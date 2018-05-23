@@ -18,6 +18,7 @@
       "webpack --config scripts/webpack.config.js --mode development",
     "build:browser:production":
       "webpack --config scripts/webpack.config.js --mode production --output-filename=bitbucket.min.js",
+    "get-api-spec": "node scripts/get-api-spec.js",
     "publish": "npm run build && npm publish"
   },
   "dependencies": {
