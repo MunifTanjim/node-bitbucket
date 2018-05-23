@@ -20,6 +20,7 @@
       "webpack --config scripts/webpack.config.js --mode production --output-filename=bitbucket.min.js",
     "get-api-spec": "node scripts/get-api-spec.js",
     "generate-methods-list": "node scripts/generate-methods-list.js",
+    "generate-routes": "node scripts/generate-routes.js",
     "publish": "npm run build && npm publish"
   },
   "dependencies": {
