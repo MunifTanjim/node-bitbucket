@@ -84,14 +84,13 @@ const setHTTPMethod = (methodObject, httpMethod) => {
 }
 
 const setParameters = (methodObject, parameters) => {
-  _.each(
-    parameters,
-    ({ name, type, enum: paramEnum, in: paramIn, required }) => {
-      methodObject.params[name] = { in: paramIn, type }
-      if (required) methodObject.params[name].required = required
-      if (paramEnum) methodObject.params[name].enum = paramEnum
-    }
-  )
+  _.each(parameters, ({ name, type, enum: _enum, in: _in, required }) => {
+    methodObject.params[name] = {}
+    if (_enum) methodObject.params[name].enum = _enum
+    if (_in) methodObject.params[name].in = _in
+    if (required) methodObject.params[name].required = required
+    if (type) methodObject.params[name].type = type
+  })
 }
 
 const setURL = (methodObject, url) => {

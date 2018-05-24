@@ -10,13 +10,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
@@ -26,18 +26,18 @@
       "params": {
         "id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
@@ -47,18 +47,18 @@
       "params": {
         "id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
@@ -68,13 +68,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
@@ -88,18 +88,18 @@
         },
         "id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
@@ -111,18 +111,18 @@
       "params": {
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/approve"
@@ -132,18 +132,18 @@
       "params": {
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/approve"
@@ -153,13 +153,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commits"
@@ -169,18 +169,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "revision": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commits/{revision}"
@@ -190,18 +190,18 @@
       "params": {
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}"
@@ -211,13 +211,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commits"
@@ -227,18 +227,18 @@
       "params": {
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments"
@@ -248,18 +248,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "revision": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commits/{revision}"
@@ -269,23 +269,23 @@
       "params": {
         "comment_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments/{comment_id}"
@@ -311,18 +311,18 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "spec": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/diff/{spec}"
@@ -332,18 +332,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "spec": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/patch/{spec}"
@@ -358,18 +358,18 @@
         },
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build"
@@ -379,18 +379,18 @@
       "params": {
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses"
@@ -400,18 +400,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
@@ -421,23 +421,23 @@
       "params": {
         "key": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}"
@@ -450,23 +450,23 @@
         },
         "key": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}"
@@ -478,13 +478,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/downloads"
@@ -494,18 +494,18 @@
       "params": {
         "filename": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/downloads/{filename}"
@@ -515,18 +515,18 @@
       "params": {
         "filename": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/downloads/{filename}"
@@ -536,13 +536,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/downloads"
@@ -553,14 +553,14 @@
       "method": "GET",
       "params": {
         "subject_type": {
-          "in": "path",
-          "type": "string",
-          "required": true,
           "enum": [
             "user",
             "repository",
             "team"
-          ]
+          ],
+          "in": "path",
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/hook_events/{subject_type}"
@@ -581,13 +581,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues"
@@ -597,18 +597,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments"
@@ -622,18 +622,18 @@
         },
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
@@ -647,18 +647,18 @@
         },
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments"
@@ -668,18 +668,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
@@ -689,18 +689,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
@@ -710,18 +710,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
@@ -731,23 +731,23 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "path": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments/{path}"
@@ -761,23 +761,23 @@
         },
         "comment_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
@@ -787,18 +787,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
@@ -808,18 +808,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
@@ -829,18 +829,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
@@ -850,13 +850,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues"
@@ -866,18 +866,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments"
@@ -887,8 +887,8 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "q": {
           "in": "query",
@@ -896,8 +896,8 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "sort": {
           "in": "query",
@@ -905,8 +905,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
@@ -916,8 +916,8 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "q": {
           "in": "query",
@@ -925,13 +925,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments"
@@ -941,13 +941,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/components"
@@ -957,13 +957,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/milestones"
@@ -973,13 +973,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/versions"
@@ -989,23 +989,23 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "path": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments/{path}"
@@ -1015,23 +1015,23 @@
       "params": {
         "change_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes/{change_id}"
@@ -1041,23 +1041,23 @@
       "params": {
         "comment_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
@@ -1067,18 +1067,18 @@
       "params": {
         "component_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/components/{component_id}"
@@ -1088,18 +1088,18 @@
       "params": {
         "milestone_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/milestones/{milestone_id}"
@@ -1109,18 +1109,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "version_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/versions/{version_id}"
@@ -1130,18 +1130,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
@@ -1151,18 +1151,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
@@ -1172,18 +1172,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
@@ -1197,23 +1197,23 @@
         },
         "comment_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
@@ -1229,13 +1229,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines/"
@@ -1249,13 +1249,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
@@ -1269,13 +1269,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
@@ -1289,13 +1289,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
@@ -1308,8 +1308,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/pipelines_config/variables/"
@@ -1322,8 +1322,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/pipelines_config/variables/"
@@ -1333,18 +1333,18 @@
       "params": {
         "known_host_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
@@ -1354,18 +1354,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "schedule_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
@@ -1375,13 +1375,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
@@ -1391,18 +1391,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
@@ -1412,13 +1412,13 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
@@ -1428,13 +1428,13 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
@@ -1444,18 +1444,18 @@
       "params": {
         "pipeline_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}"
@@ -1465,13 +1465,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines/"
@@ -1481,13 +1481,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
@@ -1497,13 +1497,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/"
@@ -1513,13 +1513,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
@@ -1529,18 +1529,18 @@
       "params": {
         "pipeline_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/"
@@ -1550,13 +1550,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
@@ -1566,8 +1566,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/pipelines_config/variables/"
@@ -1577,8 +1577,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/pipelines_config/variables/"
@@ -1588,13 +1588,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config"
@@ -1604,18 +1604,18 @@
       "params": {
         "known_host_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
@@ -1625,18 +1625,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "schedule_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
@@ -1646,13 +1646,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
@@ -1662,23 +1662,23 @@
       "params": {
         "pipeline_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "step_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}"
@@ -1688,23 +1688,23 @@
       "params": {
         "pipeline_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "step_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log"
@@ -1714,18 +1714,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
@@ -1735,13 +1735,13 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
@@ -1751,13 +1751,13 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
@@ -1767,18 +1767,18 @@
       "params": {
         "pipeline_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline"
@@ -1792,13 +1792,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/build_number"
@@ -1812,13 +1812,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config"
@@ -1832,18 +1832,18 @@
         },
         "known_host_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
@@ -1857,18 +1857,18 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "schedule_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
@@ -1882,13 +1882,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
@@ -1902,18 +1902,18 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
@@ -1927,13 +1927,13 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
@@ -1947,13 +1947,13 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
@@ -1969,8 +1969,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/projects/"
@@ -1980,13 +1980,13 @@
       "params": {
         "project_key": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/projects/{project_key}"
@@ -1996,8 +1996,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/projects/"
@@ -2007,13 +2007,13 @@
       "params": {
         "project_key": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/projects/{project_key}"
@@ -2027,13 +2027,13 @@
         },
         "project_key": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/projects/{project_key}"
@@ -2045,18 +2045,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "target_username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
@@ -2069,13 +2069,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests"
@@ -2085,18 +2085,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve"
@@ -2106,18 +2106,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/decline"
@@ -2127,18 +2127,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve"
@@ -2148,18 +2148,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "target_username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
@@ -2169,18 +2169,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}"
@@ -2190,18 +2190,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/activity"
@@ -2211,23 +2211,23 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "state": {
-          "in": "query",
-          "type": "string",
           "enum": [
             "MERGED",
             "SUPERSEDED",
             "OPEN",
             "DECLINED"
-          ]
+          ],
+          "in": "query",
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests"
@@ -2237,18 +2237,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/activity"
@@ -2258,18 +2258,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments"
@@ -2279,18 +2279,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/commits"
@@ -2300,13 +2300,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/default-reviewers"
@@ -2316,18 +2316,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
@@ -2337,23 +2337,23 @@
       "params": {
         "comment_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}"
@@ -2363,18 +2363,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "target_username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
@@ -2384,18 +2384,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/diff"
@@ -2405,18 +2405,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/diffstat"
@@ -2426,18 +2426,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/patch"
@@ -2450,18 +2450,18 @@
         },
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/merge"
@@ -2474,18 +2474,18 @@
         },
         "pull_request_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}"
@@ -2497,13 +2497,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/branches"
@@ -2517,13 +2517,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/tags"
@@ -2533,18 +2533,18 @@
       "params": {
         "name": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/branches/{name}"
@@ -2554,18 +2554,18 @@
       "params": {
         "name": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/tags/{name}"
@@ -2575,13 +2575,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs"
@@ -2591,13 +2591,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/branches"
@@ -2607,13 +2607,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/tags"
@@ -2623,18 +2623,18 @@
       "params": {
         "name": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/branches/{name}"
@@ -2644,18 +2644,18 @@
       "params": {
         "name": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/tags/{name}"
@@ -2667,18 +2667,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "target_username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
@@ -2691,13 +2691,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}"
@@ -2707,13 +2707,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/branches"
@@ -2727,13 +2727,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
@@ -2743,18 +2743,18 @@
       "params": {
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/approve"
@@ -2767,18 +2767,18 @@
         },
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build"
@@ -2788,13 +2788,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/downloads"
@@ -2807,13 +2807,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/forks"
@@ -2827,13 +2827,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues"
@@ -2843,18 +2843,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments"
@@ -2868,18 +2868,18 @@
         },
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
@@ -2893,18 +2893,18 @@
         },
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments"
@@ -2914,18 +2914,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
@@ -2935,18 +2935,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
@@ -2960,13 +2960,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines/"
@@ -2980,13 +2980,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
@@ -3000,13 +3000,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
@@ -3020,13 +3020,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
@@ -3039,13 +3039,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests"
@@ -3055,18 +3055,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve"
@@ -3096,13 +3096,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/src"
@@ -3116,13 +3116,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/tags"
@@ -3132,13 +3132,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/hooks"
@@ -3148,18 +3148,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/decline"
@@ -3173,13 +3173,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}"
@@ -3189,18 +3189,18 @@
       "params": {
         "name": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/branches/{name}"
@@ -3210,18 +3210,18 @@
       "params": {
         "id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
@@ -3231,18 +3231,18 @@
       "params": {
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/approve"
@@ -3252,18 +3252,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "target_username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
@@ -3273,18 +3273,18 @@
       "params": {
         "filename": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/downloads/{filename}"
@@ -3294,18 +3294,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
@@ -3315,23 +3315,23 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "path": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments/{path}"
@@ -3345,23 +3345,23 @@
         },
         "comment_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
@@ -3371,18 +3371,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
@@ -3392,18 +3392,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
@@ -3413,18 +3413,18 @@
       "params": {
         "known_host_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
@@ -3434,18 +3434,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "schedule_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
@@ -3455,13 +3455,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
@@ -3471,18 +3471,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
@@ -3492,18 +3492,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve"
@@ -3513,18 +3513,18 @@
       "params": {
         "name": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/tags/{name}"
@@ -3534,18 +3534,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
@@ -3555,13 +3555,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commits"
@@ -3571,18 +3571,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "revision": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commits/{revision}"
@@ -3592,13 +3592,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}"
@@ -3607,19 +3607,19 @@
       "method": "GET",
       "params": {
         "role": {
-          "in": "query",
-          "type": "string",
           "enum": [
             "admin",
             "contributor",
             "member",
             "owner"
-          ]
+          ],
+          "in": "query",
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}"
@@ -3629,13 +3629,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
@@ -3645,13 +3645,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/branches"
@@ -3661,18 +3661,18 @@
       "params": {
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments"
@@ -3682,18 +3682,18 @@
       "params": {
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses"
@@ -3703,13 +3703,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commits"
@@ -3719,18 +3719,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "revision": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commits/{revision}"
@@ -3740,13 +3740,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/default-reviewers"
@@ -3756,13 +3756,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/downloads"
@@ -3772,13 +3772,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/forks"
@@ -3788,18 +3788,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments"
@@ -3809,8 +3809,8 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "q": {
           "in": "query",
@@ -3818,8 +3818,8 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "sort": {
           "in": "query",
@@ -3827,8 +3827,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
@@ -3838,8 +3838,8 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "q": {
           "in": "query",
@@ -3847,13 +3847,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments"
@@ -3863,13 +3863,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/components"
@@ -3879,13 +3879,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/milestones"
@@ -3895,13 +3895,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/versions"
@@ -3911,13 +3911,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues"
@@ -3941,18 +3941,18 @@
       "params": {
         "pipeline_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/"
@@ -3962,13 +3962,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines/"
@@ -3978,13 +3978,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
@@ -3994,13 +3994,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/"
@@ -4010,13 +4010,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
@@ -4026,13 +4026,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
@@ -4042,18 +4042,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments"
@@ -4063,18 +4063,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/commits"
@@ -4084,18 +4084,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
@@ -4105,23 +4105,23 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "state": {
-          "in": "query",
-          "type": "string",
           "enum": [
             "MERGED",
             "SUPERSEDED",
             "OPEN",
             "DECLINED"
-          ]
+          ],
+          "in": "query",
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests"
@@ -4131,18 +4131,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/activity"
@@ -4152,13 +4152,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs"
@@ -4168,13 +4168,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/tags"
@@ -4184,13 +4184,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/watchers"
@@ -4200,13 +4200,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/hooks"
@@ -4216,18 +4216,18 @@
       "params": {
         "name": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/branches/{name}"
@@ -4237,18 +4237,18 @@
       "params": {
         "id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
@@ -4258,18 +4258,18 @@
       "params": {
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}"
@@ -4279,23 +4279,23 @@
       "params": {
         "key": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}"
@@ -4305,23 +4305,23 @@
       "params": {
         "comment_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments/{comment_id}"
@@ -4331,18 +4331,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "target_username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
@@ -4368,18 +4368,18 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "spec": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/diff/{spec}"
@@ -4393,18 +4393,18 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "spec": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/diffstat/{spec}"
@@ -4414,18 +4414,18 @@
       "params": {
         "filename": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/downloads/{filename}"
@@ -4435,13 +4435,13 @@
       "params": {
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "path": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "q": {
           "in": "query",
@@ -4453,8 +4453,8 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "sort": {
           "in": "query",
@@ -4462,8 +4462,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}"
@@ -4473,18 +4473,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
@@ -4494,23 +4494,23 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "path": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments/{path}"
@@ -4520,23 +4520,23 @@
       "params": {
         "change_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes/{change_id}"
@@ -4546,23 +4546,23 @@
       "params": {
         "comment_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
@@ -4572,18 +4572,18 @@
       "params": {
         "component_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/components/{component_id}"
@@ -4593,18 +4593,18 @@
       "params": {
         "milestone_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/milestones/{milestone_id}"
@@ -4614,18 +4614,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "version_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/versions/{version_id}"
@@ -4635,18 +4635,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
@@ -4656,18 +4656,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
@@ -4677,18 +4677,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "spec": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/patch/{spec}"
@@ -4698,18 +4698,18 @@
       "params": {
         "pipeline_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}"
@@ -4719,23 +4719,23 @@
       "params": {
         "pipeline_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "step_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}"
@@ -4745,23 +4745,23 @@
       "params": {
         "pipeline_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "step_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log"
@@ -4771,13 +4771,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config"
@@ -4787,18 +4787,18 @@
       "params": {
         "known_host_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
@@ -4808,18 +4808,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "schedule_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
@@ -4829,13 +4829,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
@@ -4845,18 +4845,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
@@ -4876,18 +4876,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}"
@@ -4897,18 +4897,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/activity"
@@ -4918,23 +4918,23 @@
       "params": {
         "comment_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}"
@@ -4944,18 +4944,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/diff"
@@ -4965,18 +4965,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/diffstat"
@@ -4986,18 +4986,18 @@
       "params": {
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/patch"
@@ -5006,22 +5006,22 @@
       "method": "GET",
       "params": {
         "format": {
-          "in": "query",
-          "type": "string",
           "enum": [
             "meta",
             "rendered"
-          ]
+          ],
+          "in": "query",
+          "type": "string"
         },
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "path": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "q": {
           "in": "query",
@@ -5029,8 +5029,8 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "sort": {
           "in": "query",
@@ -5038,8 +5038,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/src/{node}/{path}"
@@ -5048,21 +5048,21 @@
       "method": "GET",
       "params": {
         "format": {
-          "in": "query",
-          "type": "string",
           "enum": [
             "meta"
-          ]
+          ],
+          "in": "query",
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/src"
@@ -5072,18 +5072,18 @@
       "params": {
         "name": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/refs/tags/{name}"
@@ -5093,18 +5093,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
@@ -5117,18 +5117,18 @@
         },
         "pull_request_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/merge"
@@ -5138,18 +5138,18 @@
       "params": {
         "pipeline_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline"
@@ -5162,13 +5162,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}"
@@ -5182,18 +5182,18 @@
         },
         "id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
@@ -5206,23 +5206,23 @@
         },
         "key": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}"
@@ -5232,18 +5232,18 @@
       "params": {
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
@@ -5257,23 +5257,23 @@
         },
         "comment_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "issue_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
@@ -5287,13 +5287,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/build_number"
@@ -5307,13 +5307,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config"
@@ -5327,18 +5327,18 @@
         },
         "known_host_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
@@ -5352,18 +5352,18 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "schedule_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
@@ -5377,13 +5377,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
@@ -5397,18 +5397,18 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
@@ -5421,18 +5421,18 @@
         },
         "pull_request_id": {
           "in": "path",
-          "type": "integer",
-          "required": true
+          "required": true,
+          "type": "integer"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}"
@@ -5442,18 +5442,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
@@ -5473,13 +5473,13 @@
         },
         "search_query": {
           "in": "query",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/search/code"
@@ -5497,13 +5497,13 @@
         },
         "search_query": {
           "in": "query",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/search/code"
@@ -5529,13 +5529,13 @@
         },
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/comments"
@@ -5549,8 +5549,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}"
@@ -5560,13 +5560,13 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/watch"
@@ -5576,13 +5576,13 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}"
@@ -5592,18 +5592,18 @@
       "params": {
         "comment_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/comments/{comment_id}"
@@ -5613,18 +5613,18 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "node_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/{node_id}"
@@ -5634,13 +5634,13 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/watch"
@@ -5650,13 +5650,13 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}"
@@ -5665,13 +5665,13 @@
       "method": "GET",
       "params": {
         "role": {
-          "in": "query",
-          "type": "string",
           "enum": [
             "owner",
             "contributor",
             "member"
-          ]
+          ],
+          "in": "query",
+          "type": "string"
         }
       },
       "url": "/snippets"
@@ -5681,13 +5681,13 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/comments"
@@ -5697,13 +5697,13 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/commits"
@@ -5713,18 +5713,18 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "revision": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/commits/{revision}"
@@ -5733,18 +5733,18 @@
       "method": "GET",
       "params": {
         "role": {
-          "in": "query",
-          "type": "string",
           "enum": [
             "owner",
             "contributor",
             "member"
-          ]
+          ],
+          "in": "query",
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}"
@@ -5754,13 +5754,13 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/watchers"
@@ -5770,18 +5770,18 @@
       "params": {
         "comment_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/comments/{comment_id}"
@@ -5791,8 +5791,8 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "path": {
           "in": "query",
@@ -5800,13 +5800,13 @@
         },
         "revision": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/{revision}/diff"
@@ -5816,23 +5816,23 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "node_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "path": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/{node_id}/files/{path}"
@@ -5842,18 +5842,18 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "revision": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/{revision}/patch"
@@ -5863,18 +5863,18 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "node_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/{node_id}"
@@ -5884,13 +5884,13 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/watch"
@@ -5900,13 +5900,13 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}"
@@ -5916,18 +5916,18 @@
       "params": {
         "comment_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/comments/{comment_id}"
@@ -5937,18 +5937,18 @@
       "params": {
         "encoded_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "node_id": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/snippets/{username}/{encoded_id}/{node_id}"
@@ -5980,13 +5980,13 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/src"
@@ -5995,22 +5995,22 @@
       "method": "GET",
       "params": {
         "format": {
-          "in": "query",
-          "type": "string",
           "enum": [
             "meta",
             "rendered"
-          ]
+          ],
+          "in": "query",
+          "type": "string"
         },
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "path": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "q": {
           "in": "query",
@@ -6018,8 +6018,8 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "sort": {
           "in": "query",
@@ -6027,8 +6027,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/src/{node}/{path}"
@@ -6038,13 +6038,13 @@
       "params": {
         "node": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "path": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "q": {
           "in": "query",
@@ -6056,8 +6056,8 @@
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "sort": {
           "in": "query",
@@ -6065,8 +6065,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}"
@@ -6075,21 +6075,21 @@
       "method": "GET",
       "params": {
         "format": {
-          "in": "query",
-          "type": "string",
           "enum": [
             "meta"
-          ]
+          ],
+          "in": "query",
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/src"
@@ -6104,8 +6104,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/ssh-keys"
@@ -6120,8 +6120,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/ssh-keys"
@@ -6146,8 +6146,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/pipelines_config/variables/"
@@ -6161,8 +6161,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/projects/"
@@ -6172,8 +6172,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/hooks"
@@ -6183,13 +6183,13 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
@@ -6199,13 +6199,13 @@
       "params": {
         "project_key": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/projects/{project_key}"
@@ -6215,13 +6215,13 @@
       "params": {
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/hooks/{uid}"
@@ -6231,8 +6231,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}"
@@ -6241,13 +6241,13 @@
       "method": "GET",
       "params": {
         "role": {
-          "in": "query",
-          "type": "string",
           "enum": [
             "admin",
             "contributor",
             "member"
-          ]
+          ],
+          "in": "query",
+          "type": "string"
         }
       },
       "url": "/teams"
@@ -6257,8 +6257,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/followers"
@@ -6268,8 +6268,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/following"
@@ -6279,8 +6279,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/members"
@@ -6290,8 +6290,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/pipelines_config/variables/"
@@ -6301,8 +6301,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/projects/"
@@ -6312,8 +6312,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/repositories"
@@ -6323,8 +6323,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/repositories"
@@ -6342,8 +6342,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/permissions/repositories"
@@ -6361,8 +6361,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/permissions"
@@ -6372,8 +6372,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/hooks"
@@ -6383,13 +6383,13 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
@@ -6399,13 +6399,13 @@
       "params": {
         "project_key": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/projects/{project_key}"
@@ -6415,13 +6415,13 @@
       "params": {
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/hooks/{uid}"
@@ -6439,13 +6439,13 @@
         },
         "search_query": {
           "in": "query",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/search/code"
@@ -6459,13 +6459,13 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
@@ -6479,13 +6479,13 @@
         },
         "project_key": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/projects/{project_key}"
@@ -6495,13 +6495,13 @@
       "params": {
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/hooks/{uid}"
@@ -6551,8 +6551,8 @@
       "params": {
         "email": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/user/emails/{email}"
@@ -6567,8 +6567,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/pipelines_config/variables/"
@@ -6581,8 +6581,8 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/ssh-keys"
@@ -6592,8 +6592,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/hooks"
@@ -6603,13 +6603,13 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
@@ -6624,13 +6624,13 @@
       "params": {
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/hooks/{uid}"
@@ -6640,8 +6640,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}"
@@ -6656,8 +6656,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/followers"
@@ -6667,8 +6667,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/following"
@@ -6678,8 +6678,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/pipelines_config/variables/"
@@ -6689,8 +6689,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/repositories"
@@ -6700,8 +6700,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/repositories"
@@ -6711,8 +6711,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/ssh-keys"
@@ -6722,8 +6722,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/hooks"
@@ -6738,8 +6738,8 @@
       "params": {
         "email": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/user/emails/{email}"
@@ -6749,13 +6749,13 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
@@ -6770,13 +6770,13 @@
       "params": {
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/hooks/{uid}"
@@ -6794,13 +6794,13 @@
         },
         "search_query": {
           "in": "query",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/search/code"
@@ -6814,13 +6814,13 @@
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "variable_uuid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
@@ -6835,13 +6835,13 @@
       "params": {
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/hooks/{uid}"
@@ -6853,13 +6853,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/hooks"
@@ -6869,8 +6869,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/hooks"
@@ -6880,8 +6880,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/hooks"
@@ -6891,18 +6891,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
@@ -6912,13 +6912,13 @@
       "params": {
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/hooks/{uid}"
@@ -6928,13 +6928,13 @@
       "params": {
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/hooks/{uid}"
@@ -6944,18 +6944,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
@@ -6965,13 +6965,13 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/hooks"
@@ -6981,8 +6981,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/hooks"
@@ -6992,8 +6992,8 @@
       "params": {
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/hooks"
@@ -7003,13 +7003,13 @@
       "params": {
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/hooks/{uid}"
@@ -7019,13 +7019,13 @@
       "params": {
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/hooks/{uid}"
@@ -7034,14 +7034,14 @@
       "method": "GET",
       "params": {
         "subject_type": {
-          "in": "path",
-          "type": "string",
-          "required": true,
           "enum": [
             "user",
             "repository",
             "team"
-          ]
+          ],
+          "in": "path",
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/hook_events/{subject_type}"
@@ -7056,18 +7056,18 @@
       "params": {
         "repo_slug": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
@@ -7077,13 +7077,13 @@
       "params": {
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/teams/{username}/hooks/{uid}"
@@ -7093,13 +7093,13 @@
       "params": {
         "uid": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         },
         "username": {
           "in": "path",
-          "type": "string",
-          "required": true
+          "required": true,
+          "type": "string"
         }
       },
       "url": "/users/{username}/hooks/{uid}"
