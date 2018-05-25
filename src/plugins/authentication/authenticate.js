@@ -3,8 +3,8 @@
  * @param {Object} state - Authentication State
  * @param {Object} options
  */
-const authenticate = (state, options) => {
-  if (!options) {
+const authenticate = (state, options = {}) => {
+  if (!options.type) {
     state.auth = false
     return
   }

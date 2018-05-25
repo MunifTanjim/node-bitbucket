@@ -12,11 +12,15 @@ const endpointMethod = (
   let endpointOptions = deepmerge(endpointDefaults, options)
 
   let promise = Promise.resolve(endpointOptions)
-    .then(validate.bind(null, endpointParamsSpecs))
+    .then(endpointOptions => validate(endpointParamsSpecs, endpointOptions))
     .then(apiClient.request)
 
   if (callback) {
-    promise.then(callback.bind(null, null)).catch(callback)
+    promise
+      .then(response => {
+        callback(null, response)
+      })
+      .catch(callback)
     return
   }
 

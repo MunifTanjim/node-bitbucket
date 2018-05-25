@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`plugins:authentication/before-request authentication \`type\` app_password sets headers \`authorization:Basic\` 1`] = `"Basic dXNlcm5hbWU6cGFzc3dvcmQ="`;
+
+exports[`plugins:authentication/before-request authentication \`type\` basic sets headers \`authorization:Basic\` 1`] = `"Basic dXNlcm5hbWU6cGFzc3dvcmQ="`;
