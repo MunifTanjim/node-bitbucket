@@ -1,54 +1,22 @@
 const _ = require('lodash')
 const path = require('path')
-const writeFileSync = require('fs').writeFileSync
+const { writeFileSync } = require('fs')
 
-const API_SPEC_PATHS = require('../api-spec/paths')
-const METHODS_LIST = require('../libs/routes/methods-list')
-const ROUTES = require('../libs/routes/routes')
+const {
+  extractMethodNamesForScopeFromMethodList,
+  extractScopesFromMethodsList,
+  getDuplicates,
+  sortObjectByKeys
+} = require('./helpers')
 
-const routesPath = path.resolve('libs/routes/routes.json')
+const METHODS_LIST = require('../src/routes/methods-list.json')
+const PATHS_SPEC = require('../specification/paths.json')
+const ROUTES = require('../src/routes/routes.json')
 
-const getResourceName = api_path => {
-  return /^\/(\w+)\/?/.exec(api_path)[1]
-}
-
-const sortObjectByKeys = object => {
-  return _.chain(object)
-    .toPairs()
-    .sortBy(0)
-    .fromPairs()
-    .value()
-}
-
-const getDuplicates = array => {
-  return _.chain(array)
-    .filter((value, index, iteratee) => _.includes(iteratee, value, index + 1))
-    .uniq()
-    .value()
-}
-
-const extractScopes = () => {
-  return _.chain(METHODS_LIST)
-    .values()
-    .flatMap(_.values)
-    .flatMap(_.keys)
-    .uniq()
-    .value()
-}
-
-const extractMethodNames = scope => {
-  return _.chain(METHODS_LIST)
-    .values()
-    .flatMap(_.values)
-    .flatMap(o => _.pick(o, scope))
-    .reject(_.isEmpty)
-    .flatMap(_.values)
-    .compact()
-    .value()
-}
+const routesPath = path.resolve('src/routes/routes.json')
 
 const initializeRoutes = () => {
-  const scopes = extractScopes()
+  const scopes = extractScopesFromMethodsList(METHODS_LIST)
 
   _.each(scopes, scope => {
     // Initialize Scopes
@@ -56,7 +24,10 @@ const initializeRoutes = () => {
       ROUTES[scope] = {}
     }
 
-    let methodNames = extractMethodNames(scope)
+    let methodNames = extractMethodNamesForScopeFromMethodList(
+      METHODS_LIST,
+      scope
+    )
 
     // Check for duplicate MethodNames
     let duplicates = getDuplicates(methodNames)
@@ -100,34 +71,39 @@ const setURL = (methodObject, url) => {
 const updateRoutes = () => {
   _.each(METHODS_LIST, (methods, url) => {
     // Specification for URL
-    let spec = API_SPEC_PATHS[url] || {}
+    let spec = PATHS_SPEC[url] || {}
 
-    _.each(methods, (scopes, httpMethod) => {
-      _.each(scopes, (methodName, scope) => {
+    _.each(methods, (namespaces, httpMethod) => {
+      _.each(namespaces, (methodName, namespaceName) => {
         // Igonre Empty MethodNames
         if (!methodName) return
 
-        setHTTPMethod(ROUTES[scope][methodName], httpMethod)
+        setHTTPMethod(ROUTES[namespaceName][methodName], httpMethod)
 
-        setParameters(ROUTES[scope][methodName], spec.parameters)
+        setParameters(ROUTES[namespaceName][methodName], spec.parameters)
         if (spec[httpMethod]) {
-          setParameters(ROUTES[scope][methodName], spec[httpMethod].parameters)
+          setParameters(
+            ROUTES[namespaceName][methodName],
+            spec[httpMethod].parameters
+          )
         }
 
-        setURL(ROUTES[scope][methodName], url)
+        setURL(ROUTES[namespaceName][methodName], url)
       })
     })
   })
 }
 
-const sortRoutesObject = routes => {
-  return _.chain(routes)
+const sortRoutesObject = routesObject => {
+  return _.chain(routesObject)
     .thru(sortObjectByKeys)
-    .tap(scopes => {
-      _.each(scopes, (scopeObject, scope) => {
-        scopes[scope] = sortObjectByKeys(scopeObject)
-        _.each(scopes[scope], (methodObject, method) => {
-          scopes[scope][method].params = sortObjectByKeys(methodObject.params)
+    .tap(namespaces => {
+      _.each(namespaces, (namespace, namespaceName) => {
+        namespaces[namespaceName] = sortObjectByKeys(namespace)
+        _.each(namespaces[namespaceName], (methodObject, method) => {
+          namespaces[namespaceName][method].params = sortObjectByKeys(
+            methodObject.params
+          )
         })
       })
     })
