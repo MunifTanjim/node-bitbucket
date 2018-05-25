@@ -4,7 +4,7 @@
  * @param {Object} params - Query Parameters
  * @returns {String} URL with added Query Parameters
  */
-const addQueryParameters = (url, params) => {
+const addQueryParameters = (url, params = {}) => {
   const separator = /\?/.test(url) ? '&' : '?'
   const names = Object.keys(params)
 

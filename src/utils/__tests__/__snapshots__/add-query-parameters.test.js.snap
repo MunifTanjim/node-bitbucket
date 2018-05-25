@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`utils:add-query-parameters works on fresh url 1`] = `"/?wibbly=wobbly"`;
+
+exports[`utils:add-query-parameters works on url containing query string 1`] = `"/?wibbly=wobbly&timey=wimey"`;
