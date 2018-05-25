@@ -1,4 +1,5 @@
 const endpointMethod = require('../endpoint-methods/method')
+const getParamGroups = require('../endpoint-methods/get-param-groups')
 
 const {
   oauth2: oAuth2Spec
@@ -21,24 +22,15 @@ class OAuthPlugin {
       Object.keys(routes[namespaceName]).forEach(apiName => {
         let apiOptions = routes[namespaceName][apiName]
 
-        let { method, params: paramSpecs, url, ...rest } = apiOptions
+        let { method, params: paramsSpecs, url, ...rest } = apiOptions
 
-        let _paramGroups = {}
-        Object.keys(paramSpecs).forEach(paramName => {
-          let groupName = paramSpecs[paramName].in
-
-          if (!Array.isArray(_paramGroups[groupName])) {
-            _paramGroups[groupName] = []
-          }
-
-          _paramGroups[groupName].push(paramName)
-        })
+        let _paramGroups = getParamGroups(paramsSpecs)
 
         this.core.oauth[namespaceName][apiName] = endpointMethod.bind(
           null,
           this.core,
           { method, url, ...rest, _paramGroups },
-          paramSpecs
+          paramsSpecs
         )
       })
     })

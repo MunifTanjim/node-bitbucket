@@ -1,8 +1,8 @@
 const HTTPError = require('../../request/http-error')
 
-const validate = (paramSpecs, params) => {
-  Object.keys(paramSpecs).forEach(paramName => {
-    let spec = paramSpecs[paramName]
+const validate = (paramsSpecs, params) => {
+  Object.keys(paramsSpecs).forEach(paramName => {
+    let spec = paramsSpecs[paramName]
     let expectedType = spec.type
 
     let param = params[paramName]

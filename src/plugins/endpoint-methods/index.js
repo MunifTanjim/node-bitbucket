@@ -1,6 +1,7 @@
 const ENDPOINT_ROUTES = require('../../routes/routes')
 
 const endpointMethod = require('./method')
+const getParamGroups = require('./get-param-groups')
 
 class EndpointMethodsPlugin {
   constructor(apiClient) {
@@ -14,24 +15,15 @@ class EndpointMethodsPlugin {
       Object.keys(ENDPOINT_ROUTES[namespaceName]).forEach(apiName => {
         let apiOptions = ENDPOINT_ROUTES[namespaceName][apiName]
 
-        let { method, params: paramSpecs, url, ...rest } = apiOptions
+        let { method, params: paramsSpecs, url, ...rest } = apiOptions
 
-        let _paramGroups = {}
-        Object.keys(paramSpecs).forEach(paramName => {
-          let groupName = paramSpecs[paramName].in
-
-          if (!Array.isArray(_paramGroups[groupName])) {
-            _paramGroups[groupName] = []
-          }
-
-          _paramGroups[groupName].push(paramName)
-        })
+        let _paramGroups = getParamGroups(paramsSpecs)
 
         this.core[namespaceName][apiName] = endpointMethod.bind(
           null,
           this.core,
           { method, url, ...rest, _paramGroups },
-          paramSpecs
+          paramsSpecs
         )
       })
     })

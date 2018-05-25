@@ -5,14 +5,14 @@ const validate = require('./validate')
 const endpointMethod = (
   apiClient,
   endpointDefaults,
-  endpointParamSpecs,
+  endpointParamsSpecs,
   options = {},
   callback
 ) => {
   let endpointOptions = deepmerge(endpointDefaults, options)
 
   let promise = Promise.resolve(endpointOptions)
-    .then(validate.bind(null, endpointParamSpecs))
+    .then(validate.bind(null, endpointParamsSpecs))
     .then(apiClient.request)
 
   if (callback) {
