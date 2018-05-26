@@ -41,7 +41,14 @@ const getRequestOptions = (endpointOptions = {}) => {
   }
 
   if (Object.keys(groupedParams.body || {}).length) {
-    body = groupedParams.body
+    body = {}
+    Object.keys(groupedParams.body).forEach(paramName => {
+      if (paramName === '_body') {
+        body = deepmerge(body, groupedParams.body[paramName])
+      } else {
+        body[paramName] = groupedParams.body[paramName]
+      }
+    })
   }
 
   return {
