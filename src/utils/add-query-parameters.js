@@ -14,12 +14,18 @@ const addQueryParameters = (url, params = {}) => {
 
   return `${url}${separator}${names
     .map(name => {
-      return name === 'q'
-        ? `q=${params.q
-            .split('+')
-            .map(encodeURIComponent)
-            .join('+')}`
-        : `${name}=${encodeURIComponent(params[name])}`
+      if (name === 'q') {
+        let parts = Array.isArray(params.q) ? params.q : [params.q]
+        return `q=${parts
+          .map(part =>
+            part
+              .split(' ')
+              .map(encodeURIComponent)
+              .join('+')
+          )
+          .join('+')}`
+      }
+      return `${name}=${encodeURIComponent(params[name])}`
     })
     .join('&')}`
 }
