@@ -21,7 +21,7 @@ const getRequestOptions = (endpointOptions = {}) => {
     ...remainingOptions
   } = deepmerge(ENDPOINT_DEFAULTS, endpointOptions)
 
-  let { _paramGroups, ...params } = remainingOptions
+  let { _paramGroups = {}, ...params } = remainingOptions
   let groupedParams = {}
   Object.keys(_paramGroups).forEach(groupName => {
     groupedParams[groupName] = {}

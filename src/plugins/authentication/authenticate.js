@@ -11,7 +11,7 @@ const authenticate = (state, options = {}) => {
 
   switch (options.type) {
     case 'basic':
-    case 'app_password':
+    case 'apppassword':
       if (!options.username || !options.password) {
         throw new Error(
           'Basic authentication requires both a username and password to be set'

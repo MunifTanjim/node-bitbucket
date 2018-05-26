@@ -10,7 +10,7 @@ const authenticationBeforeRequest = (state, options) => {
     return
   }
 
-  if (['basic', 'app_password'].includes(state.auth.type)) {
+  if (['basic', 'apppassword'].includes(state.auth.type)) {
     const hash = btoa(`${state.auth.username}:${state.auth.password}`)
     options.headers['authorization'] = `Basic ${hash}`
     return
