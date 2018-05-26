@@ -5,7 +5,8 @@ const request = require('./request')
 
 const Plugins = [
   require('./plugins/authentication'),
-  require('./plugins/endpoint-methods')
+  require('./plugins/endpoint-methods'),
+  require('./plugins/pagination')
 ]
 
 const clientDefaults = {
