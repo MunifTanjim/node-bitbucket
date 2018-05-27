@@ -1,0 +1,92 @@
+/**
+ * This declaration file requires TypeScript 2.1 or above.
+ */
+
+declare namespace BitBucket {
+  type json = any
+  type date = string
+
+  export interface AnyResponse {
+    data: json;
+    meta: json;
+  }
+
+  export interface EmptyParams {
+  }
+
+  export interface Options {
+    baseUrl?: string;
+    headers?: {[header: string]: any};
+    options?: json;
+  }
+
+  export interface AuthBasic {
+    type: "basic";
+    username: string;
+    password: string;
+  }
+
+  export interface AuthAppPassword {
+    type: "apppassword";
+    username: string;
+    password: string;
+  }
+
+  export interface AuthToken {
+    type: "token";
+    token: string;
+  }
+
+  export type Auth =
+    | AuthBasic
+    | AuthAppPassword
+    | AuthToken;
+
+  export type Link =
+    | { next: string; }
+    | { previous: string; }
+    | string;
+
+  export interface Callback {
+    (error: Error | null, result: any): any;
+  }
+
+  {{#namespaces}}
+  {{#methods}}
+  {{^exclude}}
+  {{#paramTypeName}}
+  export type {{paramTypeName}} =
+    {{#ownParams}}
+    & {
+    {{#params}}
+      "{{key}}"{{^required}}?{{/required}}: {{{type}}};
+    {{/params}}
+    };
+    {{/ownParams}}
+    {{^ownParams}}
+    ;
+    {{/ownParams}}
+  {{/paramTypeName}}
+  {{/exclude}}
+  {{/methods}}
+  {{/namespaces}}
+}
+
+declare class BitBucket {
+  constructor(options?: BitBucket.Options);
+  authenticate(auth: BitBucket.Auth): void;
+
+  nextPage(data: BitBucket.Link): string | undefined;
+  previousPage(data: BitBucket.Link): string | undefined;
+  getPage(url: BitBucket.Link, callback?: BitBucket.Callback): Promise<BitBucket.AnyResponse>;
+
+  {{#namespaces}}
+  {{namespace}}: {
+    {{#methods}}
+    {{method}}({{#paramTypeName}}params: BitBucket.{{.}}, {{/paramTypeName}}callback?: BitBucket.Callback): Promise<BitBucket.AnyResponse>;
+    {{/methods}}
+  };
+  {{/namespaces}}
+}
+
+export = BitBucket

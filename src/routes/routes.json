@@ -6,7 +6,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -84,7 +85,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "id": {
           "in": "path",
@@ -354,7 +356,8 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "node": {
           "in": "path",
@@ -446,7 +449,8 @@
       "method": "PUT",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "key": {
           "in": "path",
@@ -577,7 +581,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -618,7 +623,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "issue_id": {
           "in": "path",
@@ -643,7 +649,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "issue_id": {
           "in": "path",
@@ -757,7 +764,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "comment_id": {
           "in": "path",
@@ -1193,7 +1201,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "comment_id": {
           "in": "path",
@@ -1225,7 +1234,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -1245,7 +1255,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -1265,7 +1276,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -1285,7 +1297,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -1304,7 +1317,8 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "username": {
           "in": "path",
@@ -1318,7 +1332,8 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "username": {
           "in": "path",
@@ -1788,7 +1803,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -1808,7 +1824,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -1828,7 +1845,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "known_host_uuid": {
           "in": "path",
@@ -1853,7 +1871,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -1878,7 +1897,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -1898,7 +1918,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -1923,7 +1944,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "username": {
           "in": "path",
@@ -1943,7 +1965,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "username": {
           "in": "path",
@@ -1965,7 +1988,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "username": {
           "in": "path",
@@ -2023,7 +2047,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "project_key": {
           "in": "path",
@@ -2065,7 +2090,8 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -2446,7 +2472,8 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "pull_request_id": {
           "in": "path",
@@ -2470,7 +2497,8 @@
       "method": "PUT",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "pull_request_id": {
           "in": "path",
@@ -2513,7 +2541,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -2687,7 +2716,8 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -2723,7 +2753,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -2763,7 +2794,8 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "node": {
           "in": "path",
@@ -2803,7 +2835,8 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -2823,7 +2856,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -2864,7 +2898,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "issue_id": {
           "in": "path",
@@ -2889,7 +2924,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "issue_id": {
           "in": "path",
@@ -2956,7 +2992,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -2976,7 +3013,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -2996,7 +3034,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -3016,7 +3055,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -3035,7 +3075,8 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -3112,7 +3153,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -3341,7 +3383,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "comment_id": {
           "in": "path",
@@ -5113,7 +5156,8 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "pull_request_id": {
           "in": "path",
@@ -5158,7 +5202,8 @@
       "method": "PUT",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -5178,7 +5223,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "id": {
           "in": "path",
@@ -5202,7 +5248,8 @@
       "method": "PUT",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "key": {
           "in": "path",
@@ -5253,7 +5300,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "comment_id": {
           "in": "path",
@@ -5283,7 +5331,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -5303,7 +5352,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -5323,7 +5373,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "known_host_uuid": {
           "in": "path",
@@ -5348,7 +5399,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -5373,7 +5425,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -5393,7 +5446,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "repo_slug": {
           "in": "path",
@@ -5417,7 +5471,8 @@
       "method": "PUT",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "pull_request_id": {
           "in": "path",
@@ -5515,7 +5570,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         }
       },
       "url": "/snippets"
@@ -5525,7 +5581,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "encoded_id": {
           "in": "path",
@@ -5545,7 +5602,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "username": {
           "in": "path",
@@ -6100,7 +6158,8 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "username": {
           "in": "path",
@@ -6142,7 +6201,8 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "username": {
           "in": "path",
@@ -6157,7 +6217,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "username": {
           "in": "path",
@@ -6455,7 +6516,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "username": {
           "in": "path",
@@ -6475,7 +6537,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "project_key": {
           "in": "path",
@@ -6563,7 +6626,8 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "username": {
           "in": "path",
@@ -6577,7 +6641,8 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body"
+          "in": "body",
+          "type": "any"
         },
         "username": {
           "in": "path",
@@ -6810,7 +6875,8 @@
       "params": {
         "_body": {
           "in": "body",
-          "required": true
+          "required": true,
+          "type": "any"
         },
         "username": {
           "in": "path",

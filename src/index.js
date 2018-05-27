@@ -17,8 +17,8 @@ const clientDefaults = {
 }
 
 class BitBucket {
-  constructor(clientOptions = {}) {
-    this.options = deepmerge(clientDefaults, clientOptions)
+  constructor(options = {}) {
+    this.options = deepmerge(clientDefaults, options)
 
     this.hook = new Hook()
 

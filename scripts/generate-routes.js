@@ -60,7 +60,7 @@ const setParameters = (methodObject, parameters) => {
     if (_enum) methodObject.params[name].enum = _enum
     if (_in) methodObject.params[name].in = _in
     if (required) methodObject.params[name].required = required
-    if (type) methodObject.params[name].type = type
+    methodObject.params[name].type = type || 'any'
   })
 }
 
