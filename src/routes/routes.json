@@ -1,5 +1,4 @@
 {
-  "addon": {},
   "branchrestrictions": {
     "create": {
       "method": "POST",
@@ -20,6 +19,7 @@
           "type": "string"
         }
       },
+      "returns": "Branchrestriction",
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
     },
     "delete": {
@@ -62,6 +62,7 @@
           "type": "string"
         }
       },
+      "returns": "Branchrestriction",
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
     },
     "getAll": {
@@ -78,6 +79,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedBranchrestrictions",
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
     },
     "update": {
@@ -104,6 +106,7 @@
           "type": "string"
         }
       },
+      "returns": "Branchrestriction",
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
     }
   },
@@ -127,6 +130,7 @@
           "type": "string"
         }
       },
+      "returns": "Participant",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/approve"
     },
     "deleteApproval": {
@@ -206,6 +210,7 @@
           "type": "string"
         }
       },
+      "returns": "Commit",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}"
     },
     "getAll": {
@@ -243,6 +248,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedCommitComments",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments"
     },
     "getAllForRevision": {
@@ -290,6 +296,7 @@
           "type": "string"
         }
       },
+      "returns": "CommitComment",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments/{comment_id}"
     },
     "getDiff": {
@@ -375,6 +382,7 @@
           "type": "string"
         }
       },
+      "returns": "Commitstatus",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build"
     },
     "getAll": {
@@ -396,6 +404,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedCommitstatuses",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses"
     },
     "getAllPullRequestStatuses": {
@@ -417,6 +426,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedCommitstatuses",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
     },
     "getBuildStatus": {
@@ -443,6 +453,7 @@
           "type": "string"
         }
       },
+      "returns": "Commitstatus",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}"
     },
     "updateBuildStatus": {
@@ -473,6 +484,7 @@
           "type": "string"
         }
       },
+      "returns": "Commitstatus",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}"
     }
   },
@@ -567,11 +579,12 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedHookEvents",
       "url": "/hook_events/{subject_type}"
     },
     "listSubjectTypes": {
       "method": "GET",
-      "params": {},
+      "returns": "SubjectTypes",
       "url": "/hook_events"
     }
   },
@@ -595,6 +608,7 @@
           "type": "string"
         }
       },
+      "returns": "Issue",
       "url": "/repositories/{username}/{repo_slug}/issues"
     },
     "createAttachments": {
@@ -642,6 +656,7 @@
           "type": "string"
         }
       },
+      "returns": "IssueChange",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
     },
     "createComment": {
@@ -689,6 +704,7 @@
           "type": "string"
         }
       },
+      "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
     },
     "createWatch": {
@@ -710,6 +726,7 @@
           "type": "string"
         }
       },
+      "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
     },
     "delete": {
@@ -731,6 +748,7 @@
           "type": "string"
         }
       },
+      "returns": "Issue",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
     },
     "deleteAttachment": {
@@ -830,6 +848,7 @@
           "type": "string"
         }
       },
+      "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
     },
     "get": {
@@ -851,6 +870,7 @@
           "type": "string"
         }
       },
+      "returns": "Issue",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
     },
     "getAll": {
@@ -867,6 +887,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedIssues",
       "url": "/repositories/{username}/{repo_slug}/issues"
     },
     "getAllAttachments": {
@@ -888,6 +909,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedIssueAttachments",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments"
     },
     "getAllChanges": {
@@ -917,6 +939,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedLogEntries",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
     },
     "getAllComments": {
@@ -942,6 +965,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedIssueComments",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments"
     },
     "getAllComponents": {
@@ -958,6 +982,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedComponents",
       "url": "/repositories/{username}/{repo_slug}/components"
     },
     "getAllMilestones": {
@@ -974,6 +999,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedMilestones",
       "url": "/repositories/{username}/{repo_slug}/milestones"
     },
     "getAllVersions": {
@@ -990,6 +1016,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedVersions",
       "url": "/repositories/{username}/{repo_slug}/versions"
     },
     "getAttachment": {
@@ -1042,6 +1069,7 @@
           "type": "string"
         }
       },
+      "returns": "IssueChange",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes/{change_id}"
     },
     "getComment": {
@@ -1068,6 +1096,7 @@
           "type": "string"
         }
       },
+      "returns": "IssueComment",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
     },
     "getComponent": {
@@ -1089,6 +1118,7 @@
           "type": "string"
         }
       },
+      "returns": "Component",
       "url": "/repositories/{username}/{repo_slug}/components/{component_id}"
     },
     "getMilestone": {
@@ -1110,6 +1140,7 @@
           "type": "string"
         }
       },
+      "returns": "Milestone",
       "url": "/repositories/{username}/{repo_slug}/milestones/{milestone_id}"
     },
     "getVersion": {
@@ -1131,6 +1162,7 @@
           "type": "integer"
         }
       },
+      "returns": "Version",
       "url": "/repositories/{username}/{repo_slug}/versions/{version_id}"
     },
     "getVote": {
@@ -1152,6 +1184,7 @@
           "type": "string"
         }
       },
+      "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
     },
     "getWatch": {
@@ -1173,6 +1206,7 @@
           "type": "string"
         }
       },
+      "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
     },
     "update": {
@@ -1194,6 +1228,7 @@
           "type": "string"
         }
       },
+      "returns": "Issue",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
     },
     "updateComment": {
@@ -1225,6 +1260,7 @@
           "type": "string"
         }
       },
+      "returns": "IssueComment",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
     }
   },
@@ -1248,6 +1284,7 @@
           "type": "string"
         }
       },
+      "returns": "Pipeline",
       "url": "/repositories/{username}/{repo_slug}/pipelines/"
     },
     "createKnownHost": {
@@ -1269,6 +1306,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineKnownHost",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
     },
     "createSchedule": {
@@ -1290,6 +1328,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineSchedule",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
     },
     "createVariable": {
@@ -1311,6 +1350,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
     },
     "createVariableForTeam": {
@@ -1326,6 +1366,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/teams/{username}/pipelines_config/variables/"
     },
     "createVariableForUser": {
@@ -1341,6 +1382,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/users/{username}/pipelines_config/variables/"
     },
     "deleteKnownHost": {
@@ -1473,6 +1515,7 @@
           "type": "string"
         }
       },
+      "returns": "Pipeline",
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}"
     },
     "getAll": {
@@ -1489,6 +1532,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelines",
       "url": "/repositories/{username}/{repo_slug}/pipelines/"
     },
     "getAllKnownHosts": {
@@ -1505,6 +1549,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelineKnownHosts",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
     },
     "getAllScheduleExecutions": {
@@ -1521,6 +1566,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelineScheduleExecutions",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/"
     },
     "getAllSchedules": {
@@ -1537,6 +1583,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelineSchedules",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
     },
     "getAllSteps": {
@@ -1558,6 +1605,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelineSteps",
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/"
     },
     "getAllVariables": {
@@ -1574,6 +1622,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelineVariables",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
     },
     "getAllVariablesForTeam": {
@@ -1585,6 +1634,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelineVariables",
       "url": "/teams/{username}/pipelines_config/variables/"
     },
     "getAllVariablesForUser": {
@@ -1596,6 +1646,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelineVariables",
       "url": "/users/{username}/pipelines_config/variables/"
     },
     "getConfig": {
@@ -1612,6 +1663,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelinesConfig",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config"
     },
     "getKnownHost": {
@@ -1633,6 +1685,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineKnownHost",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
     },
     "getSchedule": {
@@ -1654,6 +1707,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineSchedule",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
     },
     "getSshKeyPair": {
@@ -1670,6 +1724,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineSshKeyPair",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
     },
     "getStep": {
@@ -1696,6 +1751,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineStep",
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}"
     },
     "getStepLog": {
@@ -1722,6 +1778,7 @@
           "type": "string"
         }
       },
+      "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log"
     },
     "getVariable": {
@@ -1743,6 +1800,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
     },
     "getVariableForTeam": {
@@ -1759,6 +1817,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
     },
     "getVariableForUser": {
@@ -1775,6 +1834,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
     },
     "stop": {
@@ -1817,6 +1877,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineBuildNumber",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/build_number"
     },
     "updateConfig": {
@@ -1838,6 +1899,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelinesConfig",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config"
     },
     "updateKnownHost": {
@@ -1864,6 +1926,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineKnownHost",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
     },
     "updateSchedule": {
@@ -1890,6 +1953,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineSchedule",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
     },
     "updateSshKeyPair": {
@@ -1911,6 +1975,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineSshKeyPair",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
     },
     "updateVariable": {
@@ -1937,6 +2002,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
     },
     "updateVariableForTeam": {
@@ -1958,6 +2024,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
     },
     "updateVariableForUser": {
@@ -1979,6 +2046,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
     }
   },
@@ -1997,6 +2065,7 @@
           "type": "string"
         }
       },
+      "returns": "Project",
       "url": "/teams/{username}/projects/"
     },
     "deleteForTeam": {
@@ -2024,6 +2093,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedProjects",
       "url": "/teams/{username}/projects/"
     },
     "getForTeam": {
@@ -2040,6 +2110,7 @@
           "type": "string"
         }
       },
+      "returns": "Project",
       "url": "/teams/{username}/projects/{project_key}"
     },
     "updateForTeam": {
@@ -2061,6 +2132,7 @@
           "type": "string"
         }
       },
+      "returns": "Project",
       "url": "/teams/{username}/projects/{project_key}"
     }
   },
@@ -2104,6 +2176,7 @@
           "type": "string"
         }
       },
+      "returns": "Pullrequest",
       "url": "/repositories/{username}/{repo_slug}/pullrequests"
     },
     "createApproval": {
@@ -2125,6 +2198,7 @@
           "type": "string"
         }
       },
+      "returns": "Participant",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve"
     },
     "decline": {
@@ -2146,6 +2220,7 @@
           "type": "string"
         }
       },
+      "returns": "Pullrequest",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/decline"
     },
     "deleteApproval": {
@@ -2209,6 +2284,7 @@
           "type": "string"
         }
       },
+      "returns": "Pullrequest",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}"
     },
     "getActivityLog": {
@@ -2256,6 +2332,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPullrequests",
       "url": "/repositories/{username}/{repo_slug}/pullrequests"
     },
     "getAllActivityLog": {
@@ -2298,6 +2375,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPullrequestComments",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments"
     },
     "getAllCommits": {
@@ -2356,6 +2434,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedCommitstatuses",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
     },
     "getComment": {
@@ -2382,6 +2461,7 @@
           "type": "string"
         }
       },
+      "returns": "PullrequestComment",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}"
     },
     "getDefaultReviewer": {
@@ -2491,6 +2571,7 @@
           "type": "string"
         }
       },
+      "returns": "Pullrequest",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/merge"
     },
     "update": {
@@ -2516,6 +2597,7 @@
           "type": "string"
         }
       },
+      "returns": "Pullrequest",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}"
     }
   },
@@ -2534,6 +2616,7 @@
           "type": "string"
         }
       },
+      "returns": "Branch",
       "url": "/repositories/{username}/{repo_slug}/refs/branches"
     },
     "createTag": {
@@ -2555,6 +2638,7 @@
           "type": "string"
         }
       },
+      "returns": "Tag",
       "url": "/repositories/{username}/{repo_slug}/refs/tags"
     },
     "deleteBranch": {
@@ -2613,6 +2697,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedRefs",
       "url": "/repositories/{username}/{repo_slug}/refs"
     },
     "getAllBranches": {
@@ -2629,6 +2714,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedBranches",
       "url": "/repositories/{username}/{repo_slug}/refs/branches"
     },
     "getAllTags": {
@@ -2645,6 +2731,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedTags",
       "url": "/repositories/{username}/{repo_slug}/refs/tags"
     },
     "getBranch": {
@@ -2666,6 +2753,7 @@
           "type": "string"
         }
       },
+      "returns": "Branch",
       "url": "/repositories/{username}/{repo_slug}/refs/branches/{name}"
     },
     "getTag": {
@@ -2687,6 +2775,7 @@
           "type": "string"
         }
       },
+      "returns": "Tag",
       "url": "/repositories/{username}/{repo_slug}/refs/tags/{name}"
     }
   },
@@ -2730,6 +2819,7 @@
           "type": "string"
         }
       },
+      "returns": "Repository",
       "url": "/repositories/{username}/{repo_slug}"
     },
     "createBranch": {
@@ -2746,6 +2836,7 @@
           "type": "string"
         }
       },
+      "returns": "Branch",
       "url": "/repositories/{username}/{repo_slug}/refs/branches"
     },
     "createBranchRestriction": {
@@ -2767,6 +2858,7 @@
           "type": "string"
         }
       },
+      "returns": "Branchrestriction",
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
     },
     "createCommitApproval": {
@@ -2788,6 +2880,7 @@
           "type": "string"
         }
       },
+      "returns": "Participant",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/approve"
     },
     "createCommitBuildStatus": {
@@ -2813,6 +2906,7 @@
           "type": "string"
         }
       },
+      "returns": "Commitstatus",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build"
     },
     "createDownload": {
@@ -2849,6 +2943,7 @@
           "type": "string"
         }
       },
+      "returns": "Repository",
       "url": "/repositories/{username}/{repo_slug}/forks"
     },
     "createIssue": {
@@ -2870,6 +2965,7 @@
           "type": "string"
         }
       },
+      "returns": "Issue",
       "url": "/repositories/{username}/{repo_slug}/issues"
     },
     "createIssueAttachments": {
@@ -2917,6 +3013,7 @@
           "type": "string"
         }
       },
+      "returns": "IssueChange",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
     },
     "createIssueComment": {
@@ -2964,6 +3061,7 @@
           "type": "string"
         }
       },
+      "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
     },
     "createIssueWatch": {
@@ -2985,6 +3083,7 @@
           "type": "string"
         }
       },
+      "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
     },
     "createPipeline": {
@@ -3006,6 +3105,7 @@
           "type": "string"
         }
       },
+      "returns": "Pipeline",
       "url": "/repositories/{username}/{repo_slug}/pipelines/"
     },
     "createPipelinesKnownHost": {
@@ -3027,6 +3127,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineKnownHost",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
     },
     "createPipelinesSchedule": {
@@ -3048,6 +3149,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineSchedule",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
     },
     "createPipelinesVariable": {
@@ -3069,6 +3171,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
     },
     "createPullRequest": {
@@ -3089,6 +3192,7 @@
           "type": "string"
         }
       },
+      "returns": "Pullrequest",
       "url": "/repositories/{username}/{repo_slug}/pullrequests"
     },
     "createPullRequestApproval": {
@@ -3110,6 +3214,7 @@
           "type": "string"
         }
       },
+      "returns": "Participant",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve"
     },
     "createSrcFileCommit": {
@@ -3167,6 +3272,7 @@
           "type": "string"
         }
       },
+      "returns": "Tag",
       "url": "/repositories/{username}/{repo_slug}/refs/tags"
     },
     "createWebhook": {
@@ -3183,6 +3289,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/repositories/{username}/{repo_slug}/hooks"
     },
     "declinePullRequest": {
@@ -3204,6 +3311,7 @@
           "type": "string"
         }
       },
+      "returns": "Pullrequest",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/decline"
     },
     "delete": {
@@ -3350,6 +3458,7 @@
           "type": "string"
         }
       },
+      "returns": "Issue",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
     },
     "deleteIssueAttachment": {
@@ -3449,6 +3558,7 @@
           "type": "string"
         }
       },
+      "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
     },
     "deletePipelinesKnownHost": {
@@ -3644,6 +3754,7 @@
           "type": "string"
         }
       },
+      "returns": "Repository",
       "url": "/repositories/{username}/{repo_slug}"
     },
     "getAll": {
@@ -3665,6 +3776,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedRepositories",
       "url": "/repositories/{username}"
     },
     "getAllBranchRestrictions": {
@@ -3681,6 +3793,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedBranchrestrictions",
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
     },
     "getAllBranches": {
@@ -3697,6 +3810,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedBranches",
       "url": "/repositories/{username}/{repo_slug}/refs/branches"
     },
     "getAllCommitComments": {
@@ -3718,6 +3832,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedCommitComments",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments"
     },
     "getAllCommitStatuses": {
@@ -3739,6 +3854,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedCommitstatuses",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses"
     },
     "getAllCommits": {
@@ -3824,6 +3940,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedRepositories",
       "url": "/repositories/{username}/{repo_slug}/forks"
     },
     "getAllIssueAttachments": {
@@ -3845,6 +3962,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedIssueAttachments",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments"
     },
     "getAllIssueChanges": {
@@ -3874,6 +3992,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedLogEntries",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
     },
     "getAllIssueComments": {
@@ -3899,6 +4018,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedIssueComments",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments"
     },
     "getAllIssueComponents": {
@@ -3915,6 +4035,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedComponents",
       "url": "/repositories/{username}/{repo_slug}/components"
     },
     "getAllIssueMilestones": {
@@ -3931,6 +4052,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedMilestones",
       "url": "/repositories/{username}/{repo_slug}/milestones"
     },
     "getAllIssueVersions": {
@@ -3947,6 +4069,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedVersions",
       "url": "/repositories/{username}/{repo_slug}/versions"
     },
     "getAllIssues": {
@@ -3963,6 +4086,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedIssues",
       "url": "/repositories/{username}/{repo_slug}/issues"
     },
     "getAllPermissions": {
@@ -3977,6 +4101,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedRepositoryPermissions",
       "url": "/user/permissions/repositories"
     },
     "getAllPipelineSteps": {
@@ -3998,6 +4123,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelineSteps",
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/"
     },
     "getAllPipelines": {
@@ -4014,6 +4140,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelines",
       "url": "/repositories/{username}/{repo_slug}/pipelines/"
     },
     "getAllPipelinesKnownHosts": {
@@ -4030,6 +4157,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelineKnownHosts",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
     },
     "getAllPipelinesScheduleExecutions": {
@@ -4046,6 +4174,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelineScheduleExecutions",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/"
     },
     "getAllPipelinesSchedules": {
@@ -4062,6 +4191,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelineSchedules",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
     },
     "getAllPipelinesVariables": {
@@ -4078,6 +4208,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelineVariables",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
     },
     "getAllPullRequestComments": {
@@ -4099,6 +4230,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPullrequestComments",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments"
     },
     "getAllPullRequestCommits": {
@@ -4141,6 +4273,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedCommitstatuses",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
     },
     "getAllPullRequests": {
@@ -4167,6 +4300,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPullrequests",
       "url": "/repositories/{username}/{repo_slug}/pullrequests"
     },
     "getAllPullRequestsActivityLog": {
@@ -4204,6 +4338,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedRefs",
       "url": "/repositories/{username}/{repo_slug}/refs"
     },
     "getAllTags": {
@@ -4220,6 +4355,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedTags",
       "url": "/repositories/{username}/{repo_slug}/refs/tags"
     },
     "getAllWatchers": {
@@ -4252,6 +4388,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedWebhookSubscriptions",
       "url": "/repositories/{username}/{repo_slug}/hooks"
     },
     "getBranch": {
@@ -4273,6 +4410,7 @@
           "type": "string"
         }
       },
+      "returns": "Branch",
       "url": "/repositories/{username}/{repo_slug}/refs/branches/{name}"
     },
     "getBranchRestriction": {
@@ -4294,6 +4432,7 @@
           "type": "string"
         }
       },
+      "returns": "Branchrestriction",
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
     },
     "getCommit": {
@@ -4315,6 +4454,7 @@
           "type": "string"
         }
       },
+      "returns": "Commit",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}"
     },
     "getCommitBuildStatus": {
@@ -4341,6 +4481,7 @@
           "type": "string"
         }
       },
+      "returns": "Commitstatus",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}"
     },
     "getCommitComment": {
@@ -4367,6 +4508,7 @@
           "type": "string"
         }
       },
+      "returns": "CommitComment",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments/{comment_id}"
     },
     "getDefaultReviewer": {
@@ -4450,6 +4592,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedDiffstats",
       "url": "/repositories/{username}/{repo_slug}/diffstat/{spec}"
     },
     "getDownload": {
@@ -4509,6 +4652,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedFiles",
       "url": "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}"
     },
     "getIssue": {
@@ -4530,6 +4674,7 @@
           "type": "string"
         }
       },
+      "returns": "Issue",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
     },
     "getIssueAttachment": {
@@ -4582,6 +4727,7 @@
           "type": "string"
         }
       },
+      "returns": "IssueChange",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes/{change_id}"
     },
     "getIssueComment": {
@@ -4608,6 +4754,7 @@
           "type": "string"
         }
       },
+      "returns": "IssueComment",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
     },
     "getIssueComponent": {
@@ -4629,6 +4776,7 @@
           "type": "string"
         }
       },
+      "returns": "Component",
       "url": "/repositories/{username}/{repo_slug}/components/{component_id}"
     },
     "getIssueMilestone": {
@@ -4650,6 +4798,7 @@
           "type": "string"
         }
       },
+      "returns": "Milestone",
       "url": "/repositories/{username}/{repo_slug}/milestones/{milestone_id}"
     },
     "getIssueVersion": {
@@ -4671,6 +4820,7 @@
           "type": "integer"
         }
       },
+      "returns": "Version",
       "url": "/repositories/{username}/{repo_slug}/versions/{version_id}"
     },
     "getIssueVote": {
@@ -4692,6 +4842,7 @@
           "type": "string"
         }
       },
+      "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
     },
     "getIssueWatch": {
@@ -4713,6 +4864,7 @@
           "type": "string"
         }
       },
+      "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
     },
     "getPatch": {
@@ -4755,6 +4907,7 @@
           "type": "string"
         }
       },
+      "returns": "Pipeline",
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}"
     },
     "getPipelineStep": {
@@ -4781,6 +4934,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineStep",
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}"
     },
     "getPipelineStepLog": {
@@ -4807,6 +4961,7 @@
           "type": "string"
         }
       },
+      "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log"
     },
     "getPipelinesConfig": {
@@ -4823,6 +4978,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelinesConfig",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config"
     },
     "getPipelinesKnownHost": {
@@ -4844,6 +5000,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineKnownHost",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
     },
     "getPipelinesSchedule": {
@@ -4865,6 +5022,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineSchedule",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
     },
     "getPipelinesSshKeyPair": {
@@ -4881,6 +5039,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineSshKeyPair",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
     },
     "getPipelinesVariable": {
@@ -4902,6 +5061,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
     },
     "getPublic": {
@@ -4912,6 +5072,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedRepositories",
       "url": "/repositories"
     },
     "getPullRequest": {
@@ -4933,6 +5094,7 @@
           "type": "string"
         }
       },
+      "returns": "Pullrequest",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}"
     },
     "getPullRequestActivityLog": {
@@ -4980,6 +5142,7 @@
           "type": "string"
         }
       },
+      "returns": "PullrequestComment",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}"
     },
     "getPullRequestDiff": {
@@ -5085,6 +5248,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedTreeentries",
       "url": "/repositories/{username}/{repo_slug}/src/{node}/{path}"
     },
     "getSrcRoot": {
@@ -5108,6 +5272,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedTreeentries",
       "url": "/repositories/{username}/{repo_slug}/src"
     },
     "getTag": {
@@ -5129,6 +5294,7 @@
           "type": "string"
         }
       },
+      "returns": "Tag",
       "url": "/repositories/{username}/{repo_slug}/refs/tags/{name}"
     },
     "getWebhook": {
@@ -5150,6 +5316,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
     },
     "mergePullRequest": {
@@ -5175,6 +5342,7 @@
           "type": "string"
         }
       },
+      "returns": "Pullrequest",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/merge"
     },
     "stopPipeline": {
@@ -5216,6 +5384,7 @@
           "type": "string"
         }
       },
+      "returns": "Repository",
       "url": "/repositories/{username}/{repo_slug}"
     },
     "updateBranchRestriction": {
@@ -5242,6 +5411,7 @@
           "type": "string"
         }
       },
+      "returns": "Branchrestriction",
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
     },
     "updateCommitBuildStatus": {
@@ -5272,6 +5442,7 @@
           "type": "string"
         }
       },
+      "returns": "Commitstatus",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}"
     },
     "updateIssue": {
@@ -5293,6 +5464,7 @@
           "type": "string"
         }
       },
+      "returns": "Issue",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
     },
     "updateIssueComment": {
@@ -5324,6 +5496,7 @@
           "type": "string"
         }
       },
+      "returns": "IssueComment",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
     },
     "updatePipelinesBuildNumber": {
@@ -5345,6 +5518,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineBuildNumber",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/build_number"
     },
     "updatePipelinesConfig": {
@@ -5366,6 +5540,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelinesConfig",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config"
     },
     "updatePipelinesKnownHost": {
@@ -5392,6 +5567,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineKnownHost",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
     },
     "updatePipelinesSchedule": {
@@ -5418,6 +5594,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineSchedule",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
     },
     "updatePipelinesSshKeyPair": {
@@ -5439,6 +5616,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineSshKeyPair",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
     },
     "updatePipelinesVariable": {
@@ -5465,6 +5643,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
     },
     "updatePullRequest": {
@@ -5490,6 +5669,7 @@
           "type": "string"
         }
       },
+      "returns": "Pullrequest",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}"
     },
     "updateWebhook": {
@@ -5511,6 +5691,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
     }
   },
@@ -5537,6 +5718,7 @@
           "type": "string"
         }
       },
+      "returns": "SearchResultPage",
       "url": "/teams/{username}/search/code"
     },
     "codeOfUser": {
@@ -5561,6 +5743,7 @@
           "type": "string"
         }
       },
+      "returns": "SearchResultPage",
       "url": "/users/{username}/search/code"
     }
   },
@@ -5574,6 +5757,7 @@
           "type": "any"
         }
       },
+      "returns": "Snippet",
       "url": "/snippets"
     },
     "createComment": {
@@ -5595,6 +5779,7 @@
           "type": "string"
         }
       },
+      "returns": "Snippet",
       "url": "/snippets/{username}/{encoded_id}/comments"
     },
     "createForUser": {
@@ -5611,6 +5796,7 @@
           "type": "string"
         }
       },
+      "returns": "Snippet",
       "url": "/snippets/{username}"
     },
     "createWatch": {
@@ -5627,6 +5813,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedUsers",
       "url": "/snippets/{username}/{encoded_id}/watch"
     },
     "delete": {
@@ -5701,6 +5888,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedUsers",
       "url": "/snippets/{username}/{encoded_id}/watch"
     },
     "get": {
@@ -5717,6 +5905,7 @@
           "type": "string"
         }
       },
+      "returns": "Snippet",
       "url": "/snippets/{username}/{encoded_id}"
     },
     "getAll": {
@@ -5732,6 +5921,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedSnippets",
       "url": "/snippets"
     },
     "getAllComments": {
@@ -5748,6 +5938,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedSnippetComments",
       "url": "/snippets/{username}/{encoded_id}/comments"
     },
     "getAllCommits": {
@@ -5764,6 +5955,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedSnippetCommit",
       "url": "/snippets/{username}/{encoded_id}/commits"
     },
     "getAllCommitsForRevision": {
@@ -5785,6 +5977,7 @@
           "type": "string"
         }
       },
+      "returns": "SnippetCommit",
       "url": "/snippets/{username}/{encoded_id}/commits/{revision}"
     },
     "getAllForUser": {
@@ -5805,6 +5998,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedSnippets",
       "url": "/snippets/{username}"
     },
     "getAllWatchers": {
@@ -5821,6 +6015,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedUsers",
       "url": "/snippets/{username}/{encoded_id}/watchers"
     },
     "getComment": {
@@ -5842,6 +6037,7 @@
           "type": "string"
         }
       },
+      "returns": "SnippetComment",
       "url": "/snippets/{username}/{encoded_id}/comments/{comment_id}"
     },
     "getDiff": {
@@ -5935,6 +6131,7 @@
           "type": "string"
         }
       },
+      "returns": "Snippet",
       "url": "/snippets/{username}/{encoded_id}/{node_id}"
     },
     "getWatch": {
@@ -5951,9 +6148,15 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedUsers",
       "url": "/snippets/{username}/{encoded_id}/watch"
     },
     "update": {
+      "accepts": [
+        "application/json",
+        "multipart/related",
+        "multipart/form-data"
+      ],
       "method": "PUT",
       "params": {
         "encoded_id": {
@@ -5967,6 +6170,7 @@
           "type": "string"
         }
       },
+      "returns": "Snippet",
       "url": "/snippets/{username}/{encoded_id}"
     },
     "updateComment": {
@@ -5991,6 +6195,11 @@
       "url": "/snippets/{username}/{encoded_id}/comments/{comment_id}"
     },
     "updateRevision": {
+      "accepts": [
+        "application/json",
+        "multipart/related",
+        "multipart/form-data"
+      ],
       "method": "PUT",
       "params": {
         "encoded_id": {
@@ -6009,6 +6218,7 @@
           "type": "string"
         }
       },
+      "returns": "Snippet",
       "url": "/snippets/{username}/{encoded_id}/{node_id}"
     }
   },
@@ -6089,6 +6299,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedTreeentries",
       "url": "/repositories/{username}/{repo_slug}/src/{node}/{path}"
     },
     "getHistory": {
@@ -6127,6 +6338,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedFiles",
       "url": "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}"
     },
     "getRoot": {
@@ -6150,6 +6362,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedTreeentries",
       "url": "/repositories/{username}/{repo_slug}/src"
     }
   },
@@ -6167,11 +6380,11 @@
           "type": "string"
         }
       },
+      "returns": "SshAccountKey",
       "url": "/users/{username}/ssh-keys"
     },
     "deleteForUser": {
       "method": "DELETE",
-      "params": {},
       "url": "/users/{username}/ssh-keys/{key_id}"
     },
     "getAllForUser": {
@@ -6183,16 +6396,15 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedSshUserKeys",
       "url": "/users/{username}/ssh-keys"
     },
     "getForUser": {
       "method": "GET",
-      "params": {},
       "url": "/users/{username}/ssh-keys/{key_id}"
     },
     "updateForUser": {
       "method": "PUT",
-      "params": {},
       "url": "/users/{username}/ssh-keys/{key_id}"
     }
   },
@@ -6210,6 +6422,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/teams/{username}/pipelines_config/variables/"
     },
     "createProject": {
@@ -6226,6 +6439,7 @@
           "type": "string"
         }
       },
+      "returns": "Project",
       "url": "/teams/{username}/projects/"
     },
     "createWebhook": {
@@ -6237,6 +6451,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/teams/{username}/hooks"
     },
     "deletePipelinesVariable": {
@@ -6296,6 +6511,7 @@
           "type": "string"
         }
       },
+      "returns": "Team",
       "url": "/teams/{username}"
     },
     "getAll": {
@@ -6311,6 +6527,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedTeams",
       "url": "/teams"
     },
     "getAllFollowers": {
@@ -6322,6 +6539,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedUsers",
       "url": "/teams/{username}/followers"
     },
     "getAllFollowing": {
@@ -6333,6 +6551,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedUsers",
       "url": "/teams/{username}/following"
     },
     "getAllMembers": {
@@ -6344,6 +6563,7 @@
           "type": "string"
         }
       },
+      "returns": "User",
       "url": "/teams/{username}/members"
     },
     "getAllPipelinesVariables": {
@@ -6355,6 +6575,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelineVariables",
       "url": "/teams/{username}/pipelines_config/variables/"
     },
     "getAllProjects": {
@@ -6366,6 +6587,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedProjects",
       "url": "/teams/{username}/projects/"
     },
     "getAllRepositories": {
@@ -6407,6 +6629,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedRepositoryPermissions",
       "url": "/teams/{username}/permissions/repositories"
     },
     "getAllTeamPermissions": {
@@ -6426,6 +6649,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedTeamPermissions",
       "url": "/teams/{username}/permissions"
     },
     "getAllWebhooks": {
@@ -6437,6 +6661,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedWebhookSubscriptions",
       "url": "/teams/{username}/hooks"
     },
     "getPipelinesVariable": {
@@ -6453,6 +6678,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
     },
     "getProject": {
@@ -6469,6 +6695,7 @@
           "type": "string"
         }
       },
+      "returns": "Project",
       "url": "/teams/{username}/projects/{project_key}"
     },
     "getWebhook": {
@@ -6485,6 +6712,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/teams/{username}/hooks/{uid}"
     },
     "searchCode": {
@@ -6509,6 +6737,7 @@
           "type": "string"
         }
       },
+      "returns": "SearchResultPage",
       "url": "/teams/{username}/search/code"
     },
     "updatePipelinesVariable": {
@@ -6530,6 +6759,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
     },
     "updateProject": {
@@ -6551,6 +6781,7 @@
           "type": "string"
         }
       },
+      "returns": "Project",
       "url": "/teams/{username}/projects/{project_key}"
     },
     "updateWebhook": {
@@ -6567,18 +6798,18 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/teams/{username}/hooks/{uid}"
     }
   },
   "user": {
     "get": {
       "method": "GET",
-      "params": {},
+      "returns": "User",
       "url": "/user"
     },
     "getAllEmails": {
       "method": "GET",
-      "params": {},
       "url": "/user/emails"
     },
     "getAllRepositoryPermissions": {
@@ -6593,6 +6824,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedRepositoryPermissions",
       "url": "/user/permissions/repositories"
     },
     "getAllTeamPermissions": {
@@ -6607,6 +6839,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedTeamPermissions",
       "url": "/user/permissions/teams"
     },
     "getEmail": {
@@ -6635,6 +6868,7 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/users/{username}/pipelines_config/variables/"
     },
     "createSshKey": {
@@ -6650,6 +6884,7 @@
           "type": "string"
         }
       },
+      "returns": "SshAccountKey",
       "url": "/users/{username}/ssh-keys"
     },
     "createWebhook": {
@@ -6661,6 +6896,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/users/{username}/hooks"
     },
     "deletePipelinesVariable": {
@@ -6681,7 +6917,6 @@
     },
     "deleteSshKey": {
       "method": "DELETE",
-      "params": {},
       "url": "/users/{username}/ssh-keys/{key_id}"
     },
     "deleteWebhook": {
@@ -6709,11 +6944,11 @@
           "type": "string"
         }
       },
+      "returns": "User",
       "url": "/users/{username}"
     },
     "getAllEmailsForAuthedUser": {
       "method": "GET",
-      "params": {},
       "url": "/user/emails"
     },
     "getAllFollowers": {
@@ -6725,6 +6960,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedUsers",
       "url": "/users/{username}/followers"
     },
     "getAllFollowing": {
@@ -6736,6 +6972,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedUsers",
       "url": "/users/{username}/following"
     },
     "getAllPipelinesVariables": {
@@ -6747,6 +6984,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedPipelineVariables",
       "url": "/users/{username}/pipelines_config/variables/"
     },
     "getAllRepositories": {
@@ -6780,6 +7018,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedSshUserKeys",
       "url": "/users/{username}/ssh-keys"
     },
     "getAllWebhooks": {
@@ -6791,11 +7030,12 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedWebhookSubscriptions",
       "url": "/users/{username}/hooks"
     },
     "getAuthedUser": {
       "method": "GET",
-      "params": {},
+      "returns": "User",
       "url": "/user"
     },
     "getEmailForAuthedUser": {
@@ -6823,11 +7063,11 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
     },
     "getSshKey": {
       "method": "GET",
-      "params": {},
       "url": "/users/{username}/ssh-keys/{key_id}"
     },
     "getWebhook": {
@@ -6844,6 +7084,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/users/{username}/hooks/{uid}"
     },
     "searchCode": {
@@ -6868,6 +7109,7 @@
           "type": "string"
         }
       },
+      "returns": "SearchResultPage",
       "url": "/users/{username}/search/code"
     },
     "updatePipelinesVariable": {
@@ -6889,11 +7131,11 @@
           "type": "string"
         }
       },
+      "returns": "PipelineVariable",
       "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
     },
     "updateSshKey": {
       "method": "PUT",
-      "params": {},
       "url": "/users/{username}/ssh-keys/{key_id}"
     },
     "updateWebhook": {
@@ -6910,6 +7152,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/users/{username}/hooks/{uid}"
     }
   },
@@ -6928,6 +7171,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/repositories/{username}/{repo_slug}/hooks"
     },
     "createForTeam": {
@@ -6939,6 +7183,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/teams/{username}/hooks"
     },
     "createForUser": {
@@ -6950,6 +7195,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/users/{username}/hooks"
     },
     "delete": {
@@ -7024,6 +7270,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
     },
     "getAll": {
@@ -7040,6 +7287,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedWebhookSubscriptions",
       "url": "/repositories/{username}/{repo_slug}/hooks"
     },
     "getAllForTeam": {
@@ -7051,6 +7299,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedWebhookSubscriptions",
       "url": "/teams/{username}/hooks"
     },
     "getAllForUser": {
@@ -7062,6 +7311,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedWebhookSubscriptions",
       "url": "/users/{username}/hooks"
     },
     "getForTeam": {
@@ -7078,6 +7328,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/teams/{username}/hooks/{uid}"
     },
     "getForUser": {
@@ -7094,6 +7345,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/users/{username}/hooks/{uid}"
     },
     "listAll": {
@@ -7110,11 +7362,12 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedHookEvents",
       "url": "/hook_events/{subject_type}"
     },
     "listSubjectTypes": {
       "method": "GET",
-      "params": {},
+      "returns": "SubjectTypes",
       "url": "/hook_events"
     },
     "update": {
@@ -7136,6 +7389,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
     },
     "updateForTeam": {
@@ -7152,6 +7406,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/teams/{username}/hooks/{uid}"
     },
     "updateForUser": {
@@ -7168,6 +7423,7 @@
           "type": "string"
         }
       },
+      "returns": "WebhookSubscription",
       "url": "/users/{username}/hooks/{uid}"
     }
   }

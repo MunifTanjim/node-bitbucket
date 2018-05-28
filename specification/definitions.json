@@ -101,42 +101,37 @@
       }
     }
   },
-  "milestone": {
+  "pipeline_ref_target": {
     "allOf": [
       {
-        "$ref": "#/definitions/object"
+        "$ref": "#/definitions/pipeline_target"
       },
       {
+        "additionalProperties": true,
         "type": "object",
-        "description": "A milestone as defined in a repository's issue tracker.",
+        "description": "A Bitbucket Pipelines reference target.",
         "properties": {
-          "links": {
-            "type": "object",
-            "properties": {
-              "self": {
-                "type": "object",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "format": "uri"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "additionalProperties": false
-              }
-            },
-            "additionalProperties": false
+          "ref_type": {
+            "enum": [
+              "branch",
+              "tag",
+              "named_branch",
+              "bookmark"
+            ],
+            "type": "string",
+            "description": "The type of reference (branch/tag)."
           },
-          "name": {
-            "type": "string"
+          "ref_name": {
+            "type": "string",
+            "description": "The name of the reference."
           },
-          "id": {
-            "type": "integer"
+          "commit": {
+            "$ref": "#/definitions/commit"
+          },
+          "selector": {
+            "$ref": "#/definitions/pipeline_selector"
           }
-        },
-        "additionalProperties": true
+        }
       }
     ]
   },
@@ -748,37 +743,42 @@
     },
     "additionalProperties": false
   },
-  "pipeline_ref_target": {
+  "milestone": {
     "allOf": [
       {
-        "$ref": "#/definitions/pipeline_target"
+        "$ref": "#/definitions/object"
       },
       {
-        "additionalProperties": true,
         "type": "object",
-        "description": "A Bitbucket Pipelines reference target.",
+        "description": "A milestone as defined in a repository's issue tracker.",
         "properties": {
-          "ref_type": {
-            "enum": [
-              "branch",
-              "tag",
-              "named_branch",
-              "bookmark"
-            ],
-            "type": "string",
-            "description": "The type of reference (branch/tag)."
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
           },
-          "ref_name": {
-            "type": "string",
-            "description": "The name of the reference."
+          "name": {
+            "type": "string"
           },
-          "commit": {
-            "$ref": "#/definitions/commit"
-          },
-          "selector": {
-            "$ref": "#/definitions/pipeline_selector"
+          "id": {
+            "type": "integer"
           }
-        }
+        },
+        "additionalProperties": true
       }
     ]
   },
@@ -845,197 +845,70 @@
       }
     ]
   },
-  "issue": {
-    "allOf": [
-      {
-        "$ref": "#/definitions/object"
+  "ref": {
+    "type": "object",
+    "description": "A ref object, representing a branch or tag in a repository.",
+    "properties": {
+      "type": {
+        "type": "string"
       },
-      {
+      "links": {
         "type": "object",
-        "description": "An issue.",
         "properties": {
-          "links": {
+          "self": {
             "type": "object",
             "properties": {
-              "self": {
-                "type": "object",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "format": "uri"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "additionalProperties": false
+              "href": {
+                "type": "string",
+                "format": "uri"
               },
-              "html": {
-                "type": "object",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "format": "uri"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "additionalProperties": false
-              },
-              "comments": {
-                "type": "object",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "format": "uri"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "additionalProperties": false
-              },
-              "attachments": {
-                "type": "object",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "format": "uri"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "additionalProperties": false
-              },
-              "watch": {
-                "type": "object",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "format": "uri"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "additionalProperties": false
-              },
-              "vote": {
-                "type": "object",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "format": "uri"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "additionalProperties": false
+              "name": {
+                "type": "string"
               }
             },
             "additionalProperties": false
           },
-          "id": {
-            "type": "integer"
-          },
-          "repository": {
-            "$ref": "#/definitions/repository"
-          },
-          "title": {
-            "type": "string"
-          },
-          "reporter": {
-            "$ref": "#/definitions/user"
-          },
-          "assignee": {
-            "$ref": "#/definitions/user"
-          },
-          "created_on": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updated_on": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "edited_on": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "state": {
-            "type": "string",
-            "enum": [
-              "new",
-              "open",
-              "resolved",
-              "on hold",
-              "invalid",
-              "duplicate",
-              "wontfix",
-              "closed"
-            ]
-          },
-          "kind": {
-            "type": "string",
-            "enum": [
-              "bug",
-              "enhancement",
-              "proposal",
-              "task"
-            ]
-          },
-          "priority": {
-            "type": "string",
-            "enum": [
-              "trivial",
-              "minor",
-              "major",
-              "critical",
-              "blocker"
-            ]
-          },
-          "milestone": {
-            "$ref": "#/definitions/milestone"
-          },
-          "version": {
-            "$ref": "#/definitions/version"
-          },
-          "component": {
-            "$ref": "#/definitions/component"
-          },
-          "votes": {
-            "type": "integer"
-          },
-          "content": {
+          "commits": {
             "type": "object",
             "properties": {
-              "raw": {
+              "href": {
                 "type": "string",
-                "description": "The text as it was typed by a user."
+                "format": "uri"
               },
-              "markup": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "html": {
+            "type": "object",
+            "properties": {
+              "href": {
                 "type": "string",
-                "description": "The type of markup language the raw content is to be interpreted in.",
-                "enum": [
-                  "markdown",
-                  "creole",
-                  "plaintext"
-                ]
+                "format": "uri"
               },
-              "html": {
-                "type": "string",
-                "description": "The user's content rendered as HTML."
+              "name": {
+                "type": "string"
               }
             },
             "additionalProperties": false
           }
         },
-        "additionalProperties": true
+        "additionalProperties": false
+      },
+      "name": {
+        "type": "string",
+        "description": "The name of the ref."
+      },
+      "target": {
+        "$ref": "#/definitions/commit"
       }
-    ]
+    },
+    "required": [
+      "type"
+    ],
+    "additionalProperties": true
   },
   "pullrequest": {
     "allOf": [
@@ -1296,45 +1169,26 @@
       }
     ]
   },
-  "paginated_snippet_comments": {
-    "type": "object",
-    "description": "A paginated list of snippet comments.",
-    "properties": {
-      "size": {
-        "type": "integer",
-        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
-        "minimum": 0
+  "pipelines_config": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
       },
-      "page": {
-        "type": "integer",
-        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
-        "minimum": 1
-      },
-      "pagelen": {
-        "type": "integer",
-        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
-        "minimum": 1
-      },
-      "next": {
-        "type": "string",
-        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri"
-      },
-      "previous": {
-        "type": "string",
-        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri"
-      },
-      "values": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/snippet_comment"
-        },
-        "minItems": 0,
-        "uniqueItems": true
+      {
+        "additionalProperties": true,
+        "type": "object",
+        "description": "The Pipelines configuration for a repository.",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether Pipelines is enabled for the repository."
+          },
+          "repository": {
+            "$ref": "#/definitions/repository"
+          }
+        }
       }
-    },
-    "additionalProperties": false
+    ]
   },
   "team": {
     "allOf": [
@@ -1621,45 +1475,23 @@
     },
     "additionalProperties": false
   },
-  "paginated_hook_events": {
-    "type": "object",
-    "description": "A paginated list of webhook types available to subscribe on.",
-    "properties": {
-      "size": {
-        "type": "integer",
-        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
-        "minimum": 0
+  "pipeline_schedule_execution_errored": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/pipeline_schedule_execution"
       },
-      "page": {
-        "type": "integer",
-        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
-        "minimum": 1
-      },
-      "pagelen": {
-        "type": "integer",
-        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
-        "minimum": 1
-      },
-      "next": {
-        "type": "string",
-        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri"
-      },
-      "previous": {
-        "type": "string",
-        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri"
-      },
-      "values": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/hook_event"
-        },
-        "minItems": 0,
-        "uniqueItems": true
+      {
+        "additionalProperties": true,
+        "type": "object",
+        "description": "A Pipelines schedule execution that failed to be executed.",
+        "properties": {
+          "error": {
+            "$ref": "#/definitions/pipeline_error",
+            "description": "The error that caused the execution to fail."
+          }
+        }
       }
-    },
-    "additionalProperties": false
+    ]
   },
   "team_permission": {
     "type": "object",
@@ -1726,26 +1558,45 @@
     },
     "additionalProperties": false
   },
-  "pipelines_config": {
-    "allOf": [
-      {
-        "$ref": "#/definitions/object"
+  "paginated_snippet_comments": {
+    "type": "object",
+    "description": "A paginated list of snippet comments.",
+    "properties": {
+      "size": {
+        "type": "integer",
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0
       },
-      {
-        "additionalProperties": true,
-        "type": "object",
-        "description": "The Pipelines configuration for a repository.",
-        "properties": {
-          "enabled": {
-            "type": "boolean",
-            "description": "Whether Pipelines is enabled for the repository."
-          },
-          "repository": {
-            "$ref": "#/definitions/repository"
-          }
-        }
+      "page": {
+        "type": "integer",
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1
+      },
+      "pagelen": {
+        "type": "integer",
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1
+      },
+      "next": {
+        "type": "string",
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri"
+      },
+      "previous": {
+        "type": "string",
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri"
+      },
+      "values": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/snippet_comment"
+        },
+        "minItems": 0,
+        "uniqueItems": true
       }
-    ]
+    },
+    "additionalProperties": false
   },
   "version": {
     "allOf": [
@@ -1866,70 +1717,197 @@
     },
     "additionalProperties": false
   },
-  "ref": {
-    "type": "object",
-    "description": "A ref object, representing a branch or tag in a repository.",
-    "properties": {
-      "type": {
-        "type": "string"
+  "issue": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
       },
-      "links": {
+      {
         "type": "object",
+        "description": "An issue.",
         "properties": {
-          "self": {
+          "links": {
             "type": "object",
             "properties": {
-              "href": {
-                "type": "string",
-                "format": "uri"
+              "self": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
               },
-              "name": {
-                "type": "string"
+              "html": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "comments": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "attachments": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "watch": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "vote": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
               }
             },
             "additionalProperties": false
           },
-          "commits": {
-            "type": "object",
-            "properties": {
-              "href": {
-                "type": "string",
-                "format": "uri"
-              },
-              "name": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+          "id": {
+            "type": "integer"
           },
-          "html": {
+          "repository": {
+            "$ref": "#/definitions/repository"
+          },
+          "title": {
+            "type": "string"
+          },
+          "reporter": {
+            "$ref": "#/definitions/user"
+          },
+          "assignee": {
+            "$ref": "#/definitions/user"
+          },
+          "created_on": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_on": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "edited_on": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "new",
+              "open",
+              "resolved",
+              "on hold",
+              "invalid",
+              "duplicate",
+              "wontfix",
+              "closed"
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "bug",
+              "enhancement",
+              "proposal",
+              "task"
+            ]
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "trivial",
+              "minor",
+              "major",
+              "critical",
+              "blocker"
+            ]
+          },
+          "milestone": {
+            "$ref": "#/definitions/milestone"
+          },
+          "version": {
+            "$ref": "#/definitions/version"
+          },
+          "component": {
+            "$ref": "#/definitions/component"
+          },
+          "votes": {
+            "type": "integer"
+          },
+          "content": {
             "type": "object",
             "properties": {
-              "href": {
+              "raw": {
                 "type": "string",
-                "format": "uri"
+                "description": "The text as it was typed by a user."
               },
-              "name": {
-                "type": "string"
+              "markup": {
+                "type": "string",
+                "description": "The type of markup language the raw content is to be interpreted in.",
+                "enum": [
+                  "markdown",
+                  "creole",
+                  "plaintext"
+                ]
+              },
+              "html": {
+                "type": "string",
+                "description": "The user's content rendered as HTML."
               }
             },
             "additionalProperties": false
           }
         },
-        "additionalProperties": false
-      },
-      "name": {
-        "type": "string",
-        "description": "The name of the ref."
-      },
-      "target": {
-        "$ref": "#/definitions/commit"
+        "additionalProperties": true
       }
-    },
-    "required": [
-      "type"
-    ],
-    "additionalProperties": true
+    ]
   },
   "webhook_subscription": {
     "allOf": [
@@ -4506,23 +4484,45 @@
     ],
     "additionalProperties": true
   },
-  "pipeline_schedule_execution_errored": {
-    "allOf": [
-      {
-        "$ref": "#/definitions/pipeline_schedule_execution"
+  "paginated_hook_events": {
+    "type": "object",
+    "description": "A paginated list of webhook types available to subscribe on.",
+    "properties": {
+      "size": {
+        "type": "integer",
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0
       },
-      {
-        "additionalProperties": true,
-        "type": "object",
-        "description": "A Pipelines schedule execution that failed to be executed.",
-        "properties": {
-          "error": {
-            "$ref": "#/definitions/pipeline_error",
-            "description": "The error that caused the execution to fail."
-          }
-        }
+      "page": {
+        "type": "integer",
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1
+      },
+      "pagelen": {
+        "type": "integer",
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1
+      },
+      "next": {
+        "type": "string",
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri"
+      },
+      "previous": {
+        "type": "string",
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri"
+      },
+      "values": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/hook_event"
+        },
+        "minItems": 0,
+        "uniqueItems": true
       }
-    ]
+    },
+    "additionalProperties": false
   },
   "diffstat": {
     "type": "object",

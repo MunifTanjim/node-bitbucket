@@ -25,10 +25,12 @@
     "generate:specification": "node scripts/generate-specification.js",
     "generate:methods-list": "node scripts/generate-methods-list.js",
     "generate:routes": "node scripts/generate-routes.js",
+    "generate:response-type-defs":
+      "node scripts/generate-response-type-defs.js",
     "generate:types": "npm-run-all generate:types:*",
     "generate:types:ts": "node scripts/generate-types-ts.js",
     "prevalidate:ts": "npm run generate:types:ts",
-    "validate:ts": "tsc --target es6 index.d.ts",
+    "validate:ts": "tsc --target es6 src/index.d.ts",
     "prepare": "npm run build",
     "test": "jest"
   },
@@ -51,6 +53,7 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
     "jest": "^23.0.0",
+    "json-schema-to-typescript": "^5.5.0",
     "lodash": "^4.17.10",
     "mkdirp": "^0.5.1",
     "mustache": "^2.3.0",

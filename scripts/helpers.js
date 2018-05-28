@@ -1,5 +1,13 @@
 const _ = require('lodash')
 
+const camelCase = _.camelCase
+
+const compactObject = object => {
+  return _.chain(object)
+    .pickBy(o => (_.isObject(o) ? !_.isEmpty(o) : o))
+    .value()
+}
+
 const extractMethodNamesForScopeFromMethodList = (methodsList, scope) => {
   return _.chain(methodsList)
     .values()
@@ -27,9 +35,9 @@ const getDuplicates = array => {
     .value()
 }
 
-const getResourceName = apiPath => {
-  return /^\/(\w+)\/?/.exec(apiPath)[1]
-}
+const getResourceName = apiPath => /^\/(\w+)\/?/.exec(apiPath)[1]
+
+const pascalCase = string => _.upperFirst(_.camelCase(string))
 
 const sortObjectByKeys = object => {
   return _.chain(object)
@@ -39,10 +47,16 @@ const sortObjectByKeys = object => {
     .value()
 }
 
+const tidyObject = object => compactObject(sortObjectByKeys(object))
+
 module.exports = {
+  camelCase,
+  compactObject,
   extractMethodNamesForScopeFromMethodList,
   extractScopesFromMethodsList,
   getDuplicates,
   getResourceName,
-  sortObjectByKeys
+  pascalCase,
+  sortObjectByKeys,
+  tidyObject
 }

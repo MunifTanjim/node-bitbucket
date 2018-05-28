@@ -1,14 +1,11 @@
-const { readFileSync, writeFileSync } = require('fs')
+const _ = require('lodash')
 const path = require('path')
-
 const Mustache = require('mustache')
-const upperFirst = require('lodash/upperFirst')
-const camelcase = require('lodash/camelCase')
+const { readFileSync, writeFileSync } = require('fs')
+
+const { camelCase, pascalCase } = require('./helpers')
 
 const ROUTES = require('../src/routes/routes.json')
-
-const templatePath = path.resolve('scripts/templates')
-const definitionPath = path.resolve('src')
 
 const typeMap = {
   integer: 'number'
@@ -24,28 +21,32 @@ const parameterize = (paramName, param) => {
   let enums = param.enum ? param.enum.map(JSON.stringify).join('|') : null
 
   return {
-    name: pascalcase(paramName),
+    name: pascalCase(paramName),
     key: paramName,
     required: param.required,
     type: enums || type
   }
 }
 
-const pascalcase = string => upperFirst(camelcase(string))
+const generateTypes = (
+  languageName,
+  templateFile,
+  outputFile,
+  responseTypeDefs
+) => {
+  let tsDeclarationPath = path.resolve('src', outputFile)
+  let templatePath = path.resolve('scripts/templates', templateFile)
 
-const entries = object => Object.keys(object).map(key => [key, object[key]])
-
-const generateTypes = (languageName, templateFile, outputFile) => {
-  let template = readFileSync(path.resolve(templatePath, templateFile), 'utf8')
+  let template = readFileSync(templatePath, 'utf8')
 
   let namespaces = Object.keys(ROUTES).reduce((namespaces, namespaceName) => {
-    let methods = entries(ROUTES[namespaceName]).reduce(
+    let methods = _.toPairs(ROUTES[namespaceName]).reduce(
       (methods, [methodName, method]) => {
-        let namespacedParamsName = pascalcase(
+        let namespacedParamsName = pascalCase(
           `${namespaceName}-${methodName}Params`
         )
 
-        let ownParams = entries(method.params).reduce(
+        let ownParams = _.toPairs(method.params).reduce(
           (params, [paramName, param]) =>
             params.concat(parameterize(paramName, param)),
           []
@@ -55,12 +56,15 @@ const generateTypes = (languageName, templateFile, outputFile) => {
 
         let paramTypeName = hasParams
           ? namespacedParamsName
-          : pascalcase('EmptyParams')
+          : pascalCase('EmptyParams')
+
+        let responseType = method.returns || 'Any'
 
         return methods.concat({
-          method: camelcase(methodName),
+          method: camelCase(methodName),
           paramTypeName,
           ownParams: hasParams && { params: ownParams },
+          responseType,
           exclude: !hasParams
         })
       },
@@ -68,14 +72,17 @@ const generateTypes = (languageName, templateFile, outputFile) => {
     )
 
     return namespaces.concat({
-      namespace: camelcase(namespaceName),
+      namespace: camelCase(namespaceName),
       methods
     })
   }, [])
 
-  let typesContent = Mustache.render(template, { namespaces })
+  let tsDeclaration = Mustache.render(template, {
+    namespaces,
+    responseTypeDefs
+  })
 
-  writeFileSync(path.resolve(definitionPath, outputFile), typesContent, 'utf8')
+  writeFileSync(tsDeclarationPath, tsDeclaration, 'utf8')
 }
 
 module.exports = generateTypes

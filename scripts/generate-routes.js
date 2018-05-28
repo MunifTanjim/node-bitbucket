@@ -2,16 +2,21 @@ const _ = require('lodash')
 const path = require('path')
 const { writeFileSync } = require('fs')
 
+const deepmerge = require('deepmerge')
+
 const {
   extractMethodNamesForScopeFromMethodList,
   extractScopesFromMethodsList,
   getDuplicates,
-  sortObjectByKeys
+  pascalCase,
+  tidyObject
 } = require('./helpers')
 
 const METHODS_LIST = require('../src/routes/methods-list.json')
 const PATHS_SPEC = require('../specification/paths.json')
 const ROUTES = require('../src/routes/routes.json')
+
+const PATHS_SPEC_EXTRAS = require('../specification/overrides/paths.json')
 
 const routesPath = path.resolve('src/routes/routes.json')
 
@@ -50,17 +55,41 @@ const initializeRoutes = () => {
   })
 }
 
+const setConsumes = (methodObject, { consumes = [] }) => {
+  if (!methodObject.accepts) methodObject.accepts = []
+  methodObject.accepts = _.uniq(methodObject.accepts.concat(...consumes))
+}
+
 const setHTTPMethod = (methodObject, httpMethod) => {
   methodObject.method = httpMethod.toUpperCase()
 }
 
-const setParameters = (methodObject, parameters) => {
-  _.each(parameters, ({ name, type, enum: _enum, in: _in, required }) => {
-    methodObject.params[name] = {}
-    if (_enum) methodObject.params[name].enum = _enum
-    if (_in) methodObject.params[name].in = _in
-    if (required) methodObject.params[name].required = required
-    methodObject.params[name].type = type || 'any'
+const setParameters = (methodObject, { parameters = [] }) => {
+  _.each(
+    parameters,
+    ({ name, type = 'any', enum: _enum, in: _in, required }) => {
+      if (!methodObject.params[name]) methodObject.params[name] = {}
+
+      methodObject.params[name] = deepmerge(methodObject.params[name], {
+        enum: _enum,
+        in: _in,
+        required,
+        type
+      })
+
+      methodObject.params[name].enum = _.uniq(methodObject.params[name].enum)
+    }
+  )
+}
+
+const setResponses = (methodObject, { responses = [] }) => {
+  _.each(responses, (response, code) => {
+    if (Number(code) < 400) {
+      if (!response.schema) return
+      methodObject.returns = pascalCase(
+        response.schema.$ref.replace('#/definitions/', '')
+      )
+    }
   })
 }
 
@@ -72,6 +101,7 @@ const updateRoutes = () => {
   _.each(METHODS_LIST, (methods, url) => {
     // Specification for URL
     let spec = PATHS_SPEC[url] || {}
+    let specExtras = PATHS_SPEC_EXTRAS[url] || {}
 
     _.each(methods, (namespaces, httpMethod) => {
       _.each(namespaces, (methodName, namespaceName) => {
@@ -79,34 +109,45 @@ const updateRoutes = () => {
         if (!methodName) return
 
         setHTTPMethod(ROUTES[namespaceName][methodName], httpMethod)
+        setURL(ROUTES[namespaceName][methodName], url)
 
-        setParameters(ROUTES[namespaceName][methodName], spec.parameters)
+        setParameters(ROUTES[namespaceName][methodName], spec)
         if (spec[httpMethod]) {
-          setParameters(
-            ROUTES[namespaceName][methodName],
-            spec[httpMethod].parameters
-          )
+          setConsumes(ROUTES[namespaceName][methodName], spec[httpMethod])
+          setParameters(ROUTES[namespaceName][methodName], spec[httpMethod])
+          setResponses(ROUTES[namespaceName][methodName], spec[httpMethod])
         }
 
-        setURL(ROUTES[namespaceName][methodName], url)
+        if (!specExtras[httpMethod]) return
+
+        _.each(specExtras[httpMethod], (value, key) => {
+          setConsumes(ROUTES[namespaceName][methodName], specExtras[httpMethod])
+          setParameters(
+            ROUTES[namespaceName][methodName],
+            specExtras[httpMethod]
+          )
+          setResponses(
+            ROUTES[namespaceName][methodName],
+            specExtras[httpMethod]
+          )
+        })
       })
     })
   })
 }
 
-const sortRoutesObject = routesObject => {
+const recursivelyTidyObject = object => {
+  _.each(object, (value, key) => {
+    if (!_.isPlainObject(value)) return
+    object[key] = tidyObject(value)
+    recursivelyTidyObject(object[key])
+  })
+}
+
+const tidyRoutesObject = routesObject => {
   return _.chain(routesObject)
-    .thru(sortObjectByKeys)
-    .tap(namespaces => {
-      _.each(namespaces, (namespace, namespaceName) => {
-        namespaces[namespaceName] = sortObjectByKeys(namespace)
-        _.each(namespaces[namespaceName], (methodObject, method) => {
-          namespaces[namespaceName][method].params = sortObjectByKeys(
-            methodObject.params
-          )
-        })
-      })
-    })
+    .thru(tidyObject)
+    .tap(recursivelyTidyObject)
     .value()
 }
 
@@ -115,5 +156,5 @@ updateRoutes()
 
 writeFileSync(
   routesPath,
-  `${JSON.stringify(sortRoutesObject(ROUTES), null, 2)}\n`
+  `${JSON.stringify(tidyRoutesObject(ROUTES), null, 2)}\n`
 )

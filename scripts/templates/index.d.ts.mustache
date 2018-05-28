@@ -3,36 +3,28 @@
  */
 
 declare namespace BitBucket {
-  type json = any
-  type date = string
-
-  export interface AnyResponse {
-    data: json;
-    meta: json;
-  }
-
   export interface EmptyParams {
   }
 
   export interface Options {
     baseUrl?: string;
     headers?: {[header: string]: any};
-    options?: json;
+    options?: any;
   }
 
-  export interface AuthBasic {
+  interface AuthBasic {
     type: "basic";
     username: string;
     password: string;
   }
 
-  export interface AuthAppPassword {
+  interface AuthAppPassword {
     type: "apppassword";
     username: string;
     password: string;
   }
 
-  export interface AuthToken {
+  interface AuthToken {
     type: "token";
     token: string;
   }
@@ -47,8 +39,19 @@ declare namespace BitBucket {
     | { previous: string; }
     | string;
 
-  export interface Callback {
-    (error: Error | null, result: any): any;
+  export interface Callback<T> {
+    (error: Error | null, response: T): void;
+  }
+
+  export interface Response<T> {
+    data: T;
+    meta: any;
+  }
+
+  namespace ResponseType {
+    export type Any = any
+
+    {{{responseTypeDefs}}}
   }
 
   {{#namespaces}}
@@ -74,16 +77,17 @@ declare namespace BitBucket {
 
 declare class BitBucket {
   constructor(options?: BitBucket.Options);
+
   authenticate(auth: BitBucket.Auth): void;
 
   nextPage(data: BitBucket.Link): string | undefined;
   previousPage(data: BitBucket.Link): string | undefined;
-  getPage(url: BitBucket.Link, callback?: BitBucket.Callback): Promise<BitBucket.AnyResponse>;
+  getPage(url: BitBucket.Link, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
 
   {{#namespaces}}
   {{namespace}}: {
     {{#methods}}
-    {{method}}({{#paramTypeName}}params: BitBucket.{{.}}, {{/paramTypeName}}callback?: BitBucket.Callback): Promise<BitBucket.AnyResponse>;
+    {{method}}({{#paramTypeName}}params: BitBucket.{{.}}, {{/paramTypeName}}callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.{{responseType}}>>): Promise<BitBucket.Response<BitBucket.ResponseType.{{responseType}}>>;
     {{/methods}}
   };
   {{/namespaces}}
