@@ -64,7 +64,7 @@ const setHTTPMethod = (methodObject, httpMethod) => {
 const setParameters = (methodObject, { parameters = [] }) => {
   _.each(
     parameters,
-    ({ name, type = 'any', enum: _enum, in: _in, required }) => {
+    ({ enum: _enum, in: _in, name, required, schema = {}, type = 'any' }) => {
       if (!methodObject.params[name]) methodObject.params[name] = {}
 
       methodObject.params[name] = deepmerge(methodObject.params[name], {
@@ -75,6 +75,12 @@ const setParameters = (methodObject, { parameters = [] }) => {
       })
 
       methodObject.params[name].enum = _.uniq(methodObject.params[name].enum)
+
+      if (type === 'any' && schema.$ref) {
+        methodObject.params[name].schema = pascalCase(
+          schema.$ref.replace('#/definitions/', '')
+        )
+      }
     }
   )
 }

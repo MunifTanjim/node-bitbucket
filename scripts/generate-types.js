@@ -20,21 +20,22 @@ const parameterize = (paramName, param) => {
 
   let enums = param.enum ? param.enum.map(JSON.stringify).join('|') : null
 
+  let schema = false
+  if (type === 'any' && param.schema) {
+    schema = true
+    type = param.schema
+  }
+
   return {
-    name: pascalCase(paramName),
     key: paramName,
     required: param.required,
+    schema,
     type: enums || type
   }
 }
 
-const generateTypes = (
-  languageName,
-  templateFile,
-  outputFile,
-  responseTypeDefs
-) => {
-  let tsDeclarationPath = path.resolve('src', outputFile)
+const generateTypes = (languageName, templateFile, outputFile, typesBlob) => {
+  let typesPath = path.resolve('src', outputFile)
   let templatePath = path.resolve('scripts/templates', templateFile)
 
   let template = readFileSync(templatePath, 'utf8')
@@ -77,12 +78,12 @@ const generateTypes = (
     })
   }, [])
 
-  let tsDeclaration = Mustache.render(template, {
+  let typesContent = Mustache.render(template, {
     namespaces,
-    responseTypeDefs
+    typesBlob
   })
 
-  writeFileSync(tsDeclarationPath, tsDeclaration, 'utf8')
+  writeFileSync(typesPath, typesContent, 'utf8')
 }
 
 module.exports = generateTypes

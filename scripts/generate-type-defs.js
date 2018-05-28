@@ -9,7 +9,7 @@ const { pascalCase } = require('./helpers')
 const DEFINITIONS_SPEC = require('../specification/definitions.json')
 const PATHS_SPEC = require('../specification/paths.json')
 
-const responseTypeDefsPath = path.resolve('scripts/response-type-defs.json')
+const responseTypeDefsPath = path.resolve('scripts/type-defs.json')
 
 let noiseKeys = [
   'description',

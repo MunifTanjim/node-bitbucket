@@ -25,8 +25,7 @@
     "generate:specification": "node scripts/generate-specification.js",
     "generate:methods-list": "node scripts/generate-methods-list.js",
     "generate:routes": "node scripts/generate-routes.js",
-    "generate:response-type-defs":
-      "node scripts/generate-response-type-defs.js",
+    "generate:type-defs": "node scripts/generate-type-defs.js",
     "generate:types": "npm-run-all generate:types:*",
     "generate:types:ts": "node scripts/generate-types-ts.js",
     "prevalidate:ts": "npm run generate:types:ts",

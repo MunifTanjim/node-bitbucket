@@ -48,10 +48,10 @@ declare namespace BitBucket {
     headers: any;
   }
 
-  namespace ResponseType {
+  namespace Type {
     export type Any = any
 
-    {{{responseTypeDefs}}}
+    {{{typesBlob}}}
   }
 
   {{#namespaces}}
@@ -62,7 +62,7 @@ declare namespace BitBucket {
     {{#ownParams}}
     & {
     {{#params}}
-      "{{key}}"{{^required}}?{{/required}}: {{{type}}};
+      "{{key}}"{{^required}}?{{/required}}: {{#schema}}BitBucket.Type.{{/schema}}{{{type}}};
     {{/params}}
     };
     {{/ownParams}}
@@ -82,12 +82,12 @@ declare class BitBucket {
 
   nextPage(data: BitBucket.Link): string | undefined;
   previousPage(data: BitBucket.Link): string | undefined;
-  getPage(url: BitBucket.Link, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
+  getPage(url: BitBucket.Link, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
 
   {{#namespaces}}
   {{namespace}}: {
     {{#methods}}
-    {{method}}({{#paramTypeName}}params: BitBucket.{{.}}, {{/paramTypeName}}callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.{{responseType}}>>): Promise<BitBucket.Response<BitBucket.ResponseType.{{responseType}}>>;
+    {{method}}({{#paramTypeName}}params: BitBucket.{{.}}, {{/paramTypeName}}callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.{{responseType}}>>): Promise<BitBucket.Response<BitBucket.Type.{{responseType}}>>;
     {{/methods}}
   };
   {{/namespaces}}
