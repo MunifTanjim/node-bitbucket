@@ -45,7 +45,7 @@ declare namespace BitBucket {
 
   export interface Response<T> {
     data: T;
-    meta: any;
+    headers: any;
   }
 
   namespace ResponseType {

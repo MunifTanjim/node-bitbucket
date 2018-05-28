@@ -8,7 +8,7 @@ const HTTPError = require('./http-error')
 /**
  * Performs HTTP Request
  * @param {Object} requestOptions
- * @returns {Promise} ({data,meta}) on success
+ * @returns {Promise} ({data,headers}) on success
  * @throws {HTTPError} on failure
  */
 const request = requestOptions => {
@@ -60,7 +60,7 @@ const request = requestOptions => {
     })
     .then(data => ({
       data,
-      meta: responseHeaders
+      headers: responseHeaders
     }))
     .catch(error => {
       if (error instanceof HTTPError) {
