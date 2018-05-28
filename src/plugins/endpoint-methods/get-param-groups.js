@@ -3,7 +3,7 @@
  * @param {Object} paramsSpecs
  * @returns {Object} Grouped Parameter Names
  */
-const getParamGroups = paramsSpecs => {
+const getParamGroups = (paramsSpecs = {}) => {
   let paramGroups = {}
 
   Object.keys(paramsSpecs).forEach(paramName => {
