@@ -1,0 +1,132 @@
+{
+  "/repositories/{username}/{repo_slug}/commits": {
+    "get": {
+      "parameters": [
+        {
+          "in": "query",
+          "name": "include",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "in": "query",
+          "name": "exclude",
+          "required": false,
+          "type": "string"
+        }
+      ]
+    },
+    "post": {
+      "parameters": [
+        {
+          "in": "body",
+          "name": "include",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "in": "body",
+          "name": "exclude",
+          "required": false,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "/repositories/{username}/{repo_slug}/commits/{revision}": {
+    "get": {
+      "parameters": [
+        {
+          "in": "query",
+          "name": "include",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "in": "query",
+          "name": "exclude",
+          "required": false,
+          "type": "string"
+        }
+      ]
+    },
+    "post": {
+      "parameters": [
+        {
+          "in": "body",
+          "name": "include",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "in": "body",
+          "name": "exclude",
+          "required": false,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "/repositories/{username}/{repo_slug}/downloads": {
+    "post": {
+      "consumes": ["multipart/form-data"]
+    }
+  },
+  "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}": {
+    "get": {
+      "parameters": [
+        {
+          "in": "query",
+          "name": "fields",
+          "required": false,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "/repositories/{username}/{repo_slug}/hooks": {
+    "post": {
+      "parameters": [
+        {
+          "in": "body",
+          "name": "_body"
+        }
+      ]
+    }
+  },
+  "/repositories/{username}/{repo_slug}/hooks/{uid}": {
+    "put": {
+      "parameters": []
+    }
+  },
+  "/repositories/{username}/{repo_slug}/issues/{issue_id}": {
+    "put": {
+      "parameters": [
+        {
+          "in": "body",
+          "name": "_body"
+        }
+      ]
+    }
+  },
+  "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments": {
+    "post": {
+      "consumes": ["multipart/form-data"]
+    }
+  },
+  "/repositories/{username}/{repo_slug}/refs/branches": {
+    "post": {
+      "parameters": [
+        {
+          "in": "body",
+          "name": "_body"
+        }
+      ]
+    }
+  },
+  "/repositories/{username}/{repo_slug}/src": {
+    "post": {
+      "consumes": ["multipart/form-data", "application/x-www-form-urlencoded"]
+    }
+  }
+}

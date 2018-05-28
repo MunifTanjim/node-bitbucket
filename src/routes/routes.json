@@ -157,6 +157,14 @@
     "fetchAll": {
       "method": "POST",
       "params": {
+        "exclude": {
+          "in": "body",
+          "type": "string"
+        },
+        "include": {
+          "in": "body",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -173,6 +181,14 @@
     "fetchAllForRevision": {
       "method": "POST",
       "params": {
+        "exclude": {
+          "in": "body",
+          "type": "string"
+        },
+        "include": {
+          "in": "body",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -216,6 +232,14 @@
     "getAll": {
       "method": "GET",
       "params": {
+        "exclude": {
+          "in": "query",
+          "type": "string"
+        },
+        "include": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -254,6 +278,14 @@
     "getAllForRevision": {
       "method": "GET",
       "params": {
+        "exclude": {
+          "in": "query",
+          "type": "string"
+        },
+        "include": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -490,6 +522,9 @@
   },
   "downloads": {
     "create": {
+      "accepts": [
+        "multipart/form-data"
+      ],
       "method": "POST",
       "params": {
         "repo_slug": {
@@ -612,6 +647,9 @@
       "url": "/repositories/{username}/{repo_slug}/issues"
     },
     "createAttachments": {
+      "accepts": [
+        "multipart/form-data"
+      ],
       "method": "POST",
       "params": {
         "issue_id": {
@@ -1212,6 +1250,10 @@
     "update": {
       "method": "PUT",
       "params": {
+        "_body": {
+          "in": "body",
+          "type": "any"
+        },
         "issue_id": {
           "in": "path",
           "required": true,
@@ -2605,6 +2647,10 @@
     "createBranch": {
       "method": "POST",
       "params": {
+        "_body": {
+          "in": "body",
+          "type": "any"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -2825,6 +2871,10 @@
     "createBranch": {
       "method": "POST",
       "params": {
+        "_body": {
+          "in": "body",
+          "type": "any"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -2910,6 +2960,9 @@
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build"
     },
     "createDownload": {
+      "accepts": [
+        "multipart/form-data"
+      ],
       "method": "POST",
       "params": {
         "repo_slug": {
@@ -2969,6 +3022,9 @@
       "url": "/repositories/{username}/{repo_slug}/issues"
     },
     "createIssueAttachments": {
+      "accepts": [
+        "multipart/form-data"
+      ],
       "method": "POST",
       "params": {
         "issue_id": {
@@ -3218,6 +3274,10 @@
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve"
     },
     "createSrcFileCommit": {
+      "accepts": [
+        "multipart/form-data",
+        "application/x-www-form-urlencoded"
+      ],
       "method": "POST",
       "params": {
         "author": {
@@ -3278,6 +3338,10 @@
     "createWebhook": {
       "method": "POST",
       "params": {
+        "_body": {
+          "in": "body",
+          "type": "any"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -3706,6 +3770,14 @@
     "fetchAllCommits": {
       "method": "POST",
       "params": {
+        "exclude": {
+          "in": "body",
+          "type": "string"
+        },
+        "include": {
+          "in": "body",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -3722,6 +3794,14 @@
     "fetchAllCommitsForRevision": {
       "method": "POST",
       "params": {
+        "exclude": {
+          "in": "body",
+          "type": "string"
+        },
+        "include": {
+          "in": "body",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -3860,6 +3940,14 @@
     "getAllCommits": {
       "method": "GET",
       "params": {
+        "exclude": {
+          "in": "query",
+          "type": "string"
+        },
+        "include": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -3876,6 +3964,14 @@
     "getAllCommitsForRevision": {
       "method": "GET",
       "params": {
+        "exclude": {
+          "in": "query",
+          "type": "string"
+        },
+        "include": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -4619,6 +4715,10 @@
     "getFileHistory": {
       "method": "GET",
       "params": {
+        "fields": {
+          "in": "query",
+          "type": "string"
+        },
         "node": {
           "in": "path",
           "required": true,
@@ -5448,6 +5548,10 @@
     "updateIssue": {
       "method": "PUT",
       "params": {
+        "_body": {
+          "in": "body",
+          "type": "any"
+        },
         "issue_id": {
           "in": "path",
           "required": true,
@@ -6224,6 +6328,10 @@
   },
   "source": {
     "createFileCommit": {
+      "accepts": [
+        "multipart/form-data",
+        "application/x-www-form-urlencoded"
+      ],
       "method": "POST",
       "params": {
         "author": {
@@ -6305,6 +6413,10 @@
     "getHistory": {
       "method": "GET",
       "params": {
+        "fields": {
+          "in": "query",
+          "type": "string"
+        },
         "node": {
           "in": "path",
           "required": true,
@@ -7160,6 +7272,10 @@
     "create": {
       "method": "POST",
       "params": {
+        "_body": {
+          "in": "body",
+          "type": "any"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,

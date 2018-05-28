@@ -14,42 +14,39 @@ const {
 
 const METHODS_LIST = require('../src/routes/methods-list.json')
 const PATHS_SPEC = require('../specification/paths.json')
-const ROUTES = require('../src/routes/routes.json')
 
-const PATHS_SPEC_EXTRAS = require('../specification/overrides/paths.json')
+const PATHS_SPEC_EXTRAS = require('../specification/extras/paths.json')
 
 const routesPath = path.resolve('src/routes/routes.json')
 
-const initializeRoutes = () => {
-  const scopes = extractScopesFromMethodsList(METHODS_LIST)
+const routesObject = {}
 
-  _.each(scopes, scope => {
-    // Initialize Scopes
-    if (!_.has(ROUTES, scope)) {
-      ROUTES[scope] = {}
-    }
+const initializeRoutes = () => {
+  const namespaces = extractScopesFromMethodsList(METHODS_LIST)
+
+  _.each(namespaces, namespaceName => {
+    // Initialize Namespace
+    routesObject[namespaceName] = {}
 
     let methodNames = extractMethodNamesForScopeFromMethodList(
       METHODS_LIST,
-      scope
+      namespaceName
     )
 
     // Check for duplicate MethodNames
     let duplicates = getDuplicates(methodNames)
     if (duplicates.length) {
       throw new Error(
-        `Duplicate MethodNames:[${duplicates}] in Scope:[${scope}]`
+        `Duplicate MethodNames:[${duplicates}] in Scope:[${namespaceName}]`
       )
     }
 
     // Initialize MethodNames
     _.each(methodNames, methodName => {
-      if (!_.has(ROUTES[scope], methodName)) {
-        ROUTES[scope][methodName] = {
-          method: '',
-          params: {},
-          url: ''
-        }
+      routesObject[namespaceName][methodName] = {
+        method: '',
+        params: {},
+        url: ''
       }
     })
   })
@@ -108,26 +105,35 @@ const updateRoutes = () => {
         // Igonre Empty MethodNames
         if (!methodName) return
 
-        setHTTPMethod(ROUTES[namespaceName][methodName], httpMethod)
-        setURL(ROUTES[namespaceName][methodName], url)
+        setHTTPMethod(routesObject[namespaceName][methodName], httpMethod)
+        setURL(routesObject[namespaceName][methodName], url)
 
-        setParameters(ROUTES[namespaceName][methodName], spec)
+        setParameters(routesObject[namespaceName][methodName], spec)
         if (spec[httpMethod]) {
-          setConsumes(ROUTES[namespaceName][methodName], spec[httpMethod])
-          setParameters(ROUTES[namespaceName][methodName], spec[httpMethod])
-          setResponses(ROUTES[namespaceName][methodName], spec[httpMethod])
+          setConsumes(routesObject[namespaceName][methodName], spec[httpMethod])
+          setParameters(
+            routesObject[namespaceName][methodName],
+            spec[httpMethod]
+          )
+          setResponses(
+            routesObject[namespaceName][methodName],
+            spec[httpMethod]
+          )
         }
 
         if (!specExtras[httpMethod]) return
 
         _.each(specExtras[httpMethod], (value, key) => {
-          setConsumes(ROUTES[namespaceName][methodName], specExtras[httpMethod])
+          setConsumes(
+            routesObject[namespaceName][methodName],
+            specExtras[httpMethod]
+          )
           setParameters(
-            ROUTES[namespaceName][methodName],
+            routesObject[namespaceName][methodName],
             specExtras[httpMethod]
           )
           setResponses(
-            ROUTES[namespaceName][methodName],
+            routesObject[namespaceName][methodName],
             specExtras[httpMethod]
           )
         })
@@ -156,5 +162,5 @@ updateRoutes()
 
 writeFileSync(
   routesPath,
-  `${JSON.stringify(tidyRoutesObject(ROUTES), null, 2)}\n`
+  `${JSON.stringify(tidyRoutesObject(routesObject), null, 2)}\n`
 )
