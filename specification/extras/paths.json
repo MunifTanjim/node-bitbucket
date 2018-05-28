@@ -128,5 +128,34 @@
     "post": {
       "consumes": ["multipart/form-data", "application/x-www-form-urlencoded"]
     }
+  },
+  "/snippets/{username}/{encoded_id}/watch": {
+    "delete": {
+      "responses": {
+        "204": {
+          "schema": {
+            "$ref": ""
+          }
+        }
+      }
+    },
+    "get": {
+      "responses": {
+        "204": {
+          "schema": {
+            "$ref": ""
+          }
+        }
+      }
+    },
+    "put": {
+      "responses": {
+        "204": {
+          "schema": {
+            "$ref": ""
+          }
+        }
+      }
+    }
   }
 }

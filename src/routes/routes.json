@@ -65,7 +65,7 @@
       "returns": "Branchrestriction",
       "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
     },
-    "getAll": {
+    "list": {
       "method": "GET",
       "params": {
         "repo_slug": {
@@ -253,28 +253,6 @@
       },
       "url": "/repositories/{username}/{repo_slug}/commits"
     },
-    "getAllComments": {
-      "method": "GET",
-      "params": {
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedCommitComments",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments"
-    },
     "getAllForRevision": {
       "method": "GET",
       "params": {
@@ -388,6 +366,28 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/patch/{spec}"
+    },
+    "listComments": {
+      "method": "GET",
+      "params": {
+        "node": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedCommitComments",
+      "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments"
     }
   },
   "commitstatuses": {
@@ -417,50 +417,6 @@
       "returns": "Commitstatus",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build"
     },
-    "getAll": {
-      "method": "GET",
-      "params": {
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedCommitstatuses",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses"
-    },
-    "getAllPullRequestStatuses": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedCommitstatuses",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
-    },
     "getBuildStatus": {
       "method": "GET",
       "params": {
@@ -487,6 +443,50 @@
       },
       "returns": "Commitstatus",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}"
+    },
+    "list": {
+      "method": "GET",
+      "params": {
+        "node": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedCommitstatuses",
+      "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses"
+    },
+    "listPullRequestStatuses": {
+      "method": "GET",
+      "params": {
+        "pull_request_id": {
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedCommitstatuses",
+      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
     },
     "updateBuildStatus": {
       "method": "PUT",
@@ -600,7 +600,7 @@
     }
   },
   "hook_events": {
-    "listAll": {
+    "list": {
       "method": "GET",
       "params": {
         "subject_type": {
@@ -911,152 +911,6 @@
       "returns": "Issue",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
     },
-    "getAll": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedIssues",
-      "url": "/repositories/{username}/{repo_slug}/issues"
-    },
-    "getAllAttachments": {
-      "method": "GET",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedIssueAttachments",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments"
-    },
-    "getAllChanges": {
-      "method": "GET",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedLogEntries",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
-    },
-    "getAllComments": {
-      "method": "GET",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedIssueComments",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments"
-    },
-    "getAllComponents": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedComponents",
-      "url": "/repositories/{username}/{repo_slug}/components"
-    },
-    "getAllMilestones": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedMilestones",
-      "url": "/repositories/{username}/{repo_slug}/milestones"
-    },
-    "getAllVersions": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedVersions",
-      "url": "/repositories/{username}/{repo_slug}/versions"
-    },
     "getAttachment": {
       "method": "GET",
       "params": {
@@ -1246,6 +1100,152 @@
       },
       "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
+    },
+    "list": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedIssues",
+      "url": "/repositories/{username}/{repo_slug}/issues"
+    },
+    "listAttachments": {
+      "method": "GET",
+      "params": {
+        "issue_id": {
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedIssueAttachments",
+      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments"
+    },
+    "listChanges": {
+      "method": "GET",
+      "params": {
+        "issue_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedLogEntries",
+      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
+    },
+    "listComments": {
+      "method": "GET",
+      "params": {
+        "issue_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedIssueComments",
+      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments"
+    },
+    "listComponents": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedComponents",
+      "url": "/repositories/{username}/{repo_slug}/components"
+    },
+    "listMilestones": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedMilestones",
+      "url": "/repositories/{username}/{repo_slug}/milestones"
+    },
+    "listVersions": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedVersions",
+      "url": "/repositories/{username}/{repo_slug}/versions"
     },
     "update": {
       "method": "PUT",
@@ -1560,137 +1560,6 @@
       "returns": "Pipeline",
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}"
     },
-    "getAll": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelines",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/"
-    },
-    "getAllKnownHosts": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineKnownHosts",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
-    },
-    "getAllScheduleExecutions": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineScheduleExecutions",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/"
-    },
-    "getAllSchedules": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineSchedules",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
-    },
-    "getAllSteps": {
-      "method": "GET",
-      "params": {
-        "pipeline_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineSteps",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/"
-    },
-    "getAllVariables": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineVariables",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
-    },
-    "getAllVariablesForTeam": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineVariables",
-      "url": "/teams/{username}/pipelines_config/variables/"
-    },
-    "getAllVariablesForUser": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineVariables",
-      "url": "/users/{username}/pipelines_config/variables/"
-    },
     "getConfig": {
       "method": "GET",
       "params": {
@@ -1878,6 +1747,137 @@
       },
       "returns": "PipelineVariable",
       "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
+    },
+    "list": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelines",
+      "url": "/repositories/{username}/{repo_slug}/pipelines/"
+    },
+    "listKnownHosts": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineKnownHosts",
+      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
+    },
+    "listScheduleExecutions": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineScheduleExecutions",
+      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/"
+    },
+    "listSchedules": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineSchedules",
+      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
+    },
+    "listSteps": {
+      "method": "GET",
+      "params": {
+        "pipeline_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineSteps",
+      "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/"
+    },
+    "listVariablesForRepo": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineVariables",
+      "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
+    },
+    "listVariablesForTeam": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineVariables",
+      "url": "/teams/{username}/pipelines_config/variables/"
+    },
+    "listVariablesForUser": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineVariables",
+      "url": "/users/{username}/pipelines_config/variables/"
     },
     "stop": {
       "method": "POST",
@@ -2126,18 +2126,6 @@
       },
       "url": "/teams/{username}/projects/{project_key}"
     },
-    "getAllForTeam": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedProjects",
-      "url": "/teams/{username}/projects/"
-    },
     "getForTeam": {
       "method": "GET",
       "params": {
@@ -2154,6 +2142,18 @@
       },
       "returns": "Project",
       "url": "/teams/{username}/projects/{project_key}"
+    },
+    "listForTeam": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedProjects",
+      "url": "/teams/{username}/projects/"
     },
     "updateForTeam": {
       "method": "PUT",
@@ -2350,33 +2350,6 @@
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/activity"
     },
-    "getAll": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "state": {
-          "enum": [
-            "MERGED",
-            "SUPERSEDED",
-            "OPEN",
-            "DECLINED"
-          ],
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPullrequests",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests"
-    },
     "getAllActivityLog": {
       "method": "GET",
       "params": {
@@ -2397,28 +2370,6 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/activity"
-    },
-    "getAllComments": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPullrequestComments",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments"
     },
     "getAllCommits": {
       "method": "GET",
@@ -2456,28 +2407,6 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/default-reviewers"
-    },
-    "getAllStatuses": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedCommitstatuses",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
     },
     "getComment": {
       "method": "GET",
@@ -2589,6 +2518,77 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/patch"
+    },
+    "list": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "MERGED",
+            "SUPERSEDED",
+            "OPEN",
+            "DECLINED"
+          ],
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPullrequests",
+      "url": "/repositories/{username}/{repo_slug}/pullrequests"
+    },
+    "listComments": {
+      "method": "GET",
+      "params": {
+        "pull_request_id": {
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPullrequestComments",
+      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments"
+    },
+    "listStatuses": {
+      "method": "GET",
+      "params": {
+        "pull_request_id": {
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedCommitstatuses",
+      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
     },
     "merge": {
       "method": "POST",
@@ -2729,57 +2729,6 @@
       },
       "url": "/repositories/{username}/{repo_slug}/refs/tags/{name}"
     },
-    "getAll": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedRefs",
-      "url": "/repositories/{username}/{repo_slug}/refs"
-    },
-    "getAllBranches": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedBranches",
-      "url": "/repositories/{username}/{repo_slug}/refs/branches"
-    },
-    "getAllTags": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTags",
-      "url": "/repositories/{username}/{repo_slug}/refs/tags"
-    },
     "getBranch": {
       "method": "GET",
       "params": {
@@ -2823,6 +2772,57 @@
       },
       "returns": "Tag",
       "url": "/repositories/{username}/{repo_slug}/refs/tags/{name}"
+    },
+    "list": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedRefs",
+      "url": "/repositories/{username}/{repo_slug}/refs"
+    },
+    "listBranches": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedBranches",
+      "url": "/repositories/{username}/{repo_slug}/refs/branches"
+    },
+    "listTags": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedTags",
+      "url": "/repositories/{username}/{repo_slug}/refs/tags"
     }
   },
   "repositories": {
@@ -3164,7 +3164,7 @@
       "returns": "Pipeline",
       "url": "/repositories/{username}/{repo_slug}/pipelines/"
     },
-    "createPipelinesKnownHost": {
+    "createPipelineKnownHost": {
       "method": "POST",
       "params": {
         "_body": {
@@ -3186,7 +3186,7 @@
       "returns": "PipelineKnownHost",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
     },
-    "createPipelinesSchedule": {
+    "createPipelineSchedule": {
       "method": "POST",
       "params": {
         "_body": {
@@ -3208,7 +3208,7 @@
       "returns": "PipelineSchedule",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
     },
-    "createPipelinesVariable": {
+    "createPipelineVariable": {
       "method": "POST",
       "params": {
         "_body": {
@@ -3625,7 +3625,7 @@
       "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
     },
-    "deletePipelinesKnownHost": {
+    "deletePipelineKnownHost": {
       "method": "DELETE",
       "params": {
         "known_host_uuid": {
@@ -3646,7 +3646,7 @@
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
     },
-    "deletePipelinesSchedule": {
+    "deletePipelineSchedule": {
       "method": "DELETE",
       "params": {
         "repo_slug": {
@@ -3667,7 +3667,7 @@
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
     },
-    "deletePipelinesSshKeyPair": {
+    "deletePipelineSshKeyPair": {
       "method": "DELETE",
       "params": {
         "repo_slug": {
@@ -3683,7 +3683,7 @@
       },
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
     },
-    "deletePipelinesVariable": {
+    "deletePipelineVariable": {
       "method": "DELETE",
       "params": {
         "repo_slug": {
@@ -3837,106 +3837,6 @@
       "returns": "Repository",
       "url": "/repositories/{username}/{repo_slug}"
     },
-    "getAll": {
-      "method": "GET",
-      "params": {
-        "role": {
-          "enum": [
-            "admin",
-            "contributor",
-            "member",
-            "owner"
-          ],
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedRepositories",
-      "url": "/repositories/{username}"
-    },
-    "getAllBranchRestrictions": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedBranchrestrictions",
-      "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
-    },
-    "getAllBranches": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedBranches",
-      "url": "/repositories/{username}/{repo_slug}/refs/branches"
-    },
-    "getAllCommitComments": {
-      "method": "GET",
-      "params": {
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedCommitComments",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments"
-    },
-    "getAllCommitStatuses": {
-      "method": "GET",
-      "params": {
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedCommitstatuses",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses"
-    },
     "getAllCommits": {
       "method": "GET",
       "params": {
@@ -4022,313 +3922,6 @@
       },
       "url": "/repositories/{username}/{repo_slug}/downloads"
     },
-    "getAllForks": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedRepositories",
-      "url": "/repositories/{username}/{repo_slug}/forks"
-    },
-    "getAllIssueAttachments": {
-      "method": "GET",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedIssueAttachments",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments"
-    },
-    "getAllIssueChanges": {
-      "method": "GET",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedLogEntries",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
-    },
-    "getAllIssueComments": {
-      "method": "GET",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedIssueComments",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments"
-    },
-    "getAllIssueComponents": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedComponents",
-      "url": "/repositories/{username}/{repo_slug}/components"
-    },
-    "getAllIssueMilestones": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedMilestones",
-      "url": "/repositories/{username}/{repo_slug}/milestones"
-    },
-    "getAllIssueVersions": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedVersions",
-      "url": "/repositories/{username}/{repo_slug}/versions"
-    },
-    "getAllIssues": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedIssues",
-      "url": "/repositories/{username}/{repo_slug}/issues"
-    },
-    "getAllPermissions": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedRepositoryPermissions",
-      "url": "/user/permissions/repositories"
-    },
-    "getAllPipelineSteps": {
-      "method": "GET",
-      "params": {
-        "pipeline_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineSteps",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/"
-    },
-    "getAllPipelines": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelines",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/"
-    },
-    "getAllPipelinesKnownHosts": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineKnownHosts",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
-    },
-    "getAllPipelinesScheduleExecutions": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineScheduleExecutions",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/"
-    },
-    "getAllPipelinesSchedules": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineSchedules",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
-    },
-    "getAllPipelinesVariables": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineVariables",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
-    },
-    "getAllPullRequestComments": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPullrequestComments",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments"
-    },
     "getAllPullRequestCommits": {
       "method": "GET",
       "params": {
@@ -4349,55 +3942,6 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/commits"
-    },
-    "getAllPullRequestStatuses": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedCommitstatuses",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
-    },
-    "getAllPullRequests": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "state": {
-          "enum": [
-            "MERGED",
-            "SUPERSEDED",
-            "OPEN",
-            "DECLINED"
-          ],
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPullrequests",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests"
     },
     "getAllPullRequestsActivityLog": {
       "method": "GET",
@@ -4420,40 +3964,6 @@
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/activity"
     },
-    "getAllRefs": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedRefs",
-      "url": "/repositories/{username}/{repo_slug}/refs"
-    },
-    "getAllTags": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTags",
-      "url": "/repositories/{username}/{repo_slug}/refs/tags"
-    },
     "getAllWatchers": {
       "method": "GET",
       "params": {
@@ -4469,23 +3979,6 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/watchers"
-    },
-    "getAllWebhooks": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedWebhookSubscriptions",
-      "url": "/repositories/{username}/{repo_slug}/hooks"
     },
     "getBranch": {
       "method": "GET",
@@ -4665,32 +4158,6 @@
       },
       "url": "/repositories/{username}/{repo_slug}/diff/{spec}"
     },
-    "getDiffStat": {
-      "method": "GET",
-      "params": {
-        "ignore_whitespace": {
-          "in": "query",
-          "type": "boolean"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "spec": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedDiffstats",
-      "url": "/repositories/{username}/{repo_slug}/diffstat/{spec}"
-    },
     "getDownload": {
       "method": "GET",
       "params": {
@@ -4711,49 +4178,6 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/downloads/{filename}"
-    },
-    "getFileHistory": {
-      "method": "GET",
-      "params": {
-        "fields": {
-          "in": "query",
-          "type": "string"
-        },
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "path": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "renames": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedFiles",
-      "url": "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}"
     },
     "getIssue": {
       "method": "GET",
@@ -5010,6 +4434,84 @@
       "returns": "Pipeline",
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}"
     },
+    "getPipelineConfig": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PipelinesConfig",
+      "url": "/repositories/{username}/{repo_slug}/pipelines_config"
+    },
+    "getPipelineKnownHost": {
+      "method": "GET",
+      "params": {
+        "known_host_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PipelineKnownHost",
+      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
+    },
+    "getPipelineSchedule": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "schedule_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PipelineSchedule",
+      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
+    },
+    "getPipelineSshKeyPair": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PipelineSshKeyPair",
+      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
+    },
     "getPipelineStep": {
       "method": "GET",
       "params": {
@@ -5064,85 +4566,7 @@
       "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log"
     },
-    "getPipelinesConfig": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelinesConfig",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config"
-    },
-    "getPipelinesKnownHost": {
-      "method": "GET",
-      "params": {
-        "known_host_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineKnownHost",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
-    },
-    "getPipelinesSchedule": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "schedule_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineSchedule",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
-    },
-    "getPipelinesSshKeyPair": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineSshKeyPair",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
-    },
-    "getPipelinesVariable": {
+    "getPipelineVariable": {
       "method": "GET",
       "params": {
         "repo_slug": {
@@ -5163,17 +4587,6 @@
       },
       "returns": "PipelineVariable",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
-    },
-    "getPublic": {
-      "method": "GET",
-      "params": {
-        "after": {
-          "in": "query",
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedRepositories",
-      "url": "/repositories"
     },
     "getPullRequest": {
       "method": "GET",
@@ -5308,73 +4721,6 @@
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/patch"
     },
-    "getSrc": {
-      "method": "GET",
-      "params": {
-        "format": {
-          "enum": [
-            "meta",
-            "rendered"
-          ],
-          "in": "query",
-          "type": "string"
-        },
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "path": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTreeentries",
-      "url": "/repositories/{username}/{repo_slug}/src/{node}/{path}"
-    },
-    "getSrcRoot": {
-      "method": "GET",
-      "params": {
-        "format": {
-          "enum": [
-            "meta"
-          ],
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTreeentries",
-      "url": "/repositories/{username}/{repo_slug}/src"
-    },
     "getTag": {
       "method": "GET",
       "params": {
@@ -5418,6 +4764,660 @@
       },
       "returns": "WebhookSubscription",
       "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
+    },
+    "list": {
+      "method": "GET",
+      "params": {
+        "role": {
+          "enum": [
+            "admin",
+            "contributor",
+            "member",
+            "owner"
+          ],
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedRepositories",
+      "url": "/repositories/{username}"
+    },
+    "listBranchRestrictions": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedBranchrestrictions",
+      "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
+    },
+    "listBranches": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedBranches",
+      "url": "/repositories/{username}/{repo_slug}/refs/branches"
+    },
+    "listCommitComments": {
+      "method": "GET",
+      "params": {
+        "node": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedCommitComments",
+      "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments"
+    },
+    "listCommitStatuses": {
+      "method": "GET",
+      "params": {
+        "node": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedCommitstatuses",
+      "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses"
+    },
+    "listComponents": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedComponents",
+      "url": "/repositories/{username}/{repo_slug}/components"
+    },
+    "listDiffStats": {
+      "method": "GET",
+      "params": {
+        "ignore_whitespace": {
+          "in": "query",
+          "type": "boolean"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "spec": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedDiffstats",
+      "url": "/repositories/{username}/{repo_slug}/diffstat/{spec}"
+    },
+    "listFileHistory": {
+      "method": "GET",
+      "params": {
+        "fields": {
+          "in": "query",
+          "type": "string"
+        },
+        "node": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "path": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "renames": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedFiles",
+      "url": "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}"
+    },
+    "listForks": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedRepositories",
+      "url": "/repositories/{username}/{repo_slug}/forks"
+    },
+    "listIssueAttachments": {
+      "method": "GET",
+      "params": {
+        "issue_id": {
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedIssueAttachments",
+      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments"
+    },
+    "listIssueChanges": {
+      "method": "GET",
+      "params": {
+        "issue_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedLogEntries",
+      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
+    },
+    "listIssueComments": {
+      "method": "GET",
+      "params": {
+        "issue_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedIssueComments",
+      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments"
+    },
+    "listIssues": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedIssues",
+      "url": "/repositories/{username}/{repo_slug}/issues"
+    },
+    "listMilestones": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedMilestones",
+      "url": "/repositories/{username}/{repo_slug}/milestones"
+    },
+    "listPermissions": {
+      "method": "GET",
+      "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedRepositoryPermissions",
+      "url": "/user/permissions/repositories"
+    },
+    "listPipelineKnownHosts": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineKnownHosts",
+      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
+    },
+    "listPipelineScheduleExecutions": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineScheduleExecutions",
+      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/"
+    },
+    "listPipelineSchedules": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineSchedules",
+      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
+    },
+    "listPipelineSteps": {
+      "method": "GET",
+      "params": {
+        "pipeline_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineSteps",
+      "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/"
+    },
+    "listPipelineVariables": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineVariables",
+      "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
+    },
+    "listPipelines": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelines",
+      "url": "/repositories/{username}/{repo_slug}/pipelines/"
+    },
+    "listPublic": {
+      "method": "GET",
+      "params": {
+        "after": {
+          "in": "query",
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedRepositories",
+      "url": "/repositories"
+    },
+    "listPullRequestComments": {
+      "method": "GET",
+      "params": {
+        "pull_request_id": {
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPullrequestComments",
+      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments"
+    },
+    "listPullRequestStatuses": {
+      "method": "GET",
+      "params": {
+        "pull_request_id": {
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedCommitstatuses",
+      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
+    },
+    "listPullRequests": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "MERGED",
+            "SUPERSEDED",
+            "OPEN",
+            "DECLINED"
+          ],
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPullrequests",
+      "url": "/repositories/{username}/{repo_slug}/pullrequests"
+    },
+    "listRefs": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedRefs",
+      "url": "/repositories/{username}/{repo_slug}/refs"
+    },
+    "listSrc": {
+      "method": "GET",
+      "params": {
+        "format": {
+          "enum": [
+            "meta",
+            "rendered"
+          ],
+          "in": "query",
+          "type": "string"
+        },
+        "node": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "path": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedTreeentries",
+      "url": "/repositories/{username}/{repo_slug}/src/{node}/{path}"
+    },
+    "listSrcTree": {
+      "method": "GET",
+      "params": {
+        "format": {
+          "enum": [
+            "meta"
+          ],
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedTreeentries",
+      "url": "/repositories/{username}/{repo_slug}/src"
+    },
+    "listTags": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedTags",
+      "url": "/repositories/{username}/{repo_slug}/refs/tags"
+    },
+    "listVersions": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedVersions",
+      "url": "/repositories/{username}/{repo_slug}/versions"
+    },
+    "listWebhooks": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedWebhookSubscriptions",
+      "url": "/repositories/{username}/{repo_slug}/hooks"
     },
     "mergePullRequest": {
       "method": "POST",
@@ -5603,7 +5603,7 @@
       "returns": "IssueComment",
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
     },
-    "updatePipelinesBuildNumber": {
+    "updatePipelineBuildNumber": {
       "method": "PUT",
       "params": {
         "_body": {
@@ -5625,7 +5625,7 @@
       "returns": "PipelineBuildNumber",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/build_number"
     },
-    "updatePipelinesConfig": {
+    "updatePipelineConfig": {
       "method": "PUT",
       "params": {
         "_body": {
@@ -5647,7 +5647,7 @@
       "returns": "PipelinesConfig",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config"
     },
-    "updatePipelinesKnownHost": {
+    "updatePipelineKnownHost": {
       "method": "PUT",
       "params": {
         "_body": {
@@ -5674,7 +5674,7 @@
       "returns": "PipelineKnownHost",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
     },
-    "updatePipelinesSchedule": {
+    "updatePipelineSchedule": {
       "method": "PUT",
       "params": {
         "_body": {
@@ -5701,7 +5701,7 @@
       "returns": "PipelineSchedule",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
     },
-    "updatePipelinesSshKeyPair": {
+    "updatePipelineSshKeyPair": {
       "method": "PUT",
       "params": {
         "_body": {
@@ -5723,7 +5723,7 @@
       "returns": "PipelineSshKeyPair",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
     },
-    "updatePipelinesVariable": {
+    "updatePipelineVariable": {
       "method": "PUT",
       "params": {
         "_body": {
@@ -5852,6 +5852,22 @@
     }
   },
   "snippets": {
+    "checkWatch": {
+      "method": "GET",
+      "params": {
+        "encoded_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/snippets/{username}/{encoded_id}/watch"
+    },
     "create": {
       "method": "POST",
       "params": {
@@ -5902,23 +5918,6 @@
       },
       "returns": "Snippet",
       "url": "/snippets/{username}"
-    },
-    "createWatch": {
-      "method": "PUT",
-      "params": {
-        "encoded_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedUsers",
-      "url": "/snippets/{username}/{encoded_id}/watch"
     },
     "delete": {
       "method": "DELETE",
@@ -5978,23 +5977,6 @@
       },
       "url": "/snippets/{username}/{encoded_id}/{node_id}"
     },
-    "deleteWatch": {
-      "method": "DELETE",
-      "params": {
-        "encoded_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedUsers",
-      "url": "/snippets/{username}/{encoded_id}/watch"
-    },
     "get": {
       "method": "GET",
       "params": {
@@ -6011,56 +5993,6 @@
       },
       "returns": "Snippet",
       "url": "/snippets/{username}/{encoded_id}"
-    },
-    "getAll": {
-      "method": "GET",
-      "params": {
-        "role": {
-          "enum": [
-            "owner",
-            "contributor",
-            "member"
-          ],
-          "in": "query",
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedSnippets",
-      "url": "/snippets"
-    },
-    "getAllComments": {
-      "method": "GET",
-      "params": {
-        "encoded_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedSnippetComments",
-      "url": "/snippets/{username}/{encoded_id}/comments"
-    },
-    "getAllCommits": {
-      "method": "GET",
-      "params": {
-        "encoded_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedSnippetCommit",
-      "url": "/snippets/{username}/{encoded_id}/commits"
     },
     "getAllCommitsForRevision": {
       "method": "GET",
@@ -6083,44 +6015,6 @@
       },
       "returns": "SnippetCommit",
       "url": "/snippets/{username}/{encoded_id}/commits/{revision}"
-    },
-    "getAllForUser": {
-      "method": "GET",
-      "params": {
-        "role": {
-          "enum": [
-            "owner",
-            "contributor",
-            "member"
-          ],
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedSnippets",
-      "url": "/snippets/{username}"
-    },
-    "getAllWatchers": {
-      "method": "GET",
-      "params": {
-        "encoded_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedUsers",
-      "url": "/snippets/{username}/{encoded_id}/watchers"
     },
     "getComment": {
       "method": "GET",
@@ -6238,7 +6132,78 @@
       "returns": "Snippet",
       "url": "/snippets/{username}/{encoded_id}/{node_id}"
     },
-    "getWatch": {
+    "list": {
+      "method": "GET",
+      "params": {
+        "role": {
+          "enum": [
+            "owner",
+            "contributor",
+            "member"
+          ],
+          "in": "query",
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedSnippets",
+      "url": "/snippets"
+    },
+    "listComments": {
+      "method": "GET",
+      "params": {
+        "encoded_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedSnippetComments",
+      "url": "/snippets/{username}/{encoded_id}/comments"
+    },
+    "listCommits": {
+      "method": "GET",
+      "params": {
+        "encoded_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedSnippetCommit",
+      "url": "/snippets/{username}/{encoded_id}/commits"
+    },
+    "listForUser": {
+      "method": "GET",
+      "params": {
+        "role": {
+          "enum": [
+            "owner",
+            "contributor",
+            "member"
+          ],
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedSnippets",
+      "url": "/snippets/{username}"
+    },
+    "listWatchers": {
       "method": "GET",
       "params": {
         "encoded_id": {
@@ -6253,6 +6218,38 @@
         }
       },
       "returns": "PaginatedUsers",
+      "url": "/snippets/{username}/{encoded_id}/watchers"
+    },
+    "startWatch": {
+      "method": "PUT",
+      "params": {
+        "encoded_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/snippets/{username}/{encoded_id}/watch"
+    },
+    "stopWatch": {
+      "method": "DELETE",
+      "params": {
+        "encoded_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
       "url": "/snippets/{username}/{encoded_id}/watch"
     },
     "update": {
@@ -6367,7 +6364,7 @@
       },
       "url": "/repositories/{username}/{repo_slug}/src"
     },
-    "get": {
+    "list": {
       "method": "GET",
       "params": {
         "format": {
@@ -6410,7 +6407,7 @@
       "returns": "PaginatedTreeentries",
       "url": "/repositories/{username}/{repo_slug}/src/{node}/{path}"
     },
-    "getHistory": {
+    "listHistory": {
       "method": "GET",
       "params": {
         "fields": {
@@ -6453,7 +6450,7 @@
       "returns": "PaginatedFiles",
       "url": "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}"
     },
-    "getRoot": {
+    "listTree": {
       "method": "GET",
       "params": {
         "format": {
@@ -6479,7 +6476,7 @@
     }
   },
   "ssh": {
-    "createForUser": {
+    "createKeyForUser": {
       "method": "POST",
       "params": {
         "_body": {
@@ -6495,11 +6492,15 @@
       "returns": "SshAccountKey",
       "url": "/users/{username}/ssh-keys"
     },
-    "deleteForUser": {
+    "deleteKeyForUser": {
       "method": "DELETE",
       "url": "/users/{username}/ssh-keys/{key_id}"
     },
-    "getAllForUser": {
+    "getKeyForUser": {
+      "method": "GET",
+      "url": "/users/{username}/ssh-keys/{key_id}"
+    },
+    "listKeys": {
       "method": "GET",
       "params": {
         "username": {
@@ -6511,17 +6512,13 @@
       "returns": "PaginatedSshUserKeys",
       "url": "/users/{username}/ssh-keys"
     },
-    "getForUser": {
-      "method": "GET",
-      "url": "/users/{username}/ssh-keys/{key_id}"
-    },
-    "updateForUser": {
+    "updateKeyForUser": {
       "method": "PUT",
       "url": "/users/{username}/ssh-keys/{key_id}"
     }
   },
   "teams": {
-    "createPipelinesVariable": {
+    "createPipelineVariable": {
       "method": "POST",
       "params": {
         "_body": {
@@ -6566,7 +6563,7 @@
       "returns": "WebhookSubscription",
       "url": "/teams/{username}/hooks"
     },
-    "deletePipelinesVariable": {
+    "deletePipelineVariable": {
       "method": "DELETE",
       "params": {
         "username": {
@@ -6626,46 +6623,6 @@
       "returns": "Team",
       "url": "/teams/{username}"
     },
-    "getAll": {
-      "method": "GET",
-      "params": {
-        "role": {
-          "enum": [
-            "admin",
-            "contributor",
-            "member"
-          ],
-          "in": "query",
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTeams",
-      "url": "/teams"
-    },
-    "getAllFollowers": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedUsers",
-      "url": "/teams/{username}/followers"
-    },
-    "getAllFollowing": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedUsers",
-      "url": "/teams/{username}/following"
-    },
     "getAllMembers": {
       "method": "GET",
       "params": {
@@ -6677,30 +6634,6 @@
       },
       "returns": "User",
       "url": "/teams/{username}/members"
-    },
-    "getAllPipelinesVariables": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineVariables",
-      "url": "/teams/{username}/pipelines_config/variables/"
-    },
-    "getAllProjects": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedProjects",
-      "url": "/teams/{username}/projects/"
     },
     "getAllRepositories": {
       "method": "GET",
@@ -6724,59 +6657,7 @@
       },
       "url": "/users/{username}/repositories"
     },
-    "getAllRepositoryPermissions": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedRepositoryPermissions",
-      "url": "/teams/{username}/permissions/repositories"
-    },
-    "getAllTeamPermissions": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTeamPermissions",
-      "url": "/teams/{username}/permissions"
-    },
-    "getAllWebhooks": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedWebhookSubscriptions",
-      "url": "/teams/{username}/hooks"
-    },
-    "getPipelinesVariable": {
+    "getPipelineVariable": {
       "method": "GET",
       "params": {
         "username": {
@@ -6827,6 +6708,122 @@
       "returns": "WebhookSubscription",
       "url": "/teams/{username}/hooks/{uid}"
     },
+    "list": {
+      "method": "GET",
+      "params": {
+        "role": {
+          "enum": [
+            "admin",
+            "contributor",
+            "member"
+          ],
+          "in": "query",
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedTeams",
+      "url": "/teams"
+    },
+    "listFollowers": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedUsers",
+      "url": "/teams/{username}/followers"
+    },
+    "listFollowing": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedUsers",
+      "url": "/teams/{username}/following"
+    },
+    "listPipelineVariables": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineVariables",
+      "url": "/teams/{username}/pipelines_config/variables/"
+    },
+    "listProjects": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedProjects",
+      "url": "/teams/{username}/projects/"
+    },
+    "listRepositoryPermissions": {
+      "method": "GET",
+      "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedRepositoryPermissions",
+      "url": "/teams/{username}/permissions/repositories"
+    },
+    "listTeamPermissions": {
+      "method": "GET",
+      "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedTeamPermissions",
+      "url": "/teams/{username}/permissions"
+    },
+    "listWebhooks": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedWebhookSubscriptions",
+      "url": "/teams/{username}/hooks"
+    },
     "searchCode": {
       "method": "GET",
       "params": {
@@ -6852,7 +6849,7 @@
       "returns": "SearchResultPage",
       "url": "/teams/{username}/search/code"
     },
-    "updatePipelinesVariable": {
+    "updatePipelineVariable": {
       "method": "PUT",
       "params": {
         "_body": {
@@ -6924,7 +6921,18 @@
       "method": "GET",
       "url": "/user/emails"
     },
-    "getAllRepositoryPermissions": {
+    "getEmail": {
+      "method": "GET",
+      "params": {
+        "email": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/user/emails/{email}"
+    },
+    "listRepositoryPermissions": {
       "method": "GET",
       "params": {
         "q": {
@@ -6939,7 +6947,7 @@
       "returns": "PaginatedRepositoryPermissions",
       "url": "/user/permissions/repositories"
     },
-    "getAllTeamPermissions": {
+    "listTeamPermissions": {
       "method": "GET",
       "params": {
         "q": {
@@ -6953,21 +6961,10 @@
       },
       "returns": "PaginatedTeamPermissions",
       "url": "/user/permissions/teams"
-    },
-    "getEmail": {
-      "method": "GET",
-      "params": {
-        "email": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/user/emails/{email}"
     }
   },
   "users": {
-    "createPipelinesVariable": {
+    "createPipelineVariable": {
       "method": "POST",
       "params": {
         "_body": {
@@ -7011,7 +7008,7 @@
       "returns": "WebhookSubscription",
       "url": "/users/{username}/hooks"
     },
-    "deletePipelinesVariable": {
+    "deletePipelineVariable": {
       "method": "DELETE",
       "params": {
         "username": {
@@ -7063,42 +7060,6 @@
       "method": "GET",
       "url": "/user/emails"
     },
-    "getAllFollowers": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedUsers",
-      "url": "/users/{username}/followers"
-    },
-    "getAllFollowing": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedUsers",
-      "url": "/users/{username}/following"
-    },
-    "getAllPipelinesVariables": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineVariables",
-      "url": "/users/{username}/pipelines_config/variables/"
-    },
     "getAllRepositories": {
       "method": "GET",
       "params": {
@@ -7121,30 +7082,6 @@
       },
       "url": "/teams/{username}/repositories"
     },
-    "getAllSshKeys": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedSshUserKeys",
-      "url": "/users/{username}/ssh-keys"
-    },
-    "getAllWebhooks": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedWebhookSubscriptions",
-      "url": "/users/{username}/hooks"
-    },
     "getAuthedUser": {
       "method": "GET",
       "returns": "User",
@@ -7161,7 +7098,7 @@
       },
       "url": "/user/emails/{email}"
     },
-    "getPipelinesVariable": {
+    "getPipelineVariable": {
       "method": "GET",
       "params": {
         "username": {
@@ -7199,6 +7136,66 @@
       "returns": "WebhookSubscription",
       "url": "/users/{username}/hooks/{uid}"
     },
+    "listFollowers": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedUsers",
+      "url": "/users/{username}/followers"
+    },
+    "listFollowing": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedUsers",
+      "url": "/users/{username}/following"
+    },
+    "listPipelineVariables": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineVariables",
+      "url": "/users/{username}/pipelines_config/variables/"
+    },
+    "listSshKeys": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedSshUserKeys",
+      "url": "/users/{username}/ssh-keys"
+    },
+    "listWebhooks": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedWebhookSubscriptions",
+      "url": "/users/{username}/hooks"
+    },
     "searchCode": {
       "method": "GET",
       "params": {
@@ -7224,7 +7221,7 @@
       "returns": "SearchResultPage",
       "url": "/users/{username}/search/code"
     },
-    "updatePipelinesVariable": {
+    "updatePipelineVariable": {
       "method": "PUT",
       "params": {
         "_body": {
@@ -7389,47 +7386,6 @@
       "returns": "WebhookSubscription",
       "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
     },
-    "getAll": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedWebhookSubscriptions",
-      "url": "/repositories/{username}/{repo_slug}/hooks"
-    },
-    "getAllForTeam": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedWebhookSubscriptions",
-      "url": "/teams/{username}/hooks"
-    },
-    "getAllForUser": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedWebhookSubscriptions",
-      "url": "/users/{username}/hooks"
-    },
     "getForTeam": {
       "method": "GET",
       "params": {
@@ -7464,7 +7420,7 @@
       "returns": "WebhookSubscription",
       "url": "/users/{username}/hooks/{uid}"
     },
-    "listAll": {
+    "list": {
       "method": "GET",
       "params": {
         "subject_type": {
@@ -7480,6 +7436,47 @@
       },
       "returns": "PaginatedHookEvents",
       "url": "/hook_events/{subject_type}"
+    },
+    "listForRepo": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedWebhookSubscriptions",
+      "url": "/repositories/{username}/{repo_slug}/hooks"
+    },
+    "listForTeam": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedWebhookSubscriptions",
+      "url": "/teams/{username}/hooks"
+    },
+    "listForUser": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedWebhookSubscriptions",
+      "url": "/users/{username}/hooks"
     },
     "listSubjectTypes": {
       "method": "GET",

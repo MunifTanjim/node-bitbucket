@@ -47,18 +47,18 @@
   },
   "/hook_events/{subject_type}": {
     "get": {
-      "hook_events": "listAll",
-      "webhooks": "listAll"
+      "hook_events": "list",
+      "webhooks": "list"
     }
   },
   "/repositories": {
     "get": {
-      "repositories": "getPublic"
+      "repositories": "listPublic"
     }
   },
   "/repositories/{username}": {
     "get": {
-      "repositories": "getAll"
+      "repositories": "list"
     }
   },
   "/repositories/{username}/{repo_slug}": {
@@ -77,8 +77,8 @@
   },
   "/repositories/{username}/{repo_slug}/branch-restrictions": {
     "get": {
-      "branchrestrictions": "getAll",
-      "repositories": "getAllBranchRestrictions"
+      "branchrestrictions": "list",
+      "repositories": "listBranchRestrictions"
     },
     "post": {
       "branchrestrictions": "create",
@@ -117,8 +117,8 @@
   },
   "/repositories/{username}/{repo_slug}/commit/{node}/comments": {
     "get": {
-      "commits": "getAllComments",
-      "repositories": "getAllCommitComments"
+      "commits": "listComments",
+      "repositories": "listCommitComments"
     }
   },
   "/repositories/{username}/{repo_slug}/commit/{node}/comments/{comment_id}": {
@@ -129,8 +129,8 @@
   },
   "/repositories/{username}/{repo_slug}/commit/{node}/statuses": {
     "get": {
-      "commitstatuses": "getAll",
-      "repositories": "getAllCommitStatuses"
+      "commitstatuses": "list",
+      "repositories": "listCommitStatuses"
     }
   },
   "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build": {
@@ -171,8 +171,8 @@
   },
   "/repositories/{username}/{repo_slug}/components": {
     "get": {
-      "issue_tracker": "getAllComponents",
-      "repositories": "getAllIssueComponents"
+      "issue_tracker": "listComponents",
+      "repositories": "listComponents"
     }
   },
   "/repositories/{username}/{repo_slug}/components/{component_id}": {
@@ -209,7 +209,7 @@
   },
   "/repositories/{username}/{repo_slug}/diffstat/{spec}": {
     "get": {
-      "repositories": "getDiffStat"
+      "repositories": "listDiffStats"
     }
   },
   "/repositories/{username}/{repo_slug}/downloads": {
@@ -234,13 +234,13 @@
   },
   "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}": {
     "get": {
-      "repositories": "getFileHistory",
-      "source": "getHistory"
+      "repositories": "listFileHistory",
+      "source": "listHistory"
     }
   },
   "/repositories/{username}/{repo_slug}/forks": {
     "get": {
-      "repositories": "getAllForks"
+      "repositories": "listForks"
     },
     "post": {
       "repositories": "createFork"
@@ -248,8 +248,8 @@
   },
   "/repositories/{username}/{repo_slug}/hooks": {
     "get": {
-      "repositories": "getAllWebhooks",
-      "webhooks": "getAll"
+      "repositories": "listWebhooks",
+      "webhooks": "listForRepo"
     },
     "post": {
       "repositories": "createWebhook",
@@ -272,8 +272,8 @@
   },
   "/repositories/{username}/{repo_slug}/issues": {
     "get": {
-      "issue_tracker": "getAll",
-      "repositories": "getAllIssues"
+      "issue_tracker": "list",
+      "repositories": "listIssues"
     },
     "post": {
       "issue_tracker": "create",
@@ -296,8 +296,8 @@
   },
   "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments": {
     "get": {
-      "issue_tracker": "getAllAttachments",
-      "repositories": "getAllIssueAttachments"
+      "issue_tracker": "listAttachments",
+      "repositories": "listIssueAttachments"
     },
     "post": {
       "issue_tracker": "createAttachments",
@@ -316,8 +316,8 @@
   },
   "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes": {
     "get": {
-      "issue_tracker": "getAllChanges",
-      "repositories": "getAllIssueChanges"
+      "issue_tracker": "listChanges",
+      "repositories": "listIssueChanges"
     },
     "post": {
       "issue_tracker": "createChange",
@@ -332,8 +332,8 @@
   },
   "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments": {
     "get": {
-      "issue_tracker": "getAllComments",
-      "repositories": "getAllIssueComments"
+      "issue_tracker": "listComments",
+      "repositories": "listIssueComments"
     },
     "post": {
       "issue_tracker": "createComment",
@@ -384,8 +384,8 @@
   },
   "/repositories/{username}/{repo_slug}/milestones": {
     "get": {
-      "issue_tracker": "getAllMilestones",
-      "repositories": "getAllIssueMilestones"
+      "issue_tracker": "listMilestones",
+      "repositories": "listMilestones"
     }
   },
   "/repositories/{username}/{repo_slug}/milestones/{milestone_id}": {
@@ -402,8 +402,8 @@
   },
   "/repositories/{username}/{repo_slug}/pipelines/": {
     "get": {
-      "pipelines": "getAll",
-      "repositories": "getAllPipelines"
+      "pipelines": "list",
+      "repositories": "listPipelines"
     },
     "post": {
       "pipelines": "create",
@@ -418,8 +418,8 @@
   },
   "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/": {
     "get": {
-      "pipelines": "getAllSteps",
-      "repositories": "getAllPipelineSteps"
+      "pipelines": "listSteps",
+      "repositories": "listPipelineSteps"
     }
   },
   "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}": {
@@ -443,109 +443,109 @@
   "/repositories/{username}/{repo_slug}/pipelines_config": {
     "get": {
       "pipelines": "getConfig",
-      "repositories": "getPipelinesConfig"
+      "repositories": "getPipelineConfig"
     },
     "put": {
       "pipelines": "updateConfig",
-      "repositories": "updatePipelinesConfig"
+      "repositories": "updatePipelineConfig"
     }
   },
   "/repositories/{username}/{repo_slug}/pipelines_config/build_number": {
     "put": {
       "pipelines": "updateBuildNumber",
-      "repositories": "updatePipelinesBuildNumber"
+      "repositories": "updatePipelineBuildNumber"
     }
   },
   "/repositories/{username}/{repo_slug}/pipelines_config/schedules/": {
     "get": {
-      "pipelines": "getAllSchedules",
-      "repositories": "getAllPipelinesSchedules"
+      "pipelines": "listSchedules",
+      "repositories": "listPipelineSchedules"
     },
     "post": {
       "pipelines": "createSchedule",
-      "repositories": "createPipelinesSchedule"
+      "repositories": "createPipelineSchedule"
     }
   },
   "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}": {
     "delete": {
       "pipelines": "deleteSchedule",
-      "repositories": "deletePipelinesSchedule"
+      "repositories": "deletePipelineSchedule"
     },
     "get": {
       "pipelines": "getSchedule",
-      "repositories": "getPipelinesSchedule"
+      "repositories": "getPipelineSchedule"
     },
     "put": {
       "pipelines": "updateSchedule",
-      "repositories": "updatePipelinesSchedule"
+      "repositories": "updatePipelineSchedule"
     }
   },
   "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/": {
     "get": {
-      "pipelines": "getAllScheduleExecutions",
-      "repositories": "getAllPipelinesScheduleExecutions"
+      "pipelines": "listScheduleExecutions",
+      "repositories": "listPipelineScheduleExecutions"
     }
   },
   "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair": {
     "delete": {
       "pipelines": "deleteSshKeyPair",
-      "repositories": "deletePipelinesSshKeyPair"
+      "repositories": "deletePipelineSshKeyPair"
     },
     "get": {
       "pipelines": "getSshKeyPair",
-      "repositories": "getPipelinesSshKeyPair"
+      "repositories": "getPipelineSshKeyPair"
     },
     "put": {
       "pipelines": "updateSshKeyPair",
-      "repositories": "updatePipelinesSshKeyPair"
+      "repositories": "updatePipelineSshKeyPair"
     }
   },
   "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/": {
     "get": {
-      "pipelines": "getAllKnownHosts",
-      "repositories": "getAllPipelinesKnownHosts"
+      "pipelines": "listKnownHosts",
+      "repositories": "listPipelineKnownHosts"
     },
     "post": {
       "pipelines": "createKnownHost",
-      "repositories": "createPipelinesKnownHost"
+      "repositories": "createPipelineKnownHost"
     }
   },
   "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}": {
     "delete": {
       "pipelines": "deleteKnownHost",
-      "repositories": "deletePipelinesKnownHost"
+      "repositories": "deletePipelineKnownHost"
     },
     "get": {
       "pipelines": "getKnownHost",
-      "repositories": "getPipelinesKnownHost"
+      "repositories": "getPipelineKnownHost"
     },
     "put": {
       "pipelines": "updateKnownHost",
-      "repositories": "updatePipelinesKnownHost"
+      "repositories": "updatePipelineKnownHost"
     }
   },
   "/repositories/{username}/{repo_slug}/pipelines_config/variables/": {
     "get": {
-      "pipelines": "getAllVariables",
-      "repositories": "getAllPipelinesVariables"
+      "pipelines": "listVariablesForRepo",
+      "repositories": "listPipelineVariables"
     },
     "post": {
       "pipelines": "createVariable",
-      "repositories": "createPipelinesVariable"
+      "repositories": "createPipelineVariable"
     }
   },
   "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}": {
     "delete": {
       "pipelines": "deleteVariable",
-      "repositories": "deletePipelinesVariable"
+      "repositories": "deletePipelineVariable"
     },
     "get": {
       "pipelines": "getVariable",
-      "repositories": "getPipelinesVariable"
+      "repositories": "getPipelineVariable"
     },
     "put": {
       "pipelines": "updateVariable",
-      "repositories": "updatePipelinesVariable"
+      "repositories": "updatePipelineVariable"
     }
   },
   "/repositories/{username}/{repo_slug}/properties/{app_key}/{property_name}": {
@@ -561,8 +561,8 @@
   },
   "/repositories/{username}/{repo_slug}/pullrequests": {
     "get": {
-      "pullrequests": "getAll",
-      "repositories": "getAllPullRequests"
+      "pullrequests": "list",
+      "repositories": "listPullRequests"
     },
     "post": {
       "pullrequests": "create",
@@ -603,8 +603,8 @@
   },
   "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments": {
     "get": {
-      "pullrequests": "getAllComments",
-      "repositories": "getAllPullRequestComments"
+      "pullrequests": "listComments",
+      "repositories": "listPullRequestComments"
     }
   },
   "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}": {
@@ -651,21 +651,21 @@
   },
   "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses": {
     "get": {
-      "commitstatuses": "getAllPullRequestStatuses",
-      "pullrequests": "getAllStatuses",
-      "repositories": "getAllPullRequestStatuses"
+      "commitstatuses": "listPullRequestStatuses",
+      "pullrequests": "listStatuses",
+      "repositories": "listPullRequestStatuses"
     }
   },
   "/repositories/{username}/{repo_slug}/refs": {
     "get": {
-      "refs": "getAll",
-      "repositories": "getAllRefs"
+      "refs": "list",
+      "repositories": "listRefs"
     }
   },
   "/repositories/{username}/{repo_slug}/refs/branches": {
     "get": {
-      "refs": "getAllBranches",
-      "repositories": "getAllBranches"
+      "refs": "listBranches",
+      "repositories": "listBranches"
     },
     "post": {
       "refs": "createBranch",
@@ -684,8 +684,8 @@
   },
   "/repositories/{username}/{repo_slug}/refs/tags": {
     "get": {
-      "refs": "getAllTags",
-      "repositories": "getAllTags"
+      "refs": "listTags",
+      "repositories": "listTags"
     },
     "post": {
       "refs": "createTag",
@@ -704,8 +704,8 @@
   },
   "/repositories/{username}/{repo_slug}/src": {
     "get": {
-      "repositories": "getSrcRoot",
-      "source": "getRoot"
+      "repositories": "listSrcTree",
+      "source": "listTree"
     },
     "post": {
       "repositories": "createSrcFileCommit",
@@ -714,14 +714,14 @@
   },
   "/repositories/{username}/{repo_slug}/src/{node}/{path}": {
     "get": {
-      "repositories": "getSrc",
-      "source": "get"
+      "repositories": "listSrc",
+      "source": "list"
     }
   },
   "/repositories/{username}/{repo_slug}/versions": {
     "get": {
-      "issue_tracker": "getAllVersions",
-      "repositories": "getAllIssueVersions"
+      "issue_tracker": "listVersions",
+      "repositories": "listVersions"
     }
   },
   "/repositories/{username}/{repo_slug}/versions/{version_id}": {
@@ -737,7 +737,7 @@
   },
   "/snippets": {
     "get": {
-      "snippets": "getAll"
+      "snippets": "list"
     },
     "post": {
       "snippets": "create"
@@ -745,7 +745,7 @@
   },
   "/snippets/{username}": {
     "get": {
-      "snippets": "getAllForUser"
+      "snippets": "listForUser"
     },
     "post": {
       "snippets": "createForUser"
@@ -764,7 +764,7 @@
   },
   "/snippets/{username}/{encoded_id}/comments": {
     "get": {
-      "snippets": "getAllComments"
+      "snippets": "listComments"
     },
     "post": {
       "snippets": "createComment"
@@ -783,7 +783,7 @@
   },
   "/snippets/{username}/{encoded_id}/commits": {
     "get": {
-      "snippets": "getAllCommits"
+      "snippets": "listCommits"
     }
   },
   "/snippets/{username}/{encoded_id}/commits/{revision}": {
@@ -793,18 +793,18 @@
   },
   "/snippets/{username}/{encoded_id}/watch": {
     "delete": {
-      "snippets": "deleteWatch"
+      "snippets": "stopWatch"
     },
     "get": {
-      "snippets": "getWatch"
+      "snippets": "checkWatch"
     },
     "put": {
-      "snippets": "createWatch"
+      "snippets": "startWatch"
     }
   },
   "/snippets/{username}/{encoded_id}/watchers": {
     "get": {
-      "snippets": "getAllWatchers"
+      "snippets": "listWatchers"
     }
   },
   "/snippets/{username}/{encoded_id}/{node_id}": {
@@ -835,7 +835,7 @@
   },
   "/teams": {
     "get": {
-      "teams": "getAll"
+      "teams": "list"
     }
   },
   "/teams/{username}": {
@@ -845,18 +845,18 @@
   },
   "/teams/{username}/followers": {
     "get": {
-      "teams": "getAllFollowers"
+      "teams": "listFollowers"
     }
   },
   "/teams/{username}/following": {
     "get": {
-      "teams": "getAllFollowing"
+      "teams": "listFollowing"
     }
   },
   "/teams/{username}/hooks": {
     "get": {
-      "teams": "getAllWebhooks",
-      "webhooks": "getAllForTeam"
+      "teams": "listWebhooks",
+      "webhooks": "listForTeam"
     },
     "post": {
       "teams": "createWebhook",
@@ -884,42 +884,42 @@
   },
   "/teams/{username}/permissions": {
     "get": {
-      "teams": "getAllTeamPermissions"
+      "teams": "listTeamPermissions"
     }
   },
   "/teams/{username}/permissions/repositories": {
     "get": {
-      "teams": "getAllRepositoryPermissions"
+      "teams": "listRepositoryPermissions"
     }
   },
   "/teams/{username}/pipelines_config/variables/": {
     "get": {
-      "pipelines": "getAllVariablesForTeam",
-      "teams": "getAllPipelinesVariables"
+      "pipelines": "listVariablesForTeam",
+      "teams": "listPipelineVariables"
     },
     "post": {
       "pipelines": "createVariableForTeam",
-      "teams": "createPipelinesVariable"
+      "teams": "createPipelineVariable"
     }
   },
   "/teams/{username}/pipelines_config/variables/{variable_uuid}": {
     "delete": {
       "pipelines": "deleteVariableForTeam",
-      "teams": "deletePipelinesVariable"
+      "teams": "deletePipelineVariable"
     },
     "get": {
       "pipelines": "getVariableForTeam",
-      "teams": "getPipelinesVariable"
+      "teams": "getPipelineVariable"
     },
     "put": {
       "pipelines": "updateVariableForTeam",
-      "teams": "updatePipelinesVariable"
+      "teams": "updatePipelineVariable"
     }
   },
   "/teams/{username}/projects/": {
     "get": {
-      "projects": "getAllForTeam",
-      "teams": "getAllProjects"
+      "projects": "listForTeam",
+      "teams": "listProjects"
     },
     "post": {
       "projects": "createForTeam",
@@ -972,13 +972,13 @@
   },
   "/user/permissions/repositories": {
     "get": {
-      "repositories": "getAllPermissions",
-      "user": "getAllRepositoryPermissions"
+      "repositories": "listPermissions",
+      "user": "listRepositoryPermissions"
     }
   },
   "/user/permissions/teams": {
     "get": {
-      "user": "getAllTeamPermissions"
+      "user": "listTeamPermissions"
     }
   },
   "/users/{username}": {
@@ -988,18 +988,18 @@
   },
   "/users/{username}/followers": {
     "get": {
-      "users": "getAllFollowers"
+      "users": "listFollowers"
     }
   },
   "/users/{username}/following": {
     "get": {
-      "users": "getAllFollowing"
+      "users": "listFollowing"
     }
   },
   "/users/{username}/hooks": {
     "get": {
-      "users": "getAllWebhooks",
-      "webhooks": "getAllForUser"
+      "users": "listWebhooks",
+      "webhooks": "listForUser"
     },
     "post": {
       "users": "createWebhook",
@@ -1022,26 +1022,26 @@
   },
   "/users/{username}/pipelines_config/variables/": {
     "get": {
-      "pipelines": "getAllVariablesForUser",
-      "users": "getAllPipelinesVariables"
+      "pipelines": "listVariablesForUser",
+      "users": "listPipelineVariables"
     },
     "post": {
       "pipelines": "createVariableForUser",
-      "users": "createPipelinesVariable"
+      "users": "createPipelineVariable"
     }
   },
   "/users/{username}/pipelines_config/variables/{variable_uuid}": {
     "delete": {
       "pipelines": "deleteVariableForUser",
-      "users": "deletePipelinesVariable"
+      "users": "deletePipelineVariable"
     },
     "get": {
       "pipelines": "getVariableForUser",
-      "users": "getPipelinesVariable"
+      "users": "getPipelineVariable"
     },
     "put": {
       "pipelines": "updateVariableForUser",
-      "users": "updatePipelinesVariable"
+      "users": "updatePipelineVariable"
     }
   },
   "/users/{username}/repositories": {
@@ -1058,11 +1058,11 @@
   },
   "/users/{username}/ssh-keys": {
     "get": {
-      "ssh": "getAllForUser",
-      "users": "getAllSshKeys"
+      "ssh": "listKeys",
+      "users": "listSshKeys"
     },
     "post": {
-      "ssh": "createForUser",
+      "ssh": "createKeyForUser",
       "users": "createSshKey"
     }
   },
@@ -1082,15 +1082,15 @@
   },
   "/users/{username}/ssh-keys/{key_id}": {
     "delete": {
-      "ssh": "deleteForUser",
+      "ssh": "deleteKeyForUser",
       "users": "deleteSshKey"
     },
     "get": {
-      "ssh": "getForUser",
+      "ssh": "getKeyForUser",
       "users": "getSshKey"
     },
     "put": {
-      "ssh": "updateForUser",
+      "ssh": "updateKeyForUser",
       "users": "updateSshKey"
     }
   }
