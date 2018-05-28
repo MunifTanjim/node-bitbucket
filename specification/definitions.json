@@ -101,37 +101,42 @@
       }
     }
   },
-  "pipeline_ref_target": {
+  "milestone": {
     "allOf": [
       {
-        "$ref": "#/definitions/pipeline_target"
+        "$ref": "#/definitions/object"
       },
       {
-        "additionalProperties": true,
         "type": "object",
-        "description": "A Bitbucket Pipelines reference target.",
+        "description": "A milestone as defined in a repository's issue tracker.",
         "properties": {
-          "ref_type": {
-            "enum": [
-              "branch",
-              "tag",
-              "named_branch",
-              "bookmark"
-            ],
-            "type": "string",
-            "description": "The type of reference (branch/tag)."
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
           },
-          "ref_name": {
-            "type": "string",
-            "description": "The name of the reference."
+          "name": {
+            "type": "string"
           },
-          "commit": {
-            "$ref": "#/definitions/commit"
-          },
-          "selector": {
-            "$ref": "#/definitions/pipeline_selector"
+          "id": {
+            "type": "integer"
           }
-        }
+        },
+        "additionalProperties": true
       }
     ]
   },
@@ -239,7 +244,7 @@
     },
     "additionalProperties": false
   },
-  "pipeline_state_completed_expired": {
+  "pipeline_state_completed_stopped": {
     "allOf": [
       {
         "$ref": "#/definitions/pipeline_state_completed_result"
@@ -247,14 +252,14 @@
       {
         "additionalProperties": true,
         "type": "object",
-        "description": "A Bitbucket Pipelines EXPIRED pipeline result.",
+        "description": "A Bitbucket Pipelines STOPPED pipeline result.",
         "properties": {
           "name": {
             "enum": [
-              "EXPIRED"
+              "STOPPED"
             ],
             "type": "string",
-            "description": "The name of the stopped result (EXPIRED)."
+            "description": "The name of the stopped result (STOPPED)."
           }
         }
       }
@@ -492,21 +497,22 @@
       }
     }
   },
-  "pipeline_commit_target": {
+  "pipeline_step_state_completed_stopped": {
     "allOf": [
       {
-        "$ref": "#/definitions/pipeline_target"
+        "$ref": "#/definitions/pipeline_step_state_completed_result"
       },
       {
         "additionalProperties": true,
         "type": "object",
-        "description": "A Bitbucket Pipelines commit target.",
+        "description": "A Bitbucket Pipelines STOPPED pipeline step result.",
         "properties": {
-          "commit": {
-            "$ref": "#/definitions/commit"
-          },
-          "selector": {
-            "$ref": "#/definitions/pipeline_selector"
+          "name": {
+            "enum": [
+              "STOPPED"
+            ],
+            "type": "string",
+            "description": "The name of the result (STOPPED)"
           }
         }
       }
@@ -529,73 +535,6 @@
         }
       }
     ]
-  },
-  "pipeline": {
-    "allOf": [
-      {
-        "$ref": "#/definitions/object"
-      },
-      {
-        "additionalProperties": true,
-        "type": "object",
-        "description": "A Bitbucket Pipeline. This represents an actual pipeline result.",
-        "properties": {
-          "uuid": {
-            "type": "string",
-            "description": "The UUID identifying the pipeline."
-          },
-          "build_number": {
-            "type": "integer",
-            "description": "The build number of the pipeline."
-          },
-          "creator": {
-            "$ref": "#/definitions/account",
-            "description": "The Bitbucket account that was used to create the pipeline."
-          },
-          "repository": {
-            "$ref": "#/definitions/repository"
-          },
-          "target": {
-            "$ref": "#/definitions/pipeline_target",
-            "description": "The target that the pipeline built."
-          },
-          "trigger": {
-            "$ref": "#/definitions/pipeline_trigger",
-            "description": "The trigger used for the pipeline."
-          },
-          "state": {
-            "$ref": "#/definitions/pipeline_state"
-          },
-          "created_on": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The timestamp when the pipeline was created."
-          },
-          "completed_on": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The timestamp when the Pipeline was completed. This is not set if the pipeline is still in progress."
-          },
-          "build_seconds_used": {
-            "type": "integer",
-            "description": "The number of build seconds used by this pipeline."
-          }
-        }
-      }
-    ]
-  },
-  "search_segment": {
-    "type": "object",
-    "properties": {
-      "text": {
-        "type": "string",
-        "readOnly": true
-      },
-      "match": {
-        "type": "boolean",
-        "readOnly": true
-      }
-    }
   },
   "pipeline_ssh_public_key": {
     "allOf": [
@@ -743,42 +682,37 @@
     },
     "additionalProperties": false
   },
-  "milestone": {
+  "pipeline_ref_target": {
     "allOf": [
       {
-        "$ref": "#/definitions/object"
+        "$ref": "#/definitions/pipeline_target"
       },
       {
+        "additionalProperties": true,
         "type": "object",
-        "description": "A milestone as defined in a repository's issue tracker.",
+        "description": "A Bitbucket Pipelines reference target.",
         "properties": {
-          "links": {
-            "type": "object",
-            "properties": {
-              "self": {
-                "type": "object",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "format": "uri"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "additionalProperties": false
-              }
-            },
-            "additionalProperties": false
+          "ref_type": {
+            "enum": [
+              "branch",
+              "tag",
+              "named_branch",
+              "bookmark"
+            ],
+            "type": "string",
+            "description": "The type of reference (branch/tag)."
           },
-          "name": {
-            "type": "string"
+          "ref_name": {
+            "type": "string",
+            "description": "The name of the reference."
           },
-          "id": {
-            "type": "integer"
+          "commit": {
+            "$ref": "#/definitions/commit"
+          },
+          "selector": {
+            "$ref": "#/definitions/pipeline_selector"
           }
-        },
-        "additionalProperties": true
+        }
       }
     ]
   },
@@ -828,20 +762,16 @@
       }
     ]
   },
-  "commit_comment": {
+  "pipeline_state_completed_result": {
     "allOf": [
       {
-        "$ref": "#/definitions/comment"
+        "$ref": "#/definitions/object"
       },
       {
+        "additionalProperties": true,
         "type": "object",
-        "description": "A commit comment.",
-        "properties": {
-          "commit": {
-            "$ref": "#/definitions/commit"
-          }
-        },
-        "additionalProperties": true
+        "description": "A result of a completed pipeline state.",
+        "properties": {}
       }
     ]
   },
@@ -1034,6 +964,182 @@
           }
         },
         "additionalProperties": true
+      }
+    ]
+  },
+  "commit_comment": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/comment"
+      },
+      {
+        "type": "object",
+        "description": "A commit comment.",
+        "properties": {
+          "commit": {
+            "$ref": "#/definitions/commit"
+          }
+        },
+        "additionalProperties": true
+      }
+    ]
+  },
+  "issue_comment": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/comment"
+      },
+      {
+        "type": "object",
+        "description": "A issue comment.",
+        "properties": {
+          "issue": {
+            "$ref": "#/definitions/issue"
+          }
+        },
+        "additionalProperties": true
+      }
+    ]
+  },
+  "paginated_snippet_comments": {
+    "type": "object",
+    "description": "A paginated list of snippet comments.",
+    "properties": {
+      "size": {
+        "type": "integer",
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0
+      },
+      "page": {
+        "type": "integer",
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1
+      },
+      "pagelen": {
+        "type": "integer",
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1
+      },
+      "next": {
+        "type": "string",
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri"
+      },
+      "previous": {
+        "type": "string",
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri"
+      },
+      "values": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/snippet_comment"
+        },
+        "minItems": 0,
+        "uniqueItems": true
+      }
+    },
+    "additionalProperties": false
+  },
+  "team": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/account"
+      },
+      {
+        "type": "object",
+        "description": "A team object.",
+        "properties": {},
+        "additionalProperties": true
+      }
+    ]
+  },
+  "paginated_snippets": {
+    "type": "object",
+    "description": "A paginated list of snippets.",
+    "properties": {
+      "size": {
+        "type": "integer",
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0
+      },
+      "page": {
+        "type": "integer",
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1
+      },
+      "pagelen": {
+        "type": "integer",
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1
+      },
+      "next": {
+        "type": "string",
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri"
+      },
+      "previous": {
+        "type": "string",
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri"
+      },
+      "values": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/snippet"
+        },
+        "minItems": 0,
+        "uniqueItems": true
+      }
+    },
+    "additionalProperties": false
+  },
+  "paginated_pipeline_schedules": {
+    "type": "object",
+    "description": "A paged list of schedules",
+    "properties": {
+      "page": {
+        "type": "integer",
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses."
+      },
+      "values": {
+        "type": "array",
+        "minItems": 0,
+        "items": {
+          "$ref": "#/definitions/pipeline_schedule"
+        },
+        "description": "The values of the current page."
+      },
+      "size": {
+        "type": "integer",
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute."
+      },
+      "pagelen": {
+        "type": "integer",
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values."
+      },
+      "next": {
+        "type": "string",
+        "format": "uri",
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs."
+      },
+      "previous": {
+        "type": "string",
+        "format": "uri",
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs."
+      }
+    }
+  },
+  "pipeline_state_in_progress_stage": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "type": "object",
+        "description": "A result of an in progress pipeline state.",
+        "properties": {}
       }
     ]
   },
@@ -1279,141 +1385,6 @@
       }
     ]
   },
-  "issue_comment": {
-    "allOf": [
-      {
-        "$ref": "#/definitions/comment"
-      },
-      {
-        "type": "object",
-        "description": "A issue comment.",
-        "properties": {
-          "issue": {
-            "$ref": "#/definitions/issue"
-          }
-        },
-        "additionalProperties": true
-      }
-    ]
-  },
-  "pipelines_config": {
-    "allOf": [
-      {
-        "$ref": "#/definitions/object"
-      },
-      {
-        "additionalProperties": true,
-        "type": "object",
-        "description": "The Pipelines configuration for a repository.",
-        "properties": {
-          "enabled": {
-            "type": "boolean",
-            "description": "Whether Pipelines is enabled for the repository."
-          },
-          "repository": {
-            "$ref": "#/definitions/repository"
-          }
-        }
-      }
-    ]
-  },
-  "team": {
-    "allOf": [
-      {
-        "$ref": "#/definitions/account"
-      },
-      {
-        "type": "object",
-        "description": "A team object.",
-        "properties": {},
-        "additionalProperties": true
-      }
-    ]
-  },
-  "paginated_snippets": {
-    "type": "object",
-    "description": "A paginated list of snippets.",
-    "properties": {
-      "size": {
-        "type": "integer",
-        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
-        "minimum": 0
-      },
-      "page": {
-        "type": "integer",
-        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
-        "minimum": 1
-      },
-      "pagelen": {
-        "type": "integer",
-        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
-        "minimum": 1
-      },
-      "next": {
-        "type": "string",
-        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri"
-      },
-      "previous": {
-        "type": "string",
-        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri"
-      },
-      "values": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/snippet"
-        },
-        "minItems": 0,
-        "uniqueItems": true
-      }
-    },
-    "additionalProperties": false
-  },
-  "page": {
-    "type": "object",
-    "properties": {
-      "size": {
-        "type": "integer",
-        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
-        "minimum": 0
-      },
-      "page": {
-        "type": "integer",
-        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
-        "minimum": 1
-      },
-      "pagelen": {
-        "type": "integer",
-        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
-        "minimum": 1
-      },
-      "next": {
-        "type": "string",
-        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri"
-      },
-      "previous": {
-        "type": "string",
-        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri"
-      }
-    },
-    "additionalProperties": false
-  },
-  "pipeline_state_in_progress_stage": {
-    "allOf": [
-      {
-        "$ref": "#/definitions/object"
-      },
-      {
-        "additionalProperties": true,
-        "type": "object",
-        "description": "A result of an in progress pipeline state.",
-        "properties": {}
-      }
-    ]
-  },
   "pipeline_step_state_ready": {
     "allOf": [
       {
@@ -1475,48 +1446,33 @@
     },
     "additionalProperties": false
   },
-  "search_result_page": {
-    "type": "object",
-    "properties": {
-      "size": {
-        "type": "integer",
-        "format": "int64",
-        "readOnly": true
+  "pipeline_known_host": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
       },
-      "page": {
-        "type": "integer",
-        "format": "int32",
-        "readOnly": true
-      },
-      "pagelen": {
-        "type": "integer",
-        "format": "int32",
-        "readOnly": true
-      },
-      "query_substituted": {
-        "type": "boolean",
-        "readOnly": true
-      },
-      "next": {
-        "type": "string",
-        "format": "uri",
-        "readOnly": true
-      },
-      "previous": {
-        "type": "string",
-        "format": "uri",
-        "readOnly": true
-      },
-      "values": {
-        "type": "array",
-        "readOnly": true,
-        "items": {
-          "$ref": "#/definitions/search_code_search_result"
+      {
+        "additionalProperties": true,
+        "type": "object",
+        "description": "A Pipelines known host.",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "The UUID identifying the known host."
+          },
+          "hostname": {
+            "type": "string",
+            "description": "The hostname of the known host."
+          },
+          "public_key": {
+            "$ref": "#/definitions/pipeline_ssh_public_key",
+            "description": "The public key of the known host."
+          }
         }
       }
-    }
+    ]
   },
-  "pipeline_state_completed_stopped": {
+  "pipeline_state_completed_expired": {
     "allOf": [
       {
         "$ref": "#/definitions/pipeline_state_completed_result"
@@ -1524,14 +1480,14 @@
       {
         "additionalProperties": true,
         "type": "object",
-        "description": "A Bitbucket Pipelines STOPPED pipeline result.",
+        "description": "A Bitbucket Pipelines EXPIRED pipeline result.",
         "properties": {
           "name": {
             "enum": [
-              "STOPPED"
+              "EXPIRED"
             ],
             "type": "string",
-            "description": "The name of the stopped result (STOPPED)."
+            "description": "The name of the stopped result (EXPIRED)."
           }
         }
       }
@@ -1602,45 +1558,23 @@
     },
     "additionalProperties": false
   },
-  "paginated_hook_events": {
-    "type": "object",
-    "description": "A paginated list of webhook types available to subscribe on.",
-    "properties": {
-      "size": {
-        "type": "integer",
-        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
-        "minimum": 0
+  "pipeline_schedule_execution_errored": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/pipeline_schedule_execution"
       },
-      "page": {
-        "type": "integer",
-        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
-        "minimum": 1
-      },
-      "pagelen": {
-        "type": "integer",
-        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
-        "minimum": 1
-      },
-      "next": {
-        "type": "string",
-        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri"
-      },
-      "previous": {
-        "type": "string",
-        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri"
-      },
-      "values": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/hook_event"
-        },
-        "minItems": 0,
-        "uniqueItems": true
+      {
+        "additionalProperties": true,
+        "type": "object",
+        "description": "A Pipelines schedule execution that failed to be executed.",
+        "properties": {
+          "error": {
+            "$ref": "#/definitions/pipeline_error",
+            "description": "The error that caused the execution to fail."
+          }
+        }
       }
-    },
-    "additionalProperties": false
+    ]
   },
   "team_permission": {
     "type": "object",
@@ -1667,6 +1601,37 @@
       "type"
     ],
     "additionalProperties": true
+  },
+  "page": {
+    "type": "object",
+    "properties": {
+      "size": {
+        "type": "integer",
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0
+      },
+      "page": {
+        "type": "integer",
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1
+      },
+      "pagelen": {
+        "type": "integer",
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1
+      },
+      "next": {
+        "type": "string",
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri"
+      },
+      "previous": {
+        "type": "string",
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri"
+      }
+    },
+    "additionalProperties": false
   },
   "paginated_log_entries": {
     "type": "object",
@@ -1707,45 +1672,26 @@
     },
     "additionalProperties": false
   },
-  "paginated_snippet_comments": {
-    "type": "object",
-    "description": "A paginated list of snippet comments.",
-    "properties": {
-      "size": {
-        "type": "integer",
-        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
-        "minimum": 0
+  "pipelines_config": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
       },
-      "page": {
-        "type": "integer",
-        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
-        "minimum": 1
-      },
-      "pagelen": {
-        "type": "integer",
-        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
-        "minimum": 1
-      },
-      "next": {
-        "type": "string",
-        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri"
-      },
-      "previous": {
-        "type": "string",
-        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri"
-      },
-      "values": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/snippet_comment"
-        },
-        "minItems": 0,
-        "uniqueItems": true
+      {
+        "additionalProperties": true,
+        "type": "object",
+        "description": "The Pipelines configuration for a repository.",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether Pipelines is enabled for the repository."
+          },
+          "repository": {
+            "$ref": "#/definitions/repository"
+          }
+        }
       }
-    },
-    "additionalProperties": false
+    ]
   },
   "version": {
     "allOf": [
@@ -1930,42 +1876,6 @@
       "type"
     ],
     "additionalProperties": true
-  },
-  "paginated_pipeline_schedules": {
-    "type": "object",
-    "description": "A paged list of schedules",
-    "properties": {
-      "page": {
-        "type": "integer",
-        "description": "Page number of the current results. This is an optional element that is not provided in all responses."
-      },
-      "values": {
-        "type": "array",
-        "minItems": 0,
-        "items": {
-          "$ref": "#/definitions/pipeline_schedule"
-        },
-        "description": "The values of the current page."
-      },
-      "size": {
-        "type": "integer",
-        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute."
-      },
-      "pagelen": {
-        "type": "integer",
-        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values."
-      },
-      "next": {
-        "type": "string",
-        "format": "uri",
-        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs."
-      },
-      "previous": {
-        "type": "string",
-        "format": "uri",
-        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs."
-      }
-    }
   },
   "webhook_subscription": {
     "allOf": [
@@ -2730,22 +2640,22 @@
       }
     ]
   },
-  "pipeline_step_state_in_progress": {
+  "pipeline_state_pending": {
     "allOf": [
       {
-        "$ref": "#/definitions/pipeline_step_state"
+        "$ref": "#/definitions/pipeline_state"
       },
       {
         "additionalProperties": true,
         "type": "object",
-        "description": "A Bitbucket Pipelines IN_PROGRESS pipeline step state.",
+        "description": "A Bitbucket Pipelines PENDING pipeline state.",
         "properties": {
           "name": {
             "enum": [
-              "IN_PROGRESS"
+              "PENDING"
             ],
             "type": "string",
-            "description": "The name of pipeline step state (IN_PROGRESS)."
+            "description": "The name of pipeline state (PENDING)."
           }
         }
       }
@@ -2899,47 +2809,7 @@
       }
     ]
   },
-  "paginated_components": {
-    "type": "object",
-    "description": "A paginated list of issue tracker components.",
-    "properties": {
-      "size": {
-        "type": "integer",
-        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
-        "minimum": 0
-      },
-      "page": {
-        "type": "integer",
-        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
-        "minimum": 1
-      },
-      "pagelen": {
-        "type": "integer",
-        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
-        "minimum": 1
-      },
-      "next": {
-        "type": "string",
-        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri"
-      },
-      "previous": {
-        "type": "string",
-        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri"
-      },
-      "values": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/component"
-        },
-        "minItems": 0,
-        "uniqueItems": true
-      }
-    },
-    "additionalProperties": false
-  },
-  "pipeline_step_state_completed_not_run": {
+  "pipeline_step_state_completed_successful": {
     "allOf": [
       {
         "$ref": "#/definitions/pipeline_step_state_completed_result"
@@ -2947,14 +2817,68 @@
       {
         "additionalProperties": true,
         "type": "object",
-        "description": "A Bitbucket Pipelines NOT_RUN pipeline step result.",
+        "description": "A Bitbucket Pipelines SUCCESSFUL pipeline step result.",
         "properties": {
           "name": {
             "enum": [
-              "NOT_RUN"
+              "SUCCESSFUL"
             ],
             "type": "string",
-            "description": "The name of the result (NOT_RUN)"
+            "description": "The name of the result (SUCCESSFUL)"
+          }
+        }
+      }
+    ]
+  },
+  "pipeline": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "type": "object",
+        "description": "A Bitbucket Pipeline. This represents an actual pipeline result.",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "The UUID identifying the pipeline."
+          },
+          "build_number": {
+            "type": "integer",
+            "description": "The build number of the pipeline."
+          },
+          "creator": {
+            "$ref": "#/definitions/account",
+            "description": "The Bitbucket account that was used to create the pipeline."
+          },
+          "repository": {
+            "$ref": "#/definitions/repository"
+          },
+          "target": {
+            "$ref": "#/definitions/pipeline_target",
+            "description": "The target that the pipeline built."
+          },
+          "trigger": {
+            "$ref": "#/definitions/pipeline_trigger",
+            "description": "The trigger used for the pipeline."
+          },
+          "state": {
+            "$ref": "#/definitions/pipeline_state"
+          },
+          "created_on": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp when the pipeline was created."
+          },
+          "completed_on": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp when the Pipeline was completed. This is not set if the pipeline is still in progress."
+          },
+          "build_seconds_used": {
+            "type": "integer",
+            "description": "The number of build seconds used by this pipeline."
           }
         }
       }
@@ -3436,18 +3360,18 @@
       }
     ]
   },
-  "pipeline_state_completed_result": {
-    "allOf": [
-      {
-        "$ref": "#/definitions/object"
+  "search_segment": {
+    "type": "object",
+    "properties": {
+      "text": {
+        "type": "string",
+        "readOnly": true
       },
-      {
-        "additionalProperties": true,
-        "type": "object",
-        "description": "A result of a completed pipeline state.",
-        "properties": {}
+      "match": {
+        "type": "boolean",
+        "readOnly": true
       }
-    ]
+    }
   },
   "pipeline_state_in_progress": {
     "allOf": [
@@ -3535,22 +3459,21 @@
     ],
     "additionalProperties": true
   },
-  "pipeline_step_state_completed_stopped": {
+  "pipeline_commit_target": {
     "allOf": [
       {
-        "$ref": "#/definitions/pipeline_step_state_completed_result"
+        "$ref": "#/definitions/pipeline_target"
       },
       {
         "additionalProperties": true,
         "type": "object",
-        "description": "A Bitbucket Pipelines STOPPED pipeline step result.",
+        "description": "A Bitbucket Pipelines commit target.",
         "properties": {
-          "name": {
-            "enum": [
-              "STOPPED"
-            ],
-            "type": "string",
-            "description": "The name of the result (STOPPED)"
+          "commit": {
+            "$ref": "#/definitions/commit"
+          },
+          "selector": {
+            "$ref": "#/definitions/pipeline_selector"
           }
         }
       }
@@ -3832,60 +3755,24 @@
     },
     "additionalProperties": false
   },
-  "ssh_key": {
+  "pipeline_step_state_completed_not_run": {
     "allOf": [
       {
-        "$ref": "#/definitions/object"
+        "$ref": "#/definitions/pipeline_step_state_completed_result"
       },
       {
+        "additionalProperties": true,
         "type": "object",
-        "description": "Base type for representing SSH public keys.",
+        "description": "A Bitbucket Pipelines NOT_RUN pipeline step result.",
         "properties": {
-          "uuid": {
+          "name": {
+            "enum": [
+              "NOT_RUN"
+            ],
             "type": "string",
-            "description": "The SSH key's immutable ID."
-          },
-          "key": {
-            "type": "string",
-            "description": "The SSH public key value in OpenSSH format."
-          },
-          "comment": {
-            "type": "string",
-            "description": "The comment parsed from the SSH key (if present)"
-          },
-          "label": {
-            "type": "string",
-            "description": "The user-defined label for the SSH key"
-          },
-          "created_on": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "last_used": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "links": {
-            "type": "object",
-            "properties": {
-              "self": {
-                "type": "object",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "format": "uri"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "additionalProperties": false
-              }
-            },
-            "additionalProperties": false
+            "description": "The name of the result (NOT_RUN)"
           }
-        },
-        "additionalProperties": true
+        }
       }
     ]
   },
@@ -4017,31 +3904,46 @@
       }
     ]
   },
-  "pipeline_known_host": {
-    "allOf": [
-      {
-        "$ref": "#/definitions/object"
+  "search_result_page": {
+    "type": "object",
+    "properties": {
+      "size": {
+        "type": "integer",
+        "format": "int64",
+        "readOnly": true
       },
-      {
-        "additionalProperties": true,
-        "type": "object",
-        "description": "A Pipelines known host.",
-        "properties": {
-          "uuid": {
-            "type": "string",
-            "description": "The UUID identifying the known host."
-          },
-          "hostname": {
-            "type": "string",
-            "description": "The hostname of the known host."
-          },
-          "public_key": {
-            "$ref": "#/definitions/pipeline_ssh_public_key",
-            "description": "The public key of the known host."
-          }
+      "page": {
+        "type": "integer",
+        "format": "int32",
+        "readOnly": true
+      },
+      "pagelen": {
+        "type": "integer",
+        "format": "int32",
+        "readOnly": true
+      },
+      "query_substituted": {
+        "type": "boolean",
+        "readOnly": true
+      },
+      "next": {
+        "type": "string",
+        "format": "uri",
+        "readOnly": true
+      },
+      "previous": {
+        "type": "string",
+        "format": "uri",
+        "readOnly": true
+      },
+      "values": {
+        "type": "array",
+        "readOnly": true,
+        "items": {
+          "$ref": "#/definitions/search_code_search_result"
         }
       }
-    ]
+    }
   },
   "account": {
     "allOf": [
@@ -4519,23 +4421,45 @@
     ],
     "additionalProperties": true
   },
-  "pipeline_schedule_execution_errored": {
-    "allOf": [
-      {
-        "$ref": "#/definitions/pipeline_schedule_execution"
+  "paginated_hook_events": {
+    "type": "object",
+    "description": "A paginated list of webhook types available to subscribe on.",
+    "properties": {
+      "size": {
+        "type": "integer",
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0
       },
-      {
-        "additionalProperties": true,
-        "type": "object",
-        "description": "A Pipelines schedule execution that failed to be executed.",
-        "properties": {
-          "error": {
-            "$ref": "#/definitions/pipeline_error",
-            "description": "The error that caused the execution to fail."
-          }
-        }
+      "page": {
+        "type": "integer",
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1
+      },
+      "pagelen": {
+        "type": "integer",
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1
+      },
+      "next": {
+        "type": "string",
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri"
+      },
+      "previous": {
+        "type": "string",
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri"
+      },
+      "values": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/hook_event"
+        },
+        "minItems": 0,
+        "uniqueItems": true
       }
-    ]
+    },
+    "additionalProperties": false
   },
   "diffstat": {
     "type": "object",
@@ -4914,47 +4838,123 @@
     "additionalProperties": true,
     "discriminator": "type"
   },
-  "pipeline_state_pending": {
+  "pipeline_step_state_in_progress": {
     "allOf": [
       {
-        "$ref": "#/definitions/pipeline_state"
+        "$ref": "#/definitions/pipeline_step_state"
       },
       {
         "additionalProperties": true,
         "type": "object",
-        "description": "A Bitbucket Pipelines PENDING pipeline state.",
+        "description": "A Bitbucket Pipelines IN_PROGRESS pipeline step state.",
         "properties": {
           "name": {
             "enum": [
-              "PENDING"
+              "IN_PROGRESS"
             ],
             "type": "string",
-            "description": "The name of pipeline state (PENDING)."
+            "description": "The name of pipeline step state (IN_PROGRESS)."
           }
         }
       }
     ]
   },
-  "pipeline_step_state_completed_successful": {
+  "ssh_key": {
     "allOf": [
       {
-        "$ref": "#/definitions/pipeline_step_state_completed_result"
+        "$ref": "#/definitions/object"
       },
       {
-        "additionalProperties": true,
         "type": "object",
-        "description": "A Bitbucket Pipelines SUCCESSFUL pipeline step result.",
+        "description": "Base type for representing SSH public keys.",
         "properties": {
-          "name": {
-            "enum": [
-              "SUCCESSFUL"
-            ],
+          "uuid": {
             "type": "string",
-            "description": "The name of the result (SUCCESSFUL)"
+            "description": "The SSH key's immutable ID."
+          },
+          "key": {
+            "type": "string",
+            "description": "The SSH public key value in OpenSSH format."
+          },
+          "comment": {
+            "type": "string",
+            "description": "The comment parsed from the SSH key (if present)"
+          },
+          "label": {
+            "type": "string",
+            "description": "The user-defined label for the SSH key"
+          },
+          "created_on": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "last_used": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
           }
-        }
+        },
+        "additionalProperties": true
       }
     ]
+  },
+  "paginated_components": {
+    "type": "object",
+    "description": "A paginated list of issue tracker components.",
+    "properties": {
+      "size": {
+        "type": "integer",
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0
+      },
+      "page": {
+        "type": "integer",
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1
+      },
+      "pagelen": {
+        "type": "integer",
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1
+      },
+      "next": {
+        "type": "string",
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri"
+      },
+      "previous": {
+        "type": "string",
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri"
+      },
+      "values": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/component"
+        },
+        "minItems": 0,
+        "uniqueItems": true
+      }
+    },
+    "additionalProperties": false
   },
   "user": {
     "allOf": [

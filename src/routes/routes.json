@@ -165,6 +165,9 @@
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/approve"
     },
     "fetchAll": {
+      "accepts": [
+        "x-www-form-urlencoded"
+      ],
       "method": "POST",
       "params": {
         "exclude": {
@@ -175,9 +178,17 @@
           "in": "body",
           "type": "string"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -238,30 +249,6 @@
       },
       "returns": "Commit",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}"
-    },
-    "getAll": {
-      "method": "GET",
-      "params": {
-        "exclude": {
-          "in": "query",
-          "type": "string"
-        },
-        "include": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/commits"
     },
     "getAllForRevision": {
       "method": "GET",
@@ -376,6 +363,38 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/patch/{spec}"
+    },
+    "list": {
+      "method": "GET",
+      "params": {
+        "exclude": {
+          "in": "query",
+          "type": "string"
+        },
+        "include": {
+          "in": "query",
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/commits"
     },
     "listComments": {
       "method": "GET",
@@ -563,6 +582,11 @@
       ],
       "method": "POST",
       "params": {
+        "_body": {
+          "in": "body",
+          "required": true,
+          "type": "any"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -697,6 +721,11 @@
       ],
       "method": "POST",
       "params": {
+        "_body": {
+          "in": "body",
+          "required": true,
+          "type": "any"
+        },
         "issue_id": {
           "in": "path",
           "required": true,
@@ -1344,6 +1373,8 @@
       "params": {
         "_body": {
           "in": "body",
+          "required": true,
+          "schema": "Issue",
           "type": "any"
         },
         "issue_id": {
@@ -2857,6 +2888,7 @@
       "params": {
         "_body": {
           "in": "body",
+          "required": true,
           "type": "any"
         },
         "repo_slug": {
@@ -3107,6 +3139,7 @@
       "params": {
         "_body": {
           "in": "body",
+          "required": true,
           "type": "any"
         },
         "repo_slug": {
@@ -3201,6 +3234,11 @@
       ],
       "method": "POST",
       "params": {
+        "_body": {
+          "in": "body",
+          "required": true,
+          "type": "any"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -3265,6 +3303,11 @@
       ],
       "method": "POST",
       "params": {
+        "_body": {
+          "in": "body",
+          "required": true,
+          "type": "any"
+        },
         "issue_id": {
           "in": "path",
           "required": true,
@@ -3525,6 +3568,11 @@
       ],
       "method": "POST",
       "params": {
+        "_body": {
+          "in": "body",
+          "required": true,
+          "type": "any"
+        },
         "author": {
           "in": "query",
           "type": "string"
@@ -3586,6 +3634,7 @@
       "params": {
         "_body": {
           "in": "body",
+          "required": true,
           "type": "any"
         },
         "repo_slug": {
@@ -4015,6 +4064,9 @@
       "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
     },
     "fetchAllCommits": {
+      "accepts": [
+        "x-www-form-urlencoded"
+      ],
       "method": "POST",
       "params": {
         "exclude": {
@@ -4025,9 +4077,17 @@
           "in": "body",
           "type": "string"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -4083,30 +4143,6 @@
       },
       "returns": "Repository",
       "url": "/repositories/{username}/{repo_slug}"
-    },
-    "getAllCommits": {
-      "method": "GET",
-      "params": {
-        "exclude": {
-          "in": "query",
-          "type": "string"
-        },
-        "include": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/commits"
     },
     "getAllCommitsForRevision": {
       "method": "GET",
@@ -5227,6 +5263,38 @@
       "returns": "PaginatedCommitstatuses",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses"
     },
+    "listCommits": {
+      "method": "GET",
+      "params": {
+        "exclude": {
+          "in": "query",
+          "type": "string"
+        },
+        "include": {
+          "in": "query",
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/commits"
+    },
     "listComponents": {
       "method": "GET",
       "params": {
@@ -6013,6 +6081,8 @@
       "params": {
         "_body": {
           "in": "body",
+          "required": true,
+          "schema": "Issue",
           "type": "any"
         },
         "issue_id": {
@@ -6845,6 +6915,11 @@
       ],
       "method": "POST",
       "params": {
+        "_body": {
+          "in": "body",
+          "required": true,
+          "type": "any"
+        },
         "author": {
           "in": "query",
           "type": "string"
@@ -7897,6 +7972,7 @@
       "params": {
         "_body": {
           "in": "body",
+          "required": true,
           "type": "any"
         },
         "repo_slug": {

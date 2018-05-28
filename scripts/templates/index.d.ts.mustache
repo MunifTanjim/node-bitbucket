@@ -40,7 +40,7 @@ declare namespace BitBucket {
     | string;
 
   export interface Callback<T> {
-    (error: Error | null, response: T): void;
+    (error: BitBucket.Type.Error | null, response: T): void;
   }
 
   export interface Response<T> {

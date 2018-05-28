@@ -40,7 +40,7 @@ declare namespace BitBucket {
     | string;
 
   export interface Callback<T> {
-    (error: Error | null, response: T): void;
+    (error: BitBucket.Type.Error | null, response: T): void;
   }
 
   export interface Response<T> {
@@ -1285,7 +1285,9 @@ declare namespace BitBucket {
     & {
       "exclude"?: string;
       "include"?: string;
+      "q"?: string;
       "repo_slug": string;
+      "sort"?: string;
       "username": string;
     };
   export type CommitsFetchAllForRevisionParams =
@@ -1299,13 +1301,6 @@ declare namespace BitBucket {
   export type CommitsGetParams =
     & {
       "node": string;
-      "repo_slug": string;
-      "username": string;
-    };
-  export type CommitsGetAllParams =
-    & {
-      "exclude"?: string;
-      "include"?: string;
       "repo_slug": string;
       "username": string;
     };
@@ -1338,6 +1333,15 @@ declare namespace BitBucket {
     & {
       "repo_slug": string;
       "spec": string;
+      "username": string;
+    };
+  export type CommitsListParams =
+    & {
+      "exclude"?: string;
+      "include"?: string;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
       "username": string;
     };
   export type CommitsListCommentsParams =
@@ -1388,6 +1392,7 @@ declare namespace BitBucket {
     };
   export type DownloadsCreateParams =
     & {
+      "_body": any;
       "repo_slug": string;
       "username": string;
     };
@@ -1422,6 +1427,7 @@ declare namespace BitBucket {
     };
   export type IssueTrackerCreateAttachmentsParams =
     & {
+      "_body": any;
       "issue_id": number;
       "repo_slug": string;
       "username": string;
@@ -1596,7 +1602,7 @@ declare namespace BitBucket {
     };
   export type IssueTrackerUpdateParams =
     & {
-      "_body"?: any;
+      "_body": BitBucket.Type.Issue;
       "issue_id": string;
       "repo_slug": string;
       "username": string;
@@ -2009,7 +2015,7 @@ declare namespace BitBucket {
     };
   export type RefsCreateBranchParams =
     & {
-      "_body"?: any;
+      "_body": any;
       "repo_slug": string;
       "username": string;
     };
@@ -2078,7 +2084,7 @@ declare namespace BitBucket {
     };
   export type RepositoriesCreateBranchParams =
     & {
-      "_body"?: any;
+      "_body": any;
       "repo_slug": string;
       "username": string;
     };
@@ -2103,6 +2109,7 @@ declare namespace BitBucket {
     };
   export type RepositoriesCreateDownloadParams =
     & {
+      "_body": any;
       "repo_slug": string;
       "username": string;
     };
@@ -2120,6 +2127,7 @@ declare namespace BitBucket {
     };
   export type RepositoriesCreateIssueAttachmentsParams =
     & {
+      "_body": any;
       "issue_id": number;
       "repo_slug": string;
       "username": string;
@@ -2188,6 +2196,7 @@ declare namespace BitBucket {
     };
   export type RepositoriesCreateSrcFileCommitParams =
     & {
+      "_body": any;
       "author"?: string;
       "branch"?: string;
       "files"?: string;
@@ -2204,7 +2213,7 @@ declare namespace BitBucket {
     };
   export type RepositoriesCreateWebhookParams =
     & {
-      "_body"?: any;
+      "_body": any;
       "repo_slug": string;
       "username": string;
     };
@@ -2328,7 +2337,9 @@ declare namespace BitBucket {
     & {
       "exclude"?: string;
       "include"?: string;
+      "q"?: string;
       "repo_slug": string;
+      "sort"?: string;
       "username": string;
     };
   export type RepositoriesFetchAllCommitsForRevisionParams =
@@ -2341,13 +2352,6 @@ declare namespace BitBucket {
     };
   export type RepositoriesGetParams =
     & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllCommitsParams =
-    & {
-      "exclude"?: string;
-      "include"?: string;
       "repo_slug": string;
       "username": string;
     };
@@ -2655,6 +2659,15 @@ declare namespace BitBucket {
       "sort"?: string;
       "username": string;
     };
+  export type RepositoriesListCommitsParams =
+    & {
+      "exclude"?: string;
+      "include"?: string;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
   export type RepositoriesListComponentsParams =
     & {
       "q"?: string;
@@ -2869,7 +2882,7 @@ declare namespace BitBucket {
     };
   export type RepositoriesUpdateIssueParams =
     & {
-      "_body"?: any;
+      "_body": BitBucket.Type.Issue;
       "issue_id": string;
       "repo_slug": string;
       "username": string;
@@ -3091,6 +3104,7 @@ declare namespace BitBucket {
     };
   export type SourceCreateFileCommitParams =
     & {
+      "_body": any;
       "author"?: string;
       "branch"?: string;
       "files"?: string;
@@ -3385,7 +3399,7 @@ declare namespace BitBucket {
     };
   export type WebhooksCreateParams =
     & {
-      "_body"?: any;
+      "_body": any;
       "repo_slug": string;
       "username": string;
     };
@@ -3494,11 +3508,11 @@ declare class BitBucket {
     fetchAll(params: BitBucket.CommitsFetchAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
     fetchAllForRevision(params: BitBucket.CommitsFetchAllForRevisionParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
     get(params: BitBucket.CommitsGetParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Commit>>): Promise<BitBucket.Response<BitBucket.Type.Commit>>;
-    getAll(params: BitBucket.CommitsGetAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
     getAllForRevision(params: BitBucket.CommitsGetAllForRevisionParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
     getComment(params: BitBucket.CommitsGetCommentParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.CommitComment>>): Promise<BitBucket.Response<BitBucket.Type.CommitComment>>;
     getDiff(params: BitBucket.CommitsGetDiffParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
     getPatch(params: BitBucket.CommitsGetPatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
+    list(params: BitBucket.CommitsListParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
     listComments(params: BitBucket.CommitsListCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedCommitComments>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedCommitComments>>;
   };
   commitstatuses: {
@@ -3677,7 +3691,6 @@ declare class BitBucket {
     fetchAllCommits(params: BitBucket.RepositoriesFetchAllCommitsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
     fetchAllCommitsForRevision(params: BitBucket.RepositoriesFetchAllCommitsForRevisionParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
     get(params: BitBucket.RepositoriesGetParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Repository>>): Promise<BitBucket.Response<BitBucket.Type.Repository>>;
-    getAllCommits(params: BitBucket.RepositoriesGetAllCommitsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
     getAllCommitsForRevision(params: BitBucket.RepositoriesGetAllCommitsForRevisionParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
     getAllDefaultReviewers(params: BitBucket.RepositoriesGetAllDefaultReviewersParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
     getAllDownloads(params: BitBucket.RepositoriesGetAllDownloadsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
@@ -3725,6 +3738,7 @@ declare class BitBucket {
     listBranches(params: BitBucket.RepositoriesListBranchesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedBranches>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedBranches>>;
     listCommitComments(params: BitBucket.RepositoriesListCommitCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedCommitComments>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedCommitComments>>;
     listCommitStatuses(params: BitBucket.RepositoriesListCommitStatusesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedCommitstatuses>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedCommitstatuses>>;
+    listCommits(params: BitBucket.RepositoriesListCommitsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
     listComponents(params: BitBucket.RepositoriesListComponentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedComponents>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedComponents>>;
     listDiffStats(params: BitBucket.RepositoriesListDiffStatsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedDiffstats>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedDiffstats>>;
     listFileHistory(params: BitBucket.RepositoriesListFileHistoryParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedFiles>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedFiles>>;

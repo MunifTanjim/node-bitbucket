@@ -151,8 +151,8 @@
   },
   "/repositories/{username}/{repo_slug}/commits": {
     "get": {
-      "commits": "getAll",
-      "repositories": "getAllCommits"
+      "commits": "list",
+      "repositories": "listCommits"
     },
     "post": {
       "commits": "fetchAll",

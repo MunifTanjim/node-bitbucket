@@ -5,6 +5,20 @@ const deepmerge = require('deepmerge')
 const getBuffer = require('../utils/get-buffer-response')
 const HTTPError = require('./http-error')
 
+const getData = response => {
+  let contentType = response.headers.get('content-type')
+
+  if (/application\/json/.test(contentType)) {
+    return response.json()
+  }
+
+  if (!contentType || /^text\/|charset=utf-8$/.test(contentType)) {
+    return response.text()
+  }
+
+  return getBuffer(response)
+}
+
 /**
  * Performs HTTP Request
  * @param {Object} requestOptions
@@ -42,21 +56,12 @@ const request = requestOptions => {
       }
 
       if (response.status >= 400 || [304].includes(response.status)) {
-        return response.json().then(error => {
+        return getData(response).then(error => {
           throw new HTTPError(error, response.status, responseHeaders)
         })
       }
 
-      const contentType = response.headers.get('content-type')
-      if (/application\/json/.test(contentType)) {
-        return response.json()
-      }
-
-      if (!contentType || /^text\/|charset=utf-8$/.test(contentType)) {
-        return response.text()
-      }
-
-      return getBuffer(response)
+      return getData(response)
     })
     .then(data => ({
       data,

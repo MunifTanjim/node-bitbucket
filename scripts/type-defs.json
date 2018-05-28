@@ -72,34 +72,40 @@
         }
       }
     },
-    "PipelineRefTarget": {
+    "Milestone": {
       "allOf": [
         {
-          "$ref": "#/definitions/PipelineTarget"
+          "$ref": "#/definitions/Object"
         },
         {
-          "additionalProperties": true,
           "type": "object",
           "properties": {
-            "ref_type": {
-              "enum": [
-                "branch",
-                "tag",
-                "named_branch",
-                "bookmark"
-              ],
+            "links": {
+              "type": "object",
+              "properties": {
+                "self": {
+                  "type": "object",
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            },
+            "name": {
               "type": "string"
             },
-            "ref_name": {
-              "type": "string"
-            },
-            "commit": {
-              "$ref": "#/definitions/Commit"
-            },
-            "selector": {
-              "$ref": "#/definitions/PipelineSelector"
+            "id": {
+              "type": "integer"
             }
-          }
+          },
+          "additionalProperties": true
         }
       ]
     },
@@ -190,7 +196,7 @@
       },
       "additionalProperties": false
     },
-    "PipelineStateCompletedExpired": {
+    "PipelineStateCompletedStopped": {
       "allOf": [
         {
           "$ref": "#/definitions/PipelineStateCompletedResult"
@@ -201,7 +207,7 @@
           "properties": {
             "name": {
               "enum": [
-                "EXPIRED"
+                "STOPPED"
               ],
               "type": "string"
             }
@@ -393,20 +399,20 @@
         }
       }
     },
-    "PipelineCommitTarget": {
+    "PipelineStepStateCompletedStopped": {
       "allOf": [
         {
-          "$ref": "#/definitions/PipelineTarget"
+          "$ref": "#/definitions/PipelineStepStateCompletedResult"
         },
         {
           "additionalProperties": true,
           "type": "object",
           "properties": {
-            "commit": {
-              "$ref": "#/definitions/Commit"
-            },
-            "selector": {
-              "$ref": "#/definitions/PipelineSelector"
+            "name": {
+              "enum": [
+                "STOPPED"
+              ],
+              "type": "string"
             }
           }
         }
@@ -427,60 +433,6 @@
           }
         }
       ]
-    },
-    "Pipeline": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Object"
-        },
-        {
-          "additionalProperties": true,
-          "type": "object",
-          "properties": {
-            "uuid": {
-              "type": "string"
-            },
-            "build_number": {
-              "type": "integer"
-            },
-            "creator": {
-              "$ref": "#/definitions/Account"
-            },
-            "repository": {
-              "$ref": "#/definitions/Repository"
-            },
-            "target": {
-              "$ref": "#/definitions/PipelineTarget"
-            },
-            "trigger": {
-              "$ref": "#/definitions/PipelineTrigger"
-            },
-            "state": {
-              "$ref": "#/definitions/PipelineState"
-            },
-            "created_on": {
-              "type": "string"
-            },
-            "completed_on": {
-              "type": "string"
-            },
-            "build_seconds_used": {
-              "type": "integer"
-            }
-          }
-        }
-      ]
-    },
-    "SearchSegment": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string"
-        },
-        "match": {
-          "type": "boolean"
-        }
-      }
     },
     "PipelineSshPublicKey": {
       "allOf": [
@@ -587,40 +539,34 @@
       },
       "additionalProperties": false
     },
-    "Milestone": {
+    "PipelineRefTarget": {
       "allOf": [
         {
-          "$ref": "#/definitions/Object"
+          "$ref": "#/definitions/PipelineTarget"
         },
         {
+          "additionalProperties": true,
           "type": "object",
           "properties": {
-            "links": {
-              "type": "object",
-              "properties": {
-                "self": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false
-                }
-              },
-              "additionalProperties": false
-            },
-            "name": {
+            "ref_type": {
+              "enum": [
+                "branch",
+                "tag",
+                "named_branch",
+                "bookmark"
+              ],
               "type": "string"
             },
-            "id": {
-              "type": "integer"
+            "ref_name": {
+              "type": "string"
+            },
+            "commit": {
+              "$ref": "#/definitions/Commit"
+            },
+            "selector": {
+              "$ref": "#/definitions/PipelineSelector"
             }
-          },
-          "additionalProperties": true
+          }
         }
       ]
     },
@@ -665,19 +611,15 @@
         }
       ]
     },
-    "CommitComment": {
+    "PipelineStateCompletedResult": {
       "allOf": [
         {
-          "$ref": "#/definitions/Comment"
+          "$ref": "#/definitions/Object"
         },
         {
+          "additionalProperties": true,
           "type": "object",
-          "properties": {
-            "commit": {
-              "$ref": "#/definitions/Commit"
-            }
-          },
-          "additionalProperties": true
+          "properties": {}
         }
       ]
     },
@@ -857,6 +799,142 @@
             }
           },
           "additionalProperties": true
+        }
+      ]
+    },
+    "CommitComment": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Comment"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "commit": {
+              "$ref": "#/definitions/Commit"
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "IssueComment": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Comment"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "issue": {
+              "$ref": "#/definitions/Issue"
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "PaginatedSnippetComments": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SnippetComment"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Team": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Account"
+        },
+        {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        }
+      ]
+    },
+    "PaginatedSnippets": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Snippet"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "PaginatedPipelineSchedules": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineSchedule"
+          }
+        },
+        "size": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        }
+      }
+    },
+    "PipelineStateInProgressStage": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "type": "object",
+          "properties": {}
         }
       ]
     },
@@ -1073,113 +1151,6 @@
         }
       ]
     },
-    "IssueComment": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Comment"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "issue": {
-              "$ref": "#/definitions/Issue"
-            }
-          },
-          "additionalProperties": true
-        }
-      ]
-    },
-    "PipelinesConfig": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Object"
-        },
-        {
-          "additionalProperties": true,
-          "type": "object",
-          "properties": {
-            "enabled": {
-              "type": "boolean"
-            },
-            "repository": {
-              "$ref": "#/definitions/Repository"
-            }
-          }
-        }
-      ]
-    },
-    "Team": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Account"
-        },
-        {
-          "type": "object",
-          "properties": {},
-          "additionalProperties": true
-        }
-      ]
-    },
-    "PaginatedSnippets": {
-      "type": "object",
-      "properties": {
-        "size": {
-          "type": "integer"
-        },
-        "page": {
-          "type": "integer"
-        },
-        "pagelen": {
-          "type": "integer"
-        },
-        "next": {
-          "type": "string"
-        },
-        "previous": {
-          "type": "string"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Snippet"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "Page": {
-      "type": "object",
-      "properties": {
-        "size": {
-          "type": "integer"
-        },
-        "page": {
-          "type": "integer"
-        },
-        "pagelen": {
-          "type": "integer"
-        },
-        "next": {
-          "type": "string"
-        },
-        "previous": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "PipelineStateInProgressStage": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Object"
-        },
-        {
-          "additionalProperties": true,
-          "type": "object",
-          "properties": {}
-        }
-      ]
-    },
     "PipelineStepStateReady": {
       "allOf": [
         {
@@ -1226,36 +1197,29 @@
       },
       "additionalProperties": false
     },
-    "SearchResultPage": {
-      "type": "object",
-      "properties": {
-        "size": {
-          "type": "integer"
+    "PipelineKnownHost": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
         },
-        "page": {
-          "type": "integer"
-        },
-        "pagelen": {
-          "type": "integer"
-        },
-        "query_substituted": {
-          "type": "boolean"
-        },
-        "next": {
-          "type": "string"
-        },
-        "previous": {
-          "type": "string"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SearchCodeSearchResult"
+        {
+          "additionalProperties": true,
+          "type": "object",
+          "properties": {
+            "uuid": {
+              "type": "string"
+            },
+            "hostname": {
+              "type": "string"
+            },
+            "public_key": {
+              "$ref": "#/definitions/PipelineSshPublicKey"
+            }
           }
         }
-      }
+      ]
     },
-    "PipelineStateCompletedStopped": {
+    "PipelineStateCompletedExpired": {
       "allOf": [
         {
           "$ref": "#/definitions/PipelineStateCompletedResult"
@@ -1266,7 +1230,7 @@
           "properties": {
             "name": {
               "enum": [
-                "STOPPED"
+                "EXPIRED"
               ],
               "type": "string"
             }
@@ -1323,32 +1287,21 @@
       },
       "additionalProperties": false
     },
-    "PaginatedHookEvents": {
-      "type": "object",
-      "properties": {
-        "size": {
-          "type": "integer"
+    "PipelineScheduleExecutionErrored": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineScheduleExecution"
         },
-        "page": {
-          "type": "integer"
-        },
-        "pagelen": {
-          "type": "integer"
-        },
-        "next": {
-          "type": "string"
-        },
-        "previous": {
-          "type": "string"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HookEvent"
+        {
+          "additionalProperties": true,
+          "type": "object",
+          "properties": {
+            "error": {
+              "$ref": "#/definitions/PipelineError"
+            }
           }
         }
-      },
-      "additionalProperties": false
+      ]
     },
     "TeamPermission": {
       "type": "object",
@@ -1374,6 +1327,27 @@
         "type"
       ],
       "additionalProperties": true
+    },
+    "Page": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     },
     "PaginatedLogEntries": {
       "type": "object",
@@ -1402,32 +1376,24 @@
       },
       "additionalProperties": false
     },
-    "PaginatedSnippetComments": {
-      "type": "object",
-      "properties": {
-        "size": {
-          "type": "integer"
+    "PipelinesConfig": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
         },
-        "page": {
-          "type": "integer"
-        },
-        "pagelen": {
-          "type": "integer"
-        },
-        "next": {
-          "type": "string"
-        },
-        "previous": {
-          "type": "string"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SnippetComment"
+        {
+          "additionalProperties": true,
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "repository": {
+              "$ref": "#/definitions/Repository"
+            }
           }
         }
-      },
-      "additionalProperties": false
+      ]
     },
     "Version": {
       "allOf": [
@@ -1579,32 +1545,6 @@
         "type"
       ],
       "additionalProperties": true
-    },
-    "PaginatedPipelineSchedules": {
-      "type": "object",
-      "properties": {
-        "page": {
-          "type": "integer"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PipelineSchedule"
-          }
-        },
-        "size": {
-          "type": "integer"
-        },
-        "pagelen": {
-          "type": "integer"
-        },
-        "next": {
-          "type": "string"
-        },
-        "previous": {
-          "type": "string"
-        }
-      }
     },
     "WebhookSubscription": {
       "allOf": [
@@ -2308,10 +2248,10 @@
         }
       ]
     },
-    "PipelineStepStateInProgress": {
+    "PipelineStatePending": {
       "allOf": [
         {
-          "$ref": "#/definitions/PipelineStepState"
+          "$ref": "#/definitions/PipelineState"
         },
         {
           "additionalProperties": true,
@@ -2319,7 +2259,7 @@
           "properties": {
             "name": {
               "enum": [
-                "IN_PROGRESS"
+                "PENDING"
               ],
               "type": "string"
             }
@@ -2449,34 +2389,7 @@
         }
       ]
     },
-    "PaginatedComponents": {
-      "type": "object",
-      "properties": {
-        "size": {
-          "type": "integer"
-        },
-        "page": {
-          "type": "integer"
-        },
-        "pagelen": {
-          "type": "integer"
-        },
-        "next": {
-          "type": "string"
-        },
-        "previous": {
-          "type": "string"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Component"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "PipelineStepStateCompletedNotRun": {
+    "PipelineStepStateCompletedSuccessful": {
       "allOf": [
         {
           "$ref": "#/definitions/PipelineStepStateCompletedResult"
@@ -2487,9 +2400,52 @@
           "properties": {
             "name": {
               "enum": [
-                "NOT_RUN"
+                "SUCCESSFUL"
               ],
               "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "Pipeline": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "type": "object",
+          "properties": {
+            "uuid": {
+              "type": "string"
+            },
+            "build_number": {
+              "type": "integer"
+            },
+            "creator": {
+              "$ref": "#/definitions/Account"
+            },
+            "repository": {
+              "$ref": "#/definitions/Repository"
+            },
+            "target": {
+              "$ref": "#/definitions/PipelineTarget"
+            },
+            "trigger": {
+              "$ref": "#/definitions/PipelineTrigger"
+            },
+            "state": {
+              "$ref": "#/definitions/PipelineState"
+            },
+            "created_on": {
+              "type": "string"
+            },
+            "completed_on": {
+              "type": "string"
+            },
+            "build_seconds_used": {
+              "type": "integer"
             }
           }
         }
@@ -2903,17 +2859,16 @@
         }
       ]
     },
-    "PipelineStateCompletedResult": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Object"
+    "SearchSegment": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
         },
-        {
-          "additionalProperties": true,
-          "type": "object",
-          "properties": {}
+        "match": {
+          "type": "boolean"
         }
-      ]
+      }
     },
     "PipelineStateInProgress": {
       "allOf": [
@@ -2993,20 +2948,20 @@
       ],
       "additionalProperties": true
     },
-    "PipelineStepStateCompletedStopped": {
+    "PipelineCommitTarget": {
       "allOf": [
         {
-          "$ref": "#/definitions/PipelineStepStateCompletedResult"
+          "$ref": "#/definitions/PipelineTarget"
         },
         {
           "additionalProperties": true,
           "type": "object",
           "properties": {
-            "name": {
-              "enum": [
-                "STOPPED"
-              ],
-              "type": "string"
+            "commit": {
+              "$ref": "#/definitions/Commit"
+            },
+            "selector": {
+              "$ref": "#/definitions/PipelineSelector"
             }
           }
         }
@@ -3219,52 +3174,22 @@
       },
       "additionalProperties": false
     },
-    "SshKey": {
+    "PipelineStepStateCompletedNotRun": {
       "allOf": [
         {
-          "$ref": "#/definitions/Object"
+          "$ref": "#/definitions/PipelineStepStateCompletedResult"
         },
         {
+          "additionalProperties": true,
           "type": "object",
           "properties": {
-            "uuid": {
+            "name": {
+              "enum": [
+                "NOT_RUN"
+              ],
               "type": "string"
-            },
-            "key": {
-              "type": "string"
-            },
-            "comment": {
-              "type": "string"
-            },
-            "label": {
-              "type": "string"
-            },
-            "created_on": {
-              "type": "string"
-            },
-            "last_used": {
-              "type": "string"
-            },
-            "links": {
-              "type": "object",
-              "properties": {
-                "self": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false
-                }
-              },
-              "additionalProperties": false
             }
-          },
-          "additionalProperties": true
+          }
         }
       ]
     },
@@ -3371,27 +3296,34 @@
         }
       ]
     },
-    "PipelineKnownHost": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Object"
+    "SearchResultPage": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer"
         },
-        {
-          "additionalProperties": true,
-          "type": "object",
-          "properties": {
-            "uuid": {
-              "type": "string"
-            },
-            "hostname": {
-              "type": "string"
-            },
-            "public_key": {
-              "$ref": "#/definitions/PipelineSshPublicKey"
-            }
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "query_substituted": {
+          "type": "boolean"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchCodeSearchResult"
           }
         }
-      ]
+      }
     },
     "Account": {
       "allOf": [
@@ -3797,21 +3729,32 @@
       ],
       "additionalProperties": true
     },
-    "PipelineScheduleExecutionErrored": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/PipelineScheduleExecution"
+    "PaginatedHookEvents": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer"
         },
-        {
-          "additionalProperties": true,
-          "type": "object",
-          "properties": {
-            "error": {
-              "$ref": "#/definitions/PipelineError"
-            }
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HookEvent"
           }
         }
-      ]
+      },
+      "additionalProperties": false
     },
     "Diffstat": {
       "type": "object",
@@ -4144,10 +4087,10 @@
       "additionalProperties": true,
       "discriminator": "type"
     },
-    "PipelineStatePending": {
+    "PipelineStepStateInProgress": {
       "allOf": [
         {
-          "$ref": "#/definitions/PipelineState"
+          "$ref": "#/definitions/PipelineStepState"
         },
         {
           "additionalProperties": true,
@@ -4155,7 +4098,7 @@
           "properties": {
             "name": {
               "enum": [
-                "PENDING"
+                "IN_PROGRESS"
               ],
               "type": "string"
             }
@@ -4163,24 +4106,81 @@
         }
       ]
     },
-    "PipelineStepStateCompletedSuccessful": {
+    "SshKey": {
       "allOf": [
         {
-          "$ref": "#/definitions/PipelineStepStateCompletedResult"
+          "$ref": "#/definitions/Object"
         },
         {
-          "additionalProperties": true,
           "type": "object",
           "properties": {
-            "name": {
-              "enum": [
-                "SUCCESSFUL"
-              ],
+            "uuid": {
               "type": "string"
+            },
+            "key": {
+              "type": "string"
+            },
+            "comment": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "created_on": {
+              "type": "string"
+            },
+            "last_used": {
+              "type": "string"
+            },
+            "links": {
+              "type": "object",
+              "properties": {
+                "self": {
+                  "type": "object",
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
             }
-          }
+          },
+          "additionalProperties": true
         }
       ]
+    },
+    "PaginatedComponents": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Component"
+          }
+        }
+      },
+      "additionalProperties": false
     },
     "User": {
       "allOf": [

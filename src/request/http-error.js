@@ -7,23 +7,23 @@ const HTTP_ERROR_CODES = {
 }
 
 class HTTPError extends Error {
-  constructor(message, code, headers) {
-    super(message)
+  constructor(error, code, headers) {
+    super(typeof error === 'string' ? error : error.error.message)
 
     // Maintains proper stack trace for where our error was thrown (only available on V8)
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor)
-    }
+    if (Error.captureStackTrace) Error.captureStackTrace(this, this.constructor)
 
-    this.name = 'HTTPError'
+    this.name = this.constructor.name
     this.code = code
     this.status = HTTP_ERROR_CODES[code]
     this.headers = headers
+    this.error = error
   }
 
   toJSON() {
     return {
       code: this.code,
+      error: this.error,
       status: this.status,
       message: this.message
     }
