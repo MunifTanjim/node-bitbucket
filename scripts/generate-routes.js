@@ -21,7 +21,7 @@ const routesPath = path.resolve('src/routes/routes.json')
 
 const routesObject = {}
 
-const initializeRoutes = () => {
+const initializeRoutes = routesObject => {
   const namespaces = extractScopesFromMethodsList(METHODS_LIST)
 
   _.each(namespaces, namespaceName => {
@@ -94,7 +94,7 @@ const setURL = (methodObject, url) => {
   methodObject.url = url
 }
 
-const updateRoutes = () => {
+const updateRoutes = routesObject => {
   _.each(METHODS_LIST, (methods, url) => {
     // Specification for URL
     let spec = PATHS_SPEC[url] || {}
@@ -142,6 +142,21 @@ const updateRoutes = () => {
   })
 }
 
+const addFilterAndSortParams = routesObject => {
+  _.each(routesObject, (namespaces, namespaceName) => {
+    _.each(namespaces, (methodObject, methodName) => {
+      if (methodObject.returns && /^paginated/i.test(methodObject.returns)) {
+        setParameters(methodObject, {
+          parameters: [
+            { in: 'query', name: 'q', required: false, type: 'string' },
+            { in: 'query', name: 'sort', required: false, type: 'string' }
+          ]
+        })
+      }
+    })
+  })
+}
+
 const recursivelyTidyObject = object => {
   _.each(object, (value, key) => {
     if (!_.isPlainObject(value)) return
@@ -157,8 +172,9 @@ const tidyRoutesObject = routesObject => {
     .value()
 }
 
-initializeRoutes()
-updateRoutes()
+initializeRoutes(routesObject)
+updateRoutes(routesObject)
+addFilterAndSortParams(routesObject)
 
 writeFileSync(
   routesPath,

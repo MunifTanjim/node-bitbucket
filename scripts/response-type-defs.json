@@ -681,65 +681,184 @@
         }
       ]
     },
-    "Ref": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
+    "Issue": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
         },
-        "links": {
+        {
           "type": "object",
           "properties": {
-            "self": {
+            "links": {
               "type": "object",
               "properties": {
-                "href": {
-                  "type": "string"
+                "self": {
+                  "type": "object",
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
                 },
-                "name": {
-                  "type": "string"
+                "html": {
+                  "type": "object",
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "comments": {
+                  "type": "object",
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "attachments": {
+                  "type": "object",
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "watch": {
+                  "type": "object",
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "vote": {
+                  "type": "object",
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               },
               "additionalProperties": false
             },
-            "commits": {
-              "type": "object",
-              "properties": {
-                "href": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                }
-              },
-              "additionalProperties": false
+            "id": {
+              "type": "integer"
             },
-            "html": {
+            "repository": {
+              "$ref": "#/definitions/Repository"
+            },
+            "title": {
+              "type": "string"
+            },
+            "reporter": {
+              "$ref": "#/definitions/User"
+            },
+            "assignee": {
+              "$ref": "#/definitions/User"
+            },
+            "created_on": {
+              "type": "string"
+            },
+            "updated_on": {
+              "type": "string"
+            },
+            "edited_on": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "new",
+                "open",
+                "resolved",
+                "on hold",
+                "invalid",
+                "duplicate",
+                "wontfix",
+                "closed"
+              ]
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "bug",
+                "enhancement",
+                "proposal",
+                "task"
+              ]
+            },
+            "priority": {
+              "type": "string",
+              "enum": [
+                "trivial",
+                "minor",
+                "major",
+                "critical",
+                "blocker"
+              ]
+            },
+            "milestone": {
+              "$ref": "#/definitions/Milestone"
+            },
+            "version": {
+              "$ref": "#/definitions/Version"
+            },
+            "component": {
+              "$ref": "#/definitions/Component"
+            },
+            "votes": {
+              "type": "integer"
+            },
+            "content": {
               "type": "object",
               "properties": {
-                "href": {
+                "raw": {
                   "type": "string"
                 },
-                "name": {
+                "markup": {
+                  "type": "string",
+                  "enum": [
+                    "markdown",
+                    "creole",
+                    "plaintext"
+                  ]
+                },
+                "html": {
                   "type": "string"
                 }
               },
               "additionalProperties": false
             }
           },
-          "additionalProperties": false
-        },
-        "name": {
-          "type": "string"
-        },
-        "target": {
-          "$ref": "#/definitions/Commit"
+          "additionalProperties": true
         }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": true
+      ]
     },
     "Pullrequest": {
       "allOf": [
@@ -1204,21 +1323,32 @@
       },
       "additionalProperties": false
     },
-    "PipelineScheduleExecutionErrored": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/PipelineScheduleExecution"
+    "PaginatedHookEvents": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer"
         },
-        {
-          "additionalProperties": true,
-          "type": "object",
-          "properties": {
-            "error": {
-              "$ref": "#/definitions/PipelineError"
-            }
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HookEvent"
           }
         }
-      ]
+      },
+      "additionalProperties": false
     },
     "TeamPermission": {
       "type": "object",
@@ -1390,184 +1520,91 @@
       },
       "additionalProperties": false
     },
-    "Issue": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Object"
+    "Ref": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
         },
-        {
+        "links": {
           "type": "object",
           "properties": {
-            "links": {
+            "self": {
               "type": "object",
               "properties": {
-                "self": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false
+                "href": {
+                  "type": "string"
                 },
-                "html": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false
-                },
-                "comments": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false
-                },
-                "attachments": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false
-                },
-                "watch": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false
-                },
-                "vote": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false
+                "name": {
+                  "type": "string"
                 }
               },
               "additionalProperties": false
             },
-            "id": {
-              "type": "integer"
-            },
-            "repository": {
-              "$ref": "#/definitions/Repository"
-            },
-            "title": {
-              "type": "string"
-            },
-            "reporter": {
-              "$ref": "#/definitions/User"
-            },
-            "assignee": {
-              "$ref": "#/definitions/User"
-            },
-            "created_on": {
-              "type": "string"
-            },
-            "updated_on": {
-              "type": "string"
-            },
-            "edited_on": {
-              "type": "string"
-            },
-            "state": {
-              "type": "string",
-              "enum": [
-                "new",
-                "open",
-                "resolved",
-                "on hold",
-                "invalid",
-                "duplicate",
-                "wontfix",
-                "closed"
-              ]
-            },
-            "kind": {
-              "type": "string",
-              "enum": [
-                "bug",
-                "enhancement",
-                "proposal",
-                "task"
-              ]
-            },
-            "priority": {
-              "type": "string",
-              "enum": [
-                "trivial",
-                "minor",
-                "major",
-                "critical",
-                "blocker"
-              ]
-            },
-            "milestone": {
-              "$ref": "#/definitions/Milestone"
-            },
-            "version": {
-              "$ref": "#/definitions/Version"
-            },
-            "component": {
-              "$ref": "#/definitions/Component"
-            },
-            "votes": {
-              "type": "integer"
-            },
-            "content": {
+            "commits": {
               "type": "object",
               "properties": {
-                "raw": {
+                "href": {
                   "type": "string"
                 },
-                "markup": {
-                  "type": "string",
-                  "enum": [
-                    "markdown",
-                    "creole",
-                    "plaintext"
-                  ]
+                "name": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "html": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
                 },
-                "html": {
+                "name": {
                   "type": "string"
                 }
               },
               "additionalProperties": false
             }
           },
-          "additionalProperties": true
+          "additionalProperties": false
+        },
+        "name": {
+          "type": "string"
+        },
+        "target": {
+          "$ref": "#/definitions/Commit"
         }
-      ]
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "PaginatedPipelineSchedules": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineSchedule"
+          }
+        },
+        "size": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        }
+      }
     },
     "WebhookSubscription": {
       "allOf": [
@@ -2519,31 +2556,17 @@
       },
       "additionalProperties": false
     },
-    "PaginatedPipelineSchedules": {
-      "type": "object",
-      "properties": {
-        "page": {
-          "type": "integer"
+    "PipelineTriggerManual": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineTrigger"
         },
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PipelineSchedule"
-          }
-        },
-        "size": {
-          "type": "integer"
-        },
-        "pagelen": {
-          "type": "integer"
-        },
-        "next": {
-          "type": "string"
-        },
-        "previous": {
-          "type": "string"
+        {
+          "additionalProperties": true,
+          "type": "object",
+          "properties": {}
         }
-      }
+      ]
     },
     "SshAccountKey": {
       "allOf": [
@@ -3774,32 +3797,21 @@
       ],
       "additionalProperties": true
     },
-    "PaginatedHookEvents": {
-      "type": "object",
-      "properties": {
-        "size": {
-          "type": "integer"
+    "PipelineScheduleExecutionErrored": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineScheduleExecution"
         },
-        "page": {
-          "type": "integer"
-        },
-        "pagelen": {
-          "type": "integer"
-        },
-        "next": {
-          "type": "string"
-        },
-        "previous": {
-          "type": "string"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HookEvent"
+        {
+          "additionalProperties": true,
+          "type": "object",
+          "properties": {
+            "error": {
+              "$ref": "#/definitions/PipelineError"
+            }
           }
         }
-      },
-      "additionalProperties": false
+      ]
     },
     "Diffstat": {
       "type": "object",
@@ -3872,18 +3884,6 @@
         }
       ]
     },
-    "PipelineTriggerManual": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/PipelineTrigger"
-        },
-        {
-          "additionalProperties": true,
-          "type": "object",
-          "properties": {}
-        }
-      ]
-    },
     "Participant": {
       "allOf": [
         {
@@ -3952,32 +3952,24 @@
         }
       ]
     },
-    "PaginatedUsers": {
-      "type": "object",
-      "properties": {
-        "size": {
-          "type": "integer"
+    "Author": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
         },
-        "page": {
-          "type": "integer"
-        },
-        "pagelen": {
-          "type": "integer"
-        },
-        "next": {
-          "type": "string"
-        },
-        "previous": {
-          "type": "string"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/User"
-          }
+        {
+          "type": "object",
+          "properties": {
+            "raw": {
+              "type": "string"
+            },
+            "user": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "additionalProperties": true
         }
-      },
-      "additionalProperties": false
+      ]
     },
     "CommitFile": {
       "type": "object",
@@ -4317,24 +4309,32 @@
         }
       ]
     },
-    "Author": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Object"
+    "PaginatedUsers": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer"
         },
-        {
-          "type": "object",
-          "properties": {
-            "raw": {
-              "type": "string"
-            },
-            "user": {
-              "$ref": "#/definitions/Account"
-            }
-          },
-          "additionalProperties": true
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
         }
-      ]
+      },
+      "additionalProperties": false
     },
     "PaginatedPipelineKnownHosts": {
       "type": "object",

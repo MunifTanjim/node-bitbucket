@@ -68,9 +68,17 @@
     "list": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -375,9 +383,17 @@
           "required": true,
           "type": "string"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -452,9 +468,17 @@
           "required": true,
           "type": "string"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -474,9 +498,17 @@
           "required": true,
           "type": "integer"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -603,6 +635,14 @@
     "list": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "subject_type": {
           "enum": [
             "user",
@@ -1104,9 +1144,17 @@
     "list": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -1126,9 +1174,17 @@
           "required": true,
           "type": "integer"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -1187,6 +1243,10 @@
           "required": true,
           "type": "string"
         },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -1199,9 +1259,17 @@
     "listComponents": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -1216,9 +1284,17 @@
     "listMilestones": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -1233,9 +1309,17 @@
     "listVersions": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -1751,9 +1835,17 @@
     "list": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -1768,9 +1860,17 @@
     "listKnownHosts": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -1785,9 +1885,17 @@
     "listScheduleExecutions": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -1802,9 +1910,17 @@
     "listSchedules": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -1824,9 +1940,17 @@
           "required": true,
           "type": "string"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -1841,9 +1965,17 @@
     "listVariablesForRepo": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -1858,6 +1990,14 @@
     "listVariablesForTeam": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -1870,6 +2010,14 @@
     "listVariablesForUser": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -2146,6 +2294,14 @@
     "listForTeam": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -2522,9 +2678,17 @@
     "list": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "state": {
@@ -2554,9 +2718,17 @@
           "required": true,
           "type": "integer"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -2576,9 +2748,17 @@
           "required": true,
           "type": "integer"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -2776,9 +2956,17 @@
     "list": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -2793,9 +2981,17 @@
     "listBranches": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -2810,9 +3006,17 @@
     "listTags": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -4721,6 +4925,81 @@
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/patch"
     },
+    "getSrc": {
+      "method": "GET",
+      "params": {
+        "format": {
+          "enum": [
+            "meta",
+            "rendered"
+          ],
+          "in": "query",
+          "type": "string"
+        },
+        "node": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "path": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedTreeentries",
+      "url": "/repositories/{username}/{repo_slug}/src/{node}/{path}"
+    },
+    "getSrcMainRoot": {
+      "method": "GET",
+      "params": {
+        "format": {
+          "enum": [
+            "meta"
+          ],
+          "in": "query",
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedTreeentries",
+      "url": "/repositories/{username}/{repo_slug}/src"
+    },
     "getTag": {
       "method": "GET",
       "params": {
@@ -4768,6 +5047,10 @@
     "list": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "role": {
           "enum": [
             "admin",
@@ -4775,6 +5058,10 @@
             "member",
             "owner"
           ],
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
           "in": "query",
           "type": "string"
         },
@@ -4790,9 +5077,17 @@
     "listBranchRestrictions": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -4807,9 +5102,17 @@
     "listBranches": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -4829,9 +5132,17 @@
           "required": true,
           "type": "string"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -4851,9 +5162,17 @@
           "required": true,
           "type": "string"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -4868,9 +5187,17 @@
     "listComponents": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -4889,9 +5216,17 @@
           "in": "query",
           "type": "boolean"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "spec": {
@@ -4954,9 +5289,17 @@
     "listForks": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -4976,9 +5319,17 @@
           "required": true,
           "type": "integer"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -5037,6 +5388,10 @@
           "required": true,
           "type": "string"
         },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -5049,9 +5404,17 @@
     "listIssues": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -5066,9 +5429,17 @@
     "listMilestones": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -5098,9 +5469,17 @@
     "listPipelineKnownHosts": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -5115,9 +5494,17 @@
     "listPipelineScheduleExecutions": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -5132,9 +5519,17 @@
     "listPipelineSchedules": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -5154,9 +5549,17 @@
           "required": true,
           "type": "string"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -5171,9 +5574,17 @@
     "listPipelineVariables": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -5188,9 +5599,17 @@
     "listPipelines": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -5208,6 +5627,14 @@
         "after": {
           "in": "query",
           "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
         }
       },
       "returns": "PaginatedRepositories",
@@ -5221,9 +5648,17 @@
           "required": true,
           "type": "integer"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -5243,9 +5678,17 @@
           "required": true,
           "type": "integer"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -5260,9 +5703,17 @@
     "listPullRequests": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "state": {
@@ -5287,41 +5738,6 @@
     "listRefs": {
       "method": "GET",
       "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedRefs",
-      "url": "/repositories/{username}/{repo_slug}/refs"
-    },
-    "listSrc": {
-      "method": "GET",
-      "params": {
-        "format": {
-          "enum": [
-            "meta",
-            "rendered"
-          ],
-          "in": "query",
-          "type": "string"
-        },
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "path": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
         "q": {
           "in": "query",
           "type": "string"
@@ -5341,16 +5757,13 @@
           "type": "string"
         }
       },
-      "returns": "PaginatedTreeentries",
-      "url": "/repositories/{username}/{repo_slug}/src/{node}/{path}"
+      "returns": "PaginatedRefs",
+      "url": "/repositories/{username}/{repo_slug}/refs"
     },
-    "listSrcTree": {
+    "listTags": {
       "method": "GET",
       "params": {
-        "format": {
-          "enum": [
-            "meta"
-          ],
+        "q": {
           "in": "query",
           "type": "string"
         },
@@ -5359,21 +5772,8 @@
           "required": true,
           "type": "string"
         },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTreeentries",
-      "url": "/repositories/{username}/{repo_slug}/src"
-    },
-    "listTags": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -5388,9 +5788,17 @@
     "listVersions": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -5405,9 +5813,17 @@
     "listWebhooks": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -6135,12 +6551,20 @@
     "list": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "role": {
           "enum": [
             "owner",
             "contributor",
             "member"
           ],
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
           "in": "query",
           "type": "string"
         }
@@ -6154,6 +6578,14 @@
         "encoded_id": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -6173,6 +6605,14 @@
           "required": true,
           "type": "string"
         },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -6185,12 +6625,20 @@
     "listForUser": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "role": {
           "enum": [
             "owner",
             "contributor",
             "member"
           ],
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
           "in": "query",
           "type": "string"
         },
@@ -6209,6 +6657,14 @@
         "encoded_id": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -6364,7 +6820,7 @@
       },
       "url": "/repositories/{username}/{repo_slug}/src"
     },
-    "list": {
+    "get": {
       "method": "GET",
       "params": {
         "format": {
@@ -6406,6 +6862,38 @@
       },
       "returns": "PaginatedTreeentries",
       "url": "/repositories/{username}/{repo_slug}/src/{node}/{path}"
+    },
+    "getMainRoot": {
+      "method": "GET",
+      "params": {
+        "format": {
+          "enum": [
+            "meta"
+          ],
+          "in": "query",
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedTreeentries",
+      "url": "/repositories/{username}/{repo_slug}/src"
     },
     "listHistory": {
       "method": "GET",
@@ -6449,30 +6937,6 @@
       },
       "returns": "PaginatedFiles",
       "url": "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}"
-    },
-    "listTree": {
-      "method": "GET",
-      "params": {
-        "format": {
-          "enum": [
-            "meta"
-          ],
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTreeentries",
-      "url": "/repositories/{username}/{repo_slug}/src"
     }
   },
   "ssh": {
@@ -6503,6 +6967,14 @@
     "listKeys": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -6711,12 +7183,20 @@
     "list": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "role": {
           "enum": [
             "admin",
             "contributor",
             "member"
           ],
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
           "in": "query",
           "type": "string"
         }
@@ -6727,6 +7207,14 @@
     "listFollowers": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -6739,6 +7227,14 @@
     "listFollowing": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -6751,6 +7247,14 @@
     "listPipelineVariables": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -6763,6 +7267,14 @@
     "listProjects": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -6815,6 +7327,14 @@
     "listWebhooks": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -7139,6 +7659,14 @@
     "listFollowers": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -7151,6 +7679,14 @@
     "listFollowing": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -7163,6 +7699,14 @@
     "listPipelineVariables": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -7175,6 +7719,14 @@
     "listSshKeys": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -7187,6 +7739,14 @@
     "listWebhooks": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -7423,6 +7983,14 @@
     "list": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "subject_type": {
           "enum": [
             "user",
@@ -7440,9 +8008,17 @@
     "listForRepo": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
@@ -7457,6 +8033,14 @@
     "listForTeam": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,
@@ -7469,6 +8053,14 @@
     "listForUser": {
       "method": "GET",
       "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
         "username": {
           "in": "path",
           "required": true,

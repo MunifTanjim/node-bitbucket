@@ -1255,9 +1255,11 @@ declare namespace BitBucket {
       "repo_slug": string;
       "username": string;
     };
-  export type BranchrestrictionsGetAllParams =
+  export type BranchrestrictionsListParams =
     & {
+      "q"?: string;
       "repo_slug": string;
+      "sort"?: string;
       "username": string;
     };
   export type BranchrestrictionsUpdateParams =
@@ -1281,11 +1283,15 @@ declare namespace BitBucket {
     };
   export type CommitsFetchAllParams =
     & {
+      "exclude"?: string;
+      "include"?: string;
       "repo_slug": string;
       "username": string;
     };
   export type CommitsFetchAllForRevisionParams =
     & {
+      "exclude"?: string;
+      "include"?: string;
       "repo_slug": string;
       "revision": string;
       "username": string;
@@ -1298,17 +1304,15 @@ declare namespace BitBucket {
     };
   export type CommitsGetAllParams =
     & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type CommitsGetAllCommentsParams =
-    & {
-      "node": string;
+      "exclude"?: string;
+      "include"?: string;
       "repo_slug": string;
       "username": string;
     };
   export type CommitsGetAllForRevisionParams =
     & {
+      "exclude"?: string;
+      "include"?: string;
       "repo_slug": string;
       "revision": string;
       "username": string;
@@ -1336,22 +1340,18 @@ declare namespace BitBucket {
       "spec": string;
       "username": string;
     };
+  export type CommitsListCommentsParams =
+    & {
+      "node": string;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
   export type CommitstatusesCreateBuildStatusParams =
     & {
       "_body"?: any;
       "node": string;
-      "repo_slug": string;
-      "username": string;
-    };
-  export type CommitstatusesGetAllParams =
-    & {
-      "node": string;
-      "repo_slug": string;
-      "username": string;
-    };
-  export type CommitstatusesGetAllPullRequestStatusesParams =
-    & {
-      "pull_request_id": number;
       "repo_slug": string;
       "username": string;
     };
@@ -1360,6 +1360,22 @@ declare namespace BitBucket {
       "key": string;
       "node": string;
       "repo_slug": string;
+      "username": string;
+    };
+  export type CommitstatusesListParams =
+    & {
+      "node": string;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type CommitstatusesListPullRequestStatusesParams =
+    & {
+      "pull_request_id": number;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
       "username": string;
     };
   export type CommitstatusesUpdateBuildStatusParams =
@@ -1392,8 +1408,10 @@ declare namespace BitBucket {
       "repo_slug": string;
       "username": string;
     };
-  export type HookEventsListAllParams =
+  export type HookEventsListParams =
     & {
+      "q"?: string;
+      "sort"?: string;
       "subject_type": "user"|"repository"|"team";
     };
   export type IssueTrackerCreateParams =
@@ -1473,47 +1491,6 @@ declare namespace BitBucket {
       "repo_slug": string;
       "username": string;
     };
-  export type IssueTrackerGetAllParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type IssueTrackerGetAllAttachmentsParams =
-    & {
-      "issue_id": number;
-      "repo_slug": string;
-      "username": string;
-    };
-  export type IssueTrackerGetAllChangesParams =
-    & {
-      "issue_id": string;
-      "q"?: string;
-      "repo_slug": string;
-      "sort"?: string;
-      "username": string;
-    };
-  export type IssueTrackerGetAllCommentsParams =
-    & {
-      "issue_id": string;
-      "q"?: string;
-      "repo_slug": string;
-      "username": string;
-    };
-  export type IssueTrackerGetAllComponentsParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type IssueTrackerGetAllMilestonesParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type IssueTrackerGetAllVersionsParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
   export type IssueTrackerGetAttachmentParams =
     & {
       "issue_id": string;
@@ -1565,8 +1542,61 @@ declare namespace BitBucket {
       "repo_slug": string;
       "username": string;
     };
+  export type IssueTrackerListParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type IssueTrackerListAttachmentsParams =
+    & {
+      "issue_id": number;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type IssueTrackerListChangesParams =
+    & {
+      "issue_id": string;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type IssueTrackerListCommentsParams =
+    & {
+      "issue_id": string;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type IssueTrackerListComponentsParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type IssueTrackerListMilestonesParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type IssueTrackerListVersionsParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
   export type IssueTrackerUpdateParams =
     & {
+      "_body"?: any;
       "issue_id": string;
       "repo_slug": string;
       "username": string;
@@ -1652,45 +1682,6 @@ declare namespace BitBucket {
       "repo_slug": string;
       "username": string;
     };
-  export type PipelinesGetAllParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type PipelinesGetAllKnownHostsParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type PipelinesGetAllScheduleExecutionsParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type PipelinesGetAllSchedulesParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type PipelinesGetAllStepsParams =
-    & {
-      "pipeline_uuid": string;
-      "repo_slug": string;
-      "username": string;
-    };
-  export type PipelinesGetAllVariablesParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type PipelinesGetAllVariablesForTeamParams =
-    & {
-      "username": string;
-    };
-  export type PipelinesGetAllVariablesForUserParams =
-    & {
-      "username": string;
-    };
   export type PipelinesGetConfigParams =
     & {
       "repo_slug": string;
@@ -1742,6 +1733,61 @@ declare namespace BitBucket {
     & {
       "username": string;
       "variable_uuid": string;
+    };
+  export type PipelinesListParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type PipelinesListKnownHostsParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type PipelinesListScheduleExecutionsParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type PipelinesListSchedulesParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type PipelinesListStepsParams =
+    & {
+      "pipeline_uuid": string;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type PipelinesListVariablesForRepoParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type PipelinesListVariablesForTeamParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type PipelinesListVariablesForUserParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
     };
   export type PipelinesStopParams =
     & {
@@ -1810,13 +1856,15 @@ declare namespace BitBucket {
       "project_key": string;
       "username": string;
     };
-  export type ProjectsGetAllForTeamParams =
-    & {
-      "username": string;
-    };
   export type ProjectsGetForTeamParams =
     & {
       "project_key": string;
+      "username": string;
+    };
+  export type ProjectsListForTeamParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
       "username": string;
     };
   export type ProjectsUpdateForTeamParams =
@@ -1873,19 +1921,7 @@ declare namespace BitBucket {
       "repo_slug": string;
       "username": string;
     };
-  export type PullrequestsGetAllParams =
-    & {
-      "repo_slug": string;
-      "state"?: "MERGED"|"SUPERSEDED"|"OPEN"|"DECLINED";
-      "username": string;
-    };
   export type PullrequestsGetAllActivityLogParams =
-    & {
-      "pull_request_id": number;
-      "repo_slug": string;
-      "username": string;
-    };
-  export type PullrequestsGetAllCommentsParams =
     & {
       "pull_request_id": number;
       "repo_slug": string;
@@ -1899,12 +1935,6 @@ declare namespace BitBucket {
     };
   export type PullrequestsGetAllDefaultReviewersParams =
     & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type PullrequestsGetAllStatusesParams =
-    & {
-      "pull_request_id": number;
       "repo_slug": string;
       "username": string;
     };
@@ -1939,6 +1969,30 @@ declare namespace BitBucket {
       "repo_slug": string;
       "username": string;
     };
+  export type PullrequestsListParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "state"?: "MERGED"|"SUPERSEDED"|"OPEN"|"DECLINED";
+      "username": string;
+    };
+  export type PullrequestsListCommentsParams =
+    & {
+      "pull_request_id": number;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type PullrequestsListStatusesParams =
+    & {
+      "pull_request_id": number;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
   export type PullrequestsMergeParams =
     & {
       "_body"?: any;
@@ -1955,6 +2009,7 @@ declare namespace BitBucket {
     };
   export type RefsCreateBranchParams =
     & {
+      "_body"?: any;
       "repo_slug": string;
       "username": string;
     };
@@ -1976,21 +2031,6 @@ declare namespace BitBucket {
       "repo_slug": string;
       "username": string;
     };
-  export type RefsGetAllParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RefsGetAllBranchesParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RefsGetAllTagsParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
   export type RefsGetBranchParams =
     & {
       "name": string;
@@ -2001,6 +2041,27 @@ declare namespace BitBucket {
     & {
       "name": string;
       "repo_slug": string;
+      "username": string;
+    };
+  export type RefsListParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RefsListBranchesParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RefsListTagsParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
       "username": string;
     };
   export type RepositoriesAddDefaultReviewerParams =
@@ -2017,6 +2078,7 @@ declare namespace BitBucket {
     };
   export type RepositoriesCreateBranchParams =
     & {
+      "_body"?: any;
       "repo_slug": string;
       "username": string;
     };
@@ -2094,19 +2156,19 @@ declare namespace BitBucket {
       "repo_slug": string;
       "username": string;
     };
-  export type RepositoriesCreatePipelinesKnownHostParams =
+  export type RepositoriesCreatePipelineKnownHostParams =
     & {
       "_body": any;
       "repo_slug": string;
       "username": string;
     };
-  export type RepositoriesCreatePipelinesScheduleParams =
+  export type RepositoriesCreatePipelineScheduleParams =
     & {
       "_body": any;
       "repo_slug": string;
       "username": string;
     };
-  export type RepositoriesCreatePipelinesVariableParams =
+  export type RepositoriesCreatePipelineVariableParams =
     & {
       "_body": any;
       "repo_slug": string;
@@ -2142,6 +2204,7 @@ declare namespace BitBucket {
     };
   export type RepositoriesCreateWebhookParams =
     & {
+      "_body"?: any;
       "repo_slug": string;
       "username": string;
     };
@@ -2220,24 +2283,24 @@ declare namespace BitBucket {
       "repo_slug": string;
       "username": string;
     };
-  export type RepositoriesDeletePipelinesKnownHostParams =
+  export type RepositoriesDeletePipelineKnownHostParams =
     & {
       "known_host_uuid": string;
       "repo_slug": string;
       "username": string;
     };
-  export type RepositoriesDeletePipelinesScheduleParams =
+  export type RepositoriesDeletePipelineScheduleParams =
     & {
       "repo_slug": string;
       "schedule_uuid": string;
       "username": string;
     };
-  export type RepositoriesDeletePipelinesSshKeyPairParams =
+  export type RepositoriesDeletePipelineSshKeyPairParams =
     & {
       "repo_slug": string;
       "username": string;
     };
-  export type RepositoriesDeletePipelinesVariableParams =
+  export type RepositoriesDeletePipelineVariableParams =
     & {
       "repo_slug": string;
       "username": string;
@@ -2263,11 +2326,15 @@ declare namespace BitBucket {
     };
   export type RepositoriesFetchAllCommitsParams =
     & {
+      "exclude"?: string;
+      "include"?: string;
       "repo_slug": string;
       "username": string;
     };
   export type RepositoriesFetchAllCommitsForRevisionParams =
     & {
+      "exclude"?: string;
+      "include"?: string;
       "repo_slug": string;
       "revision": string;
       "username": string;
@@ -2277,40 +2344,17 @@ declare namespace BitBucket {
       "repo_slug": string;
       "username": string;
     };
-  export type RepositoriesGetAllParams =
-    & {
-      "role"?: "admin"|"contributor"|"member"|"owner";
-      "username": string;
-    };
-  export type RepositoriesGetAllBranchRestrictionsParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllBranchesParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllCommitCommentsParams =
-    & {
-      "node": string;
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllCommitStatusesParams =
-    & {
-      "node": string;
-      "repo_slug": string;
-      "username": string;
-    };
   export type RepositoriesGetAllCommitsParams =
     & {
+      "exclude"?: string;
+      "include"?: string;
       "repo_slug": string;
       "username": string;
     };
   export type RepositoriesGetAllCommitsForRevisionParams =
     & {
+      "exclude"?: string;
+      "include"?: string;
       "repo_slug": string;
       "revision": string;
       "username": string;
@@ -2325,110 +2369,10 @@ declare namespace BitBucket {
       "repo_slug": string;
       "username": string;
     };
-  export type RepositoriesGetAllForksParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllIssueAttachmentsParams =
-    & {
-      "issue_id": number;
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllIssueChangesParams =
-    & {
-      "issue_id": string;
-      "q"?: string;
-      "repo_slug": string;
-      "sort"?: string;
-      "username": string;
-    };
-  export type RepositoriesGetAllIssueCommentsParams =
-    & {
-      "issue_id": string;
-      "q"?: string;
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllIssueComponentsParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllIssueMilestonesParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllIssueVersionsParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllIssuesParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllPermissionsParams =
-    & {
-      "q"?: string;
-      "sort"?: string;
-    };
-  export type RepositoriesGetAllPipelineStepsParams =
-    & {
-      "pipeline_uuid": string;
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllPipelinesParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllPipelinesKnownHostsParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllPipelinesScheduleExecutionsParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllPipelinesSchedulesParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllPipelinesVariablesParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllPullRequestCommentsParams =
-    & {
-      "pull_request_id": number;
-      "repo_slug": string;
-      "username": string;
-    };
   export type RepositoriesGetAllPullRequestCommitsParams =
     & {
       "pull_request_id": string;
       "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllPullRequestStatusesParams =
-    & {
-      "pull_request_id": number;
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllPullRequestsParams =
-    & {
-      "repo_slug": string;
-      "state"?: "MERGED"|"SUPERSEDED"|"OPEN"|"DECLINED";
       "username": string;
     };
   export type RepositoriesGetAllPullRequestsActivityLogParams =
@@ -2437,22 +2381,7 @@ declare namespace BitBucket {
       "repo_slug": string;
       "username": string;
     };
-  export type RepositoriesGetAllRefsParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllTagsParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
   export type RepositoriesGetAllWatchersParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetAllWebhooksParams =
     & {
       "repo_slug": string;
       "username": string;
@@ -2505,27 +2434,10 @@ declare namespace BitBucket {
       "spec": string;
       "username": string;
     };
-  export type RepositoriesGetDiffStatParams =
-    & {
-      "ignore_whitespace"?: boolean;
-      "repo_slug": string;
-      "spec": string;
-      "username": string;
-    };
   export type RepositoriesGetDownloadParams =
     & {
       "filename": string;
       "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetFileHistoryParams =
-    & {
-      "node": string;
-      "path": string;
-      "q"?: string;
-      "renames"?: string;
-      "repo_slug": string;
-      "sort"?: string;
       "username": string;
     };
   export type RepositoriesGetIssueParams =
@@ -2597,6 +2509,28 @@ declare namespace BitBucket {
       "repo_slug": string;
       "username": string;
     };
+  export type RepositoriesGetPipelineConfigParams =
+    & {
+      "repo_slug": string;
+      "username": string;
+    };
+  export type RepositoriesGetPipelineKnownHostParams =
+    & {
+      "known_host_uuid": string;
+      "repo_slug": string;
+      "username": string;
+    };
+  export type RepositoriesGetPipelineScheduleParams =
+    & {
+      "repo_slug": string;
+      "schedule_uuid": string;
+      "username": string;
+    };
+  export type RepositoriesGetPipelineSshKeyPairParams =
+    & {
+      "repo_slug": string;
+      "username": string;
+    };
   export type RepositoriesGetPipelineStepParams =
     & {
       "pipeline_uuid": string;
@@ -2611,37 +2545,11 @@ declare namespace BitBucket {
       "step_uuid": string;
       "username": string;
     };
-  export type RepositoriesGetPipelinesConfigParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetPipelinesKnownHostParams =
-    & {
-      "known_host_uuid": string;
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetPipelinesScheduleParams =
-    & {
-      "repo_slug": string;
-      "schedule_uuid": string;
-      "username": string;
-    };
-  export type RepositoriesGetPipelinesSshKeyPairParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type RepositoriesGetPipelinesVariableParams =
+  export type RepositoriesGetPipelineVariableParams =
     & {
       "repo_slug": string;
       "username": string;
       "variable_uuid": string;
-    };
-  export type RepositoriesGetPublicParams =
-    & {
-      "after"?: string;
     };
   export type RepositoriesGetPullRequestParams =
     & {
@@ -2690,10 +2598,12 @@ declare namespace BitBucket {
       "sort"?: string;
       "username": string;
     };
-  export type RepositoriesGetSrcRootParams =
+  export type RepositoriesGetSrcMainRootParams =
     & {
       "format"?: "meta";
+      "q"?: string;
       "repo_slug": string;
+      "sort"?: string;
       "username": string;
     };
   export type RepositoriesGetTagParams =
@@ -2706,6 +2616,221 @@ declare namespace BitBucket {
     & {
       "repo_slug": string;
       "uid": string;
+      "username": string;
+    };
+  export type RepositoriesListParams =
+    & {
+      "q"?: string;
+      "role"?: "admin"|"contributor"|"member"|"owner";
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListBranchRestrictionsParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListBranchesParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListCommitCommentsParams =
+    & {
+      "node": string;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListCommitStatusesParams =
+    & {
+      "node": string;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListComponentsParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListDiffStatsParams =
+    & {
+      "ignore_whitespace"?: boolean;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "spec": string;
+      "username": string;
+    };
+  export type RepositoriesListFileHistoryParams =
+    & {
+      "fields"?: string;
+      "node": string;
+      "path": string;
+      "q"?: string;
+      "renames"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListForksParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListIssueAttachmentsParams =
+    & {
+      "issue_id": number;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListIssueChangesParams =
+    & {
+      "issue_id": string;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListIssueCommentsParams =
+    & {
+      "issue_id": string;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListIssuesParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListMilestonesParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListPermissionsParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+    };
+  export type RepositoriesListPipelineKnownHostsParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListPipelineScheduleExecutionsParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListPipelineSchedulesParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListPipelineStepsParams =
+    & {
+      "pipeline_uuid": string;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListPipelineVariablesParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListPipelinesParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListPublicParams =
+    & {
+      "after"?: string;
+      "q"?: string;
+      "sort"?: string;
+    };
+  export type RepositoriesListPullRequestCommentsParams =
+    & {
+      "pull_request_id": number;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListPullRequestStatusesParams =
+    & {
+      "pull_request_id": number;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListPullRequestsParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "state"?: "MERGED"|"SUPERSEDED"|"OPEN"|"DECLINED";
+      "username": string;
+    };
+  export type RepositoriesListRefsParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListTagsParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListVersionsParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type RepositoriesListWebhooksParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
       "username": string;
     };
   export type RepositoriesMergePullRequestParams =
@@ -2744,6 +2869,7 @@ declare namespace BitBucket {
     };
   export type RepositoriesUpdateIssueParams =
     & {
+      "_body"?: any;
       "issue_id": string;
       "repo_slug": string;
       "username": string;
@@ -2756,39 +2882,39 @@ declare namespace BitBucket {
       "repo_slug": string;
       "username": string;
     };
-  export type RepositoriesUpdatePipelinesBuildNumberParams =
+  export type RepositoriesUpdatePipelineBuildNumberParams =
     & {
       "_body": any;
       "repo_slug": string;
       "username": string;
     };
-  export type RepositoriesUpdatePipelinesConfigParams =
+  export type RepositoriesUpdatePipelineConfigParams =
     & {
       "_body": any;
       "repo_slug": string;
       "username": string;
     };
-  export type RepositoriesUpdatePipelinesKnownHostParams =
+  export type RepositoriesUpdatePipelineKnownHostParams =
     & {
       "_body": any;
       "known_host_uuid": string;
       "repo_slug": string;
       "username": string;
     };
-  export type RepositoriesUpdatePipelinesScheduleParams =
+  export type RepositoriesUpdatePipelineScheduleParams =
     & {
       "_body": any;
       "repo_slug": string;
       "schedule_uuid": string;
       "username": string;
     };
-  export type RepositoriesUpdatePipelinesSshKeyPairParams =
+  export type RepositoriesUpdatePipelineSshKeyPairParams =
     & {
       "_body": any;
       "repo_slug": string;
       "username": string;
     };
-  export type RepositoriesUpdatePipelinesVariableParams =
+  export type RepositoriesUpdatePipelineVariableParams =
     & {
       "_body": any;
       "repo_slug": string;
@@ -2822,6 +2948,11 @@ declare namespace BitBucket {
       "search_query": string;
       "username": string;
     };
+  export type SnippetsCheckWatchParams =
+    & {
+      "encoded_id": string;
+      "username": string;
+    };
   export type SnippetsCreateParams =
     & {
       "_body": any;
@@ -2835,11 +2966,6 @@ declare namespace BitBucket {
   export type SnippetsCreateForUserParams =
     & {
       "_body": any;
-      "username": string;
-    };
-  export type SnippetsCreateWatchParams =
-    & {
-      "encoded_id": string;
       "username": string;
     };
   export type SnippetsDeleteParams =
@@ -2859,26 +2985,7 @@ declare namespace BitBucket {
       "node_id": string;
       "username": string;
     };
-  export type SnippetsDeleteWatchParams =
-    & {
-      "encoded_id": string;
-      "username": string;
-    };
   export type SnippetsGetParams =
-    & {
-      "encoded_id": string;
-      "username": string;
-    };
-  export type SnippetsGetAllParams =
-    & {
-      "role"?: "owner"|"contributor"|"member";
-    };
-  export type SnippetsGetAllCommentsParams =
-    & {
-      "encoded_id": string;
-      "username": string;
-    };
-  export type SnippetsGetAllCommitsParams =
     & {
       "encoded_id": string;
       "username": string;
@@ -2887,16 +2994,6 @@ declare namespace BitBucket {
     & {
       "encoded_id": string;
       "revision": string;
-      "username": string;
-    };
-  export type SnippetsGetAllForUserParams =
-    & {
-      "role"?: "owner"|"contributor"|"member";
-      "username": string;
-    };
-  export type SnippetsGetAllWatchersParams =
-    & {
-      "encoded_id": string;
       "username": string;
     };
   export type SnippetsGetCommentParams =
@@ -2931,7 +3028,46 @@ declare namespace BitBucket {
       "node_id": string;
       "username": string;
     };
-  export type SnippetsGetWatchParams =
+  export type SnippetsListParams =
+    & {
+      "q"?: string;
+      "role"?: "owner"|"contributor"|"member";
+      "sort"?: string;
+    };
+  export type SnippetsListCommentsParams =
+    & {
+      "encoded_id": string;
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type SnippetsListCommitsParams =
+    & {
+      "encoded_id": string;
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type SnippetsListForUserParams =
+    & {
+      "q"?: string;
+      "role"?: "owner"|"contributor"|"member";
+      "sort"?: string;
+      "username": string;
+    };
+  export type SnippetsListWatchersParams =
+    & {
+      "encoded_id": string;
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type SnippetsStartWatchParams =
+    & {
+      "encoded_id": string;
+      "username": string;
+    };
+  export type SnippetsStopWatchParams =
     & {
       "encoded_id": string;
       "username": string;
@@ -2973,8 +3109,17 @@ declare namespace BitBucket {
       "sort"?: string;
       "username": string;
     };
-  export type SourceGetHistoryParams =
+  export type SourceGetMainRootParams =
     & {
+      "format"?: "meta";
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type SourceListHistoryParams =
+    & {
+      "fields"?: string;
       "node": string;
       "path": string;
       "q"?: string;
@@ -2983,22 +3128,18 @@ declare namespace BitBucket {
       "sort"?: string;
       "username": string;
     };
-  export type SourceGetRootParams =
-    & {
-      "format"?: "meta";
-      "repo_slug": string;
-      "username": string;
-    };
-  export type SshCreateForUserParams =
+  export type SshCreateKeyForUserParams =
     & {
       "_body"?: any;
       "username": string;
     };
-  export type SshGetAllForUserParams =
+  export type SshListKeysParams =
     & {
+      "q"?: string;
+      "sort"?: string;
       "username": string;
     };
-  export type TeamsCreatePipelinesVariableParams =
+  export type TeamsCreatePipelineVariableParams =
     & {
       "_body"?: any;
       "username": string;
@@ -3012,7 +3153,7 @@ declare namespace BitBucket {
     & {
       "username": string;
     };
-  export type TeamsDeletePipelinesVariableParams =
+  export type TeamsDeletePipelineVariableParams =
     & {
       "username": string;
       "variable_uuid": string;
@@ -3031,27 +3172,7 @@ declare namespace BitBucket {
     & {
       "username": string;
     };
-  export type TeamsGetAllParams =
-    & {
-      "role"?: "admin"|"contributor"|"member";
-    };
-  export type TeamsGetAllFollowersParams =
-    & {
-      "username": string;
-    };
-  export type TeamsGetAllFollowingParams =
-    & {
-      "username": string;
-    };
   export type TeamsGetAllMembersParams =
-    & {
-      "username": string;
-    };
-  export type TeamsGetAllPipelinesVariablesParams =
-    & {
-      "username": string;
-    };
-  export type TeamsGetAllProjectsParams =
     & {
       "username": string;
     };
@@ -3063,23 +3184,7 @@ declare namespace BitBucket {
     & {
       "username": string;
     };
-  export type TeamsGetAllRepositoryPermissionsParams =
-    & {
-      "q"?: string;
-      "sort"?: string;
-      "username": string;
-    };
-  export type TeamsGetAllTeamPermissionsParams =
-    & {
-      "q"?: string;
-      "sort"?: string;
-      "username": string;
-    };
-  export type TeamsGetAllWebhooksParams =
-    & {
-      "username": string;
-    };
-  export type TeamsGetPipelinesVariableParams =
+  export type TeamsGetPipelineVariableParams =
     & {
       "username": string;
       "variable_uuid": string;
@@ -3094,6 +3199,54 @@ declare namespace BitBucket {
       "uid": string;
       "username": string;
     };
+  export type TeamsListParams =
+    & {
+      "q"?: string;
+      "role"?: "admin"|"contributor"|"member";
+      "sort"?: string;
+    };
+  export type TeamsListFollowersParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type TeamsListFollowingParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type TeamsListPipelineVariablesParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type TeamsListProjectsParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type TeamsListRepositoryPermissionsParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type TeamsListTeamPermissionsParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type TeamsListWebhooksParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
   export type TeamsSearchCodeParams =
     & {
       "page"?: number;
@@ -3101,7 +3254,7 @@ declare namespace BitBucket {
       "search_query": string;
       "username": string;
     };
-  export type TeamsUpdatePipelinesVariableParams =
+  export type TeamsUpdatePipelineVariableParams =
     & {
       "_body": any;
       "username": string;
@@ -3118,21 +3271,21 @@ declare namespace BitBucket {
       "uid": string;
       "username": string;
     };
-  export type UserGetAllRepositoryPermissionsParams =
-    & {
-      "q"?: string;
-      "sort"?: string;
-    };
-  export type UserGetAllTeamPermissionsParams =
-    & {
-      "q"?: string;
-      "sort"?: string;
-    };
   export type UserGetEmailParams =
     & {
       "email": string;
     };
-  export type UsersCreatePipelinesVariableParams =
+  export type UserListRepositoryPermissionsParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+    };
+  export type UserListTeamPermissionsParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+    };
+  export type UsersCreatePipelineVariableParams =
     & {
       "_body"?: any;
       "username": string;
@@ -3146,7 +3299,7 @@ declare namespace BitBucket {
     & {
       "username": string;
     };
-  export type UsersDeletePipelinesVariableParams =
+  export type UsersDeletePipelineVariableParams =
     & {
       "username": string;
       "variable_uuid": string;
@@ -3160,18 +3313,6 @@ declare namespace BitBucket {
     & {
       "username": string;
     };
-  export type UsersGetAllFollowersParams =
-    & {
-      "username": string;
-    };
-  export type UsersGetAllFollowingParams =
-    & {
-      "username": string;
-    };
-  export type UsersGetAllPipelinesVariablesParams =
-    & {
-      "username": string;
-    };
   export type UsersGetAllRepositoriesParams =
     & {
       "username": string;
@@ -3180,19 +3321,11 @@ declare namespace BitBucket {
     & {
       "username": string;
     };
-  export type UsersGetAllSshKeysParams =
-    & {
-      "username": string;
-    };
-  export type UsersGetAllWebhooksParams =
-    & {
-      "username": string;
-    };
   export type UsersGetEmailForAuthedUserParams =
     & {
       "email": string;
     };
-  export type UsersGetPipelinesVariableParams =
+  export type UsersGetPipelineVariableParams =
     & {
       "username": string;
       "variable_uuid": string;
@@ -3202,6 +3335,36 @@ declare namespace BitBucket {
       "uid": string;
       "username": string;
     };
+  export type UsersListFollowersParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type UsersListFollowingParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type UsersListPipelineVariablesParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type UsersListSshKeysParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type UsersListWebhooksParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
   export type UsersSearchCodeParams =
     & {
       "page"?: number;
@@ -3209,7 +3372,7 @@ declare namespace BitBucket {
       "search_query": string;
       "username": string;
     };
-  export type UsersUpdatePipelinesVariableParams =
+  export type UsersUpdatePipelineVariableParams =
     & {
       "_body": any;
       "username": string;
@@ -3222,6 +3385,7 @@ declare namespace BitBucket {
     };
   export type WebhooksCreateParams =
     & {
+      "_body"?: any;
       "repo_slug": string;
       "username": string;
     };
@@ -3255,19 +3419,6 @@ declare namespace BitBucket {
       "uid": string;
       "username": string;
     };
-  export type WebhooksGetAllParams =
-    & {
-      "repo_slug": string;
-      "username": string;
-    };
-  export type WebhooksGetAllForTeamParams =
-    & {
-      "username": string;
-    };
-  export type WebhooksGetAllForUserParams =
-    & {
-      "username": string;
-    };
   export type WebhooksGetForTeamParams =
     & {
       "uid": string;
@@ -3278,9 +3429,30 @@ declare namespace BitBucket {
       "uid": string;
       "username": string;
     };
-  export type WebhooksListAllParams =
+  export type WebhooksListParams =
     & {
+      "q"?: string;
+      "sort"?: string;
       "subject_type": "user"|"repository"|"team";
+    };
+  export type WebhooksListForRepoParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type WebhooksListForTeamParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
+    };
+  export type WebhooksListForUserParams =
+    & {
+      "q"?: string;
+      "sort"?: string;
+      "username": string;
     };
   export type WebhooksUpdateParams =
     & {
@@ -3313,7 +3485,7 @@ declare class BitBucket {
     create(params: BitBucket.BranchrestrictionsCreateParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Branchrestriction>>): Promise<BitBucket.Response<BitBucket.ResponseType.Branchrestriction>>;
     delete(params: BitBucket.BranchrestrictionsDeleteParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     get(params: BitBucket.BranchrestrictionsGetParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Branchrestriction>>): Promise<BitBucket.Response<BitBucket.ResponseType.Branchrestriction>>;
-    getAll(params: BitBucket.BranchrestrictionsGetAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedBranchrestrictions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedBranchrestrictions>>;
+    list(params: BitBucket.BranchrestrictionsListParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedBranchrestrictions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedBranchrestrictions>>;
     update(params: BitBucket.BranchrestrictionsUpdateParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Branchrestriction>>): Promise<BitBucket.Response<BitBucket.ResponseType.Branchrestriction>>;
   };
   commits: {
@@ -3323,17 +3495,17 @@ declare class BitBucket {
     fetchAllForRevision(params: BitBucket.CommitsFetchAllForRevisionParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     get(params: BitBucket.CommitsGetParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Commit>>): Promise<BitBucket.Response<BitBucket.ResponseType.Commit>>;
     getAll(params: BitBucket.CommitsGetAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getAllComments(params: BitBucket.CommitsGetAllCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitComments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitComments>>;
     getAllForRevision(params: BitBucket.CommitsGetAllForRevisionParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getComment(params: BitBucket.CommitsGetCommentParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.CommitComment>>): Promise<BitBucket.Response<BitBucket.ResponseType.CommitComment>>;
     getDiff(params: BitBucket.CommitsGetDiffParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getPatch(params: BitBucket.CommitsGetPatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
+    listComments(params: BitBucket.CommitsListCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitComments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitComments>>;
   };
   commitstatuses: {
     createBuildStatus(params: BitBucket.CommitstatusesCreateBuildStatusParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Commitstatus>>): Promise<BitBucket.Response<BitBucket.ResponseType.Commitstatus>>;
-    getAll(params: BitBucket.CommitstatusesGetAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>;
-    getAllPullRequestStatuses(params: BitBucket.CommitstatusesGetAllPullRequestStatusesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>;
     getBuildStatus(params: BitBucket.CommitstatusesGetBuildStatusParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Commitstatus>>): Promise<BitBucket.Response<BitBucket.ResponseType.Commitstatus>>;
+    list(params: BitBucket.CommitstatusesListParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>;
+    listPullRequestStatuses(params: BitBucket.CommitstatusesListPullRequestStatusesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>;
     updateBuildStatus(params: BitBucket.CommitstatusesUpdateBuildStatusParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Commitstatus>>): Promise<BitBucket.Response<BitBucket.ResponseType.Commitstatus>>;
   };
   downloads: {
@@ -3343,7 +3515,7 @@ declare class BitBucket {
     getAll(params: BitBucket.DownloadsGetAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
   };
   hookEvents: {
-    listAll(params: BitBucket.HookEventsListAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedHookEvents>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedHookEvents>>;
+    list(params: BitBucket.HookEventsListParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedHookEvents>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedHookEvents>>;
     listSubjectTypes(params: BitBucket.EmptyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.SubjectTypes>>): Promise<BitBucket.Response<BitBucket.ResponseType.SubjectTypes>>;
   };
   issueTracker: {
@@ -3359,13 +3531,6 @@ declare class BitBucket {
     deleteVote(params: BitBucket.IssueTrackerDeleteVoteParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     deleteWatch(params: BitBucket.IssueTrackerDeleteWatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Error>>): Promise<BitBucket.Response<BitBucket.ResponseType.Error>>;
     get(params: BitBucket.IssueTrackerGetParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Issue>>): Promise<BitBucket.Response<BitBucket.ResponseType.Issue>>;
-    getAll(params: BitBucket.IssueTrackerGetAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedIssues>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedIssues>>;
-    getAllAttachments(params: BitBucket.IssueTrackerGetAllAttachmentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueAttachments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueAttachments>>;
-    getAllChanges(params: BitBucket.IssueTrackerGetAllChangesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedLogEntries>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedLogEntries>>;
-    getAllComments(params: BitBucket.IssueTrackerGetAllCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueComments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueComments>>;
-    getAllComponents(params: BitBucket.IssueTrackerGetAllComponentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedComponents>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedComponents>>;
-    getAllMilestones(params: BitBucket.IssueTrackerGetAllMilestonesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedMilestones>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedMilestones>>;
-    getAllVersions(params: BitBucket.IssueTrackerGetAllVersionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedVersions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedVersions>>;
     getAttachment(params: BitBucket.IssueTrackerGetAttachmentParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getChange(params: BitBucket.IssueTrackerGetChangeParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.IssueChange>>): Promise<BitBucket.Response<BitBucket.ResponseType.IssueChange>>;
     getComment(params: BitBucket.IssueTrackerGetCommentParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.IssueComment>>): Promise<BitBucket.Response<BitBucket.ResponseType.IssueComment>>;
@@ -3374,6 +3539,13 @@ declare class BitBucket {
     getVersion(params: BitBucket.IssueTrackerGetVersionParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Version>>): Promise<BitBucket.Response<BitBucket.ResponseType.Version>>;
     getVote(params: BitBucket.IssueTrackerGetVoteParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Error>>): Promise<BitBucket.Response<BitBucket.ResponseType.Error>>;
     getWatch(params: BitBucket.IssueTrackerGetWatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Error>>): Promise<BitBucket.Response<BitBucket.ResponseType.Error>>;
+    list(params: BitBucket.IssueTrackerListParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedIssues>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedIssues>>;
+    listAttachments(params: BitBucket.IssueTrackerListAttachmentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueAttachments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueAttachments>>;
+    listChanges(params: BitBucket.IssueTrackerListChangesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedLogEntries>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedLogEntries>>;
+    listComments(params: BitBucket.IssueTrackerListCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueComments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueComments>>;
+    listComponents(params: BitBucket.IssueTrackerListComponentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedComponents>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedComponents>>;
+    listMilestones(params: BitBucket.IssueTrackerListMilestonesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedMilestones>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedMilestones>>;
+    listVersions(params: BitBucket.IssueTrackerListVersionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedVersions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedVersions>>;
     update(params: BitBucket.IssueTrackerUpdateParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Issue>>): Promise<BitBucket.Response<BitBucket.ResponseType.Issue>>;
     updateComment(params: BitBucket.IssueTrackerUpdateCommentParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.IssueComment>>): Promise<BitBucket.Response<BitBucket.ResponseType.IssueComment>>;
   };
@@ -3391,14 +3563,6 @@ declare class BitBucket {
     deleteVariableForTeam(params: BitBucket.PipelinesDeleteVariableForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     deleteVariableForUser(params: BitBucket.PipelinesDeleteVariableForUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     get(params: BitBucket.PipelinesGetParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Pipeline>>): Promise<BitBucket.Response<BitBucket.ResponseType.Pipeline>>;
-    getAll(params: BitBucket.PipelinesGetAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelines>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelines>>;
-    getAllKnownHosts(params: BitBucket.PipelinesGetAllKnownHostsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineKnownHosts>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineKnownHosts>>;
-    getAllScheduleExecutions(params: BitBucket.PipelinesGetAllScheduleExecutionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineScheduleExecutions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineScheduleExecutions>>;
-    getAllSchedules(params: BitBucket.PipelinesGetAllSchedulesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSchedules>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSchedules>>;
-    getAllSteps(params: BitBucket.PipelinesGetAllStepsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSteps>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSteps>>;
-    getAllVariables(params: BitBucket.PipelinesGetAllVariablesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>;
-    getAllVariablesForTeam(params: BitBucket.PipelinesGetAllVariablesForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>;
-    getAllVariablesForUser(params: BitBucket.PipelinesGetAllVariablesForUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>;
     getConfig(params: BitBucket.PipelinesGetConfigParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelinesConfig>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelinesConfig>>;
     getKnownHost(params: BitBucket.PipelinesGetKnownHostParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineKnownHost>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineKnownHost>>;
     getSchedule(params: BitBucket.PipelinesGetScheduleParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineSchedule>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineSchedule>>;
@@ -3408,6 +3572,14 @@ declare class BitBucket {
     getVariable(params: BitBucket.PipelinesGetVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
     getVariableForTeam(params: BitBucket.PipelinesGetVariableForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
     getVariableForUser(params: BitBucket.PipelinesGetVariableForUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
+    list(params: BitBucket.PipelinesListParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelines>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelines>>;
+    listKnownHosts(params: BitBucket.PipelinesListKnownHostsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineKnownHosts>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineKnownHosts>>;
+    listScheduleExecutions(params: BitBucket.PipelinesListScheduleExecutionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineScheduleExecutions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineScheduleExecutions>>;
+    listSchedules(params: BitBucket.PipelinesListSchedulesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSchedules>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSchedules>>;
+    listSteps(params: BitBucket.PipelinesListStepsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSteps>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSteps>>;
+    listVariablesForRepo(params: BitBucket.PipelinesListVariablesForRepoParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>;
+    listVariablesForTeam(params: BitBucket.PipelinesListVariablesForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>;
+    listVariablesForUser(params: BitBucket.PipelinesListVariablesForUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>;
     stop(params: BitBucket.PipelinesStopParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     updateBuildNumber(params: BitBucket.PipelinesUpdateBuildNumberParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineBuildNumber>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineBuildNumber>>;
     updateConfig(params: BitBucket.PipelinesUpdateConfigParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelinesConfig>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelinesConfig>>;
@@ -3421,8 +3593,8 @@ declare class BitBucket {
   projects: {
     createForTeam(params: BitBucket.ProjectsCreateForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Project>>): Promise<BitBucket.Response<BitBucket.ResponseType.Project>>;
     deleteForTeam(params: BitBucket.ProjectsDeleteForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getAllForTeam(params: BitBucket.ProjectsGetAllForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedProjects>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedProjects>>;
     getForTeam(params: BitBucket.ProjectsGetForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Project>>): Promise<BitBucket.Response<BitBucket.ResponseType.Project>>;
+    listForTeam(params: BitBucket.ProjectsListForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedProjects>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedProjects>>;
     updateForTeam(params: BitBucket.ProjectsUpdateForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Project>>): Promise<BitBucket.Response<BitBucket.ResponseType.Project>>;
   };
   pullrequests: {
@@ -3434,17 +3606,17 @@ declare class BitBucket {
     deleteDefaultReviewer(params: BitBucket.PullrequestsDeleteDefaultReviewerParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     get(params: BitBucket.PullrequestsGetParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Pullrequest>>): Promise<BitBucket.Response<BitBucket.ResponseType.Pullrequest>>;
     getActivityLog(params: BitBucket.PullrequestsGetActivityLogParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getAll(params: BitBucket.PullrequestsGetAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequests>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequests>>;
     getAllActivityLog(params: BitBucket.PullrequestsGetAllActivityLogParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getAllComments(params: BitBucket.PullrequestsGetAllCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequestComments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequestComments>>;
     getAllCommits(params: BitBucket.PullrequestsGetAllCommitsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getAllDefaultReviewers(params: BitBucket.PullrequestsGetAllDefaultReviewersParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getAllStatuses(params: BitBucket.PullrequestsGetAllStatusesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>;
     getComment(params: BitBucket.PullrequestsGetCommentParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PullrequestComment>>): Promise<BitBucket.Response<BitBucket.ResponseType.PullrequestComment>>;
     getDefaultReviewer(params: BitBucket.PullrequestsGetDefaultReviewerParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getDiff(params: BitBucket.PullrequestsGetDiffParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getDiffStat(params: BitBucket.PullrequestsGetDiffStatParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getPatch(params: BitBucket.PullrequestsGetPatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
+    list(params: BitBucket.PullrequestsListParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequests>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequests>>;
+    listComments(params: BitBucket.PullrequestsListCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequestComments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequestComments>>;
+    listStatuses(params: BitBucket.PullrequestsListStatusesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>;
     merge(params: BitBucket.PullrequestsMergeParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Pullrequest>>): Promise<BitBucket.Response<BitBucket.ResponseType.Pullrequest>>;
     update(params: BitBucket.PullrequestsUpdateParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Pullrequest>>): Promise<BitBucket.Response<BitBucket.ResponseType.Pullrequest>>;
   };
@@ -3453,11 +3625,11 @@ declare class BitBucket {
     createTag(params: BitBucket.RefsCreateTagParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Tag>>): Promise<BitBucket.Response<BitBucket.ResponseType.Tag>>;
     deleteBranch(params: BitBucket.RefsDeleteBranchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     deleteTag(params: BitBucket.RefsDeleteTagParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getAll(params: BitBucket.RefsGetAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRefs>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRefs>>;
-    getAllBranches(params: BitBucket.RefsGetAllBranchesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedBranches>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedBranches>>;
-    getAllTags(params: BitBucket.RefsGetAllTagsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTags>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTags>>;
     getBranch(params: BitBucket.RefsGetBranchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Branch>>): Promise<BitBucket.Response<BitBucket.ResponseType.Branch>>;
     getTag(params: BitBucket.RefsGetTagParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Tag>>): Promise<BitBucket.Response<BitBucket.ResponseType.Tag>>;
+    list(params: BitBucket.RefsListParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRefs>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRefs>>;
+    listBranches(params: BitBucket.RefsListBranchesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedBranches>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedBranches>>;
+    listTags(params: BitBucket.RefsListTagsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTags>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTags>>;
   };
   repositories: {
     addDefaultReviewer(params: BitBucket.RepositoriesAddDefaultReviewerParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
@@ -3475,9 +3647,9 @@ declare class BitBucket {
     createIssueVote(params: BitBucket.RepositoriesCreateIssueVoteParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Error>>): Promise<BitBucket.Response<BitBucket.ResponseType.Error>>;
     createIssueWatch(params: BitBucket.RepositoriesCreateIssueWatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Error>>): Promise<BitBucket.Response<BitBucket.ResponseType.Error>>;
     createPipeline(params: BitBucket.RepositoriesCreatePipelineParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Pipeline>>): Promise<BitBucket.Response<BitBucket.ResponseType.Pipeline>>;
-    createPipelinesKnownHost(params: BitBucket.RepositoriesCreatePipelinesKnownHostParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineKnownHost>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineKnownHost>>;
-    createPipelinesSchedule(params: BitBucket.RepositoriesCreatePipelinesScheduleParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineSchedule>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineSchedule>>;
-    createPipelinesVariable(params: BitBucket.RepositoriesCreatePipelinesVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
+    createPipelineKnownHost(params: BitBucket.RepositoriesCreatePipelineKnownHostParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineKnownHost>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineKnownHost>>;
+    createPipelineSchedule(params: BitBucket.RepositoriesCreatePipelineScheduleParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineSchedule>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineSchedule>>;
+    createPipelineVariable(params: BitBucket.RepositoriesCreatePipelineVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
     createPullRequest(params: BitBucket.RepositoriesCreatePullRequestParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Pullrequest>>): Promise<BitBucket.Response<BitBucket.ResponseType.Pullrequest>>;
     createPullRequestApproval(params: BitBucket.RepositoriesCreatePullRequestApprovalParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Participant>>): Promise<BitBucket.Response<BitBucket.ResponseType.Participant>>;
     createSrcFileCommit(params: BitBucket.RepositoriesCreateSrcFileCommitParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
@@ -3495,49 +3667,23 @@ declare class BitBucket {
     deleteIssueComment(params: BitBucket.RepositoriesDeleteIssueCommentParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     deleteIssueVote(params: BitBucket.RepositoriesDeleteIssueVoteParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     deleteIssueWatch(params: BitBucket.RepositoriesDeleteIssueWatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Error>>): Promise<BitBucket.Response<BitBucket.ResponseType.Error>>;
-    deletePipelinesKnownHost(params: BitBucket.RepositoriesDeletePipelinesKnownHostParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    deletePipelinesSchedule(params: BitBucket.RepositoriesDeletePipelinesScheduleParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    deletePipelinesSshKeyPair(params: BitBucket.RepositoriesDeletePipelinesSshKeyPairParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    deletePipelinesVariable(params: BitBucket.RepositoriesDeletePipelinesVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
+    deletePipelineKnownHost(params: BitBucket.RepositoriesDeletePipelineKnownHostParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
+    deletePipelineSchedule(params: BitBucket.RepositoriesDeletePipelineScheduleParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
+    deletePipelineSshKeyPair(params: BitBucket.RepositoriesDeletePipelineSshKeyPairParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
+    deletePipelineVariable(params: BitBucket.RepositoriesDeletePipelineVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     deletePullRequestApproval(params: BitBucket.RepositoriesDeletePullRequestApprovalParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     deleteTag(params: BitBucket.RepositoriesDeleteTagParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     deleteWebhook(params: BitBucket.RepositoriesDeleteWebhookParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     fetchAllCommits(params: BitBucket.RepositoriesFetchAllCommitsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     fetchAllCommitsForRevision(params: BitBucket.RepositoriesFetchAllCommitsForRevisionParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     get(params: BitBucket.RepositoriesGetParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Repository>>): Promise<BitBucket.Response<BitBucket.ResponseType.Repository>>;
-    getAll(params: BitBucket.RepositoriesGetAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositories>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositories>>;
-    getAllBranchRestrictions(params: BitBucket.RepositoriesGetAllBranchRestrictionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedBranchrestrictions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedBranchrestrictions>>;
-    getAllBranches(params: BitBucket.RepositoriesGetAllBranchesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedBranches>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedBranches>>;
-    getAllCommitComments(params: BitBucket.RepositoriesGetAllCommitCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitComments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitComments>>;
-    getAllCommitStatuses(params: BitBucket.RepositoriesGetAllCommitStatusesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>;
     getAllCommits(params: BitBucket.RepositoriesGetAllCommitsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getAllCommitsForRevision(params: BitBucket.RepositoriesGetAllCommitsForRevisionParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getAllDefaultReviewers(params: BitBucket.RepositoriesGetAllDefaultReviewersParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getAllDownloads(params: BitBucket.RepositoriesGetAllDownloadsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getAllForks(params: BitBucket.RepositoriesGetAllForksParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositories>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositories>>;
-    getAllIssueAttachments(params: BitBucket.RepositoriesGetAllIssueAttachmentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueAttachments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueAttachments>>;
-    getAllIssueChanges(params: BitBucket.RepositoriesGetAllIssueChangesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedLogEntries>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedLogEntries>>;
-    getAllIssueComments(params: BitBucket.RepositoriesGetAllIssueCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueComments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueComments>>;
-    getAllIssueComponents(params: BitBucket.RepositoriesGetAllIssueComponentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedComponents>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedComponents>>;
-    getAllIssueMilestones(params: BitBucket.RepositoriesGetAllIssueMilestonesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedMilestones>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedMilestones>>;
-    getAllIssueVersions(params: BitBucket.RepositoriesGetAllIssueVersionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedVersions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedVersions>>;
-    getAllIssues(params: BitBucket.RepositoriesGetAllIssuesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedIssues>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedIssues>>;
-    getAllPermissions(params: BitBucket.RepositoriesGetAllPermissionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositoryPermissions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositoryPermissions>>;
-    getAllPipelineSteps(params: BitBucket.RepositoriesGetAllPipelineStepsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSteps>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSteps>>;
-    getAllPipelines(params: BitBucket.RepositoriesGetAllPipelinesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelines>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelines>>;
-    getAllPipelinesKnownHosts(params: BitBucket.RepositoriesGetAllPipelinesKnownHostsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineKnownHosts>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineKnownHosts>>;
-    getAllPipelinesScheduleExecutions(params: BitBucket.RepositoriesGetAllPipelinesScheduleExecutionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineScheduleExecutions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineScheduleExecutions>>;
-    getAllPipelinesSchedules(params: BitBucket.RepositoriesGetAllPipelinesSchedulesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSchedules>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSchedules>>;
-    getAllPipelinesVariables(params: BitBucket.RepositoriesGetAllPipelinesVariablesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>;
-    getAllPullRequestComments(params: BitBucket.RepositoriesGetAllPullRequestCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequestComments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequestComments>>;
     getAllPullRequestCommits(params: BitBucket.RepositoriesGetAllPullRequestCommitsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getAllPullRequestStatuses(params: BitBucket.RepositoriesGetAllPullRequestStatusesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>;
-    getAllPullRequests(params: BitBucket.RepositoriesGetAllPullRequestsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequests>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequests>>;
     getAllPullRequestsActivityLog(params: BitBucket.RepositoriesGetAllPullRequestsActivityLogParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getAllRefs(params: BitBucket.RepositoriesGetAllRefsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRefs>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRefs>>;
-    getAllTags(params: BitBucket.RepositoriesGetAllTagsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTags>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTags>>;
     getAllWatchers(params: BitBucket.RepositoriesGetAllWatchersParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getAllWebhooks(params: BitBucket.RepositoriesGetAllWebhooksParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>;
     getBranch(params: BitBucket.RepositoriesGetBranchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Branch>>): Promise<BitBucket.Response<BitBucket.ResponseType.Branch>>;
     getBranchRestriction(params: BitBucket.RepositoriesGetBranchRestrictionParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Branchrestriction>>): Promise<BitBucket.Response<BitBucket.ResponseType.Branchrestriction>>;
     getCommit(params: BitBucket.RepositoriesGetCommitParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Commit>>): Promise<BitBucket.Response<BitBucket.ResponseType.Commit>>;
@@ -3545,9 +3691,7 @@ declare class BitBucket {
     getCommitComment(params: BitBucket.RepositoriesGetCommitCommentParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.CommitComment>>): Promise<BitBucket.Response<BitBucket.ResponseType.CommitComment>>;
     getDefaultReviewer(params: BitBucket.RepositoriesGetDefaultReviewerParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getDiff(params: BitBucket.RepositoriesGetDiffParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getDiffStat(params: BitBucket.RepositoriesGetDiffStatParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedDiffstats>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedDiffstats>>;
     getDownload(params: BitBucket.RepositoriesGetDownloadParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getFileHistory(params: BitBucket.RepositoriesGetFileHistoryParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedFiles>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedFiles>>;
     getIssue(params: BitBucket.RepositoriesGetIssueParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Issue>>): Promise<BitBucket.Response<BitBucket.ResponseType.Issue>>;
     getIssueAttachment(params: BitBucket.RepositoriesGetIssueAttachmentParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getIssueChange(params: BitBucket.RepositoriesGetIssueChangeParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.IssueChange>>): Promise<BitBucket.Response<BitBucket.ResponseType.IssueChange>>;
@@ -3559,14 +3703,13 @@ declare class BitBucket {
     getIssueWatch(params: BitBucket.RepositoriesGetIssueWatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Error>>): Promise<BitBucket.Response<BitBucket.ResponseType.Error>>;
     getPatch(params: BitBucket.RepositoriesGetPatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getPipeline(params: BitBucket.RepositoriesGetPipelineParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Pipeline>>): Promise<BitBucket.Response<BitBucket.ResponseType.Pipeline>>;
+    getPipelineConfig(params: BitBucket.RepositoriesGetPipelineConfigParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelinesConfig>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelinesConfig>>;
+    getPipelineKnownHost(params: BitBucket.RepositoriesGetPipelineKnownHostParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineKnownHost>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineKnownHost>>;
+    getPipelineSchedule(params: BitBucket.RepositoriesGetPipelineScheduleParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineSchedule>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineSchedule>>;
+    getPipelineSshKeyPair(params: BitBucket.RepositoriesGetPipelineSshKeyPairParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineSshKeyPair>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineSshKeyPair>>;
     getPipelineStep(params: BitBucket.RepositoriesGetPipelineStepParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineStep>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineStep>>;
     getPipelineStepLog(params: BitBucket.RepositoriesGetPipelineStepLogParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Error>>): Promise<BitBucket.Response<BitBucket.ResponseType.Error>>;
-    getPipelinesConfig(params: BitBucket.RepositoriesGetPipelinesConfigParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelinesConfig>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelinesConfig>>;
-    getPipelinesKnownHost(params: BitBucket.RepositoriesGetPipelinesKnownHostParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineKnownHost>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineKnownHost>>;
-    getPipelinesSchedule(params: BitBucket.RepositoriesGetPipelinesScheduleParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineSchedule>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineSchedule>>;
-    getPipelinesSshKeyPair(params: BitBucket.RepositoriesGetPipelinesSshKeyPairParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineSshKeyPair>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineSshKeyPair>>;
-    getPipelinesVariable(params: BitBucket.RepositoriesGetPipelinesVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
-    getPublic(params: BitBucket.RepositoriesGetPublicParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositories>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositories>>;
+    getPipelineVariable(params: BitBucket.RepositoriesGetPipelineVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
     getPullRequest(params: BitBucket.RepositoriesGetPullRequestParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Pullrequest>>): Promise<BitBucket.Response<BitBucket.ResponseType.Pullrequest>>;
     getPullRequestActivityLog(params: BitBucket.RepositoriesGetPullRequestActivityLogParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getPullRequestComment(params: BitBucket.RepositoriesGetPullRequestCommentParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PullrequestComment>>): Promise<BitBucket.Response<BitBucket.ResponseType.PullrequestComment>>;
@@ -3574,9 +3717,38 @@ declare class BitBucket {
     getPullRequestDiffStat(params: BitBucket.RepositoriesGetPullRequestDiffStatParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getPullRequestPatch(params: BitBucket.RepositoriesGetPullRequestPatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getSrc(params: BitBucket.RepositoriesGetSrcParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTreeentries>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTreeentries>>;
-    getSrcRoot(params: BitBucket.RepositoriesGetSrcRootParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTreeentries>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTreeentries>>;
+    getSrcMainRoot(params: BitBucket.RepositoriesGetSrcMainRootParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTreeentries>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTreeentries>>;
     getTag(params: BitBucket.RepositoriesGetTagParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Tag>>): Promise<BitBucket.Response<BitBucket.ResponseType.Tag>>;
     getWebhook(params: BitBucket.RepositoriesGetWebhookParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>): Promise<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>;
+    list(params: BitBucket.RepositoriesListParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositories>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositories>>;
+    listBranchRestrictions(params: BitBucket.RepositoriesListBranchRestrictionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedBranchrestrictions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedBranchrestrictions>>;
+    listBranches(params: BitBucket.RepositoriesListBranchesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedBranches>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedBranches>>;
+    listCommitComments(params: BitBucket.RepositoriesListCommitCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitComments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitComments>>;
+    listCommitStatuses(params: BitBucket.RepositoriesListCommitStatusesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>;
+    listComponents(params: BitBucket.RepositoriesListComponentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedComponents>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedComponents>>;
+    listDiffStats(params: BitBucket.RepositoriesListDiffStatsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedDiffstats>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedDiffstats>>;
+    listFileHistory(params: BitBucket.RepositoriesListFileHistoryParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedFiles>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedFiles>>;
+    listForks(params: BitBucket.RepositoriesListForksParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositories>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositories>>;
+    listIssueAttachments(params: BitBucket.RepositoriesListIssueAttachmentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueAttachments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueAttachments>>;
+    listIssueChanges(params: BitBucket.RepositoriesListIssueChangesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedLogEntries>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedLogEntries>>;
+    listIssueComments(params: BitBucket.RepositoriesListIssueCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueComments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedIssueComments>>;
+    listIssues(params: BitBucket.RepositoriesListIssuesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedIssues>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedIssues>>;
+    listMilestones(params: BitBucket.RepositoriesListMilestonesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedMilestones>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedMilestones>>;
+    listPermissions(params: BitBucket.RepositoriesListPermissionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositoryPermissions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositoryPermissions>>;
+    listPipelineKnownHosts(params: BitBucket.RepositoriesListPipelineKnownHostsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineKnownHosts>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineKnownHosts>>;
+    listPipelineScheduleExecutions(params: BitBucket.RepositoriesListPipelineScheduleExecutionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineScheduleExecutions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineScheduleExecutions>>;
+    listPipelineSchedules(params: BitBucket.RepositoriesListPipelineSchedulesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSchedules>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSchedules>>;
+    listPipelineSteps(params: BitBucket.RepositoriesListPipelineStepsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSteps>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineSteps>>;
+    listPipelineVariables(params: BitBucket.RepositoriesListPipelineVariablesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>;
+    listPipelines(params: BitBucket.RepositoriesListPipelinesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelines>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelines>>;
+    listPublic(params: BitBucket.RepositoriesListPublicParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositories>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositories>>;
+    listPullRequestComments(params: BitBucket.RepositoriesListPullRequestCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequestComments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequestComments>>;
+    listPullRequestStatuses(params: BitBucket.RepositoriesListPullRequestStatusesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedCommitstatuses>>;
+    listPullRequests(params: BitBucket.RepositoriesListPullRequestsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequests>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPullrequests>>;
+    listRefs(params: BitBucket.RepositoriesListRefsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRefs>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRefs>>;
+    listTags(params: BitBucket.RepositoriesListTagsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTags>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTags>>;
+    listVersions(params: BitBucket.RepositoriesListVersionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedVersions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedVersions>>;
+    listWebhooks(params: BitBucket.RepositoriesListWebhooksParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>;
     mergePullRequest(params: BitBucket.RepositoriesMergePullRequestParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Pullrequest>>): Promise<BitBucket.Response<BitBucket.ResponseType.Pullrequest>>;
     stopPipeline(params: BitBucket.RepositoriesStopPipelineParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     update(params: BitBucket.RepositoriesUpdateParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Repository>>): Promise<BitBucket.Response<BitBucket.ResponseType.Repository>>;
@@ -3584,12 +3756,12 @@ declare class BitBucket {
     updateCommitBuildStatus(params: BitBucket.RepositoriesUpdateCommitBuildStatusParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Commitstatus>>): Promise<BitBucket.Response<BitBucket.ResponseType.Commitstatus>>;
     updateIssue(params: BitBucket.RepositoriesUpdateIssueParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Issue>>): Promise<BitBucket.Response<BitBucket.ResponseType.Issue>>;
     updateIssueComment(params: BitBucket.RepositoriesUpdateIssueCommentParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.IssueComment>>): Promise<BitBucket.Response<BitBucket.ResponseType.IssueComment>>;
-    updatePipelinesBuildNumber(params: BitBucket.RepositoriesUpdatePipelinesBuildNumberParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineBuildNumber>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineBuildNumber>>;
-    updatePipelinesConfig(params: BitBucket.RepositoriesUpdatePipelinesConfigParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelinesConfig>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelinesConfig>>;
-    updatePipelinesKnownHost(params: BitBucket.RepositoriesUpdatePipelinesKnownHostParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineKnownHost>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineKnownHost>>;
-    updatePipelinesSchedule(params: BitBucket.RepositoriesUpdatePipelinesScheduleParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineSchedule>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineSchedule>>;
-    updatePipelinesSshKeyPair(params: BitBucket.RepositoriesUpdatePipelinesSshKeyPairParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineSshKeyPair>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineSshKeyPair>>;
-    updatePipelinesVariable(params: BitBucket.RepositoriesUpdatePipelinesVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
+    updatePipelineBuildNumber(params: BitBucket.RepositoriesUpdatePipelineBuildNumberParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineBuildNumber>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineBuildNumber>>;
+    updatePipelineConfig(params: BitBucket.RepositoriesUpdatePipelineConfigParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelinesConfig>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelinesConfig>>;
+    updatePipelineKnownHost(params: BitBucket.RepositoriesUpdatePipelineKnownHostParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineKnownHost>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineKnownHost>>;
+    updatePipelineSchedule(params: BitBucket.RepositoriesUpdatePipelineScheduleParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineSchedule>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineSchedule>>;
+    updatePipelineSshKeyPair(params: BitBucket.RepositoriesUpdatePipelineSshKeyPairParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineSshKeyPair>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineSshKeyPair>>;
+    updatePipelineVariable(params: BitBucket.RepositoriesUpdatePipelineVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
     updatePullRequest(params: BitBucket.RepositoriesUpdatePullRequestParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Pullrequest>>): Promise<BitBucket.Response<BitBucket.ResponseType.Pullrequest>>;
     updateWebhook(params: BitBucket.RepositoriesUpdateWebhookParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>): Promise<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>;
   };
@@ -3598,27 +3770,27 @@ declare class BitBucket {
     codeOfUser(params: BitBucket.SearchCodeOfUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.SearchResultPage>>): Promise<BitBucket.Response<BitBucket.ResponseType.SearchResultPage>>;
   };
   snippets: {
+    checkWatch(params: BitBucket.SnippetsCheckWatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     create(params: BitBucket.SnippetsCreateParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Snippet>>): Promise<BitBucket.Response<BitBucket.ResponseType.Snippet>>;
     createComment(params: BitBucket.SnippetsCreateCommentParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Snippet>>): Promise<BitBucket.Response<BitBucket.ResponseType.Snippet>>;
     createForUser(params: BitBucket.SnippetsCreateForUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Snippet>>): Promise<BitBucket.Response<BitBucket.ResponseType.Snippet>>;
-    createWatch(params: BitBucket.SnippetsCreateWatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>;
     delete(params: BitBucket.SnippetsDeleteParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     deleteComment(params: BitBucket.SnippetsDeleteCommentParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     deleteRevision(params: BitBucket.SnippetsDeleteRevisionParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    deleteWatch(params: BitBucket.SnippetsDeleteWatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>;
     get(params: BitBucket.SnippetsGetParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Snippet>>): Promise<BitBucket.Response<BitBucket.ResponseType.Snippet>>;
-    getAll(params: BitBucket.SnippetsGetAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippets>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippets>>;
-    getAllComments(params: BitBucket.SnippetsGetAllCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippetComments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippetComments>>;
-    getAllCommits(params: BitBucket.SnippetsGetAllCommitsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippetCommit>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippetCommit>>;
     getAllCommitsForRevision(params: BitBucket.SnippetsGetAllCommitsForRevisionParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.SnippetCommit>>): Promise<BitBucket.Response<BitBucket.ResponseType.SnippetCommit>>;
-    getAllForUser(params: BitBucket.SnippetsGetAllForUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippets>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippets>>;
-    getAllWatchers(params: BitBucket.SnippetsGetAllWatchersParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>;
     getComment(params: BitBucket.SnippetsGetCommentParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.SnippetComment>>): Promise<BitBucket.Response<BitBucket.ResponseType.SnippetComment>>;
     getDiff(params: BitBucket.SnippetsGetDiffParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getFile(params: BitBucket.SnippetsGetFileParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getPatch(params: BitBucket.SnippetsGetPatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getRevision(params: BitBucket.SnippetsGetRevisionParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Snippet>>): Promise<BitBucket.Response<BitBucket.ResponseType.Snippet>>;
-    getWatch(params: BitBucket.SnippetsGetWatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>;
+    list(params: BitBucket.SnippetsListParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippets>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippets>>;
+    listComments(params: BitBucket.SnippetsListCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippetComments>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippetComments>>;
+    listCommits(params: BitBucket.SnippetsListCommitsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippetCommit>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippetCommit>>;
+    listForUser(params: BitBucket.SnippetsListForUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippets>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedSnippets>>;
+    listWatchers(params: BitBucket.SnippetsListWatchersParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>;
+    startWatch(params: BitBucket.SnippetsStartWatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
+    stopWatch(params: BitBucket.SnippetsStopWatchParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     update(params: BitBucket.SnippetsUpdateParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Snippet>>): Promise<BitBucket.Response<BitBucket.ResponseType.Snippet>>;
     updateComment(params: BitBucket.SnippetsUpdateCommentParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     updateRevision(params: BitBucket.SnippetsUpdateRevisionParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Snippet>>): Promise<BitBucket.Response<BitBucket.ResponseType.Snippet>>;
@@ -3626,73 +3798,73 @@ declare class BitBucket {
   source: {
     createFileCommit(params: BitBucket.SourceCreateFileCommitParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     get(params: BitBucket.SourceGetParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTreeentries>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTreeentries>>;
-    getHistory(params: BitBucket.SourceGetHistoryParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedFiles>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedFiles>>;
-    getRoot(params: BitBucket.SourceGetRootParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTreeentries>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTreeentries>>;
+    getMainRoot(params: BitBucket.SourceGetMainRootParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTreeentries>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTreeentries>>;
+    listHistory(params: BitBucket.SourceListHistoryParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedFiles>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedFiles>>;
   };
   ssh: {
-    createForUser(params: BitBucket.SshCreateForUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.SshAccountKey>>): Promise<BitBucket.Response<BitBucket.ResponseType.SshAccountKey>>;
-    deleteForUser(params: BitBucket.EmptyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getAllForUser(params: BitBucket.SshGetAllForUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedSshUserKeys>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedSshUserKeys>>;
-    getForUser(params: BitBucket.EmptyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    updateForUser(params: BitBucket.EmptyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
+    createKeyForUser(params: BitBucket.SshCreateKeyForUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.SshAccountKey>>): Promise<BitBucket.Response<BitBucket.ResponseType.SshAccountKey>>;
+    deleteKeyForUser(params: BitBucket.EmptyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
+    getKeyForUser(params: BitBucket.EmptyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
+    listKeys(params: BitBucket.SshListKeysParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedSshUserKeys>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedSshUserKeys>>;
+    updateKeyForUser(params: BitBucket.EmptyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
   };
   teams: {
-    createPipelinesVariable(params: BitBucket.TeamsCreatePipelinesVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
+    createPipelineVariable(params: BitBucket.TeamsCreatePipelineVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
     createProject(params: BitBucket.TeamsCreateProjectParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Project>>): Promise<BitBucket.Response<BitBucket.ResponseType.Project>>;
     createWebhook(params: BitBucket.TeamsCreateWebhookParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>): Promise<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>;
-    deletePipelinesVariable(params: BitBucket.TeamsDeletePipelinesVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
+    deletePipelineVariable(params: BitBucket.TeamsDeletePipelineVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     deleteProject(params: BitBucket.TeamsDeleteProjectParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     deleteWebhook(params: BitBucket.TeamsDeleteWebhookParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     get(params: BitBucket.TeamsGetParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Team>>): Promise<BitBucket.Response<BitBucket.ResponseType.Team>>;
-    getAll(params: BitBucket.TeamsGetAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTeams>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTeams>>;
-    getAllFollowers(params: BitBucket.TeamsGetAllFollowersParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>;
-    getAllFollowing(params: BitBucket.TeamsGetAllFollowingParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>;
     getAllMembers(params: BitBucket.TeamsGetAllMembersParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.User>>): Promise<BitBucket.Response<BitBucket.ResponseType.User>>;
-    getAllPipelinesVariables(params: BitBucket.TeamsGetAllPipelinesVariablesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>;
-    getAllProjects(params: BitBucket.TeamsGetAllProjectsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedProjects>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedProjects>>;
     getAllRepositories(params: BitBucket.TeamsGetAllRepositoriesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getAllRepositoriesForUser(params: BitBucket.TeamsGetAllRepositoriesForUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getAllRepositoryPermissions(params: BitBucket.TeamsGetAllRepositoryPermissionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositoryPermissions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositoryPermissions>>;
-    getAllTeamPermissions(params: BitBucket.TeamsGetAllTeamPermissionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTeamPermissions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTeamPermissions>>;
-    getAllWebhooks(params: BitBucket.TeamsGetAllWebhooksParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>;
-    getPipelinesVariable(params: BitBucket.TeamsGetPipelinesVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
+    getPipelineVariable(params: BitBucket.TeamsGetPipelineVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
     getProject(params: BitBucket.TeamsGetProjectParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Project>>): Promise<BitBucket.Response<BitBucket.ResponseType.Project>>;
     getWebhook(params: BitBucket.TeamsGetWebhookParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>): Promise<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>;
+    list(params: BitBucket.TeamsListParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTeams>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTeams>>;
+    listFollowers(params: BitBucket.TeamsListFollowersParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>;
+    listFollowing(params: BitBucket.TeamsListFollowingParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>;
+    listPipelineVariables(params: BitBucket.TeamsListPipelineVariablesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>;
+    listProjects(params: BitBucket.TeamsListProjectsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedProjects>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedProjects>>;
+    listRepositoryPermissions(params: BitBucket.TeamsListRepositoryPermissionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositoryPermissions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositoryPermissions>>;
+    listTeamPermissions(params: BitBucket.TeamsListTeamPermissionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTeamPermissions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTeamPermissions>>;
+    listWebhooks(params: BitBucket.TeamsListWebhooksParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>;
     searchCode(params: BitBucket.TeamsSearchCodeParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.SearchResultPage>>): Promise<BitBucket.Response<BitBucket.ResponseType.SearchResultPage>>;
-    updatePipelinesVariable(params: BitBucket.TeamsUpdatePipelinesVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
+    updatePipelineVariable(params: BitBucket.TeamsUpdatePipelineVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
     updateProject(params: BitBucket.TeamsUpdateProjectParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Project>>): Promise<BitBucket.Response<BitBucket.ResponseType.Project>>;
     updateWebhook(params: BitBucket.TeamsUpdateWebhookParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>): Promise<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>;
   };
   user: {
     get(params: BitBucket.EmptyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.User>>): Promise<BitBucket.Response<BitBucket.ResponseType.User>>;
     getAllEmails(params: BitBucket.EmptyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getAllRepositoryPermissions(params: BitBucket.UserGetAllRepositoryPermissionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositoryPermissions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositoryPermissions>>;
-    getAllTeamPermissions(params: BitBucket.UserGetAllTeamPermissionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTeamPermissions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTeamPermissions>>;
     getEmail(params: BitBucket.UserGetEmailParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
+    listRepositoryPermissions(params: BitBucket.UserListRepositoryPermissionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositoryPermissions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedRepositoryPermissions>>;
+    listTeamPermissions(params: BitBucket.UserListTeamPermissionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedTeamPermissions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedTeamPermissions>>;
   };
   users: {
-    createPipelinesVariable(params: BitBucket.UsersCreatePipelinesVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
+    createPipelineVariable(params: BitBucket.UsersCreatePipelineVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
     createSshKey(params: BitBucket.UsersCreateSshKeyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.SshAccountKey>>): Promise<BitBucket.Response<BitBucket.ResponseType.SshAccountKey>>;
     createWebhook(params: BitBucket.UsersCreateWebhookParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>): Promise<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>;
-    deletePipelinesVariable(params: BitBucket.UsersDeletePipelinesVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
+    deletePipelineVariable(params: BitBucket.UsersDeletePipelineVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     deleteSshKey(params: BitBucket.EmptyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     deleteWebhook(params: BitBucket.UsersDeleteWebhookParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     get(params: BitBucket.UsersGetParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.User>>): Promise<BitBucket.Response<BitBucket.ResponseType.User>>;
     getAllEmailsForAuthedUser(params: BitBucket.EmptyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getAllFollowers(params: BitBucket.UsersGetAllFollowersParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>;
-    getAllFollowing(params: BitBucket.UsersGetAllFollowingParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>;
-    getAllPipelinesVariables(params: BitBucket.UsersGetAllPipelinesVariablesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>;
     getAllRepositories(params: BitBucket.UsersGetAllRepositoriesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getAllRepositoriesForTeam(params: BitBucket.UsersGetAllRepositoriesForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getAllSshKeys(params: BitBucket.UsersGetAllSshKeysParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedSshUserKeys>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedSshUserKeys>>;
-    getAllWebhooks(params: BitBucket.UsersGetAllWebhooksParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>;
     getAuthedUser(params: BitBucket.EmptyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.User>>): Promise<BitBucket.Response<BitBucket.ResponseType.User>>;
     getEmailForAuthedUser(params: BitBucket.UsersGetEmailForAuthedUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
-    getPipelinesVariable(params: BitBucket.UsersGetPipelinesVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
+    getPipelineVariable(params: BitBucket.UsersGetPipelineVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
     getSshKey(params: BitBucket.EmptyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     getWebhook(params: BitBucket.UsersGetWebhookParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>): Promise<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>;
+    listFollowers(params: BitBucket.UsersListFollowersParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>;
+    listFollowing(params: BitBucket.UsersListFollowingParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedUsers>>;
+    listPipelineVariables(params: BitBucket.UsersListPipelineVariablesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedPipelineVariables>>;
+    listSshKeys(params: BitBucket.UsersListSshKeysParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedSshUserKeys>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedSshUserKeys>>;
+    listWebhooks(params: BitBucket.UsersListWebhooksParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>;
     searchCode(params: BitBucket.UsersSearchCodeParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.SearchResultPage>>): Promise<BitBucket.Response<BitBucket.ResponseType.SearchResultPage>>;
-    updatePipelinesVariable(params: BitBucket.UsersUpdatePipelinesVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
+    updatePipelineVariable(params: BitBucket.UsersUpdatePipelineVariableParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>): Promise<BitBucket.Response<BitBucket.ResponseType.PipelineVariable>>;
     updateSshKey(params: BitBucket.EmptyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     updateWebhook(params: BitBucket.UsersUpdateWebhookParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>): Promise<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>;
   };
@@ -3704,12 +3876,12 @@ declare class BitBucket {
     deleteForTeam(params: BitBucket.WebhooksDeleteForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     deleteForUser(params: BitBucket.WebhooksDeleteForUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.Any>>): Promise<BitBucket.Response<BitBucket.ResponseType.Any>>;
     get(params: BitBucket.WebhooksGetParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>): Promise<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>;
-    getAll(params: BitBucket.WebhooksGetAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>;
-    getAllForTeam(params: BitBucket.WebhooksGetAllForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>;
-    getAllForUser(params: BitBucket.WebhooksGetAllForUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>;
     getForTeam(params: BitBucket.WebhooksGetForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>): Promise<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>;
     getForUser(params: BitBucket.WebhooksGetForUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>): Promise<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>;
-    listAll(params: BitBucket.WebhooksListAllParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedHookEvents>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedHookEvents>>;
+    list(params: BitBucket.WebhooksListParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedHookEvents>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedHookEvents>>;
+    listForRepo(params: BitBucket.WebhooksListForRepoParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>;
+    listForTeam(params: BitBucket.WebhooksListForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>;
+    listForUser(params: BitBucket.WebhooksListForUserParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>): Promise<BitBucket.Response<BitBucket.ResponseType.PaginatedWebhookSubscriptions>>;
     listSubjectTypes(params: BitBucket.EmptyParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.SubjectTypes>>): Promise<BitBucket.Response<BitBucket.ResponseType.SubjectTypes>>;
     update(params: BitBucket.WebhooksUpdateParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>): Promise<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>;
     updateForTeam(params: BitBucket.WebhooksUpdateForTeamParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>): Promise<BitBucket.Response<BitBucket.ResponseType.WebhookSubscription>>;

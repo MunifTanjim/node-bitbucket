@@ -704,8 +704,8 @@
   },
   "/repositories/{username}/{repo_slug}/src": {
     "get": {
-      "repositories": "listSrcTree",
-      "source": "listTree"
+      "repositories": "getSrcMainRoot",
+      "source": "getMainRoot"
     },
     "post": {
       "repositories": "createSrcFileCommit",
@@ -714,8 +714,8 @@
   },
   "/repositories/{username}/{repo_slug}/src/{node}/{path}": {
     "get": {
-      "repositories": "listSrc",
-      "source": "list"
+      "repositories": "getSrc",
+      "source": "get"
     }
   },
   "/repositories/{username}/{repo_slug}/versions": {
