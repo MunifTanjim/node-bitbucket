@@ -41,7 +41,9 @@
     "url-template": "^2.0.8"
   },
   "devDependencies": {
+    "clean-deep": "^3.0.2",
     "debug": "^3.1.0",
+    "deep-sort-object": "^1.0.2",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-standard": "^11.0.0",

@@ -1,8 +1,9 @@
 const _ = require('lodash')
 const path = require('path')
 const { writeFileSync } = require('fs')
+const deepsort = require('deep-sort-object')
 
-const { getResourceName, sortObjectByKeys } = require('./helpers')
+const { extractNamespaceFromURL } = require('./helpers')
 
 const METHODS_LIST = require('../src/routes/methods-list.json')
 const PATHS_SPEC = require('../specification/paths.json')
@@ -11,31 +12,31 @@ const methodsListPath = path.resolve('src/routes/methods-list.json')
 
 const NON_METHODS = ['parameters']
 
-const updateMethodsList = () => {
-  Object.keys(PATHS_SPEC).forEach(apiPath => {
-    let resourceName = getResourceName(apiPath)
+const addMissingMethodsListItems = () => {
+  _.keys(PATHS_SPEC).forEach(url => {
+    let resourceNamespace = extractNamespaceFromURL(url)
 
-    if (!_.has(METHODS_LIST, apiPath)) {
-      METHODS_LIST[apiPath] = {}
+    if (!METHODS_LIST[url]) {
+      METHODS_LIST[url] = {}
     }
 
-    Object.keys(PATHS_SPEC[apiPath]).forEach(method => {
+    _.keys(PATHS_SPEC[url]).forEach(method => {
       if (NON_METHODS.includes(method)) {
         return
       }
 
-      if (!_.has(METHODS_LIST[apiPath], method)) {
-        METHODS_LIST[apiPath][method] = {}
+      if (!METHODS_LIST[url][method]) {
+        METHODS_LIST[url][method] = {}
       }
 
-      if (!METHODS_LIST[apiPath][method][resourceName]) {
-        METHODS_LIST[apiPath][method][resourceName] = ''
+      if (!METHODS_LIST[url][method][resourceNamespace]) {
+        METHODS_LIST[url][method][resourceNamespace] = ''
       }
 
-      if (_.has(PATHS_SPEC[apiPath][method], 'tags')) {
-        PATHS_SPEC[apiPath][method].tags.forEach(tag => {
-          if (!METHODS_LIST[apiPath][method][tag]) {
-            METHODS_LIST[apiPath][method][tag] = ''
+      if (PATHS_SPEC[url][method].tags) {
+        PATHS_SPEC[url][method].tags.forEach(tagNamespace => {
+          if (!METHODS_LIST[url][method][tagNamespace]) {
+            METHODS_LIST[url][method][tagNamespace] = ''
           }
         })
       }
@@ -43,23 +44,9 @@ const updateMethodsList = () => {
   })
 }
 
-const sortMethodsListObject = methodsListObject => {
-  return _.chain(methodsListObject)
-    .thru(sortObjectByKeys)
-    .tap(apiPathObjects => {
-      _.each(apiPathObjects, (apiPathObject, apiPath) => {
-        apiPathObjects[apiPath] = sortObjectByKeys(apiPathObject)
-        _.each(apiPathObjects[apiPath], (methodObject, method) => {
-          apiPathObjects[apiPath][method] = sortObjectByKeys(methodObject)
-        })
-      })
-    })
-    .value()
-}
-
-updateMethodsList()
+addMissingMethodsListItems()
 
 writeFileSync(
   methodsListPath,
-  `${JSON.stringify(sortMethodsListObject(METHODS_LIST), null, 2)}\n`
+  `${JSON.stringify(deepsort(METHODS_LIST), null, 2)}\n`
 )

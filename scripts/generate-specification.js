@@ -1,13 +1,14 @@
-const { writeFileSync } = require('fs')
-const fetch = require('node-fetch')
 const path = require('path')
+const fetch = require('node-fetch')
+const { writeFileSync } = require('fs')
+const deepsort = require('deep-sort-object')
 
 const specPath = path.resolve('specification')
 
 const writeSpecPartialJSON = (filename, content) => {
   writeFileSync(
     path.resolve(specPath, `${filename}.json`),
-    `${JSON.stringify(content, null, 2)}\n`
+    `${JSON.stringify(deepsort(content), null, 2)}\n`
   )
 }
 

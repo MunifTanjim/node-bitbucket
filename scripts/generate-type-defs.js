@@ -1,8 +1,8 @@
 const _ = require('lodash')
 const path = require('path')
 const { writeFileSync } = require('fs')
-
 const deepmerge = require('deepmerge')
+const deepsort = require('deep-sort-object')
 
 const { pascalCase } = require('./helpers')
 
@@ -59,7 +59,7 @@ _.each(entityNames, entityName => {
   }
 })
 
-let stringifiedResponseTypeDefs = JSON.stringify(rootObject, null, 2)
+let stringifiedResponseTypeDefs = JSON.stringify(deepsort(rootObject), null, 2)
 
 _.each(entityNames, entityName => {
   stringifiedResponseTypeDefs = _.chain(stringifiedResponseTypeDefs)

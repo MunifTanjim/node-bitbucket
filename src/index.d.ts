@@ -56,22 +56,6 @@ declare namespace BitBucket {
     };
     export type Commit = BaseCommit & {
       links?: {
-        self?: {
-          href?: string;
-          name?: string;
-        };
-        html?: {
-          href?: string;
-          name?: string;
-        };
-        diff?: {
-          href?: string;
-          name?: string;
-        };
-        patch?: {
-          href?: string;
-          name?: string;
-        };
         approve?: {
           href?: string;
           name?: string;
@@ -80,26 +64,42 @@ declare namespace BitBucket {
           href?: string;
           name?: string;
         };
+        diff?: {
+          href?: string;
+          name?: string;
+        };
+        html?: {
+          href?: string;
+          name?: string;
+        };
+        patch?: {
+          href?: string;
+          name?: string;
+        };
+        self?: {
+          href?: string;
+          name?: string;
+        };
         statuses?: {
           href?: string;
           name?: string;
         };
       };
-      repository?: Repository;
       participants?: Participant[];
+      repository?: Repository;
       [k: string]: any;
     };
     export type BaseCommit = Object & {
-      hash?: string;
-      date?: string;
       author?: Author;
+      date?: string;
+      hash?: string;
       message?: string;
-      summary?: {
-        raw?: string;
-        markup?: "markdown" | "creole" | "plaintext";
-        html?: string;
-      };
       parents?: BaseCommit[];
+      summary?: {
+        html?: string;
+        markup?: "markdown" | "creole" | "plaintext";
+        raw?: string;
+      };
       [k: string]: any;
     };
     export type Author = Object & {
@@ -108,15 +108,9 @@ declare namespace BitBucket {
       [k: string]: any;
     };
     export type Account = Object & {
+      created_on?: string;
+      display_name?: string;
       links?: {
-        self?: {
-          href?: string;
-          name?: string;
-        };
-        html?: {
-          href?: string;
-          name?: string;
-        };
         avatar?: {
           href?: string;
           name?: string;
@@ -129,49 +123,47 @@ declare namespace BitBucket {
           href?: string;
           name?: string;
         };
+        html?: {
+          href?: string;
+          name?: string;
+        };
         repositories?: {
+          href?: string;
+          name?: string;
+        };
+        self?: {
           href?: string;
           name?: string;
         };
       };
       username?: string;
-      display_name?: string;
-      website?: string;
-      created_on?: string;
       uuid?: string;
+      website?: string;
+      [k: string]: any;
+    };
+    export type Participant = Object & {
+      approved?: boolean;
+      participated_on?: string;
+      role?: "PARTICIPANT" | "REVIEWER";
+      user?: User;
+      [k: string]: any;
+    };
+    export type User = Account & {
+      account_id?: string;
+      is_staff?: boolean;
       [k: string]: any;
     };
     export type Repository = Object & {
+      created_on?: string;
+      description?: string;
+      fork_policy?: "allow_forks" | "no_public_forks" | "no_forks";
+      full_name?: string;
+      has_issues?: boolean;
+      has_wiki?: boolean;
+      is_private?: boolean;
+      language?: string;
       links?: {
-        self?: {
-          href?: string;
-          name?: string;
-        };
-        html?: {
-          href?: string;
-          name?: string;
-        };
         avatar?: {
-          href?: string;
-          name?: string;
-        };
-        pullrequests?: {
-          href?: string;
-          name?: string;
-        };
-        commits?: {
-          href?: string;
-          name?: string;
-        };
-        forks?: {
-          href?: string;
-          name?: string;
-        };
-        watchers?: {
-          href?: string;
-          name?: string;
-        };
-        downloads?: {
           href?: string;
           name?: string;
         };
@@ -179,73 +171,76 @@ declare namespace BitBucket {
           href?: string;
           name?: string;
         }[];
+        commits?: {
+          href?: string;
+          name?: string;
+        };
+        downloads?: {
+          href?: string;
+          name?: string;
+        };
+        forks?: {
+          href?: string;
+          name?: string;
+        };
         hooks?: {
           href?: string;
           name?: string;
         };
-      };
-      uuid?: string;
-      full_name?: string;
-      is_private?: boolean;
-      parent?: Repository;
-      scm?: "hg" | "git";
-      owner?: Account;
-      name?: string;
-      description?: string;
-      created_on?: string;
-      updated_on?: string;
-      size?: number;
-      language?: string;
-      has_issues?: boolean;
-      has_wiki?: boolean;
-      fork_policy?: "allow_forks" | "no_public_forks" | "no_forks";
-      project?: Project;
-      mainbranch?: Branch;
-      [k: string]: any;
-    };
-    export type Project = Object & {
-      links?: {
         html?: {
           href?: string;
           name?: string;
         };
-        avatar?: {
+        pullrequests?: {
+          href?: string;
+          name?: string;
+        };
+        self?: {
+          href?: string;
+          name?: string;
+        };
+        watchers?: {
           href?: string;
           name?: string;
         };
       };
-      uuid?: string;
-      key?: string;
-      owner?: Team;
+      mainbranch?: Branch;
       name?: string;
+      owner?: Account;
+      parent?: Repository;
+      project?: Project;
+      scm?: "hg" | "git";
+      size?: number;
+      updated_on?: string;
+      uuid?: string;
+      [k: string]: any;
+    };
+    export type Project = Object & {
+      created_on?: string;
       description?: string;
       is_private?: boolean;
-      created_on?: string;
+      key?: string;
+      links?: {
+        avatar?: {
+          href?: string;
+          name?: string;
+        };
+        html?: {
+          href?: string;
+          name?: string;
+        };
+      };
+      name?: string;
+      owner?: Team;
       updated_on?: string;
+      uuid?: string;
       [k: string]: any;
     };
     export type Team = Account & {
       [k: string]: any;
     };
-    export type Participant = Object & {
-      user?: User;
-      role?: "PARTICIPANT" | "REVIEWER";
-      approved?: boolean;
-      participated_on?: string;
-      [k: string]: any;
-    };
-    export type User = Account & {
-      is_staff?: boolean;
-      account_id?: string;
-      [k: string]: any;
-    };
     export type Branchrestriction = Object & {
-      links?: {
-        self?: {
-          href?: string;
-          name?: string;
-        };
-      };
+      groups?: Group[];
       id?: number;
       kind?:
         | "require_tasks_to_be_completed"
@@ -258,27 +253,32 @@ declare namespace BitBucket {
         | "restrict_merges"
         | "reset_pullrequest_approvals_on_change"
         | "delete";
-      users?: Account[];
-      groups?: Group[];
-      value?: number;
-      [k: string]: any;
-    };
-    export type Group = Object & {
       links?: {
         self?: {
           href?: string;
           name?: string;
         };
+      };
+      users?: Account[];
+      value?: number;
+      [k: string]: any;
+    };
+    export type Group = Object & {
+      full_slug?: string;
+      links?: {
         html?: {
           href?: string;
           name?: string;
         };
+        self?: {
+          href?: string;
+          name?: string;
+        };
       };
-      owner?: Account;
-      name?: string;
-      slug?: string;
-      full_slug?: string;
       members?: number;
+      name?: string;
+      owner?: Account;
+      slug?: string;
       [k: string]: any;
     };
     export type CommitComment = Comment & {
@@ -286,61 +286,62 @@ declare namespace BitBucket {
       [k: string]: any;
     };
     export type Comment = Object & {
-      id?: number;
-      created_on?: string;
-      updated_on?: string;
       content?: {
-        raw?: string;
-        markup?: "markdown" | "creole" | "plaintext";
         html?: string;
+        markup?: "markdown" | "creole" | "plaintext";
+        raw?: string;
       };
-      user?: User;
+      created_on?: string;
       deleted?: boolean;
-      parent?: Comment;
+      id?: number;
       inline?: {
-        to?: number;
         from?: number;
         path: string;
+        to?: number;
       };
       links?: {
-        self?: {
-          href?: string;
-          name?: string;
-        };
-        html?: {
-          href?: string;
-          name?: string;
-        };
         code?: {
           href?: string;
           name?: string;
         };
-      };
-      [k: string]: any;
-    };
-    export type Commitstatus = Object & {
-      links?: {
+        html?: {
+          href?: string;
+          name?: string;
+        };
         self?: {
           href?: string;
           name?: string;
         };
+      };
+      parent?: Comment;
+      updated_on?: string;
+      user?: User;
+      [k: string]: any;
+    };
+    export type Commitstatus = Object & {
+      created_on?: string;
+      description?: string;
+      key?: string;
+      links?: {
         commit?: {
           href?: string;
           name?: string;
         };
+        self?: {
+          href?: string;
+          name?: string;
+        };
       };
-      uuid?: string;
-      key?: string;
-      refname?: string;
-      url?: string;
-      state?: "SUCCESSFUL" | "FAILED" | "INPROGRESS" | "STOPPED";
       name?: string;
-      description?: string;
-      created_on?: string;
+      refname?: string;
+      state?: "SUCCESSFUL" | "FAILED" | "INPROGRESS" | "STOPPED";
       updated_on?: string;
+      url?: string;
+      uuid?: string;
       [k: string]: any;
     };
     export type Component = Object & {
+      id?: number;
       links?: {
         self?: {
           href?: string;
@@ -348,16 +349,22 @@ declare namespace BitBucket {
         };
       };
       name?: string;
-      id?: number;
       [k: string]: any;
     };
     export type Issue = Object & {
+      assignee?: User;
+      component?: Component;
+      content?: {
+        html?: string;
+        markup?: "markdown" | "creole" | "plaintext";
+        raw?: string;
+      };
+      created_on?: string;
+      edited_on?: string;
+      id?: number;
+      kind?: "bug" | "enhancement" | "proposal" | "task";
       links?: {
-        self?: {
-          href?: string;
-          name?: string;
-        };
-        html?: {
+        attachments?: {
           href?: string;
           name?: string;
         };
@@ -365,11 +372,11 @@ declare namespace BitBucket {
           href?: string;
           name?: string;
         };
-        attachments?: {
+        html?: {
           href?: string;
           name?: string;
         };
-        watch?: {
+        self?: {
           href?: string;
           name?: string;
         };
@@ -377,30 +384,24 @@ declare namespace BitBucket {
           href?: string;
           name?: string;
         };
+        watch?: {
+          href?: string;
+          name?: string;
+        };
       };
-      id?: number;
-      repository?: Repository;
-      title?: string;
-      reporter?: User;
-      assignee?: User;
-      created_on?: string;
-      updated_on?: string;
-      edited_on?: string;
-      state?: "new" | "open" | "resolved" | "on hold" | "invalid" | "duplicate" | "wontfix" | "closed";
-      kind?: "bug" | "enhancement" | "proposal" | "task";
-      priority?: "trivial" | "minor" | "major" | "critical" | "blocker";
       milestone?: Milestone;
+      priority?: "trivial" | "minor" | "major" | "critical" | "blocker";
+      reporter?: User;
+      repository?: Repository;
+      state?: "new" | "open" | "resolved" | "on hold" | "invalid" | "duplicate" | "wontfix" | "closed";
+      title?: string;
+      updated_on?: string;
       version?: Version;
-      component?: Component;
       votes?: number;
-      content?: {
-        raw?: string;
-        markup?: "markdown" | "creole" | "plaintext";
-        html?: string;
-      };
       [k: string]: any;
     };
     export type Milestone = Object & {
+      id?: number;
       links?: {
         self?: {
           href?: string;
@@ -408,10 +409,10 @@ declare namespace BitBucket {
         };
       };
       name?: string;
-      id?: number;
       [k: string]: any;
     };
     export type Version = Object & {
+      id?: number;
       links?: {
         self?: {
           href?: string;
@@ -419,7 +420,6 @@ declare namespace BitBucket {
         };
       };
       name?: string;
-      id?: number;
       [k: string]: any;
     };
     export type IssueComment = Comment & {
@@ -437,14 +437,14 @@ declare namespace BitBucket {
       [k: string]: any;
     };
     export type PipelineKnownHost = Object & {
-      uuid?: string;
       hostname?: string;
       public_key?: PipelineSshPublicKey;
+      uuid?: string;
       [k: string]: any;
     };
     export type PipelineSshPublicKey = Object & {
-      key_type?: string;
       key?: string;
+      key_type?: string;
       md5_fingerprint?: string;
       sha256_fingerprint?: string;
       [k: string]: any;
@@ -453,61 +453,61 @@ declare namespace BitBucket {
       [k: string]: any;
     };
     export type PipelineSchedule = Object & {
-      uuid?: string;
-      enabled?: boolean;
-      target?: PipelineTarget;
-      selector?: PipelineSelector;
-      cron_pattern?: string;
       created_on?: string;
+      cron_pattern?: string;
+      enabled?: boolean;
+      selector?: PipelineSelector;
+      target?: PipelineTarget;
       updated_on?: string;
+      uuid?: string;
+      [k: string]: any;
+    };
+    export type PipelineSelector = Object & {
+      pattern?: string;
+      type?: "branches" | "tags" | "bookmarks" | "default" | "custom";
       [k: string]: any;
     };
     export type PipelineTarget = Object & {
       [k: string]: any;
     };
-    export type PipelineSelector = Object & {
-      type?: "branches" | "tags" | "bookmarks" | "default" | "custom";
-      pattern?: string;
-      [k: string]: any;
-    };
     export type PipelineStep = Object & {
-      uuid?: string;
-      started_on?: string;
       completed_on?: string;
-      state?: PipelineStepState;
       image?: PipelineImage;
-      setup_commands?: PipelineCommand[];
-      script_commands?: PipelineCommand[];
       logByteCount?: number;
+      script_commands?: PipelineCommand[];
+      setup_commands?: PipelineCommand[];
+      started_on?: string;
+      state?: PipelineStepState;
+      uuid?: string;
       [k: string]: any;
     };
     export type PipelineStepState = Object & {
       [k: string]: any;
     };
     export type PipelineVariable = Object & {
-      uuid?: string;
       key?: string;
-      value?: string;
       secured?: boolean;
+      uuid?: string;
+      value?: string;
       [k: string]: any;
     };
     export type Pipeline = Object & {
-      uuid?: string;
       build_number?: number;
+      build_seconds_used?: number;
+      completed_on?: string;
+      created_on?: string;
       creator?: Account;
       repository?: Repository;
+      state?: PipelineState;
       target?: PipelineTarget;
       trigger?: PipelineTrigger;
-      state?: PipelineState;
-      created_on?: string;
-      completed_on?: string;
-      build_seconds_used?: number;
-      [k: string]: any;
-    };
-    export type PipelineTrigger = Object & {
+      uuid?: string;
       [k: string]: any;
     };
     export type PipelineState = Object & {
+      [k: string]: any;
+    };
+    export type PipelineTrigger = Object & {
       [k: string]: any;
     };
     export type PullrequestComment = Comment & {
@@ -515,16 +515,15 @@ declare namespace BitBucket {
       [k: string]: any;
     };
     export type Pullrequest = Object & {
+      author?: Account;
+      close_source_branch?: boolean;
+      closed_by?: Account;
+      comment_count?: number;
+      created_on?: string;
+      destination?: PullrequestEndpoint;
+      id?: number;
       links?: {
-        self?: {
-          href?: string;
-          name?: string;
-        };
-        html?: {
-          href?: string;
-          name?: string;
-        };
-        commits?: {
+        activity?: {
           href?: string;
           name?: string;
         };
@@ -532,19 +531,11 @@ declare namespace BitBucket {
           href?: string;
           name?: string;
         };
-        diff?: {
-          href?: string;
-          name?: string;
-        };
         comments?: {
           href?: string;
           name?: string;
         };
-        activity?: {
-          href?: string;
-          name?: string;
-        };
-        merge?: {
+        commits?: {
           href?: string;
           name?: string;
         };
@@ -552,39 +543,48 @@ declare namespace BitBucket {
           href?: string;
           name?: string;
         };
-      };
-      id?: number;
-      title?: string;
-      summary?: {
-        raw?: string;
-        markup?: "markdown" | "creole" | "plaintext";
-        html?: string;
-      };
-      state?: "MERGED" | "SUPERSEDED" | "OPEN" | "DECLINED";
-      author?: Account;
-      source?: PullrequestEndpoint;
-      destination?: PullrequestEndpoint;
-      merge_commit?: {
-        hash?: string;
-      };
-      comment_count?: number;
-      task_count?: number;
-      close_source_branch?: boolean;
-      closed_by?: Account;
-      reason?: string;
-      created_on?: string;
-      updated_on?: string;
-      reviewers?: Account[];
-      participants?: Participant[];
-      [k: string]: any;
-    };
-    export type SnippetComment = Object & {
-      links?: {
-        self?: {
+        diff?: {
           href?: string;
           name?: string;
         };
         html?: {
+          href?: string;
+          name?: string;
+        };
+        merge?: {
+          href?: string;
+          name?: string;
+        };
+        self?: {
+          href?: string;
+          name?: string;
+        };
+      };
+      merge_commit?: {
+        hash?: string;
+      };
+      participants?: Participant[];
+      reason?: string;
+      reviewers?: Account[];
+      source?: PullrequestEndpoint;
+      state?: "MERGED" | "SUPERSEDED" | "OPEN" | "DECLINED";
+      summary?: {
+        html?: string;
+        markup?: "markdown" | "creole" | "plaintext";
+        raw?: string;
+      };
+      task_count?: number;
+      title?: string;
+      updated_on?: string;
+      [k: string]: any;
+    };
+    export type SnippetComment = Object & {
+      links?: {
+        html?: {
+          href?: string;
+          name?: string;
+        };
+        self?: {
           href?: string;
           name?: string;
         };
@@ -593,19 +593,19 @@ declare namespace BitBucket {
       [k: string]: any;
     };
     export type Snippet = Object & {
-      id?: number;
-      title?: string;
-      scm?: "hg" | "git";
       created_on?: string;
-      updated_on?: string;
-      owner?: Account;
       creator?: Account;
+      id?: number;
       is_private?: boolean;
+      owner?: Account;
+      scm?: "hg" | "git";
+      title?: string;
+      updated_on?: string;
       [k: string]: any;
     };
     export type SnippetCommit = BaseCommit & {
       links?: {
-        self?: {
+        diff?: {
           href?: string;
           name?: string;
         };
@@ -613,7 +613,7 @@ declare namespace BitBucket {
           href?: string;
           name?: string;
         };
-        diff?: {
+        self?: {
           href?: string;
           name?: string;
         };
@@ -626,11 +626,10 @@ declare namespace BitBucket {
       [k: string]: any;
     };
     export type SshKey = Object & {
-      uuid?: string;
-      key?: string;
       comment?: string;
-      label?: string;
       created_on?: string;
+      key?: string;
+      label?: string;
       last_used?: string;
       links?: {
         self?: {
@@ -638,22 +637,19 @@ declare namespace BitBucket {
           name?: string;
         };
       };
+      uuid?: string;
       [k: string]: any;
     };
     export type Tag = Ref & {
-      message?: string;
       date?: string;
+      message?: string;
       tagger?: Author;
       [k: string]: any;
     };
     export type WebhookSubscription = Object & {
-      uuid?: string;
-      url?: string;
-      description?: string;
-      subject_type?: "user" | "repository" | "team";
-      subject?: Object;
       active?: boolean;
       created_at?: string;
+      description?: string;
       events?: (
         | "pullrequest:unapproved"
         | "issue:comment_created"
@@ -678,6 +674,10 @@ declare namespace BitBucket {
         | "pullrequest:created"
         | "repo:transfer"
         | "repo:commit_comment_created")[];
+      subject?: Object;
+      subject_type?: "user" | "repository" | "team";
+      url?: string;
+      uuid?: string;
       [k: string]: any;
     };
     export type PipelineBuildNumber = Object & {
@@ -695,12 +695,7 @@ declare namespace BitBucket {
       [k: string]: any;
     };
     export interface Ref {
-      type: string;
       links?: {
-        self?: {
-          href?: string;
-          name?: string;
-        };
         commits?: {
           href?: string;
           name?: string;
@@ -709,9 +704,14 @@ declare namespace BitBucket {
           href?: string;
           name?: string;
         };
+        self?: {
+          href?: string;
+          name?: string;
+        };
       };
       name?: string;
       target?: Commit;
+      type: string;
       [k: string]: any;
     }
     export interface Object {
@@ -719,158 +719,160 @@ declare namespace BitBucket {
       [k: string]: any;
     }
     export interface Error {
-      type: string;
       error?: {
-        message: string;
-        detail?: string;
         data?: {
           [k: string]: any;
         };
+        detail?: string;
+        message: string;
       };
+      type: string;
       [k: string]: any;
     }
     export interface IssueChange {
-      type: string;
-      links?: {
-        self?: {
-          href?: string;
-          name?: string;
+      changes?: {
+        assignee?: {
+          new?: string;
+          old?: string;
         };
+        component?: {
+          new?: string;
+          old?: string;
+        };
+        content?: {
+          new?: string;
+          old?: string;
+        };
+        kind?: {
+          new?: string;
+          old?: string;
+        };
+        milestone?: {
+          new?: string;
+          old?: string;
+        };
+        priority?: {
+          new?: string;
+          old?: string;
+        };
+        state?: {
+          new?: string;
+          old?: string;
+        };
+        title?: {
+          new?: string;
+          old?: string;
+        };
+        version?: {
+          new?: string;
+          old?: string;
+        };
+      };
+      created_on?: string;
+      issue?: Issue;
+      links?: {
         issue?: {
           href?: string;
           name?: string;
         };
-      };
-      name?: string;
-      created_on?: string;
-      user?: User;
-      issue?: Issue;
-      changes?: {
-        assignee?: {
-          old?: string;
-          new?: string;
-        };
-        state?: {
-          old?: string;
-          new?: string;
-        };
-        title?: {
-          old?: string;
-          new?: string;
-        };
-        kind?: {
-          old?: string;
-          new?: string;
-        };
-        milestone?: {
-          old?: string;
-          new?: string;
-        };
-        component?: {
-          old?: string;
-          new?: string;
-        };
-        priority?: {
-          old?: string;
-          new?: string;
-        };
-        version?: {
-          old?: string;
-          new?: string;
-        };
-        content?: {
-          old?: string;
-          new?: string;
+        self?: {
+          href?: string;
+          name?: string;
         };
       };
       message?: {
-        raw?: string;
-        markup?: "markdown" | "creole" | "plaintext";
         html?: string;
+        markup?: "markdown" | "creole" | "plaintext";
+        raw?: string;
       };
+      name?: string;
+      type: string;
+      user?: User;
       [k: string]: any;
     }
     export interface PaginatedBranches {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Branch[];
     }
     export interface PaginatedBranchrestrictions {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Branchrestriction[];
     }
     export interface PaginatedCommitComments {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: CommitComment[];
     }
     export interface PaginatedCommitstatuses {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Commitstatus[];
     }
     export interface PaginatedComponents {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Component[];
     }
     export interface PaginatedDiffstats {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Diffstat[];
     }
     export interface Diffstat {
-      type: string;
-      status?: "added" | "removed" | "modified" | "renamed";
       lines_added?: number;
       lines_removed?: number;
-      old?: CommitFile;
       new?: CommitFile;
+      old?: CommitFile;
+      status?: "added" | "removed" | "modified" | "renamed";
+      type: string;
       [k: string]: any;
     }
     export interface CommitFile {
-      type: string;
-      path?: string;
-      commit?: Commit;
       attributes?: "link" | "executable" | "subrepository" | "binary" | "lfs";
+      commit?: Commit;
+      path?: string;
+      type: string;
       [k: string]: any;
     }
     export interface PaginatedFiles {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: CommitFile[];
     }
     export interface PaginatedHookEvents {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: HookEvent[];
     }
     export interface HookEvent {
+      category?: string;
+      description?: string;
       event?:
         | "pullrequest:unapproved"
         | "issue:comment_created"
@@ -895,97 +897,95 @@ declare namespace BitBucket {
         | "pullrequest:created"
         | "repo:transfer"
         | "repo:commit_comment_created";
-      category?: string;
       label?: string;
-      description?: string;
     }
     export interface PaginatedIssueAttachments {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: IssueAttachment[];
     }
     export interface PaginatedIssueComments {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: IssueComment[];
     }
     export interface PaginatedIssues {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Issue[];
     }
     export interface PaginatedLogEntries {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: IssueChange[];
     }
     export interface PaginatedMilestones {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Milestone[];
     }
     export interface PaginatedPipelineKnownHosts {
-      page?: number;
-      values?: PipelineKnownHost[];
-      size?: number;
-      pagelen?: number;
       next?: string;
+      page?: number;
+      pagelen?: number;
       previous?: string;
+      size?: number;
+      values?: PipelineKnownHost[];
       [k: string]: any;
     }
     export interface PaginatedPipelineScheduleExecutions {
-      page?: number;
-      values?: PipelineScheduleExecution[];
-      size?: number;
-      pagelen?: number;
       next?: string;
+      page?: number;
+      pagelen?: number;
       previous?: string;
+      size?: number;
+      values?: PipelineScheduleExecution[];
       [k: string]: any;
     }
     export interface PaginatedPipelineSchedules {
-      page?: number;
-      values?: PipelineSchedule[];
-      size?: number;
-      pagelen?: number;
       next?: string;
+      page?: number;
+      pagelen?: number;
       previous?: string;
+      size?: number;
+      values?: PipelineSchedule[];
       [k: string]: any;
     }
     export interface PaginatedPipelineSteps {
-      page?: number;
-      values?: PipelineStep[];
-      size?: number;
-      pagelen?: number;
       next?: string;
+      page?: number;
+      pagelen?: number;
       previous?: string;
+      size?: number;
+      values?: PipelineStep[];
       [k: string]: any;
     }
     export interface PipelineImage {
-      name?: string;
-      username?: string;
-      password?: string;
       email?: string;
+      name?: string;
+      password?: string;
+      username?: string;
       [k: string]: any;
     }
     export interface PipelineCommand {
-      name?: string;
       command?: string;
       log_range?: PipelineLogRange;
+      name?: string;
       [k: string]: any;
     }
     export interface PipelineLogRange {
@@ -994,211 +994,211 @@ declare namespace BitBucket {
       [k: string]: any;
     }
     export interface PaginatedPipelineVariables {
-      page?: number;
-      values?: PipelineVariable[];
-      size?: number;
-      pagelen?: number;
       next?: string;
+      page?: number;
+      pagelen?: number;
       previous?: string;
+      size?: number;
+      values?: PipelineVariable[];
       [k: string]: any;
     }
     export interface PaginatedPipelines {
-      page?: number;
-      values?: Pipeline[];
-      size?: number;
-      pagelen?: number;
       next?: string;
+      page?: number;
+      pagelen?: number;
       previous?: string;
+      size?: number;
+      values?: Pipeline[];
       [k: string]: any;
     }
     export interface PaginatedProjects {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Project[];
     }
     export interface PaginatedPullrequestComments {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: PullrequestComment[];
     }
     export interface PullrequestEndpoint {
-      repository?: Repository;
       branch?: {
         name?: string;
       };
       commit?: {
         hash?: string;
       };
+      repository?: Repository;
     }
     export interface PaginatedPullrequests {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Pullrequest[];
     }
     export interface PaginatedRefs {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Ref[];
     }
     export interface PaginatedRepositories {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Repository[];
     }
     export interface PaginatedRepositoryPermissions {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: RepositoryPermission[];
     }
     export interface RepositoryPermission {
-      type: string;
       permission?: "admin" | "write" | "read";
-      user?: User;
       repository?: Repository;
+      type: string;
+      user?: User;
       [k: string]: any;
     }
     export interface PaginatedSnippetComments {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: SnippetComment[];
     }
     export interface PaginatedSnippetCommit {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: SnippetCommit[];
     }
     export interface PaginatedSnippets {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Snippet[];
     }
     export interface PaginatedSshUserKeys {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: SshAccountKey[];
     }
     export interface PaginatedTags {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Tag[];
     }
     export interface PaginatedTeamPermissions {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: TeamPermission[];
     }
     export interface TeamPermission {
-      type: string;
       permission?: "admin" | "collaborator";
-      user?: User;
       team?: Team;
+      type: string;
+      user?: User;
       [k: string]: any;
     }
     export interface PaginatedTeams {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Team[];
     }
     export interface PaginatedTreeentries {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Treeentry[];
     }
     export interface Treeentry {
-      type: string;
-      path?: string;
       commit?: Commit;
+      path?: string;
+      type: string;
       [k: string]: any;
     }
     export interface PaginatedUsers {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: User[];
     }
     export interface PaginatedVersions {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: Version[];
     }
     export interface PaginatedWebhookSubscriptions {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      next?: string;
       previous?: string;
+      size?: number;
       values?: WebhookSubscription[];
     }
     export interface PullrequestMergeParameters {
-      type: string;
-      message?: string;
       close_source_branch?: boolean;
       merge_strategy?: "merge_commit" | "squash" | "fast_forward";
+      message?: string;
+      type: string;
       [k: string]: any;
     }
     export interface SearchResultPage {
-      size?: number;
+      next?: string;
       page?: number;
       pagelen?: number;
-      query_substituted?: boolean;
-      next?: string;
       previous?: string;
+      query_substituted?: boolean;
+      size?: number;
       values?: SearchCodeSearchResult[];
       [k: string]: any;
     }
     export interface SearchCodeSearchResult {
-      type?: string;
       content_match_count?: number;
       content_matches?: SearchContentMatch[];
-      path_matches?: SearchSegment[];
       file?: CommitFile;
+      path_matches?: SearchSegment[];
+      type?: string;
       [k: string]: any;
     }
     export interface SearchContentMatch {
@@ -1211,8 +1211,8 @@ declare namespace BitBucket {
       [k: string]: any;
     }
     export interface SearchSegment {
-      text?: string;
       match?: boolean;
+      text?: string;
       [k: string]: any;
     }
     export interface SubjectTypes {
@@ -1222,13 +1222,13 @@ declare namespace BitBucket {
           name?: string;
         };
       };
-      user?: {
+      team?: {
         events?: {
           href?: string;
           name?: string;
         };
       };
-      team?: {
+      user?: {
         events?: {
           href?: string;
           name?: string;
@@ -2629,14 +2629,14 @@ declare namespace BitBucket {
       "sort"?: string;
       "username": string;
     };
-  export type RepositoriesListBranchRestrictionsParams =
+  export type RepositoriesListBranchesParams =
     & {
       "q"?: string;
       "repo_slug": string;
       "sort"?: string;
       "username": string;
     };
-  export type RepositoriesListBranchesParams =
+  export type RepositoriesListBranchRestrictionsParams =
     & {
       "q"?: string;
       "repo_slug": string;
@@ -2651,18 +2651,18 @@ declare namespace BitBucket {
       "sort"?: string;
       "username": string;
     };
-  export type RepositoriesListCommitStatusesParams =
+  export type RepositoriesListCommitsParams =
     & {
-      "node": string;
+      "exclude"?: string;
+      "include"?: string;
       "q"?: string;
       "repo_slug": string;
       "sort"?: string;
       "username": string;
     };
-  export type RepositoriesListCommitsParams =
+  export type RepositoriesListCommitStatusesParams =
     & {
-      "exclude"?: string;
-      "include"?: string;
+      "node": string;
       "q"?: string;
       "repo_slug": string;
       "sort"?: string;
@@ -2752,6 +2752,13 @@ declare namespace BitBucket {
       "sort"?: string;
       "username": string;
     };
+  export type RepositoriesListPipelinesParams =
+    & {
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
+      "username": string;
+    };
   export type RepositoriesListPipelineScheduleExecutionsParams =
     & {
       "q"?: string;
@@ -2781,13 +2788,6 @@ declare namespace BitBucket {
       "sort"?: string;
       "username": string;
     };
-  export type RepositoriesListPipelinesParams =
-    & {
-      "q"?: string;
-      "repo_slug": string;
-      "sort"?: string;
-      "username": string;
-    };
   export type RepositoriesListPublicParams =
     & {
       "after"?: string;
@@ -2802,20 +2802,20 @@ declare namespace BitBucket {
       "sort"?: string;
       "username": string;
     };
-  export type RepositoriesListPullRequestStatusesParams =
-    & {
-      "pull_request_id": number;
-      "q"?: string;
-      "repo_slug": string;
-      "sort"?: string;
-      "username": string;
-    };
   export type RepositoriesListPullRequestsParams =
     & {
       "q"?: string;
       "repo_slug": string;
       "sort"?: string;
       "state"?: "MERGED"|"SUPERSEDED"|"OPEN"|"DECLINED";
+      "username": string;
+    };
+  export type RepositoriesListPullRequestStatusesParams =
+    & {
+      "pull_request_id": number;
+      "q"?: string;
+      "repo_slug": string;
+      "sort"?: string;
       "username": string;
     };
   export type RepositoriesListRefsParams =
@@ -3734,11 +3734,11 @@ declare class BitBucket {
     getTag(params: BitBucket.RepositoriesGetTagParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Tag>>): Promise<BitBucket.Response<BitBucket.Type.Tag>>;
     getWebhook(params: BitBucket.RepositoriesGetWebhookParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.WebhookSubscription>>): Promise<BitBucket.Response<BitBucket.Type.WebhookSubscription>>;
     list(params: BitBucket.RepositoriesListParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedRepositories>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedRepositories>>;
-    listBranchRestrictions(params: BitBucket.RepositoriesListBranchRestrictionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedBranchrestrictions>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedBranchrestrictions>>;
     listBranches(params: BitBucket.RepositoriesListBranchesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedBranches>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedBranches>>;
+    listBranchRestrictions(params: BitBucket.RepositoriesListBranchRestrictionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedBranchrestrictions>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedBranchrestrictions>>;
     listCommitComments(params: BitBucket.RepositoriesListCommitCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedCommitComments>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedCommitComments>>;
-    listCommitStatuses(params: BitBucket.RepositoriesListCommitStatusesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedCommitstatuses>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedCommitstatuses>>;
     listCommits(params: BitBucket.RepositoriesListCommitsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
+    listCommitStatuses(params: BitBucket.RepositoriesListCommitStatusesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedCommitstatuses>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedCommitstatuses>>;
     listComponents(params: BitBucket.RepositoriesListComponentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedComponents>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedComponents>>;
     listDiffStats(params: BitBucket.RepositoriesListDiffStatsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedDiffstats>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedDiffstats>>;
     listFileHistory(params: BitBucket.RepositoriesListFileHistoryParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedFiles>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedFiles>>;
@@ -3750,15 +3750,15 @@ declare class BitBucket {
     listMilestones(params: BitBucket.RepositoriesListMilestonesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedMilestones>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedMilestones>>;
     listPermissions(params: BitBucket.RepositoriesListPermissionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedRepositoryPermissions>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedRepositoryPermissions>>;
     listPipelineKnownHosts(params: BitBucket.RepositoriesListPipelineKnownHostsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedPipelineKnownHosts>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedPipelineKnownHosts>>;
+    listPipelines(params: BitBucket.RepositoriesListPipelinesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedPipelines>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedPipelines>>;
     listPipelineScheduleExecutions(params: BitBucket.RepositoriesListPipelineScheduleExecutionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedPipelineScheduleExecutions>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedPipelineScheduleExecutions>>;
     listPipelineSchedules(params: BitBucket.RepositoriesListPipelineSchedulesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedPipelineSchedules>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedPipelineSchedules>>;
     listPipelineSteps(params: BitBucket.RepositoriesListPipelineStepsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedPipelineSteps>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedPipelineSteps>>;
     listPipelineVariables(params: BitBucket.RepositoriesListPipelineVariablesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedPipelineVariables>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedPipelineVariables>>;
-    listPipelines(params: BitBucket.RepositoriesListPipelinesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedPipelines>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedPipelines>>;
     listPublic(params: BitBucket.RepositoriesListPublicParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedRepositories>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedRepositories>>;
     listPullRequestComments(params: BitBucket.RepositoriesListPullRequestCommentsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedPullrequestComments>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedPullrequestComments>>;
-    listPullRequestStatuses(params: BitBucket.RepositoriesListPullRequestStatusesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedCommitstatuses>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedCommitstatuses>>;
     listPullRequests(params: BitBucket.RepositoriesListPullRequestsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedPullrequests>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedPullrequests>>;
+    listPullRequestStatuses(params: BitBucket.RepositoriesListPullRequestStatusesParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedCommitstatuses>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedCommitstatuses>>;
     listRefs(params: BitBucket.RepositoriesListRefsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedRefs>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedRefs>>;
     listTags(params: BitBucket.RepositoriesListTagsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedTags>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedTags>>;
     listVersions(params: BitBucket.RepositoriesListVersionsParams, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.PaginatedVersions>>): Promise<BitBucket.Response<BitBucket.Type.PaginatedVersions>>;

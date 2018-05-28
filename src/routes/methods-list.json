@@ -400,46 +400,6 @@
       "repositories": "getPatch"
     }
   },
-  "/repositories/{username}/{repo_slug}/pipelines/": {
-    "get": {
-      "pipelines": "list",
-      "repositories": "listPipelines"
-    },
-    "post": {
-      "pipelines": "create",
-      "repositories": "createPipeline"
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}": {
-    "get": {
-      "pipelines": "get",
-      "repositories": "getPipeline"
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/": {
-    "get": {
-      "pipelines": "listSteps",
-      "repositories": "listPipelineSteps"
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}": {
-    "get": {
-      "pipelines": "getStep",
-      "repositories": "getPipelineStep"
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log": {
-    "get": {
-      "pipelines": "getStepLog",
-      "repositories": "getPipelineStepLog"
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline": {
-    "post": {
-      "pipelines": "stop",
-      "repositories": "stopPipeline"
-    }
-  },
   "/repositories/{username}/{repo_slug}/pipelines_config": {
     "get": {
       "pipelines": "getConfig",
@@ -548,6 +508,46 @@
       "repositories": "updatePipelineVariable"
     }
   },
+  "/repositories/{username}/{repo_slug}/pipelines/": {
+    "get": {
+      "pipelines": "list",
+      "repositories": "listPipelines"
+    },
+    "post": {
+      "pipelines": "create",
+      "repositories": "createPipeline"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}": {
+    "get": {
+      "pipelines": "get",
+      "repositories": "getPipeline"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/": {
+    "get": {
+      "pipelines": "listSteps",
+      "repositories": "listPipelineSteps"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}": {
+    "get": {
+      "pipelines": "getStep",
+      "repositories": "getPipelineStep"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log": {
+    "get": {
+      "pipelines": "getStepLog",
+      "repositories": "getPipelineStepLog"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline": {
+    "post": {
+      "pipelines": "stop",
+      "repositories": "stopPipeline"
+    }
+  },
   "/repositories/{username}/{repo_slug}/properties/{app_key}/{property_name}": {
     "delete": {
       "repositories": ""
@@ -567,12 +567,6 @@
     "post": {
       "pullrequests": "create",
       "repositories": "createPullRequest"
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pullrequests/activity": {
-    "get": {
-      "pullrequests": "getAllActivityLog",
-      "repositories": "getAllPullRequestsActivityLog"
     }
   },
   "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}": {
@@ -654,6 +648,12 @@
       "commitstatuses": "listPullRequestStatuses",
       "pullrequests": "listStatuses",
       "repositories": "listPullRequestStatuses"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests/activity": {
+    "get": {
+      "pullrequests": "getAllActivityLog",
+      "repositories": "getAllPullRequestsActivityLog"
     }
   },
   "/repositories/{username}/{repo_slug}/refs": {
@@ -762,6 +762,32 @@
       "snippets": "update"
     }
   },
+  "/snippets/{username}/{encoded_id}/{node_id}": {
+    "delete": {
+      "snippets": "deleteRevision"
+    },
+    "get": {
+      "snippets": "getRevision"
+    },
+    "put": {
+      "snippets": "updateRevision"
+    }
+  },
+  "/snippets/{username}/{encoded_id}/{node_id}/files/{path}": {
+    "get": {
+      "snippets": "getFile"
+    }
+  },
+  "/snippets/{username}/{encoded_id}/{revision}/diff": {
+    "get": {
+      "snippets": "getDiff"
+    }
+  },
+  "/snippets/{username}/{encoded_id}/{revision}/patch": {
+    "get": {
+      "snippets": "getPatch"
+    }
+  },
   "/snippets/{username}/{encoded_id}/comments": {
     "get": {
       "snippets": "listComments"
@@ -805,32 +831,6 @@
   "/snippets/{username}/{encoded_id}/watchers": {
     "get": {
       "snippets": "listWatchers"
-    }
-  },
-  "/snippets/{username}/{encoded_id}/{node_id}": {
-    "delete": {
-      "snippets": "deleteRevision"
-    },
-    "get": {
-      "snippets": "getRevision"
-    },
-    "put": {
-      "snippets": "updateRevision"
-    }
-  },
-  "/snippets/{username}/{encoded_id}/{node_id}/files/{path}": {
-    "get": {
-      "snippets": "getFile"
-    }
-  },
-  "/snippets/{username}/{encoded_id}/{revision}/diff": {
-    "get": {
-      "snippets": "getDiff"
-    }
-  },
-  "/snippets/{username}/{encoded_id}/{revision}/patch": {
-    "get": {
-      "snippets": "getPatch"
     }
   },
   "/teams": {

@@ -5153,31 +5153,6 @@
       "returns": "PaginatedRepositories",
       "url": "/repositories/{username}"
     },
-    "listBranchRestrictions": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedBranchrestrictions",
-      "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
-    },
     "listBranches": {
       "method": "GET",
       "params": {
@@ -5202,6 +5177,31 @@
       },
       "returns": "PaginatedBranches",
       "url": "/repositories/{username}/{repo_slug}/refs/branches"
+    },
+    "listBranchRestrictions": {
+      "method": "GET",
+      "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedBranchrestrictions",
+      "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
     },
     "listCommitComments": {
       "method": "GET",
@@ -5232,36 +5232,6 @@
       },
       "returns": "PaginatedCommitComments",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments"
-    },
-    "listCommitStatuses": {
-      "method": "GET",
-      "params": {
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedCommitstatuses",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses"
     },
     "listCommits": {
       "method": "GET",
@@ -5294,6 +5264,36 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commits"
+    },
+    "listCommitStatuses": {
+      "method": "GET",
+      "params": {
+        "node": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedCommitstatuses",
+      "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses"
     },
     "listComponents": {
       "method": "GET",
@@ -5602,6 +5602,31 @@
       "returns": "PaginatedPipelineKnownHosts",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
     },
+    "listPipelines": {
+      "method": "GET",
+      "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelines",
+      "url": "/repositories/{username}/{repo_slug}/pipelines/"
+    },
     "listPipelineScheduleExecutions": {
       "method": "GET",
       "params": {
@@ -5707,31 +5732,6 @@
       "returns": "PaginatedPipelineVariables",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
     },
-    "listPipelines": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelines",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/"
-    },
     "listPublic": {
       "method": "GET",
       "params": {
@@ -5781,36 +5781,6 @@
       "returns": "PaginatedPullrequestComments",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments"
     },
-    "listPullRequestStatuses": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedCommitstatuses",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
-    },
     "listPullRequests": {
       "method": "GET",
       "params": {
@@ -5845,6 +5815,36 @@
       },
       "returns": "PaginatedPullrequests",
       "url": "/repositories/{username}/{repo_slug}/pullrequests"
+    },
+    "listPullRequestStatuses": {
+      "method": "GET",
+      "params": {
+        "pull_request_id": {
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedCommitstatuses",
+      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
     },
     "listRefs": {
       "method": "GET",

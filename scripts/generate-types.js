@@ -3,7 +3,7 @@ const path = require('path')
 const Mustache = require('mustache')
 const { readFileSync, writeFileSync } = require('fs')
 
-const { camelCase, pascalCase } = require('./helpers')
+const { pascalCase } = require('./helpers')
 
 const ROUTES = require('../src/routes/routes.json')
 
@@ -62,7 +62,7 @@ const generateTypes = (languageName, templateFile, outputFile, typesBlob) => {
         let responseType = method.returns || 'Any'
 
         return methods.concat({
-          method: camelCase(methodName),
+          method: _.camelCase(methodName),
           paramTypeName,
           ownParams: hasParams && { params: ownParams },
           responseType,
@@ -73,7 +73,7 @@ const generateTypes = (languageName, templateFile, outputFile, typesBlob) => {
     )
 
     return namespaces.concat({
-      namespace: camelCase(namespaceName),
+      namespace: _.camelCase(namespaceName),
       methods
     })
   }, [])

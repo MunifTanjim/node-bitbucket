@@ -1,15 +1,15 @@
 const _ = require('lodash')
 const path = require('path')
 const { writeFileSync } = require('fs')
-
+const deepclean = require('clean-deep')
 const deepmerge = require('deepmerge')
+const deepsort = require('deep-sort-object')
 
 const {
   extractMethodNamesForScopeFromMethodList,
   extractScopesFromMethodsList,
   getDuplicates,
-  pascalCase,
-  tidyObject
+  pascalCase
 } = require('./helpers')
 
 const METHODS_LIST = require('../src/routes/methods-list.json')
@@ -70,9 +70,10 @@ const setParameters = (methodObject, { parameters = [] }) => {
       methodObject.params[name] = deepmerge(methodObject.params[name], {
         enum: _enum,
         in: _in,
-        required,
         type
       })
+
+      if (required) methodObject.params[name].required = required
 
       methodObject.params[name].enum = _.uniq(methodObject.params[name].enum)
 
@@ -163,26 +164,11 @@ const addFilterAndSortParams = routesObject => {
   })
 }
 
-const recursivelyTidyObject = object => {
-  _.each(object, (value, key) => {
-    if (!_.isPlainObject(value)) return
-    object[key] = tidyObject(value)
-    recursivelyTidyObject(object[key])
-  })
-}
-
-const tidyRoutesObject = routesObject => {
-  return _.chain(routesObject)
-    .thru(tidyObject)
-    .tap(recursivelyTidyObject)
-    .value()
-}
-
 initializeRoutes(routesObject)
 updateRoutes(routesObject)
 addFilterAndSortParams(routesObject)
 
 writeFileSync(
   routesPath,
-  `${JSON.stringify(tidyRoutesObject(routesObject), null, 2)}\n`
+  `${JSON.stringify(deepsort(deepclean(routesObject)), null, 2)}\n`
 )

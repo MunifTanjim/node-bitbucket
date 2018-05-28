@@ -1,66 +1,66 @@
 [
   {
-    "name": "users",
-    "description": ""
+    "description": "",
+    "name": "users"
   },
   {
-    "name": "teams",
-    "description": ""
+    "description": "",
+    "name": "teams"
   },
   {
-    "name": "repositories",
-    "description": ""
+    "description": "",
+    "name": "repositories"
   },
   {
-    "name": "source",
-    "description": "Browse the source code in the repository and\n                              create new commits by uploading."
+    "description": "Browse the source code in the repository and\n                              create new commits by uploading.",
+    "name": "source"
   },
   {
-    "name": "refs",
-    "description": ""
+    "description": "",
+    "name": "refs"
   },
   {
-    "name": "commits",
-    "description": ""
+    "description": "",
+    "name": "commits"
   },
   {
-    "name": "pullrequests",
-    "description": ""
+    "description": "",
+    "name": "pullrequests"
   },
   {
-    "name": "issue_tracker",
-    "description": "The issue resources provide functionality for getting information on\nissues in an issue tracker, creating new issues, updating them and deleting\nthem.\n\nYou can access public issues without authentication, but you can't gain access\nto private repositories' issues. By authenticating, you will get the ability\nto create issues, as well as access to updating data or deleting issues you\nhave access to."
+    "description": "The issue resources provide functionality for getting information on\nissues in an issue tracker, creating new issues, updating them and deleting\nthem.\n\nYou can access public issues without authentication, but you can't gain access\nto private repositories' issues. By authenticating, you will get the ability\nto create issues, as well as access to updating data or deleting issues you\nhave access to.",
+    "name": "issue_tracker"
   },
   {
-    "name": "wiki",
-    "description": ""
+    "description": "",
+    "name": "wiki"
   },
   {
-    "name": "downloads",
-    "description": ""
+    "description": "",
+    "name": "downloads"
   },
   {
-    "name": "snippets",
-    "description": ""
+    "description": "",
+    "name": "snippets"
   },
   {
-    "name": "webhooks",
-    "description": "Webhooks provide a way to configure Bitbucket Cloud to make requests to\nyour server (or another external service) whenever certain events occur in\nBitbucket Cloud.\n\nA webhook consists of:\n\n* A subject -- The resource that generates the events. Currently, this resource\n  is the repository, user account, or team where you create the webhook.\n* One or more event -- The default event is a repository push, but you can\n  select multiple events that can trigger the webhook.\n* A URL -- The endpoint where you want Bitbucket to send the event payloads\n  when a matching event happens.\n\nThere are two parts to getting a webhook to work: creating the webhook and\ntriggering the webhook. After you create a webhook for an event, every time\nthat event occurs, Bitbucket sends a payload request that describes the event\nto the specified URL. Thus, you can think of webhooks as a kind of\nnotification system.\n\nUse webhooks to integrate applications with Bitbucket Cloud. The following\nuse cases provides examples of when you would want to use webhooks:\n\n* Every time a user pushes commits in a repository, you may want to notify\n  your CI server to start a build.\n* Every time a user pushes commits or creates a pull request, you may want to\n  display a notification in your application.\n"
+    "description": "Webhooks provide a way to configure Bitbucket Cloud to make requests to\nyour server (or another external service) whenever certain events occur in\nBitbucket Cloud.\n\nA webhook consists of:\n\n* A subject -- The resource that generates the events. Currently, this resource\n  is the repository, user account, or team where you create the webhook.\n* One or more event -- The default event is a repository push, but you can\n  select multiple events that can trigger the webhook.\n* A URL -- The endpoint where you want Bitbucket to send the event payloads\n  when a matching event happens.\n\nThere are two parts to getting a webhook to work: creating the webhook and\ntriggering the webhook. After you create a webhook for an event, every time\nthat event occurs, Bitbucket sends a payload request that describes the event\nto the specified URL. Thus, you can think of webhooks as a kind of\nnotification system.\n\nUse webhooks to integrate applications with Bitbucket Cloud. The following\nuse cases provides examples of when you would want to use webhooks:\n\n* Every time a user pushes commits in a repository, you may want to notify\n  your CI server to start a build.\n* Every time a user pushes commits or creates a pull request, you may want to\n  display a notification in your application.\n",
+    "name": "webhooks"
   },
   {
-    "name": "commitstatuses",
-    "description": "Commit statuses provide a way to tag commits with meta data,\nlike automated build results.\n"
+    "description": "Commit statuses provide a way to tag commits with meta data,\nlike automated build results.\n",
+    "name": "commitstatuses"
   },
   {
-    "name": "branchrestrictions",
-    "description": "Repository owners and administrators can set branch management\nrules on a repository that control what can be pushed by whom.\nThrough these rules, you can enforce a project or team\nworkflow. For example, owners or administrators can:\n\n* Limit push powers\n* Prevent branch (bookmark) deletion\n* Prevent history re-writes (Git only)\n"
+    "description": "Repository owners and administrators can set branch management\nrules on a repository that control what can be pushed by whom.\nThrough these rules, you can enforce a project or team\nworkflow. For example, owners or administrators can:\n\n* Limit push powers\n* Prevent branch (bookmark) deletion\n* Prevent history re-writes (Git only)\n",
+    "name": "branchrestrictions"
   },
   {
-    "name": "projects",
-    "description": "Bitbucket Cloud projects make it easier for teams to focus on\na goal, product, or process by organizing their repositories.\n"
+    "description": "Bitbucket Cloud projects make it easier for teams to focus on\na goal, product, or process by organizing their repositories.\n",
+    "name": "projects"
   },
   {
-    "name": "pipelines",
-    "description": "Bitbucket Pipelines brings continuous delivery to Bitbucket\nCloud, empowering teams with full branching to deployment\nvisibility and faster feedback loops.\n"
+    "description": "Bitbucket Pipelines brings continuous delivery to Bitbucket\nCloud, empowering teams with full branching to deployment\nvisibility and faster feedback loops.\n",
+    "name": "pipelines"
   }
 ]
