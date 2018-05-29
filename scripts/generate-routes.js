@@ -1,9 +1,10 @@
 const _ = require('lodash')
 const path = require('path')
 const { writeFileSync } = require('fs')
+
 const deepclean = require('clean-deep')
-const deepmerge = require('deepmerge')
 const deepsort = require('deep-sort-object')
+const deepmerge = require('../src/utils/deepmerge')
 
 const {
   extractMethodNamesForScopeFromMethodList,

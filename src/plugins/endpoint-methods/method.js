@@ -1,4 +1,4 @@
-const deepmerge = require('deepmerge')
+const deepmerge = require('../../utils/deepmerge')
 
 const validate = require('./validate')
 

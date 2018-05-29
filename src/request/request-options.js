@@ -1,7 +1,8 @@
-const deepmerge = require('deepmerge')
 const urlTemplate = require('url-template')
 
 const addQueryParameters = require('../utils/add-query-parameters')
+const deepmerge = require('../utils/deepmerge')
+
 const HTTPError = require('./http-error')
 
 const DEFAULT_OPTIONS = require('./defaults')

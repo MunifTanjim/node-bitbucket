@@ -1,6 +1,6 @@
-const deepmerge = require('deepmerge')
 const authenticate = require('../authenticate')
 const beforeRequest = require('../before-request')
+const deepmerge = require('../../../utils/deepmerge')
 
 const state = {}
 

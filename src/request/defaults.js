@@ -1,4 +1,5 @@
 const { version } = require('../../package.json')
+
 const {
   basePath,
   host,

@@ -1,8 +1,9 @@
 const _ = require('lodash')
 const path = require('path')
 const { writeFileSync } = require('fs')
-const deepmerge = require('deepmerge')
+
 const deepsort = require('deep-sort-object')
+const deepmerge = require('../src/utils/deepmerge')
 
 const { pascalCase } = require('./helpers')
 

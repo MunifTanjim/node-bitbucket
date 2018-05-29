@@ -1,6 +1,5 @@
 const fetch = require('node-fetch')
 const debug = require('debug')('bitbucket')
-const deepmerge = require('deepmerge')
 
 const getBuffer = require('../utils/get-buffer-response')
 const HTTPError = require('./http-error')
@@ -28,7 +27,7 @@ const getData = response => {
 const request = requestOptions => {
   debug('REQUEST:', requestOptions)
 
-  let { method, url, headers = {}, body, timeout } = requestOptions
+  let { method, url, headers, body, timeout } = requestOptions
 
   // https://fetch.spec.whatwg.org/#methods
   method = method.toUpperCase()

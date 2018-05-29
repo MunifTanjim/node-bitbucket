@@ -1,6 +1,6 @@
-const deepmerge = require('deepmerge')
 const Hook = require('before-after-hook')
 
+const deepmerge = require('./utils/deepmerge')
 const request = require('./request')
 
 const Plugins = [
@@ -15,8 +15,6 @@ const clientDefaults = {
     timeout: 0
   }
 }
-
-// TODO: find deepmerge replacement
 
 class BitBucket {
   constructor(options = {}) {
