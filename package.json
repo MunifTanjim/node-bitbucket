@@ -53,6 +53,7 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
+    "form-data": "^2.3.2",
     "jest": "^23.0.0",
     "json-schema-to-typescript": "^5.5.0",
     "lodash": "^4.17.10",

@@ -2,8 +2,9 @@ const deepmerge = require('deepmerge')
 const urlTemplate = require('url-template')
 
 const addQueryParameters = require('../utils/add-query-parameters')
+const HTTPError = require('./http-error')
 
-const ENDPOINT_DEFAULTS = require('./defaults')
+const DEFAULT_OPTIONS = require('./defaults')
 
 /**
  * Returns Request Options for HTTP client
@@ -12,6 +13,7 @@ const ENDPOINT_DEFAULTS = require('./defaults')
  */
 const getRequestOptions = (endpointOptions = {}) => {
   let {
+    accepts = [],
     baseUrl,
     body,
     headers,
@@ -19,36 +21,60 @@ const getRequestOptions = (endpointOptions = {}) => {
     url,
     options: otherOptions,
     ...remainingOptions
-  } = deepmerge(ENDPOINT_DEFAULTS, endpointOptions)
+  } = deepmerge(DEFAULT_OPTIONS, endpointOptions)
 
-  let { _paramGroups = {}, ...params } = remainingOptions
-  let groupedParams = {}
+  let { _paramGroups, ...params } = remainingOptions
+
+  let paramGroups = {}
+
   Object.keys(_paramGroups).forEach(groupName => {
-    groupedParams[groupName] = {}
+    paramGroups[groupName] = {}
     _paramGroups[groupName].forEach(paramName => {
       if (params[paramName])
-        groupedParams[groupName][paramName] = params[paramName]
+        paramGroups[groupName][paramName] = params[paramName]
     })
   })
 
-  url = urlTemplate.parse(url).expand(groupedParams.path || {})
+  url = urlTemplate.parse(url).expand(paramGroups.path)
   if (!/^http/.test(url)) {
     url = `${baseUrl}${url}`
   }
 
-  if (Object.keys(groupedParams.query || {}).length) {
-    url = addQueryParameters(url, groupedParams.query)
+  if (Object.keys(paramGroups.query).length) {
+    url = addQueryParameters(url, paramGroups.query)
   }
 
-  if (Object.keys(groupedParams.body || {}).length) {
-    body = {}
-    Object.keys(groupedParams.body).forEach(paramName => {
-      if (paramName === '_body') {
-        body = deepmerge(body, groupedParams.body[paramName])
+  if (Object.keys(paramGroups.body).length) {
+    body = paramGroups.body._body || {}
+
+    let bodyType = body.constructor.name
+
+    if (/form-?data/i.test(bodyType)) {
+      let formDataContentType = 'multipart/form-data'
+
+      if (~accepts.indexOf(formDataContentType)) {
+        headers['content-type'] = formDataContentType
       } else {
-        body[paramName] = groupedParams.body[paramName]
+        // multipart/form-data not supported
+        throw new HTTPError(`Invalid Body Type: ${bodyType}`, 400)
       }
-    })
+    } else {
+      let urlEncodedContentType = 'application/x-www-form-urlencoded'
+
+      Object.keys(paramGroups.body).forEach(paramName => {
+        if (paramName === '_body') return
+        body[paramName] = paramGroups.body[paramName]
+      })
+
+      if (~accepts.indexOf(urlEncodedContentType)) {
+        body = addQueryParameters('', body).substring(1)
+        headers['content-type'] = urlEncodedContentType
+      } else {
+        // application/x-www-form-urlencoded not supported
+        body = JSON.stringify(body)
+        headers['content-type'] = 'application/json; charset=utf-8'
+      }
+    }
   }
 
   return {

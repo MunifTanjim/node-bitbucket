@@ -33,17 +33,10 @@ const request = requestOptions => {
   // https://fetch.spec.whatwg.org/#methods
   method = method.toUpperCase()
 
-  if (body) {
-    headers = deepmerge(
-      { 'content-type': 'application/json; charset=utf-8' },
-      headers
-    )
-  }
-
   let options = {
     method,
     headers,
-    body: body ? JSON.stringify(body) : null,
+    body,
     timeout
   }
 

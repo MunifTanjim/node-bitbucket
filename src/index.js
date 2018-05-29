@@ -16,6 +16,8 @@ const clientDefaults = {
   }
 }
 
+// TODO: find deepmerge replacement
+
 class BitBucket {
   constructor(options = {}) {
     this.options = deepmerge(clientDefaults, options)

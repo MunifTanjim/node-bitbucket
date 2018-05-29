@@ -4,15 +4,10 @@
  * @returns {Object} Grouped Parameter Names
  */
 const getParamGroups = (paramsSpecs = {}) => {
-  let paramGroups = {}
+  let paramGroups = { body: [], path: [], query: [] }
 
   Object.keys(paramsSpecs).forEach(paramName => {
-    let groupName = paramsSpecs[paramName].in
-
-    if (!Array.isArray(paramGroups[groupName])) {
-      paramGroups[groupName] = []
-    }
-
+    let groupName = paramsSpecs[paramName].in || 'body'
     paramGroups[groupName].push(paramName)
   })
 

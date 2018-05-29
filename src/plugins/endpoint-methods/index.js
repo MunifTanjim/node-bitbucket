@@ -15,14 +15,18 @@ class EndpointMethodsPlugin {
       Object.keys(ENDPOINT_ROUTES[namespaceName]).forEach(apiName => {
         let apiOptions = ENDPOINT_ROUTES[namespaceName][apiName]
 
-        let { method, params: paramsSpecs, url, ...rest } = apiOptions
+        let { accepts, method, params: paramsSpecs, url, ...rest } = apiOptions
 
         let _paramGroups = getParamGroups(paramsSpecs)
+
+        let defaults = { method, url, ...rest, _paramGroups }
+
+        if (accepts) defaults.accepts = accepts
 
         this.core[namespaceName][apiName] = endpointMethod.bind(
           null,
           this.core,
-          { method, url, ...rest, _paramGroups },
+          defaults,
           paramsSpecs
         )
       })
