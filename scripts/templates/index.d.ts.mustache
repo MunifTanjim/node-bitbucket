@@ -3,13 +3,13 @@
  */
 
 declare namespace BitBucket {
-  export interface EmptyParams {
-  }
+  export type Any = any;
+  export type AnyObject = object;
 
   export interface Options {
     baseUrl?: string;
     headers?: {[header: string]: any};
-    options?: any;
+    options?: AnyObject;
   }
 
   interface AuthBasic {
@@ -34,13 +34,13 @@ declare namespace BitBucket {
     | AuthAppPassword
     | AuthToken;
 
-  export type Link =
+  export type PageLink =
     | { next: string; }
     | { previous: string; }
     | string;
 
   export interface Callback<T> {
-    (error: BitBucket.Type.Error | null, response: T): void;
+    (error: BitBucket.Schema.Error | null, response: T): void;
   }
 
   export interface Response<T> {
@@ -48,31 +48,35 @@ declare namespace BitBucket {
     headers: any;
   }
 
-  namespace Type {
-    export type Any = any
+  namespace Schema {
+    export type Any = BitBucket.Any;
 
     {{{typesBlob}}}
   }
 
-  {{#namespaces}}
-  {{#methods}}
-  {{^exclude}}
-  {{#paramTypeName}}
-  export type {{paramTypeName}} =
-    {{#ownParams}}
-    & {
-    {{#params}}
-      "{{key}}"{{^required}}?{{/required}}: {{#schema}}BitBucket.Type.{{/schema}}{{{type}}};
-    {{/params}}
-    };
-    {{/ownParams}}
-    {{^ownParams}}
-    ;
-    {{/ownParams}}
-  {{/paramTypeName}}
-  {{/exclude}}
-  {{/methods}}
-  {{/namespaces}}
+  namespace Params {
+    export type Empty = {}
+
+    {{#namespaces}}
+    {{#methods}}
+    {{^exclude}}
+    {{#paramsType}}
+    export type {{paramsType}} =
+      {{#ownParams}}
+      {
+      {{#params}}
+        "{{name}}"{{^required}}?{{/required}}: {{#schema}}BitBucket.Schema.{{/schema}}{{{type}}};
+      {{/params}}
+      };
+      {{/ownParams}}
+      {{^ownParams}}
+      ;
+      {{/ownParams}}
+    {{/paramsType}}
+    {{/exclude}}
+    {{/methods}}
+    {{/namespaces}}
+  }
 }
 
 declare class BitBucket {
@@ -80,17 +84,19 @@ declare class BitBucket {
 
   authenticate(auth: BitBucket.Auth): void;
 
-  nextPage(data: BitBucket.Link): string | undefined;
-  previousPage(data: BitBucket.Link): string | undefined;
-  getPage(url: BitBucket.Link, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.Any>>): Promise<BitBucket.Response<BitBucket.Type.Any>>;
+  nextPage(data: BitBucket.PageLink): string | undefined;
+  previousPage(data: BitBucket.PageLink): string | undefined;
+  getPage(url: BitBucket.PageLink, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Schema.Any>>): Promise<BitBucket.Response<BitBucket.Schema.Any>>;
 
   {{#namespaces}}
   {{namespace}}: {
     {{#methods}}
-    {{method}}({{#paramTypeName}}params: BitBucket.{{.}}, {{/paramTypeName}}callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Type.{{responseType}}>>): Promise<BitBucket.Response<BitBucket.Type.{{responseType}}>>;
+    {{method}}(params: BitBucket.Params.{{paramsType}}, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Schema.{{responseType}}>>): Promise<BitBucket.Response<BitBucket.Schema.{{responseType}}>>;
     {{/methods}}
   };
   {{/namespaces}}
 }
 
-export = BitBucket
+export = BitBucket;
+
+export as namespace BitBucket;

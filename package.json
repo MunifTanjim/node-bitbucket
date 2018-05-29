@@ -17,7 +17,7 @@
   "repository": "github:MunifTanjim/node-bitbucket",
   "scripts": {
     "build": "npm-run-all build:*",
-    "prebuild:browser": "mkdirp dist/",
+    "prebuild:browser": "mkdirp dist",
     "build:browser": "npm-run-all build:browser:*",
     "build:browser:development": "webpack --mode development",
     "build:browser:production":
@@ -30,7 +30,7 @@
     "generate:types:ts": "node scripts/generate-types-ts.js",
     "prevalidate:ts": "npm run generate:types:ts",
     "validate:ts": "tsc --target es6 src/index.d.ts",
-    "prepare": "npm run build",
+    "prepare": "npm-run-all -s build generate:types",
     "test": "jest"
   },
   "dependencies": {

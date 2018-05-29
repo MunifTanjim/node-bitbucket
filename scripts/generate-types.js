@@ -11,7 +11,13 @@ const typeMap = {
   integer: 'number'
 }
 
-const parameterize = (paramName, param) => {
+const bodyTypeMap = {
+  default: 'BitBucket.Any',
+  'application/x-www-form-urlencoded': 'BitBucket.AnyObject',
+  'multipart/form-data': 'FormData'
+}
+
+const parameterize = (paramName, param, accepts) => {
   if (param === null) {
     return {}
   }
@@ -26,8 +32,14 @@ const parameterize = (paramName, param) => {
     type = param.schema
   }
 
+  if (accepts && paramName === '_body') {
+    type = accepts
+      .map(type => bodyTypeMap[type] || bodyTypeMap.default)
+      .join(' | ')
+  }
+
   return {
-    key: paramName,
+    name: paramName,
     required: param.required,
     schema,
     type: enums || type
@@ -43,27 +55,23 @@ const generateTypes = (languageName, templateFile, outputFile, typesBlob) => {
   let namespaces = Object.keys(ROUTES).reduce((namespaces, namespaceName) => {
     let methods = _.toPairs(ROUTES[namespaceName]).reduce(
       (methods, [methodName, method]) => {
-        let namespacedParamsName = pascalCase(
-          `${namespaceName}-${methodName}Params`
-        )
+        let namespacedParamsName = pascalCase(`${namespaceName}-${methodName}`)
 
         let ownParams = _.toPairs(method.params).reduce(
           (params, [paramName, param]) =>
-            params.concat(parameterize(paramName, param)),
+            params.concat(parameterize(paramName, param, method.accepts)),
           []
         )
 
         let hasParams = ownParams.length > 0
 
-        let paramTypeName = hasParams
-          ? namespacedParamsName
-          : pascalCase('EmptyParams')
+        let paramsType = hasParams ? namespacedParamsName : pascalCase('Empty')
 
         let responseType = method.returns || 'Any'
 
         return methods.concat({
           method: _.camelCase(methodName),
-          paramTypeName,
+          paramsType,
           ownParams: hasParams && { params: ownParams },
           responseType,
           exclude: !hasParams

@@ -60,5 +60,8 @@ typings/
 # next.js build output
 .next
 
+# type definitions are generated before publish
+**/*.d.ts
+
 # Others
 dist
