@@ -159,9 +159,15 @@ const updateRoutes = routesObject => {
 
 const addFilterAndSortParams = routesObject => {
   _.each(routesObject, (namespaces, namespaceName) => {
-    _.each(namespaces, (methodObject, methodName) => {
-      if (methodObject.returns && /^paginated/i.test(methodObject.returns)) {
-        setParameters(methodObject, {
+    _.each(namespaces, (apiObject, apiName) => {
+      if (apiObject.alias) return
+
+      let isPaginatedList = /^list/i.test(apiName)
+      let returnsPaginated =
+        apiObject.returns && /^paginated/i.test(apiObject.returns)
+
+      if (isPaginatedList || returnsPaginated) {
+        setParameters(apiObject, {
           parameters: [
             { in: 'query', name: 'q', required: false, type: 'string' },
             { in: 'query', name: 'sort', required: false, type: 'string' }

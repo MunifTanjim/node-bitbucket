@@ -26,14 +26,11 @@
     "fetchAll": {
       "alias": "repositories.fetchAllCommits"
     },
-    "fetchAllForRevision": {
-      "alias": "repositories.fetchAllCommitsForRevision"
+    "fetchAllFor": {
+      "alias": "repositories.fetchAllCommitsFor"
     },
     "get": {
       "alias": "repositories.getCommit"
-    },
-    "getAllForRevision": {
-      "alias": "repositories.getAllCommitsForRevision"
     },
     "getComment": {
       "alias": "repositories.getCommitComment"
@@ -49,6 +46,9 @@
     },
     "listComments": {
       "alias": "repositories.listCommitComments"
+    },
+    "listFor": {
+      "alias": "repositories.listCommitsFor"
     }
   },
   "commitstatuses": {
@@ -78,11 +78,16 @@
     "get": {
       "alias": "repositories.getDownload"
     },
-    "getAll": {
-      "alias": "repositories.getAllDownloads"
+    "list": {
+      "alias": "repositories.listDownloads"
     }
   },
   "hook_events": {
+    "getAllSubjectTypes": {
+      "method": "GET",
+      "returns": "SubjectTypes",
+      "url": "/hook_events"
+    },
     "list": {
       "method": "GET",
       "params": {
@@ -107,11 +112,6 @@
       },
       "returns": "PaginatedHookEvents",
       "url": "/hook_events/{subject_type}"
-    },
-    "listSubjectTypes": {
-      "method": "GET",
-      "returns": "SubjectTypes",
-      "url": "/hook_events"
     }
   },
   "issue_tracker": {
@@ -364,15 +364,6 @@
     "getActivityLog": {
       "alias": "repositories.getPullRequestActivityLog"
     },
-    "getAllActivityLog": {
-      "alias": "repositories.getAllPullRequestsActivityLog"
-    },
-    "getAllCommits": {
-      "alias": "repositories.getAllPullRequestCommits"
-    },
-    "getAllDefaultReviewers": {
-      "alias": "repositories.getAllDefaultReviewers"
-    },
     "getComment": {
       "alias": "repositories.getPullRequestComment"
     },
@@ -391,8 +382,17 @@
     "list": {
       "alias": "repositories.listPullRequests"
     },
+    "listActivityLog": {
+      "alias": "repositories.listPullRequestsActivityLog"
+    },
     "listComments": {
       "alias": "repositories.listPullRequestComments"
+    },
+    "listCommits": {
+      "alias": "repositories.listPullRequestCommits"
+    },
+    "listDefaultReviewers": {
+      "alias": "repositories.listDefaultReviewers"
     },
     "listStatuses": {
       "alias": "repositories.listPullRequestStatuses"
@@ -1441,7 +1441,7 @@
       },
       "url": "/repositories/{username}/{repo_slug}/commits"
     },
-    "fetchAllCommitsForRevision": {
+    "fetchAllCommitsFor": {
       "method": "POST",
       "params": {
         "exclude": {
@@ -1486,125 +1486,6 @@
       },
       "returns": "Repository",
       "url": "/repositories/{username}/{repo_slug}"
-    },
-    "getAllCommitsForRevision": {
-      "method": "GET",
-      "params": {
-        "exclude": {
-          "in": "query",
-          "type": "string"
-        },
-        "include": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "revision": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/commits/{revision}"
-    },
-    "getAllDefaultReviewers": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/default-reviewers"
-    },
-    "getAllDownloads": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/downloads"
-    },
-    "getAllPullRequestCommits": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/commits"
-    },
-    "getAllPullRequestsActivityLog": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/activity"
-    },
-    "getAllWatchers": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/watchers"
     },
     "getBranch": {
       "method": "GET",
@@ -2608,6 +2489,43 @@
       },
       "url": "/repositories/{username}/{repo_slug}/commits"
     },
+    "listCommitsFor": {
+      "method": "GET",
+      "params": {
+        "exclude": {
+          "in": "query",
+          "type": "string"
+        },
+        "include": {
+          "in": "query",
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "revision": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/commits/{revision}"
+    },
     "listCommitStatuses": {
       "method": "GET",
       "params": {
@@ -2663,6 +2581,30 @@
       "returns": "PaginatedComponents",
       "url": "/repositories/{username}/{repo_slug}/components"
     },
+    "listDefaultReviewers": {
+      "method": "GET",
+      "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/default-reviewers"
+    },
     "listDiffStats": {
       "method": "GET",
       "params": {
@@ -2696,6 +2638,30 @@
       },
       "returns": "PaginatedDiffstats",
       "url": "/repositories/{username}/{repo_slug}/diffstat/{spec}"
+    },
+    "listDownloads": {
+      "method": "GET",
+      "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/downloads"
     },
     "listFileHistory": {
       "method": "GET",
@@ -3112,6 +3078,35 @@
       "returns": "PaginatedPullrequestComments",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments"
     },
+    "listPullRequestCommits": {
+      "method": "GET",
+      "params": {
+        "pull_request_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/commits"
+    },
     "listPullRequests": {
       "method": "GET",
       "params": {
@@ -3146,6 +3141,35 @@
       },
       "returns": "PaginatedPullrequests",
       "url": "/repositories/{username}/{repo_slug}/pullrequests"
+    },
+    "listPullRequestsActivityLog": {
+      "method": "GET",
+      "params": {
+        "pull_request_id": {
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/pullrequests/activity"
     },
     "listPullRequestStatuses": {
       "method": "GET",
@@ -3251,6 +3275,30 @@
       },
       "returns": "PaginatedVersions",
       "url": "/repositories/{username}/{repo_slug}/versions"
+    },
+    "listWatchers": {
+      "method": "GET",
+      "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/watchers"
     },
     "listWebhooks": {
       "method": "GET",
@@ -3787,7 +3835,7 @@
       },
       "url": "/snippets/{username}/{encoded_id}/comments/{comment_id}"
     },
-    "deleteRevision": {
+    "deleteCommit": {
       "method": "DELETE",
       "params": {
         "encoded_id": {
@@ -3825,28 +3873,6 @@
       "returns": "Snippet",
       "url": "/snippets/{username}/{encoded_id}"
     },
-    "getAllCommitsForRevision": {
-      "method": "GET",
-      "params": {
-        "encoded_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "revision": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "SnippetCommit",
-      "url": "/snippets/{username}/{encoded_id}/commits/{revision}"
-    },
     "getComment": {
       "method": "GET",
       "params": {
@@ -3868,6 +3894,28 @@
       },
       "returns": "SnippetComment",
       "url": "/snippets/{username}/{encoded_id}/comments/{comment_id}"
+    },
+    "getCommit": {
+      "method": "GET",
+      "params": {
+        "encoded_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "node_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "Snippet",
+      "url": "/snippets/{username}/{encoded_id}/{node_id}"
     },
     "getDiff": {
       "method": "GET",
@@ -3940,28 +3988,6 @@
         }
       },
       "url": "/snippets/{username}/{encoded_id}/{revision}/patch"
-    },
-    "getRevision": {
-      "method": "GET",
-      "params": {
-        "encoded_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "node_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Snippet",
-      "url": "/snippets/{username}/{encoded_id}/{node_id}"
     },
     "list": {
       "method": "GET",
@@ -4036,6 +4062,36 @@
       },
       "returns": "PaginatedSnippetCommit",
       "url": "/snippets/{username}/{encoded_id}/commits"
+    },
+    "listCommitsFor": {
+      "method": "GET",
+      "params": {
+        "encoded_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "revision": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "SnippetCommit",
+      "url": "/snippets/{username}/{encoded_id}/commits/{revision}"
     },
     "listForUser": {
       "method": "GET",
@@ -4166,7 +4222,7 @@
       },
       "url": "/snippets/{username}/{encoded_id}/comments/{comment_id}"
     },
-    "updateRevision": {
+    "updateCommit": {
       "accepts": [
         "application/json",
         "multipart/related",
@@ -4209,19 +4265,19 @@
     }
   },
   "ssh": {
-    "createKeyForUser": {
+    "createKey": {
       "alias": "users.createSshKey"
     },
-    "deleteKeyForUser": {
+    "deleteKey": {
       "alias": "users.deleteSshKey"
     },
-    "getKeyForUser": {
+    "getKey": {
       "alias": "users.getSshKey"
     },
     "listKeys": {
       "alias": "users.listSshKeys"
     },
-    "updateKeyForUser": {
+    "updateKey": {
       "alias": "users.updateSshKey"
     }
   },
@@ -4332,32 +4388,6 @@
       },
       "returns": "Team",
       "url": "/teams/{username}"
-    },
-    "getAllMembers": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "User",
-      "url": "/teams/{username}/members"
-    },
-    "getAllRepositories": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/teams/{username}/repositories"
-    },
-    "getAllRepositoriesForUser": {
-      "alias": "users.getAllRepositories"
     },
     "getPipelineVariable": {
       "method": "GET",
@@ -4474,6 +4504,26 @@
       "returns": "PaginatedUsers",
       "url": "/teams/{username}/following"
     },
+    "listMembers": {
+      "method": "GET",
+      "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "User",
+      "url": "/teams/{username}/members"
+    },
     "listPipelineVariables": {
       "method": "GET",
       "params": {
@@ -4513,6 +4563,28 @@
       },
       "returns": "PaginatedProjects",
       "url": "/teams/{username}/projects/"
+    },
+    "listRepositories": {
+      "method": "GET",
+      "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/teams/{username}/repositories"
+    },
+    "listRepositoriesForUser": {
+      "alias": "users.listRepositories"
     },
     "listRepositoryPermissions": {
       "method": "GET",
@@ -4669,10 +4741,6 @@
       "returns": "User",
       "url": "/user"
     },
-    "getAllEmails": {
-      "method": "GET",
-      "url": "/user/emails"
-    },
     "getEmail": {
       "method": "GET",
       "params": {
@@ -4683,6 +4751,20 @@
         }
       },
       "url": "/user/emails/{email}"
+    },
+    "listEmails": {
+      "method": "GET",
+      "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        }
+      },
+      "url": "/user/emails"
     },
     "listRepositoryPermissions": {
       "method": "GET",
@@ -4810,23 +4892,6 @@
       "returns": "User",
       "url": "/users/{username}"
     },
-    "getAllEmailsForAuthedUser": {
-      "alias": "user.getAllEmails"
-    },
-    "getAllRepositories": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/users/{username}/repositories"
-    },
-    "getAllRepositoriesForTeam": {
-      "alias": "teams.getAllRepositories"
-    },
     "getAuthedUser": {
       "alias": "user.get"
     },
@@ -4870,6 +4935,9 @@
       },
       "returns": "WebhookSubscription",
       "url": "/users/{username}/hooks/{uid}"
+    },
+    "listEmailsForAuthedUser": {
+      "alias": "user.listEmails"
     },
     "listFollowers": {
       "method": "GET",
@@ -4930,6 +4998,28 @@
       },
       "returns": "PaginatedPipelineVariables",
       "url": "/users/{username}/pipelines_config/variables/"
+    },
+    "listRepositories": {
+      "method": "GET",
+      "params": {
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/users/{username}/repositories"
+    },
+    "listRepositoriesForTeam": {
+      "alias": "teams.listRepositories"
     },
     "listSshKeys": {
       "method": "GET",
@@ -5063,6 +5153,9 @@
     "get": {
       "alias": "repositories.getWebhook"
     },
+    "getAllSubjectTypes": {
+      "alias": "hook_events.getAllSubjectTypes"
+    },
     "getForTeam": {
       "alias": "teams.getWebhook"
     },
@@ -5080,9 +5173,6 @@
     },
     "listForUser": {
       "alias": "users.listWebhooks"
-    },
-    "listSubjectTypes": {
-      "alias": "hook_events.listSubjectTypes"
     },
     "update": {
       "alias": "repositories.updateWebhook"

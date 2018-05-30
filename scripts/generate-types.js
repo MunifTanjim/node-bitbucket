@@ -86,7 +86,7 @@ const generateTypes = (languageName, templateFile, outputFile, typesBlob) => {
     )
 
     return namespaces.concat({
-      namespace: _.camelCase(namespaceName),
+      namespace: namespaceName,
       apis
     })
   }, [])

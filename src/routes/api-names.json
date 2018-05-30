@@ -41,8 +41,8 @@
   },
   "/hook_events": {
     "get": {
-      "hook_events": "listSubjectTypes",
-      "webhooks": "listSubjectTypes"
+      "hook_events": "getAllSubjectTypes",
+      "webhooks": "getAllSubjectTypes"
     }
   },
   "/hook_events/{subject_type}": {
@@ -161,12 +161,12 @@
   },
   "/repositories/{username}/{repo_slug}/commits/{revision}": {
     "get": {
-      "commits": "getAllForRevision",
-      "repositories": "getAllCommitsForRevision"
+      "commits": "listFor",
+      "repositories": "listCommitsFor"
     },
     "post": {
-      "commits": "fetchAllForRevision",
-      "repositories": "fetchAllCommitsForRevision"
+      "commits": "fetchAllFor",
+      "repositories": "fetchAllCommitsFor"
     }
   },
   "/repositories/{username}/{repo_slug}/components": {
@@ -183,8 +183,8 @@
   },
   "/repositories/{username}/{repo_slug}/default-reviewers": {
     "get": {
-      "pullrequests": "getAllDefaultReviewers",
-      "repositories": "getAllDefaultReviewers"
+      "pullrequests": "listDefaultReviewers",
+      "repositories": "listDefaultReviewers"
     }
   },
   "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}": {
@@ -214,8 +214,8 @@
   },
   "/repositories/{username}/{repo_slug}/downloads": {
     "get": {
-      "downloads": "getAll",
-      "repositories": "getAllDownloads"
+      "downloads": "list",
+      "repositories": "listDownloads"
     },
     "post": {
       "downloads": "create",
@@ -609,8 +609,8 @@
   },
   "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/commits": {
     "get": {
-      "pullrequests": "getAllCommits",
-      "repositories": "getAllPullRequestCommits"
+      "pullrequests": "listCommits",
+      "repositories": "listPullRequestCommits"
     }
   },
   "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/decline": {
@@ -652,8 +652,8 @@
   },
   "/repositories/{username}/{repo_slug}/pullrequests/activity": {
     "get": {
-      "pullrequests": "getAllActivityLog",
-      "repositories": "getAllPullRequestsActivityLog"
+      "pullrequests": "listActivityLog",
+      "repositories": "listPullRequestsActivityLog"
     }
   },
   "/repositories/{username}/{repo_slug}/refs": {
@@ -732,7 +732,7 @@
   },
   "/repositories/{username}/{repo_slug}/watchers": {
     "get": {
-      "repositories": "getAllWatchers"
+      "repositories": "listWatchers"
     }
   },
   "/snippets": {
@@ -764,13 +764,13 @@
   },
   "/snippets/{username}/{encoded_id}/{node_id}": {
     "delete": {
-      "snippets": "deleteRevision"
+      "snippets": "deleteCommit"
     },
     "get": {
-      "snippets": "getRevision"
+      "snippets": "getCommit"
     },
     "put": {
-      "snippets": "updateRevision"
+      "snippets": "updateCommit"
     }
   },
   "/snippets/{username}/{encoded_id}/{node_id}/files/{path}": {
@@ -814,7 +814,7 @@
   },
   "/snippets/{username}/{encoded_id}/commits/{revision}": {
     "get": {
-      "snippets": "getAllCommitsForRevision"
+      "snippets": "listCommitsFor"
     }
   },
   "/snippets/{username}/{encoded_id}/watch": {
@@ -879,7 +879,7 @@
   },
   "/teams/{username}/members": {
     "get": {
-      "teams": "getAllMembers"
+      "teams": "listMembers"
     }
   },
   "/teams/{username}/permissions": {
@@ -942,8 +942,8 @@
   },
   "/teams/{username}/repositories": {
     "get": {
-      "teams": "getAllRepositories",
-      "users": "getAllRepositoriesForTeam"
+      "teams": "listRepositories",
+      "users": "listRepositoriesForTeam"
     }
   },
   "/teams/{username}/search/code": {
@@ -960,8 +960,8 @@
   },
   "/user/emails": {
     "get": {
-      "user": "getAllEmails",
-      "users": "getAllEmailsForAuthedUser"
+      "user": "listEmails",
+      "users": "listEmailsForAuthedUser"
     }
   },
   "/user/emails/{email}": {
@@ -1046,8 +1046,8 @@
   },
   "/users/{username}/repositories": {
     "get": {
-      "teams": "getAllRepositoriesForUser",
-      "users": "getAllRepositories"
+      "teams": "listRepositoriesForUser",
+      "users": "listRepositories"
     }
   },
   "/users/{username}/search/code": {
@@ -1062,7 +1062,7 @@
       "users": "listSshKeys"
     },
     "post": {
-      "ssh": "createKeyForUser",
+      "ssh": "createKey",
       "users": "createSshKey"
     }
   },
@@ -1082,15 +1082,15 @@
   },
   "/users/{username}/ssh-keys/{key_id}": {
     "delete": {
-      "ssh": "deleteKeyForUser",
+      "ssh": "deleteKey",
       "users": "deleteSshKey"
     },
     "get": {
-      "ssh": "getKeyForUser",
+      "ssh": "getKey",
       "users": "getSshKey"
     },
     "put": {
-      "ssh": "updateKeyForUser",
+      "ssh": "updateKey",
       "users": "updateSshKey"
     }
   }

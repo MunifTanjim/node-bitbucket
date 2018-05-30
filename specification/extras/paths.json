@@ -13,9 +13,7 @@
           "name": "exclude",
           "required": false,
           "type": "string"
-        },
-        { "in": "query", "name": "q", "required": false, "type": "string" },
-        { "in": "query", "name": "sort", "required": false, "type": "string" }
+        }
       ]
     },
     "post": {
@@ -118,13 +116,6 @@
     "post": {
       "consumes": ["multipart/form-data"],
       "parameters": [{ "in": "body", "name": "_body", "required": true }]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments": {
-    "get": {
-      "parameters": [
-        { "in": "query", "name": "sort", "required": false, "type": "string" }
-      ]
     }
   },
   "/repositories/{username}/{repo_slug}/refs/branches": {
