@@ -1,4 +1,10 @@
 {
+  "name": "BitBucket API client",
+  "title": "BitBucket API client Docs",
+  "header": {
+    "title": "Introduction",
+    "filename": "README.md"
+  },
   "template": {
     "withCompare": false
   }

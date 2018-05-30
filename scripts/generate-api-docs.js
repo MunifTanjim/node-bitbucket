@@ -151,11 +151,11 @@ const prepareNamespace = (namespace, namespaceName) =>
         prepareAPI(namespace[apiName], apiName, namespaceName)
       )
     )
-    .join('\n\n')
+    .join('\n')
 
 const apiDocs = _.keys(ROUTES)
   .map(namespaceName => prepareNamespace(ROUTES[namespaceName], namespaceName))
-  .join('\n\n')
+  .join('\n')
   .trim()
 
-writeFileSync(path.resolve(docsPath, 'apidoc.js'), apiDocs)
+writeFileSync(path.resolve(docsPath, 'apidoc.js'), `${apiDocs}\n`)

@@ -1,8 +1,8 @@
-# node-bitbucket
+# BitBucket.js
 
 BitBucket API client for Browser and Node.js
 
-BitBucket API docs: https://api.bitbucket.org
+BitBucket API docs: [https://api.bitbucket.org](https://api.bitbucket.org)
 
 ## Usage
 
@@ -20,6 +20,37 @@ bitbucket.repositories
   .then(({ data, headers }) => console.log(data.values))
   .catch(err => console.error(err))
 ```
+
+**async/await**
+```js
+let { data, headers } = await bitbucket.<namespace>.<api>({ ...params })
+```
+
+**Promise**
+```js
+bitbucket.<namespace>
+  .<api>({ ...params })
+  .then(({ data, headers }) => {})
+  .catch(err => {})
+```
+
+**Callback**
+```js
+bitbucket.<namespace>.<api>({ ...params }, ({ data, headers }) => {})
+```
+
+Notes:
+
+- `<namespace>` is one of the _Namespace Names_
+- `<api>` is one of the _API Names_
+
+### Namespace Names
+
+`addon`, `hook_events`, `webhooks`, `repositories`, `branchrestrictions`, `commits`, `commitstatuses`, `issue_tracker`, `pullrequests`, `downloads`, `source`, `pipelines`, `refs`, `snippets`, `teams`, `projects`, `users`, `search`, `user`, `ssh`
+
+### API Names
+
+Check API client docs: [https://bitbucketjs.netlify.com](https://bitbucketjs.netlify.com)
 
 ## Acknowledgement
 
