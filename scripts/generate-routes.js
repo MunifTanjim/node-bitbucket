@@ -8,12 +8,13 @@ const deepmerge = require('../src/utils/deepmerge')
 
 const {
   extractMethodNamesForScopeFromMethodList,
+  extractNamespaceFromURL,
   extractScopesFromMethodsList,
   getDuplicates,
   pascalCase
 } = require('./helpers')
 
-const METHODS_LIST = require('../src/routes/methods-list.json')
+const API_NAMES = require('../src/routes/api-names.json')
 const PATHS_SPEC = require('../specification/paths.json')
 
 const PATHS_SPEC_EXTRAS = require('../specification/extras/paths.json')
@@ -23,14 +24,14 @@ const routesPath = path.resolve('src/routes/routes.json')
 const routesObject = {}
 
 const initializeRoutes = routesObject => {
-  const namespaces = extractScopesFromMethodsList(METHODS_LIST)
+  const namespaces = extractScopesFromMethodsList(API_NAMES)
 
   _.each(namespaces, namespaceName => {
     // Initialize Namespace
     routesObject[namespaceName] = {}
 
     let methodNames = extractMethodNamesForScopeFromMethodList(
-      METHODS_LIST,
+      API_NAMES,
       namespaceName
     )
 
@@ -45,41 +46,48 @@ const initializeRoutes = routesObject => {
     // Initialize MethodNames
     _.each(methodNames, methodName => {
       routesObject[namespaceName][methodName] = {
-        method: '',
-        params: {},
-        url: ''
+        params: {}
       }
     })
   })
 }
 
-const setConsumes = (methodObject, { consumes = [] }) => {
-  if (!methodObject.accepts) methodObject.accepts = []
-  methodObject.accepts = _.uniq(methodObject.accepts.concat(...consumes))
+const setAlias = (apiObject, namespaceName, resourceName, namesList) => {
+  if (namespaceName !== resourceName && namesList[resourceName]) {
+    apiObject.alias = `${resourceName}.${namesList[resourceName]}`
+    return true
+  }
+
+  return false
 }
 
-const setHTTPMethod = (methodObject, httpMethod) => {
-  methodObject.method = httpMethod.toUpperCase()
+const setConsumes = (apiObject, { consumes = [] }) => {
+  if (!apiObject.accepts) apiObject.accepts = []
+  apiObject.accepts = _.uniq(apiObject.accepts.concat(...consumes))
 }
 
-const setParameters = (methodObject, { parameters = [] }) => {
+const setHTTPMethod = (apiObject, method) => {
+  apiObject.method = method.toUpperCase()
+}
+
+const setParameters = (apiObject, { parameters = [] }) => {
   _.each(
     parameters,
     ({ enum: _enum, in: _in, name, required, schema = {}, type = 'any' }) => {
-      if (!methodObject.params[name]) methodObject.params[name] = {}
+      if (!apiObject.params[name]) apiObject.params[name] = {}
 
-      methodObject.params[name] = deepmerge(methodObject.params[name], {
+      apiObject.params[name] = deepmerge(apiObject.params[name], {
         enum: _enum,
         in: _in,
         type
       })
 
-      if (required) methodObject.params[name].required = required
+      if (required) apiObject.params[name].required = required
 
-      methodObject.params[name].enum = _.uniq(methodObject.params[name].enum)
+      apiObject.params[name].enum = _.uniq(apiObject.params[name].enum)
 
       if (type === 'any' && schema.$ref) {
-        methodObject.params[name].schema = pascalCase(
+        apiObject.params[name].schema = pascalCase(
           schema.$ref.replace('#/definitions/', '')
         )
       }
@@ -87,63 +95,62 @@ const setParameters = (methodObject, { parameters = [] }) => {
   )
 }
 
-const setResponses = (methodObject, { responses = [] }) => {
+const setResponses = (apiObject, { responses = [] }) => {
   _.each(responses, (response, code) => {
     if (Number(code) < 400) {
       if (!response.schema) return
-      methodObject.returns = pascalCase(
+      apiObject.returns = pascalCase(
         response.schema.$ref.replace('#/definitions/', '')
       )
     }
   })
 }
 
-const setURL = (methodObject, url) => {
-  methodObject.url = url
+const setURL = (apiObject, url) => {
+  apiObject.url = url
 }
 
 const updateRoutes = routesObject => {
-  _.each(METHODS_LIST, (methods, url) => {
+  _.each(API_NAMES, (methods, url) => {
     // Specification for URL
     let spec = PATHS_SPEC[url] || {}
     let specExtras = PATHS_SPEC_EXTRAS[url] || {}
 
-    _.each(methods, (namespaces, httpMethod) => {
-      _.each(namespaces, (methodName, namespaceName) => {
+    _.each(methods, (namespaces, method) => {
+      _.each(namespaces, (apiName, namespaceName) => {
         // Igonre Empty MethodNames
-        if (!methodName) return
+        if (!apiName) return
 
-        setHTTPMethod(routesObject[namespaceName][methodName], httpMethod)
-        setURL(routesObject[namespaceName][methodName], url)
-
-        setParameters(routesObject[namespaceName][methodName], spec)
-        if (spec[httpMethod]) {
-          setConsumes(routesObject[namespaceName][methodName], spec[httpMethod])
-          setParameters(
-            routesObject[namespaceName][methodName],
-            spec[httpMethod]
+        if (
+          setAlias(
+            routesObject[namespaceName][apiName],
+            namespaceName,
+            extractNamespaceFromURL(url),
+            API_NAMES[url][method]
           )
-          setResponses(
-            routesObject[namespaceName][methodName],
-            spec[httpMethod]
-          )
+        ) {
+          return
         }
 
-        if (!specExtras[httpMethod]) return
+        setHTTPMethod(routesObject[namespaceName][apiName], method)
+        setURL(routesObject[namespaceName][apiName], url)
 
-        _.each(specExtras[httpMethod], (value, key) => {
-          setConsumes(
-            routesObject[namespaceName][methodName],
-            specExtras[httpMethod]
-          )
+        setParameters(routesObject[namespaceName][apiName], spec)
+        if (spec[method]) {
+          setConsumes(routesObject[namespaceName][apiName], spec[method])
+          setParameters(routesObject[namespaceName][apiName], spec[method])
+          setResponses(routesObject[namespaceName][apiName], spec[method])
+        }
+
+        if (!specExtras[method]) return
+
+        _.each(specExtras[method], (value, key) => {
+          setConsumes(routesObject[namespaceName][apiName], specExtras[method])
           setParameters(
-            routesObject[namespaceName][methodName],
-            specExtras[httpMethod]
+            routesObject[namespaceName][apiName],
+            specExtras[method]
           )
-          setResponses(
-            routesObject[namespaceName][methodName],
-            specExtras[httpMethod]
-          )
+          setResponses(routesObject[namespaceName][apiName], specExtras[method])
         })
       })
     })

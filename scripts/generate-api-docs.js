@@ -9,7 +9,7 @@ const docsPath = path.resolve('docs')
 
 const ROUTES = require('../src/routes/routes.json')
 
-// TODO: implement .alias library-wide
+// One of many workarounds for BitBucket's faulty API Specification
 const URL_ALIASES = {
   '/users/{username}/ssh-keys/{key_id}': '/users/{username}/ssh-keys/'
 }
@@ -84,6 +84,11 @@ const getLinkToOfficialDocs = ({ method, url }, apiName, namespaceName) =>
   )}#${_.lowerCase(method)}">[API Docs]</a>`
 
 const toAPIComment = (api, apiName, namespaceName) => {
+  if (api.alias) {
+    let [namespaceAlias, apiAlias] = api.alias.split('.')
+    api = ROUTES[namespaceAlias][apiAlias]
+  }
+
   let method = api.method
   let url = api.url
   let params = api.params

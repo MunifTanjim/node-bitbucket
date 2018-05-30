@@ -1,662 +1,85 @@
 {
   "branchrestrictions": {
     "create": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "Branchrestriction",
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Branchrestriction",
-      "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
+      "alias": "repositories.createBranchRestriction"
     },
     "delete": {
-      "method": "DELETE",
-      "params": {
-        "id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
+      "alias": "repositories.deleteBranchRestriction"
     },
     "get": {
-      "method": "GET",
-      "params": {
-        "id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Branchrestriction",
-      "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
+      "alias": "repositories.getBranchRestriction"
     },
     "list": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedBranchrestrictions",
-      "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
+      "alias": "repositories.listBranchRestrictions"
     },
     "update": {
-      "method": "PUT",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "Branchrestriction",
-          "type": "any"
-        },
-        "id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Branchrestriction",
-      "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
+      "alias": "repositories.updateBranchRestriction"
     }
   },
   "commits": {
     "createApproval": {
-      "method": "POST",
-      "params": {
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Participant",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/approve"
+      "alias": "repositories.createCommitApproval"
     },
     "deleteApproval": {
-      "method": "DELETE",
-      "params": {
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/approve"
+      "alias": "repositories.deleteCommitApproval"
     },
     "fetchAll": {
-      "accepts": [
-        "application/x-www-form-urlencoded"
-      ],
-      "method": "POST",
-      "params": {
-        "exclude": {
-          "in": "body",
-          "type": "string"
-        },
-        "include": {
-          "in": "body",
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/commits"
+      "alias": "repositories.fetchAllCommits"
     },
     "fetchAllForRevision": {
-      "method": "POST",
-      "params": {
-        "exclude": {
-          "in": "body",
-          "type": "string"
-        },
-        "include": {
-          "in": "body",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "revision": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/commits/{revision}"
+      "alias": "repositories.fetchAllCommitsForRevision"
     },
     "get": {
-      "method": "GET",
-      "params": {
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Commit",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}"
+      "alias": "repositories.getCommit"
     },
     "getAllForRevision": {
-      "method": "GET",
-      "params": {
-        "exclude": {
-          "in": "query",
-          "type": "string"
-        },
-        "include": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "revision": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/commits/{revision}"
+      "alias": "repositories.getAllCommitsForRevision"
     },
     "getComment": {
-      "method": "GET",
-      "params": {
-        "comment_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "CommitComment",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments/{comment_id}"
+      "alias": "repositories.getCommitComment"
     },
     "getDiff": {
-      "method": "GET",
-      "params": {
-        "binary": {
-          "in": "query",
-          "type": "boolean"
-        },
-        "context": {
-          "in": "query",
-          "type": "integer"
-        },
-        "ignore_whitespace": {
-          "in": "query",
-          "type": "boolean"
-        },
-        "path": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "spec": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/diff/{spec}"
+      "alias": "repositories.getDiff"
     },
     "getPatch": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "spec": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/patch/{spec}"
+      "alias": "repositories.getPatch"
     },
     "list": {
-      "method": "GET",
-      "params": {
-        "exclude": {
-          "in": "query",
-          "type": "string"
-        },
-        "include": {
-          "in": "query",
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/commits"
+      "alias": "repositories.listCommits"
     },
     "listComments": {
-      "method": "GET",
-      "params": {
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedCommitComments",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments"
+      "alias": "repositories.listCommitComments"
     }
   },
   "commitstatuses": {
     "createBuildStatus": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "schema": "Commitstatus",
-          "type": "any"
-        },
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Commitstatus",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build"
+      "alias": "repositories.createCommitBuildStatus"
     },
     "getBuildStatus": {
-      "method": "GET",
-      "params": {
-        "key": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Commitstatus",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}"
+      "alias": "repositories.getCommitBuildStatus"
     },
     "list": {
-      "method": "GET",
-      "params": {
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedCommitstatuses",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses"
+      "alias": "repositories.listCommitStatuses"
     },
     "listPullRequestStatuses": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedCommitstatuses",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
+      "alias": "repositories.listPullRequestStatuses"
     },
     "updateBuildStatus": {
-      "method": "PUT",
-      "params": {
-        "_body": {
-          "in": "body",
-          "schema": "Commitstatus",
-          "type": "any"
-        },
-        "key": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Commitstatus",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}"
+      "alias": "repositories.updateCommitBuildStatus"
     }
   },
   "downloads": {
     "create": {
-      "accepts": [
-        "multipart/form-data"
-      ],
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/downloads"
+      "alias": "repositories.createDownload"
     },
     "delete": {
-      "method": "DELETE",
-      "params": {
-        "filename": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/downloads/{filename}"
+      "alias": "repositories.deleteDownload"
     },
     "get": {
-      "method": "GET",
-      "params": {
-        "filename": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/downloads/{filename}"
+      "alias": "repositories.getDownload"
     },
     "getAll": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/downloads"
+      "alias": "repositories.getAllDownloads"
     }
   },
   "hook_events": {
@@ -693,2401 +116,321 @@
   },
   "issue_tracker": {
     "create": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "Issue",
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Issue",
-      "url": "/repositories/{username}/{repo_slug}/issues"
+      "alias": "repositories.createIssue"
     },
     "createAttachments": {
-      "accepts": [
-        "multipart/form-data"
-      ],
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "type": "any"
-        },
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments"
+      "alias": "repositories.createIssueAttachments"
     },
     "createChange": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "IssueChange",
-          "type": "any"
-        },
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "IssueChange",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
+      "alias": "repositories.createIssueChange"
     },
     "createComment": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "IssueComment",
-          "type": "any"
-        },
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments"
+      "alias": "repositories.createIssueComment"
     },
     "createVote": {
-      "method": "PUT",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Error",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
+      "alias": "repositories.createIssueVote"
     },
     "createWatch": {
-      "method": "PUT",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Error",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
+      "alias": "repositories.createIssueWatch"
     },
     "delete": {
-      "method": "DELETE",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Issue",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
+      "alias": "repositories.deleteIssue"
     },
     "deleteAttachment": {
-      "method": "DELETE",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "path": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments/{path}"
+      "alias": "repositories.deleteIssueAttachment"
     },
     "deleteComment": {
-      "method": "DELETE",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "IssueComment",
-          "type": "any"
-        },
-        "comment_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
+      "alias": "repositories.deleteIssueComment"
     },
     "deleteVote": {
-      "method": "DELETE",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
+      "alias": "repositories.deleteIssueVote"
     },
     "deleteWatch": {
-      "method": "DELETE",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Error",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
+      "alias": "repositories.deleteIssueWatch"
     },
     "get": {
-      "method": "GET",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Issue",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
+      "alias": "repositories.getIssue"
     },
     "getAttachment": {
-      "method": "GET",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "path": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments/{path}"
+      "alias": "repositories.getIssueAttachment"
     },
     "getChange": {
-      "method": "GET",
-      "params": {
-        "change_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "IssueChange",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes/{change_id}"
+      "alias": "repositories.getIssueChange"
     },
     "getComment": {
-      "method": "GET",
-      "params": {
-        "comment_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "IssueComment",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
+      "alias": "repositories.getIssueComment"
     },
     "getComponent": {
-      "method": "GET",
-      "params": {
-        "component_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Component",
-      "url": "/repositories/{username}/{repo_slug}/components/{component_id}"
+      "alias": "repositories.getIssueComponent"
     },
     "getMilestone": {
-      "method": "GET",
-      "params": {
-        "milestone_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Milestone",
-      "url": "/repositories/{username}/{repo_slug}/milestones/{milestone_id}"
+      "alias": "repositories.getIssueMilestone"
     },
     "getVersion": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "version_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        }
-      },
-      "returns": "Version",
-      "url": "/repositories/{username}/{repo_slug}/versions/{version_id}"
+      "alias": "repositories.getIssueVersion"
     },
     "getVote": {
-      "method": "GET",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Error",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
+      "alias": "repositories.getIssueVote"
     },
     "getWatch": {
-      "method": "GET",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Error",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
+      "alias": "repositories.getIssueWatch"
     },
     "list": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedIssues",
-      "url": "/repositories/{username}/{repo_slug}/issues"
+      "alias": "repositories.listIssues"
     },
     "listAttachments": {
-      "method": "GET",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedIssueAttachments",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments"
+      "alias": "repositories.listIssueAttachments"
     },
     "listChanges": {
-      "method": "GET",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedLogEntries",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
+      "alias": "repositories.listIssueChanges"
     },
     "listComments": {
-      "method": "GET",
-      "params": {
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedIssueComments",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments"
+      "alias": "repositories.listIssueComments"
     },
     "listComponents": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedComponents",
-      "url": "/repositories/{username}/{repo_slug}/components"
+      "alias": "repositories.listComponents"
     },
     "listMilestones": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedMilestones",
-      "url": "/repositories/{username}/{repo_slug}/milestones"
+      "alias": "repositories.listMilestones"
     },
     "listVersions": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedVersions",
-      "url": "/repositories/{username}/{repo_slug}/versions"
+      "alias": "repositories.listVersions"
     },
     "update": {
-      "method": "PUT",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "Issue",
-          "type": "any"
-        },
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Issue",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
+      "alias": "repositories.updateIssue"
     },
     "updateComment": {
-      "method": "PUT",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "IssueComment",
-          "type": "any"
-        },
-        "comment_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "issue_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "IssueComment",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
+      "alias": "repositories.updateIssueComment"
     }
   },
   "pipelines": {
     "create": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "Pipeline",
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Pipeline",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/"
+      "alias": "repositories.createPipeline"
     },
     "createKnownHost": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "PipelineKnownHost",
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineKnownHost",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
+      "alias": "repositories.createPipelineKnownHost"
     },
     "createSchedule": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "PipelineSchedule",
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineSchedule",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
+      "alias": "repositories.createPipelineSchedule"
     },
     "createVariable": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "PipelineVariable",
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineVariable",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
+      "alias": "repositories.createPipelineVariable"
     },
     "createVariableForTeam": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "schema": "PipelineVariable",
-          "type": "any"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineVariable",
-      "url": "/teams/{username}/pipelines_config/variables/"
+      "alias": "teams.createPipelineVariable"
     },
     "createVariableForUser": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "schema": "PipelineVariable",
-          "type": "any"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineVariable",
-      "url": "/users/{username}/pipelines_config/variables/"
+      "alias": "users.createPipelineVariable"
     },
     "deleteKnownHost": {
-      "method": "DELETE",
-      "params": {
-        "known_host_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
+      "alias": "repositories.deletePipelineKnownHost"
     },
     "deleteSchedule": {
-      "method": "DELETE",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "schedule_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
+      "alias": "repositories.deletePipelineSchedule"
     },
     "deleteSshKeyPair": {
-      "method": "DELETE",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
+      "alias": "repositories.deletePipelineSshKeyPair"
     },
     "deleteVariable": {
-      "method": "DELETE",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "variable_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
+      "alias": "repositories.deletePipelineVariable"
     },
     "deleteVariableForTeam": {
-      "method": "DELETE",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "variable_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
+      "alias": "teams.deletePipelineVariable"
     },
     "deleteVariableForUser": {
-      "method": "DELETE",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "variable_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
+      "alias": "users.deletePipelineVariable"
     },
     "get": {
-      "method": "GET",
-      "params": {
-        "pipeline_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Pipeline",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}"
+      "alias": "repositories.getPipeline"
     },
     "getConfig": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelinesConfig",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config"
+      "alias": "repositories.getPipelineConfig"
     },
     "getKnownHost": {
-      "method": "GET",
-      "params": {
-        "known_host_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineKnownHost",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
+      "alias": "repositories.getPipelineKnownHost"
     },
     "getSchedule": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "schedule_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineSchedule",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
+      "alias": "repositories.getPipelineSchedule"
     },
     "getSshKeyPair": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineSshKeyPair",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
+      "alias": "repositories.getPipelineSshKeyPair"
     },
     "getStep": {
-      "method": "GET",
-      "params": {
-        "pipeline_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "step_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineStep",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}"
+      "alias": "repositories.getPipelineStep"
     },
     "getStepLog": {
-      "method": "GET",
-      "params": {
-        "pipeline_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "step_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Error",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log"
+      "alias": "repositories.getPipelineStepLog"
     },
     "getVariable": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "variable_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineVariable",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
+      "alias": "repositories.getPipelineVariable"
     },
     "getVariableForTeam": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "variable_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineVariable",
-      "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
+      "alias": "teams.getPipelineVariable"
     },
     "getVariableForUser": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "variable_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineVariable",
-      "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
+      "alias": "users.getPipelineVariable"
     },
     "list": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelines",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/"
+      "alias": "repositories.listPipelines"
     },
     "listKnownHosts": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineKnownHosts",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
+      "alias": "repositories.listPipelineKnownHosts"
     },
     "listScheduleExecutions": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineScheduleExecutions",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/"
+      "alias": "repositories.listPipelineScheduleExecutions"
     },
     "listSchedules": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineSchedules",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
+      "alias": "repositories.listPipelineSchedules"
     },
     "listSteps": {
-      "method": "GET",
-      "params": {
-        "pipeline_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineSteps",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/"
+      "alias": "repositories.listPipelineSteps"
     },
     "listVariablesForRepo": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineVariables",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
+      "alias": "repositories.listPipelineVariables"
     },
     "listVariablesForTeam": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineVariables",
-      "url": "/teams/{username}/pipelines_config/variables/"
+      "alias": "teams.listPipelineVariables"
     },
     "listVariablesForUser": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPipelineVariables",
-      "url": "/users/{username}/pipelines_config/variables/"
+      "alias": "users.listPipelineVariables"
     },
     "stop": {
-      "method": "POST",
-      "params": {
-        "pipeline_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline"
+      "alias": "repositories.stopPipeline"
     },
     "updateBuildNumber": {
-      "method": "PUT",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "PipelineBuildNumber",
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineBuildNumber",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/build_number"
+      "alias": "repositories.updatePipelineBuildNumber"
     },
     "updateConfig": {
-      "method": "PUT",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "PipelinesConfig",
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelinesConfig",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config"
+      "alias": "repositories.updatePipelineConfig"
     },
     "updateKnownHost": {
-      "method": "PUT",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "PipelineKnownHost",
-          "type": "any"
-        },
-        "known_host_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineKnownHost",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
+      "alias": "repositories.updatePipelineKnownHost"
     },
     "updateSchedule": {
-      "method": "PUT",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "PipelineSchedule",
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "schedule_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineSchedule",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
+      "alias": "repositories.updatePipelineSchedule"
     },
     "updateSshKeyPair": {
-      "method": "PUT",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "PipelineSshKeyPair",
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineSshKeyPair",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
+      "alias": "repositories.updatePipelineSshKeyPair"
     },
     "updateVariable": {
-      "method": "PUT",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "PipelineVariable",
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "variable_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineVariable",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
+      "alias": "repositories.updatePipelineVariable"
     },
     "updateVariableForTeam": {
-      "method": "PUT",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "PipelineVariable",
-          "type": "any"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "variable_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineVariable",
-      "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
+      "alias": "teams.updatePipelineVariable"
     },
     "updateVariableForUser": {
-      "method": "PUT",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "PipelineVariable",
-          "type": "any"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "variable_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PipelineVariable",
-      "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
+      "alias": "users.updatePipelineVariable"
     }
   },
   "projects": {
     "createForTeam": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "Project",
-          "type": "any"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Project",
-      "url": "/teams/{username}/projects/"
+      "alias": "teams.createProject"
     },
     "deleteForTeam": {
-      "method": "DELETE",
-      "params": {
-        "project_key": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/teams/{username}/projects/{project_key}"
+      "alias": "teams.deleteProject"
     },
     "getForTeam": {
-      "method": "GET",
-      "params": {
-        "project_key": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Project",
-      "url": "/teams/{username}/projects/{project_key}"
+      "alias": "teams.getProject"
     },
     "listForTeam": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedProjects",
-      "url": "/teams/{username}/projects/"
+      "alias": "teams.listProjects"
     },
     "updateForTeam": {
-      "method": "PUT",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "Project",
-          "type": "any"
-        },
-        "project_key": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Project",
-      "url": "/teams/{username}/projects/{project_key}"
+      "alias": "teams.updateProject"
     }
   },
   "pullrequests": {
     "addDefaultReviewer": {
-      "method": "PUT",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "target_username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
+      "alias": "repositories.addDefaultReviewer"
     },
     "create": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "schema": "Pullrequest",
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Pullrequest",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests"
+      "alias": "repositories.createPullRequest"
     },
     "createApproval": {
-      "method": "POST",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Participant",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve"
+      "alias": "repositories.createPullRequestApproval"
     },
     "decline": {
-      "method": "POST",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Pullrequest",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/decline"
+      "alias": "repositories.declinePullRequest"
     },
     "deleteApproval": {
-      "method": "DELETE",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve"
+      "alias": "repositories.deletePullRequestApproval"
     },
     "deleteDefaultReviewer": {
-      "method": "DELETE",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "target_username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
+      "alias": "repositories.deleteDefaultReviewer"
     },
     "get": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Pullrequest",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}"
+      "alias": "repositories.getPullRequest"
     },
     "getActivityLog": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/activity"
+      "alias": "repositories.getPullRequestActivityLog"
     },
     "getAllActivityLog": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/activity"
+      "alias": "repositories.getAllPullRequestsActivityLog"
     },
     "getAllCommits": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/commits"
+      "alias": "repositories.getAllPullRequestCommits"
     },
     "getAllDefaultReviewers": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/default-reviewers"
+      "alias": "repositories.getAllDefaultReviewers"
     },
     "getComment": {
-      "method": "GET",
-      "params": {
-        "comment_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PullrequestComment",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}"
+      "alias": "repositories.getPullRequestComment"
     },
     "getDefaultReviewer": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "target_username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
+      "alias": "repositories.getDefaultReviewer"
     },
     "getDiff": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/diff"
+      "alias": "repositories.getPullRequestDiff"
     },
     "getDiffStat": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/diffstat"
+      "alias": "repositories.getPullRequestDiffStat"
     },
     "getPatch": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/patch"
+      "alias": "repositories.getPullRequestPatch"
     },
     "list": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "state": {
-          "enum": [
-            "MERGED",
-            "SUPERSEDED",
-            "OPEN",
-            "DECLINED"
-          ],
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPullrequests",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests"
+      "alias": "repositories.listPullRequests"
     },
     "listComments": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPullrequestComments",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments"
+      "alias": "repositories.listPullRequestComments"
     },
     "listStatuses": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedCommitstatuses",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
+      "alias": "repositories.listPullRequestStatuses"
     },
     "merge": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "schema": "PullrequestMergeParameters",
-          "type": "any"
-        },
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Pullrequest",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/merge"
+      "alias": "repositories.mergePullRequest"
     },
     "update": {
-      "method": "PUT",
-      "params": {
-        "_body": {
-          "in": "body",
-          "schema": "Pullrequest",
-          "type": "any"
-        },
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Pullrequest",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}"
+      "alias": "repositories.updatePullRequest"
     }
   },
   "refs": {
     "createBranch": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Branch",
-      "url": "/repositories/{username}/{repo_slug}/refs/branches"
+      "alias": "repositories.createBranch"
     },
     "createTag": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "schema": "Tag",
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Tag",
-      "url": "/repositories/{username}/{repo_slug}/refs/tags"
+      "alias": "repositories.createTag"
     },
     "deleteBranch": {
-      "method": "DELETE",
-      "params": {
-        "name": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/refs/branches/{name}"
+      "alias": "repositories.deleteBranch"
     },
     "deleteTag": {
-      "method": "DELETE",
-      "params": {
-        "name": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/refs/tags/{name}"
+      "alias": "repositories.deleteTag"
     },
     "getBranch": {
-      "method": "GET",
-      "params": {
-        "name": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Branch",
-      "url": "/repositories/{username}/{repo_slug}/refs/branches/{name}"
+      "alias": "repositories.getBranch"
     },
     "getTag": {
-      "method": "GET",
-      "params": {
-        "name": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Tag",
-      "url": "/repositories/{username}/{repo_slug}/refs/tags/{name}"
+      "alias": "repositories.getTag"
     },
     "list": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedRefs",
-      "url": "/repositories/{username}/{repo_slug}/refs"
+      "alias": "repositories.listRefs"
     },
     "listBranches": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedBranches",
-      "url": "/repositories/{username}/{repo_slug}/refs/branches"
+      "alias": "repositories.listBranches"
     },
     "listTags": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTags",
-      "url": "/repositories/{username}/{repo_slug}/refs/tags"
+      "alias": "repositories.listTags"
     }
   },
   "repositories": {
@@ -5563,19 +2906,7 @@
       "url": "/repositories/{username}/{repo_slug}/milestones"
     },
     "listPermissions": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedRepositoryPermissions",
-      "url": "/user/permissions/repositories"
+      "alias": "user.listRepositoryPermissions"
     },
     "listPipelineKnownHosts": {
       "method": "GET",
@@ -6342,54 +3673,10 @@
   },
   "search": {
     "codeOfTeam": {
-      "method": "GET",
-      "params": {
-        "page": {
-          "in": "query",
-          "type": "integer"
-        },
-        "pagelen": {
-          "in": "query",
-          "type": "integer"
-        },
-        "search_query": {
-          "in": "query",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "SearchResultPage",
-      "url": "/teams/{username}/search/code"
+      "alias": "teams.searchCode"
     },
     "codeOfUser": {
-      "method": "GET",
-      "params": {
-        "page": {
-          "in": "query",
-          "type": "integer"
-        },
-        "pagelen": {
-          "in": "query",
-          "type": "integer"
-        },
-        "search_query": {
-          "in": "query",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "SearchResultPage",
-      "url": "/users/{username}/search/code"
+      "alias": "users.searchCode"
     }
   },
   "snippets": {
@@ -6909,218 +4196,33 @@
   },
   "source": {
     "createFileCommit": {
-      "accepts": [
-        "multipart/form-data",
-        "application/x-www-form-urlencoded"
-      ],
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "type": "any"
-        },
-        "author": {
-          "in": "query",
-          "type": "string"
-        },
-        "branch": {
-          "in": "query",
-          "type": "string"
-        },
-        "files": {
-          "in": "query",
-          "type": "string"
-        },
-        "message": {
-          "in": "query",
-          "type": "string"
-        },
-        "parents": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/src"
+      "alias": "repositories.createSrcFileCommit"
     },
     "get": {
-      "method": "GET",
-      "params": {
-        "format": {
-          "enum": [
-            "meta",
-            "rendered"
-          ],
-          "in": "query",
-          "type": "string"
-        },
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "path": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTreeentries",
-      "url": "/repositories/{username}/{repo_slug}/src/{node}/{path}"
+      "alias": "repositories.getSrc"
     },
     "getMainRoot": {
-      "method": "GET",
-      "params": {
-        "format": {
-          "enum": [
-            "meta"
-          ],
-          "in": "query",
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTreeentries",
-      "url": "/repositories/{username}/{repo_slug}/src"
+      "alias": "repositories.getSrcMainRoot"
     },
     "listHistory": {
-      "method": "GET",
-      "params": {
-        "fields": {
-          "in": "query",
-          "type": "string"
-        },
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "path": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "renames": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedFiles",
-      "url": "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}"
+      "alias": "repositories.listFileHistory"
     }
   },
   "ssh": {
     "createKeyForUser": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "schema": "SshAccountKey",
-          "type": "any"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "SshAccountKey",
-      "url": "/users/{username}/ssh-keys"
+      "alias": "users.createSshKey"
     },
     "deleteKeyForUser": {
-      "method": "DELETE",
-      "url": "/users/{username}/ssh-keys/{key_id}"
+      "alias": "users.deleteSshKey"
     },
     "getKeyForUser": {
-      "method": "GET",
-      "url": "/users/{username}/ssh-keys/{key_id}"
+      "alias": "users.getSshKey"
     },
     "listKeys": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedSshUserKeys",
-      "url": "/users/{username}/ssh-keys"
+      "alias": "users.listSshKeys"
     },
     "updateKeyForUser": {
-      "method": "PUT",
-      "url": "/users/{username}/ssh-keys/{key_id}"
+      "alias": "users.updateSshKey"
     }
   },
   "teams": {
@@ -7255,15 +4357,7 @@
       "url": "/teams/{username}/repositories"
     },
     "getAllRepositoriesForUser": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/users/{username}/repositories"
+      "alias": "users.getAllRepositories"
     },
     "getPipelineVariable": {
       "method": "GET",
@@ -7717,8 +4811,7 @@
       "url": "/users/{username}"
     },
     "getAllEmailsForAuthedUser": {
-      "method": "GET",
-      "url": "/user/emails"
+      "alias": "user.getAllEmails"
     },
     "getAllRepositories": {
       "method": "GET",
@@ -7732,31 +4825,13 @@
       "url": "/users/{username}/repositories"
     },
     "getAllRepositoriesForTeam": {
-      "method": "GET",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/teams/{username}/repositories"
+      "alias": "teams.getAllRepositories"
     },
     "getAuthedUser": {
-      "method": "GET",
-      "returns": "User",
-      "url": "/user"
+      "alias": "user.get"
     },
     "getEmailForAuthedUser": {
-      "method": "GET",
-      "params": {
-        "email": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/user/emails/{email}"
+      "alias": "user.getEmail"
     },
     "getPipelineVariable": {
       "method": "GET",
@@ -7968,310 +5043,55 @@
   },
   "webhooks": {
     "create": {
-      "method": "POST",
-      "params": {
-        "_body": {
-          "in": "body",
-          "required": true,
-          "type": "any"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "WebhookSubscription",
-      "url": "/repositories/{username}/{repo_slug}/hooks"
+      "alias": "repositories.createWebhook"
     },
     "createForTeam": {
-      "method": "POST",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "WebhookSubscription",
-      "url": "/teams/{username}/hooks"
+      "alias": "teams.createWebhook"
     },
     "createForUser": {
-      "method": "POST",
-      "params": {
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "WebhookSubscription",
-      "url": "/users/{username}/hooks"
+      "alias": "users.createWebhook"
     },
     "delete": {
-      "method": "DELETE",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "uid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
+      "alias": "repositories.deleteWebhook"
     },
     "deleteForTeam": {
-      "method": "DELETE",
-      "params": {
-        "uid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/teams/{username}/hooks/{uid}"
+      "alias": "teams.deleteWebhook"
     },
     "deleteForUser": {
-      "method": "DELETE",
-      "params": {
-        "uid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/users/{username}/hooks/{uid}"
+      "alias": "users.deleteWebhook"
     },
     "get": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "uid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "WebhookSubscription",
-      "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
+      "alias": "repositories.getWebhook"
     },
     "getForTeam": {
-      "method": "GET",
-      "params": {
-        "uid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "WebhookSubscription",
-      "url": "/teams/{username}/hooks/{uid}"
+      "alias": "teams.getWebhook"
     },
     "getForUser": {
-      "method": "GET",
-      "params": {
-        "uid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "WebhookSubscription",
-      "url": "/users/{username}/hooks/{uid}"
+      "alias": "users.getWebhook"
     },
     "list": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "subject_type": {
-          "enum": [
-            "user",
-            "repository",
-            "team"
-          ],
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedHookEvents",
-      "url": "/hook_events/{subject_type}"
+      "alias": "hook_events.list"
     },
     "listForRepo": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedWebhookSubscriptions",
-      "url": "/repositories/{username}/{repo_slug}/hooks"
+      "alias": "repositories.listWebhooks"
     },
     "listForTeam": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedWebhookSubscriptions",
-      "url": "/teams/{username}/hooks"
+      "alias": "teams.listWebhooks"
     },
     "listForUser": {
-      "method": "GET",
-      "params": {
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedWebhookSubscriptions",
-      "url": "/users/{username}/hooks"
+      "alias": "users.listWebhooks"
     },
     "listSubjectTypes": {
-      "method": "GET",
-      "returns": "SubjectTypes",
-      "url": "/hook_events"
+      "alias": "hook_events.listSubjectTypes"
     },
     "update": {
-      "method": "PUT",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "uid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "WebhookSubscription",
-      "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
+      "alias": "repositories.updateWebhook"
     },
     "updateForTeam": {
-      "method": "PUT",
-      "params": {
-        "uid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "WebhookSubscription",
-      "url": "/teams/{username}/hooks/{uid}"
+      "alias": "teams.updateWebhook"
     },
     "updateForUser": {
-      "method": "PUT",
-      "params": {
-        "uid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "WebhookSubscription",
-      "url": "/users/{username}/hooks/{uid}"
+      "alias": "users.updateWebhook"
     }
   }
 }

@@ -1,4 +1,4 @@
-const ENDPOINT_ROUTES = require('../../routes/routes')
+const ROUTES = require('../../routes/routes.json')
 
 const endpointMethod = require('./method')
 const getParamGroups = require('./get-param-groups')
@@ -9,11 +9,16 @@ class EndpointMethodsPlugin {
   }
 
   inject() {
-    Object.keys(ENDPOINT_ROUTES).forEach(namespaceName => {
+    Object.keys(ROUTES).forEach(namespaceName => {
       this.core[namespaceName] = {}
 
-      Object.keys(ENDPOINT_ROUTES[namespaceName]).forEach(apiName => {
-        let apiOptions = ENDPOINT_ROUTES[namespaceName][apiName]
+      Object.keys(ROUTES[namespaceName]).forEach(apiName => {
+        let apiOptions = ROUTES[namespaceName][apiName]
+
+        if (apiOptions.alias) {
+          let [namespaceAlias, apiAlias] = apiOptions.alias.split('.')
+          apiOptions = ROUTES[namespaceAlias][apiAlias]
+        }
 
         let { accepts, method, params: paramsSpecs, url, ...rest } = apiOptions
 

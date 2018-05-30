@@ -53,13 +53,18 @@ const generateTypes = (languageName, templateFile, outputFile, typesBlob) => {
   let template = readFileSync(templatePath, 'utf8')
 
   let namespaces = Object.keys(ROUTES).reduce((namespaces, namespaceName) => {
-    let methods = _.toPairs(ROUTES[namespaceName]).reduce(
-      (methods, [methodName, method]) => {
-        let namespacedParamsName = pascalCase(`${namespaceName}-${methodName}`)
+    let apis = _.toPairs(ROUTES[namespaceName]).reduce(
+      (apis, [apiName, api]) => {
+        let namespacedParamsName = pascalCase(`${namespaceName}-${apiName}`)
 
-        let ownParams = _.toPairs(method.params).reduce(
+        if (api.alias) {
+          let [namespaceAlias, apiAlias] = api.alias.split('.')
+          api = ROUTES[namespaceAlias][apiAlias]
+        }
+
+        let ownParams = _.toPairs(api.params).reduce(
           (params, [paramName, param]) =>
-            params.concat(parameterize(paramName, param, method.accepts)),
+            params.concat(parameterize(paramName, param, api.accepts)),
           []
         )
 
@@ -67,10 +72,10 @@ const generateTypes = (languageName, templateFile, outputFile, typesBlob) => {
 
         let paramsType = hasParams ? namespacedParamsName : pascalCase('Empty')
 
-        let responseType = method.returns || 'Any'
+        let responseType = api.returns || 'Any'
 
-        return methods.concat({
-          method: _.camelCase(methodName),
+        return apis.concat({
+          name: _.camelCase(apiName),
           paramsType,
           ownParams: hasParams && { params: ownParams },
           responseType,
@@ -82,7 +87,7 @@ const generateTypes = (languageName, templateFile, outputFile, typesBlob) => {
 
     return namespaces.concat({
       namespace: _.camelCase(namespaceName),
-      methods
+      apis
     })
   }, [])
 

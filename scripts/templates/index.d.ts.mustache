@@ -58,7 +58,7 @@ declare namespace BitBucket {
     export type Empty = {}
 
     {{#namespaces}}
-    {{#methods}}
+    {{#apis}}
     {{^exclude}}
     {{#paramsType}}
     export type {{paramsType}} =
@@ -74,7 +74,7 @@ declare namespace BitBucket {
       {{/ownParams}}
     {{/paramsType}}
     {{/exclude}}
-    {{/methods}}
+    {{/apis}}
     {{/namespaces}}
   }
 }
@@ -90,9 +90,9 @@ declare class BitBucket {
 
   {{#namespaces}}
   {{namespace}}: {
-    {{#methods}}
-    {{method}}(params: BitBucket.Params.{{paramsType}}, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Schema.{{responseType}}>>): Promise<BitBucket.Response<BitBucket.Schema.{{responseType}}>>;
-    {{/methods}}
+    {{#apis}}
+    {{name}}(params: BitBucket.Params.{{paramsType}}, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Schema.{{responseType}}>>): Promise<BitBucket.Response<BitBucket.Schema.{{responseType}}>>;
+    {{/apis}}
   };
   {{/namespaces}}
 }

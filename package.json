@@ -27,7 +27,7 @@
     "postbuild:docs": "apidoc -i docs -o docs",
     "generate:api-docs": "node scripts/generate-api-docs.js",
     "generate:specification": "node scripts/generate-specification.js",
-    "generate:methods-list": "node scripts/generate-methods-list.js",
+    "generate:api-names": "node scripts/generate-api-names.js",
     "generate:routes": "node scripts/generate-routes.js",
     "generate:type-defs": "node scripts/generate-type-defs.js",
     "generate:types": "npm-run-all generate:types:*",
