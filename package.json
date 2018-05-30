@@ -22,6 +22,10 @@
     "build:browser:development": "webpack --mode development",
     "build:browser:production":
       "webpack --mode production --output-filename=bitbucket.min.js",
+    "prebuild:docs": "mkdirp docs",
+    "build:docs": "npm run generate:api-docs",
+    "postbuild:docs": "apidoc -i docs -o docs",
+    "generate:api-docs": "node scripts/generate-api-docs.js",
     "generate:specification": "node scripts/generate-specification.js",
     "generate:methods-list": "node scripts/generate-methods-list.js",
     "generate:routes": "node scripts/generate-routes.js",
@@ -30,7 +34,7 @@
     "generate:types:ts": "node scripts/generate-types-ts.js",
     "prevalidate:ts": "npm run generate:types:ts",
     "validate:ts": "tsc --target es6 src/index.d.ts",
-    "prepare": "npm-run-all -s build generate:types",
+    "prepare": "npm-run-all -s build:browser generate:types",
     "test": "jest"
   },
   "dependencies": {
@@ -41,6 +45,7 @@
     "url-template": "^2.0.8"
   },
   "devDependencies": {
+    "apidoc": "^0.17.6",
     "clean-deep": "^3.0.2",
     "debug": "^3.1.0",
     "deep-sort-object": "^1.0.2",
