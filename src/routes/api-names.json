@@ -119,6 +119,10 @@
     "get": {
       "commits": "listComments",
       "repositories": "listCommitComments"
+    },
+    "post": {
+      "commits": "createComment",
+      "repositories": "createCommitComment"
     }
   },
   "/repositories/{username}/{repo_slug}/commit/{node}/comments/{comment_id}": {

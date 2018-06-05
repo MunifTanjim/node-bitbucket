@@ -20,6 +20,9 @@
     "createApproval": {
       "alias": "repositories.createCommitApproval"
     },
+    "createComment": {
+      "alias": "repositories.createCommitComment"
+    },
     "deleteApproval": {
       "alias": "repositories.deleteCommitApproval"
     },
@@ -570,6 +573,33 @@
       },
       "returns": "Commitstatus",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build"
+    },
+    "createCommitComment": {
+      "method": "POST",
+      "params": {
+        "_body": {
+          "in": "body",
+          "required": true,
+          "schema": "CommitComment",
+          "type": "any"
+        },
+        "node": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments"
     },
     "createDownload": {
       "accepts": [

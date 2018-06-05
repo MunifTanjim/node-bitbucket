@@ -1188,7 +1188,68 @@
         "required": true,
         "type": "string"
       }
-    ]
+    ],
+    "post": {
+      "description": "Creates new comment on the specified commit.\n\nTo post a reply to an existing comment, include the `parent.id` field:\n\n```\n$ curl https://api.bitbucket.org/2.0/repositories/atlassian/prlinks/commit/db9ba1e031d07a02603eae0e559a7adc010257fc/comments/ \\\n  -X POST -u evzijst \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"content\": {\"raw\": \"One more thing!\"},\n       \"parent\": {\"id\": 5728901}}'\n```",
+      "parameters": [
+        {
+          "description": "This can either be the username or the UUID of the user,\nsurrounded by curly-braces, for example: `{user UUID}`.\n",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The specified comment.",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/commit_comment"
+          }
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The newly created comment.",
+          "headers": {
+            "Location": {
+              "description": "The location of the newly created comment.",
+              "type": "string"
+            }
+          }
+        },
+        "400": {
+          "description": "If the comment was detected as spam, or if the parent comment is not attached to the same node as the new comment"
+        },
+        "404": {
+          "description": "If a parent ID was passed in that cannot be found"
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "repository"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "commits"
+      ]
+    }
   },
   "/repositories/{username}/{repo_slug}/commit/{node}/comments/{comment_id}": {
     "get": {
@@ -6181,6 +6242,12 @@
           "schema": {
             "$ref": "#/definitions/pullrequest"
           }
+        },
+        "555": {
+          "description": "If the decline took too long and timed out.\nIn this case the caller should retry the request later.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
         }
       },
       "security": [
@@ -6333,6 +6400,12 @@
           "description": "The pull request object.",
           "schema": {
             "$ref": "#/definitions/pullrequest"
+          }
+        },
+        "555": {
+          "description": "If the merge took too long and timed out.\nIn this case the caller should retry the request later",
+          "schema": {
+            "$ref": "#/definitions/error"
           }
         }
       },
