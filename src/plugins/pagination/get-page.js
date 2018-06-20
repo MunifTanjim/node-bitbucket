@@ -1,8 +1,10 @@
 const HTTPError = require('../../request/http-error')
 
-const getPage = (apiClient, url, callback) => {
+const getPage = (apiClient, data, direction, callback) => {
+  let url = data[direction]
+
   if (!url) {
-    let urlError = new HTTPError(`No URL found`, 404)
+    let urlError = new HTTPError(`No ${direction} URL found`, 404)
     return callback ? callback(urlError) : Promise.reject(urlError)
   }
 

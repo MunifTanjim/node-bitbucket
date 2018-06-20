@@ -34,10 +34,9 @@ declare namespace BitBucket {
     | AuthAppPassword
     | AuthToken;
 
-  export type PageLink =
+  export type PaginatedData =
     | { next: string; }
-    | { previous: string; }
-    | string;
+    | { previous: string; };
 
   export interface Callback<T> {
     (error: BitBucket.Schema.Error | null, response: T): void;
@@ -84,9 +83,11 @@ declare class BitBucket {
 
   authenticate(auth: BitBucket.Auth): void;
 
-  nextPage(data: BitBucket.PageLink): string | undefined;
-  previousPage(data: BitBucket.PageLink): string | undefined;
-  getPage(url: BitBucket.PageLink, callback?: BitBucket.Callback<BitBucket.Response<BitBucket.Schema.Any>>): Promise<BitBucket.Response<BitBucket.Schema.Any>>;
+  hasNextPage(data: BitBucket.PaginatedData): boolean;
+  getNextPage<T>(data: T, callback?: BitBucket.Callback<BitBucket.Response<T>>): Promise<BitBucket.Response<T>>;
+
+  hasPreviousPage(data: BitBucket.PaginatedData): boolean;
+  getPreviousPage<T>(data: T, callback?: BitBucket.Callback<BitBucket.Response<T>>): Promise<BitBucket.Response<T>>;
 
   {{#namespaces}}
   {{namespace}}: {

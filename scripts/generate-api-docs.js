@@ -128,7 +128,7 @@ const toAPIComment = (api, apiName, namespaceName) => {
       ` * @apiExample {js} Promise`,
       ` *   bitbucket.${namespaceName}.${apiName}({ ${paramsString} }).then(({ data, headers }) => {})`,
       ` * @apiExample {js} Callback`,
-      ` *   bitbucket.${namespaceName}.${apiName}({ ${paramsString} }, (error, { data, headers }) => {})`,
+      ` *   bitbucket.${namespaceName}.${apiName}({ ${paramsString} }, (err, { data, headers }) => {})`,
       ` */`
     ])
     .join('\n')

@@ -23,7 +23,9 @@ bitbucket.repositories
 
 **async/await**
 ```js
-let { data, headers } = await bitbucket.<namespace>.<api>({ ...params })
+try {
+  let { data, headers } = await bitbucket.<namespace>.<api>({ ...params })
+} catch (err) {}
 ```
 
 **Promise**
@@ -36,7 +38,7 @@ bitbucket.<namespace>
 
 **Callback**
 ```js
-bitbucket.<namespace>.<api>({ ...params }, ({ data, headers }) => {})
+bitbucket.<namespace>.<api>({ ...params }, (err, { data, headers }) => {})
 ```
 
 Notes:

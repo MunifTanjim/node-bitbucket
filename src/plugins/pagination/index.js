@@ -6,9 +6,13 @@ class PaginationPlugin {
   }
 
   inject() {
-    this.core.getPage = (url, callback) => getPage(this.core, url, callback)
-    this.core.nextPage = ({ next }) => next
-    this.core.previousPage = ({ previous }) => previous
+    this.core.hasNextPage = ({ next }) => Boolean(next)
+    this.core.getNextPage = (data, callback) =>
+      getPage(this.core, data, 'next', callback)
+
+    this.core.hasPreviousPage = ({ previous }) => Boolean(previous)
+    this.core.getPreviousPage = (data, callback) =>
+      getPage(this.core, data, 'previous', callback)
   }
 }
 

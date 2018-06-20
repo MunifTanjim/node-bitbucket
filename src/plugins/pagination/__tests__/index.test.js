@@ -13,8 +13,9 @@ describe('plugins:pagination', () => {
 
   it('can be injected into core', () => {
     new PaginationPlugin(apiClient).inject()
-    expect(apiClient.getPage).toBeDefined()
-    expect(apiClient.nextPage).toBeDefined()
-    expect(apiClient.previousPage).toBeDefined()
+    expect(apiClient.hasNextPage).toBeDefined()
+    expect(apiClient.getNextPage).toBeDefined()
+    expect(apiClient.hasPreviousPage).toBeDefined()
+    expect(apiClient.getPreviousPage).toBeDefined()
   })
 })

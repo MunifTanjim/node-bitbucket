@@ -1,45 +1,41 @@
 const getPage = require('../get-page')
-const HTTPError = require('../../../request/http-error')
 
-let apiClient, url
+let apiClient, data
 
 beforeEach(() => {
-  apiClient = {
-    request: jest.fn(o => Promise.resolve(o))
-  }
-  url = '/test'
+  apiClient = { request: jest.fn(o => Promise.resolve(o)) }
+  data = { next: '/test?page=2' }
 })
 
 describe('plugins:pagination/get-page', () => {
-  it('invokes callback if present', () => {
-    expect.assertions(1)
-
-    let mockCallback = jest.fn(() => expect(mockCallback).toBeCalled())
-
-    getPage(apiClient, url, mockCallback)
-  })
-
-  it('returns promise if callback not present', async () => {
-    expect.assertions(1)
-
-    await expect(getPage(apiClient, url)).resolves.toMatchSnapshot()
-  })
-
-  it('returns HTTPError if url is Falsy', async () => {
+  it('throws error if url does not exist', () => {
     expect.assertions(2)
 
-    url = ''
+    getPage(apiClient, data, 'prev', e => e && expect(e).toMatchSnapshot())
 
-    getPage(apiClient, url, e => e && expect(e).toBeInstanceOf(HTTPError))
-    await expect(getPage(apiClient, url)).rejects.toBeInstanceOf(HTTPError)
+    expect(getPage(apiClient, data, 'prev')).rejects.toMatchSnapshot()
   })
 
   it('makes request', async () => {
     expect.assertions(2)
 
-    getPage(apiClient, url, () => {})
+    getPage(apiClient, data, 'next', () => {})
     expect(apiClient.request).toBeCalledTimes(1)
-    await getPage(apiClient, url)
+    await getPage(apiClient, data, 'next')
     expect(apiClient.request).toBeCalledTimes(2)
+  })
+
+  it('invokes callback if present', () => {
+    expect.assertions(1)
+
+    let mockCallback = jest.fn(() => expect(mockCallback).toBeCalled())
+
+    getPage(apiClient, data, 'next', mockCallback)
+  })
+
+  it('returns promise if callback not present', () => {
+    expect.assertions(1)
+
+    expect(getPage(apiClient, data, 'next')).toBeInstanceOf(Promise)
   })
 })
