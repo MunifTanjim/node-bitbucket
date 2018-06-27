@@ -1,0 +1,3 @@
+[build]
+publish = "docs"
+command = "npm run build:docs"

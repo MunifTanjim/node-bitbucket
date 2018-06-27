@@ -39,6 +39,11 @@
       "addon": ""
     }
   },
+  "/addon/users/{target_user}/events/{event_key}": {
+    "post": {
+      "addon": ""
+    }
+  },
   "/hook_events": {
     "get": {
       "hook_events": "getAllSubjectTypes",

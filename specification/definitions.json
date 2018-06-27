@@ -697,6 +697,158 @@
       }
     ]
   },
+  "deployment": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Deployment.",
+        "properties": {
+          "state": {
+            "$ref": "#/definitions/deployment_state"
+          },
+          "uuid": {
+            "description": "The UUID identifying the deployment.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
+  "deployment_state": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "The representation of the progress state of a deployment.",
+        "properties": {},
+        "type": "object"
+      }
+    ]
+  },
+  "deployment_state_completed": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/deployment_state"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Deployment COMPLETED deployment state.",
+        "properties": {
+          "completion_date": {
+            "description": "The timestamp when the deployment completed.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "deployer": {
+            "$ref": "#/definitions/account",
+            "description": "The Bitbucket account that was used to perform the deployment."
+          },
+          "last_successful_deployment": {
+            "$ref": "#/definitions/deployment",
+            "description": "The last successful deployment."
+          },
+          "name": {
+            "description": "The name of deployment state (COMPLETED).",
+            "enum": [
+              "COMPLETED"
+            ],
+            "type": "string"
+          },
+          "start_date": {
+            "description": "The timestamp when the deployment was started.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "status": {
+            "description": "The status of of the completed deployment.",
+            "enum": [
+              "SUCCESSFUL",
+              "FAILED",
+              "STOPPED"
+            ],
+            "type": "string"
+          },
+          "url": {
+            "description": "Link to the deployment result.",
+            "format": "uri",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
+  "deployment_state_in_progress": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/deployment_state"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Deployment IN_PROGRESS deployment state.",
+        "properties": {
+          "deployer": {
+            "$ref": "#/definitions/account",
+            "description": "The Bitbucket account that was used to perform the deployment."
+          },
+          "last_successful_deployment": {
+            "$ref": "#/definitions/deployment",
+            "description": "The last successful deployment."
+          },
+          "name": {
+            "description": "The name of deployment state (IN_PROGRESS).",
+            "enum": [
+              "IN_PROGRESS"
+            ],
+            "type": "string"
+          },
+          "start_date": {
+            "description": "The timestamp when the deployment was started.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "url": {
+            "description": "Link to the deployment result.",
+            "format": "uri",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
+  "deployment_state_undeployed": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/deployment_state"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Deployment UNDEPLOYED deployment state.",
+        "properties": {
+          "name": {
+            "description": "The name of deployment state (UNDEPLOYED).",
+            "enum": [
+              "UNDEPLOYED"
+            ],
+            "type": "string"
+          },
+          "triggerUrl": {
+            "description": "Link to trigger the deployment.",
+            "format": "uri",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
   "diffstat": {
     "additionalProperties": true,
     "description": "A diffstat object that includes a summary of changes made to a file between two commits.",

@@ -295,6 +295,50 @@
       }
     ]
   },
+  "/addon/users/{target_user}/events/{event_key}": {
+    "parameters": [
+      {
+        "description": "The account the app is installed in.\n\nThis can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
+        "in": "path",
+        "name": "target_user",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The key of the event, which corresponds to an event\ndefined in the connect app descriptor.\n",
+        "in": "path",
+        "name": "event_key",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "post": {
+      "description": "POST a new custom event.\n\nThe data within the event body will be hydrated by Bitbucket. For example, the following event\nsubmission would result in subscribers for the event receiving the full repository object\ncorresponding to the UUID.\n\n```\n$ curl -X POST -H \"Content-Type: application/json\" -d '{\n    \"my_num_data\": \"12345\",\n    \"repository\": {\n        \"type\": \"repository\",\n        \"uuid\": \"{be95aa1f-c0b2-47f6-99d1-bf5d3a0f850f}\"\n}}' https://api.bitbucket.org/2.0/addon/users/myuser/events/myappkey%3Amyevent\n```\n\nUse the `fields` property of the custom event Connect module where the event is defined to restrict the\nfields included in the expanded payload sent to listeners.\n\nFor example, the `customEvents` module in the app descriptor for the previous example would look like this:\n\n```\n'modules': {\n    'customEvents': {\n        'myappkey:myevent': {\n            'schema': {\n                'properties': {\n                    'my_num_data': {'type': 'number'},\n                    'repository': {'$ref': '#/definitions/repository'}\n                }\n            },\n            'fields': ['my_num_data', 'repository.owner.username']\n        }\n    }\n}\n```\n\nBy specifying fields explicitly, only the `my_num_data` field and the username of the repository owner\nwill be sent to subscribers of the event.",
+      "parameters": [],
+      "responses": {
+        "204": {
+          "description": "Event successfully submitted"
+        },
+        "404": {
+          "description": "Connect app not installed or event does not exist"
+        }
+      },
+      "security": [
+        {
+          "oauth2": []
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "addon"
+      ]
+    }
+  },
   "/hook_events": {
     "get": {
       "description": "Returns the webhook resource or subject types on which webhooks can\nbe registered.\n\nEach resource/subject type contains an `events` link that returns the\npaginated list of specific events each individual subject type can\nemit.\n\nThis endpoint is publicly accessible and does not require\nauthentication or scopes.\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/hook_events\n\n{\n    \"repository\": {\n        \"links\": {\n            \"events\": {\n                \"href\": \"https://api.bitbucket.org/2.0/hook_events/repository\"\n            }\n        }\n    },\n    \"team\": {\n        \"links\": {\n            \"events\": {\n                \"href\": \"https://api.bitbucket.org/2.0/hook_events/team\"\n            }\n        }\n    },\n    \"user\": {\n        \"links\": {\n            \"events\": {\n                \"href\": \"https://api.bitbucket.org/2.0/hook_events/user\"\n            }\n        }\n    }\n}\n```",

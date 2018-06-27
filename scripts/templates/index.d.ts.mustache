@@ -6,9 +6,13 @@ declare namespace BitBucket {
   export type Any = any;
   export type AnyObject = object;
 
+  export type Headers = {
+    [header: string]: any
+  };
+
   export interface Options {
     baseUrl?: string;
-    headers?: {[header: string]: any};
+    headers?: Headers;
     options?: AnyObject;
   }
 
@@ -44,7 +48,7 @@ declare namespace BitBucket {
 
   export interface Response<T> {
     data: T;
-    headers: any;
+    headers: Headers;
   }
 
   namespace Schema {

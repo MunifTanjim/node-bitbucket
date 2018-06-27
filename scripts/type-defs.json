@@ -632,6 +632,132 @@
         }
       ]
     },
+    "Deployment": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "state": {
+              "$ref": "#/definitions/DeploymentState"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentState": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {},
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentStateCompleted": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentState"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "completion_date": {
+              "type": "string"
+            },
+            "deployer": {
+              "$ref": "#/definitions/Account"
+            },
+            "last_successful_deployment": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "name": {
+              "enum": [
+                "COMPLETED"
+              ],
+              "type": "string"
+            },
+            "start_date": {
+              "type": "string"
+            },
+            "status": {
+              "enum": [
+                "SUCCESSFUL",
+                "FAILED",
+                "STOPPED"
+              ],
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentStateInProgress": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentState"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "deployer": {
+              "$ref": "#/definitions/Account"
+            },
+            "last_successful_deployment": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "name": {
+              "enum": [
+                "IN_PROGRESS"
+              ],
+              "type": "string"
+            },
+            "start_date": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentStateUndeployed": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentState"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "name": {
+              "enum": [
+                "UNDEPLOYED"
+              ],
+              "type": "string"
+            },
+            "triggerUrl": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
     "Diffstat": {
       "additionalProperties": true,
       "properties": {
