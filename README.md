@@ -1,12 +1,44 @@
+[![version:@latest](https://img.shields.io/npm/v/bitbucket.svg?style=for-the-badge)](https://www.npmjs.com/package/bitbucket)
+[![Documentation](https://img.shields.io/badge/docs-bitbucket.js-blue.svg?style=for-the-badge)](https://bitbucketjs.netlify.com)
+[![License](https://img.shields.io/github/license/MunifTanjim/node-bitbucket.svg?style=for-the-badge)](https://github.com/MunifTanjim/node-bitbucket/blob/master/LICENSE)
+
 # BitBucket.js
 
 BitBucket API client for Browser and Node.js
 
 BitBucket API docs: [https://api.bitbucket.org](https://api.bitbucket.org)
 
+## Installation
+
+via **npm**:
+
+```sh
+$ npm install bitbucket --save
+```
+
+via **yarn**:
+
+```sh
+$ yarn add bitbucket
+```
+
 ## Usage
 
+### Browser
+
+
+```html
+<script src="https://unpkg.com/bitbucket/dist/bitbucket.min.js"></script>
+<script>
+  const bitbucket = new BitBucket()
+</script>
+```
+
+### Node
+
 ```js
+const BitBucket = require('bitbucket')
+
 const bitbucket = new BitBucket()
 
 bitbucket.authenticate({
@@ -46,11 +78,11 @@ Notes:
 - `<namespace>` is one of the _Namespace Names_
 - `<api>` is one of the _API Names_
 
-### Namespace Names
+#### Namespace Names
 
 `addon`, `hook_events`, `webhooks`, `repositories`, `branchrestrictions`, `commits`, `commitstatuses`, `issue_tracker`, `pullrequests`, `downloads`, `source`, `pipelines`, `refs`, `snippets`, `teams`, `projects`, `users`, `search`, `user`, `ssh`
 
-### API Names
+#### API Names
 
 Check API client docs: [https://bitbucketjs.netlify.com](https://bitbucketjs.netlify.com)
 
