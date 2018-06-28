@@ -1,11 +1,6 @@
 const { version } = require('../../package.json')
 
-const {
-  basePath,
-  host,
-  produces,
-  schemes
-} = require('../../specification/others')
+const { basePath, host, produces, schemes } = require('./spec')
 
 const defaultEndpointOptions = {
   baseUrl: `${schemes[0]}://${host}${basePath}`,

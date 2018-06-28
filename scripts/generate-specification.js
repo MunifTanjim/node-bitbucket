@@ -4,6 +4,7 @@ const { writeFileSync } = require('fs')
 const deepsort = require('deep-sort-object')
 
 const specPath = path.resolve('specification')
+const srcPath = path.resolve('src')
 
 const writeSpecPartialJSON = (filename, content) => {
   writeFileSync(
@@ -26,6 +27,11 @@ fetch(API_SPECIFICATION)
   })
   .then(({ securityDefinitions, ...apiSpec }) => {
     writeSpecPartialJSON('securityDefinitions', securityDefinitions)
+
+    writeFileSync(
+      path.resolve(srcPath, `plugins/oauth/spec.json`),
+      `${JSON.stringify(deepsort(securityDefinitions.oauth2), null, 2)}\n`
+    )
     return apiSpec
   })
   .then(({ tags, ...apiSpec }) => {
@@ -34,6 +40,13 @@ fetch(API_SPECIFICATION)
   })
   .then(({ 'x-radar-pages': xRadarPages, ...apiSpec }) => {
     writeSpecPartialJSON('others', apiSpec)
+
+    delete apiSpec.info
+    delete apiSpec['x-revision']
+    writeFileSync(
+      path.resolve(srcPath, `request/spec.json`),
+      `${JSON.stringify(deepsort(apiSpec), null, 2)}\n`
+    )
   })
   .catch(err => {
     console.error(err)

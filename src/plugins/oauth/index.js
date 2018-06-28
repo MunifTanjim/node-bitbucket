@@ -1,9 +1,7 @@
 const endpointMethod = require('../endpoint-methods/method')
 const getParamGroups = require('../endpoint-methods/get-param-groups')
 
-const {
-  oauth2: oAuth2Spec
-} = require('../../../specification/securityDefinitions')
+const oAuth2Spec = require('./spec')
 
 const routes = require('./routes')(oAuth2Spec)
 
