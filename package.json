@@ -1,6 +1,6 @@
 {
   "name": "bitbucket",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "BitBucket API client for Browser and Node.js",
   "keywords": ["bitbucket", "api-client", "rest"],
   "homepage": "https://github.com/MunifTanjim/node-bitbucket#readme",
@@ -42,6 +42,7 @@
   "dependencies": {
     "before-after-hook": "^1.1.0",
     "btoa-lite": "^1.0.0",
+    "debug": "^3.1.0",
     "is-plain-object": "^2.0.4",
     "node-fetch": "^2.1.2",
     "url-template": "^2.0.8"
@@ -49,7 +50,6 @@
   "devDependencies": {
     "apidoc": "^0.17.6",
     "clean-deep": "^3.0.2",
-    "debug": "^3.1.0",
     "deep-sort-object": "^1.0.2",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
