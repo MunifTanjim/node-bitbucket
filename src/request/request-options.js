@@ -24,7 +24,7 @@ const getRequestOptions = (endpointOptions = {}) => {
     ...remainingOptions
   } = deepmerge(DEFAULT_OPTIONS, endpointOptions)
 
-  let { _paramGroups, ...params } = remainingOptions
+  let { _paramGroups = {}, ...params } = remainingOptions
 
   let paramGroups = {}
 
@@ -36,16 +36,16 @@ const getRequestOptions = (endpointOptions = {}) => {
     })
   })
 
-  url = urlTemplate.parse(url).expand(paramGroups.path)
+  url = urlTemplate.parse(url).expand(paramGroups.path || {})
   if (!/^http/.test(url)) {
     url = `${baseUrl}${url}`
   }
 
-  if (Object.keys(paramGroups.query).length) {
+  if (paramGroups.query) {
     url = addQueryParameters(url, paramGroups.query)
   }
 
-  if (Object.keys(paramGroups.body).length) {
+  if (paramGroups.body && Object.keys(paramGroups.body).length) {
     body = paramGroups.body._body || {}
 
     let bodyType = body.constructor.name
