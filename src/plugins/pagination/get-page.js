@@ -8,7 +8,8 @@ const getPage = (apiClient, data, direction, callback) => {
     return callback ? callback(urlError) : Promise.reject(urlError)
   }
 
-  let requestOptions = { url }
+  let _paramGroups = { body: [], path: [], query: [] }
+  let requestOptions = { url,_paramGroups }
 
   let promise = apiClient.request(requestOptions)
 
