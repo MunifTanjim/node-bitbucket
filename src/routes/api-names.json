@@ -608,12 +608,24 @@
     "get": {
       "pullrequests": "listComments",
       "repositories": "listPullRequestComments"
+    },
+    "post": {
+      "pullrequests": "createComment",
+      "repositories": "createPullRequestComment"
     }
   },
   "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}": {
+    "delete": {
+      "pullrequests": "deleteComment",
+      "repositories": "deletePullRequestComment"
+    },
     "get": {
       "pullrequests": "getComment",
       "repositories": "getPullRequestComment"
+    },
+    "put": {
+      "pullrequests": "updateComment",
+      "repositories": "updatePullRequestComment"
     }
   },
   "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/commits": {

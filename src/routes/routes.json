@@ -352,11 +352,17 @@
     "createApproval": {
       "alias": "repositories.createPullRequestApproval"
     },
+    "createComment": {
+      "alias": "repositories.createPullRequestComment"
+    },
     "decline": {
       "alias": "repositories.declinePullRequest"
     },
     "deleteApproval": {
       "alias": "repositories.deletePullRequestApproval"
+    },
+    "deleteComment": {
+      "alias": "repositories.deletePullRequestComment"
     },
     "deleteDefaultReviewer": {
       "alias": "repositories.deleteDefaultReviewer"
@@ -405,6 +411,9 @@
     },
     "update": {
       "alias": "repositories.updatePullRequest"
+    },
+    "updateComment": {
+      "alias": "repositories.updatePullRequestComment"
     }
   },
   "refs": {
@@ -934,6 +943,34 @@
       "returns": "Participant",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve"
     },
+    "createPullRequestComment": {
+      "method": "POST",
+      "params": {
+        "_body": {
+          "in": "body",
+          "required": true,
+          "schema": "PullrequestComment",
+          "type": "any"
+        },
+        "pull_request_id": {
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PullrequestComment",
+      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments"
+    },
     "createSrcFileCommit": {
       "accepts": [
         "multipart/form-data",
@@ -1393,6 +1430,32 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve"
+    },
+    "deletePullRequestComment": {
+      "method": "DELETE",
+      "params": {
+        "comment_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "pull_request_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}"
     },
     "deleteTag": {
       "method": "DELETE",
@@ -3725,6 +3788,39 @@
       },
       "returns": "Pullrequest",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}"
+    },
+    "updatePullRequestComment": {
+      "method": "PUT",
+      "params": {
+        "_body": {
+          "in": "body",
+          "required": true,
+          "schema": "PullrequestComment",
+          "type": "any"
+        },
+        "comment_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "pull_request_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PullrequestComment",
+      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}"
     },
     "updateWebhook": {
       "method": "PUT",
