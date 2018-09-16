@@ -169,6 +169,7 @@ const addFilterAndSortParams = routesObject => {
       if (isPaginatedList || returnsPaginated) {
         setParameters(apiObject, {
           parameters: [
+            { in: 'query', name: 'page', require: false, type: 'string' },
             { in: 'query', name: 'q', required: false, type: 'string' },
             { in: 'query', name: 'sort', required: false, type: 'string' }
           ]

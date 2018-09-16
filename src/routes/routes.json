@@ -94,6 +94,10 @@
     "list": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -2337,6 +2341,10 @@
           "required": true,
           "type": "string"
         },
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "path": {
           "in": "path",
           "required": true,
@@ -2371,6 +2379,10 @@
           "enum": [
             "meta"
           ],
+          "in": "query",
+          "type": "string"
+        },
+        "page": {
           "in": "query",
           "type": "string"
         },
@@ -2443,6 +2455,10 @@
     "list": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -2473,6 +2489,10 @@
     "listBranches": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -2498,6 +2518,10 @@
     "listBranchRestrictions": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -2526,6 +2550,10 @@
         "node": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "page": {
+          "in": "query",
           "type": "string"
         },
         "q": {
@@ -2561,6 +2589,10 @@
           "in": "query",
           "type": "string"
         },
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -2590,6 +2622,10 @@
           "type": "string"
         },
         "include": {
+          "in": "query",
+          "type": "string"
+        },
+        "page": {
           "in": "query",
           "type": "string"
         },
@@ -2627,6 +2663,10 @@
           "required": true,
           "type": "string"
         },
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -2652,6 +2692,10 @@
     "listComponents": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -2677,6 +2721,10 @@
     "listDefaultReviewers": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -2704,6 +2752,10 @@
         "ignore_whitespace": {
           "in": "query",
           "type": "boolean"
+        },
+        "page": {
+          "in": "query",
+          "type": "string"
         },
         "q": {
           "in": "query",
@@ -2735,6 +2787,10 @@
     "listDownloads": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -2766,6 +2822,10 @@
         "node": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "page": {
+          "in": "query",
           "type": "string"
         },
         "path": {
@@ -2802,6 +2862,10 @@
     "listForks": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -2832,6 +2896,10 @@
           "required": true,
           "type": "integer"
         },
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -2860,6 +2928,10 @@
         "issue_id": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "page": {
+          "in": "query",
           "type": "string"
         },
         "q": {
@@ -2892,6 +2964,10 @@
           "required": true,
           "type": "string"
         },
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -2917,6 +2993,10 @@
     "listIssues": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -2942,6 +3022,10 @@
     "listMilestones": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -2970,6 +3054,10 @@
     "listPipelineKnownHosts": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -2995,6 +3083,10 @@
     "listPipelines": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -3020,6 +3112,10 @@
     "listPipelineScheduleExecutions": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -3045,6 +3141,10 @@
     "listPipelineSchedules": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -3070,6 +3170,10 @@
     "listPipelineSteps": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "pipeline_uuid": {
           "in": "path",
           "required": true,
@@ -3100,6 +3204,10 @@
     "listPipelineVariables": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -3129,6 +3237,10 @@
           "in": "query",
           "type": "string"
         },
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -3144,6 +3256,10 @@
     "listPullRequestComments": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "pull_request_id": {
           "in": "path",
           "required": true,
@@ -3174,6 +3290,10 @@
     "listPullRequestCommits": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "pull_request_id": {
           "in": "path",
           "required": true,
@@ -3203,6 +3323,10 @@
     "listPullRequests": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -3238,6 +3362,10 @@
     "listPullRequestsActivityLog": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "pull_request_id": {
           "in": "path",
           "required": true,
@@ -3267,6 +3395,10 @@
     "listPullRequestStatuses": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "pull_request_id": {
           "in": "path",
           "required": true,
@@ -3297,6 +3429,10 @@
     "listRefs": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -3322,6 +3458,10 @@
     "listTags": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -3347,6 +3487,10 @@
     "listVersions": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -3372,6 +3516,10 @@
     "listWatchers": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -3396,6 +3544,10 @@
     "listWebhooks": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4118,6 +4270,10 @@
     "list": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4147,6 +4303,10 @@
           "required": true,
           "type": "string"
         },
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4170,6 +4330,10 @@
         "encoded_id": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "page": {
+          "in": "query",
           "type": "string"
         },
         "q": {
@@ -4197,6 +4361,10 @@
           "required": true,
           "type": "string"
         },
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4222,6 +4390,10 @@
     "listForUser": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4254,6 +4426,10 @@
         "encoded_id": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "page": {
+          "in": "query",
           "type": "string"
         },
         "q": {
@@ -4569,6 +4745,10 @@
     "list": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4593,6 +4773,10 @@
     "listFollowers": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4613,6 +4797,10 @@
     "listFollowing": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4633,6 +4821,10 @@
     "listMembers": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4653,6 +4845,10 @@
     "listPipelineVariables": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4673,6 +4869,10 @@
     "listProjects": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4693,6 +4893,10 @@
     "listRepositories": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4715,6 +4919,10 @@
     "listRepositoryPermissions": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4735,6 +4943,10 @@
     "listTeamPermissions": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4755,6 +4967,10 @@
     "listWebhooks": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4881,6 +5097,10 @@
     "listEmails": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4895,6 +5115,10 @@
     "listRepositoryPermissions": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -4910,6 +5134,10 @@
     "listTeamPermissions": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -5068,6 +5296,10 @@
     "listFollowers": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -5088,6 +5320,10 @@
     "listFollowing": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -5108,6 +5344,10 @@
     "listPipelineVariables": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -5128,6 +5368,10 @@
     "listRepositories": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -5150,6 +5394,10 @@
     "listSshKeys": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
@@ -5170,6 +5418,10 @@
     "listWebhooks": {
       "method": "GET",
       "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
         "q": {
           "in": "query",
           "type": "string"
