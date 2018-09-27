@@ -1,4 +1,4 @@
-const getPage = require('./get-page')
+const getPage = require('./get-page.js')
 
 class PaginationPlugin {
   constructor(apiClient) {

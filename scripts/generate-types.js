@@ -3,7 +3,7 @@ const path = require('path')
 const Mustache = require('mustache')
 const { readFileSync, writeFileSync } = require('fs')
 
-const { pascalCase } = require('./helpers')
+const { pascalCase } = require('./helpers.js')
 
 const ROUTES = require('../src/routes/routes.json')
 

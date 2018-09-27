@@ -1,4 +1,4 @@
-const EndpointMethodsPlugin = require('../')
+const EndpointMethodsPlugin = require('../index.js')
 
 let apiClient
 

@@ -1,8 +1,8 @@
-const endpointMethod = require('../method')
+const endpointMethod = require('../method.js')
 
-jest.mock('../validate', () => jest.fn((paramsSpecs, params) => params))
+jest.mock('../validate.js', () => jest.fn((paramsSpecs, params) => params))
 
-const validate = require('../validate')
+const validate = require('../validate.js')
 
 let apiClient
 

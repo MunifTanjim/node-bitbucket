@@ -1,4 +1,4 @@
-const PaginationPlugin = require('../')
+const PaginationPlugin = require('../index.js')
 
 let apiClient
 

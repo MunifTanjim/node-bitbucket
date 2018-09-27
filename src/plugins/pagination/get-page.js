@@ -1,4 +1,4 @@
-const HTTPError = require('../../request/http-error')
+const HTTPError = require('../../request/http-error.js')
 
 const getPage = (apiClient, data, direction, callback) => {
   let url = data[direction]

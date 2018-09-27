@@ -1,4 +1,4 @@
-const getParamGroups = require('../get-param-groups')
+const getParamGroups = require('../get-param-groups.js')
 
 expect.addSnapshotSerializer({
   test: o =>

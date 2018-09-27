@@ -1,5 +1,5 @@
-const getRequestOptions = require('./request-options')
-const fetch = require('./fetch')
+const getRequestOptions = require('./request-options.js')
+const fetch = require('./fetch.js')
 
 /**
  * Gets the Request Options and Performs Request

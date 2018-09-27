@@ -1,6 +1,6 @@
 const { compile } = require('json-schema-to-typescript')
 
-const generateTypes = require('./generate-types')
+const generateTypes = require('./generate-types.js')
 
 const typeDefs = require('./type-defs.json')
 

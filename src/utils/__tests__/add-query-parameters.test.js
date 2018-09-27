@@ -1,4 +1,4 @@
-const addQueryParameters = require('../add-query-parameters')
+const addQueryParameters = require('../add-query-parameters.js')
 
 const url = '/'
 

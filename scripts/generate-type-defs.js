@@ -3,9 +3,9 @@ const path = require('path')
 const { writeFileSync } = require('fs')
 
 const deepsort = require('deep-sort-object')
-const deepmerge = require('../src/utils/deepmerge')
+const deepmerge = require('../src/utils/deepmerge.js')
 
-const { pascalCase } = require('./helpers')
+const { pascalCase } = require('./helpers.js')
 
 const DEFINITIONS_SPEC = require('../specification/definitions.json')
 const PATHS_SPEC = require('../specification/paths.json')

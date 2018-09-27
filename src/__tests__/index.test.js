@@ -1,4 +1,4 @@
-const BitBucket = require('../')
+const BitBucket = require('../index.js')
 
 describe('bitbucket', () => {
   it('can be instantiated', () => {

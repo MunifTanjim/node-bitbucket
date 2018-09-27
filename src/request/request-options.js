@@ -1,11 +1,11 @@
 const urlTemplate = require('url-template')
 
-const addQueryParameters = require('../utils/add-query-parameters')
-const deepmerge = require('../utils/deepmerge')
+const addQueryParameters = require('../utils/add-query-parameters.js')
+const deepmerge = require('../utils/deepmerge.js')
 
-const HTTPError = require('./http-error')
+const HTTPError = require('./http-error.js')
 
-const DEFAULT_OPTIONS = require('./defaults')
+const DEFAULT_OPTIONS = require('./defaults.js')
 
 /**
  * Returns Request Options for HTTP client

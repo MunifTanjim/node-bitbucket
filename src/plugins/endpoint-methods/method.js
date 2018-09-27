@@ -1,6 +1,6 @@
-const deepmerge = require('../../utils/deepmerge')
+const deepmerge = require('../../utils/deepmerge.js')
 
-const validate = require('./validate')
+const validate = require('./validate.js')
 
 const endpointMethod = (
   apiClient,

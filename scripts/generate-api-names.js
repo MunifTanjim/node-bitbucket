@@ -3,7 +3,7 @@ const path = require('path')
 const { writeFileSync } = require('fs')
 const deepsort = require('deep-sort-object')
 
-const { extractNamespaceFromURL } = require('./helpers')
+const { extractNamespaceFromURL } = require('./helpers.js')
 
 const API_NAMES = require('../src/routes/api-names.json')
 const PATHS_SPEC = require('../specification/paths.json')

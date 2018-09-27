@@ -1,9 +1,9 @@
-const endpointMethod = require('../endpoint-methods/method')
-const getParamGroups = require('../endpoint-methods/get-param-groups')
+const endpointMethod = require('../endpoint-methods/method.js')
+const getParamGroups = require('../endpoint-methods/get-param-groups.js')
 
-const oAuth2Spec = require('./spec')
+const oAuth2Spec = require('./spec.json')
 
-const routes = require('./routes')(oAuth2Spec)
+const routes = require('./routes.js')(oAuth2Spec)
 
 class OAuthPlugin {
   constructor(apiClient) {

@@ -1,7 +1,7 @@
 const ROUTES = require('../../routes/routes.json')
 
-const endpointMethod = require('./method')
-const getParamGroups = require('./get-param-groups')
+const endpointMethod = require('./method.js')
+const getParamGroups = require('./get-param-groups.js')
 
 class EndpointMethodsPlugin {
   constructor(apiClient) {

@@ -1,12 +1,12 @@
 const Hook = require('before-after-hook')
 
-const deepmerge = require('./utils/deepmerge')
-const request = require('./request')
+const deepmerge = require('./utils/deepmerge.js')
+const request = require('./request/index.js')
 
 const Plugins = [
-  require('./plugins/authentication'),
-  require('./plugins/endpoint-methods'),
-  require('./plugins/pagination')
+  require('./plugins/authentication/index.js'),
+  require('./plugins/endpoint-methods/index.js'),
+  require('./plugins/pagination/index.js')
 ]
 
 const clientDefaults = {

@@ -1,5 +1,5 @@
-const authenticate = require('./authenticate')
-const beforeRequest = require('./before-request')
+const authenticate = require('./authenticate.js')
+const beforeRequest = require('./before-request.js')
 
 class AuthenticationPlugin {
   constructor(apiClient) {

@@ -4,7 +4,7 @@ const { writeFileSync } = require('fs')
 
 const deepclean = require('clean-deep')
 const deepsort = require('deep-sort-object')
-const deepmerge = require('../src/utils/deepmerge')
+const deepmerge = require('../src/utils/deepmerge.js')
 
 const {
   extractMethodNamesForScopeFromMethodList,
@@ -12,7 +12,7 @@ const {
   extractScopesFromMethodsList,
   getDuplicates,
   pascalCase
-} = require('./helpers')
+} = require('./helpers.js')
 
 const API_NAMES = require('../src/routes/api-names.json')
 const PATHS_SPEC = require('../specification/paths.json')

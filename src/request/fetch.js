@@ -1,8 +1,8 @@
 const fetch = require('node-fetch')
 const debug = require('debug')('bitbucket')
 
-const getBuffer = require('../utils/get-buffer-response')
-const HTTPError = require('./http-error')
+const getBuffer = require('../utils/get-buffer-response.js')
+const HTTPError = require('./http-error.js')
 
 const getData = response => {
   let contentType = response.headers.get('content-type')

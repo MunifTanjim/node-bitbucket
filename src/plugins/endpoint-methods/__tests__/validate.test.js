@@ -1,5 +1,5 @@
-const HTTPError = require('../../../request/http-error')
-const validate = require('../validate')
+const HTTPError = require('../../../request/http-error.js')
+const validate = require('../validate.js')
 
 const paramsSpecs = {
   boolean: { type: 'boolean' },

@@ -1,5 +1,5 @@
 const Hook = require('before-after-hook')
-const AuthenticationPlugin = require('../')
+const AuthenticationPlugin = require('../index.js')
 
 let apiClient
 
