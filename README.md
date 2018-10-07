@@ -47,7 +47,7 @@ You can set the APIs' `baseUrl` and modify some behaviors (e.g. request timeout 
 
 ```js
 const clientOptions = {
-  baseUrl: 'https://api.bitbucket.org/2.0'
+  baseUrl: 'https://api.bitbucket.org/2.0',
   headers: {},
   options: {
     timeout: 10

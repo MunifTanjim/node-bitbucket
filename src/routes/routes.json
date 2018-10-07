@@ -72,37 +72,14 @@
     }
   },
   "deployments": {
-    "find-deployments": {
-      "method": "GET",
-      "params": {
-        "page": {
-          "in": "query",
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedDeployments",
-      "url": "/repositories/{username}/{repo_slug}/deployments/"
-    },
     "get": {
       "alias": "repositories.getDeployment"
+    },
+    "getEnvironment": {
+      "alias": "repositories.getEnvironment"
+    },
+    "list": {
+      "alias": "repositories.listDeployments"
     }
   },
   "downloads": {
@@ -1839,6 +1816,28 @@
       },
       "url": "/repositories/{username}/{repo_slug}/downloads/{filename}"
     },
+    "getEnvironment": {
+      "method": "GET",
+      "params": {
+        "environment_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "DeploymentEnvironment",
+      "url": "/repositories/{username}/{repo_slug}/environments/{environment_uuid}"
+    },
     "getIssue": {
       "method": "GET",
       "params": {
@@ -2801,6 +2800,35 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/default-reviewers"
+    },
+    "listDeployments": {
+      "method": "GET",
+      "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedDeployments",
+      "url": "/repositories/{username}/{repo_slug}/deployments/"
     },
     "listDiffStats": {
       "method": "GET",
@@ -4061,6 +4089,11 @@
       "alias": "users.searchCode"
     }
   },
+  "snippet": {
+    "getRawFiles": {
+      "alias": "snippets.getRawFiles"
+    }
+  },
   "snippets": {
     "checkWatch": {
       "method": "GET",
@@ -4322,6 +4355,27 @@
         }
       },
       "url": "/snippets/{username}/{encoded_id}/{revision}/patch"
+    },
+    "getRawFiles": {
+      "method": "GET",
+      "params": {
+        "encoded_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "path": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/snippets/{username}/{encoded_id}/files/{path}"
     },
     "list": {
       "method": "GET",
