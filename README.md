@@ -2,11 +2,11 @@
 [![Documentation](https://img.shields.io/badge/docs-bitbucket.js-blue.svg?style=for-the-badge)](https://bitbucketjs.netlify.com)
 [![License](https://img.shields.io/github/license/MunifTanjim/node-bitbucket.svg?style=for-the-badge)](https://github.com/MunifTanjim/node-bitbucket/blob/master/LICENSE)
 
-# BitBucket.js
+# Bitbucket.js
 
-BitBucket API client for Browser and Node.js
+Bitbucket API client for Browser and Node.js
 
-BitBucket API docs: [https://api.bitbucket.org](https://api.bitbucket.org)
+Bitbucket API docs: [https://api.bitbucket.org](https://api.bitbucket.org)
 
 ## Installation
 
@@ -26,32 +26,50 @@ $ yarn add bitbucket
 
 ### Browser
 
-
 ```html
 <script src="https://unpkg.com/bitbucket/dist/bitbucket.min.js"></script>
 <script>
-  const bitbucket = new BitBucket()
+  const bitbucket = new Bitbucket()
 </script>
 ```
 
 ### Node
 
 ```js
-const BitBucket = require('bitbucket')
+const Bitbucket = require('bitbucket')
 
-const bitbucket = new BitBucket()
+const bitbucket = new Bitbucket()
+```
 
+#### Client Options
+
+You can set the APIs' `baseUrl` and modify some behaviors (e.g. request timeout etc.) by passing a clientOptions object to the `Bitbucket` constructor.
+
+```js
+const clientOptions = {
+  baseUrl: 'https://api.bitbucket.org/2.0'
+  headers: {},
+  options: {
+    timeout: 10
+  }
+}
+
+const bitbucket = new Bitbucket(clientOptions)
+```
+
+This enables you to use `bitbucket` with both Bitbucket Cloud and Bitbucket Server.
+
+#### Authentication
+
+```js
 bitbucket.authenticate({
   type: 'basic',
   username: 'username',
   password: 'password'
 })
-
-bitbucket.repositories
-  .list({ username: 'username' })
-  .then(({ data, headers }) => console.log(data.values))
-  .catch(err => console.error(err))
 ```
+
+#### API Methods
 
 **async/await**
 ```js
@@ -85,6 +103,15 @@ Notes:
 #### API Names
 
 Check API client docs: [https://bitbucketjs.netlify.com](https://bitbucketjs.netlify.com)
+
+##### Examples
+
+```js
+bitbucket.repositories
+  .list({ username: 'MunifTanjim' })
+  .then(({ data, headers }) => console.log(data.values))
+  .catch(err => console.error(err))
+```
 
 ## Acknowledgement
 
