@@ -1,8 +1,8 @@
 {
   "name": "bitbucket",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "BitBucket API client for Browser and Node.js",
-  "keywords": ["bitbucket", "api-client", "rest"],
+  "keywords": ["bitbucket", "bitbucket-api", "api-client", "api", "rest"],
   "homepage": "https://github.com/MunifTanjim/node-bitbucket#readme",
   "bugs": "https://github.com/MunifTanjim/node-bitbucket/issues",
   "license": "MIT",
