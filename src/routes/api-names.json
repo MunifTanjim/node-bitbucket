@@ -56,6 +56,11 @@
       "webhooks": "list"
     }
   },
+  "/pullrequests/{target_user}": {
+    "get": {
+      "pullrequests": ""
+    }
+  },
   "/repositories": {
     "get": {
       "repositories": "listPublic"
@@ -210,6 +215,18 @@
       "repositories": "addDefaultReviewer"
     }
   },
+  "/repositories/{username}/{repo_slug}/deployments/": {
+    "get": {
+      "deployments": "list",
+      "repositories": "listDeployments"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/deployments/{deployment_uuid}": {
+    "get": {
+      "deployments": "get",
+      "repositories": "getDeployment"
+    }
+  },
   "/repositories/{username}/{repo_slug}/diff/{spec}": {
     "get": {
       "commits": "getDiff",
@@ -239,6 +256,12 @@
     "get": {
       "downloads": "get",
       "repositories": "getDownload"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/environments/{environment_uuid}": {
+    "get": {
+      "deployments": "getEnvironment",
+      "repositories": "getEnvironment"
     }
   },
   "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}": {
@@ -838,6 +861,12 @@
       "snippets": "listCommitsFor"
     }
   },
+  "/snippets/{username}/{encoded_id}/files/{path}": {
+    "get": {
+      "snippet": "getRawFiles",
+      "snippets": "getRawFiles"
+    }
+  },
   "/snippets/{username}/{encoded_id}/watch": {
     "delete": {
       "snippets": "stopWatch"
@@ -1039,6 +1068,12 @@
     "put": {
       "users": "updateWebhook",
       "webhooks": "updateForUser"
+    }
+  },
+  "/users/{username}/members": {
+    "get": {
+      "teams": "getMembers",
+      "users": "getTeamMembers"
     }
   },
   "/users/{username}/pipelines_config/variables/": {

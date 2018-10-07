@@ -71,6 +71,40 @@
       "alias": "repositories.updateCommitBuildStatus"
     }
   },
+  "deployments": {
+    "find-deployments": {
+      "method": "GET",
+      "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedDeployments",
+      "url": "/repositories/{username}/{repo_slug}/deployments/"
+    },
+    "get": {
+      "alias": "repositories.getDeployment"
+    }
+  },
   "downloads": {
     "create": {
       "alias": "repositories.createDownload"
@@ -1724,6 +1758,28 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
+    },
+    "getDeployment": {
+      "method": "GET",
+      "params": {
+        "deployment_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "Deployment",
+      "url": "/repositories/{username}/{repo_slug}/deployments/{deployment_uuid}"
     },
     "getDiff": {
       "method": "GET",
@@ -4691,6 +4747,9 @@
       "returns": "Team",
       "url": "/teams/{username}"
     },
+    "getMembers": {
+      "alias": "users.getTeamMembers"
+    },
     "getPipelineVariable": {
       "method": "GET",
       "params": {
@@ -5272,6 +5331,18 @@
     "getSshKey": {
       "method": "GET",
       "url": "/users/{username}/ssh-keys/{key_id}"
+    },
+    "getTeamMembers": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "User",
+      "url": "/users/{username}/members"
     },
     "getWebhook": {
       "method": "GET",

@@ -62,5 +62,9 @@
   {
     "description": "Bitbucket Pipelines brings continuous delivery to Bitbucket\nCloud, empowering teams with full branching to deployment\nvisibility and faster feedback loops.\n",
     "name": "pipelines"
+  },
+  {
+    "description": "Teams are deploying code faster than ever, thanks to continuous\ndelivery practices and tools like Bitbucket Pipelines. Bitbucket\nDeployments gives teams visibility into their deployment\nenvironments and helps teams to track how far changes have\nprogressed in their deployment pipeline.\n",
+    "name": "deployments"
   }
 ]

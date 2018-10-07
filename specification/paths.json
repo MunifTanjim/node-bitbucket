@@ -313,7 +313,7 @@
       }
     ],
     "post": {
-      "description": "POST a new custom event.\n\nThe data within the event body will be hydrated by Bitbucket. For example, the following event\nsubmission would result in subscribers for the event receiving the full repository object\ncorresponding to the UUID.\n\n```\n$ curl -X POST -H \"Content-Type: application/json\" -d '{\n    \"my_num_data\": \"12345\",\n    \"repository\": {\n        \"type\": \"repository\",\n        \"uuid\": \"{be95aa1f-c0b2-47f6-99d1-bf5d3a0f850f}\"\n}}' https://api.bitbucket.org/2.0/addon/users/myuser/events/myappkey%3Amyevent\n```\n\nUse the `fields` property of the custom event Connect module where the event is defined to restrict the\nfields included in the expanded payload sent to listeners.\n\nFor example, the `customEvents` module in the app descriptor for the previous example would look like this:\n\n```\n'modules': {\n    'customEvents': {\n        'myappkey:myevent': {\n            'schema': {\n                'properties': {\n                    'my_num_data': {'type': 'number'},\n                    'repository': {'$ref': '#/definitions/repository'}\n                }\n            },\n            'fields': ['my_num_data', 'repository.owner.username']\n        }\n    }\n}\n```\n\nBy specifying fields explicitly, only the `my_num_data` field and the username of the repository owner\nwill be sent to subscribers of the event.",
+      "description": "POST a new custom event.\n\nThe data within the event body will be hydrated by Bitbucket. For example, the following event\nsubmission would result in subscribers for the event receiving the full repository object\ncorresponding to the UUID.\n\n```\n$ curl -X POST -H \"Content-Type: application/json\" -d '{\n    \"mynumdata\": \"12345\",\n    \"repository\": {\n        \"type\": \"repository\",\n        \"uuid\": \"{be95aa1f-c0b2-47f6-99d1-bf5d3a0f850f}\"\n}}' https://api.bitbucket.org/2.0/addon/users/myuser/events/com.example.app%3Amyevent\n```\n\nUse the optional `fields` property of the custom event Connect\nmodule where the event is defined to add additional\nfields to the expanded payload sent to listeners.\n\nFor example, the `customEvents` module in the app descriptor for the previous example would look like this:\n\n```\n'modules': {\n    'customEvents': {\n        'com.example.app:myevent': {\n            'schema': {\n                'properties': {\n                    'mynumdata': {'type': 'number'},\n                    'repository': {'$ref': '#/definitions/repository'}\n                }\n            },\n            'fields': ['repository.owner']\n        }\n    }\n}\n```\n\nBy specifying fields as above, the repository owner\nwill also be sent to subscribers of the event.",
       "parameters": [],
       "responses": {
         "204": {
@@ -418,6 +418,70 @@
       {
         "in": "path",
         "name": "subject_type",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "/pullrequests/{target_user}": {
+    "get": {
+      "description": "Returns all pull requests authored by the specified user.\n\nBy default only open pull requests are returned. This can be controlled\nusing the `state` query parameter. To retrieve pull requests that are\nin one of multiple states, repeat the `state` parameter for each\nindividual state.\n\nThis endpoint also supports filtering and sorting of the results. See\n[filtering and sorting](../../../../meta/filtering) for more details.",
+      "parameters": [
+        {
+          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Only return pull requests that are in this state. This parameter can be repeated.",
+          "enum": [
+            "MERGED",
+            "SUPERSEDED",
+            "OPEN",
+            "DECLINED"
+          ],
+          "in": "query",
+          "name": "state",
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "All pull requests authored by the specified user.",
+          "schema": {
+            "$ref": "#/definitions/paginated_pullrequests"
+          }
+        },
+        "404": {
+          "description": "If the specified user does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "pullrequest"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "pullrequests"
+      ]
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "target_user",
         "required": true,
         "type": "string"
       }
@@ -641,7 +705,7 @@
                 "display_name": "Example Username",
                 "links": {
                   "avatar": {
-                    "href": "https://bitbucket.org/account/example-username/avatar/32/"
+                    "href": "https://bitbucket.org/account/example-username/avatar/"
                   },
                   "html": {
                     "href": "https://bitbucket.org/example-username/"
@@ -655,7 +719,7 @@
                 "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
               },
               "scm": "git",
-              "size": 0,
+              "size": 33348,
               "slug": "bits_and_bobs",
               "type": "repository",
               "updated_on": "2018-06-20T23:17:33.616037+00:00",
@@ -797,7 +861,7 @@
                 "display_name": "Example Username",
                 "links": {
                   "avatar": {
-                    "href": "https://bitbucket.org/account/example-username/avatar/32/"
+                    "href": "https://bitbucket.org/account/example-username/avatar/"
                   },
                   "html": {
                     "href": "https://bitbucket.org/example-username/"
@@ -811,7 +875,7 @@
                 "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
               },
               "scm": "git",
-              "size": 0,
+              "size": 33348,
               "slug": "bits_and_bobs",
               "type": "repository",
               "updated_on": "2018-06-20T23:17:33.616037+00:00",
@@ -937,7 +1001,7 @@
                 "display_name": "Example Username",
                 "links": {
                   "avatar": {
-                    "href": "https://bitbucket.org/account/example-username/avatar/32/"
+                    "href": "https://bitbucket.org/account/example-username/avatar/"
                   },
                   "html": {
                     "href": "https://bitbucket.org/example-username/"
@@ -951,7 +1015,7 @@
                 "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
               },
               "scm": "git",
-              "size": 0,
+              "size": 33348,
               "slug": "bits_and_bobs",
               "type": "repository",
               "updated_on": "2018-06-20T23:17:33.616037+00:00",
@@ -1036,7 +1100,7 @@
                 "display_name": "Example Username",
                 "links": {
                   "avatar": {
-                    "href": "https://bitbucket.org/account/example-username/avatar/32/"
+                    "href": "https://bitbucket.org/account/example-username/avatar/"
                   },
                   "html": {
                     "href": "https://bitbucket.org/example-username/"
@@ -1050,7 +1114,7 @@
                 "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
               },
               "scm": "git",
-              "size": 0,
+              "size": 33348,
               "slug": "bits_and_bobs",
               "type": "repository",
               "updated_on": "2018-06-20T23:17:33.616037+00:00",
@@ -2383,6 +2447,85 @@
       ]
     }
   },
+  "/repositories/{username}/{repo_slug}/deployments/": {
+    "get": {
+      "description": "Find deployments",
+      "operationId": "getDeploymentsForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The matching deployments.",
+          "schema": {
+            "$ref": "#/definitions/paginated_deployments"
+          }
+        }
+      },
+      "tags": [
+        "deployments"
+      ]
+    }
+  },
+  "/repositories/{username}/{repo_slug}/deployments/{deployment_uuid}": {
+    "get": {
+      "description": "Retrieve a deployment",
+      "operationId": "getDeploymentForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The deployment UUID.",
+          "in": "path",
+          "name": "deployment_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The deployment.",
+          "schema": {
+            "$ref": "#/definitions/deployment"
+          }
+        },
+        "404": {
+          "description": "No account, repository or deployment with the UUID provided exists.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "deployments"
+      ]
+    }
+  },
   "/repositories/{username}/{repo_slug}/diff/{spec}": {
     "get": {
       "description": "Produces a raw, git-style diff for either a single commit (diffed\nagainst its first parent), or a revspec of 2 commits (e.g.\n`3a8b42..9ff173` where the first commit represents the source and the\nsecond commit the destination).\n\nIn case of the latter (diffing a revspec), a 3-way diff, or merge diff,\nis computed. This shows the changes introduced by the left branch\n(`3a8b42` in our example) as compared againt the right branch\n(`9ff173`).\n\nThis is equivalent to merging the left branch into the right branch and\nthen computing the diff of the merge commit against its first parent\n(the right branch). This follows the same behavior as pull requests\nthat also show this style of 3-way, or merge diff.\n\nWhile similar to patches, diffs:\n\n* Don't have a commit header (username, commit message, etc)\n* Support the optional `path=foo/bar.py` query param to filter\n  the diff to just that one file diff\n\nThe raw diff is returned as-is, in whatever encoding the files in the\nrepository use. It is not decoded into unicode. As such, the\ncontent-type is `text/plain`.",
@@ -2692,6 +2835,52 @@
       }
     ]
   },
+  "/repositories/{username}/{repo_slug}/environments/{environment_uuid}": {
+    "get": {
+      "description": "Retrieve an environment",
+      "operationId": "getEnvironmentForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The environment UUID.",
+          "in": "path",
+          "name": "environment_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The environment.",
+          "schema": {
+            "$ref": "#/definitions/deployment_environment"
+          }
+        },
+        "404": {
+          "description": "No account, repository or environment with the UUID provided exists.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "deployments"
+      ]
+    }
+  },
   "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}": {
     "get": {
       "description": "Returns a paginated list of commits that modified the specified file.\n\nCommits are returned in reverse chronological order. This is roughly\nequivalent to the following commands:\n\n    $ git log --follow --date-order <sha> <path>\n\n    $ hg log --follow <path>\n\nBy default, Bitbucket will follow renames and the path name in the\nreturned entries reflects that. This can be turned off using the\n`?renames=false` query parameter.\n\nResults are returned in descending chronological order by default, and\nlike most endpoints you can\n[filter and sort](../../../../../../meta/filtering) the response to\nonly provide exactly the data you want.\n\nFor example, if you wanted to find commits made before 2011-05-18\nagainst a file named `README.rst`, but you only wanted the path and\ndate, your query would look like this:\n\n```\n$ curl 'https://api.bitbucket.org/2.0/repositories/evzijst/dogslow/filehistory/master/README.rst'\\\n  '?fields=values.next,values.path,values.commit.date&q=commit.date<=2011-05-18'\n{\n  \"values\": [\n    {\n      \"commit\": {\n        \"date\": \"2011-05-17T07:32:09+00:00\"\n      },\n      \"path\": \"README.rst\"\n    },\n    {\n      \"commit\": {\n        \"date\": \"2011-05-16T06:33:28+00:00\"\n      },\n      \"path\": \"README.txt\"\n    },\n    {\n      \"commit\": {\n        \"date\": \"2011-05-16T06:15:39+00:00\"\n      },\n      \"path\": \"README.txt\"\n    }\n  ]\n}\n```\n\nIn the response you can see that the file was renamed to `README.rst`\nby the commit made on 2011-05-16, and was previously named `README.txt`.",
@@ -2917,7 +3106,7 @@
                 "display_name": "Example Username",
                 "links": {
                   "avatar": {
-                    "href": "https://bitbucket.org/account/example-username/avatar/32/"
+                    "href": "https://bitbucket.org/account/example-username/avatar/"
                   },
                   "html": {
                     "href": "https://bitbucket.org/example-username/"
@@ -2931,7 +3120,7 @@
                 "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
               },
               "scm": "git",
-              "size": 0,
+              "size": 33348,
               "slug": "bits_and_bobs",
               "type": "repository",
               "updated_on": "2018-06-20T23:17:33.616037+00:00",
@@ -6027,7 +6216,7 @@
   },
   "/repositories/{username}/{repo_slug}/pullrequests": {
     "get": {
-      "description": "Returns a paginated list of all pull requests on the specified\nrepository. By default only open pull requests are returned. This can\nbe controlled using the `state` query parameter. To retrieve pull\nrequests that are in one of multiple states, repeat the `state`\nparameter for each individual state.\n\nThis endpoint also supports filtering and sorting of the results. See\n[filtering and sorting](../../../../meta/filtering) for more details.",
+      "description": "Returns all pull requests on the specified repository.\n\nBy default only open pull requests are returned. This can be controlled\nusing the `state` query parameter. To retrieve pull requests that are\nin one of multiple states, repeat the `state` parameter for each\nindividual state.\n\nThis endpoint also supports filtering and sorting of the results. See\n[filtering and sorting](../../../../meta/filtering) for more details.",
       "parameters": [
         {
           "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
@@ -6204,6 +6393,149 @@
       "responses": {
         "200": {
           "description": "The pull request object",
+          "examples": {
+            "application/json": {
+              "author": {
+                "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+                "display_name": "Example Username",
+                "links": {
+                  "avatar": {
+                    "href": "https://bitbucket.org/account/example-username/avatar/"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/example-username/"
+                  },
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/users/example-username"
+                  }
+                },
+                "type": "user",
+                "username": "example-username",
+                "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+              },
+              "close_source_branch": true,
+              "closed_by": null,
+              "comment_count": 0,
+              "created_on": "2018-06-20T23:17:33.616037+00:00",
+              "description": "Everything is awesome!",
+              "destination": {
+                "branch": {
+                  "name": "master"
+                },
+                "commit": {
+                  "hash": "230269fdfabd",
+                  "links": {
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs/commits/230269fdfabd"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabd"
+                    }
+                  },
+                  "type": "commit"
+                },
+                "repository": {
+                  "full_name": "example-username/bits_and_bobs",
+                  "links": {
+                    "avatar": {
+                      "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+                    },
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+                    }
+                  },
+                  "name": "bits_and_bobs",
+                  "type": "repository",
+                  "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}"
+                }
+              },
+              "id": 1,
+              "links": {
+                "activity": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/activity"
+                },
+                "approve": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/approve"
+                },
+                "comments": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/comments"
+                },
+                "commits": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/commits"
+                },
+                "decline": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/decline"
+                },
+                "diff": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/diff"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/example-username/bits_and_bobs/pull-requests/1"
+                },
+                "merge": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/merge"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1"
+                },
+                "statuses": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/statuses"
+                }
+              },
+              "merge_commit": null,
+              "participants": [],
+              "reason": "",
+              "reviewers": [],
+              "source": {
+                "branch": {
+                  "name": "branch_magnificent_internet"
+                },
+                "commit": {
+                  "hash": "c184aab5708b",
+                  "links": {
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs/commits/c184aab5708b"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/c184aab5708b"
+                    }
+                  },
+                  "type": "commit"
+                },
+                "repository": {
+                  "full_name": "example-username/bits_and_bobs",
+                  "links": {
+                    "avatar": {
+                      "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+                    },
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+                    }
+                  },
+                  "name": "bits_and_bobs",
+                  "type": "repository",
+                  "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}"
+                }
+              },
+              "state": "OPEN",
+              "summary": {
+                "html": "<p>Everything is awesome!</p>",
+                "markup": "markdown",
+                "raw": "Everything is awesome!",
+                "type": "rendered"
+              },
+              "task_count": 0,
+              "title": "Change a cooperative standard to a smiling disease",
+              "type": "pullrequest",
+              "updated_on": "2018-06-20T23:17:33.616037+00:00"
+            }
+          },
           "schema": {
             "$ref": "#/definitions/pullrequest"
           }
@@ -6292,6 +6624,149 @@
       "responses": {
         "200": {
           "description": "The updated pull request",
+          "examples": {
+            "application/json": {
+              "author": {
+                "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+                "display_name": "Example Username",
+                "links": {
+                  "avatar": {
+                    "href": "https://bitbucket.org/account/example-username/avatar/"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/example-username/"
+                  },
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/users/example-username"
+                  }
+                },
+                "type": "user",
+                "username": "example-username",
+                "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+              },
+              "close_source_branch": true,
+              "closed_by": null,
+              "comment_count": 0,
+              "created_on": "2018-06-20T23:17:33.616037+00:00",
+              "description": "Everything is awesome!",
+              "destination": {
+                "branch": {
+                  "name": "master"
+                },
+                "commit": {
+                  "hash": "230269fdfabd",
+                  "links": {
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs/commits/230269fdfabd"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabd"
+                    }
+                  },
+                  "type": "commit"
+                },
+                "repository": {
+                  "full_name": "example-username/bits_and_bobs",
+                  "links": {
+                    "avatar": {
+                      "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+                    },
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+                    }
+                  },
+                  "name": "bits_and_bobs",
+                  "type": "repository",
+                  "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}"
+                }
+              },
+              "id": 1,
+              "links": {
+                "activity": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/activity"
+                },
+                "approve": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/approve"
+                },
+                "comments": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/comments"
+                },
+                "commits": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/commits"
+                },
+                "decline": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/decline"
+                },
+                "diff": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/diff"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/example-username/bits_and_bobs/pull-requests/1"
+                },
+                "merge": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/merge"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1"
+                },
+                "statuses": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/statuses"
+                }
+              },
+              "merge_commit": null,
+              "participants": [],
+              "reason": "",
+              "reviewers": [],
+              "source": {
+                "branch": {
+                  "name": "branch_magnificent_internet"
+                },
+                "commit": {
+                  "hash": "c184aab5708b",
+                  "links": {
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs/commits/c184aab5708b"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/c184aab5708b"
+                    }
+                  },
+                  "type": "commit"
+                },
+                "repository": {
+                  "full_name": "example-username/bits_and_bobs",
+                  "links": {
+                    "avatar": {
+                      "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+                    },
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+                    }
+                  },
+                  "name": "bits_and_bobs",
+                  "type": "repository",
+                  "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}"
+                }
+              },
+              "state": "OPEN",
+              "summary": {
+                "html": "<p>Everything is awesome!</p>",
+                "markup": "markdown",
+                "raw": "Everything is awesome!",
+                "type": "rendered"
+              },
+              "task_count": 0,
+              "title": "Change a cooperative standard to a smiling disease",
+              "type": "pullrequest",
+              "updated_on": "2018-06-20T23:17:33.616037+00:00"
+            }
+          },
           "schema": {
             "$ref": "#/definitions/pullrequest"
           }
@@ -6891,6 +7366,149 @@
       "responses": {
         "200": {
           "description": "The pull request object.",
+          "examples": {
+            "application/json": {
+              "author": {
+                "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+                "display_name": "Example Username",
+                "links": {
+                  "avatar": {
+                    "href": "https://bitbucket.org/account/example-username/avatar/"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/example-username/"
+                  },
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/users/example-username"
+                  }
+                },
+                "type": "user",
+                "username": "example-username",
+                "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+              },
+              "close_source_branch": true,
+              "closed_by": null,
+              "comment_count": 0,
+              "created_on": "2018-06-20T23:17:33.616037+00:00",
+              "description": "Everything is awesome!",
+              "destination": {
+                "branch": {
+                  "name": "master"
+                },
+                "commit": {
+                  "hash": "230269fdfabd",
+                  "links": {
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs/commits/230269fdfabd"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabd"
+                    }
+                  },
+                  "type": "commit"
+                },
+                "repository": {
+                  "full_name": "example-username/bits_and_bobs",
+                  "links": {
+                    "avatar": {
+                      "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+                    },
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+                    }
+                  },
+                  "name": "bits_and_bobs",
+                  "type": "repository",
+                  "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}"
+                }
+              },
+              "id": 1,
+              "links": {
+                "activity": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/activity"
+                },
+                "approve": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/approve"
+                },
+                "comments": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/comments"
+                },
+                "commits": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/commits"
+                },
+                "decline": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/decline"
+                },
+                "diff": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/diff"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/example-username/bits_and_bobs/pull-requests/1"
+                },
+                "merge": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/merge"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1"
+                },
+                "statuses": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/statuses"
+                }
+              },
+              "merge_commit": null,
+              "participants": [],
+              "reason": "",
+              "reviewers": [],
+              "source": {
+                "branch": {
+                  "name": "branch_magnificent_internet"
+                },
+                "commit": {
+                  "hash": "c184aab5708b",
+                  "links": {
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs/commits/c184aab5708b"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/c184aab5708b"
+                    }
+                  },
+                  "type": "commit"
+                },
+                "repository": {
+                  "full_name": "example-username/bits_and_bobs",
+                  "links": {
+                    "avatar": {
+                      "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+                    },
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+                    }
+                  },
+                  "name": "bits_and_bobs",
+                  "type": "repository",
+                  "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}"
+                }
+              },
+              "state": "OPEN",
+              "summary": {
+                "html": "<p>Everything is awesome!</p>",
+                "markup": "markdown",
+                "raw": "Everything is awesome!",
+                "type": "rendered"
+              },
+              "task_count": 0,
+              "title": "Change a cooperative standard to a smiling disease",
+              "type": "pullrequest",
+              "updated_on": "2018-06-20T23:17:33.616037+00:00"
+            }
+          },
           "schema": {
             "$ref": "#/definitions/pullrequest"
           }
@@ -7050,6 +7668,149 @@
       "responses": {
         "200": {
           "description": "The pull request object.",
+          "examples": {
+            "application/json": {
+              "author": {
+                "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+                "display_name": "Example Username",
+                "links": {
+                  "avatar": {
+                    "href": "https://bitbucket.org/account/example-username/avatar/"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/example-username/"
+                  },
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/users/example-username"
+                  }
+                },
+                "type": "user",
+                "username": "example-username",
+                "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+              },
+              "close_source_branch": true,
+              "closed_by": null,
+              "comment_count": 0,
+              "created_on": "2018-06-20T23:17:33.616037+00:00",
+              "description": "Everything is awesome!",
+              "destination": {
+                "branch": {
+                  "name": "master"
+                },
+                "commit": {
+                  "hash": "230269fdfabd",
+                  "links": {
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs/commits/230269fdfabd"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabd"
+                    }
+                  },
+                  "type": "commit"
+                },
+                "repository": {
+                  "full_name": "example-username/bits_and_bobs",
+                  "links": {
+                    "avatar": {
+                      "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+                    },
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+                    }
+                  },
+                  "name": "bits_and_bobs",
+                  "type": "repository",
+                  "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}"
+                }
+              },
+              "id": 1,
+              "links": {
+                "activity": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/activity"
+                },
+                "approve": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/approve"
+                },
+                "comments": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/comments"
+                },
+                "commits": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/commits"
+                },
+                "decline": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/decline"
+                },
+                "diff": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/diff"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/example-username/bits_and_bobs/pull-requests/1"
+                },
+                "merge": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/merge"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1"
+                },
+                "statuses": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/statuses"
+                }
+              },
+              "merge_commit": null,
+              "participants": [],
+              "reason": "",
+              "reviewers": [],
+              "source": {
+                "branch": {
+                  "name": "branch_magnificent_internet"
+                },
+                "commit": {
+                  "hash": "c184aab5708b",
+                  "links": {
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs/commits/c184aab5708b"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/c184aab5708b"
+                    }
+                  },
+                  "type": "commit"
+                },
+                "repository": {
+                  "full_name": "example-username/bits_and_bobs",
+                  "links": {
+                    "avatar": {
+                      "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+                    },
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+                    }
+                  },
+                  "name": "bits_and_bobs",
+                  "type": "repository",
+                  "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}"
+                }
+              },
+              "state": "OPEN",
+              "summary": {
+                "html": "<p>Everything is awesome!</p>",
+                "markup": "markdown",
+                "raw": "Everything is awesome!",
+                "type": "rendered"
+              },
+              "task_count": 0,
+              "title": "Change a cooperative standard to a smiling disease",
+              "type": "pullrequest",
+              "updated_on": "2018-06-20T23:17:33.616037+00:00"
+            }
+          },
           "schema": {
             "$ref": "#/definitions/pullrequest"
           }
@@ -7267,8 +8028,35 @@
   },
   "/repositories/{username}/{repo_slug}/refs": {
     "get": {
-      "description": "Returns the branches and tags in the repository.",
-      "parameters": [],
+      "description": "Returns the branches and tags in the repository.\n\nBy default, results will be in the order the underlying source control system returns them and identical to\nthe ordering one sees when running \"$ git show-ref\". Note that this follows simple\nlexical ordering of the ref names.\n\nThis can be undesirable as it does apply any natural sorting semantics, meaning for instance that refs are\nsorted [\"branch1\", \"branch10\", \"branch2\", \"v10\", \"v11\", \"v9\"] instead of [\"branch1\", \"branch2\",\n\"branch10\", \"v9\", \"v10\", \"v11\"].\n\nSorting can be changed using the ?sort= query parameter. When using ?sort=name to explicitly sort on ref name,\nBitbucket will apply natural sorting and interpret numerical values as numbers instead of strings.",
+      "parameters": [
+        {
+          "description": "\nThis can either be the username or the UUID of the user,\nsurrounded by curly-braces, for example: `{user UUID}`.\n",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "\nThis can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../../../../meta/filtering).",
+          "in": "query",
+          "name": "q",
+          "type": "string"
+        },
+        {
+          "description": "\nField by which the results should be sorted as per\n[filtering and sorting](../../../../../../meta/filtering). The `name`\nfield is handled specially for refs in that, if specified as the sort field, it\nuses a natural sort order instead of the default lexicographical sort order. For example,\nit will return ['1.1', '1.2', '1.10'] instead of ['1.1', '1.10', '1.2'].",
+          "in": "query",
+          "name": "sort",
+          "type": "string"
+        }
+      ],
       "responses": {
         "200": {
           "description": "A paginated list of refs matching any filter criteria that were provided.",
@@ -7325,8 +8113,35 @@
   },
   "/repositories/{username}/{repo_slug}/refs/branches": {
     "get": {
-      "description": "Returns a list of all open branches within the specified repository.\nResults will be in the order the source control manager returns them.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches | jq .\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"heads\": [\n        {\n          \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n          \"type\": \"commit\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n            }\n          }\n        }\n      ],\n      \"type\": \"named_branch\",\n      \"name\": \"default\",\n      \"links\": {\n        \"commits\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/default\"\n        },\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/branch/default\"\n        }\n      },\n      \"target\": {\n        \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n        \"repository\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial\"\n            },\n            \"avatar\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/avatar/32/\"\n            }\n          },\n          \"type\": \"repository\",\n          \"name\": \"mercurial\",\n          \"full_name\": \"seanfarley/mercurial\",\n          \"uuid\": \"{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}\"\n        },\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"comments\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/comments\"\n          },\n          \"patch\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"diff\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"approve\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/approve\"\n          },\n          \"statuses\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/statuses\"\n          }\n        },\n        \"author\": {\n          \"raw\": \"Martin von Zweigbergk <martinvonz@google.com>\",\n          \"type\": \"author\",\n          \"user\": {\n            \"username\": \"martinvonz\",\n            \"display_name\": \"Martin von Zweigbergk\",\n            \"type\": \"user\",\n            \"uuid\": \"{fdb0e657-3ade-4fad-a136-95f1ffe4a5ac}\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/martinvonz\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/martinvonz/\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/martinvonz/avatar/32/\"\n              }\n            }\n          }\n        },\n        \"parents\": [\n          {\n            \"hash\": \"5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\",\n            \"type\": \"commit\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n              }\n            }\n          }\n        ],\n        \"date\": \"2018-02-01T18:44:49+00:00\",\n        \"message\": \"config: replace a for-else by any()\",\n        \"type\": \"commit\"\n      }\n    },\n    {\n      \"heads\": [\n        {\n          \"hash\": \"1d60ad093792706e1dc7a52b20942593f2c19655\",\n          \"type\": \"commit\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/1d60ad093792706e1dc7a52b20942593f2c19655\"\n            }\n          }\n        }\n      ],\n      \"type\": \"named_branch\",\n      \"name\": \"stable\",\n      \"links\": {\n        \"commits\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/stable\"\n        },\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/stable\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/branch/stable\"\n        }\n      },\n      \"target\": {\n        \"hash\": \"1d60ad093792706e1dc7a52b20942593f2c19655\",\n        \"repository\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial\"\n            },\n            \"avatar\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/avatar/32/\"\n            }\n          },\n          \"type\": \"repository\",\n          \"name\": \"mercurial\",\n          \"full_name\": \"seanfarley/mercurial\",\n          \"uuid\": \"{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}\"\n        },\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"comments\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/comments\"\n          },\n          \"patch\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"diff\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"approve\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/approve\"\n          },\n          \"statuses\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/statuses\"\n          }\n        },\n        \"author\": {\n          \"raw\": \"Augie Fackler <raf@durin42.com>\",\n          \"type\": \"author\",\n          \"user\": {\n            \"username\": \"durin42\",\n            \"display_name\": \"Augie Fackler\",\n            \"type\": \"user\",\n            \"uuid\": \"{e07dc61f-bb05-4218-b43a-d991f26be65a}\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/durin42\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/durin42/\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/durin42/avatar/32/\"\n              }\n            }\n          }\n        },\n        \"parents\": [\n          {\n            \"hash\": \"56a0da11bde519d79168e890df4bcf0da62f0a7b\",\n            \"type\": \"commit\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/56a0da11bde519d79168e890df4bcf0da62f0a7b\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/56a0da11bde519d79168e890df4bcf0da62f0a7b\"\n              }\n            }\n          }\n        ],\n        \"date\": \"2018-02-01T19:13:41+00:00\",\n        \"message\": \"Added signature for changeset d334afc585e2\",\n        \"type\": \"commit\"\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nBranches support [filtering and sorting](../../../../../meta/filtering)\nthat can be used to search for specific branches. For instance, to find\nall branches that have \"stab\" in their name:\n\n```\ncurl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches -G --data-urlencode 'q=name ~ \"stab\"'\n```",
-      "parameters": [],
+      "description": "Returns a list of all open branches within the specified repository.\nResults will be in the order the source control manager returns them.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches | jq .\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"heads\": [\n        {\n          \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n          \"type\": \"commit\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n            }\n          }\n        }\n      ],\n      \"type\": \"named_branch\",\n      \"name\": \"default\",\n      \"links\": {\n        \"commits\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/default\"\n        },\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/branch/default\"\n        }\n      },\n      \"target\": {\n        \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n        \"repository\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial\"\n            },\n            \"avatar\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/avatar/32/\"\n            }\n          },\n          \"type\": \"repository\",\n          \"name\": \"mercurial\",\n          \"full_name\": \"seanfarley/mercurial\",\n          \"uuid\": \"{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}\"\n        },\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"comments\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/comments\"\n          },\n          \"patch\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"diff\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"approve\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/approve\"\n          },\n          \"statuses\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/statuses\"\n          }\n        },\n        \"author\": {\n          \"raw\": \"Martin von Zweigbergk <martinvonz@google.com>\",\n          \"type\": \"author\",\n          \"user\": {\n            \"username\": \"martinvonz\",\n            \"display_name\": \"Martin von Zweigbergk\",\n            \"type\": \"user\",\n            \"uuid\": \"{fdb0e657-3ade-4fad-a136-95f1ffe4a5ac}\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/martinvonz\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/martinvonz/\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/martinvonz/avatar/32/\"\n              }\n            }\n          }\n        },\n        \"parents\": [\n          {\n            \"hash\": \"5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\",\n            \"type\": \"commit\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n              }\n            }\n          }\n        ],\n        \"date\": \"2018-02-01T18:44:49+00:00\",\n        \"message\": \"config: replace a for-else by any()\",\n        \"type\": \"commit\"\n      }\n    },\n    {\n      \"heads\": [\n        {\n          \"hash\": \"1d60ad093792706e1dc7a52b20942593f2c19655\",\n          \"type\": \"commit\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/1d60ad093792706e1dc7a52b20942593f2c19655\"\n            }\n          }\n        }\n      ],\n      \"type\": \"named_branch\",\n      \"name\": \"stable\",\n      \"links\": {\n        \"commits\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/stable\"\n        },\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/stable\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/branch/stable\"\n        }\n      },\n      \"target\": {\n        \"hash\": \"1d60ad093792706e1dc7a52b20942593f2c19655\",\n        \"repository\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial\"\n            },\n            \"avatar\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/avatar/32/\"\n            }\n          },\n          \"type\": \"repository\",\n          \"name\": \"mercurial\",\n          \"full_name\": \"seanfarley/mercurial\",\n          \"uuid\": \"{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}\"\n        },\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"comments\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/comments\"\n          },\n          \"patch\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"diff\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"approve\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/approve\"\n          },\n          \"statuses\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/statuses\"\n          }\n        },\n        \"author\": {\n          \"raw\": \"Augie Fackler <raf@durin42.com>\",\n          \"type\": \"author\",\n          \"user\": {\n            \"username\": \"durin42\",\n            \"display_name\": \"Augie Fackler\",\n            \"type\": \"user\",\n            \"uuid\": \"{e07dc61f-bb05-4218-b43a-d991f26be65a}\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/durin42\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/durin42/\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/durin42/avatar/32/\"\n              }\n            }\n          }\n        },\n        \"parents\": [\n          {\n            \"hash\": \"56a0da11bde519d79168e890df4bcf0da62f0a7b\",\n            \"type\": \"commit\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/56a0da11bde519d79168e890df4bcf0da62f0a7b\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/56a0da11bde519d79168e890df4bcf0da62f0a7b\"\n              }\n            }\n          }\n        ],\n        \"date\": \"2018-02-01T19:13:41+00:00\",\n        \"message\": \"Added signature for changeset d334afc585e2\",\n        \"type\": \"commit\"\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nBranches support [filtering and sorting](../../../../../meta/filtering)\nthat can be used to search for specific branches. For instance, to find\nall branches that have \"stab\" in their name:\n\n```\ncurl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches -G --data-urlencode 'q=name ~ \"stab\"'\n```\n\nBy default, results will be in the order the underlying source control system returns them and identical to\nthe ordering one sees when running \"$ hg branches\" or \"$ git branch --list\". Note that this follows simple\nlexical ordering of the ref names.\n\nThis can be undesirable as it does apply any natural sorting semantics, meaning for instance that tags are\nsorted [\"v10\", \"v11\", \"v9\"] instead of [\"v9\", \"v10\", \"v11\"].\n\nSorting can be changed using the ?q= query parameter. When using ?q=name to explicitly sort on ref name,\nBitbucket will apply natural sorting and interpret numerical values as numbers instead of strings.",
+      "parameters": [
+        {
+          "description": "\nThis can either be the username or the UUID of the user,\nsurrounded by curly-braces, for example: `{user UUID}`.\n",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "\nThis can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../../../../meta/filtering).",
+          "in": "query",
+          "name": "q",
+          "type": "string"
+        },
+        {
+          "description": "\nField by which the results should be sorted as per\n[filtering and sorting](../../../../../../meta/filtering). The `name`\nfield is handled specially for branches in that, if specified as the sort field, it\nuses a natural sort order instead of the default lexicographical sort order. For example,\nit will return ['branch1', 'branch2', 'branch10'] instead of ['branch1', 'branch10', 'branch2'].",
+          "in": "query",
+          "name": "sort",
+          "type": "string"
+        }
+      ],
       "responses": {
         "200": {
           "description": "A paginated list of branches matching any filter criteria that were provided.",
@@ -7386,6 +8201,92 @@
       "responses": {
         "201": {
           "description": "The newly created branch object.",
+          "examples": {
+            "application/json": {
+              "links": {
+                "commits": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commits/master"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/example-username/bits_and_bobs/branch/master"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/refs/branches/master"
+                }
+              },
+              "name": "master",
+              "target": {
+                "author": {
+                  "raw": "Example Username <brian_stamm@gmail.com>",
+                  "type": "author",
+                  "user": {
+                    "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+                    "display_name": "Example Username",
+                    "links": {
+                      "avatar": {
+                        "href": "https://bitbucket.org/account/example-username/avatar/"
+                      },
+                      "html": {
+                        "href": "https://bitbucket.org/example-username/"
+                      },
+                      "self": {
+                        "href": "https://api.bitbucket.org/2.0/users/example-username"
+                      }
+                    },
+                    "type": "user",
+                    "username": "example-username",
+                    "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+                  }
+                },
+                "date": "2018-06-20T23:17:33+00:00",
+                "hash": "230269fdfabdb5562a991f351b5dd6425de232d2",
+                "links": {
+                  "approve": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2/approve"
+                  },
+                  "comments": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2/comments"
+                  },
+                  "diff": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/diff/230269fdfabdb5562a991f351b5dd6425de232d2"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/example-username/bits_and_bobs/commits/230269fdfabdb5562a991f351b5dd6425de232d2"
+                  },
+                  "patch": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/patch/230269fdfabdb5562a991f351b5dd6425de232d2"
+                  },
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2"
+                  },
+                  "statuses": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2/statuses"
+                  }
+                },
+                "message": "Kickass commit message!",
+                "parents": [],
+                "repository": {
+                  "full_name": "example-username/bits_and_bobs",
+                  "links": {
+                    "avatar": {
+                      "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+                    },
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+                    }
+                  },
+                  "name": "bits_and_bobs",
+                  "type": "repository",
+                  "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}"
+                },
+                "type": "commit"
+              },
+              "type": "branch"
+            }
+          },
           "schema": {
             "$ref": "#/definitions/branch"
           }
@@ -7465,6 +8366,92 @@
       "responses": {
         "200": {
           "description": "The branch object.",
+          "examples": {
+            "application/json": {
+              "links": {
+                "commits": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commits/master"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/example-username/bits_and_bobs/branch/master"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/refs/branches/master"
+                }
+              },
+              "name": "master",
+              "target": {
+                "author": {
+                  "raw": "Example Username <brian_stamm@gmail.com>",
+                  "type": "author",
+                  "user": {
+                    "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+                    "display_name": "Example Username",
+                    "links": {
+                      "avatar": {
+                        "href": "https://bitbucket.org/account/example-username/avatar/"
+                      },
+                      "html": {
+                        "href": "https://bitbucket.org/example-username/"
+                      },
+                      "self": {
+                        "href": "https://api.bitbucket.org/2.0/users/example-username"
+                      }
+                    },
+                    "type": "user",
+                    "username": "example-username",
+                    "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+                  }
+                },
+                "date": "2018-06-20T23:17:33+00:00",
+                "hash": "230269fdfabdb5562a991f351b5dd6425de232d2",
+                "links": {
+                  "approve": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2/approve"
+                  },
+                  "comments": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2/comments"
+                  },
+                  "diff": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/diff/230269fdfabdb5562a991f351b5dd6425de232d2"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/example-username/bits_and_bobs/commits/230269fdfabdb5562a991f351b5dd6425de232d2"
+                  },
+                  "patch": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/patch/230269fdfabdb5562a991f351b5dd6425de232d2"
+                  },
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2"
+                  },
+                  "statuses": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2/statuses"
+                  }
+                },
+                "message": "Kickass commit message!",
+                "parents": [],
+                "repository": {
+                  "full_name": "example-username/bits_and_bobs",
+                  "links": {
+                    "avatar": {
+                      "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+                    },
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/bits_and_bobs"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+                    }
+                  },
+                  "name": "bits_and_bobs",
+                  "type": "repository",
+                  "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}"
+                },
+                "type": "commit"
+              },
+              "type": "branch"
+            }
+          },
           "schema": {
             "$ref": "#/definitions/branch"
           }
@@ -7525,8 +8512,35 @@
   },
   "/repositories/{username}/{repo_slug}/refs/tags": {
     "get": {
-      "description": "Returns the tags in the repository.",
-      "parameters": [],
+      "description": "Returns the tags in the repository.\n\nBy default, results will be in the order the underlying source control system returns them and identical to\nthe ordering one sees when running \"$ hg tags\" or \"$ git tag --list\". Note that this follows simple\nlexical ordering of the ref names.\n\nThis can be undesirable as it does apply any natural sorting semantics, meaning for instance that tags are\nsorted [\"v10\", \"v11\", \"v9\"] instead of [\"v9\", \"v10\", \"v11\"].\n\nSorting can be changed using the ?sort= query parameter. When using ?sort=name to explicitly sort on ref name,\nBitbucket will apply natural sorting and interpret numerical values as numbers instead of strings.",
+      "parameters": [
+        {
+          "description": "\nThis can either be the username or the UUID of the user,\nsurrounded by curly-braces, for example: `{user UUID}`.\n",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "\nThis can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../../../../meta/filtering).",
+          "in": "query",
+          "name": "q",
+          "type": "string"
+        },
+        {
+          "description": "\nField by which the results should be sorted as per\n[filtering and sorting](../../../../../../meta/filtering). The `name`\nfield is handled specially for tags in that, if specified as the sort field, it\nuses a natural sort order instead of the default lexicographical sort order. For example,\nit will return ['1.1', '1.2', '1.10'] instead of ['1.1', '1.10', '1.2'].",
+          "in": "query",
+          "name": "sort",
+          "type": "string"
+        }
+      ],
       "responses": {
         "200": {
           "description": "A paginated list of tags matching any filter criteria that were provided.",
@@ -7788,7 +8802,7 @@
       }
     ],
     "post": {
-      "description": "This endpoint is used to create new commits in the repository by\nuploading files.\n\nTo add a new file to a repository:\n\n```\n$ curl https://api.bitbucket.org/2.0/repositories/username/slug/src \\\n    -F /repo/path/to/image.png=@image.png\n```\n\nThis will create a new commit on top of the main branch, inheriting the\ncontents of the main branch, but adding (or overwriting) the\n`image.png` file to the repository in the `/repo/path/to` directory.\n\nThis endpoint accepts `multipart/form-data` (as in the example above), as\nwell as `application/x-www-form-urlencoded`.\n\n## multipart/form-data\n\nA `multipart/form-data` post contains a series of \"form fields\" that\nidentify both the individual files that are being uploaded, as well as\nadditional, optional meta data.\n\nFiles are uploaded in file form fields (those that have a\n`Content-Disposition` parameter) whose field names point to the remote\npath in the repository where the file should be stored. Path field\nnames are always interpreted to be absolute from the root of the\nrepository, regardless whether the client uses a leading slash (as the\nabove `curl` example did).\n\nFile contents are treated as bytes and are not decoded as text.\n\nThe commit message, as well as other non-file meta data for the\nrequest, is sent along as normal form field elements. Meta data fields\nshare the same namespace as the file objects. For `multipart/form-data`\nbodies that should not lead to any ambiguity, as the\n`Content-Disposition` header will contain the `filename` parameter to\ndistinguish between a file named \"message\" and the commit message field.\n\n## application/x-www-form-urlencoded\n\nIt is also possible to upload new files using a simple\n`application/x-www-form-urlencoded` POST. This can be convenient when\nuploading pure text files:\n\n```\n$ curl https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/ \\\n  --data-urlencode \"/path/to/me.txt=Lorem ipsum.\" \\\n  --data-urlencode \"message=Initial commit\" \\\n  --data-urlencode \"author=Erik van Zijst <erik.van.zijst@gmail.com>\"\n```\n\nThere could be a field name clash if a client were to upload a file\nnamed \"message\", as this filename clashes with the meta data property\nfor the commit message. To avoid this and to upload files whose names\nclash with the meta data properties, use a leading slash for the files,\ne.g. `curl --data-urlencode \"/message=file contents\"`.\n\nWhen an explicit slash is omitted for a file whose path matches that of\na meta data parameter, then it is interpreted as meta data, not as a\nfile.\n\n## Executables and links\n\nWhile this API aims to facilitate the most common use cases, it is\npossible to perform some more advanced operations like creating a new\nsymlink in the repository, or creating an executable file.\n\nFiles can be supplied with a `x-attributes` value in the\n`Content-Disposition` header. For example, to upload an executable\nfile, as well as create a symlink from `README.txt` to `README`:\n\n```\n--===============1438169132528273974==\nContent-Type: text/plain; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding: 7bit\nContent-ID: \"bin/shutdown.sh\"\nContent-Disposition: attachment; filename=\"shutdown.sh\"; x-attributes:\"executable\"\n\n#!/bin/sh\nhalt\n\n--===============1438169132528273974==\nContent-Type: text/plain; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding: 7bit\nContent-ID: \"/README.txt\"\nContent-Disposition: attachment; filename=\"README.txt\"; x-attributes:\"link\"\n\nREADME\n--===============1438169132528273974==--\n```\n\nLinks are files that contain the target path and have\n`x-attributes:\"link\"` set.\n\nWhen overwriting links with files, or vice versa, the newly uploaded\nfile determines both the new contents, as well as the attributes. That\nmeans uploading a file without specifying `x-attributes=\"link\"` will\ncreate a regular file, even if the parent commit hosted a symlink at\nthe same path.\n\nThe same applies to executables. When modifying an existing executable\nfile, the form-data file element must include\n`x-attributes=\"executable\"` in order to preserve the executable status\nof the file.\n\nNote that this API does not support the creation or manipulation of\nsubrepos / submodules.",
+      "description": "This endpoint is used to create new commits in the repository by\nuploading files.\n\nTo add a new file to a repository:\n\n```\n$ curl https://api.bitbucket.org/2.0/repositories/username/slug/src \\\n  -F /repo/path/to/image.png=@image.png\n```\n\nThis will create a new commit on top of the main branch, inheriting the\ncontents of the main branch, but adding (or overwriting) the\n`image.png` file to the repository in the `/repo/path/to` directory.\n\nTo create a commit that deletes files, use the `files` parameter:\n\n```\n$ curl https://api.bitbucket.org/2.0/repositories/username/slug/src \\\n  -F files=/file/to/delete/1.txt \\\n  -F files=/file/to/delete/2.txt\n```\n\nYou can add/modify/delete multiple files in a request. Rename/move a\nfile by deleting the old path and adding the content at the new path.\n\nThis endpoint accepts `multipart/form-data` (as in the examples above),\nas well as `application/x-www-form-urlencoded`.\n\n## multipart/form-data\n\nA `multipart/form-data` post contains a series of \"form fields\" that\nidentify both the individual files that are being uploaded, as well as\nadditional, optional meta data.\n\nFiles are uploaded in file form fields (those that have a\n`Content-Disposition` parameter) whose field names point to the remote\npath in the repository where the file should be stored. Path field\nnames are always interpreted to be absolute from the root of the\nrepository, regardless whether the client uses a leading slash (as the\nabove `curl` example did).\n\nFile contents are treated as bytes and are not decoded as text.\n\nThe commit message, as well as other non-file meta data for the\nrequest, is sent along as normal form field elements. Meta data fields\nshare the same namespace as the file objects. For `multipart/form-data`\nbodies that should not lead to any ambiguity, as the\n`Content-Disposition` header will contain the `filename` parameter to\ndistinguish between a file named \"message\" and the commit message field.\n\n## application/x-www-form-urlencoded\n\nIt is also possible to upload new files using a simple\n`application/x-www-form-urlencoded` POST. This can be convenient when\nuploading pure text files:\n\n```\n$ curl https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src \\\n  --data-urlencode \"/path/to/me.txt=Lorem ipsum.\" \\\n  --data-urlencode \"message=Initial commit\" \\\n  --data-urlencode \"author=Erik van Zijst <erik.van.zijst@gmail.com>\"\n```\n\nThere could be a field name clash if a client were to upload a file\nnamed \"message\", as this filename clashes with the meta data property\nfor the commit message. To avoid this and to upload files whose names\nclash with the meta data properties, use a leading slash for the files,\ne.g. `curl --data-urlencode \"/message=file contents\"`.\n\nWhen an explicit slash is omitted for a file whose path matches that of\na meta data parameter, then it is interpreted as meta data, not as a\nfile.\n\n## Executables and links\n\nWhile this API aims to facilitate the most common use cases, it is\npossible to perform some more advanced operations like creating a new\nsymlink in the repository, or creating an executable file.\n\nFiles can be supplied with a `x-attributes` value in the\n`Content-Disposition` header. For example, to upload an executable\nfile, as well as create a symlink from `README.txt` to `README`:\n\n```\n--===============1438169132528273974==\nContent-Type: text/plain; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding: 7bit\nContent-ID: \"bin/shutdown.sh\"\nContent-Disposition: attachment; filename=\"shutdown.sh\"; x-attributes:\"executable\"\n\n#!/bin/sh\nhalt\n\n--===============1438169132528273974==\nContent-Type: text/plain; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding: 7bit\nContent-ID: \"/README.txt\"\nContent-Disposition: attachment; filename=\"README.txt\"; x-attributes:\"link\"\n\nREADME\n--===============1438169132528273974==--\n```\n\nLinks are files that contain the target path and have\n`x-attributes:\"link\"` set.\n\nWhen overwriting links with files, or vice versa, the newly uploaded\nfile determines both the new contents, as well as the attributes. That\nmeans uploading a file without specifying `x-attributes=\"link\"` will\ncreate a regular file, even if the parent commit hosted a symlink at\nthe same path.\n\nThe same applies to executables. When modifying an existing executable\nfile, the form-data file element must include\n`x-attributes=\"executable\"` in order to preserve the executable status\nof the file.\n\nNote that this API does not support the creation or manipulation of\nsubrepos / submodules.",
       "parameters": [
         {
           "description": "The commit message. When omitted, Bitbucket uses a canned string.",
@@ -9333,6 +10347,71 @@
       }
     ]
   },
+  "/snippets/{username}/{encoded_id}/files/{path}": {
+    "get": {
+      "description": "Convenience resource for getting to a snippet's raw files without the\nneed for first having to retrieve the snippet itself and having to pull\nout the versioned file links.",
+      "parameters": [],
+      "responses": {
+        "302": {
+          "description": "A redirect to the most recent revision of the specified file.",
+          "headers": {
+            "Location": {
+              "description": "The URL of the most recent file revision.",
+              "type": "string"
+            }
+          }
+        },
+        "403": {
+          "description": "If the authenticated user does not have access to the snippet.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the snippet does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "snippet"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "snippet"
+      ]
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "in": "path",
+        "name": "path",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
   "/snippets/{username}/{encoded_id}/watch": {
     "delete": {
       "description": "Used to stop watching a specific snippet. Returns 204 (No Content)\nto indicate success.",
@@ -10007,6 +11086,26 @@
       "responses": {
         "200": {
           "description": "All members",
+          "examples": {
+            "application/json": {
+              "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+              "display_name": "Example Username",
+              "links": {
+                "avatar": {
+                  "href": "https://bitbucket.org/account/example-username/avatar/"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/example-username/"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/example-username"
+                }
+              },
+              "type": "user",
+              "username": "example-username",
+              "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+            }
+          },
           "schema": {
             "$ref": "#/definitions/user"
           }
@@ -10110,7 +11209,7 @@
   },
   "/teams/{username}/permissions/repositories": {
     "get": {
-      "description": "Returns an object for each repository permission for all of a\nteam’s repositories.\n\nPermissions returned are effective permissions — the highest level of\npermission the user has. This does not include public repositories that\nusers are not granted any specific permission in, and does not\ndistinguish between direct and indirect privileges.\n\nOnly users with admin permission for the team may access this resource.\n\nPermissions can be:\n\n* `admin`\n* `write`\n* `read`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions/repositories\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"admin\"\n    },\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"seanaty\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"write\"\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../../meta/filtering)\nby repository, user, or permission by adding the following query string\nparameters:\n\n* `q=repository.name=\"geordi\"` or `q=permission>\"read\"`\n* `sort=user.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
+      "description": "Returns an object for each repository permission for all of a\nteam’s repositories.\n\nIf the username URL parameter refers to a user account instead of\na team account, an object containing the repository permissions\nof all the username's repositories will be returned.\n\nPermissions returned are effective permissions — the highest level of\npermission the user has. This does not include public repositories that\nusers are not granted any specific permission in, and does not\ndistinguish between direct and indirect privileges.\n\nOnly users with admin permission for the team may access this resource.\n\nPermissions can be:\n\n* `admin`\n* `write`\n* `read`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions/repositories\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"admin\"\n    },\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"seanaty\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"write\"\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../../meta/filtering)\nby repository, user, or permission by adding the following query string\nparameters:\n\n* `q=repository.name=\"geordi\"` or `q=permission>\"read\"`\n* `sort=user.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
       "parameters": [
         {
           "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
@@ -10754,6 +11853,42 @@
       "responses": {
         "200": {
           "description": "The current user.",
+          "examples": {
+            "application/json": {
+              "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+              "created_on": "2018-06-20T23:17:33.616037+00:00",
+              "display_name": "Example Username",
+              "is_staff": false,
+              "links": {
+                "avatar": {
+                  "href": "https://bitbucket.org/account/example-username/avatar/"
+                },
+                "followers": {
+                  "href": "https://api.bitbucket.org/2.0/users/example-username/followers"
+                },
+                "following": {
+                  "href": "https://api.bitbucket.org/2.0/users/example-username/following"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/example-username/"
+                },
+                "repositories": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/example-username"
+                },
+                "snippets": {
+                  "href": "https://api.bitbucket.org/2.0/snippets/example-username"
+                }
+              },
+              "location": null,
+              "type": "user",
+              "username": "example-username",
+              "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}",
+              "website": null
+            }
+          },
           "schema": {
             "$ref": "#/definitions/user"
           }
@@ -10958,6 +12093,26 @@
       "responses": {
         "200": {
           "description": "The user object",
+          "examples": {
+            "application/json": {
+              "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+              "display_name": "Example Username",
+              "links": {
+                "avatar": {
+                  "href": "https://bitbucket.org/account/example-username/avatar/"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/example-username/"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/example-username"
+                }
+              },
+              "type": "user",
+              "username": "example-username",
+              "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+            }
+          },
           "schema": {
             "$ref": "#/definitions/user"
           }
@@ -11346,6 +12501,70 @@
         "webhooks"
       ]
     }
+  },
+  "/users/{username}/members": {
+    "get": {
+      "description": "All members of a team.\n\nReturns all members of the specified team. Any member of any of the\nteam's groups is considered a member of the team. This includes users\nin groups that may not actually have access to any of the team's\nrepositories.\n\nNote that members using the \"private profile\" feature are not included.",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "All members",
+          "examples": {
+            "application/json": {
+              "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+              "display_name": "Example Username",
+              "links": {
+                "avatar": {
+                  "href": "https://bitbucket.org/account/example-username/avatar/"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/example-username/"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/example-username"
+                }
+              },
+              "type": "user",
+              "username": "example-username",
+              "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+            }
+          },
+          "schema": {
+            "$ref": "#/definitions/user"
+          }
+        },
+        "404": {
+          "description": "When the team does not exist, or multiple teams with the same name exist that differ only in casing and the URL did not match the exact casing of a particular one.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "account"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "teams"
+      ]
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ]
   },
   "/users/{username}/pipelines_config/variables/": {
     "get": {

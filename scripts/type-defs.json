@@ -371,96 +371,6 @@
         {
           "additionalProperties": true,
           "properties": {
-            "links": {
-              "additionalProperties": false,
-              "properties": {
-                "approve": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "comments": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "diff": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "html": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "patch": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "self": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "statuses": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              },
-              "type": "object"
-            },
             "participants": {
               "items": {
                 "$ref": "#/definitions/Participant"
@@ -640,8 +550,61 @@
         {
           "additionalProperties": true,
           "properties": {
+            "environment": {
+              "$ref": "#/definitions/DeploymentEnvironment"
+            },
+            "release": {
+              "$ref": "#/definitions/DeploymentRelease"
+            },
             "state": {
               "$ref": "#/definitions/DeploymentState"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentEnvironment": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentRelease": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "commit": {
+              "$ref": "#/definitions/Commit"
+            },
+            "created_on": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
             },
             "uuid": {
               "type": "string"
@@ -677,9 +640,6 @@
             "deployer": {
               "$ref": "#/definitions/Account"
             },
-            "last_successful_deployment": {
-              "$ref": "#/definitions/Deployment"
-            },
             "name": {
               "enum": [
                 "COMPLETED"
@@ -690,14 +650,78 @@
               "type": "string"
             },
             "status": {
+              "$ref": "#/definitions/DeploymentStateCompletedStatus"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentStateCompletedStatus": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {},
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentStateCompletedStatusFailed": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentStateCompletedStatusFailed"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "name": {
               "enum": [
-                "SUCCESSFUL",
-                "FAILED",
+                "FAILED"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentStateCompletedStatusStopped": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentStateCompletedStatusStopped"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "name": {
+              "enum": [
                 "STOPPED"
               ],
               "type": "string"
-            },
-            "url": {
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentStateCompletedStatusSuccessful": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentStateCompletedStatusSuccessful"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "name": {
+              "enum": [
+                "SUCCESSFUL"
+              ],
               "type": "string"
             }
           },
@@ -715,9 +739,6 @@
           "properties": {
             "deployer": {
               "$ref": "#/definitions/Account"
-            },
-            "last_successful_deployment": {
-              "$ref": "#/definitions/Deployment"
             },
             "name": {
               "enum": [
@@ -750,7 +771,7 @@
               ],
               "type": "string"
             },
-            "triggerUrl": {
+            "trigger_url": {
               "type": "string"
             }
           },
@@ -1541,6 +1562,32 @@
         "values": {
           "items": {
             "$ref": "#/definitions/Component"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedDeployments": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/Deployment"
           },
           "type": "array"
         }
@@ -3658,6 +3705,20 @@
         "branch": {
           "additionalProperties": false,
           "properties": {
+            "default_merge_strategy": {
+              "type": "string"
+            },
+            "merge_strategies": {
+              "items": {
+                "enum": [
+                  "merge_commit",
+                  "squash",
+                  "fast_forward"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            },
             "name": {
               "type": "string"
             }
@@ -4578,6 +4639,12 @@
     "Component": {
       "$ref": "#/definitions/Component"
     },
+    "Deployment": {
+      "$ref": "#/definitions/Deployment"
+    },
+    "DeploymentEnvironment": {
+      "$ref": "#/definitions/DeploymentEnvironment"
+    },
     "Error": {
       "$ref": "#/definitions/Error"
     },
@@ -4607,6 +4674,9 @@
     },
     "PaginatedComponents": {
       "$ref": "#/definitions/PaginatedComponents"
+    },
+    "PaginatedDeployments": {
+      "$ref": "#/definitions/PaginatedDeployments"
     },
     "PaginatedDiffstats": {
       "$ref": "#/definitions/PaginatedDiffstats"

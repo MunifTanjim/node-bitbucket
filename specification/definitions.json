@@ -411,103 +411,6 @@
         "additionalProperties": true,
         "description": "A repository commit object.",
         "properties": {
-          "links": {
-            "additionalProperties": false,
-            "properties": {
-              "approve": {
-                "additionalProperties": false,
-                "properties": {
-                  "href": {
-                    "format": "uri",
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              },
-              "comments": {
-                "additionalProperties": false,
-                "properties": {
-                  "href": {
-                    "format": "uri",
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              },
-              "diff": {
-                "additionalProperties": false,
-                "properties": {
-                  "href": {
-                    "format": "uri",
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              },
-              "html": {
-                "additionalProperties": false,
-                "properties": {
-                  "href": {
-                    "format": "uri",
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              },
-              "patch": {
-                "additionalProperties": false,
-                "properties": {
-                  "href": {
-                    "format": "uri",
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              },
-              "self": {
-                "additionalProperties": false,
-                "properties": {
-                  "href": {
-                    "format": "uri",
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              },
-              "statuses": {
-                "additionalProperties": false,
-                "properties": {
-                  "href": {
-                    "format": "uri",
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              }
-            },
-            "type": "object"
-          },
           "participants": {
             "items": {
               "$ref": "#/definitions/participant"
@@ -706,11 +609,77 @@
         "additionalProperties": true,
         "description": "A Bitbucket Deployment.",
         "properties": {
+          "environment": {
+            "$ref": "#/definitions/deployment_environment",
+            "description": "A deployment environment."
+          },
+          "release": {
+            "$ref": "#/definitions/deployment_release",
+            "description": "The release associated with this deployment."
+          },
           "state": {
             "$ref": "#/definitions/deployment_state"
           },
           "uuid": {
             "description": "The UUID identifying the deployment.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
+  "deployment_environment": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Deployment Environment.",
+        "properties": {
+          "name": {
+            "description": "The name of the environment.",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "The UUID identifying the environment.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
+  "deployment_release": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Deployment Release.",
+        "properties": {
+          "commit": {
+            "$ref": "#/definitions/commit",
+            "description": "The commit associated with this release."
+          },
+          "created_on": {
+            "description": "The timestamp when the release was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the release.",
+            "type": "string"
+          },
+          "url": {
+            "description": "Link to the pipeline that produced the release.",
+            "format": "uri",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "The UUID identifying the release.",
             "type": "string"
           }
         },
@@ -749,10 +718,6 @@
             "$ref": "#/definitions/account",
             "description": "The Bitbucket account that was used to perform the deployment."
           },
-          "last_successful_deployment": {
-            "$ref": "#/definitions/deployment",
-            "description": "The last successful deployment."
-          },
           "name": {
             "description": "The name of deployment state (COMPLETED).",
             "enum": [
@@ -766,17 +731,88 @@
             "type": "string"
           },
           "status": {
-            "description": "The status of of the completed deployment.",
-            "enum": [
-              "SUCCESSFUL",
-              "FAILED",
-              "STOPPED"
-            ],
-            "type": "string"
+            "$ref": "#/definitions/deployment_state_completed_status",
+            "description": "The status of the completed deployment."
           },
           "url": {
             "description": "Link to the deployment result.",
             "format": "uri",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
+  "deployment_state_completed_status": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "The status of a completed deployment.",
+        "properties": {},
+        "type": "object"
+      }
+    ]
+  },
+  "deployment_state_completed_status_failed": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/deployment_state_completed_status_failed"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A FAILED completed deployment status.",
+        "properties": {
+          "name": {
+            "description": "The name of the completed deployment status (FAILED).",
+            "enum": [
+              "FAILED"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
+  "deployment_state_completed_status_stopped": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/deployment_state_completed_status_stopped"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A STOPPED completed deployment status.",
+        "properties": {
+          "name": {
+            "description": "The name of the completed deployment status (STOPPED).",
+            "enum": [
+              "STOPPED"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
+  "deployment_state_completed_status_successful": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/deployment_state_completed_status_successful"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A SUCCESSFUL completed deployment status.",
+        "properties": {
+          "name": {
+            "description": "The name of the completed deployment status (SUCCESSFUL).",
+            "enum": [
+              "SUCCESSFUL"
+            ],
             "type": "string"
           }
         },
@@ -796,10 +832,6 @@
           "deployer": {
             "$ref": "#/definitions/account",
             "description": "The Bitbucket account that was used to perform the deployment."
-          },
-          "last_successful_deployment": {
-            "$ref": "#/definitions/deployment",
-            "description": "The last successful deployment."
           },
           "name": {
             "description": "The name of deployment state (IN_PROGRESS).",
@@ -839,7 +871,7 @@
             ],
             "type": "string"
           },
-          "triggerUrl": {
+          "trigger_url": {
             "description": "Link to trigger the deployment.",
             "format": "uri",
             "type": "string"
@@ -1749,6 +1781,42 @@
         "minItems": 0,
         "type": "array",
         "uniqueItems": true
+      }
+    },
+    "type": "object"
+  },
+  "paginated_deployments": {
+    "description": "A paged list of deployments",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/deployment"
+        },
+        "minItems": 0,
+        "type": "array"
       }
     },
     "type": "object"
@@ -4424,6 +4492,22 @@
       "branch": {
         "additionalProperties": false,
         "properties": {
+          "default_merge_strategy": {
+            "description": "The default merge strategy, when this endpoint is the destination of the pull request.",
+            "type": "string"
+          },
+          "merge_strategies": {
+            "description": "Available merge strategies, when this endpoint is the destination of the pull request.",
+            "items": {
+              "enum": [
+                "merge_commit",
+                "squash",
+                "fast_forward"
+              ],
+              "type": "string"
+            },
+            "type": "array"
+          },
           "name": {
             "type": "string"
           }
