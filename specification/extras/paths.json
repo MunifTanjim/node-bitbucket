@@ -31,8 +31,18 @@
           "required": false,
           "type": "string"
         },
-        { "in": "query", "name": "q", "required": false, "type": "string" },
-        { "in": "query", "name": "sort", "required": false, "type": "string" }
+        {
+          "in": "query",
+          "name": "q",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "in": "query",
+          "name": "sort",
+          "required": false,
+          "type": "string"
+        }
       ]
     }
   },
@@ -73,7 +83,13 @@
   "/repositories/{username}/{repo_slug}/downloads": {
     "post": {
       "consumes": ["multipart/form-data"],
-      "parameters": [{ "in": "body", "name": "_body", "required": true }]
+      "parameters": [
+        {
+          "in": "body",
+          "name": "_body",
+          "required": true
+        }
+      ]
     }
   },
   "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}": {
@@ -90,7 +106,13 @@
   },
   "/repositories/{username}/{repo_slug}/hooks": {
     "post": {
-      "parameters": [{ "in": "body", "name": "_body", "required": true }]
+      "parameters": [
+        {
+          "in": "body",
+          "name": "_body",
+          "required": true
+        }
+      ]
     }
   },
   "/repositories/{username}/{repo_slug}/hooks/{uid}": {
@@ -115,18 +137,66 @@
   "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments": {
     "post": {
       "consumes": ["multipart/form-data"],
-      "parameters": [{ "in": "body", "name": "_body", "required": true }]
+      "parameters": [
+        {
+          "in": "body",
+          "name": "_body",
+          "required": true
+        }
+      ]
     }
   },
   "/repositories/{username}/{repo_slug}/refs/branches": {
     "post": {
-      "parameters": [{ "in": "body", "name": "_body", "required": true }]
+      "parameters": [
+        {
+          "in": "body",
+          "name": "_body",
+          "required": true
+        }
+      ]
     }
   },
   "/repositories/{username}/{repo_slug}/src": {
     "post": {
       "consumes": ["multipart/form-data", "application/x-www-form-urlencoded"],
-      "parameters": [{ "in": "body", "name": "_body", "required": true }]
+      "parameters": [
+        {
+          "in": "body",
+          "name": "_body",
+          "required": true
+        },
+        {
+          "in": "body",
+          "name": "author",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "in": "body",
+          "name": "branch",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "in": "body",
+          "name": "files",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "in": "body",
+          "name": "message",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "in": "body",
+          "name": "parents",
+          "required": false,
+          "type": "string"
+        }
+      ]
     }
   },
   "/snippets/{username}/{encoded_id}/watch": {

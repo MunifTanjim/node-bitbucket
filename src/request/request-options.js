@@ -54,7 +54,19 @@ const getRequestOptions = (endpointOptions = {}) => {
       let formDataContentType = 'multipart/form-data'
 
       if (~accepts.indexOf(formDataContentType)) {
-        headers['content-type'] = formDataContentType
+        headers = deepmerge(
+          headers,
+          typeof body.getHeaders === 'function'
+            ? body.getHeaders()
+            : { 'content-type': formDataContentType }
+        )
+
+        Object.keys(paramGroups.body).forEach(paramName => {
+          if (paramName === '_body') return
+          let param = paramGroups.body[paramName]
+          param = typeof param === 'string' ? param : JSON.stringify(param)
+          body.append(paramName, param)
+        })
       } else {
         // multipart/form-data not supported
         throw new HTTPError(`Invalid Body Type: ${bodyType}`, 400)
@@ -68,12 +80,20 @@ const getRequestOptions = (endpointOptions = {}) => {
       })
 
       if (~accepts.indexOf(urlEncodedContentType)) {
-        body = addQueryParameters('', body).substring(1)
         headers['content-type'] = urlEncodedContentType
+
+        Object.keys(body).forEach(key => {
+          body[key] =
+            typeof body[key] === 'string'
+              ? body[key]
+              : JSON.stringify(body[key])
+        })
+
+        body = addQueryParameters('', body).substring(1)
       } else {
         // application/x-www-form-urlencoded not supported
-        body = JSON.stringify(body)
         headers['content-type'] = 'application/json; charset=utf-8'
+        body = JSON.stringify(body)
       }
     }
   }

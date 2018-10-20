@@ -999,23 +999,23 @@
           "type": "any"
         },
         "author": {
-          "in": "query",
+          "in": "body",
           "type": "string"
         },
         "branch": {
-          "in": "query",
+          "in": "body",
           "type": "string"
         },
         "files": {
-          "in": "query",
+          "in": "body",
           "type": "string"
         },
         "message": {
-          "in": "query",
+          "in": "body",
           "type": "string"
         },
         "parents": {
-          "in": "query",
+          "in": "body",
           "type": "string"
         },
         "repo_slug": {

@@ -66,3 +66,4 @@ typings/
 # Others
 dist
 docs
+/bitbucket-test.js
