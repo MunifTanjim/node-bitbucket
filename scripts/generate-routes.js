@@ -24,7 +24,7 @@ const routesPath = path.resolve('src/routes/routes.json')
 const routesObject = {}
 
 const initializeRoutes = routesObject => {
-  const namespaces = extractScopesFromMethodsList(API_NAMES)
+  let namespaces = extractScopesFromMethodsList(API_NAMES)
 
   _.each(namespaces, namespaceName => {
     // Initialize Namespace

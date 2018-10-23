@@ -9,7 +9,7 @@ const docsPath = path.resolve('docs')
 
 const ROUTES = require('../src/routes/routes.json')
 
-// One of many workarounds for BitBucket's faulty API Specification
+// One of many workarounds for Bitbucket's faulty API Specification
 const URL_ALIASES = {
   '/users/{username}/ssh-keys/{key_id}': '/users/{username}/ssh-keys/'
 }

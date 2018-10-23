@@ -1,7 +1,7 @@
-const BitBucket = require('../index.js')
+const Bitbucket = require('../index.js')
 
 describe('bitbucket', () => {
   it('can be instantiated', () => {
-    expect(new BitBucket()).toBeInstanceOf(BitBucket)
+    expect(new Bitbucket()).toBeInstanceOf(Bitbucket)
   })
 })

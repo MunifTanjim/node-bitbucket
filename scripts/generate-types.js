@@ -12,8 +12,8 @@ const typeMap = {
 }
 
 const bodyTypeMap = {
-  default: 'BitBucket.Any',
-  'application/x-www-form-urlencoded': 'BitBucket.AnyObject',
+  default: 'Bitbucket.Any',
+  'application/x-www-form-urlencoded': 'Bitbucket.AnyObject',
   'multipart/form-data': 'FormData'
 }
 

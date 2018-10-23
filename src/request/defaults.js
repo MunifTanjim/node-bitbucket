@@ -6,7 +6,7 @@ const defaultEndpointOptions = {
   baseUrl: `${schemes[0]}://${host}${basePath}`,
   headers: {
     accept: `${produces.join(',')}`,
-    'user-agent': `NodeBitBucket/${version}`
+    'user-agent': `NodeBitbucket/${version}`
   },
   method: 'GET',
   options: {}

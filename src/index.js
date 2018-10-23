@@ -16,7 +16,7 @@ const clientDefaults = {
   }
 }
 
-class BitBucket {
+class Bitbucket {
   constructor(options = {}) {
     this.options = deepmerge(clientDefaults, options)
 
@@ -36,4 +36,4 @@ class BitBucket {
   }
 }
 
-module.exports = BitBucket
+module.exports = Bitbucket
