@@ -1,6 +1,6 @@
 {
   "name": "bitbucket",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "Bitbucket API client for Browser and Node.js",
   "keywords": ["bitbucket", "bitbucket-api", "api-client", "api", "rest"],
   "homepage": "https://github.com/MunifTanjim/node-bitbucket#readme",
