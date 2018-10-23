@@ -27,7 +27,7 @@ const getData = response => {
 const request = requestOptions => {
   debug('REQUEST:', requestOptions)
 
-  let { method, url, headers, body, timeout } = requestOptions
+  let { method, url, headers, body, timeout, agent } = requestOptions
 
   // https://fetch.spec.whatwg.org/#methods
   method = method.toUpperCase()
@@ -36,7 +36,8 @@ const request = requestOptions => {
     method,
     headers,
     body,
-    timeout
+    timeout,
+    agent
   }
 
   let responseHeaders = {}
