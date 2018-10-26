@@ -170,6 +170,7 @@ const addFilterAndSortParams = routesObject => {
         setParameters(apiObject, {
           parameters: [
             { in: 'query', name: 'page', require: false, type: 'string' },
+            { in: 'query', name: 'pagelen', required: false, type: 'integer' },
             { in: 'query', name: 'q', required: false, type: 'string' },
             { in: 'query', name: 'sort', required: false, type: 'string' }
           ]
