@@ -8,6 +8,9 @@
         {
           "additionalProperties": true,
           "properties": {
+            "account_status": {
+              "type": "string"
+            },
             "created_on": {
               "type": "string"
             },
@@ -91,6 +94,9 @@
                 }
               },
               "type": "object"
+            },
+            "nickname": {
+              "type": "string"
             },
             "username": {
               "type": "string"
@@ -535,6 +541,58 @@
               "type": "object"
             },
             "name": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "DeployKey": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "added_on": {
+              "type": "string"
+            },
+            "comment": {
+              "type": "string"
+            },
+            "key": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "last_used": {
+              "type": "string"
+            },
+            "links": {
+              "additionalProperties": false,
+              "properties": {
+                "self": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "owner": {
+              "$ref": "#/definitions/Account"
+            },
+            "repository": {
               "type": "string"
             }
           },
@@ -1615,6 +1673,32 @@
         "values": {
           "items": {
             "$ref": "#/definitions/Diffstat"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedEnvironments": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/DeploymentEnvironment"
           },
           "type": "array"
         }
@@ -3631,6 +3715,72 @@
             "reason": {
               "type": "string"
             },
+            "rendered": {
+              "additionalProperties": false,
+              "properties": {
+                "description": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "html": {
+                      "type": "string"
+                    },
+                    "markup": {
+                      "enum": [
+                        "markdown",
+                        "creole",
+                        "plaintext"
+                      ],
+                      "type": "string"
+                    },
+                    "raw": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "reason": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "html": {
+                      "type": "string"
+                    },
+                    "markup": {
+                      "enum": [
+                        "markdown",
+                        "creole",
+                        "plaintext"
+                      ],
+                      "type": "string"
+                    },
+                    "raw": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "title": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "html": {
+                      "type": "string"
+                    },
+                    "markup": {
+                      "enum": [
+                        "markdown",
+                        "creole",
+                        "plaintext"
+                      ],
+                      "type": "string"
+                    },
+                    "raw": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
             "reviewers": {
               "items": {
                 "$ref": "#/definitions/Account"
@@ -4639,6 +4789,9 @@
     "Component": {
       "$ref": "#/definitions/Component"
     },
+    "DeployKey": {
+      "$ref": "#/definitions/DeployKey"
+    },
     "Deployment": {
       "$ref": "#/definitions/Deployment"
     },
@@ -4680,6 +4833,9 @@
     },
     "PaginatedDiffstats": {
       "$ref": "#/definitions/PaginatedDiffstats"
+    },
+    "PaginatedEnvironments": {
+      "$ref": "#/definitions/PaginatedEnvironments"
     },
     "PaginatedFiles": {
       "$ref": "#/definitions/PaginatedFiles"

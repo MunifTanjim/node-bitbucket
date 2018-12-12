@@ -71,6 +71,23 @@
       "alias": "repositories.updateCommitBuildStatus"
     }
   },
+  "deploy": {
+    "createKey": {
+      "alias": "repositories.createDeployKey"
+    },
+    "deleteKey": {
+      "alias": "repositories.deleteDeployKey"
+    },
+    "getAllKeys": {
+      "alias": "repositories.getAllDeployKeys"
+    },
+    "getKey": {
+      "alias": "repositories.getDeployKey"
+    },
+    "updateKey": {
+      "alias": "repositories.updateDeployKey"
+    }
+  },
   "deployments": {
     "get": {
       "alias": "repositories.getDeployment"
@@ -80,6 +97,12 @@
     },
     "list": {
       "alias": "repositories.listDeployments"
+    },
+    "listEnvironments": {
+      "alias": "repositories.listEnvironments"
+    },
+    "updateEnvironment": {
+      "alias": "repositories.updateEnvironment"
     }
   },
   "downloads": {
@@ -404,6 +427,9 @@
     "getDiffStat": {
       "alias": "repositories.getPullRequestDiffStat"
     },
+    "getForCommit": {
+      "alias": "repositories.getPullrequestsForCommit"
+    },
     "getPatch": {
       "alias": "repositories.getPullRequestPatch"
     },
@@ -628,6 +654,23 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments"
+    },
+    "createDeployKey": {
+      "method": "POST",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "DeployKey",
+      "url": "/repositories/{username}/{repo_slug}/deploy-keys"
     },
     "createDownload": {
       "accepts": [
@@ -1206,6 +1249,27 @@
       },
       "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
     },
+    "deleteDeployKey": {
+      "method": "DELETE",
+      "params": {
+        "key_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/deploy-keys/{key_id}"
+    },
     "deleteDownload": {
       "method": "DELETE",
       "params": {
@@ -1599,6 +1663,23 @@
       "returns": "Repository",
       "url": "/repositories/{username}/{repo_slug}"
     },
+    "getAllDeployKeys": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "DeployKey",
+      "url": "/repositories/{username}/{repo_slug}/deploy-keys"
+    },
     "getBranch": {
       "method": "GET",
       "params": {
@@ -1739,6 +1820,28 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
+    },
+    "getDeployKey": {
+      "method": "GET",
+      "params": {
+        "key_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "DeployKey",
+      "url": "/repositories/{username}/{repo_slug}/deploy-keys/{key_id}"
     },
     "getDeployment": {
       "method": "GET",
@@ -2384,6 +2487,44 @@
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/patch"
     },
+    "getPullrequestsForCommit": {
+      "method": "GET",
+      "params": {
+        "commit": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
+        "pagelen": {
+          "in": "query",
+          "type": "integer"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPullrequests",
+      "url": "/repositories/{username}/{repo_slug}/commit/{commit}/pullrequests"
+    },
     "getSrc": {
       "method": "GET",
       "params": {
@@ -2955,6 +3096,39 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/downloads"
+    },
+    "listEnvironments": {
+      "method": "GET",
+      "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
+        "pagelen": {
+          "in": "query",
+          "type": "integer"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedEnvironments",
+      "url": "/repositories/{username}/{repo_slug}/environments/"
     },
     "listFileHistory": {
       "method": "GET",
@@ -3939,6 +4113,49 @@
       },
       "returns": "Commitstatus",
       "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}"
+    },
+    "updateDeployKey": {
+      "method": "PUT",
+      "params": {
+        "key_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "DeployKey",
+      "url": "/repositories/{username}/{repo_slug}/deploy-keys/{key_id}"
+    },
+    "updateEnvironment": {
+      "method": "POST",
+      "params": {
+        "environment_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/environments/{environment_uuid}/changes/"
     },
     "updateIssue": {
       "method": "PUT",

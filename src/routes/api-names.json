@@ -109,6 +109,12 @@
       "repositories": "updateBranchRestriction"
     }
   },
+  "/repositories/{username}/{repo_slug}/commit/{commit}/pullrequests": {
+    "get": {
+      "pullrequests": "getForCommit",
+      "repositories": "getPullrequestsForCommit"
+    }
+  },
   "/repositories/{username}/{repo_slug}/commit/{node}": {
     "get": {
       "commits": "get",
@@ -215,6 +221,30 @@
       "repositories": "addDefaultReviewer"
     }
   },
+  "/repositories/{username}/{repo_slug}/deploy-keys": {
+    "get": {
+      "deploy": "getAllKeys",
+      "repositories": "getAllDeployKeys"
+    },
+    "post": {
+      "deploy": "createKey",
+      "repositories": "createDeployKey"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/deploy-keys/{key_id}": {
+    "delete": {
+      "deploy": "deleteKey",
+      "repositories": "deleteDeployKey"
+    },
+    "get": {
+      "deploy": "getKey",
+      "repositories": "getDeployKey"
+    },
+    "put": {
+      "deploy": "updateKey",
+      "repositories": "updateDeployKey"
+    }
+  },
   "/repositories/{username}/{repo_slug}/deployments/": {
     "get": {
       "deployments": "list",
@@ -258,10 +288,22 @@
       "repositories": "getDownload"
     }
   },
+  "/repositories/{username}/{repo_slug}/environments/": {
+    "get": {
+      "deployments": "listEnvironments",
+      "repositories": "listEnvironments"
+    }
+  },
   "/repositories/{username}/{repo_slug}/environments/{environment_uuid}": {
     "get": {
       "deployments": "getEnvironment",
       "repositories": "getEnvironment"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/environments/{environment_uuid}/changes/": {
+    "post": {
+      "deployments": "updateEnvironment",
+      "repositories": "updateEnvironment"
     }
   },
   "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}": {

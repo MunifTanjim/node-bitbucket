@@ -8,6 +8,10 @@
         "additionalProperties": true,
         "description": "An account object.",
         "properties": {
+          "account_status": {
+            "description": "The status of the account. Currently the only possible value is \"active\", but more values may be added in the future.",
+            "type": "string"
+          },
           "created_on": {
             "format": "date-time",
             "type": "string"
@@ -98,6 +102,10 @@
               }
             },
             "type": "object"
+          },
+          "nickname": {
+            "description": "Account name defined by the owner. Should be used instead of the \"username\" field. Note that \"nickname\" cannot be used in place of \"username\" in URLs and queries, as \"nickname\" is not guaranteed to be unique.",
+            "type": "string"
           },
           "username": {
             "pattern": "^[a-zA-Z0-9_\\-]+$",
@@ -593,6 +601,66 @@
             "type": "object"
           },
           "name": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
+  "deploy_key": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "Represents deploy key for a repository.",
+        "properties": {
+          "added_on": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "comment": {
+            "description": "The comment parsed from the deploy key (if present)",
+            "type": "string"
+          },
+          "key": {
+            "description": "The deploy key value.",
+            "type": "string"
+          },
+          "label": {
+            "description": "The user-defined label for the deploy key",
+            "type": "string"
+          },
+          "last_used": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "links": {
+            "additionalProperties": false,
+            "properties": {
+              "self": {
+                "additionalProperties": false,
+                "properties": {
+                  "href": {
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "owner": {
+            "$ref": "#/definitions/account"
+          },
+          "repository": {
+            "description": "The repository the deploy key is linked to",
             "type": "string"
           }
         },
@@ -1857,6 +1925,42 @@
         "minItems": 0,
         "type": "array",
         "uniqueItems": true
+      }
+    },
+    "type": "object"
+  },
+  "paginated_environments": {
+    "description": "A paged list of environments",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/deployment_environment"
+        },
+        "minItems": 0,
+        "type": "array"
       }
     },
     "type": "object"
@@ -4406,6 +4510,81 @@
           "reason": {
             "description": "Explains why a pull request was declined. This field is only applicable to pull requests in rejected state.",
             "type": "string"
+          },
+          "rendered": {
+            "additionalProperties": false,
+            "properties": {
+              "description": {
+                "additionalProperties": false,
+                "properties": {
+                  "html": {
+                    "description": "The user's content rendered as HTML.",
+                    "type": "string"
+                  },
+                  "markup": {
+                    "description": "The type of markup language the raw content is to be interpreted in.",
+                    "enum": [
+                      "markdown",
+                      "creole",
+                      "plaintext"
+                    ],
+                    "type": "string"
+                  },
+                  "raw": {
+                    "description": "The text as it was typed by a user.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "reason": {
+                "additionalProperties": false,
+                "properties": {
+                  "html": {
+                    "description": "The user's content rendered as HTML.",
+                    "type": "string"
+                  },
+                  "markup": {
+                    "description": "The type of markup language the raw content is to be interpreted in.",
+                    "enum": [
+                      "markdown",
+                      "creole",
+                      "plaintext"
+                    ],
+                    "type": "string"
+                  },
+                  "raw": {
+                    "description": "The text as it was typed by a user.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "title": {
+                "additionalProperties": false,
+                "properties": {
+                  "html": {
+                    "description": "The user's content rendered as HTML.",
+                    "type": "string"
+                  },
+                  "markup": {
+                    "description": "The type of markup language the raw content is to be interpreted in.",
+                    "enum": [
+                      "markdown",
+                      "creole",
+                      "plaintext"
+                    ],
+                    "type": "string"
+                  },
+                  "raw": {
+                    "description": "The text as it was typed by a user.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
           },
           "reviewers": {
             "description": "The list of users that were added as reviewers on this pull request when it was created. For performance reasons, the API only includes this list on a pull request's `self` URL.",

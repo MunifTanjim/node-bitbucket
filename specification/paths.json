@@ -714,6 +714,7 @@
                     "href": "https://api.bitbucket.org/2.0/users/example-username"
                   }
                 },
+                "nickname": "example-username",
                 "type": "user",
                 "username": "example-username",
                 "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
@@ -870,6 +871,7 @@
                     "href": "https://api.bitbucket.org/2.0/users/example-username"
                   }
                 },
+                "nickname": "example-username",
                 "type": "user",
                 "username": "example-username",
                 "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
@@ -1010,6 +1012,7 @@
                     "href": "https://api.bitbucket.org/2.0/users/example-username"
                   }
                 },
+                "nickname": "example-username",
                 "type": "user",
                 "username": "example-username",
                 "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
@@ -1109,6 +1112,7 @@
                     "href": "https://api.bitbucket.org/2.0/users/example-username"
                   }
                 },
+                "nickname": "example-username",
                 "type": "user",
                 "username": "example-username",
                 "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
@@ -1450,6 +1454,79 @@
       ],
       "tags": [
         "branchrestrictions"
+      ]
+    }
+  },
+  "/repositories/{username}/{repo_slug}/commit/{commit}/pullrequests": {
+    "get": {
+      "operationId": "getPullrequestsForCommit",
+      "parameters": [
+        {
+          "description": "The account; either the UUID in curly braces, or the account_id",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository; either the UUID in curly braces, or the slug",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The SHA1 of the commit",
+          "in": "path",
+          "name": "commit",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "default": 1,
+          "description": "Which page to retrieve",
+          "format": "int32",
+          "in": "query",
+          "name": "page",
+          "required": false,
+          "type": "integer"
+        },
+        {
+          "default": 30,
+          "description": "How many pull requests to retrieve per page",
+          "format": "int32",
+          "in": "query",
+          "name": "pagelen",
+          "required": false,
+          "type": "integer"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "The paginated list of pull requests.",
+          "schema": {
+            "$ref": "#/definitions/paginated_pullrequests"
+          }
+        },
+        "202": {
+          "description": "The repository's pull requests are still being indexed.",
+          "schema": {
+            "$ref": "#/definitions/paginated_pullrequests"
+          }
+        },
+        "404": {
+          "description": "Either the repository does not exist, or pull request commit links have not yet been indexed.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "summary": "Returns a paginated list of all pull requests as part of which this commit was reviewed.",
+      "tags": [
+        "pullrequests"
       ]
     }
   },
@@ -2447,6 +2524,245 @@
       ]
     }
   },
+  "/repositories/{username}/{repo_slug}/deploy-keys": {
+    "get": {
+      "description": "Returns all deploy-keys belonging to a repository.\n\nExample:\n```\n$ curl -H \"Authorization <auth header>\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys\n\nOutput:\n{\n    \"comment\": \"mleu@C02W454JHTD8\",\n    \"last_used\": null,\n    \"links\": {\n        \"self\": {\n            \"href\": https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys\"\n        }\n    },\n    \"repository\": \"test\",\n    \"label\": \"mykey\",\n    \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"pk\": 1,\n    \"type\": \"deploy_key\"\n}\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "Deploy keys matching the repository",
+          "schema": {
+            "$ref": "#/definitions/deploy_key"
+          }
+        },
+        "403": {
+          "description": "If the specified user or repository is not accessible to the current user"
+        },
+        "404": {
+          "description": "If the specified user or repository does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "repository",
+            "repository:admin"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "deploy"
+      ]
+    },
+    "parameters": [
+      {
+        "description": "The account's username.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The name of the repository the deploy key belongs to.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "post": {
+      "description": "Create a new deploy key in a repository.\n\nExample:\n```\n$ curl -XPOST \\\n-H \"Authorization <auth header>\" \\\n-H \"Content-type: application/json\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys -d \\\n'{\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5 mleu@C02W454JHTD8\",\n    \"label\": \"mydeploykey\"\n}'\n\nOutput:\n{\n    \"pk\": 123,\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"label\": \"mydeploykey\",\n    \"type\": \"deploy_key\",\n    \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n    \"repository\": \"test\",\n    \"links\":{\n        \"self\":{\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys/123\"\n        }\n    }\n    \"last_used\": null,\n    \"comment\": \"mleu@C02W454JHTD8\"\n}\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The deploy key that was created",
+          "schema": {
+            "$ref": "#/definitions/deploy_key"
+          }
+        },
+        "400": {
+          "description": "Invalid deploy key inputs"
+        },
+        "403": {
+          "description": "If the specified user or repository is not accessible to the current user"
+        },
+        "404": {
+          "description": "If the specified user or repository does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "repository",
+            "repository:admin"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "deploy"
+      ]
+    }
+  },
+  "/repositories/{username}/{repo_slug}/deploy-keys/{key_id}": {
+    "delete": {
+      "description": "This deletes a deploy key from a repository.\n\nExample:\n```\n$ curl -XDELETE \\\n-H \"Authorization <auth header>\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys/1234\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The key has been deleted"
+        },
+        "403": {
+          "description": "If the current user does not have permission to delete a key for the specified user"
+        },
+        "404": {
+          "description": "If the specified user, repository, or deploy key does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "repository",
+            "repository:admin"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "deploy"
+      ]
+    },
+    "get": {
+      "description": "Returns the deploy key belonging to a specific key.\n\nExample:\n```\n$ curl -H \"Authorization <auth header>\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-key/1234\n\nOutput:\n{\n    \"comment\": \"mleu@C02W454JHTD8\",\n    \"last_used\": null,\n    \"links\": {\n        \"self\": {\n            \"href\": https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-key/1234\"\n        }\n    },\n    \"repository\": \"test\",\n    \"label\": \"mykey\",\n    \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"pk\": 1234,\n    \"type\": \"deploy_key\"\n}\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "Deploy key matching the key ID",
+          "schema": {
+            "$ref": "#/definitions/deploy_key"
+          }
+        },
+        "403": {
+          "description": "If the specified user or repository is not accessible to the current user"
+        },
+        "404": {
+          "description": "If the specified user or repository does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "repository",
+            "repository:admin"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "deploy"
+      ]
+    },
+    "parameters": [
+      {
+        "description": "The account's username.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The name of the repository the deploy key belongs to.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The key ID matching the deploy key.",
+        "in": "path",
+        "name": "key_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "put": {
+      "description": "Create a new deploy key in a repository.\n\nThe same key needs to be passed in but the comment and label can change.\n\nExample:\n```\n$ curl -XPUT \\\n-H \"Authorization <auth header>\" \\\n-H \"Content-type: application/json\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys/1234 -d \\\n'{\n    \"label\": \"newlabel\",\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5 newcomment\",\n}'\n\nOutput:\n{\n    \"comment\": \"newcomment\",\n    \"last_used\": null,\n    \"links\": {\n        \"self\": {\n            \"href\": \"http://localhost:8000/!api/2.0/repositories/mleu/test/deploy-keys/1234\"\n        }\n    },\n    \"repository\": \"test\",\n    \"label\": \"newlabel\",\n    \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"pk\": 1234,\n    \"type\": \"deploy_key\"\n}\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The newly updated deploy key.",
+          "schema": {
+            "$ref": "#/definitions/deploy_key"
+          }
+        },
+        "400": {
+          "description": "If the submitted key or related value is invalid",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "If the current user does not have permission to add a key for the specified user"
+        },
+        "404": {
+          "description": "If the specified user, repository, or deploy key does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "repository",
+            "repository:admin"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "deploy"
+      ]
+    }
+  },
   "/repositories/{username}/{repo_slug}/deployments/": {
     "get": {
       "description": "Find deployments",
@@ -2835,6 +3151,39 @@
       }
     ]
   },
+  "/repositories/{username}/{repo_slug}/environments/": {
+    "get": {
+      "description": "Find environments",
+      "operationId": "getEnvironmentsForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The matching environments.",
+          "schema": {
+            "$ref": "#/definitions/paginated_environments"
+          }
+        }
+      },
+      "tags": [
+        "deployments"
+      ]
+    }
+  },
   "/repositories/{username}/{repo_slug}/environments/{environment_uuid}": {
     "get": {
       "description": "Retrieve an environment",
@@ -2868,6 +3217,49 @@
           "schema": {
             "$ref": "#/definitions/deployment_environment"
           }
+        },
+        "404": {
+          "description": "No account, repository or environment with the UUID provided exists.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "deployments"
+      ]
+    }
+  },
+  "/repositories/{username}/{repo_slug}/environments/{environment_uuid}/changes/": {
+    "post": {
+      "description": "Update an environment",
+      "operationId": "updateEnvironmentForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The environment UUID.",
+          "in": "path",
+          "name": "environment_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "202": {
+          "description": "The environment update request was accepted."
         },
         "404": {
           "description": "No account, repository or environment with the UUID provided exists.",
@@ -3115,6 +3507,7 @@
                     "href": "https://api.bitbucket.org/2.0/users/example-username"
                   }
                 },
+                "nickname": "example-username",
                 "type": "user",
                 "username": "example-username",
                 "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
@@ -3901,7 +4294,7 @@
   },
   "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes": {
     "get": {
-      "description": "Returns the list of all changes that have been made to the specified\nissue. Changes are returned in chronological order with the oldest\nchange first.\n\nEach time an issue is edited in the UI or through the API, an immutable\nchange record is created under the `/issues/123/changes` endpoint. It\nalso has a comment associated with the change.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/evzijst/dogslow/issues/1/changes - | jq .\n\n{\n  \"pagelen\": 20,\n  \"values\": [\n    {\n      \"changes\": {\n        \"priority\": {\n          \"new\": \"trivial\",\n          \"old\": \"major\"\n        },\n        \"assignee\": {\n          \"new\": \"\",\n          \"old\": \"evzijst\"\n        },\n        \"kind\": {\n          \"new\": \"enhancement\",\n          \"old\": \"bug\"\n        }\n      },\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/evzijst/dogslow/issues/1/changes/2\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/evzijst/dogslow/issues/1#comment-2\"\n        }\n      },\n      \"issue\": {\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/evzijst/dogslow/issues/1\"\n          }\n        },\n        \"type\": \"issue\",\n        \"id\": 1,\n        \"repository\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/evzijst/dogslow\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/evzijst/dogslow\"\n            },\n            \"avatar\": {\n              \"href\": \"https://bitbucket.org/evzijst/dogslow/avatar/32/\"\n            }\n          },\n          \"type\": \"repository\",\n          \"name\": \"dogslow\",\n          \"full_name\": \"evzijst/dogslow\",\n          \"uuid\": \"{988b17c6-1a47-4e70-84ee-854d5f012bf6}\"\n        },\n        \"title\": \"Updated title\"\n      },\n      \"created_on\": \"2018-03-03T00:35:28.353630+00:00\",\n      \"user\": {\n        \"username\": \"evzijst\",\n        \"display_name\": \"evzijst\",\n        \"type\": \"user\",\n        \"uuid\": \"{aaa7972b-38af-4fb1-802d-6e3854c95778}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/evzijst\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/evzijst/\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket.org/account/evzijst/avatar/32/\"\n          }\n        }\n      },\n      \"message\": {\n        \"raw\": \"Removed assignee, changed kind and priority.\",\n        \"markup\": \"markdown\",\n        \"html\": \"<p>Removed assignee, changed kind and priority.</p>\",\n        \"type\": \"rendered\"\n      },\n      \"type\": \"issue_change\",\n      \"id\": 2\n    }\n  ],\n  \"page\": 1\n}\n```\n\nChanges support [filtering and sorting](../../../meta/filtering) that\ncan be used to search for specific changes. For instance, to see\nwhen an issue transitioned to \"resolved\":\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/site/master/issues/1/changes \\\n   -G --data-urlencode='q=changes.state.new = \"resolved\"'\n```\n\nThis resource is only available on repositories that have the issue\ntracker enabled.",
+      "description": "Returns the list of all changes that have been made to the specified\nissue. Changes are returned in chronological order with the oldest\nchange first.\n\nEach time an issue is edited in the UI or through the API, an immutable\nchange record is created under the `/issues/123/changes` endpoint. It\nalso has a comment associated with the change.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/evzijst/dogslow/issues/1/changes - | jq .\n\n{\n  \"pagelen\": 20,\n  \"values\": [\n    {\n      \"changes\": {\n        \"priority\": {\n          \"new\": \"trivial\",\n          \"old\": \"major\"\n        },\n        \"assignee\": {\n          \"new\": \"\",\n          \"old\": \"evzijst\"\n        },\n        \"assignee_account_id\": {\n          \"new\": \"\",\n          \"old\": \"557058:c0b72ad0-1cb5-4018-9cdc-0cde8492c443\"\n        },\n        \"kind\": {\n          \"new\": \"enhancement\",\n          \"old\": \"bug\"\n        }\n      },\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/evzijst/dogslow/issues/1/changes/2\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/evzijst/dogslow/issues/1#comment-2\"\n        }\n      },\n      \"issue\": {\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/evzijst/dogslow/issues/1\"\n          }\n        },\n        \"type\": \"issue\",\n        \"id\": 1,\n        \"repository\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/evzijst/dogslow\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/evzijst/dogslow\"\n            },\n            \"avatar\": {\n              \"href\": \"https://bitbucket.org/evzijst/dogslow/avatar/32/\"\n            }\n          },\n          \"type\": \"repository\",\n          \"name\": \"dogslow\",\n          \"full_name\": \"evzijst/dogslow\",\n          \"uuid\": \"{988b17c6-1a47-4e70-84ee-854d5f012bf6}\"\n        },\n        \"title\": \"Updated title\"\n      },\n      \"created_on\": \"2018-03-03T00:35:28.353630+00:00\",\n      \"user\": {\n        \"username\": \"evzijst\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"evzijst\",\n        \"type\": \"user\",\n        \"uuid\": \"{aaa7972b-38af-4fb1-802d-6e3854c95778}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/evzijst\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/evzijst/\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket.org/account/evzijst/avatar/32/\"\n          }\n        }\n      },\n      \"message\": {\n        \"raw\": \"Removed assignee, changed kind and priority.\",\n        \"markup\": \"markdown\",\n        \"html\": \"<p>Removed assignee, changed kind and priority.</p>\",\n        \"type\": \"rendered\"\n      },\n      \"type\": \"issue_change\",\n      \"id\": 2\n    }\n  ],\n  \"page\": 1\n}\n```\n\nChanges support [filtering and sorting](../../../meta/filtering) that\ncan be used to search for specific changes. For instance, to see\nwhen an issue transitioned to \"resolved\":\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/site/master/issues/1/changes \\\n   -G --data-urlencode='q=changes.state.new = \"resolved\"'\n```\n\nThis resource is only available on repositories that have the issue\ntracker enabled.\n\nN.B.\n\nThe `changes.assignee` and `changes.assignee_account_id` fields are not\na `user` object. Instead, they contain the raw `username` and\n`account_id` of the user. This is to protect the integrity of the audit\nlog even after a user account gets deleted.\n\nThe `changes.assignee` field is deprecated will disappear in the\nfuture. Use `changes.assignee_account_id` instead.",
       "parameters": [
         {
           "description": "\nQuery string to narrow down the response. See\n[filtering and sorting](../../../meta/filtering) for details.",
@@ -3973,7 +4366,7 @@
       }
     ],
     "post": {
-      "description": "Makes a change to the specified issue.\n\nFor example, to change an issue's state and assignee, create a new\nchange object that modifies these fields:\n\n```\ncurl https://api.bitbucket.org/2.0/site/master/issues/1234/changes \\\n  -s -u evzijst -X POST -H \"Content-Type: application/json\" \\\n  -d '{\n    \"changes\": {\n      \"assignee\": {\n        \"new\": \"evzijst\"\n      },\n      \"state\": {\n        \"new\": 'resolved\"\n      }\n    }\n    \"message\": {\n      \"raw\": \"This is now resolved.\"\n    }\n  }'\n```\n\nThe above example also includes a custom comment to go alongside the\nchange. This comment will also be visible on the issue page in the UI.\n\nThe fields of the `changes` object are strings, not objects. This\nallows for immutable change log records, even after user accounts,\nmilestones, or other objects recorded in a change entry, get renamed or\ndeleted.\n\nThe assignee field stores the username. When POSTing a new change and\nchanging the assignee, the client should also use the username in the\n`changes.assignee.new` field.\n\nThis call requires authentication. Private repositories or private\nissue trackers require the caller to authenticate with an account that\nhas appropriate authorization.",
+      "description": "Makes a change to the specified issue.\n\nFor example, to change an issue's state and assignee, create a new\nchange object that modifies these fields:\n\n```\ncurl https://api.bitbucket.org/2.0/site/master/issues/1234/changes \\\n  -s -u evzijst -X POST -H \"Content-Type: application/json\" \\\n  -d '{\n    \"changes\": {\n      \"assignee_account_id\": {\n        \"new\": \"557058:c0b72ad0-1cb5-4018-9cdc-0cde8492c443\"\n      },\n      \"state\": {\n        \"new\": 'resolved\"\n      }\n    }\n    \"message\": {\n      \"raw\": \"This is now resolved.\"\n    }\n  }'\n```\n\nThe above example also includes a custom comment to go alongside the\nchange. This comment will also be visible on the issue page in the UI.\n\nThe fields of the `changes` object are strings, not objects. This\nallows for immutable change log records, even after user accounts,\nmilestones, or other objects recorded in a change entry, get renamed or\ndeleted.\n\nThe `assignee_account_id` field stores the account id. When POSTing a\nnew change and changing the assignee, the client should therefore use\nthe user's account_id in the `changes.assignee_account_id.new` field.\n\nThis call requires authentication. Private repositories or private\nissue trackers require the caller to authenticate with an account that\nhas appropriate authorization.",
       "parameters": [
         {
           "description": "The new issue state change. The only required elements are `changes.[].new`. All other elements can be omitted from the body.",
@@ -6294,7 +6687,7 @@
       }
     ],
     "post": {
-      "description": "Creates a new pull request.",
+      "description": "Creates a new pull request where the destination repository is\nthis repository and the author is the authenticated user.\n\nThe minimum required fields to create a pull request are `title` and\n`source`, specified by a branch name.\n\n```\ncurl https://api.bitbucket.org/2.0/repositories/my-username/my-repository/pullrequests \\\n    -u my-username:my-password \\\n    --request POST \\\n    --header 'Content-Type: application/json' \\\n    --data '{\n        \"title\": \"My Title\",\n        \"source\": {\n            \"branch\": {\n                \"name\": \"staging\"\n            }\n        }\n    }'\n```\n\nIf the pull request's `destination` is not specified, it will default\nto the `repository.mainbranch`. To open a pull request to a\ndifferent branch, say from a feature branch to a staging branch,\nspecify a `destination` (same format as the `source`):\n\n```\n{\n    \"title\": \"My Title\",\n    \"source\": {\n        \"branch\": {\n            \"name\": \"my-feature-branch\"\n        }\n    },\n    \"destination\": {\n        \"branch\": {\n            \"name\": \"staging\"\n        }\n    }\n}\n```\n\nReviewers can be specified by adding an array of user objects as the\n`reviewers` property.\n\n```\n{\n    \"title\": \"My Title\",\n    \"source\": {\n        \"branch\": {\n            \"name\": \"my-feature-branch\"\n        }\n    },\n    \"reviewers\": [\n        {\n            \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n        }\n    ]\n}\n```\n\nOther fields:\n\n* `description` - a string\n* `close_source_branch` - boolean that specifies if the source branch should be closed upon merging",
       "parameters": [
         {
           "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
@@ -6409,6 +6802,7 @@
                     "href": "https://api.bitbucket.org/2.0/users/example-username"
                   }
                 },
+                "nickname": "example-username",
                 "type": "user",
                 "username": "example-username",
                 "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
@@ -6640,6 +7034,7 @@
                     "href": "https://api.bitbucket.org/2.0/users/example-username"
                   }
                 },
+                "nickname": "example-username",
                 "type": "user",
                 "username": "example-username",
                 "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
@@ -7382,6 +7777,7 @@
                     "href": "https://api.bitbucket.org/2.0/users/example-username"
                   }
                 },
+                "nickname": "example-username",
                 "type": "user",
                 "username": "example-username",
                 "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
@@ -7684,6 +8080,7 @@
                     "href": "https://api.bitbucket.org/2.0/users/example-username"
                   }
                 },
+                "nickname": "example-username",
                 "type": "user",
                 "username": "example-username",
                 "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
@@ -8113,7 +8510,7 @@
   },
   "/repositories/{username}/{repo_slug}/refs/branches": {
     "get": {
-      "description": "Returns a list of all open branches within the specified repository.\nResults will be in the order the source control manager returns them.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches | jq .\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"heads\": [\n        {\n          \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n          \"type\": \"commit\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n            }\n          }\n        }\n      ],\n      \"type\": \"named_branch\",\n      \"name\": \"default\",\n      \"links\": {\n        \"commits\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/default\"\n        },\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/branch/default\"\n        }\n      },\n      \"target\": {\n        \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n        \"repository\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial\"\n            },\n            \"avatar\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/avatar/32/\"\n            }\n          },\n          \"type\": \"repository\",\n          \"name\": \"mercurial\",\n          \"full_name\": \"seanfarley/mercurial\",\n          \"uuid\": \"{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}\"\n        },\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"comments\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/comments\"\n          },\n          \"patch\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"diff\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"approve\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/approve\"\n          },\n          \"statuses\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/statuses\"\n          }\n        },\n        \"author\": {\n          \"raw\": \"Martin von Zweigbergk <martinvonz@google.com>\",\n          \"type\": \"author\",\n          \"user\": {\n            \"username\": \"martinvonz\",\n            \"display_name\": \"Martin von Zweigbergk\",\n            \"type\": \"user\",\n            \"uuid\": \"{fdb0e657-3ade-4fad-a136-95f1ffe4a5ac}\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/martinvonz\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/martinvonz/\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/martinvonz/avatar/32/\"\n              }\n            }\n          }\n        },\n        \"parents\": [\n          {\n            \"hash\": \"5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\",\n            \"type\": \"commit\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n              }\n            }\n          }\n        ],\n        \"date\": \"2018-02-01T18:44:49+00:00\",\n        \"message\": \"config: replace a for-else by any()\",\n        \"type\": \"commit\"\n      }\n    },\n    {\n      \"heads\": [\n        {\n          \"hash\": \"1d60ad093792706e1dc7a52b20942593f2c19655\",\n          \"type\": \"commit\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/1d60ad093792706e1dc7a52b20942593f2c19655\"\n            }\n          }\n        }\n      ],\n      \"type\": \"named_branch\",\n      \"name\": \"stable\",\n      \"links\": {\n        \"commits\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/stable\"\n        },\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/stable\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/branch/stable\"\n        }\n      },\n      \"target\": {\n        \"hash\": \"1d60ad093792706e1dc7a52b20942593f2c19655\",\n        \"repository\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial\"\n            },\n            \"avatar\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/avatar/32/\"\n            }\n          },\n          \"type\": \"repository\",\n          \"name\": \"mercurial\",\n          \"full_name\": \"seanfarley/mercurial\",\n          \"uuid\": \"{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}\"\n        },\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"comments\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/comments\"\n          },\n          \"patch\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"diff\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"approve\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/approve\"\n          },\n          \"statuses\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/statuses\"\n          }\n        },\n        \"author\": {\n          \"raw\": \"Augie Fackler <raf@durin42.com>\",\n          \"type\": \"author\",\n          \"user\": {\n            \"username\": \"durin42\",\n            \"display_name\": \"Augie Fackler\",\n            \"type\": \"user\",\n            \"uuid\": \"{e07dc61f-bb05-4218-b43a-d991f26be65a}\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/durin42\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/durin42/\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/durin42/avatar/32/\"\n              }\n            }\n          }\n        },\n        \"parents\": [\n          {\n            \"hash\": \"56a0da11bde519d79168e890df4bcf0da62f0a7b\",\n            \"type\": \"commit\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/56a0da11bde519d79168e890df4bcf0da62f0a7b\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/56a0da11bde519d79168e890df4bcf0da62f0a7b\"\n              }\n            }\n          }\n        ],\n        \"date\": \"2018-02-01T19:13:41+00:00\",\n        \"message\": \"Added signature for changeset d334afc585e2\",\n        \"type\": \"commit\"\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nBranches support [filtering and sorting](../../../../../meta/filtering)\nthat can be used to search for specific branches. For instance, to find\nall branches that have \"stab\" in their name:\n\n```\ncurl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches -G --data-urlencode 'q=name ~ \"stab\"'\n```\n\nBy default, results will be in the order the underlying source control system returns them and identical to\nthe ordering one sees when running \"$ hg branches\" or \"$ git branch --list\". Note that this follows simple\nlexical ordering of the ref names.\n\nThis can be undesirable as it does apply any natural sorting semantics, meaning for instance that tags are\nsorted [\"v10\", \"v11\", \"v9\"] instead of [\"v9\", \"v10\", \"v11\"].\n\nSorting can be changed using the ?q= query parameter. When using ?q=name to explicitly sort on ref name,\nBitbucket will apply natural sorting and interpret numerical values as numbers instead of strings.",
+      "description": "Returns a list of all open branches within the specified repository.\nResults will be in the order the source control manager returns them.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches | jq .\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"heads\": [\n        {\n          \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n          \"type\": \"commit\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n            }\n          }\n        }\n      ],\n      \"type\": \"named_branch\",\n      \"name\": \"default\",\n      \"links\": {\n        \"commits\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/default\"\n        },\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/branch/default\"\n        }\n      },\n      \"target\": {\n        \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n        \"repository\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial\"\n            },\n            \"avatar\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/avatar/32/\"\n            }\n          },\n          \"type\": \"repository\",\n          \"name\": \"mercurial\",\n          \"full_name\": \"seanfarley/mercurial\",\n          \"uuid\": \"{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}\"\n        },\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"comments\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/comments\"\n          },\n          \"patch\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"diff\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"approve\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/approve\"\n          },\n          \"statuses\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/statuses\"\n          }\n        },\n        \"author\": {\n          \"raw\": \"Martin von Zweigbergk <martinvonz@google.com>\",\n          \"type\": \"author\",\n          \"user\": {\n            \"username\": \"martinvonz\",\n            \"nickname\": \"martinvonz\",\n            \"display_name\": \"Martin von Zweigbergk\",\n            \"type\": \"user\",\n            \"uuid\": \"{fdb0e657-3ade-4fad-a136-95f1ffe4a5ac}\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/martinvonz\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/martinvonz/\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/martinvonz/avatar/32/\"\n              }\n            }\n          }\n        },\n        \"parents\": [\n          {\n            \"hash\": \"5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\",\n            \"type\": \"commit\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n              }\n            }\n          }\n        ],\n        \"date\": \"2018-02-01T18:44:49+00:00\",\n        \"message\": \"config: replace a for-else by any()\",\n        \"type\": \"commit\"\n      }\n    },\n    {\n      \"heads\": [\n        {\n          \"hash\": \"1d60ad093792706e1dc7a52b20942593f2c19655\",\n          \"type\": \"commit\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/1d60ad093792706e1dc7a52b20942593f2c19655\"\n            }\n          }\n        }\n      ],\n      \"type\": \"named_branch\",\n      \"name\": \"stable\",\n      \"links\": {\n        \"commits\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/stable\"\n        },\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/stable\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/branch/stable\"\n        }\n      },\n      \"target\": {\n        \"hash\": \"1d60ad093792706e1dc7a52b20942593f2c19655\",\n        \"repository\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial\"\n            },\n            \"avatar\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/avatar/32/\"\n            }\n          },\n          \"type\": \"repository\",\n          \"name\": \"mercurial\",\n          \"full_name\": \"seanfarley/mercurial\",\n          \"uuid\": \"{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}\"\n        },\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"comments\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/comments\"\n          },\n          \"patch\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"diff\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"approve\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/approve\"\n          },\n          \"statuses\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/statuses\"\n          }\n        },\n        \"author\": {\n          \"raw\": \"Augie Fackler <raf@durin42.com>\",\n          \"type\": \"author\",\n          \"user\": {\n            \"username\": \"durin42\",\n            \"nickname\": \"durin42\",\n            \"display_name\": \"Augie Fackler\",\n            \"type\": \"user\",\n            \"uuid\": \"{e07dc61f-bb05-4218-b43a-d991f26be65a}\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/durin42\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/durin42/\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/durin42/avatar/32/\"\n              }\n            }\n          }\n        },\n        \"parents\": [\n          {\n            \"hash\": \"56a0da11bde519d79168e890df4bcf0da62f0a7b\",\n            \"type\": \"commit\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/56a0da11bde519d79168e890df4bcf0da62f0a7b\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/56a0da11bde519d79168e890df4bcf0da62f0a7b\"\n              }\n            }\n          }\n        ],\n        \"date\": \"2018-02-01T19:13:41+00:00\",\n        \"message\": \"Added signature for changeset d334afc585e2\",\n        \"type\": \"commit\"\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nBranches support [filtering and sorting](../../../../../meta/filtering)\nthat can be used to search for specific branches. For instance, to find\nall branches that have \"stab\" in their name:\n\n```\ncurl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches -G --data-urlencode 'q=name ~ \"stab\"'\n```\n\nBy default, results will be in the order the underlying source control system returns them and identical to\nthe ordering one sees when running \"$ hg branches\" or \"$ git branch --list\". Note that this follows simple\nlexical ordering of the ref names.\n\nThis can be undesirable as it does apply any natural sorting semantics, meaning for instance that tags are\nsorted [\"v10\", \"v11\", \"v9\"] instead of [\"v9\", \"v10\", \"v11\"].\n\nSorting can be changed using the ?q= query parameter. When using ?q=name to explicitly sort on ref name,\nBitbucket will apply natural sorting and interpret numerical values as numbers instead of strings.",
       "parameters": [
         {
           "description": "\nThis can either be the username or the UUID of the user,\nsurrounded by curly-braces, for example: `{user UUID}`.\n",
@@ -8233,6 +8630,7 @@
                         "href": "https://api.bitbucket.org/2.0/users/example-username"
                       }
                     },
+                    "nickname": "example-username",
                     "type": "user",
                     "username": "example-username",
                     "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
@@ -8361,7 +8759,7 @@
       ]
     },
     "get": {
-      "description": "Returns a branch object within the specified repository.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default | jq .\n{\n  \"heads\": [\n    {\n      \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n      \"type\": \"commit\",\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n        }\n      }\n    }\n  ],\n  \"type\": \"named_branch\",\n  \"name\": \"default\",\n  \"links\": {\n    \"commits\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/default\"\n    },\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default\"\n    },\n    \"html\": {\n      \"href\": \"https://bitbucket.org/seanfarley/mercurial/branch/default\"\n    }\n  },\n  \"target\": {\n    \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n    \"repository\": {\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial\"\n        },\n        \"avatar\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/avatar/32/\"\n        }\n      },\n      \"type\": \"repository\",\n      \"name\": \"mercurial\",\n      \"full_name\": \"seanfarley/mercurial\",\n      \"uuid\": \"{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}\"\n    },\n    \"links\": {\n      \"self\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"comments\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/comments\"\n      },\n      \"patch\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"html\": {\n        \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"diff\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"approve\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/approve\"\n      },\n      \"statuses\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/statuses\"\n      }\n    },\n    \"author\": {\n      \"raw\": \"Martin von Zweigbergk <martinvonz@google.com>\",\n      \"type\": \"author\",\n      \"user\": {\n        \"username\": \"martinvonz\",\n        \"display_name\": \"Martin von Zweigbergk\",\n        \"type\": \"user\",\n        \"uuid\": \"{fdb0e657-3ade-4fad-a136-95f1ffe4a5ac}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/martinvonz\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/martinvonz/\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket.org/account/martinvonz/avatar/32/\"\n          }\n        }\n      }\n    },\n    \"parents\": [\n      {\n        \"hash\": \"5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\",\n        \"type\": \"commit\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n          }\n        }\n      }\n    ],\n    \"date\": \"2018-02-01T18:44:49+00:00\",\n    \"message\": \"config: replace a for-else by any()\",\n    \"type\": \"commit\"\n  }\n}\n```\n\nThis call requires authentication. Private repositories require the\ncaller to authenticate with an account that has appropriate\nauthorization.\n\nFor Git, the branch name should not include any prefixes (e.g.\nrefs/heads).\n\nFor Mercurial, the response will include an additional field that lists\nthe open heads.",
+      "description": "Returns a branch object within the specified repository.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default | jq .\n{\n  \"heads\": [\n    {\n      \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n      \"type\": \"commit\",\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n        }\n      }\n    }\n  ],\n  \"type\": \"named_branch\",\n  \"name\": \"default\",\n  \"links\": {\n    \"commits\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/default\"\n    },\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default\"\n    },\n    \"html\": {\n      \"href\": \"https://bitbucket.org/seanfarley/mercurial/branch/default\"\n    }\n  },\n  \"target\": {\n    \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n    \"repository\": {\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial\"\n        },\n        \"avatar\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/avatar/32/\"\n        }\n      },\n      \"type\": \"repository\",\n      \"name\": \"mercurial\",\n      \"full_name\": \"seanfarley/mercurial\",\n      \"uuid\": \"{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}\"\n    },\n    \"links\": {\n      \"self\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"comments\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/comments\"\n      },\n      \"patch\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"html\": {\n        \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"diff\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"approve\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/approve\"\n      },\n      \"statuses\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/statuses\"\n      }\n    },\n    \"author\": {\n      \"raw\": \"Martin von Zweigbergk <martinvonz@google.com>\",\n      \"type\": \"author\",\n      \"user\": {\n        \"username\": \"martinvonz\",\n        \"nickname\": \"martinvonz\",\n        \"display_name\": \"Martin von Zweigbergk\",\n        \"type\": \"user\",\n        \"uuid\": \"{fdb0e657-3ade-4fad-a136-95f1ffe4a5ac}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/martinvonz\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/martinvonz/\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket.org/account/martinvonz/avatar/32/\"\n          }\n        }\n      }\n    },\n    \"parents\": [\n      {\n        \"hash\": \"5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\",\n        \"type\": \"commit\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n          }\n        }\n      }\n    ],\n    \"date\": \"2018-02-01T18:44:49+00:00\",\n    \"message\": \"config: replace a for-else by any()\",\n    \"type\": \"commit\"\n  }\n}\n```\n\nThis call requires authentication. Private repositories require the\ncaller to authenticate with an account that has appropriate\nauthorization.\n\nFor Git, the branch name should not include any prefixes (e.g.\nrefs/heads).\n\nFor Mercurial, the response will include an additional field that lists\nthe open heads.",
       "parameters": [],
       "responses": {
         "200": {
@@ -8398,6 +8796,7 @@
                         "href": "https://api.bitbucket.org/2.0/users/example-username"
                       }
                     },
+                    "nickname": "example-username",
                     "type": "user",
                     "username": "example-username",
                     "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
@@ -8595,7 +8994,7 @@
       }
     ],
     "post": {
-      "description": "Creates a new tag in the specified repository.\n\nThe payload of the POST should consist of a JSON document that\ncontains the name of the tag and the target hash.\n\n```\n{\n    \"name\" : \"new tag name\",\n    \"target\" : {\n        \"hash\" : \"target commit hash\",\n    }\n}\n```\n\nThis endpoint does support using short hash prefixes for the commit\nhash, but it may return a 400 response if the provided prefix is\nambiguous. Using a full commit hash is the preferred approach.",
+      "description": "Creates a new tag in the specified repository.\n\nThe payload of the POST should consist of a JSON document that\ncontains the name of the tag and the target hash.\n\n```\ncurl https://api.bitbucket.org/2.0/repositories/jdoe/myrepo/refs/tags \\\n-s -u jdoe -X POST -H \"Content-Type: application/json\" \\\n-d '{\n    \"name\" : \"new-tag-name\",\n    \"target\" : {\n        \"hash\" : \"a1b2c3d4e5f6\",\n    }\n}'\n```\n\nThis endpoint does support using short hash prefixes for the commit\nhash, but it may return a 400 response if the provided prefix is\nambiguous. Using a full commit hash is the preferred approach.",
       "parameters": [
         {
           "in": "body",
@@ -8677,7 +9076,7 @@
       ]
     },
     "get": {
-      "description": "Returns the specified tag.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/hg/refs/tags/3.8 -G | jq .\n{\n  \"name\": \"3.8\",\n  \"links\": {\n    \"commits\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commits/3.8\"\n    },\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/refs/tags/3.8\"\n    },\n    \"html\": {\n      \"href\": \"https://bitbucket.org/seanfarley/hg/commits/tag/3.8\"\n    }\n  },\n  \"tagger\": {\n    \"raw\": \"Matt Mackall <mpm@selenic.com>\",\n    \"type\": \"author\",\n    \"user\": {\n      \"username\": \"mpmselenic\",\n      \"display_name\": \"Matt Mackall\",\n      \"type\": \"user\",\n      \"uuid\": \"{a4934530-db4c-419c-a478-9ab4964c2ee7}\",\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/users/mpmselenic\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/mpmselenic/\"\n        },\n        \"avatar\": {\n          \"href\": \"https://bitbucket.org/account/mpmselenic/avatar/32/\"\n        }\n      }\n    }\n  },\n  \"date\": \"2016-05-01T18:52:25+00:00\",\n  \"message\": \"Added tag 3.8 for changeset f85de28eae32\",\n  \"type\": \"tag\",\n  \"target\": {\n    \"hash\": \"f85de28eae32e7d3064b1a1321309071bbaaa069\",\n    \"repository\": {\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/hg\"\n        },\n        \"avatar\": {\n          \"href\": \"https://bitbucket.org/seanfarley/hg/avatar/32/\"\n        }\n      },\n      \"type\": \"repository\",\n      \"name\": \"hg\",\n      \"full_name\": \"seanfarley/hg\",\n      \"uuid\": \"{c75687fb-e99d-4579-9087-190dbd406d30}\"\n    },\n    \"links\": {\n      \"self\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"comments\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069/comments\"\n      },\n      \"patch\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/patch/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"html\": {\n        \"href\": \"https://bitbucket.org/seanfarley/hg/commits/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"diff\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/diff/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"approve\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069/approve\"\n      },\n      \"statuses\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069/statuses\"\n      }\n    },\n    \"author\": {\n      \"raw\": \"Sean Farley <sean@farley.io>\",\n      \"type\": \"author\",\n      \"user\": {\n        \"username\": \"seanfarley\",\n        \"display_name\": \"Sean Farley\",\n        \"type\": \"user\",\n        \"uuid\": \"{a295f8a8-5876-4d43-89b5-3ad8c6c3c51d}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/seanfarley\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket.org/account/seanfarley/avatar/32/\"\n          }\n        }\n      }\n    },\n    \"parents\": [\n      {\n        \"hash\": \"9a98d0e5b07fc60887f9d3d34d9ac7d536f470d2\",\n        \"type\": \"commit\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/9a98d0e5b07fc60887f9d3d34d9ac7d536f470d2\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/hg/commits/9a98d0e5b07fc60887f9d3d34d9ac7d536f470d2\"\n          }\n        }\n      }\n    ],\n    \"date\": \"2016-05-01T04:21:17+00:00\",\n    \"message\": \"debian: alphabetize build deps\",\n    \"type\": \"commit\"\n  }\n}\n```",
+      "description": "Returns the specified tag.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/hg/refs/tags/3.8 -G | jq .\n{\n  \"name\": \"3.8\",\n  \"links\": {\n    \"commits\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commits/3.8\"\n    },\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/refs/tags/3.8\"\n    },\n    \"html\": {\n      \"href\": \"https://bitbucket.org/seanfarley/hg/commits/tag/3.8\"\n    }\n  },\n  \"tagger\": {\n    \"raw\": \"Matt Mackall <mpm@selenic.com>\",\n    \"type\": \"author\",\n    \"user\": {\n      \"username\": \"mpmselenic\",\n      \"nickname\": \"mpmselenic\",\n      \"display_name\": \"Matt Mackall\",\n      \"type\": \"user\",\n      \"uuid\": \"{a4934530-db4c-419c-a478-9ab4964c2ee7}\",\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/users/mpmselenic\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/mpmselenic/\"\n        },\n        \"avatar\": {\n          \"href\": \"https://bitbucket.org/account/mpmselenic/avatar/32/\"\n        }\n      }\n    }\n  },\n  \"date\": \"2016-05-01T18:52:25+00:00\",\n  \"message\": \"Added tag 3.8 for changeset f85de28eae32\",\n  \"type\": \"tag\",\n  \"target\": {\n    \"hash\": \"f85de28eae32e7d3064b1a1321309071bbaaa069\",\n    \"repository\": {\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/hg\"\n        },\n        \"avatar\": {\n          \"href\": \"https://bitbucket.org/seanfarley/hg/avatar/32/\"\n        }\n      },\n      \"type\": \"repository\",\n      \"name\": \"hg\",\n      \"full_name\": \"seanfarley/hg\",\n      \"uuid\": \"{c75687fb-e99d-4579-9087-190dbd406d30}\"\n    },\n    \"links\": {\n      \"self\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"comments\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069/comments\"\n      },\n      \"patch\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/patch/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"html\": {\n        \"href\": \"https://bitbucket.org/seanfarley/hg/commits/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"diff\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/diff/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"approve\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069/approve\"\n      },\n      \"statuses\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069/statuses\"\n      }\n    },\n    \"author\": {\n      \"raw\": \"Sean Farley <sean@farley.io>\",\n      \"type\": \"author\",\n      \"user\": {\n        \"username\": \"seanfarley\",\n        \"nickname\": \"seanfarley\",\n        \"display_name\": \"Sean Farley\",\n        \"type\": \"user\",\n        \"uuid\": \"{a295f8a8-5876-4d43-89b5-3ad8c6c3c51d}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/seanfarley\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket.org/account/seanfarley/avatar/32/\"\n          }\n        }\n      }\n    },\n    \"parents\": [\n      {\n        \"hash\": \"9a98d0e5b07fc60887f9d3d34d9ac7d536f470d2\",\n        \"type\": \"commit\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/9a98d0e5b07fc60887f9d3d34d9ac7d536f470d2\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/hg/commits/9a98d0e5b07fc60887f9d3d34d9ac7d536f470d2\"\n          }\n        }\n      }\n    ],\n    \"date\": \"2016-05-01T04:21:17+00:00\",\n    \"message\": \"debian: alphabetize build deps\",\n    \"type\": \"commit\"\n  }\n}\n```",
       "parameters": [],
       "responses": {
         "200": {
@@ -9393,7 +9792,7 @@
       ]
     },
     "get": {
-      "description": "Retrieves a single snippet.\n\nSnippets support multiple content types:\n\n* application/json\n* multipart/related\n* multipart/form-data\n\n\napplication/json\n----------------\n\nThe default content type of the response is `application/json`.\nSince JSON is always `utf-8`, it cannot reliably contain file contents\nfor files that are not text. Therefore, JSON snippet documents only\ncontain the filename and links to the file contents.\n\nThis means that in order to retrieve all parts of a snippet, N+1\nrequests need to be made (where N is the number of files in the\nsnippet).\n\n\nmultipart/related\n-----------------\n\nTo retrieve an entire snippet in a single response, use the\n`Accept: multipart/related` HTTP request header.\n\n    $ curl -H \"Accept: multipart/related\" https://api.bitbucket.org/2.0/snippets/evzijst/1\n\nResponse:\n\n    HTTP/1.1 200 OK\n    Content-Length: 2214\n    Content-Type: multipart/related; start=\"snippet\"; boundary=\"===============1438169132528273974==\"\n    MIME-Version: 1.0\n\n    --===============1438169132528273974==\n    Content-Type: application/json; charset=\"utf-8\"\n    MIME-Version: 1.0\n    Content-ID: snippet\n\n    {\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/snippets/evzijst/kypj\"\n        },\n        \"comments\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/comments\"\n        },\n        \"watchers\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/watchers\"\n        },\n        \"commits\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/commits\"\n        }\n      },\n      \"id\": kypj,\n      \"title\": \"My snippet\",\n      \"created_on\": \"2014-12-29T22:22:04.790331+00:00\",\n      \"updated_on\": \"2014-12-29T22:22:04.790331+00:00\",\n      \"is_private\": false,\n      \"files\": {\n        \"foo.txt\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/files/367ab19/foo.txt\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/snippets/evzijst/kypj#file-foo.txt\"\n            }\n          }\n        },\n        \"image.png\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/files/367ab19/image.png\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/snippets/evzijst/kypj#file-image.png\"\n            }\n          }\n        }\n      ],\n      \"owner\": {\n        \"username\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/evzijst\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/evzijst\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket-staging-assetroot.s3.amazonaws.com/c/photos/2013/Jul/31/erik-avatar-725122544-0_avatar.png\"\n          }\n        }\n      },\n      \"creator\": {\n        \"username\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/evzijst\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/evzijst\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket-staging-assetroot.s3.amazonaws.com/c/photos/2013/Jul/31/erik-avatar-725122544-0_avatar.png\"\n          }\n        }\n      }\n    }\n\n    --===============1438169132528273974==\n    Content-Type: text/plain; charset=\"us-ascii\"\n    MIME-Version: 1.0\n    Content-Transfer-Encoding: 7bit\n    Content-ID: \"foo.txt\"\n    Content-Disposition: attachment; filename=\"foo.txt\"\n\n    foo\n\n    --===============1438169132528273974==\n    Content-Type: image/png\n    MIME-Version: 1.0\n    Content-Transfer-Encoding: base64\n    Content-ID: \"image.png\"\n    Content-Disposition: attachment; filename=\"image.png\"\n\n    iVBORw0KGgoAAAANSUhEUgAAABQAAAAoCAYAAAD+MdrbAAABD0lEQVR4Ae3VMUoDQRTG8ccUaW2m\n    TKONFxArJYJamCvkCnZTaa+VnQdJSBFl2SMsLFrEWNjZBZs0JgiL/+KrhhVmJRbCLPx4O+/DT2TB\n    cbblJxf+UWFVVRNsEGAtgvJxnLm2H+A5RQ93uIl+3632PZyl/skjfOn9Gvdwmlcw5aPUwimG+NT5\n    EnNN036IaZePUuIcK533NVfal7/5yjWeot2z9ta1cAczHEf7I+3J0ws9Cgx0fsOFpmlfwKcWPuBQ\n    73Oc4FHzBaZ8llq4q1mr5B2mOUCt815qYR8eB1hG2VJ7j35q4RofaH7IG+Xrf/PfJhfmwtfFYoIN\n    AqxFUD6OMxcvkO+UfKfkOyXfKdsv/AYCHMLVkHAFWgAAAABJRU5ErkJggg==\n    --===============1438169132528273974==--\n\nmultipart/form-data\n-------------------\n\nAs with creating new snippets, `multipart/form-data` can be used as an\nalternative to `multipart/related`. However, the inherently flat\nstructure of form-data means that only basic, root-level properties\ncan be returned, while nested elements like `links` are omitted:\n\n    $ curl -H \"Accept: multipart/form-data\" https://api.bitbucket.org/2.0/snippets/evzijst/kypj\n\nResponse:\n\n    HTTP/1.1 200 OK\n    Content-Length: 951\n    Content-Type: multipart/form-data; boundary=----------------------------63a4b224c59f\n\n    ------------------------------63a4b224c59f\n    Content-Disposition: form-data; name=\"title\"\n    Content-Type: text/plain; charset=\"utf-8\"\n\n    My snippet\n    ------------------------------63a4b224c59f--\n    Content-Disposition: attachment; name=\"file\"; filename=\"foo.txt\"\n    Content-Type: text/plain\n\n    foo\n\n    ------------------------------63a4b224c59f\n    Content-Disposition: attachment; name=\"file\"; filename=\"image.png\"\n    Content-Transfer-Encoding: base64\n    Content-Type: application/octet-stream\n\n    iVBORw0KGgoAAAANSUhEUgAAABQAAAAoCAYAAAD+MdrbAAABD0lEQVR4Ae3VMUoDQRTG8ccUaW2m\n    TKONFxArJYJamCvkCnZTaa+VnQdJSBFl2SMsLFrEWNjZBZs0JgiL/+KrhhVmJRbCLPx4O+/DT2TB\n    cbblJxf+UWFVVRNsEGAtgvJxnLm2H+A5RQ93uIl+3632PZyl/skjfOn9Gvdwmlcw5aPUwimG+NT5\n    EnNN036IaZePUuIcK533NVfal7/5yjWeot2z9ta1cAczHEf7I+3J0ws9Cgx0fsOFpmlfwKcWPuBQ\n    73Oc4FHzBaZ8llq4q1mr5B2mOUCt815qYR8eB1hG2VJ7j35q4RofaH7IG+Xrf/PfJhfmwtfFYoIN\n    AqxFUD6OMxcvkO+UfKfkOyXfKdsv/AYCHMLVkHAFWgAAAABJRU5ErkJggg==\n    ------------------------------5957323a6b76--",
+      "description": "Retrieves a single snippet.\n\nSnippets support multiple content types:\n\n* application/json\n* multipart/related\n* multipart/form-data\n\n\napplication/json\n----------------\n\nThe default content type of the response is `application/json`.\nSince JSON is always `utf-8`, it cannot reliably contain file contents\nfor files that are not text. Therefore, JSON snippet documents only\ncontain the filename and links to the file contents.\n\nThis means that in order to retrieve all parts of a snippet, N+1\nrequests need to be made (where N is the number of files in the\nsnippet).\n\n\nmultipart/related\n-----------------\n\nTo retrieve an entire snippet in a single response, use the\n`Accept: multipart/related` HTTP request header.\n\n    $ curl -H \"Accept: multipart/related\" https://api.bitbucket.org/2.0/snippets/evzijst/1\n\nResponse:\n\n    HTTP/1.1 200 OK\n    Content-Length: 2214\n    Content-Type: multipart/related; start=\"snippet\"; boundary=\"===============1438169132528273974==\"\n    MIME-Version: 1.0\n\n    --===============1438169132528273974==\n    Content-Type: application/json; charset=\"utf-8\"\n    MIME-Version: 1.0\n    Content-ID: snippet\n\n    {\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/snippets/evzijst/kypj\"\n        },\n        \"comments\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/comments\"\n        },\n        \"watchers\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/watchers\"\n        },\n        \"commits\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/commits\"\n        }\n      },\n      \"id\": kypj,\n      \"title\": \"My snippet\",\n      \"created_on\": \"2014-12-29T22:22:04.790331+00:00\",\n      \"updated_on\": \"2014-12-29T22:22:04.790331+00:00\",\n      \"is_private\": false,\n      \"files\": {\n        \"foo.txt\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/files/367ab19/foo.txt\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/snippets/evzijst/kypj#file-foo.txt\"\n            }\n          }\n        },\n        \"image.png\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/files/367ab19/image.png\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/snippets/evzijst/kypj#file-image.png\"\n            }\n          }\n        }\n      ],\n      \"owner\": {\n        \"username\": \"evzijst\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/evzijst\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/evzijst\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket-staging-assetroot.s3.amazonaws.com/c/photos/2013/Jul/31/erik-avatar-725122544-0_avatar.png\"\n          }\n        }\n      },\n      \"creator\": {\n        \"username\": \"evzijst\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/evzijst\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/evzijst\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket-staging-assetroot.s3.amazonaws.com/c/photos/2013/Jul/31/erik-avatar-725122544-0_avatar.png\"\n          }\n        }\n      }\n    }\n\n    --===============1438169132528273974==\n    Content-Type: text/plain; charset=\"us-ascii\"\n    MIME-Version: 1.0\n    Content-Transfer-Encoding: 7bit\n    Content-ID: \"foo.txt\"\n    Content-Disposition: attachment; filename=\"foo.txt\"\n\n    foo\n\n    --===============1438169132528273974==\n    Content-Type: image/png\n    MIME-Version: 1.0\n    Content-Transfer-Encoding: base64\n    Content-ID: \"image.png\"\n    Content-Disposition: attachment; filename=\"image.png\"\n\n    iVBORw0KGgoAAAANSUhEUgAAABQAAAAoCAYAAAD+MdrbAAABD0lEQVR4Ae3VMUoDQRTG8ccUaW2m\n    TKONFxArJYJamCvkCnZTaa+VnQdJSBFl2SMsLFrEWNjZBZs0JgiL/+KrhhVmJRbCLPx4O+/DT2TB\n    cbblJxf+UWFVVRNsEGAtgvJxnLm2H+A5RQ93uIl+3632PZyl/skjfOn9Gvdwmlcw5aPUwimG+NT5\n    EnNN036IaZePUuIcK533NVfal7/5yjWeot2z9ta1cAczHEf7I+3J0ws9Cgx0fsOFpmlfwKcWPuBQ\n    73Oc4FHzBaZ8llq4q1mr5B2mOUCt815qYR8eB1hG2VJ7j35q4RofaH7IG+Xrf/PfJhfmwtfFYoIN\n    AqxFUD6OMxcvkO+UfKfkOyXfKdsv/AYCHMLVkHAFWgAAAABJRU5ErkJggg==\n    --===============1438169132528273974==--\n\nmultipart/form-data\n-------------------\n\nAs with creating new snippets, `multipart/form-data` can be used as an\nalternative to `multipart/related`. However, the inherently flat\nstructure of form-data means that only basic, root-level properties\ncan be returned, while nested elements like `links` are omitted:\n\n    $ curl -H \"Accept: multipart/form-data\" https://api.bitbucket.org/2.0/snippets/evzijst/kypj\n\nResponse:\n\n    HTTP/1.1 200 OK\n    Content-Length: 951\n    Content-Type: multipart/form-data; boundary=----------------------------63a4b224c59f\n\n    ------------------------------63a4b224c59f\n    Content-Disposition: form-data; name=\"title\"\n    Content-Type: text/plain; charset=\"utf-8\"\n\n    My snippet\n    ------------------------------63a4b224c59f--\n    Content-Disposition: attachment; name=\"file\"; filename=\"foo.txt\"\n    Content-Type: text/plain\n\n    foo\n\n    ------------------------------63a4b224c59f\n    Content-Disposition: attachment; name=\"file\"; filename=\"image.png\"\n    Content-Transfer-Encoding: base64\n    Content-Type: application/octet-stream\n\n    iVBORw0KGgoAAAANSUhEUgAAABQAAAAoCAYAAAD+MdrbAAABD0lEQVR4Ae3VMUoDQRTG8ccUaW2m\n    TKONFxArJYJamCvkCnZTaa+VnQdJSBFl2SMsLFrEWNjZBZs0JgiL/+KrhhVmJRbCLPx4O+/DT2TB\n    cbblJxf+UWFVVRNsEGAtgvJxnLm2H+A5RQ93uIl+3632PZyl/skjfOn9Gvdwmlcw5aPUwimG+NT5\n    EnNN036IaZePUuIcK533NVfal7/5yjWeot2z9ta1cAczHEf7I+3J0ws9Cgx0fsOFpmlfwKcWPuBQ\n    73Oc4FHzBaZ8llq4q1mr5B2mOUCt815qYR8eB1hG2VJ7j35q4RofaH7IG+Xrf/PfJhfmwtfFYoIN\n    AqxFUD6OMxcvkO+UfKfkOyXfKdsv/AYCHMLVkHAFWgAAAABJRU5ErkJggg==\n    ------------------------------5957323a6b76--",
       "parameters": [
         {
           "description": "The snippet's id.",
@@ -11089,6 +11488,7 @@
           "examples": {
             "application/json": {
               "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+              "account_status": "active",
               "display_name": "Example Username",
               "links": {
                 "avatar": {
@@ -11101,6 +11501,7 @@
                   "href": "https://api.bitbucket.org/2.0/users/example-username"
                 }
               },
+              "nickname": "example-username",
               "type": "user",
               "username": "example-username",
               "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
@@ -11145,7 +11546,7 @@
   },
   "/teams/{username}/permissions": {
     "get": {
-      "description": "Returns an object for each team permission a user on the team has.\n\nPermissions returned are effective permissions — if a user is a member of\nmultiple groups with distinct roles, only the highest level is returned.\n\nPermissions can be:\n\n* `admin`\n* `collaborator`\n\nOnly users with admin permission for the team may access this resource.\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"permission\": \"admin\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"team\": {\n        \"username\": \"bitbucket\",\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    },\n    {\n      \"permission\": \"collaborator\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"seanaty\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"team\": {\n        \"username\": \"bitbucket\",\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../meta/filtering) by\nteam, user, or permission by adding the following query string\nparameters:\n\n* `q=user.username=\"evzijst\"` or `q=permission=\"admin\"`\n* `sort=team.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
+      "description": "Returns an object for each team permission a user on the team has.\n\nPermissions returned are effective permissions — if a user is a member of\nmultiple groups with distinct roles, only the highest level is returned.\n\nPermissions can be:\n\n* `admin`\n* `collaborator`\n\nOnly users with admin permission for the team may access this resource.\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"permission\": \"admin\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"evzijst\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"team\": {\n        \"username\": \"bitbucket\",\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    },\n    {\n      \"permission\": \"collaborator\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"seanaty\",\n        \"nickname\": \"seanaty\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"team\": {\n        \"username\": \"bitbucket\",\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../meta/filtering) by\nteam, user, or permission by adding the following query string\nparameters:\n\n* `q=user.username=\"evzijst\"` or `q=permission=\"admin\"`\n* `sort=team.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
       "parameters": [
         {
           "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
@@ -11856,6 +12257,7 @@
           "examples": {
             "application/json": {
               "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+              "account_status": "active",
               "created_on": "2018-06-20T23:17:33.616037+00:00",
               "display_name": "Example Username",
               "is_staff": false,
@@ -11883,6 +12285,7 @@
                 }
               },
               "location": null,
+              "nickname": "example-username",
               "type": "user",
               "username": "example-username",
               "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}",
@@ -11990,7 +12393,7 @@
   },
   "/user/permissions/repositories": {
     "get": {
-      "description": "Returns an object for each repository the caller has explicit access\nto and their effective permission — the highest level of permission the\ncaller has. This does not return public repositories that the user was\nnot granted any specific permission in, and does not distinguish between\ndirect and indirect privileges.\n\nPermissions can be:\n\n* `admin`\n* `write`\n* `read`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/user/permissions/repositories\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"admin\"\n    }\n  ],\n  \"page\": 1,\n  \"size\": 1\n}\n```\n\nResults may be further [filtered or sorted](../../../meta/filtering) by\nrepository or permission by adding the following query string\nparameters:\n\n* `q=repository.name=\"geordi\"` or `q=permission>\"read\"`\n* `sort=repository.name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
+      "description": "Returns an object for each repository the caller has explicit access\nto and their effective permission — the highest level of permission the\ncaller has. This does not return public repositories that the user was\nnot granted any specific permission in, and does not distinguish between\ndirect and indirect privileges.\n\nPermissions can be:\n\n* `admin`\n* `write`\n* `read`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/user/permissions/repositories\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"evzijst\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"admin\"\n    }\n  ],\n  \"page\": 1,\n  \"size\": 1\n}\n```\n\nResults may be further [filtered or sorted](../../../meta/filtering) by\nrepository or permission by adding the following query string\nparameters:\n\n* `q=repository.name=\"geordi\"` or `q=permission>\"read\"`\n* `sort=repository.name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
       "parameters": [
         {
           "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../meta/filtering).",
@@ -12036,7 +12439,7 @@
   },
   "/user/permissions/teams": {
     "get": {
-      "description": "Returns an object for each team the caller is a member of, and their\neffective role — the highest level of privilege the caller has. If a\nuser is a member of multiple groups with distinct roles, only the\nhighest level is returned.\n\nPermissions can be:\n\n* `admin`\n* `collaborator`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/user/permissions/teams\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"permission\": \"admin\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"team\": {\n        \"username\": \"bitbucket\",\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 1\n}\n```\n\nResults may be further [filtered or sorted](../../../meta/filtering) by\nteam or permission by adding the following query string parameters:\n\n* `q=team.username=\"bitbucket\"` or `q=permission=\"admin\"`\n* `sort=team.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
+      "description": "Returns an object for each team the caller is a member of, and their\neffective role — the highest level of privilege the caller has. If a\nuser is a member of multiple groups with distinct roles, only the\nhighest level is returned.\n\nPermissions can be:\n\n* `admin`\n* `collaborator`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/user/permissions/teams\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"permission\": \"admin\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"evzijst\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"team\": {\n        \"username\": \"bitbucket\",\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 1\n}\n```\n\nResults may be further [filtered or sorted](../../../meta/filtering) by\nteam or permission by adding the following query string parameters:\n\n* `q=team.username=\"bitbucket\"` or `q=permission=\"admin\"`\n* `sort=team.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
       "parameters": [
         {
           "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../meta/filtering).",
@@ -12512,6 +12915,7 @@
           "examples": {
             "application/json": {
               "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+              "account_status": "active",
               "display_name": "Example Username",
               "links": {
                 "avatar": {
@@ -12524,6 +12928,7 @@
                   "href": "https://api.bitbucket.org/2.0/users/example-username"
                 }
               },
+              "nickname": "example-username",
               "type": "user",
               "username": "example-username",
               "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
@@ -12875,7 +13280,7 @@
   },
   "/users/{username}/ssh-keys": {
     "get": {
-      "description": "Returns a paginated list of the user's SSH public keys.\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys\n{\n    \"page\": 1,\n    \"pagelen\": 10,\n    \"size\": 1,\n    \"values\": [\n        {\n            \"comment\": \"user@myhost\",\n            \"created_on\": \"2018-03-14T13:17:05.196003+00:00\",\n            \"key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY\",\n            \"label\": \"\",\n            \"last_used\": \"2018-03-20T13:18:05.196003+00:00\",\n            \"links\": {\n                \"self\": {\n                    \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/b15b6026-9c02-4626-b4ad-b905f99f763a\"\n                }\n            },\n            \"owner\": {\n                \"display_name\": \"Mark Adams\",\n                \"links\": {\n                    \"avatar\": {\n                        \"href\": \"https://bitbucket.org/account/markadams-atl/avatar/32/\"\n                    },\n                    \"html\": {\n                        \"href\": \"https://bitbucket.org/markadams-atl/\"\n                    },\n                    \"self\": {\n                        \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl\"\n                    }\n                },\n                \"type\": \"user\",\n                \"username\": \"markadams-atl\",\n                \"uuid\": \"{d7dd0e2d-3994-4a50-a9ee-d260b6cefdab}\"\n            },\n            \"type\": \"ssh_key\",\n            \"uuid\": \"{b15b6026-9c02-4626-b4ad-b905f99f763a}\"\n        }\n    ]\n}\n```",
+      "description": "Returns a paginated list of the user's SSH public keys.\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys\n{\n    \"page\": 1,\n    \"pagelen\": 10,\n    \"size\": 1,\n    \"values\": [\n        {\n            \"comment\": \"user@myhost\",\n            \"created_on\": \"2018-03-14T13:17:05.196003+00:00\",\n            \"key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY\",\n            \"label\": \"\",\n            \"last_used\": \"2018-03-20T13:18:05.196003+00:00\",\n            \"links\": {\n                \"self\": {\n                    \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/b15b6026-9c02-4626-b4ad-b905f99f763a\"\n                }\n            },\n            \"owner\": {\n                \"display_name\": \"Mark Adams\",\n                \"links\": {\n                    \"avatar\": {\n                        \"href\": \"https://bitbucket.org/account/markadams-atl/avatar/32/\"\n                    },\n                    \"html\": {\n                        \"href\": \"https://bitbucket.org/markadams-atl/\"\n                    },\n                    \"self\": {\n                        \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl\"\n                    }\n                },\n                \"type\": \"user\",\n                \"username\": \"markadams-atl\",\n                \"nickname\": \"markadams-atl\",\n                \"uuid\": \"{d7dd0e2d-3994-4a50-a9ee-d260b6cefdab}\"\n            },\n            \"type\": \"ssh_key\",\n            \"uuid\": \"{b15b6026-9c02-4626-b4ad-b905f99f763a}\"\n        }\n    ]\n}\n```",
       "parameters": [
         {
           "description": "The account's username or UUID.",
@@ -12928,7 +13333,7 @@
       }
     ],
     "post": {
-      "description": "Adds a new SSH public key to the specified user account and returns the resulting key.\n\nExample:\n```\n$ curl -X POST -H \"Content-Type: application/json\" -d '{\"key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY user@myhost\"}' https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys\n\n{\n    \"comment\": \"user@myhost\",\n    \"created_on\": \"2018-03-14T13:17:05.196003+00:00\",\n    \"key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY\",\n    \"label\": \"\",\n    \"last_used\": \"2018-03-20T13:18:05.196003+00:00\",\n    \"links\": {\n        \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/b15b6026-9c02-4626-b4ad-b905f99f763a\"\n        }\n    },\n    \"owner\": {\n        \"display_name\": \"Mark Adams\",\n        \"links\": {\n            \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/markadams-atl/avatar/32/\"\n            },\n            \"html\": {\n                \"href\": \"https://bitbucket.org/markadams-atl/\"\n            },\n            \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl\"\n            }\n        },\n        \"type\": \"user\",\n        \"username\": \"markadams-atl\",\n        \"uuid\": \"{d7dd0e2d-3994-4a50-a9ee-d260b6cefdab}\"\n    },\n    \"type\": \"ssh_key\",\n    \"uuid\": \"{b15b6026-9c02-4626-b4ad-b905f99f763a}\"\n}\n```",
+      "description": "Adds a new SSH public key to the specified user account and returns the resulting key.\n\nExample:\n```\n$ curl -X POST -H \"Content-Type: application/json\" -d '{\"key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY user@myhost\"}' https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys\n\n{\n    \"comment\": \"user@myhost\",\n    \"created_on\": \"2018-03-14T13:17:05.196003+00:00\",\n    \"key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY\",\n    \"label\": \"\",\n    \"last_used\": \"2018-03-20T13:18:05.196003+00:00\",\n    \"links\": {\n        \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/b15b6026-9c02-4626-b4ad-b905f99f763a\"\n        }\n    },\n    \"owner\": {\n        \"display_name\": \"Mark Adams\",\n        \"links\": {\n            \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/markadams-atl/avatar/32/\"\n            },\n            \"html\": {\n                \"href\": \"https://bitbucket.org/markadams-atl/\"\n            },\n            \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl\"\n            }\n        },\n        \"type\": \"user\",\n        \"username\": \"markadams-atl\",\n        \"nickname\": \"markadams-atl\",\n        \"uuid\": \"{d7dd0e2d-3994-4a50-a9ee-d260b6cefdab}\"\n    },\n    \"type\": \"ssh_key\",\n    \"uuid\": \"{b15b6026-9c02-4626-b4ad-b905f99f763a}\"\n}\n```",
       "parameters": [
         {
           "description": "The account's username or UUID.",
@@ -13039,7 +13444,7 @@
       ]
     },
     "get": {
-      "description": "Returns a specific SSH public key belonging to a user.\n\nExample:\n```\n$ curl https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/{fbe4bbab-f6f7-4dde-956b-5c58323c54b3}\n\n{\n    \"comment\": \"user@myhost\",\n    \"created_on\": \"2018-03-14T13:17:05.196003+00:00\",\n    \"key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY\",\n    \"label\": \"\",\n    \"last_used\": \"2018-03-20T13:18:05.196003+00:00\",\n    \"links\": {\n        \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/b15b6026-9c02-4626-b4ad-b905f99f763a\"\n        }\n    },\n    \"owner\": {\n        \"display_name\": \"Mark Adams\",\n        \"links\": {\n            \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/markadams-atl/avatar/32/\"\n            },\n            \"html\": {\n                \"href\": \"https://bitbucket.org/markadams-atl/\"\n            },\n            \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl\"\n            }\n        },\n        \"type\": \"user\",\n        \"username\": \"markadams-atl\",\n        \"uuid\": \"{d7dd0e2d-3994-4a50-a9ee-d260b6cefdab}\"\n    },\n    \"type\": \"ssh_key\",\n    \"uuid\": \"{b15b6026-9c02-4626-b4ad-b905f99f763a}\"\n}\n```",
+      "description": "Returns a specific SSH public key belonging to a user.\n\nExample:\n```\n$ curl https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/{fbe4bbab-f6f7-4dde-956b-5c58323c54b3}\n\n{\n    \"comment\": \"user@myhost\",\n    \"created_on\": \"2018-03-14T13:17:05.196003+00:00\",\n    \"key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY\",\n    \"label\": \"\",\n    \"last_used\": \"2018-03-20T13:18:05.196003+00:00\",\n    \"links\": {\n        \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/b15b6026-9c02-4626-b4ad-b905f99f763a\"\n        }\n    },\n    \"owner\": {\n        \"display_name\": \"Mark Adams\",\n        \"links\": {\n            \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/markadams-atl/avatar/32/\"\n            },\n            \"html\": {\n                \"href\": \"https://bitbucket.org/markadams-atl/\"\n            },\n            \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl\"\n            }\n        },\n        \"type\": \"user\",\n        \"username\": \"markadams-atl\",\n        \"nickname\": \"markadams-atl\",\n        \"uuid\": \"{d7dd0e2d-3994-4a50-a9ee-d260b6cefdab}\"\n    },\n    \"type\": \"ssh_key\",\n    \"uuid\": \"{b15b6026-9c02-4626-b4ad-b905f99f763a}\"\n}\n```",
       "parameters": [
         {
           "description": "The account's username or UUID.",
@@ -13099,7 +13504,7 @@
       }
     ],
     "put": {
-      "description": "Updates a specific SSH public key on a user's account\n\nNote: Only the 'comment' field can be updated using this API. To modify the key or comment values, you must delete and add the key again.\n\nExample:\n```\n$ curl -X PUT -H \"Content-Type: application/json\" -d '{\"label\": \"Work key\"}' https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/{b15b6026-9c02-4626-b4ad-b905f99f763a}\n\n{\n    \"comment\": \"\",\n    \"created_on\": \"2018-03-14T13:17:05.196003+00:00\",\n    \"key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY\",\n    \"label\": \"Work key\",\n    \"last_used\": \"2018-03-20T13:18:05.196003+00:00\",\n    \"links\": {\n        \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/b15b6026-9c02-4626-b4ad-b905f99f763a\"\n        }\n    },\n    \"owner\": {\n        \"display_name\": \"Mark Adams\",\n        \"links\": {\n            \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/markadams-atl/avatar/32/\"\n            },\n            \"html\": {\n                \"href\": \"https://bitbucket.org/markadams-atl/\"\n            },\n            \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl\"\n            }\n        },\n        \"type\": \"user\",\n        \"username\": \"markadams-atl\",\n        \"uuid\": \"{d7dd0e2d-3994-4a50-a9ee-d260b6cefdab}\"\n    },\n    \"type\": \"ssh_key\",\n    \"uuid\": \"{b15b6026-9c02-4626-b4ad-b905f99f763a}\"\n}\n```",
+      "description": "Updates a specific SSH public key on a user's account\n\nNote: Only the 'comment' field can be updated using this API. To modify the key or comment values, you must delete and add the key again.\n\nExample:\n```\n$ curl -X PUT -H \"Content-Type: application/json\" -d '{\"label\": \"Work key\"}' https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/{b15b6026-9c02-4626-b4ad-b905f99f763a}\n\n{\n    \"comment\": \"\",\n    \"created_on\": \"2018-03-14T13:17:05.196003+00:00\",\n    \"key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY\",\n    \"label\": \"Work key\",\n    \"last_used\": \"2018-03-20T13:18:05.196003+00:00\",\n    \"links\": {\n        \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/b15b6026-9c02-4626-b4ad-b905f99f763a\"\n        }\n    },\n    \"owner\": {\n        \"display_name\": \"Mark Adams\",\n        \"links\": {\n            \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/markadams-atl/avatar/32/\"\n            },\n            \"html\": {\n                \"href\": \"https://bitbucket.org/markadams-atl/\"\n            },\n            \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl\"\n            }\n        },\n        \"type\": \"user\",\n        \"username\": \"markadams-atl\",\n        \"nickname\": \"markadams-atl\",\n        \"uuid\": \"{d7dd0e2d-3994-4a50-a9ee-d260b6cefdab}\"\n    },\n    \"type\": \"ssh_key\",\n    \"uuid\": \"{b15b6026-9c02-4626-b4ad-b905f99f763a}\"\n}\n```",
       "parameters": [
         {
           "description": "The account's username or UUID.",
