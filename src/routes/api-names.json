@@ -456,6 +456,16 @@
       "repositories": "createIssueWatch"
     }
   },
+  "/repositories/{username}/{repo_slug}/issues/export": {
+    "post": {
+      "repositories": "createIssueExportJob"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/issues/export/{repo_name}-issues-{task_id}.zip": {
+    "get": {
+      "repositories": "getIssueExportJobStatus"
+    }
+  },
   "/repositories/{username}/{repo_slug}/milestones": {
     "get": {
       "issue_tracker": "listMilestones",

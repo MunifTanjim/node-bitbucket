@@ -825,6 +825,22 @@
       },
       "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments"
     },
+    "createIssueExportJob": {
+      "method": "POST",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/issues/export"
+    },
     "createIssueVote": {
       "method": "PUT",
       "params": {
@@ -2068,6 +2084,33 @@
       },
       "returns": "Component",
       "url": "/repositories/{username}/{repo_slug}/components/{component_id}"
+    },
+    "getIssueExportJobStatus": {
+      "method": "GET",
+      "params": {
+        "repo_name": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "task_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "IssueJobStatus",
+      "url": "/repositories/{username}/{repo_slug}/issues/export/{repo_name}-issues-{task_id}.zip"
     },
     "getIssueMilestone": {
       "method": "GET",

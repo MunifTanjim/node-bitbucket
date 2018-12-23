@@ -733,7 +733,7 @@
     "DeploymentStateCompletedStatusFailed": {
       "allOf": [
         {
-          "$ref": "#/definitions/DeploymentStateCompletedStatusFailed"
+          "$ref": "#/definitions/DeploymentStateCompletedStatus"
         },
         {
           "additionalProperties": true,
@@ -752,7 +752,7 @@
     "DeploymentStateCompletedStatusStopped": {
       "allOf": [
         {
-          "$ref": "#/definitions/DeploymentStateCompletedStatusStopped"
+          "$ref": "#/definitions/DeploymentStateCompletedStatus"
         },
         {
           "additionalProperties": true,
@@ -771,7 +771,7 @@
     "DeploymentStateCompletedStatusSuccessful": {
       "allOf": [
         {
-          "$ref": "#/definitions/DeploymentStateCompletedStatusSuccessful"
+          "$ref": "#/definitions/DeploymentStateCompletedStatus"
         },
         {
           "additionalProperties": true,
@@ -1419,6 +1419,37 @@
           "type": "object"
         }
       ]
+    },
+    "IssueJobStatus": {
+      "additionalProperties": false,
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "pct": {
+          "maximum": 100,
+          "type": "integer"
+        },
+        "phase": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "ACCEPTED",
+            "STARTED",
+            "RUNNING",
+            "FAILURE"
+          ],
+          "type": "string"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "type": "object"
     },
     "Milestone": {
       "allOf": [
@@ -4809,6 +4840,9 @@
     },
     "IssueComment": {
       "$ref": "#/definitions/IssueComment"
+    },
+    "IssueJobStatus": {
+      "$ref": "#/definitions/IssueJobStatus"
     },
     "Milestone": {
       "$ref": "#/definitions/Milestone"

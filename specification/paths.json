@@ -4294,7 +4294,7 @@
   },
   "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes": {
     "get": {
-      "description": "Returns the list of all changes that have been made to the specified\nissue. Changes are returned in chronological order with the oldest\nchange first.\n\nEach time an issue is edited in the UI or through the API, an immutable\nchange record is created under the `/issues/123/changes` endpoint. It\nalso has a comment associated with the change.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/evzijst/dogslow/issues/1/changes - | jq .\n\n{\n  \"pagelen\": 20,\n  \"values\": [\n    {\n      \"changes\": {\n        \"priority\": {\n          \"new\": \"trivial\",\n          \"old\": \"major\"\n        },\n        \"assignee\": {\n          \"new\": \"\",\n          \"old\": \"evzijst\"\n        },\n        \"assignee_account_id\": {\n          \"new\": \"\",\n          \"old\": \"557058:c0b72ad0-1cb5-4018-9cdc-0cde8492c443\"\n        },\n        \"kind\": {\n          \"new\": \"enhancement\",\n          \"old\": \"bug\"\n        }\n      },\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/evzijst/dogslow/issues/1/changes/2\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/evzijst/dogslow/issues/1#comment-2\"\n        }\n      },\n      \"issue\": {\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/evzijst/dogslow/issues/1\"\n          }\n        },\n        \"type\": \"issue\",\n        \"id\": 1,\n        \"repository\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/evzijst/dogslow\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/evzijst/dogslow\"\n            },\n            \"avatar\": {\n              \"href\": \"https://bitbucket.org/evzijst/dogslow/avatar/32/\"\n            }\n          },\n          \"type\": \"repository\",\n          \"name\": \"dogslow\",\n          \"full_name\": \"evzijst/dogslow\",\n          \"uuid\": \"{988b17c6-1a47-4e70-84ee-854d5f012bf6}\"\n        },\n        \"title\": \"Updated title\"\n      },\n      \"created_on\": \"2018-03-03T00:35:28.353630+00:00\",\n      \"user\": {\n        \"username\": \"evzijst\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"evzijst\",\n        \"type\": \"user\",\n        \"uuid\": \"{aaa7972b-38af-4fb1-802d-6e3854c95778}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/evzijst\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/evzijst/\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket.org/account/evzijst/avatar/32/\"\n          }\n        }\n      },\n      \"message\": {\n        \"raw\": \"Removed assignee, changed kind and priority.\",\n        \"markup\": \"markdown\",\n        \"html\": \"<p>Removed assignee, changed kind and priority.</p>\",\n        \"type\": \"rendered\"\n      },\n      \"type\": \"issue_change\",\n      \"id\": 2\n    }\n  ],\n  \"page\": 1\n}\n```\n\nChanges support [filtering and sorting](../../../meta/filtering) that\ncan be used to search for specific changes. For instance, to see\nwhen an issue transitioned to \"resolved\":\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/site/master/issues/1/changes \\\n   -G --data-urlencode='q=changes.state.new = \"resolved\"'\n```\n\nThis resource is only available on repositories that have the issue\ntracker enabled.\n\nN.B.\n\nThe `changes.assignee` and `changes.assignee_account_id` fields are not\na `user` object. Instead, they contain the raw `username` and\n`account_id` of the user. This is to protect the integrity of the audit\nlog even after a user account gets deleted.\n\nThe `changes.assignee` field is deprecated will disappear in the\nfuture. Use `changes.assignee_account_id` instead.",
+      "description": "Returns the list of all changes that have been made to the specified\nissue. Changes are returned in chronological order with the oldest\nchange first.\n\nEach time an issue is edited in the UI or through the API, an immutable\nchange record is created under the `/issues/123/changes` endpoint. It\nalso has a comment associated with the change.\n\nNote that this operation is changing significantly, due to privacy changes.\nSee the [announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#changes-to-the-issue-changes-api)\nfor details.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/evzijst/dogslow/issues/1/changes - | jq .\n\n{\n  \"pagelen\": 20,\n  \"values\": [\n    {\n      \"changes\": {\n        \"priority\": {\n          \"new\": \"trivial\",\n          \"old\": \"major\"\n        },\n        \"assignee\": {\n          \"new\": \"\",\n          \"old\": \"evzijst\"\n        },\n        \"assignee_account_id\": {\n          \"new\": \"\",\n          \"old\": \"557058:c0b72ad0-1cb5-4018-9cdc-0cde8492c443\"\n        },\n        \"kind\": {\n          \"new\": \"enhancement\",\n          \"old\": \"bug\"\n        }\n      },\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/evzijst/dogslow/issues/1/changes/2\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/evzijst/dogslow/issues/1#comment-2\"\n        }\n      },\n      \"issue\": {\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/evzijst/dogslow/issues/1\"\n          }\n        },\n        \"type\": \"issue\",\n        \"id\": 1,\n        \"repository\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/evzijst/dogslow\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/evzijst/dogslow\"\n            },\n            \"avatar\": {\n              \"href\": \"https://bitbucket.org/evzijst/dogslow/avatar/32/\"\n            }\n          },\n          \"type\": \"repository\",\n          \"name\": \"dogslow\",\n          \"full_name\": \"evzijst/dogslow\",\n          \"uuid\": \"{988b17c6-1a47-4e70-84ee-854d5f012bf6}\"\n        },\n        \"title\": \"Updated title\"\n      },\n      \"created_on\": \"2018-03-03T00:35:28.353630+00:00\",\n      \"user\": {\n        \"username\": \"evzijst\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"evzijst\",\n        \"type\": \"user\",\n        \"uuid\": \"{aaa7972b-38af-4fb1-802d-6e3854c95778}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/evzijst\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/evzijst/\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket.org/account/evzijst/avatar/32/\"\n          }\n        }\n      },\n      \"message\": {\n        \"raw\": \"Removed assignee, changed kind and priority.\",\n        \"markup\": \"markdown\",\n        \"html\": \"<p>Removed assignee, changed kind and priority.</p>\",\n        \"type\": \"rendered\"\n      },\n      \"type\": \"issue_change\",\n      \"id\": 2\n    }\n  ],\n  \"page\": 1\n}\n```\n\nChanges support [filtering and sorting](../../../meta/filtering) that\ncan be used to search for specific changes. For instance, to see\nwhen an issue transitioned to \"resolved\":\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/site/master/issues/1/changes \\\n   -G --data-urlencode='q=changes.state.new = \"resolved\"'\n```\n\nThis resource is only available on repositories that have the issue\ntracker enabled.\n\nN.B.\n\nThe `changes.assignee` and `changes.assignee_account_id` fields are not\na `user` object. Instead, they contain the raw `username` and\n`account_id` of the user. This is to protect the integrity of the audit\nlog even after a user account gets deleted.\n\nThe `changes.assignee` field is deprecated will disappear in the\nfuture. Use `changes.assignee_account_id` instead.",
       "parameters": [
         {
           "description": "\nQuery string to narrow down the response. See\n[filtering and sorting](../../../meta/filtering) for details.",
@@ -5109,6 +5109,181 @@
         "issue_tracker"
       ]
     }
+  },
+  "/repositories/{username}/{repo_slug}/issues/export": {
+    "parameters": [
+      {
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "post": {
+      "description": "A POST request to this endpoint initiates a new background celery task that archives the repo's issues.\n\nFor example, you can run:\n\ncurl -u <username> -X POST http://api.bitbucket.org/2.0/repositories/<owner_username>/<repo_slug>/\nissues/export\n\nWhen the job has been accepted, it will return a 202 (Accepted) along with a unique url to this job in the\n'Location' response header. This url is the endpoint for where the user can obtain their zip files.\"",
+      "parameters": [
+        {
+          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "202": {
+          "description": "The export job has been accepted"
+        },
+        "401": {
+          "description": "The request wasn't authenticated properly",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "When the authenticated user does not have admin permission on the repo",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "The repo does not exist or does not have an issue tracker",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "repository:admin",
+            "issue"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": []
+    }
+  },
+  "/repositories/{username}/{repo_slug}/issues/export/{repo_name}-issues-{task_id}.zip": {
+    "get": {
+      "description": "This endpoint is used to poll for the progress of an issue export\njob and return the zip file after the job is complete.\nAs long as the job is running, this will return a 200 response\nwith in the response body a description of the current status.\n\nAfter the job has been scheduled, but before it starts executing, this\nendpoint's response is:\n\n{\n \"type\": \"issue_job_status\",\n \"status\": \"ACCEPTED\",\n \"phase\": \"Initializing\",\n \"total\": 0,\n \"count\": 0,\n \"pct\": 0\n}\n\n\nThen once it starts running, it becomes:\n\n{\n \"type\": \"issue_job_status\",\n \"status\": \"STARTED\",\n \"phase\": \"Attachments\",\n \"total\": 15,\n \"count\": 11,\n \"pct\": 73\n}\n\nOnce the job has successfully completed, it returns a stream of the zip file.",
+      "parameters": [
+        {
+          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the repo",
+          "in": "path",
+          "name": "repo_name",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The ID of the export task",
+          "in": "path",
+          "name": "task_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "202": {
+          "description": "Export job accepted",
+          "schema": {
+            "$ref": "#/definitions/issue_job_status"
+          }
+        },
+        "401": {
+          "description": "The request wasn't authenticated properly",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "When the authenticated user does not have admin permission on the repo",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "No export job has begun",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "repository:admin",
+            "issue"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": []
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "in": "path",
+        "name": "repo_name",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "in": "path",
+        "name": "task_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ]
   },
   "/repositories/{username}/{repo_slug}/milestones": {
     "get": {
@@ -11480,7 +11655,7 @@
   },
   "/teams/{username}/members": {
     "get": {
-      "description": "All members of a team.\n\nReturns all members of the specified team. Any member of any of the\nteam's groups is considered a member of the team. This includes users\nin groups that may not actually have access to any of the team's\nrepositories.\n\nNote that members using the \"private profile\" feature are not included.",
+      "description": "Returns all members of the specified team. Any member of any of the\nteam's groups is considered a member of the team. This includes users\nin groups that may not actually have access to any of the team's\nrepositories.\n\nThis operation has been deprecated due to privacy changes.\nSee the [announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/)\nfor details.",
       "parameters": [],
       "responses": {
         "200": {
@@ -12483,10 +12658,10 @@
   },
   "/users/{username}": {
     "get": {
-      "description": "Gets the public information associated with a user account.\n\nIf the user's profile is private, `location`, `website` and\n`created_on` elements are omitted.",
+      "description": "Gets the public information associated with a user account.\n\nIf the user's profile is private, `location`, `website` and\n`created_on` elements are omitted.\n\nNote that the user object returned by this operation is changing significantly, due to privacy changes.\nSee the [announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#changes-to-bitbucket-user-objects) for details.",
       "parameters": [
         {
-          "description": "The account's username or UUID.",
+          "description": "The account's UUID, account_id, or username. Note that username has been deprecated due to [privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).",
           "in": "path",
           "name": "username",
           "required": true,
@@ -12553,7 +12728,7 @@
   },
   "/users/{username}/followers": {
     "get": {
-      "description": "Returns the list of accounts that are following this team.",
+      "description": "Returns the list of accounts that are following this user.\n\nThis operation has been deprecated due to privacy changes.\nSee the [announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/) for details.",
       "parameters": [
         {
           "description": "The account's username",
@@ -12603,7 +12778,7 @@
   },
   "/users/{username}/following": {
     "get": {
-      "description": "Returns the list of accounts this user is following.",
+      "description": "Returns the list of accounts this user is following.\n\nThis operation has been deprecated due to privacy changes.\nSee the [announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/) for details.",
       "parameters": [
         {
           "description": "The user's username",
@@ -12655,7 +12830,7 @@
   },
   "/users/{username}/hooks": {
     "get": {
-      "description": "Returns a paginated list of webhooks installed on this user account.",
+      "description": "Returns a paginated list of webhooks installed on this user account.\n\nNote that the username path parameter has been deprecated due to\n[privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).\nUse the account's UUID or account_id instead.",
       "parameters": [],
       "responses": {
         "200": {
@@ -12704,7 +12879,7 @@
       }
     ],
     "post": {
-      "description": "Creates a new webhook on the specified user account.\n\nAccount-level webhooks are fired for events from all repositories\nbelonging to that account.\n\nNote that one can only register webhooks on one's own account, not that\nof others.",
+      "description": "Creates a new webhook on the specified user account.\n\nAccount-level webhooks are fired for events from all repositories\nbelonging to that account.\n\nNote that one can only register webhooks on one's own account, not that\nof others.\n\nAlso, note that the username path parameter has been deprecated due to\n[privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).\nUse the account's UUID or account_id instead.",
       "parameters": [],
       "responses": {
         "201": {
@@ -12753,7 +12928,7 @@
   },
   "/users/{username}/hooks/{uid}": {
     "delete": {
-      "description": "Deletes the specified webhook subscription from the given user\naccount.",
+      "description": "Deletes the specified webhook subscription from the given user\naccount.\n\nNote that the username path parameter has been deprecated due to\n[privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).\nUse the account's UUID or account_id instead.",
       "parameters": [
         {
           "description": "The installed webhook's id",
@@ -12799,7 +12974,7 @@
       ]
     },
     "get": {
-      "description": "Returns the webhook with the specified id installed on the given\nuser account.",
+      "description": "Returns the webhook with the specified id installed on the given\nuser account.\n\nNote that the username path parameter has been deprecated due to\n[privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).\nUse the account's UUID or account_id instead.",
       "parameters": [
         {
           "description": "The installed webhook's id.",
@@ -12856,7 +13031,7 @@
       }
     ],
     "put": {
-      "description": "Updates the specified webhook subscription.\n\nThe following properties can be mutated:\n\n* `description`\n* `url`\n* `active`\n* `events`",
+      "description": "Updates the specified webhook subscription.\n\nThe following properties can be mutated:\n\n* `description`\n* `url`\n* `active`\n* `events`\n\nNote that the username path parameter has been deprecated due to\n[privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).\nUse the account's UUID or account_id instead.",
       "parameters": [
         {
           "description": "The installed webhook's id",
@@ -12907,7 +13082,7 @@
   },
   "/users/{username}/members": {
     "get": {
-      "description": "All members of a team.\n\nReturns all members of the specified team. Any member of any of the\nteam's groups is considered a member of the team. This includes users\nin groups that may not actually have access to any of the team's\nrepositories.\n\nNote that members using the \"private profile\" feature are not included.",
+      "description": "Returns all members of the specified team. Any member of any of the\nteam's groups is considered a member of the team. This includes users\nin groups that may not actually have access to any of the team's\nrepositories.\n\nThis operation has been deprecated due to privacy changes.\nSee the [announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/)\nfor details.",
       "parameters": [],
       "responses": {
         "200": {
@@ -13283,7 +13458,7 @@
       "description": "Returns a paginated list of the user's SSH public keys.\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys\n{\n    \"page\": 1,\n    \"pagelen\": 10,\n    \"size\": 1,\n    \"values\": [\n        {\n            \"comment\": \"user@myhost\",\n            \"created_on\": \"2018-03-14T13:17:05.196003+00:00\",\n            \"key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY\",\n            \"label\": \"\",\n            \"last_used\": \"2018-03-20T13:18:05.196003+00:00\",\n            \"links\": {\n                \"self\": {\n                    \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/b15b6026-9c02-4626-b4ad-b905f99f763a\"\n                }\n            },\n            \"owner\": {\n                \"display_name\": \"Mark Adams\",\n                \"links\": {\n                    \"avatar\": {\n                        \"href\": \"https://bitbucket.org/account/markadams-atl/avatar/32/\"\n                    },\n                    \"html\": {\n                        \"href\": \"https://bitbucket.org/markadams-atl/\"\n                    },\n                    \"self\": {\n                        \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl\"\n                    }\n                },\n                \"type\": \"user\",\n                \"username\": \"markadams-atl\",\n                \"nickname\": \"markadams-atl\",\n                \"uuid\": \"{d7dd0e2d-3994-4a50-a9ee-d260b6cefdab}\"\n            },\n            \"type\": \"ssh_key\",\n            \"uuid\": \"{b15b6026-9c02-4626-b4ad-b905f99f763a}\"\n        }\n    ]\n}\n```",
       "parameters": [
         {
-          "description": "The account's username or UUID.",
+          "description": "The account's UUID, account_id, or username. Note that username has been deprecated due to [privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).",
           "in": "path",
           "name": "username",
           "required": true,
@@ -13336,14 +13511,14 @@
       "description": "Adds a new SSH public key to the specified user account and returns the resulting key.\n\nExample:\n```\n$ curl -X POST -H \"Content-Type: application/json\" -d '{\"key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY user@myhost\"}' https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys\n\n{\n    \"comment\": \"user@myhost\",\n    \"created_on\": \"2018-03-14T13:17:05.196003+00:00\",\n    \"key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY\",\n    \"label\": \"\",\n    \"last_used\": \"2018-03-20T13:18:05.196003+00:00\",\n    \"links\": {\n        \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/b15b6026-9c02-4626-b4ad-b905f99f763a\"\n        }\n    },\n    \"owner\": {\n        \"display_name\": \"Mark Adams\",\n        \"links\": {\n            \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/markadams-atl/avatar/32/\"\n            },\n            \"html\": {\n                \"href\": \"https://bitbucket.org/markadams-atl/\"\n            },\n            \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl\"\n            }\n        },\n        \"type\": \"user\",\n        \"username\": \"markadams-atl\",\n        \"nickname\": \"markadams-atl\",\n        \"uuid\": \"{d7dd0e2d-3994-4a50-a9ee-d260b6cefdab}\"\n    },\n    \"type\": \"ssh_key\",\n    \"uuid\": \"{b15b6026-9c02-4626-b4ad-b905f99f763a}\"\n}\n```",
       "parameters": [
         {
-          "description": "The account's username or UUID.",
+          "description": "The account's UUID, account_id, or username. Note that username has been deprecated due to [privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).",
           "in": "path",
           "name": "username",
           "required": true,
           "type": "string"
         },
         {
-          "description": "The new SSH key object",
+          "description": "The new SSH key object. Note that the username property has been deprecated due to [privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).",
           "in": "body",
           "name": "_body",
           "required": false,

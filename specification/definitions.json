@@ -828,7 +828,7 @@
   "deployment_state_completed_status_failed": {
     "allOf": [
       {
-        "$ref": "#/definitions/deployment_state_completed_status_failed"
+        "$ref": "#/definitions/deployment_state_completed_status"
       },
       {
         "additionalProperties": true,
@@ -849,7 +849,7 @@
   "deployment_state_completed_status_stopped": {
     "allOf": [
       {
-        "$ref": "#/definitions/deployment_state_completed_status_stopped"
+        "$ref": "#/definitions/deployment_state_completed_status"
       },
       {
         "additionalProperties": true,
@@ -870,7 +870,7 @@
   "deployment_state_completed_status_successful": {
     "allOf": [
       {
-        "$ref": "#/definitions/deployment_state_completed_status_successful"
+        "$ref": "#/definitions/deployment_state_completed_status"
       },
       {
         "additionalProperties": true,
@@ -1568,6 +1568,44 @@
         "type": "object"
       }
     ]
+  },
+  "issue_job_status": {
+    "additionalProperties": false,
+    "description": "The status of an import or export job",
+    "properties": {
+      "count": {
+        "description": "The total number of issues already imported/exported",
+        "type": "integer"
+      },
+      "pct": {
+        "description": "The percentage of issues already imported/exported",
+        "maximum": 100,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "phase": {
+        "description": "The phase of the import/export job",
+        "type": "string"
+      },
+      "status": {
+        "description": "The status of the import/export job",
+        "enum": [
+          "ACCEPTED",
+          "STARTED",
+          "RUNNING",
+          "FAILURE"
+        ],
+        "type": "string"
+      },
+      "total": {
+        "description": "The total number of issues being imported/exported",
+        "type": "integer"
+      },
+      "type": {
+        "type": "string"
+      }
+    },
+    "type": "object"
   },
   "milestone": {
     "allOf": [
