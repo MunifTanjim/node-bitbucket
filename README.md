@@ -8,6 +8,9 @@ Bitbucket API client for Browser and Node.js
 
 Bitbucket API docs: [https://api.bitbucket.org](https://api.bitbucket.org)
 
+**BITBUCKET CLOUD API CHANGING NOTICE**: [https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr)  
+**BITBUCKET CLOUD API MIGRATION GUIDE**: [https://developer.atlassian.com/cloud/bitbucket/bbc-gdpr-api-migration-guide](https://developer.atlassian.com/cloud/bitbucket/bbc-gdpr-api-migration-guide)
+
 ## Installation
 
 via **npm**:
