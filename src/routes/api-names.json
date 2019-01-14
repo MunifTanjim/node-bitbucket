@@ -223,8 +223,8 @@
   },
   "/repositories/{username}/{repo_slug}/deploy-keys": {
     "get": {
-      "deploy": "getAllKeys",
-      "repositories": "getAllDeployKeys"
+      "deploy": "listKeys",
+      "repositories": "listDeployKeys"
     },
     "post": {
       "deploy": "createKey",
