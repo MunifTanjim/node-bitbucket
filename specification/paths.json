@@ -2526,13 +2526,13 @@
   },
   "/repositories/{username}/{repo_slug}/deploy-keys": {
     "get": {
-      "description": "Returns all deploy-keys belonging to a repository.\n\nExample:\n```\n$ curl -H \"Authorization <auth header>\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys\n\nOutput:\n{\n    \"comment\": \"mleu@C02W454JHTD8\",\n    \"last_used\": null,\n    \"links\": {\n        \"self\": {\n            \"href\": https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys\"\n        }\n    },\n    \"repository\": \"test\",\n    \"label\": \"mykey\",\n    \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"pk\": 1,\n    \"type\": \"deploy_key\"\n}\n```",
+      "description": "Returns all deploy-keys belonging to a repository.\n\nExample:\n```\n$ curl -H \"Authorization <auth header>\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys\n\nOutput:\n{\n    \"pagelen\": 10,\n    \"values\": [\n        {\n            \"id\": 123,\n            \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n            \"label\": \"mykey\",\n            \"type\": \"deploy_key\",\n            \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n            \"repository\": {\n                \"full_name\": \"mleu/test\",\n                \"name\": \"test\",\n                \"type\": \"repository\",\n                \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n            },\n            \"links\":{\n                \"self\":{\n                    \"href\": \"https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys/123\"\n                }\n            }\n            \"last_used\": null,\n            \"comment\": \"mleu@C02W454JHTD8\"\n        }\n    ],\n    \"page\": 1,\n    \"size\": 1\n}\n```",
       "parameters": [],
       "responses": {
         "200": {
           "description": "Deploy keys matching the repository",
           "schema": {
-            "$ref": "#/definitions/deploy_key"
+            "$ref": "#/definitions/paginated_deploy_keys"
           }
         },
         "403": {
@@ -2565,14 +2565,14 @@
     },
     "parameters": [
       {
-        "description": "The account's username.",
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
         "type": "string"
       },
       {
-        "description": "The name of the repository the deploy key belongs to.",
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -2580,7 +2580,7 @@
       }
     ],
     "post": {
-      "description": "Create a new deploy key in a repository.\n\nExample:\n```\n$ curl -XPOST \\\n-H \"Authorization <auth header>\" \\\n-H \"Content-type: application/json\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys -d \\\n'{\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5 mleu@C02W454JHTD8\",\n    \"label\": \"mydeploykey\"\n}'\n\nOutput:\n{\n    \"pk\": 123,\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"label\": \"mydeploykey\",\n    \"type\": \"deploy_key\",\n    \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n    \"repository\": \"test\",\n    \"links\":{\n        \"self\":{\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys/123\"\n        }\n    }\n    \"last_used\": null,\n    \"comment\": \"mleu@C02W454JHTD8\"\n}\n```",
+      "description": "Create a new deploy key in a repository.\n\nExample:\n```\n$ curl -XPOST \\\n-H \"Authorization <auth header>\" \\\n-H \"Content-type: application/json\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys -d \\\n'{\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5 mleu@C02W454JHTD8\",\n    \"label\": \"mydeploykey\"\n}'\n\nOutput:\n{\n    \"id\": 123,\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"label\": \"mydeploykey\",\n    \"type\": \"deploy_key\",\n    \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n    \"repository\": {\n        \"full_name\": \"mleu/test\",\n        \"name\": \"test\",\n        \"type\": \"repository\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n    },\n    \"links\":{\n        \"self\":{\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys/123\"\n        }\n    }\n    \"last_used\": null,\n    \"comment\": \"mleu@C02W454JHTD8\"\n}\n```",
       "parameters": [],
       "responses": {
         "200": {
@@ -2626,7 +2626,7 @@
       "description": "This deletes a deploy key from a repository.\n\nExample:\n```\n$ curl -XDELETE \\\n-H \"Authorization <auth header>\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys/1234\n```",
       "parameters": [],
       "responses": {
-        "200": {
+        "204": {
           "description": "The key has been deleted"
         },
         "403": {
@@ -2658,7 +2658,7 @@
       ]
     },
     "get": {
-      "description": "Returns the deploy key belonging to a specific key.\n\nExample:\n```\n$ curl -H \"Authorization <auth header>\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-key/1234\n\nOutput:\n{\n    \"comment\": \"mleu@C02W454JHTD8\",\n    \"last_used\": null,\n    \"links\": {\n        \"self\": {\n            \"href\": https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-key/1234\"\n        }\n    },\n    \"repository\": \"test\",\n    \"label\": \"mykey\",\n    \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"pk\": 1234,\n    \"type\": \"deploy_key\"\n}\n```",
+      "description": "Returns the deploy key belonging to a specific key.\n\nExample:\n```\n$ curl -H \"Authorization <auth header>\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-key/1234\n\nOutput:\n{\n    \"comment\": \"mleu@C02W454JHTD8\",\n    \"last_used\": null,\n    \"links\": {\n        \"self\": {\n            \"href\": https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-key/1234\"\n        }\n    },\n    \"repository\": {\n        \"full_name\": \"mleu/test\",\n        \"name\": \"test\",\n        \"type\": \"repository\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n    },\n    \"label\": \"mykey\",\n    \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"id\": 1234,\n    \"type\": \"deploy_key\"\n}\n```",
       "parameters": [],
       "responses": {
         "200": {
@@ -2697,14 +2697,14 @@
     },
     "parameters": [
       {
-        "description": "The account's username.",
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
         "type": "string"
       },
       {
-        "description": "The name of the repository the deploy key belongs to.",
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -2719,7 +2719,7 @@
       }
     ],
     "put": {
-      "description": "Create a new deploy key in a repository.\n\nThe same key needs to be passed in but the comment and label can change.\n\nExample:\n```\n$ curl -XPUT \\\n-H \"Authorization <auth header>\" \\\n-H \"Content-type: application/json\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys/1234 -d \\\n'{\n    \"label\": \"newlabel\",\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5 newcomment\",\n}'\n\nOutput:\n{\n    \"comment\": \"newcomment\",\n    \"last_used\": null,\n    \"links\": {\n        \"self\": {\n            \"href\": \"http://localhost:8000/!api/2.0/repositories/mleu/test/deploy-keys/1234\"\n        }\n    },\n    \"repository\": \"test\",\n    \"label\": \"newlabel\",\n    \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"pk\": 1234,\n    \"type\": \"deploy_key\"\n}\n```",
+      "description": "Create a new deploy key in a repository.\n\nThe same key needs to be passed in but the comment and label can change.\n\nExample:\n```\n$ curl -XPUT \\\n-H \"Authorization <auth header>\" \\\n-H \"Content-type: application/json\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys/1234 -d \\\n'{\n    \"label\": \"newlabel\",\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5 newcomment\",\n}'\n\nOutput:\n{\n    \"comment\": \"newcomment\",\n    \"last_used\": null,\n    \"links\": {\n        \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys/1234\"\n        }\n    },\n    \"repository\": {\n        \"full_name\": \"mleu/test\",\n        \"name\": \"test\",\n        \"type\": \"repository\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n    },\n    \"label\": \"newlabel\",\n    \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"id\": 1234,\n    \"type\": \"deploy_key\"\n}\n```",
       "parameters": [],
       "responses": {
         "200": {
@@ -5284,6 +5284,154 @@
         "type": "string"
       }
     ]
+  },
+  "/repositories/{username}/{repo_slug}/issues/import": {
+    "get": {
+      "description": "When using GET, this endpoint reports the status of the current import task. Request example:\n\n```\n$ curl -u <username> -X GET https://api.bitbucket.org/2.0/repositories/<owner_username>/<repo_slug>/issues/import\n```\n\nAfter the job has been scheduled, but before it starts executing, this endpoint's response is:\n\n```\n< HTTP/1.1 202 Accepted\n{\n    \"type\": \"issue_job_status\",\n    \"status\": \"PENDING\",\n    \"phase\": \"Attachments\",\n    \"total\": 15,\n    \"count\": 0,\n    \"percent\": 0\n}\n```\n\nOnce it starts running, it is a 202 response with status STARTED and progress filled.\n\nAfter it is finished, it becomes a 200 response with status SUCCESS or FAILURE.",
+      "parameters": [
+        {
+          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Import job complete with either FAILURE or SUCCESS status",
+          "schema": {
+            "$ref": "#/definitions/issue_job_status"
+          }
+        },
+        "202": {
+          "description": "Import job started",
+          "schema": {
+            "$ref": "#/definitions/issue_job_status"
+          }
+        },
+        "401": {
+          "description": "The request wasn't authenticated properly",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "When the authenticated user does not have admin permission on the repo",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "No export job has begun",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "repository:admin",
+            "issue:write"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": []
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "post": {
+      "description": "A POST request to this endpoint will import the zip file given by the archive parameter into the repository. All\nexisting issues will be deleted and replaced by the contents of the imported zip file.\n\nImports are done through a multipart/form-data POST. There is one valid and required form field, with the name\n\"archive,\" which needs to be a file field:\n\n```\n$ curl -u <username> -X POST -F archive=@/path/to/file.zip https://api.bitbucket.org/2.0/repositories/<owner_username>/<repo_slug>/issues/import\n```\n\nWhen the import job is accepted, here is example output:\n\n```\n< HTTP/1.1 202 Accepted\n\n{\n    \"type\": \"issue_job_status\",\n    \"status\": \"ACCEPTED\",\n    \"phase\": \"Attachments\",\n    \"total\": 15,\n    \"count\": 0,\n    \"percent\": 0\n}\n```",
+      "parameters": [
+        {
+          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "202": {
+          "description": "Import job accepted",
+          "schema": {
+            "$ref": "#/definitions/issue_job_status"
+          }
+        },
+        "401": {
+          "description": "The request wasn't authenticated properly",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "When the authenticated user does not have admin permission on the repo",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "No export job has begun",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "409": {
+          "description": "Import already running",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "repository:admin",
+            "issue:write"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": []
+    }
   },
   "/repositories/{username}/{repo_slug}/milestones": {
     "get": {
@@ -11811,7 +11959,7 @@
       ],
       "responses": {
         "200": {
-          "description": "Something something",
+          "description": "List of team's repository permissions.",
           "schema": {
             "$ref": "#/definitions/paginated_repository_permissions"
           }

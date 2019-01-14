@@ -593,7 +593,7 @@
               "$ref": "#/definitions/Account"
             },
             "repository": {
-              "type": "string"
+              "$ref": "#/definitions/Repository"
             }
           },
           "type": "object"
@@ -1428,7 +1428,7 @@
         },
         "pct": {
           "maximum": 100,
-          "type": "integer"
+          "type": "number"
         },
         "phase": {
           "type": "string"
@@ -1651,6 +1651,33 @@
         "values": {
           "items": {
             "$ref": "#/definitions/Component"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedDeployKeys": {
+      "additionalProperties": false,
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/DeployKey"
           },
           "type": "array"
         }
@@ -4861,6 +4888,9 @@
     },
     "PaginatedComponents": {
       "$ref": "#/definitions/PaginatedComponents"
+    },
+    "PaginatedDeployKeys": {
+      "$ref": "#/definitions/PaginatedDeployKeys"
     },
     "PaginatedDeployments": {
       "$ref": "#/definitions/PaginatedDeployments"

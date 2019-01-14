@@ -78,11 +78,11 @@
     "deleteKey": {
       "alias": "repositories.deleteDeployKey"
     },
-    "getAllKeys": {
-      "alias": "repositories.getAllDeployKeys"
-    },
     "getKey": {
       "alias": "repositories.getDeployKey"
+    },
+    "listKeys": {
+      "alias": "repositories.listDeployKeys"
     },
     "updateKey": {
       "alias": "repositories.updateDeployKey"
@@ -1679,23 +1679,6 @@
       "returns": "Repository",
       "url": "/repositories/{username}/{repo_slug}"
     },
-    "getAllDeployKeys": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "DeployKey",
-      "url": "/repositories/{username}/{repo_slug}/deploy-keys"
-    },
     "getBranch": {
       "method": "GET",
       "params": {
@@ -3032,6 +3015,39 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/default-reviewers"
+    },
+    "listDeployKeys": {
+      "method": "GET",
+      "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
+        "pagelen": {
+          "in": "query",
+          "type": "integer"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedDeployKeys",
+      "url": "/repositories/{username}/{repo_slug}/deploy-keys"
     },
     "listDeployments": {
       "method": "GET",

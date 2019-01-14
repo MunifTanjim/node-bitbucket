@@ -466,6 +466,14 @@
       "repositories": "getIssueExportJobStatus"
     }
   },
+  "/repositories/{username}/{repo_slug}/issues/import": {
+    "get": {
+      "repositories": "getIssueImportJobStatus"
+    },
+    "post": {
+      "repositories": "createIssueImportJob"
+    }
+  },
   "/repositories/{username}/{repo_slug}/milestones": {
     "get": {
       "issue_tracker": "listMilestones",
