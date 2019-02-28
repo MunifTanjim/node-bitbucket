@@ -994,12 +994,17 @@
   },
   "/teams/{username}/permissions": {
     "get": {
-      "teams": "listTeamPermissions"
+      "teams": "listPermissions"
     }
   },
   "/teams/{username}/permissions/repositories": {
     "get": {
-      "teams": "listRepositoryPermissions"
+      "teams": "listPermissionsForRepos"
+    }
+  },
+  "/teams/{username}/permissions/repositories/{repo_slug}": {
+    "get": {
+      "teams": "listPermissionsForRepo"
     }
   },
   "/teams/{username}/pipelines_config/variables/": {
@@ -1083,12 +1088,12 @@
   "/user/permissions/repositories": {
     "get": {
       "repositories": "listPermissions",
-      "user": "listRepositoryPermissions"
+      "user": "listPermissionsForRepos"
     }
   },
   "/user/permissions/teams": {
     "get": {
-      "user": "listTeamPermissions"
+      "user": "listPermissionsForTeams"
     }
   },
   "/users/{username}": {

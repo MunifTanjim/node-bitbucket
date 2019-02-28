@@ -841,6 +841,23 @@
       },
       "url": "/repositories/{username}/{repo_slug}/issues/export"
     },
+    "createIssueImportJob": {
+      "method": "POST",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "IssueJobStatus",
+      "url": "/repositories/{username}/{repo_slug}/issues/import"
+    },
     "createIssueVote": {
       "method": "PUT",
       "params": {
@@ -2094,6 +2111,23 @@
       },
       "returns": "IssueJobStatus",
       "url": "/repositories/{username}/{repo_slug}/issues/export/{repo_name}-issues-{task_id}.zip"
+    },
+    "getIssueImportJobStatus": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "IssueJobStatus",
+      "url": "/repositories/{username}/{repo_slug}/issues/import"
     },
     "getIssueMilestone": {
       "method": "GET",
@@ -3454,7 +3488,7 @@
       "url": "/repositories/{username}/{repo_slug}/milestones"
     },
     "listPermissions": {
-      "alias": "user.listRepositoryPermissions"
+      "alias": "user.listPermissionsForRepos"
     },
     "listPipelineKnownHosts": {
       "method": "GET",
@@ -5427,6 +5461,95 @@
       "returns": "User",
       "url": "/teams/{username}/members"
     },
+    "listPermissions": {
+      "method": "GET",
+      "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
+        "pagelen": {
+          "in": "query",
+          "type": "integer"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedTeamPermissions",
+      "url": "/teams/{username}/permissions"
+    },
+    "listPermissionsForRepo": {
+      "method": "GET",
+      "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
+        "pagelen": {
+          "in": "query",
+          "type": "integer"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedRepositoryPermissions",
+      "url": "/teams/{username}/permissions/repositories/{repo_slug}"
+    },
+    "listPermissionsForRepos": {
+      "method": "GET",
+      "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
+        "pagelen": {
+          "in": "query",
+          "type": "integer"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedRepositoryPermissions",
+      "url": "/teams/{username}/permissions/repositories"
+    },
     "listPipelineVariables": {
       "method": "GET",
       "params": {
@@ -5512,62 +5635,6 @@
     },
     "listRepositoriesForUser": {
       "alias": "users.listRepositories"
-    },
-    "listRepositoryPermissions": {
-      "method": "GET",
-      "params": {
-        "page": {
-          "in": "query",
-          "type": "string"
-        },
-        "pagelen": {
-          "in": "query",
-          "type": "integer"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedRepositoryPermissions",
-      "url": "/teams/{username}/permissions/repositories"
-    },
-    "listTeamPermissions": {
-      "method": "GET",
-      "params": {
-        "page": {
-          "in": "query",
-          "type": "string"
-        },
-        "pagelen": {
-          "in": "query",
-          "type": "integer"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTeamPermissions",
-      "url": "/teams/{username}/permissions"
     },
     "listWebhooks": {
       "method": "GET",
@@ -5725,7 +5792,7 @@
       },
       "url": "/user/emails"
     },
-    "listRepositoryPermissions": {
+    "listPermissionsForRepos": {
       "method": "GET",
       "params": {
         "page": {
@@ -5748,7 +5815,7 @@
       "returns": "PaginatedRepositoryPermissions",
       "url": "/user/permissions/repositories"
     },
-    "listTeamPermissions": {
+    "listPermissionsForTeams": {
       "method": "GET",
       "params": {
         "page": {

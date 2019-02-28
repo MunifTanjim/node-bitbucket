@@ -17,6 +17,9 @@
             "display_name": {
               "type": "string"
             },
+            "has_2fa_enabled": {
+              "type": "boolean"
+            },
             "links": {
               "additionalProperties": false,
               "properties": {
@@ -3210,7 +3213,13 @@
               "type": "string"
             }
           },
-          "type": "object"
+          "type": "object",
+          "x-bb-default-fields": [
+            "uuid",
+            "state",
+            "image"
+          ],
+          "x-bb-url": "/rest/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
         }
       ]
     },

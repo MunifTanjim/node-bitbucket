@@ -11995,6 +11995,83 @@
       }
     ]
   },
+  "/teams/{username}/permissions/repositories/{repo_slug}": {
+    "get": {
+      "description": "Returns an object for each repository permission of a given repository.\n\nIf the username URL parameter refers to a user account instead of\na team account, an object containing the repository permissions\nof the username's repository will be returned.\n\nPermissions returned are effective permissions — the highest level of\npermission the user has. This does not include public repositories that\nusers are not granted any specific permission in, and does not\ndistinguish between direct and indirect privileges.\n\nOnly users with admin permission for the repository may access this resource.\n\nPermissions can be:\n\n* `admin`\n* `write`\n* `read`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions/repositories/geordi\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"admin\"\n    },\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"seanaty\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"write\"\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../../meta/filtering)\nby user, or permission by adding the following query string parameters:\n\n* `q=permission>\"read\"`\n* `sort=user.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
+      "parameters": [
+        {
+          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../../meta/filtering).",
+          "in": "query",
+          "name": "q",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "description": "\nName of a response property sort the result by as per\n[filtering and sorting](../../../../meta/filtering#query-sort).\n",
+          "in": "query",
+          "name": "sort",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "List of repository's repository permissions.",
+          "schema": {
+            "$ref": "#/definitions/paginated_repository_permissions"
+          }
+        },
+        "403": {
+          "description": "The requesting user isn't an admin of the repository.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "repository"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": []
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
   "/teams/{username}/pipelines_config/variables/": {
     "get": {
       "description": "Find account level variables.",
