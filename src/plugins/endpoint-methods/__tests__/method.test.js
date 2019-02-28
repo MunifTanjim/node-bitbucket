@@ -13,10 +13,13 @@ beforeEach(() => {
 })
 
 describe('plugins:endpoint-methods/method', () => {
-  it('invokes callback if present', () => {
+  it('invokes callback if present', done => {
     expect.assertions(1)
 
-    let mockCallback = jest.fn(() => expect(mockCallback).toBeCalled())
+    const mockCallback = jest.fn(() => {
+      expect(mockCallback).toBeCalled()
+      done()
+    })
 
     endpointMethod(apiClient, {}, {}, {}, mockCallback)
   })
