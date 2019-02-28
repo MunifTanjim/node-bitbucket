@@ -97,7 +97,7 @@ const setParameters = (apiObject, { parameters = [] }) => {
 
 const setResponses = (apiObject, { responses = [] }) => {
   _.each(responses, (response, code) => {
-    if (Number(code) < 400) {
+    if (Number(code) < 300) {
       if (!response.schema) return
       apiObject.returns = pascalCase(
         response.schema.$ref.replace('#/definitions/', '')

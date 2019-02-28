@@ -2389,7 +2389,6 @@
           "type": "string"
         }
       },
-      "returns": "Error",
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log"
     },
     "getPipelineVariable": {
