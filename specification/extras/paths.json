@@ -30,18 +30,6 @@
           "name": "exclude",
           "required": false,
           "type": "string"
-        },
-        {
-          "in": "query",
-          "name": "q",
-          "required": false,
-          "type": "string"
-        },
-        {
-          "in": "query",
-          "name": "sort",
-          "required": false,
-          "type": "string"
         }
       ]
     }
@@ -142,6 +130,17 @@
           "in": "body",
           "name": "_body",
           "required": true
+        }
+      ]
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests/activity": {
+    "get": {
+      "parameters": [
+        {
+          "name": "pull_request_id",
+          "type": "integer",
+          "deleted": true
         }
       ]
     }

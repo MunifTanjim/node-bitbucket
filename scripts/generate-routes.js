@@ -73,16 +73,32 @@ const setHTTPMethod = (apiObject, method) => {
 const setParameters = (apiObject, { parameters = [] }) => {
   _.each(
     parameters,
-    ({ enum: _enum, in: _in, name, required, schema = {}, type = 'any' }) => {
+    ({
+      enum: _enum,
+      in: _in,
+      name,
+      required,
+      schema = {},
+      type = 'any',
+      deleted
+    }) => {
+      if (deleted) {
+        delete apiObject.params[name]
+        return
+      }
+
       if (!apiObject.params[name]) apiObject.params[name] = {}
 
       apiObject.params[name] = deepmerge(apiObject.params[name], {
         enum: _enum,
         in: _in,
+        required,
         type
       })
 
-      if (required) apiObject.params[name].required = required
+      if (!required) {
+        delete apiObject.params[name].required
+      }
 
       apiObject.params[name].enum = _.uniq(apiObject.params[name].enum)
 

@@ -3649,11 +3649,6 @@
           "in": "query",
           "type": "integer"
         },
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
         "q": {
           "in": "query",
           "type": "string"
