@@ -1170,7 +1170,22 @@
   "/repositories/{username}/{repo_slug}/branch-restrictions": {
     "get": {
       "description": "Returns a paginated list of all branch restrictions on the\nrepository.",
-      "parameters": [],
+      "parameters": [
+        {
+          "description": "Branch restrictions of this type",
+          "in": "query",
+          "name": "kind",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "description": "Branch restrictions applied to branches of this pattern",
+          "in": "query",
+          "name": "pattern",
+          "required": false,
+          "type": "string"
+        }
+      ],
       "responses": {
         "200": {
           "description": "A paginated list of branch restrictions",
@@ -1456,6 +1471,11 @@
         "branchrestrictions"
       ]
     }
+  },
+  "/repositories/{username}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name}": {
+    "delete": {},
+    "get": {},
+    "put": {}
   },
   "/repositories/{username}/{repo_slug}/commit/{commit}/pullrequests": {
     "get": {
@@ -2384,7 +2404,7 @@
       "security": [
         {
           "oauth2": [
-            "repository:admin"
+            "pullrequest"
           ]
         },
         {
@@ -2458,7 +2478,7 @@
       "security": [
         {
           "oauth2": [
-            "repository:admin"
+            "pullrequest"
           ]
         },
         {
@@ -8674,6 +8694,11 @@
       }
     ]
   },
+  "/repositories/{username}/{repo_slug}/pullrequests/{pullrequest_id}/properties/{app_key}/{property_name}": {
+    "delete": {},
+    "get": {},
+    "put": {}
+  },
   "/repositories/{username}/{repo_slug}/pullrequests/activity": {
     "get": {
       "description": "Returns a paginated list of the pull request's activity log.\n\nThis includes comments that were made by the reviewers, updates and\napprovals.",
@@ -9601,7 +9626,7 @@
   },
   "/repositories/{username}/{repo_slug}/src/{node}/{path}": {
     "get": {
-      "description": "This endpoints is used to retrieve the contents of a single file,\nor the contents of a directory at a specified revision.\n\n## Raw file contents\n\nWhen `path` points to a file, this endpoint returns the raw contents.\nThe response's Content-Type is derived from the filename\nextension (not from the contents). The file contents are not processed\nand no character encoding/recoding is performed and as a result no\ncharacter encoding is included as part of the Content-Type.\n\nThe `Content-Disposition` header will be \"attachment\" to prevent\nbrowsers from running executable files.\n\nIf the file is managed by LFS, then a 301 redirect pointing to\nAtlassian's media services platform is returned.\n\nThe response includes an ETag that is based on the contents of the file\nand its attributes. This means that an empty `__init__.py` always\nreturns the same ETag, regardless on the directory it lives in, or the\ncommit it is on.\n\n## File meta data\n\nWhen the request for a file path includes the query parameter\n`?format=meta`, instead of returning the file's raw contents, Bitbucket\ninstead returns the JSON object describing the file's properties:\n\n```javascript\n$ curl https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef/tests/__init__.py?format=meta\n{\n  \"links\": {\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/__init__.py\"\n    },\n    \"meta\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/__init__.py?format=meta\"\n    }\n  },\n  \"path\": \"tests/__init__.py\",\n  \"commit\": {\n    \"type\": \"commit\",\n    \"hash\": \"eefd5ef5d3df01aed629f650959d6706d54cd335\",\n    \"links\": {\n      \"self\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/commit/eefd5ef5d3df01aed629f650959d6706d54cd335\"\n      },\n      \"html\": {\n        \"href\": \"https://bitbucket.org/atlassian/bbql/commits/eefd5ef5d3df01aed629f650959d6706d54cd335\"\n      }\n    }\n  },\n  \"attributes\": [],\n  \"type\": \"commit_file\",\n  \"size\": 0\n}\n```\n\nFile objects contain an `attributes` element that contains a list of\npossible modifiers. Currently defined values are:\n\n* `link` -- indicates that the entry is a symbolic link. The contents\n    of the file represent the path the link points to.\n* `executable` -- indicates that the file has the executable bit set.\n* `subrepository` -- indicates that the entry points to a submodule or\n    subrepo. The contents of the file is the SHA1 of the repository\n    pointed to.\n* `binary` -- indicates whether Bitbucket thinks the file is binary.\n\nThis endpoint can provide an alternative to how a HEAD request can be\nused to check for the existence of a file, or a file's size without\nincurring the overhead of receiving its full contents.\n\n\n## Directory listings\n\nWhen `path` points to a directory instead of a file, the response is a\npaginated list of directory and file objects in the same order as the\nunderlying SCM system would return them.\n\nFor example:\n\n```javascript\n$ curl https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef/tests\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"path\": \"tests/test_project\",\n      \"type\": \"commit_directory\",\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/test_project/\"\n        },\n        \"meta\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/test_project/?format=meta\"\n        }\n      },\n      \"commit\": {\n        \"type\": \"commit\",\n        \"hash\": \"eefd5ef5d3df01aed629f650959d6706d54cd335\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/commit/eefd5ef5d3df01aed629f650959d6706d54cd335\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/atlassian/bbql/commits/eefd5ef5d3df01aed629f650959d6706d54cd335\"\n          }\n        }\n      }\n    },\n    {\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/__init__.py\"\n        },\n        \"meta\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/__init__.py?format=meta\"\n        }\n      },\n      \"path\": \"tests/__init__.py\",\n      \"commit\": {\n        \"type\": \"commit\",\n        \"hash\": \"eefd5ef5d3df01aed629f650959d6706d54cd335\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/commit/eefd5ef5d3df01aed629f650959d6706d54cd335\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/atlassian/bbql/commits/eefd5ef5d3df01aed629f650959d6706d54cd335\"\n          }\n        }\n      },\n      \"attributes\": [],\n      \"type\": \"commit_file\",\n      \"size\": 0\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nWhen listing the contents of the repo's root directory, the use of a\ntrailing slash at the end of the URL is required.\n\nThe response is not recursive, meaning that only the direct contents of\na path are returned. The response does not recurse down into\nsubdirectories. In order to \"walk\" the entire directory tree, the\nclient needs to parse each response and follow the `self` links of each\n`commit_directory` object.\n\nEach returned object is either a `commit_file`, or a `commit_directory`,\nboth of which contain a `path` element. This path is the absolute path\nfrom the root of the repository. Each object also contains a `commit`\nobject which embeds the commit the file is on. Note that this is merely\nthe commit that was used in the URL. It is *not* the commit that last\nmodified the file.\n\nDirectory objects have 2 representations. Their `self` link returns the\npaginated contents of the directory. The `meta` link on the other hand\nreturns the actual `directory` object itself, e.g.:\n\n```javascript\n{\n  \"path\": \"tests/test_project\",\n  \"type\": \"commit_directory\",\n  \"links\": {\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/test_project/\"\n    },\n    \"meta\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/test_project/?format=meta\"\n    }\n  },\n  \"commit\": { ... }\n}\n```\n\n## Querying, filtering and sorting\n\nLike most API endpoints, this API supports the Bitbucket\nquerying/filtering syntax and so you could filter a directory listing\nto only include entries that match certain criteria. For instance, to\nlist all binary files over 1kb use the expression:\n\n`size > 1024 and attributes = \"binary\"`\n\nwhich after urlencoding yields the query string:\n\n`?q=size%3E1024+and+attributes%3D%22binary%22`\n\nTo change the ordering of the response, use the `?sort` parameter:\n\n`.../src/eefd5ef/?sort=-size`\n\nSee [filtering and sorting](../../../../../../meta/filtering) for more\ndetails.",
+      "description": "This endpoints is used to retrieve the contents of a single file,\nor the contents of a directory at a specified revision.\n\n## Raw file contents\n\nWhen `path` points to a file, this endpoint returns the raw contents.\nThe response's Content-Type is derived from the filename\nextension (not from the contents). The file contents are not processed\nand no character encoding/recoding is performed and as a result no\ncharacter encoding is included as part of the Content-Type.\n\nThe `Content-Disposition` header will be \"attachment\" to prevent\nbrowsers from running executable files.\n\nIf the file is managed by LFS, then a 301 redirect pointing to\nAtlassian's media services platform is returned.\n\nThe response includes an ETag that is based on the contents of the file\nand its attributes. This means that an empty `__init__.py` always\nreturns the same ETag, regardless on the directory it lives in, or the\ncommit it is on.\n\n## File meta data\n\nWhen the request for a file path includes the query parameter\n`?format=meta`, instead of returning the file's raw contents, Bitbucket\ninstead returns the JSON object describing the file's properties:\n\n```javascript\n$ curl https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef/tests/__init__.py?format=meta\n{\n  \"links\": {\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/__init__.py\"\n    },\n    \"meta\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/__init__.py?format=meta\"\n    }\n  },\n  \"path\": \"tests/__init__.py\",\n  \"commit\": {\n    \"type\": \"commit\",\n    \"hash\": \"eefd5ef5d3df01aed629f650959d6706d54cd335\",\n    \"links\": {\n      \"self\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/commit/eefd5ef5d3df01aed629f650959d6706d54cd335\"\n      },\n      \"html\": {\n        \"href\": \"https://bitbucket.org/atlassian/bbql/commits/eefd5ef5d3df01aed629f650959d6706d54cd335\"\n      }\n    }\n  },\n  \"attributes\": [],\n  \"type\": \"commit_file\",\n  \"size\": 0\n}\n```\n\nFile objects contain an `attributes` element that contains a list of\npossible modifiers. Currently defined values are:\n\n* `link` -- indicates that the entry is a symbolic link. The contents\n    of the file represent the path the link points to.\n* `executable` -- indicates that the file has the executable bit set.\n* `subrepository` -- indicates that the entry points to a submodule or\n    subrepo. The contents of the file is the SHA1 of the repository\n    pointed to.\n* `binary` -- indicates whether Bitbucket thinks the file is binary.\n\nThis endpoint can provide an alternative to how a HEAD request can be\nused to check for the existence of a file, or a file's size without\nincurring the overhead of receiving its full contents.\n\n\n## Directory listings\n\nWhen `path` points to a directory instead of a file, the response is a\npaginated list of directory and file objects in the same order as the\nunderlying SCM system would return them.\n\nFor example:\n\n```javascript\n$ curl https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef/tests\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"path\": \"tests/test_project\",\n      \"type\": \"commit_directory\",\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/test_project/\"\n        },\n        \"meta\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/test_project/?format=meta\"\n        }\n      },\n      \"commit\": {\n        \"type\": \"commit\",\n        \"hash\": \"eefd5ef5d3df01aed629f650959d6706d54cd335\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/commit/eefd5ef5d3df01aed629f650959d6706d54cd335\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/atlassian/bbql/commits/eefd5ef5d3df01aed629f650959d6706d54cd335\"\n          }\n        }\n      }\n    },\n    {\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/__init__.py\"\n        },\n        \"meta\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/__init__.py?format=meta\"\n        }\n      },\n      \"path\": \"tests/__init__.py\",\n      \"commit\": {\n        \"type\": \"commit\",\n        \"hash\": \"eefd5ef5d3df01aed629f650959d6706d54cd335\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/commit/eefd5ef5d3df01aed629f650959d6706d54cd335\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/atlassian/bbql/commits/eefd5ef5d3df01aed629f650959d6706d54cd335\"\n          }\n        }\n      },\n      \"attributes\": [],\n      \"type\": \"commit_file\",\n      \"size\": 0\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nWhen listing the contents of the repo's root directory, the use of a\ntrailing slash at the end of the URL is required.\n\nThe response by default is not recursive, meaning that only the direct contents of\na path are returned. The response does not recurse down into\nsubdirectories. In order to \"walk\" the entire directory tree, the\nclient can either parse each response and follow the `self` links of each\n`commit_directory` object, or can specify a `max_depth` to recurse to.\n\nThe max_depth parameter will do a breadth-first search to return the contents of the subdirectories\nup to the depth specified. Breadth-first search was chosen as it leads to the least amount of\nfile system operations for git. If the `max_depth` parameter is specified to be too\nlarge, the call will time out and return a 555.\n\nEach returned object is either a `commit_file`, or a `commit_directory`,\nboth of which contain a `path` element. This path is the absolute path\nfrom the root of the repository. Each object also contains a `commit`\nobject which embeds the commit the file is on. Note that this is merely\nthe commit that was used in the URL. It is *not* the commit that last\nmodified the file.\n\nDirectory objects have 2 representations. Their `self` link returns the\npaginated contents of the directory. The `meta` link on the other hand\nreturns the actual `directory` object itself, e.g.:\n\n```javascript\n{\n  \"path\": \"tests/test_project\",\n  \"type\": \"commit_directory\",\n  \"links\": {\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/test_project/\"\n    },\n    \"meta\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/bbql/src/eefd5ef5d3df01aed629f650959d6706d54cd335/tests/test_project/?format=meta\"\n    }\n  },\n  \"commit\": { ... }\n}\n```\n\n## Querying, filtering and sorting\n\nLike most API endpoints, this API supports the Bitbucket\nquerying/filtering syntax and so you could filter a directory listing\nto only include entries that match certain criteria. For instance, to\nlist all binary files over 1kb use the expression:\n\n`size > 1024 and attributes = \"binary\"`\n\nwhich after urlencoding yields the query string:\n\n`?q=size%3E1024+and+attributes%3D%22binary%22`\n\nTo change the ordering of the response, use the `?sort` parameter:\n\n`.../src/eefd5ef/?sort=-size`\n\nSee [filtering and sorting](../../../../../../meta/filtering) for more\ndetails.",
       "parameters": [
         {
           "description": "If 'meta' is provided, returns the (json) meta data for the contents of the file.  If 'rendered' is provided, returns the contents of a non-binary file in HTML-formatted rendered markup. Since Git and Mercurial do not generally track what text encoding scheme is used, this endpoint attempts to detect the most appropriate character encoding. While usually correct, determining the character encoding can be ambiguous which in exceptional cases can lead to misinterpretation of the characters. As such, the raw element in the response object should not be treated as equivalent to the file's actual contents.",
@@ -9627,6 +9652,13 @@
           "name": "sort",
           "required": false,
           "type": "string"
+        },
+        {
+          "description": "If provided, returns the contents of the repository and its subdirectories recursively until the specified max_depth of nested directories. When omitted, this defaults to 1.",
+          "in": "query",
+          "name": "max_depth",
+          "required": false,
+          "type": "integer"
         }
       ],
       "responses": {
@@ -9638,6 +9670,12 @@
         },
         "404": {
           "description": "If the path or commit in the URL does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "555": {
+          "description": "If the call times out, possibly because the specifiedrecursion depth is too large.",
           "schema": {
             "$ref": "#/definitions/error"
           }
@@ -13566,6 +13604,11 @@
         "pipelines"
       ]
     }
+  },
+  "/users/{username}/properties/{app_key}/{property_name}": {
+    "delete": {},
+    "get": {},
+    "put": {}
   },
   "/users/{username}/repositories": {
     "get": {

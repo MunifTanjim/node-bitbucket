@@ -247,6 +247,9 @@
               },
               "type": "object"
             },
+            "pattern": {
+              "type": "string"
+            },
             "users": {
               "items": {
                 "$ref": "#/definitions/Account"
@@ -257,6 +260,10 @@
               "type": "integer"
             }
           },
+          "required": [
+            "kind",
+            "pattern"
+          ],
           "type": "object"
         }
       ]

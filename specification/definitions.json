@@ -238,7 +238,7 @@
             "type": "integer"
           },
           "kind": {
-            "description": "The type of restriction that is being applied",
+            "description": "The type of restriction that is being applied.",
             "enum": [
               "require_tasks_to_be_completed",
               "require_passing_builds_to_merge",
@@ -272,6 +272,10 @@
             },
             "type": "object"
           },
+          "pattern": {
+            "description": "Apply restrictions to branches following this pattern.",
+            "type": "string"
+          },
           "users": {
             "items": {
               "$ref": "#/definitions/account"
@@ -284,6 +288,10 @@
             "type": "integer"
           }
         },
+        "required": [
+          "kind",
+          "pattern"
+        ],
         "type": "object"
       }
     ]

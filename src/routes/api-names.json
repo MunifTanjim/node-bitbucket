@@ -109,10 +109,21 @@
       "repositories": "updateBranchRestriction"
     }
   },
+  "/repositories/{username}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name}": {
+    "delete": {
+      "repositories": ""
+    },
+    "get": {
+      "repositories": ""
+    },
+    "put": {
+      "repositories": ""
+    }
+  },
   "/repositories/{username}/{repo_slug}/commit/{commit}/pullrequests": {
     "get": {
-      "pullrequests": "getForCommit",
-      "repositories": "getPullrequestsForCommit"
+      "pullrequests": "listForCommit",
+      "repositories": "listPullrequestsForCommit"
     }
   },
   "/repositories/{username}/{repo_slug}/commit/{node}": {
@@ -175,18 +186,18 @@
       "repositories": "listCommits"
     },
     "post": {
-      "commits": "fetchAll",
-      "repositories": "fetchAllCommits"
+      "commits": "listAlt",
+      "repositories": "listCommitsAlt"
     }
   },
   "/repositories/{username}/{repo_slug}/commits/{revision}": {
     "get": {
-      "commits": "listFor",
-      "repositories": "listCommitsFor"
+      "commits": "listAt",
+      "repositories": "listCommitsAt"
     },
     "post": {
-      "commits": "fetchAllFor",
-      "repositories": "fetchAllCommitsFor"
+      "commits": "listAtAlt",
+      "repositories": "listCommitsAtAlt"
     }
   },
   "/repositories/{username}/{repo_slug}/components": {
@@ -673,8 +684,8 @@
   },
   "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/activity": {
     "get": {
-      "pullrequests": "getActivityLog",
-      "repositories": "getPullRequestActivityLog"
+      "pullrequests": "listActivities",
+      "repositories": "listPullRequestActivities"
     }
   },
   "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve": {
@@ -754,10 +765,21 @@
       "repositories": "listPullRequestStatuses"
     }
   },
+  "/repositories/{username}/{repo_slug}/pullrequests/{pullrequest_id}/properties/{app_key}/{property_name}": {
+    "delete": {
+      "repositories": ""
+    },
+    "get": {
+      "repositories": ""
+    },
+    "put": {
+      "repositories": ""
+    }
+  },
   "/repositories/{username}/{repo_slug}/pullrequests/activity": {
     "get": {
-      "pullrequests": "listActivityLog",
-      "repositories": "listPullRequestsActivityLog"
+      "pullrequests": "listActivitiesForRepo",
+      "repositories": "listPullRequestActivitiesForRepo"
     }
   },
   "/repositories/{username}/{repo_slug}/refs": {
@@ -808,8 +830,8 @@
   },
   "/repositories/{username}/{repo_slug}/src": {
     "get": {
-      "repositories": "getSrcMainRoot",
-      "source": "getMainRoot"
+      "repositories": "readSrcRoot",
+      "source": "readRoot"
     },
     "post": {
       "repositories": "createSrcFileCommit",
@@ -818,8 +840,8 @@
   },
   "/repositories/{username}/{repo_slug}/src/{node}/{path}": {
     "get": {
-      "repositories": "getSrc",
-      "source": "get"
+      "repositories": "readSrc",
+      "source": "read"
     }
   },
   "/repositories/{username}/{repo_slug}/versions": {
@@ -868,13 +890,13 @@
   },
   "/snippets/{username}/{encoded_id}/{node_id}": {
     "delete": {
-      "snippets": "deleteCommit"
+      "snippets": "deleteAt"
     },
     "get": {
-      "snippets": "getCommit"
+      "snippets": "getAt"
     },
     "put": {
-      "snippets": "updateCommit"
+      "snippets": "updateAt"
     }
   },
   "/snippets/{username}/{encoded_id}/{node_id}/files/{path}": {
@@ -918,7 +940,7 @@
   },
   "/snippets/{username}/{encoded_id}/commits/{revision}": {
     "get": {
-      "snippets": "listCommitsFor"
+      "snippets": "getCommit"
     }
   },
   "/snippets/{username}/{encoded_id}/files/{path}": {
@@ -989,7 +1011,7 @@
   },
   "/teams/{username}/members": {
     "get": {
-      "teams": "listMembers"
+      "teams": "getAllMembers"
     }
   },
   "/teams/{username}/permissions": {
@@ -1163,6 +1185,17 @@
     "put": {
       "pipelines": "updateVariableForUser",
       "users": "updatePipelineVariable"
+    }
+  },
+  "/users/{username}/properties/{app_key}/{property_name}": {
+    "delete": {
+      "users": ""
+    },
+    "get": {
+      "users": ""
+    },
+    "put": {
+      "users": ""
     }
   },
   "/users/{username}/repositories": {

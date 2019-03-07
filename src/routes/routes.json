@@ -26,12 +26,6 @@
     "deleteApproval": {
       "alias": "repositories.deleteCommitApproval"
     },
-    "fetchAll": {
-      "alias": "repositories.fetchAllCommits"
-    },
-    "fetchAllFor": {
-      "alias": "repositories.fetchAllCommitsFor"
-    },
     "get": {
       "alias": "repositories.getCommit"
     },
@@ -47,11 +41,17 @@
     "list": {
       "alias": "repositories.listCommits"
     },
+    "listAlt": {
+      "alias": "repositories.listCommitsAlt"
+    },
+    "listAt": {
+      "alias": "repositories.listCommitsAt"
+    },
+    "listAtAlt": {
+      "alias": "repositories.listCommitsAtAlt"
+    },
     "listComments": {
       "alias": "repositories.listCommitComments"
-    },
-    "listFor": {
-      "alias": "repositories.listCommitsFor"
     }
   },
   "commitstatuses": {
@@ -412,9 +412,6 @@
     "get": {
       "alias": "repositories.getPullRequest"
     },
-    "getActivityLog": {
-      "alias": "repositories.getPullRequestActivityLog"
-    },
     "getComment": {
       "alias": "repositories.getPullRequestComment"
     },
@@ -427,17 +424,17 @@
     "getDiffStat": {
       "alias": "repositories.getPullRequestDiffStat"
     },
-    "getForCommit": {
-      "alias": "repositories.getPullrequestsForCommit"
-    },
     "getPatch": {
       "alias": "repositories.getPullRequestPatch"
     },
     "list": {
       "alias": "repositories.listPullRequests"
     },
-    "listActivityLog": {
-      "alias": "repositories.listPullRequestsActivityLog"
+    "listActivities": {
+      "alias": "repositories.listPullRequestActivities"
+    },
+    "listActivitiesForRepo": {
+      "alias": "repositories.listPullRequestActivitiesForRepo"
     },
     "listComments": {
       "alias": "repositories.listPullRequestComments"
@@ -447,6 +444,9 @@
     },
     "listDefaultReviewers": {
       "alias": "repositories.listDefaultReviewers"
+    },
+    "listForCommit": {
+      "alias": "repositories.listPullrequestsForCommit"
     },
     "listStatuses": {
       "alias": "repositories.listPullRequestStatuses"
@@ -1615,70 +1615,6 @@
       },
       "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
     },
-    "fetchAllCommits": {
-      "accepts": [
-        "application/x-www-form-urlencoded"
-      ],
-      "method": "POST",
-      "params": {
-        "exclude": {
-          "in": "body",
-          "type": "string"
-        },
-        "include": {
-          "in": "body",
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/commits"
-    },
-    "fetchAllCommitsFor": {
-      "method": "POST",
-      "params": {
-        "exclude": {
-          "in": "body",
-          "type": "string"
-        },
-        "include": {
-          "in": "body",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "revision": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/commits/{revision}"
-    },
     "get": {
       "method": "GET",
       "params": {
@@ -2435,27 +2371,6 @@
       "returns": "Pullrequest",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}"
     },
-    "getPullRequestActivityLog": {
-      "method": "GET",
-      "params": {
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
-          "type": "integer"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/activity"
-    },
     "getPullRequestComment": {
       "method": "GET",
       "params": {
@@ -2545,135 +2460,6 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/patch"
-    },
-    "getPullrequestsForCommit": {
-      "method": "GET",
-      "params": {
-        "commit": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "page": {
-          "in": "query",
-          "type": "string"
-        },
-        "pagelen": {
-          "in": "query",
-          "type": "integer"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedPullrequests",
-      "url": "/repositories/{username}/{repo_slug}/commit/{commit}/pullrequests"
-    },
-    "getSrc": {
-      "method": "GET",
-      "params": {
-        "format": {
-          "enum": [
-            "meta",
-            "rendered"
-          ],
-          "in": "query",
-          "type": "string"
-        },
-        "node": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "page": {
-          "in": "query",
-          "type": "string"
-        },
-        "pagelen": {
-          "in": "query",
-          "type": "integer"
-        },
-        "path": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTreeentries",
-      "url": "/repositories/{username}/{repo_slug}/src/{node}/{path}"
-    },
-    "getSrcMainRoot": {
-      "method": "GET",
-      "params": {
-        "format": {
-          "enum": [
-            "meta"
-          ],
-          "in": "query",
-          "type": "string"
-        },
-        "page": {
-          "in": "query",
-          "type": "string"
-        },
-        "pagelen": {
-          "in": "query",
-          "type": "integer"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTreeentries",
-      "url": "/repositories/{username}/{repo_slug}/src"
     },
     "getTag": {
       "method": "GET",
@@ -2793,6 +2579,10 @@
     "listBranchRestrictions": {
       "method": "GET",
       "params": {
+        "kind": {
+          "in": "query",
+          "type": "string"
+        },
         "page": {
           "in": "query",
           "type": "string"
@@ -2800,6 +2590,10 @@
         "pagelen": {
           "in": "query",
           "type": "integer"
+        },
+        "pattern": {
+          "in": "query",
+          "type": "string"
         },
         "q": {
           "in": "query",
@@ -2901,7 +2695,50 @@
       },
       "url": "/repositories/{username}/{repo_slug}/commits"
     },
-    "listCommitsFor": {
+    "listCommitsAlt": {
+      "accepts": [
+        "application/x-www-form-urlencoded"
+      ],
+      "method": "POST",
+      "params": {
+        "exclude": {
+          "in": "body",
+          "type": "string"
+        },
+        "include": {
+          "in": "body",
+          "type": "string"
+        },
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
+        "pagelen": {
+          "in": "query",
+          "type": "integer"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/commits"
+    },
+    "listCommitsAt": {
       "method": "GET",
       "params": {
         "exclude": {
@@ -2910,6 +2747,51 @@
         },
         "include": {
           "in": "query",
+          "type": "string"
+        },
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
+        "pagelen": {
+          "in": "query",
+          "type": "integer"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "revision": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/commits/{revision}"
+    },
+    "listCommitsAtAlt": {
+      "method": "POST",
+      "params": {
+        "exclude": {
+          "in": "body",
+          "type": "string"
+        },
+        "include": {
+          "in": "body",
           "type": "string"
         },
         "page": {
@@ -3719,6 +3601,80 @@
       "returns": "PaginatedRepositories",
       "url": "/repositories"
     },
+    "listPullRequestActivities": {
+      "method": "GET",
+      "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
+        "pagelen": {
+          "in": "query",
+          "type": "integer"
+        },
+        "pull_request_id": {
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/activity"
+    },
+    "listPullRequestActivitiesForRepo": {
+      "method": "GET",
+      "params": {
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
+        "pagelen": {
+          "in": "query",
+          "type": "integer"
+        },
+        "pull_request_id": {
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/pullrequests/activity"
+    },
     "listPullRequestComments": {
       "method": "GET",
       "params": {
@@ -3837,20 +3793,20 @@
       "returns": "PaginatedPullrequests",
       "url": "/repositories/{username}/{repo_slug}/pullrequests"
     },
-    "listPullRequestsActivityLog": {
+    "listPullrequestsForCommit": {
       "method": "GET",
       "params": {
+        "commit": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
         "page": {
           "in": "query",
           "type": "string"
         },
         "pagelen": {
           "in": "query",
-          "type": "integer"
-        },
-        "pull_request_id": {
-          "in": "path",
-          "required": true,
           "type": "integer"
         },
         "q": {
@@ -3872,7 +3828,8 @@
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/activity"
+      "returns": "PaginatedPullrequests",
+      "url": "/repositories/{username}/{repo_slug}/commit/{commit}/pullrequests"
     },
     "listPullRequestStatuses": {
       "method": "GET",
@@ -4102,6 +4059,101 @@
       },
       "returns": "Pullrequest",
       "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/merge"
+    },
+    "readSrc": {
+      "method": "GET",
+      "params": {
+        "format": {
+          "enum": [
+            "meta",
+            "rendered"
+          ],
+          "in": "query",
+          "type": "string"
+        },
+        "max_depth": {
+          "in": "query",
+          "type": "integer"
+        },
+        "node": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
+        "pagelen": {
+          "in": "query",
+          "type": "integer"
+        },
+        "path": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedTreeentries",
+      "url": "/repositories/{username}/{repo_slug}/src/{node}/{path}"
+    },
+    "readSrcRoot": {
+      "method": "GET",
+      "params": {
+        "format": {
+          "enum": [
+            "meta"
+          ],
+          "in": "query",
+          "type": "string"
+        },
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
+        "pagelen": {
+          "in": "query",
+          "type": "integer"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedTreeentries",
+      "url": "/repositories/{username}/{repo_slug}/src"
     },
     "stopPipeline": {
       "method": "POST",
@@ -4646,6 +4698,27 @@
       },
       "url": "/snippets/{username}/{encoded_id}"
     },
+    "deleteAt": {
+      "method": "DELETE",
+      "params": {
+        "encoded_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "node_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/snippets/{username}/{encoded_id}/{node_id}"
+    },
     "deleteComment": {
       "method": "DELETE",
       "params": {
@@ -4667,8 +4740,25 @@
       },
       "url": "/snippets/{username}/{encoded_id}/comments/{comment_id}"
     },
-    "deleteCommit": {
-      "method": "DELETE",
+    "get": {
+      "method": "GET",
+      "params": {
+        "encoded_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "Snippet",
+      "url": "/snippets/{username}/{encoded_id}"
+    },
+    "getAt": {
+      "method": "GET",
       "params": {
         "encoded_id": {
           "in": "path",
@@ -4686,24 +4776,8 @@
           "type": "string"
         }
       },
-      "url": "/snippets/{username}/{encoded_id}/{node_id}"
-    },
-    "get": {
-      "method": "GET",
-      "params": {
-        "encoded_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
       "returns": "Snippet",
-      "url": "/snippets/{username}/{encoded_id}"
+      "url": "/snippets/{username}/{encoded_id}/{node_id}"
     },
     "getComment": {
       "method": "GET",
@@ -4735,7 +4809,7 @@
           "required": true,
           "type": "string"
         },
-        "node_id": {
+        "revision": {
           "in": "path",
           "required": true,
           "type": "string"
@@ -4746,8 +4820,8 @@
           "type": "string"
         }
       },
-      "returns": "Snippet",
-      "url": "/snippets/{username}/{encoded_id}/{node_id}"
+      "returns": "SnippetCommit",
+      "url": "/snippets/{username}/{encoded_id}/commits/{revision}"
     },
     "getDiff": {
       "method": "GET",
@@ -4940,44 +5014,6 @@
       "returns": "PaginatedSnippetCommit",
       "url": "/snippets/{username}/{encoded_id}/commits"
     },
-    "listCommitsFor": {
-      "method": "GET",
-      "params": {
-        "encoded_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "page": {
-          "in": "query",
-          "type": "string"
-        },
-        "pagelen": {
-          "in": "query",
-          "type": "integer"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "revision": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "SnippetCommit",
-      "url": "/snippets/{username}/{encoded_id}/commits/{revision}"
-    },
     "listForUser": {
       "method": "GET",
       "params": {
@@ -5102,28 +5138,7 @@
       "returns": "Snippet",
       "url": "/snippets/{username}/{encoded_id}"
     },
-    "updateComment": {
-      "method": "PUT",
-      "params": {
-        "comment_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "encoded_id": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/snippets/{username}/{encoded_id}/comments/{comment_id}"
-    },
-    "updateCommit": {
+    "updateAt": {
       "accepts": [
         "application/json",
         "multipart/related",
@@ -5149,20 +5164,41 @@
       },
       "returns": "Snippet",
       "url": "/snippets/{username}/{encoded_id}/{node_id}"
+    },
+    "updateComment": {
+      "method": "PUT",
+      "params": {
+        "comment_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "encoded_id": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/snippets/{username}/{encoded_id}/comments/{comment_id}"
     }
   },
   "source": {
     "createFileCommit": {
       "alias": "repositories.createSrcFileCommit"
     },
-    "get": {
-      "alias": "repositories.getSrc"
-    },
-    "getMainRoot": {
-      "alias": "repositories.getSrcMainRoot"
-    },
     "listHistory": {
       "alias": "repositories.listFileHistory"
+    },
+    "read": {
+      "alias": "repositories.readSrc"
+    },
+    "readRoot": {
+      "alias": "repositories.readSrcRoot"
     }
   },
   "ssh": {
@@ -5289,6 +5325,18 @@
       },
       "returns": "Team",
       "url": "/teams/{username}"
+    },
+    "getAllMembers": {
+      "method": "GET",
+      "params": {
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "User",
+      "url": "/teams/{username}/members"
     },
     "getMembers": {
       "alias": "users.getTeamMembers"
@@ -5431,34 +5479,6 @@
       },
       "returns": "PaginatedUsers",
       "url": "/teams/{username}/following"
-    },
-    "listMembers": {
-      "method": "GET",
-      "params": {
-        "page": {
-          "in": "query",
-          "type": "string"
-        },
-        "pagelen": {
-          "in": "query",
-          "type": "integer"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "User",
-      "url": "/teams/{username}/members"
     },
     "listPermissions": {
       "method": "GET",
