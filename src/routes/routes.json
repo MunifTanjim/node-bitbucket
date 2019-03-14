@@ -3382,10 +3382,6 @@
           "in": "query",
           "type": "integer"
         },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -3414,10 +3410,6 @@
         "pagelen": {
           "in": "query",
           "type": "integer"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
         },
         "repo_slug": {
           "in": "path",
@@ -3448,10 +3440,6 @@
           "in": "query",
           "type": "integer"
         },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -3480,10 +3468,6 @@
         "pagelen": {
           "in": "query",
           "type": "integer"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
         },
         "repo_slug": {
           "in": "path",
@@ -3519,10 +3503,6 @@
           "required": true,
           "type": "string"
         },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -3551,10 +3531,6 @@
         "pagelen": {
           "in": "query",
           "type": "integer"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
         },
         "repo_slug": {
           "in": "path",
@@ -5575,10 +5551,6 @@
           "in": "query",
           "type": "integer"
         },
-        "q": {
-          "in": "query",
-          "type": "string"
-        },
         "sort": {
           "in": "query",
           "type": "string"
@@ -6073,10 +6045,6 @@
         "pagelen": {
           "in": "query",
           "type": "integer"
-        },
-        "q": {
-          "in": "query",
-          "type": "string"
         },
         "sort": {
           "in": "query",
