@@ -531,6 +531,9 @@
           "type": "string"
         }
       },
+      "produces": [
+        "application/json"
+      ],
       "returns": "Repository",
       "url": "/repositories/{username}/{repo_slug}"
     },
@@ -1629,6 +1632,9 @@
           "type": "string"
         }
       },
+      "produces": [
+        "application/json"
+      ],
       "returns": "Repository",
       "url": "/repositories/{username}/{repo_slug}"
     },
@@ -2325,6 +2331,9 @@
           "type": "string"
         }
       },
+      "produces": [
+        "application/octet-stream"
+      ],
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log"
     },
     "getPipelineVariable": {
@@ -3823,6 +3832,9 @@
           "type": "string"
         }
       },
+      "produces": [
+        "application/json"
+      ],
       "returns": "PaginatedPullrequests",
       "url": "/repositories/{username}/{repo_slug}/commit/{commit}/pullrequests"
     },
@@ -4190,6 +4202,9 @@
           "type": "string"
         }
       },
+      "produces": [
+        "application/json"
+      ],
       "returns": "Repository",
       "url": "/repositories/{username}/{repo_slug}"
     },
@@ -4749,6 +4764,11 @@
           "type": "string"
         }
       },
+      "produces": [
+        "application/json",
+        "multipart/related",
+        "multipart/form-data"
+      ],
       "returns": "Snippet",
       "url": "/snippets/{username}/{encoded_id}"
     },
@@ -4771,6 +4791,11 @@
           "type": "string"
         }
       },
+      "produces": [
+        "application/json",
+        "multipart/related",
+        "multipart/form-data"
+      ],
       "returns": "Snippet",
       "url": "/snippets/{username}/{encoded_id}/{node_id}"
     },
@@ -5130,6 +5155,11 @@
           "type": "string"
         }
       },
+      "produces": [
+        "application/json",
+        "multipart/related",
+        "multipart/form-data"
+      ],
       "returns": "Snippet",
       "url": "/snippets/{username}/{encoded_id}"
     },
@@ -5157,6 +5187,11 @@
           "type": "string"
         }
       },
+      "produces": [
+        "application/json",
+        "multipart/related",
+        "multipart/form-data"
+      ],
       "returns": "Snippet",
       "url": "/snippets/{username}/{encoded_id}/{node_id}"
     },
@@ -5700,6 +5735,9 @@
           "type": "string"
         }
       },
+      "produces": [
+        "application/json"
+      ],
       "returns": "SearchResultPage",
       "url": "/teams/{username}/search/code"
     },
@@ -6199,6 +6237,9 @@
           "type": "string"
         }
       },
+      "produces": [
+        "application/json"
+      ],
       "returns": "SearchResultPage",
       "url": "/users/{username}/search/code"
     },

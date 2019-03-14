@@ -66,6 +66,11 @@ const setConsumes = (apiObject, { consumes = [] }) => {
   apiObject.accepts = _.uniq(apiObject.accepts.concat(...consumes))
 }
 
+const setProduces = (apiObject, { produces = [] }) => {
+  if (!apiObject.produces) apiObject.produces = []
+  apiObject.produces = _.uniq(apiObject.produces.concat(...produces))
+}
+
 const setHTTPMethod = (apiObject, method) => {
   apiObject.method = method.toUpperCase()
 }
@@ -154,6 +159,7 @@ const updateRoutes = routesObject => {
         setParameters(routesObject[namespaceName][apiName], spec)
         if (spec[method]) {
           setConsumes(routesObject[namespaceName][apiName], spec[method])
+          setProduces(routesObject[namespaceName][apiName], spec[method])
           setParameters(routesObject[namespaceName][apiName], spec[method])
           setResponses(routesObject[namespaceName][apiName], spec[method])
         }
@@ -162,6 +168,7 @@ const updateRoutes = routesObject => {
 
         _.each(specExtras[method], (value, key) => {
           setConsumes(routesObject[namespaceName][apiName], specExtras[method])
+          setProduces(routesObject[namespaceName][apiName], specExtras[method])
           setParameters(
             routesObject[namespaceName][apiName],
             specExtras[method]
