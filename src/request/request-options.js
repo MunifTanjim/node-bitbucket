@@ -46,8 +46,8 @@ const getRequestOptions = (endpointOptions = {}) => {
     url = addQueryParameters(url, paramGroups.query)
   }
 
-  if (produces.length > 0) {
-    headers['accept'] = produces
+  if (produces.length === 1) {
+    headers['accept'] = produces[0]
   }
 
   if (paramGroups.body && Object.keys(paramGroups.body).length) {

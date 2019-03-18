@@ -68,7 +68,9 @@ const setConsumes = (apiObject, { consumes = [] }) => {
 
 const setProduces = (apiObject, { produces = [] }) => {
   if (!apiObject.produces) apiObject.produces = []
-  apiObject.produces = _.uniq(apiObject.produces.concat(...produces))
+  if (produces.includes('application/octet-stream')) {
+    apiObject.produces = ['application/octet-stream']
+  }
 }
 
 const setHTTPMethod = (apiObject, method) => {
