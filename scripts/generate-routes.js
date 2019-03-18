@@ -67,9 +67,8 @@ const setConsumes = (apiObject, { consumes = [] }) => {
 }
 
 const setProduces = (apiObject, { produces = [] }) => {
-  if (!apiObject.produces) apiObject.produces = []
-  if (produces.includes('application/octet-stream')) {
-    apiObject.produces = ['application/octet-stream']
+  if (produces.length === 1) {
+    _.set(apiObject, 'headers.accept', produces[0])
   }
 }
 

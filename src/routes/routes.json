@@ -513,6 +513,9 @@
       "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
     },
     "create": {
+      "headers": {
+        "accept": "application/json"
+      },
       "method": "POST",
       "params": {
         "_body": {
@@ -1616,6 +1619,9 @@
       "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
     },
     "get": {
+      "headers": {
+        "accept": "application/json"
+      },
       "method": "GET",
       "params": {
         "repo_slug": {
@@ -2302,6 +2308,9 @@
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}"
     },
     "getPipelineStepLog": {
+      "headers": {
+        "accept": "application/octet-stream"
+      },
       "method": "GET",
       "params": {
         "pipeline_uuid": {
@@ -2325,9 +2334,6 @@
           "type": "string"
         }
       },
-      "produces": [
-        "application/octet-stream"
-      ],
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log"
     },
     "getPipelineVariable": {
@@ -3792,6 +3798,9 @@
       "url": "/repositories/{username}/{repo_slug}/pullrequests"
     },
     "listPullrequestsForCommit": {
+      "headers": {
+        "accept": "application/json"
+      },
       "method": "GET",
       "params": {
         "commit": {
@@ -4175,6 +4184,9 @@
       "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline"
     },
     "update": {
+      "headers": {
+        "accept": "application/json"
+      },
       "method": "PUT",
       "params": {
         "_body": {
@@ -5682,6 +5694,9 @@
       "url": "/teams/{username}/hooks"
     },
     "searchCode": {
+      "headers": {
+        "accept": "application/json"
+      },
       "method": "GET",
       "params": {
         "page": {
@@ -6181,6 +6196,9 @@
       "url": "/users/{username}/hooks"
     },
     "searchCode": {
+      "headers": {
+        "accept": "application/json"
+      },
       "method": "GET",
       "params": {
         "page": {

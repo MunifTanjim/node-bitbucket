@@ -19,7 +19,6 @@ const getRequestOptions = (endpointOptions = {}) => {
     body,
     headers,
     method,
-    produces = [],
     url,
     options: otherOptions,
     ...remainingOptions
@@ -44,10 +43,6 @@ const getRequestOptions = (endpointOptions = {}) => {
 
   if (paramGroups.query) {
     url = addQueryParameters(url, paramGroups.query)
-  }
-
-  if (produces.length === 1) {
-    headers['accept'] = produces[0]
   }
 
   if (paramGroups.body && Object.keys(paramGroups.body).length) {
