@@ -22,7 +22,7 @@ class Bitbucket {
   constructor(options = {}) {
     this.options = deepmerge(clientDefaults, options)
 
-    this.hook = new Hook()
+    this.hook = new Hook.Collection()
 
     this.request = this.request.bind(this)
 
