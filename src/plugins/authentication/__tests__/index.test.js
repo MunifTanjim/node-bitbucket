@@ -5,7 +5,7 @@ let apiClient
 
 beforeEach(() => {
   apiClient = {
-    hook: new Hook()
+    hook: new Hook.Collection()
   }
 })
 
