@@ -1246,7 +1246,7 @@
       }
     ],
     "post": {
-      "description": "Creates a new branch restriction rule for a repository.\n\n`kind` describes what will be restricted. Allowed values are: `push`,\n`force`, `delete`, and `restrict_merges`.\n\nDifferent kinds of branch restrictions have different requirements:\n\n* `push` and `restrict_merges` require `users` and `groups` to be\n  specified. Empty lists are allowed, in which case permission is\n  denied for everybody.\n* `force` can not be specified in a Mercurial repository.\n\n`pattern` is used to determine which branches will be restricted.\n\nA `'*'` in `pattern` will expand to match zero or more characters, and\nevery other character matches itself. For example, `'foo*'` will match\n`'foo'` and `'foobar'`, but not `'barfoo'`. `'*'` will match all\nbranches.\n\n`users` and `groups` are lists of user names and group names.\n\n`kind` and `pattern` must be unique within a repository; adding new\nusers or groups to an existing restriction should be done via `PUT`.\n\nNote that branch restrictions with overlapping patterns are allowed,\nbut the resulting behavior may be surprising.",
+      "description": "Creates a new branch restriction rule for a repository.\n\n`kind` describes what will be restricted. Allowed values include:\n`push`, `force`, `delete` and `restrict_merges`.\n\nDifferent kinds of branch restrictions have different requirements:\n\n* `push` and `restrict_merges` require `users` and `groups` to be\n  specified. Empty lists are allowed, in which case permission is\n  denied for everybody.\n* `force` can not be specified in a Mercurial repository.\n\nThe restriction applies to all branches that match. There are\ntwo ways to match a branch. It is configured in `branch_match_kind`:\n\n1. `glob`: Matches a branch against the `pattern`. A `'*'` in\n   `pattern` will expand to match zero or more characters, and every\n   other character matches itself. For example, `'foo*'` will match\n   `'foo'` and `'foobar'`, but not `'barfoo'`. `'*'` will match all\n   branches.\n2. `branching_model`: Matches a branch against the repository's\n   branching model. The `branch_type` controls the type of branch\n   to match. Allowed values include: `production`, `development`,\n   `bugfix`, `release`, `feature` and `hotfix`.\n\nThe combination of `kind` and match must be unique. This means that\ntwo `glob` restrictions in a repository cannot have the same `kind` and\n`pattern`. Additionally, two `branching_model` restrictions in a\nrepository cannot have the same `kind` and `branch_type`.\n\n`users` and `groups` are lists of users and groups that are except from\nthe restriction. They can only be configured in `push` and\n`restrict_merges` restrictions. The `push` restriction stops a user\npushing to matching branches unless that user is in `users` or is a\nmember of a group in `groups`. The `restrict_merges` stops a user\nmerging pull requests to matching branches unless that user is in\n`users` or is a member of a group in `groups`. Adding new users or\ngroups to an existing restriction should be done via `PUT`.\n\nNote that branch restrictions with overlapping matchers is allowed,\nbut the resulting behavior may be surprising.",
       "parameters": [
         {
           "description": "The new rule",
@@ -1416,7 +1416,7 @@
       }
     ],
     "put": {
-      "description": "Updates an existing branch restriction rule.\n\nFields not present in the request body are ignored.\n\nSee [`POST`](../../branch-restrictions#post) for details.",
+      "description": "Updates an existing branch restriction rule.\n\nFields not present in the request body are ignored.\n\nSee [`POST`](../branch-restrictions#post) for details.",
       "parameters": [
         {
           "description": "The new version of the existing rule",
@@ -1472,10 +1472,185 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name}": {
-    "delete": {},
-    "get": {},
-    "put": {}
+  "/repositories/{username}/{repo_slug}/branching-model": {
+    "get": {
+      "description": "Return the branching model as applied to the repository. This view is\nread-only. The branching model settings can be changed using the\n[settings](branching-model/settings#get) API.\n\nThe returned object:\n\n1. Always has a `development` property. `development.branch` contains\n   the actual repository branch object that is considered to be the\n   `development` branch. `development.branch` will not be present\n   if it does not exist.\n2. Might have a `production` property. `production` will not\n   be present when `production` is disabled.\n   `production.branch` contains the actual branch object that is\n   considered to be the `production` branch. `production.branch` will\n   not be present if it does not exist.\n3. Always has a `branch_types` array which contains all enabled branch\n   types.\n\nExample body:\n\n```\n{\n  \"development\": {\n    \"name\": \"master\",\n    \"branch\": {\n      \"type\": \"branch\",\n      \"name\": \"master\",\n      \"target\": {\n        \"hash\": \"16dffcb0de1b22e249db6799532074cf32efe80f\"\n      }\n    },\n    \"use_mainbranch\": true\n  },\n  \"production\": {\n    \"name\": \"production\",\n    \"branch\": {\n      \"type\": \"branch\",\n      \"name\": \"production\",\n      \"target\": {\n        \"hash\": \"16dffcb0de1b22e249db6799532074cf32efe80f\"\n      }\n    },\n    \"use_mainbranch\": false\n  },\n  \"branch_types\": [\n    {\n      \"kind\": \"release\",\n      \"prefix\": \"release/\"\n    },\n    {\n      \"kind\": \"hotfix\",\n      \"prefix\": \"hotfix/\"\n    },\n    {\n      \"kind\": \"feature\",\n      \"prefix\": \"feature/\"\n    },\n    {\n      \"kind\": \"bugfix\",\n      \"prefix\": \"bugfix/\"\n    }\n  ],\n  \"type\": \"branching_model\",\n  \"links\": {\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/.../branching-model\"\n    }\n  }\n}\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The branching model object",
+          "schema": {
+            "$ref": "#/definitions/branching_model"
+          }
+        },
+        "401": {
+          "description": "If the request was not authenticated",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user does not have read access to the repository",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the repository does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "repository"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "branching_model"
+      ]
+    },
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "/repositories/{username}/{repo_slug}/branching-model/settings": {
+    "get": {
+      "description": "Return the branching model configuration for a repository. The returned\nobject:\n\n1. Always has a `development` property for the development branch.\n2. Always a `production` property for the production branch. The\n   production branch can be disabled.\n3. The `branch_types` contains all the branch types.\n\nThis is the raw configuration for the branching model. A client\nwishing to see the branching model with its actual current branches may\nfind the [active model API](../branching-model#get) more useful.\n\nExample body:\n\n```\n{\n  \"development\": {\n    \"is_valid\": true,\n    \"name\": null,\n    \"use_mainbranch\": true\n  },\n  \"production\": {\n    \"is_valid\": true,\n    \"name\": \"production\",\n    \"use_mainbranch\": false,\n    \"enabled\": false\n  },\n  \"branch_types\": [\n    {\n      \"kind\": \"release\",\n      \"enabled\": true,\n      \"prefix\": \"release/\"\n    },\n    {\n      \"kind\": \"hotfix\",\n      \"enabled\": true,\n      \"prefix\": \"hotfix/\"\n    },\n    {\n      \"kind\": \"feature\",\n      \"enabled\": true,\n      \"prefix\": \"feature/\"\n    },\n    {\n      \"kind\": \"bugfix\",\n      \"enabled\": false,\n      \"prefix\": \"bugfix/\"\n    }\n  ],\n  \"type\": \"branching_model_settings\",\n  \"links\": {\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/.../branching-model/settings\"\n    }\n  }\n}\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The branching model configuration",
+          "schema": {
+            "$ref": "#/definitions/branching_model_settings"
+          }
+        },
+        "401": {
+          "description": "If the request was not authenticated",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user does not have admin access to the repository",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the repository does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "repository:admin"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "branching_model"
+      ]
+    },
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "put": {
+      "description": "Update the branching model configuration for a repository.\n\nThe `development` branch can be configured to a specific branch or to\ntrack the main branch. When set to a specific branch it must\ncurrently exist. Only the passed properties will be updated. The\nproperties not passed will be left unchanged. A request without a\n`development` property will leave the development branch unchanged.\n\nIt is possible for the `development` branch to be invalid. This\nhappens when it points at a specific branch that has been\ndeleted. This is indicated in the `is_valid` field for the branch. It is\nnot possible to update the settings for `development` if that\nwould leave the branch in an invalid state. Such a request will be\nrejected.\n\nThe `production` branch can be a specific branch, the main\nbranch or disabled. When set to a specific branch it must currently\nexist. The `enabled` property can be used to enable (`true`) or\ndisable (`false`) it. Only the passed properties will be updated. The\nproperties not passed will be left unchanged. A request without a\n`production` property will leave the production branch unchanged.\n\nIt is possible for the `production` branch to be invalid. This\nhappens when it points at a specific branch that has been\ndeleted. This is indicated in the `is_valid` field for the branch. A\nrequest that would leave `production` enabled and invalid will be\nrejected. It is possible to update `production` and make it invalid if\nit would also be left disabled.\n\nThe `branch_types` property contains the branch types to be updated.\nOnly the branch types passed will be updated. All updates will be\nrejected if it would leave the branching model in an invalid state.\nFor branch types this means that:\n\n1. The prefixes for all enabled branch types are valid. For example,\n   it is not possible to use '*' inside a Git prefix.\n2. A prefix of an enabled branch type must not be a prefix of another\n   enabled branch type. This is to ensure that a branch can be easily\n   classified by its prefix unambiguously.\n\nIt is possible to store an invalid prefix if that branch type would be\nleft disabled. Only the passed properties will be updated. The\nproperties not passed will be left unchanged. Each branch type must\nhave a `kind` property to identify it.\n\nExample Body:\n\n```\n    {\n      \"development\": {\n        \"use_mainbranch\": true\n      },\n      \"production\": {\n        \"enabled\": true,\n        \"use_mainbranch\": false,\n        \"name\": \"production\"\n      },\n      \"branch_types\": [\n        {\n          \"kind\": \"bugfix\",\n          \"enabled\": true,\n          \"prefix\": \"bugfix/\"\n        },\n        {\n          \"kind\": \"feature\",\n          \"enabled\": true,\n          \"prefix\": \"feature/\"\n        },\n        {\n          \"kind\": \"hotfix\",\n          \"prefix\": \"hotfix/\"\n        },\n        {\n          \"kind\": \"release\",\n          \"enabled\": false,\n        }\n      ]\n    }\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The updated branching model configuration",
+          "schema": {
+            "$ref": "#/definitions/branching_model_settings"
+          }
+        },
+        "400": {
+          "description": "If the request contains invalid branching model configuration",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "401": {
+          "description": "If the request was not authenticated",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user does not have admin access to the repository",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the repository does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "repository:admin"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "branching_model"
+      ]
+    }
   },
   "/repositories/{username}/{repo_slug}/commit/{commit}/pullrequests": {
     "get": {
@@ -2129,7 +2304,7 @@
   },
   "/repositories/{username}/{repo_slug}/commits": {
     "get": {
-      "description": "These are the repository's commits. They are paginated and returned\nin reverse chronological order, similar to the output of `git log` and\n`hg log`. Like these tools, the DAG can be filtered.\n\n## GET /repositories/{username}/{repo_slug}/commits/\n\nReturns all commits in the repo in topological order (newest commit\nfirst). All branches and tags are included (similar to\n`git log --all` and `hg log`).\n\n## GET /repositories/{username}/{repo_slug}/commits/master\n\nReturns all commits on rev `master` (similar to `git log master`,\n`hg log master`).\n\n## GET /repositories/{username}/{repo_slug}/commits/dev?exclude=master\n\nReturns all commits on ref `dev`, except those that are reachable on\n`master` (similar to `git log dev ^master`).\n\n## GET /repositories/{username}/{repo_slug}/commits/?exclude=master\n\nReturns all commits in the repo that are not on master\n(similar to `git log --all ^master`).\n\n## GET /repositories/{username}/{repo_slug}/commits/?include=foo&include=bar&exclude=fu&exclude=fubar\n\nReturns all commits that are on refs `foo` or `bar`, but not on `fu` or\n`fubar` (similar to `git log foo bar ^fu ^fubar`).\n\nBecause the response could include a very large number of commits, it\nis paginated. Follow the 'next' link in the response to navigate to the\nnext page of commits. As with other paginated resources, do not\nconstruct your own links.\n\nWhen the include and exclude parameters are more than can fit in a\nquery string, clients can use a `x-www-form-urlencoded` POST instead.",
+      "description": "These are the repository's commits. They are paginated and returned\nin reverse chronological order, similar to the output of `git log` and\n`hg log`. Like these tools, the DAG can be filtered.\n\n## GET /repositories/{username}/{repo_slug}/commits/\n\nReturns all commits in the repo in topological order (newest commit\nfirst). All branches and tags are included (similar to\n`git log --all` and `hg log`).\n\n## GET /repositories/{username}/{repo_slug}/commits/master\n\nReturns all commits on rev `master` (similar to `git log master`,\n`hg log master`).\n\n## GET /repositories/{username}/{repo_slug}/commits/dev?exclude=master\n\nReturns all commits on ref `dev`, except those that are reachable on\n`master` (similar to `git log dev ^master`).\n\n## GET /repositories/{username}/{repo_slug}/commits/?exclude=master\n\nReturns all commits in the repo that are not on master\n(similar to `git log --all ^master`).\n\n## GET /repositories/{username}/{repo_slug}/commits/?include=foo&include=bar&exclude=fu&exclude=fubar\n\nReturns all commits that are on refs `foo` or `bar`, but not on `fu` or\n`fubar` (similar to `git log foo bar ^fu ^fubar`).\n\nAn optional `path` parameter can be specified that will limit the\nresults to commits that affect that path. `path` can either be a file\nor a directory. If a directory is specified, commits are returned that\nhave modified any file in the directory tree rooted by `path`. It is\nimportant to note that if the `path` parameter is specified, the commits\nreturned by this endpoint may no longer be a DAG, parent commits that\ndo not modify the path will be omitted from the response.\n\n## GET /repositories/{username}/{repo_slug}/commits/?path=README.md&include=foo&include=bar&exclude=master\n\nReturns all commits that are on refs `foo` or `bar`, but not on `master`\nthat changed the file README.md.\n\n## GET /repositories/{username}/{repo_slug}/commits/?path=src/&include=foo&include=bar&exclude=master\n\nReturns all commits that are on refs `foo` or `bar`, but not on `master`\nthat changed to a file in any file in the directory src or its children.\n\nBecause the response could include a very large number of commits, it\nis paginated. Follow the 'next' link in the response to navigate to the\nnext page of commits. As with other paginated resources, do not\nconstruct your own links.\n\nWhen the include and exclude parameters are more than can fit in a\nquery string, clients can use a `x-www-form-urlencoded` POST instead.",
       "parameters": [],
       "responses": {
         "default": {
@@ -2203,7 +2378,7 @@
   },
   "/repositories/{username}/{repo_slug}/commits/{revision}": {
     "get": {
-      "description": "These are the repository's commits. They are paginated and returned\nin reverse chronological order, similar to the output of `git log` and\n`hg log`. Like these tools, the DAG can be filtered.\n\n## GET /repositories/{username}/{repo_slug}/commits/\n\nReturns all commits in the repo in topological order (newest commit\nfirst). All branches and tags are included (similar to\n`git log --all` and `hg log`).\n\n## GET /repositories/{username}/{repo_slug}/commits/master\n\nReturns all commits on rev `master` (similar to `git log master`,\n`hg log master`).\n\n## GET /repositories/{username}/{repo_slug}/commits/dev?exclude=master\n\nReturns all commits on ref `dev`, except those that are reachable on\n`master` (similar to `git log dev ^master`).\n\n## GET /repositories/{username}/{repo_slug}/commits/?exclude=master\n\nReturns all commits in the repo that are not on master\n(similar to `git log --all ^master`).\n\n## GET /repositories/{username}/{repo_slug}/commits/?include=foo&include=bar&exclude=fu&exclude=fubar\n\nReturns all commits that are on refs `foo` or `bar`, but not on `fu` or\n`fubar` (similar to `git log foo bar ^fu ^fubar`).\n\nBecause the response could include a very large number of commits, it\nis paginated. Follow the 'next' link in the response to navigate to the\nnext page of commits. As with other paginated resources, do not\nconstruct your own links.\n\nWhen the include and exclude parameters are more than can fit in a\nquery string, clients can use a `x-www-form-urlencoded` POST instead.",
+      "description": "These are the repository's commits. They are paginated and returned\nin reverse chronological order, similar to the output of `git log` and\n`hg log`. Like these tools, the DAG can be filtered.\n\n## GET /repositories/{username}/{repo_slug}/commits/\n\nReturns all commits in the repo in topological order (newest commit\nfirst). All branches and tags are included (similar to\n`git log --all` and `hg log`).\n\n## GET /repositories/{username}/{repo_slug}/commits/master\n\nReturns all commits on rev `master` (similar to `git log master`,\n`hg log master`).\n\n## GET /repositories/{username}/{repo_slug}/commits/dev?exclude=master\n\nReturns all commits on ref `dev`, except those that are reachable on\n`master` (similar to `git log dev ^master`).\n\n## GET /repositories/{username}/{repo_slug}/commits/?exclude=master\n\nReturns all commits in the repo that are not on master\n(similar to `git log --all ^master`).\n\n## GET /repositories/{username}/{repo_slug}/commits/?include=foo&include=bar&exclude=fu&exclude=fubar\n\nReturns all commits that are on refs `foo` or `bar`, but not on `fu` or\n`fubar` (similar to `git log foo bar ^fu ^fubar`).\n\nAn optional `path` parameter can be specified that will limit the\nresults to commits that affect that path. `path` can either be a file\nor a directory. If a directory is specified, commits are returned that\nhave modified any file in the directory tree rooted by `path`. It is\nimportant to note that if the `path` parameter is specified, the commits\nreturned by this endpoint may no longer be a DAG, parent commits that\ndo not modify the path will be omitted from the response.\n\n## GET /repositories/{username}/{repo_slug}/commits/?path=README.md&include=foo&include=bar&exclude=master\n\nReturns all commits that are on refs `foo` or `bar`, but not on `master`\nthat changed the file README.md.\n\n## GET /repositories/{username}/{repo_slug}/commits/?path=src/&include=foo&include=bar&exclude=master\n\nReturns all commits that are on refs `foo` or `bar`, but not on `master`\nthat changed to a file in any file in the directory src or its children.\n\nBecause the response could include a very large number of commits, it\nis paginated. Follow the 'next' link in the response to navigate to the\nnext page of commits. As with other paginated resources, do not\nconstruct your own links.\n\nWhen the include and exclude parameters are more than can fit in a\nquery string, clients can use a `x-www-form-urlencoded` POST instead.",
       "parameters": [],
       "responses": {
         "default": {
@@ -2864,7 +3039,7 @@
   },
   "/repositories/{username}/{repo_slug}/diff/{spec}": {
     "get": {
-      "description": "Produces a raw, git-style diff for either a single commit (diffed\nagainst its first parent), or a revspec of 2 commits (e.g.\n`3a8b42..9ff173` where the first commit represents the source and the\nsecond commit the destination).\n\nIn case of the latter (diffing a revspec), a 3-way diff, or merge diff,\nis computed. This shows the changes introduced by the left branch\n(`3a8b42` in our example) as compared againt the right branch\n(`9ff173`).\n\nThis is equivalent to merging the left branch into the right branch and\nthen computing the diff of the merge commit against its first parent\n(the right branch). This follows the same behavior as pull requests\nthat also show this style of 3-way, or merge diff.\n\nWhile similar to patches, diffs:\n\n* Don't have a commit header (username, commit message, etc)\n* Support the optional `path=foo/bar.py` query param to filter\n  the diff to just that one file diff\n\nThe raw diff is returned as-is, in whatever encoding the files in the\nrepository use. It is not decoded into unicode. As such, the\ncontent-type is `text/plain`.",
+      "description": "",
       "parameters": [
         {
           "description": "Generate diffs with <n> lines of context instead of the usual three",
@@ -2946,7 +3121,7 @@
   },
   "/repositories/{username}/{repo_slug}/diffstat/{spec}": {
     "get": {
-      "description": "Returns the diff stat for the specified commit.\n\nDiff stat responses contain a record for every path modified by the\ncommit and lists the number of lines added and removed for each file.\n\n\nExample:\n```\ncurl https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/diffstat/d222fa2..e174964\n{\n    \"pagelen\": 500,\n    \"values\": [\n        {\n            \"type\": \"diffstat\",\n            \"status\": \"modified\",\n            \"lines_removed\": 1,\n            \"lines_added\": 2,\n            \"old\": {\n                \"path\": \"setup.py\",\n                \"type\": \"commit_file\",\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/src/e1749643d655d7c7014001a6c0f58abaf42ad850/setup.py\"\n                    }\n                }\n            },\n            \"new\": {\n                \"path\": \"setup.py\",\n                \"type\": \"commit_file\",\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/src/d222fa235229c55dad20b190b0b571adf737d5a6/setup.py\"\n                    }\n                }\n            }\n        }\n    ],\n    \"page\": 1,\n    \"size\": 1\n}\n```",
+      "description": "",
       "parameters": [
         {
           "description": "Generate diffs that ignore whitespace",
@@ -3202,9 +3377,68 @@
       "tags": [
         "deployments"
       ]
+    },
+    "post": {
+      "description": "Create an environment.",
+      "operationId": "createEnvironment",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The environment to create.",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/deployment_environment"
+          }
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The environment was created.",
+          "headers": {
+            "Location": {
+              "description": "The URL of the newly created environment.",
+              "type": "string"
+            }
+          },
+          "schema": {
+            "$ref": "#/definitions/deployment_environment"
+          }
+        },
+        "404": {
+          "description": "The account or repository does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "409": {
+          "description": "An environment host with the provided name already exists.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "deployments"
+      ]
     }
   },
   "/repositories/{username}/{repo_slug}/environments/{environment_uuid}": {
+    "delete": {},
     "get": {
       "description": "Retrieve an environment",
       "operationId": "getEnvironmentForRepository",
@@ -6945,11 +7179,6 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/properties/{app_key}/{property_name}": {
-    "delete": {},
-    "get": {},
-    "put": {}
-  },
   "/repositories/{username}/{repo_slug}/pullrequests": {
     "get": {
       "description": "Returns all pull requests on the specified repository.\n\nBy default only open pull requests are returned. This can be controlled\nusing the `state` query parameter. To retrieve pull requests that are\nin one of multiple states, repeat the `state` parameter for each\nindividual state.\n\nThis endpoint also supports filtering and sorting of the results. See\n[filtering and sorting](../../../../meta/filtering) for more details.",
@@ -8694,11 +8923,6 @@
       }
     ]
   },
-  "/repositories/{username}/{repo_slug}/pullrequests/{pullrequest_id}/properties/{app_key}/{property_name}": {
-    "delete": {},
-    "get": {},
-    "put": {}
-  },
   "/repositories/{username}/{repo_slug}/pullrequests/activity": {
     "get": {
       "description": "Returns a paginated list of the pull request's activity log.\n\nThis includes comments that were made by the reviewers, updates and\napprovals.",
@@ -9879,6 +10103,432 @@
         "type": "string"
       }
     ]
+  },
+  "/repositories/{workspace}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name}": {
+    "delete": {
+      "description": "Delete an application property value stored against a commit.",
+      "operationId": "deleteCommitHostedPropertyValue",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The commit.",
+          "in": "path",
+          "name": "commit",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key of the Connect app.",
+          "in": "path",
+          "name": "app_key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the property.",
+          "in": "path",
+          "name": "property_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "An empty response."
+        }
+      },
+      "tags": [
+        "properties"
+      ]
+    },
+    "get": {
+      "description": "Retrieve an application property value stored against a commit.",
+      "operationId": "getCommitHostedPropertyValue",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The commit.",
+          "in": "path",
+          "name": "commit",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key of the Connect app.",
+          "in": "path",
+          "name": "app_key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the property.",
+          "in": "path",
+          "name": "property_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The value of the property."
+        }
+      },
+      "tags": [
+        "properties"
+      ]
+    },
+    "put": {
+      "description": "Update an application property value stored against a commit.",
+      "operationId": "updateCommitHostedPropertyValue",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The commit.",
+          "in": "path",
+          "name": "commit",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key of the Connect app.",
+          "in": "path",
+          "name": "app_key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the property.",
+          "in": "path",
+          "name": "property_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "An empty response."
+        }
+      },
+      "tags": [
+        "properties"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/properties/{app_key}/{property_name}": {
+    "delete": {
+      "description": "Delete an application property value stored against a repository.",
+      "operationId": "deleteRepositoryHostedPropertyValue",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key of the Connect app.",
+          "in": "path",
+          "name": "app_key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the property.",
+          "in": "path",
+          "name": "property_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "An empty response."
+        }
+      },
+      "tags": [
+        "properties"
+      ]
+    },
+    "get": {
+      "description": "Retrieve an application property value stored against a repository.",
+      "operationId": "getRepositoryHostedPropertyValue",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key of the Connect app.",
+          "in": "path",
+          "name": "app_key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the property.",
+          "in": "path",
+          "name": "property_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The value of the property."
+        }
+      },
+      "tags": [
+        "properties"
+      ]
+    },
+    "put": {
+      "description": "Update an application property value stored against a repository.",
+      "operationId": "updateRepositoryHostedPropertyValue",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key of the Connect app.",
+          "in": "path",
+          "name": "app_key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the property.",
+          "in": "path",
+          "name": "property_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "An empty response."
+        }
+      },
+      "tags": [
+        "properties"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pullrequests/{pullrequest_id}/properties/{app_key}/{property_name}": {
+    "delete": {
+      "description": "Delete an application property value stored against a pull request.",
+      "operationId": "deletePullRequestHostedPropertyValue",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The pull request ID.",
+          "in": "path",
+          "name": "pullrequest_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key of the Connect app.",
+          "in": "path",
+          "name": "app_key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the property.",
+          "in": "path",
+          "name": "property_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "An empty response."
+        }
+      },
+      "tags": [
+        "properties"
+      ]
+    },
+    "get": {
+      "description": "Retrieve an application property value stored against a pull request.",
+      "operationId": "getPullRequestHostedPropertyValue",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The pull request ID.",
+          "in": "path",
+          "name": "pullrequest_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key of the Connect app.",
+          "in": "path",
+          "name": "app_key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the property.",
+          "in": "path",
+          "name": "property_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The value of the property."
+        }
+      },
+      "tags": [
+        "properties"
+      ]
+    },
+    "put": {
+      "description": "Update an application property value stored against a pull request.",
+      "operationId": "updatePullRequestHostedPropertyValue",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The pull request ID.",
+          "in": "path",
+          "name": "pullrequest_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key of the Connect app.",
+          "in": "path",
+          "name": "app_key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the property.",
+          "in": "path",
+          "name": "property_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "An empty response."
+        }
+      },
+      "tags": [
+        "properties"
+      ]
+    }
   },
   "/snippets": {
     "get": {
@@ -13606,9 +14256,111 @@
     }
   },
   "/users/{username}/properties/{app_key}/{property_name}": {
-    "delete": {},
-    "get": {},
-    "put": {}
+    "delete": {
+      "description": "Delete an application property value stored against a user.",
+      "operationId": "deleteUserHostedPropertyValue",
+      "parameters": [
+        {
+          "description": "The user.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key of the Connect app.",
+          "in": "path",
+          "name": "app_key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the property.",
+          "in": "path",
+          "name": "property_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "An empty response."
+        }
+      },
+      "tags": [
+        "properties"
+      ]
+    },
+    "get": {
+      "description": "Retrieve an application property value stored against a user.",
+      "operationId": "retrieveUserHostedPropertyValue",
+      "parameters": [
+        {
+          "description": "The user.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key of the Connect app.",
+          "in": "path",
+          "name": "app_key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the property.",
+          "in": "path",
+          "name": "property_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The value of the property."
+        }
+      },
+      "tags": [
+        "properties"
+      ]
+    },
+    "put": {
+      "description": "Update an application property value stored against a user.",
+      "operationId": "updateUserHostedPropertyValue",
+      "parameters": [
+        {
+          "description": "The user.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key of the Connect app.",
+          "in": "path",
+          "name": "app_key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the property.",
+          "in": "path",
+          "name": "property_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "An empty response."
+        }
+      },
+      "tags": [
+        "properties"
+      ]
+    }
   },
   "/users/{username}/repositories": {
     "get": {

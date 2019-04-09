@@ -109,6 +109,22 @@
       "repositories": "updateBranchRestriction"
     }
   },
+  "/repositories/{username}/{repo_slug}/branching-model": {
+    "get": {
+      "branching_model": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{username}/{repo_slug}/branching-model/settings": {
+    "get": {
+      "branching_model": "",
+      "repositories": ""
+    },
+    "put": {
+      "branching_model": "",
+      "repositories": ""
+    }
+  },
   "/repositories/{username}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name}": {
     "delete": {
       "repositories": ""
@@ -303,9 +319,16 @@
     "get": {
       "deployments": "listEnvironments",
       "repositories": "listEnvironments"
+    },
+    "post": {
+      "deployments": "",
+      "repositories": ""
     }
   },
   "/repositories/{username}/{repo_slug}/environments/{environment_uuid}": {
+    "delete": {
+      "repositories": ""
+    },
     "get": {
       "deployments": "getEnvironment",
       "repositories": "getEnvironment"
@@ -861,6 +884,48 @@
       "repositories": "listWatchers"
     }
   },
+  "/repositories/{workspace}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name}": {
+    "delete": {
+      "properties": "",
+      "repositories": ""
+    },
+    "get": {
+      "properties": "",
+      "repositories": ""
+    },
+    "put": {
+      "properties": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/properties/{app_key}/{property_name}": {
+    "delete": {
+      "properties": "",
+      "repositories": ""
+    },
+    "get": {
+      "properties": "",
+      "repositories": ""
+    },
+    "put": {
+      "properties": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pullrequests/{pullrequest_id}/properties/{app_key}/{property_name}": {
+    "delete": {
+      "properties": "",
+      "repositories": ""
+    },
+    "get": {
+      "properties": "",
+      "repositories": ""
+    },
+    "put": {
+      "properties": "",
+      "repositories": ""
+    }
+  },
   "/snippets": {
     "get": {
       "snippets": "list"
@@ -1189,12 +1254,15 @@
   },
   "/users/{username}/properties/{app_key}/{property_name}": {
     "delete": {
+      "properties": "",
       "users": ""
     },
     "get": {
+      "properties": "",
       "users": ""
     },
     "put": {
+      "properties": "",
       "users": ""
     }
   },
