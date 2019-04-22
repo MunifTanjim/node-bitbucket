@@ -1,4 +1,17 @@
 {
+  "/repositories": {
+    "get": {
+      "parameters": [
+        {
+          "enum": ["admin", "contributor", "member", "owner"],
+          "in": "query",
+          "name": "role",
+          "required": false,
+          "type": "string"
+        }
+      ]
+    }
+  },
   "/repositories/{username}/{repo_slug}/commits": {
     "get": {
       "parameters": [

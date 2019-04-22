@@ -3602,6 +3602,16 @@
           "in": "query",
           "type": "string"
         },
+        "role": {
+          "enum": [
+            "admin",
+            "contributor",
+            "member",
+            "owner"
+          ],
+          "in": "query",
+          "type": "string"
+        },
         "sort": {
           "in": "query",
           "type": "string"
