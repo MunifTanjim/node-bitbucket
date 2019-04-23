@@ -111,18 +111,18 @@
   },
   "/repositories/{username}/{repo_slug}/branching-model": {
     "get": {
-      "branching_model": "",
-      "repositories": ""
+      "branchingmodel": "get",
+      "repositories": "getBranchingModel"
     }
   },
   "/repositories/{username}/{repo_slug}/branching-model/settings": {
     "get": {
-      "branching_model": "",
-      "repositories": ""
+      "branchingmodelsettings": "get",
+      "repositories": "getBranchingModelSettings"
     },
     "put": {
-      "branching_model": "",
-      "repositories": ""
+      "branchingmodelsettings": "update",
+      "repositories": "updateBranchingModelSettings"
     }
   },
   "/repositories/{username}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name}": {
