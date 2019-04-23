@@ -1,14 +1,12 @@
 {
-  "branchingmodel": {
+  "branching_model": {
     "get": {
       "alias": "repositories.getBranchingModel"
-    }
-  },
-  "branchingmodelsettings": {
-    "get": {
+    },
+    "getSettings": {
       "alias": "repositories.getBranchingModelSettings"
     },
-    "update": {
+    "updateSettings": {
       "alias": "repositories.updateBranchingModelSettings"
     }
   },
