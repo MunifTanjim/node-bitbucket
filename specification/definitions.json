@@ -217,6 +217,199 @@
       }
     ]
   },
+  "branching_model": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A repository's branching model",
+        "properties": {
+          "branch_types": {
+            "description": "The active branch types.",
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "description": "The kind of branch.",
+                  "enum": [
+                    "feature",
+                    "bugfix",
+                    "release",
+                    "hotfix"
+                  ],
+                  "type": "string"
+                },
+                "prefix": {
+                  "description": "The prefix for this branch type. A branch with this prefix will be classified as per `kind`. The prefix must be a valid prefix for a branch and must always exist. It cannot be blank, empty or `null`.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "prefix"
+              ],
+              "type": "object"
+            },
+            "maxItems": 4,
+            "minItems": 0,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "development": {
+            "additionalProperties": false,
+            "properties": {
+              "branch": {
+                "$ref": "#/definitions/branch"
+              },
+              "name": {
+                "description": "Name of the target branch. Will be listed here even when the target branch does not exist. Will be `null` if targeting the main branch and the repository is empty.",
+                "type": "string"
+              },
+              "use_mainbranch": {
+                "description": "Indicates if the setting points at an explicit branch (`false`) or tracks the main branch (`true`).",
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "name",
+              "use_mainbranch"
+            ],
+            "type": "object"
+          },
+          "production": {
+            "additionalProperties": false,
+            "properties": {
+              "branch": {
+                "$ref": "#/definitions/branch"
+              },
+              "name": {
+                "description": "Name of the target branch. Will be listed here even when the target branch does not exist. Will be `null` if targeting the main branch and the repository is empty.",
+                "type": "string"
+              },
+              "use_mainbranch": {
+                "description": "Indicates if the setting points at an explicit branch (`false`) or tracks the main branch (`true`).",
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "name",
+              "use_mainbranch"
+            ],
+            "type": "object"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
+  "branching_model_settings": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A repository's branching model settings",
+        "properties": {
+          "branch_types": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "enabled": {
+                  "description": "Whether the branch type is enabled or not. A disabled branch type may contain an invalid `prefix`.",
+                  "type": "boolean"
+                },
+                "kind": {
+                  "description": "The kind of the branch type.",
+                  "enum": [
+                    "feature",
+                    "bugfix",
+                    "release",
+                    "hotfix"
+                  ],
+                  "type": "string"
+                },
+                "prefix": {
+                  "description": "The prefix for this branch type. A branch with this prefix will be classified as per `kind`. The `prefix` of an enabled branch type must be a valid branch prefix.Additionally, it cannot be blank, empty or `null`. The `prefix` for a disabled branch type can be empty or invalid.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind"
+              ],
+              "type": "object"
+            },
+            "maxItems": 4,
+            "minItems": 0,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "development": {
+            "additionalProperties": false,
+            "properties": {
+              "is_valid": {
+                "description": "Indicates if the configured branch is valid, that is, if the configured branch actually exists currently. Is always `true` when `use_mainbranch` is `true` (even if the main branch does not exist). This field is read-only. This field is ignored when updating/creating settings.",
+                "type": "boolean"
+              },
+              "name": {
+                "description": "The configured branch. It must be `null` when `use_mainbranch` is `true`. Otherwise it must be a non-empty value. It is possible for the configured branch to not exist (e.g. it was deleted after the settings are set). In this case `is_valid` will be `false`. The branch must exist when updating/setting the `name` or an error will occur.",
+                "type": "string"
+              },
+              "use_mainbranch": {
+                "description": "Indicates if the setting points at an explicit branch (`false`) or tracks the main branch (`true`). When `true` the `name` must be `null` or not provided. When `false` the `name` must contain a non-empty branch name.",
+                "type": "boolean"
+              }
+            },
+            "type": "object"
+          },
+          "links": {
+            "additionalProperties": false,
+            "properties": {
+              "self": {
+                "additionalProperties": false,
+                "properties": {
+                  "href": {
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "production": {
+            "additionalProperties": false,
+            "properties": {
+              "enabled": {
+                "description": "Indicates if branch is enabled or not.",
+                "type": "boolean"
+              },
+              "is_valid": {
+                "description": "Indicates if the configured branch is valid, that is, if the configured branch actually exists currently. Is always `true` when `use_mainbranch` is `true` (even if the main branch does not exist). This field is read-only. This field is ignored when updating/creating settings.",
+                "type": "boolean"
+              },
+              "name": {
+                "description": "The configured branch. It must be `null` when `use_mainbranch` is `true`. Otherwise it must be a non-empty value. It is possible for the configured branch to not exist (e.g. it was deleted after the settings are set). In this case `is_valid` will be `false`. The branch must exist when updating/setting the `name` or an error will occur.",
+                "type": "string"
+              },
+              "use_mainbranch": {
+                "description": "Indicates if the setting points at an explicit branch (`false`) or tracks the main branch (`true`). When `true` the `name` must be `null` or not provided. When `false` the `name` must contain a non-empty branch name.",
+                "type": "boolean"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
   "branchrestriction": {
     "allOf": [
       {
@@ -226,6 +419,26 @@
         "additionalProperties": true,
         "description": "A branch restriction rule.",
         "properties": {
+          "branch_match_kind": {
+            "description": "Indicates how the restriction is matched against a branch. The default is `glob`.",
+            "enum": [
+              "branching_model",
+              "glob"
+            ],
+            "type": "string"
+          },
+          "branch_type": {
+            "description": "Apply the restriction to branches of this type. Active when `branch_match_kind` is `branching_model`. The branch type will be calculated using the branching model configured for the repository.",
+            "enum": [
+              "feature",
+              "bugfix",
+              "release",
+              "hotfix",
+              "development",
+              "production"
+            ],
+            "type": "string"
+          },
           "groups": {
             "items": {
               "$ref": "#/definitions/group"
@@ -273,7 +486,7 @@
             "type": "object"
           },
           "pattern": {
-            "description": "Apply restrictions to branches following this pattern.",
+            "description": "Apply the restriction to branches that match this pattern. Active when `branch_match_kind` is `glob`. Will be empty when `branch_match_kind` is `branching_model`.",
             "type": "string"
           },
           "users": {
@@ -290,6 +503,7 @@
         },
         "required": [
           "kind",
+          "branch_match_kind",
           "pattern"
         ],
         "type": "object"
@@ -3337,10 +3551,6 @@
         "description": "The executable command.",
         "type": "string"
       },
-      "log_range": {
-        "$ref": "#/definitions/pipeline_log_range",
-        "description": "The range in the log that contains the execution output of this command."
-      },
       "name": {
         "description": "The name of the command.",
         "type": "string"
@@ -3437,20 +3647,6 @@
         "type": "object"
       }
     ]
-  },
-  "pipeline_log_range": {
-    "description": "A reference to a range of bytes in a log file (does not contain the actual bytes).",
-    "properties": {
-      "first_byte_position": {
-        "description": "The position of the first byte of the range in the log.",
-        "type": "integer"
-      },
-      "last_byte_position": {
-        "description": "The position of the last byte of the range in the log.",
-        "type": "integer"
-      }
-    },
-    "type": "object"
   },
   "pipeline_ref_target": {
     "allOf": [
@@ -3938,10 +4134,6 @@
             "$ref": "#/definitions/pipeline_image",
             "description": "The Docker image used as the build container for the step."
           },
-          "logByteCount": {
-            "description": "The amount of bytes of the log file that is available.",
-            "type": "integer"
-          },
           "script_commands": {
             "description": "The list of build commands. These commands are executed in the build container.",
             "items": {
@@ -3970,13 +4162,7 @@
             "type": "string"
           }
         },
-        "type": "object",
-        "x-bb-default-fields": [
-          "uuid",
-          "state",
-          "image"
-        ],
-        "x-bb-url": "/rest/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
+        "type": "object"
       }
     ]
   },
@@ -4346,6 +4532,40 @@
           }
         },
         "type": "object"
+      }
+    ]
+  },
+  "pipelines_ddev_pipeline_step": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A step of a Bitbucket pipeline. This represents the actual result of the step execution.",
+        "type": "object",
+        "x-bb-default-fields": [
+          "uuid",
+          "state",
+          "image"
+        ]
+      }
+    ]
+  },
+  "pipelines_stg_west_pipeline_step": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A step of a Bitbucket pipeline. This represents the actual result of the step execution.",
+        "type": "object",
+        "x-bb-default-fields": [
+          "uuid",
+          "state",
+          "image"
+        ]
       }
     ]
   },

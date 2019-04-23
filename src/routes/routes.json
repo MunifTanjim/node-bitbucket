@@ -1,4 +1,15 @@
 {
+  "branching_model": {
+    "get": {
+      "alias": "repositories.getBranchingModel"
+    },
+    "getSettings": {
+      "alias": "repositories.getBranchingModelSettings"
+    },
+    "updateSettings": {
+      "alias": "repositories.updateBranchingModelSettings"
+    }
+  },
   "branchrestrictions": {
     "create": {
       "alias": "repositories.createBranchRestriction"
@@ -1659,6 +1670,40 @@
       },
       "returns": "Branch",
       "url": "/repositories/{username}/{repo_slug}/refs/branches/{name}"
+    },
+    "getBranchingModel": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "BranchingModel",
+      "url": "/repositories/{username}/{repo_slug}/branching-model"
+    },
+    "getBranchingModelSettings": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "BranchingModelSettings",
+      "url": "/repositories/{username}/{repo_slug}/branching-model/settings"
     },
     "getBranchRestriction": {
       "method": "GET",
@@ -4217,6 +4262,23 @@
       },
       "returns": "Repository",
       "url": "/repositories/{username}/{repo_slug}"
+    },
+    "updateBranchingModelSettings": {
+      "method": "PUT",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "BranchingModelSettings",
+      "url": "/repositories/{username}/{repo_slug}/branching-model/settings"
     },
     "updateBranchRestriction": {
       "method": "PUT",

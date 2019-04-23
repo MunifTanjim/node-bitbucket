@@ -197,6 +197,175 @@
         }
       ]
     },
+    "BranchingModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "branch_types": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "feature",
+                      "bugfix",
+                      "release",
+                      "hotfix"
+                    ],
+                    "type": "string"
+                  },
+                  "prefix": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "prefix"
+                ],
+                "type": "object"
+              },
+              "maxItems": 4,
+              "type": "array"
+            },
+            "development": {
+              "additionalProperties": false,
+              "properties": {
+                "branch": {
+                  "$ref": "#/definitions/Branch"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "use_mainbranch": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "name",
+                "use_mainbranch"
+              ],
+              "type": "object"
+            },
+            "production": {
+              "additionalProperties": false,
+              "properties": {
+                "branch": {
+                  "$ref": "#/definitions/Branch"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "use_mainbranch": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "name",
+                "use_mainbranch"
+              ],
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "BranchingModelSettings": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "branch_types": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "enabled": {
+                    "type": "boolean"
+                  },
+                  "kind": {
+                    "enum": [
+                      "feature",
+                      "bugfix",
+                      "release",
+                      "hotfix"
+                    ],
+                    "type": "string"
+                  },
+                  "prefix": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "kind"
+                ],
+                "type": "object"
+              },
+              "maxItems": 4,
+              "type": "array"
+            },
+            "development": {
+              "additionalProperties": false,
+              "properties": {
+                "is_valid": {
+                  "type": "boolean"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "use_mainbranch": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "links": {
+              "additionalProperties": false,
+              "properties": {
+                "self": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "production": {
+              "additionalProperties": false,
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "is_valid": {
+                  "type": "boolean"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "use_mainbranch": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
     "Branchrestriction": {
       "allOf": [
         {
@@ -205,6 +374,24 @@
         {
           "additionalProperties": true,
           "properties": {
+            "branch_match_kind": {
+              "enum": [
+                "branching_model",
+                "glob"
+              ],
+              "type": "string"
+            },
+            "branch_type": {
+              "enum": [
+                "feature",
+                "bugfix",
+                "release",
+                "hotfix",
+                "development",
+                "production"
+              ],
+              "type": "string"
+            },
             "groups": {
               "items": {
                 "$ref": "#/definitions/Group"
@@ -262,6 +449,7 @@
           },
           "required": [
             "kind",
+            "branch_match_kind",
             "pattern"
           ],
           "type": "object"
@@ -2670,9 +2858,6 @@
         "command": {
           "type": "string"
         },
-        "log_range": {
-          "$ref": "#/definitions/PipelineLogRange"
-        },
         "name": {
           "type": "string"
         }
@@ -2755,17 +2940,6 @@
           "type": "object"
         }
       ]
-    },
-    "PipelineLogRange": {
-      "properties": {
-        "first_byte_position": {
-          "type": "integer"
-        },
-        "last_byte_position": {
-          "type": "integer"
-        }
-      },
-      "type": "object"
     },
     "PipelineRefTarget": {
       "allOf": [
@@ -3195,9 +3369,6 @@
             "image": {
               "$ref": "#/definitions/PipelineImage"
             },
-            "logByteCount": {
-              "type": "integer"
-            },
             "script_commands": {
               "items": {
                 "$ref": "#/definitions/PipelineCommand"
@@ -3220,13 +3391,7 @@
               "type": "string"
             }
           },
-          "type": "object",
-          "x-bb-default-fields": [
-            "uuid",
-            "state",
-            "image"
-          ],
-          "x-bb-url": "/rest/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
+          "type": "object"
         }
       ]
     },
@@ -3558,6 +3723,38 @@
             }
           },
           "type": "object"
+        }
+      ]
+    },
+    "PipelinesDdevPipelineStep": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "type": "object",
+          "x-bb-default-fields": [
+            "uuid",
+            "state",
+            "image"
+          ]
+        }
+      ]
+    },
+    "PipelinesStgWestPipelineStep": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "type": "object",
+          "x-bb-default-fields": [
+            "uuid",
+            "state",
+            "image"
+          ]
         }
       ]
     },
@@ -4847,6 +5044,12 @@
   "properties": {
     "Branch": {
       "$ref": "#/definitions/Branch"
+    },
+    "BranchingModel": {
+      "$ref": "#/definitions/BranchingModel"
+    },
+    "BranchingModelSettings": {
+      "$ref": "#/definitions/BranchingModelSettings"
     },
     "Branchrestriction": {
       "$ref": "#/definitions/Branchrestriction"
