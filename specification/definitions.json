@@ -4164,7 +4164,11 @@
         },
         "type": "object"
       }
-    ]
+    ],
+    "x-bb-default-fields": [
+      "uuid"
+    ],
+    "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
   },
   "pipeline_step_error": {
     "allOf": [
@@ -4543,14 +4547,13 @@
       {
         "additionalProperties": true,
         "description": "A step of a Bitbucket pipeline. This represents the actual result of the step execution.",
-        "type": "object",
-        "x-bb-default-fields": [
-          "uuid",
-          "state",
-          "image"
-        ]
+        "type": "object"
       }
-    ]
+    ],
+    "x-bb-default-fields": [
+      "uuid"
+    ],
+    "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
   },
   "pipelines_stg_west_pipeline_step": {
     "allOf": [
@@ -4560,14 +4563,13 @@
       {
         "additionalProperties": true,
         "description": "A step of a Bitbucket pipeline. This represents the actual result of the step execution.",
-        "type": "object",
-        "x-bb-default-fields": [
-          "uuid",
-          "state",
-          "image"
-        ]
+        "type": "object"
       }
-    ]
+    ],
+    "x-bb-default-fields": [
+      "uuid"
+    ],
+    "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
   },
   "project": {
     "allOf": [

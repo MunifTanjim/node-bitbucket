@@ -1652,79 +1652,6 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/commit/{commit}/pullrequests": {
-    "get": {
-      "operationId": "getPullrequestsForCommit",
-      "parameters": [
-        {
-          "description": "The account; either the UUID in curly braces, or the account_id",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository; either the UUID in curly braces, or the slug",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The SHA1 of the commit",
-          "in": "path",
-          "name": "commit",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "default": 1,
-          "description": "Which page to retrieve",
-          "format": "int32",
-          "in": "query",
-          "name": "page",
-          "required": false,
-          "type": "integer"
-        },
-        {
-          "default": 30,
-          "description": "How many pull requests to retrieve per page",
-          "format": "int32",
-          "in": "query",
-          "name": "pagelen",
-          "required": false,
-          "type": "integer"
-        }
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "responses": {
-        "200": {
-          "description": "The paginated list of pull requests.",
-          "schema": {
-            "$ref": "#/definitions/paginated_pullrequests"
-          }
-        },
-        "202": {
-          "description": "The repository's pull requests are still being indexed.",
-          "schema": {
-            "$ref": "#/definitions/paginated_pullrequests"
-          }
-        },
-        "404": {
-          "description": "Either the repository does not exist, or pull request commit links have not yet been indexed.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "summary": "Returns a paginated list of all pull requests as part of which this commit was reviewed.",
-      "tags": [
-        "pullrequests"
-      ]
-    }
-  },
   "/repositories/{username}/{repo_slug}/commit/{node}": {
     "get": {
       "description": "Returns the specified commit.",
@@ -2958,88 +2885,9 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/deployments/": {
-    "get": {
-      "description": "Find deployments",
-      "operationId": "getDeploymentsForRepository",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The matching deployments.",
-          "schema": {
-            "$ref": "#/definitions/paginated_deployments"
-          }
-        }
-      },
-      "tags": [
-        "deployments"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/deployments/{deployment_uuid}": {
-    "get": {
-      "description": "Retrieve a deployment",
-      "operationId": "getDeploymentForRepository",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The deployment UUID.",
-          "in": "path",
-          "name": "deployment_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The deployment.",
-          "schema": {
-            "$ref": "#/definitions/deployment"
-          }
-        },
-        "404": {
-          "description": "No account, repository or deployment with the UUID provided exists.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "deployments"
-      ]
-    }
-  },
   "/repositories/{username}/{repo_slug}/diff/{spec}": {
     "get": {
-      "description": "",
+      "description": "Produces a raw, git-style diff for either a single commit (diffed\nagainst its first parent), or a revspec of 2 commits (e.g.\n`3a8b42..9ff173` where the first commit represents the source and the\nsecond commit the destination).\n\nIn case of the latter (diffing a revspec), a 3-way diff, or merge diff,\nis computed. This shows the changes introduced by the left branch\n(`3a8b42` in our example) as compared againt the right branch\n(`9ff173`).\n\nThis is equivalent to merging the left branch into the right branch and\nthen computing the diff of the merge commit against its first parent\n(the right branch). This follows the same behavior as pull requests\nthat also show this style of 3-way, or merge diff.\n\nWhile similar to patches, diffs:\n\n* Don't have a commit header (username, commit message, etc)\n* Support the optional `path=foo/bar.py` query param to filter\n  the diff to just that one file diff\n\nThe raw diff is returned as-is, in whatever encoding the files in the\nrepository use. It is not decoded into unicode. As such, the\ncontent-type is `text/plain`.",
       "parameters": [
         {
           "description": "Generate diffs with <n> lines of context instead of the usual three",
@@ -3121,7 +2969,7 @@
   },
   "/repositories/{username}/{repo_slug}/diffstat/{spec}": {
     "get": {
-      "description": "",
+      "description": "Returns the diff stat for the specified commit.\n\nDiff stat responses contain a record for every path modified by the\ncommit and lists the number of lines added and removed for each file.\n\n\nExample:\n```\ncurl https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/diffstat/d222fa2..e174964\n{\n    \"pagelen\": 500,\n    \"values\": [\n        {\n            \"type\": \"diffstat\",\n            \"status\": \"modified\",\n            \"lines_removed\": 1,\n            \"lines_added\": 2,\n            \"old\": {\n                \"path\": \"setup.py\",\n                \"type\": \"commit_file\",\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/src/e1749643d655d7c7014001a6c0f58abaf42ad850/setup.py\"\n                    }\n                }\n            },\n            \"new\": {\n                \"path\": \"setup.py\",\n                \"type\": \"commit_file\",\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/src/d222fa235229c55dad20b190b0b571adf737d5a6/setup.py\"\n                    }\n                }\n            }\n        }\n    ],\n    \"page\": 1,\n    \"size\": 1\n}\n```",
       "parameters": [
         {
           "description": "Generate diffs that ignore whitespace",
@@ -3345,187 +3193,6 @@
         "type": "string"
       }
     ]
-  },
-  "/repositories/{username}/{repo_slug}/environments/": {
-    "get": {
-      "description": "Find environments",
-      "operationId": "getEnvironmentsForRepository",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The matching environments.",
-          "schema": {
-            "$ref": "#/definitions/paginated_environments"
-          }
-        }
-      },
-      "tags": [
-        "deployments"
-      ]
-    },
-    "post": {
-      "description": "Create an environment.",
-      "operationId": "createEnvironment",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The environment to create.",
-          "in": "body",
-          "name": "_body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/deployment_environment"
-          }
-        }
-      ],
-      "responses": {
-        "201": {
-          "description": "The environment was created.",
-          "headers": {
-            "Location": {
-              "description": "The URL of the newly created environment.",
-              "type": "string"
-            }
-          },
-          "schema": {
-            "$ref": "#/definitions/deployment_environment"
-          }
-        },
-        "404": {
-          "description": "The account or repository does not exist.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        },
-        "409": {
-          "description": "An environment host with the provided name already exists.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "deployments"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/environments/{environment_uuid}": {
-    "delete": {},
-    "get": {
-      "description": "Retrieve an environment",
-      "operationId": "getEnvironmentForRepository",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The environment UUID.",
-          "in": "path",
-          "name": "environment_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The environment.",
-          "schema": {
-            "$ref": "#/definitions/deployment_environment"
-          }
-        },
-        "404": {
-          "description": "No account, repository or environment with the UUID provided exists.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "deployments"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/environments/{environment_uuid}/changes/": {
-    "post": {
-      "description": "Update an environment",
-      "operationId": "updateEnvironmentForRepository",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The environment UUID.",
-          "in": "path",
-          "name": "environment_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "202": {
-          "description": "The environment update request was accepted."
-        },
-        "404": {
-          "description": "No account, repository or environment with the UUID provided exists.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "deployments"
-      ]
-    }
   },
   "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}": {
     "get": {
@@ -5850,1334 +5517,6 @@
         "type": "string"
       }
     ]
-  },
-  "/repositories/{username}/{repo_slug}/pipelines_config": {
-    "get": {
-      "description": "Retrieve the repository pipelines configuration.",
-      "operationId": "getRepositoryPipelineConfig",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The repository pipelines configuration.",
-          "schema": {
-            "$ref": "#/definitions/pipelines_config"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    },
-    "put": {
-      "description": "Update the pipelines configuration for a repository.",
-      "operationId": "updateRepositoryPipelineConfig",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The updated repository pipelines configuration.",
-          "in": "body",
-          "name": "_body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/pipelines_config"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The repository pipelines configuration was updated.",
-          "schema": {
-            "$ref": "#/definitions/pipelines_config"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines_config/build_number": {
-    "put": {
-      "description": "Update the next build number that should be assigned to a pipeline. The next build number that will be configured has to be strictly higher than the current latest build number for this repository.",
-      "operationId": "updateRepositoryBuildNumber",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The build number to update.",
-          "in": "body",
-          "name": "_body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/pipeline_build_number"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The build number has been configured.",
-          "schema": {
-            "$ref": "#/definitions/pipeline_build_number"
-          }
-        },
-        "400": {
-          "description": "The update failed because the next number was invalid (it should be higher than the current number).",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        },
-        "404": {
-          "description": "The account or repository was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines_config/schedules/": {
-    "get": {
-      "description": "Retrieve the configured schedules for the given repository.",
-      "operationId": "getRepositoryPipelineSchedules",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The list of schedules.",
-          "schema": {
-            "$ref": "#/definitions/paginated_pipeline_schedules"
-          }
-        },
-        "404": {
-          "description": "The account or repository was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    },
-    "post": {
-      "description": "Create a schedule for the given repository.",
-      "operationId": "createRepositoryPipelineSchedule",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The schedule to create.",
-          "in": "body",
-          "name": "_body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/pipeline_schedule"
-          }
-        }
-      ],
-      "responses": {
-        "201": {
-          "description": "The created schedule.",
-          "schema": {
-            "$ref": "#/definitions/pipeline_schedule"
-          }
-        },
-        "400": {
-          "description": "There were errors validating the request.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        },
-        "401": {
-          "description": "The maximum limit of schedules for this repository was reached.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        },
-        "404": {
-          "description": "The account or repository was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}": {
-    "delete": {
-      "description": "Delete a schedule.",
-      "operationId": "deleteRepositoryPipelineSchedule",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The uuid of the schedule.",
-          "in": "path",
-          "name": "schedule_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "204": {
-          "description": "The schedule was deleted."
-        },
-        "404": {
-          "description": "The account, repository or schedule was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    },
-    "get": {
-      "description": "Retrieve a schedule by its UUID.",
-      "operationId": "getRepositoryPipelineSchedule",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The uuid of the schedule.",
-          "in": "path",
-          "name": "schedule_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The requested schedule.",
-          "schema": {
-            "$ref": "#/definitions/pipeline_schedule"
-          }
-        },
-        "404": {
-          "description": "The account, repository or schedule was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    },
-    "put": {
-      "description": "Update a schedule.",
-      "operationId": "updateRepositoryPipelineSchedule",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The uuid of the schedule.",
-          "in": "path",
-          "name": "schedule_uuid",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The schedule to update.",
-          "in": "body",
-          "name": "_body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/pipeline_schedule"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The schedule is updated.",
-          "schema": {
-            "$ref": "#/definitions/pipeline_schedule"
-          }
-        },
-        "404": {
-          "description": "The account, repository or schedule was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/": {
-    "get": {
-      "description": "Retrieve the executions of a given schedule.",
-      "operationId": "getRepositoryPipelineScheduleExecutions",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The list of executions of a schedule.",
-          "schema": {
-            "$ref": "#/definitions/paginated_pipeline_schedule_executions"
-          }
-        },
-        "404": {
-          "description": "The account or repository was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair": {
-    "delete": {
-      "description": "Delete the repository SSH key pair.",
-      "operationId": "deleteRepositoryPipelineKeyPair",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "204": {
-          "description": "The SSH key pair was deleted."
-        },
-        "404": {
-          "description": "The account, repository or SSH key pair was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    },
-    "get": {
-      "description": "Retrieve the repository SSH key pair excluding the SSH private key. The private key is a write only field and will never be exposed in the logs or the REST API.",
-      "operationId": "getRepositoryPipelineSshKeyPair",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The SSH key pair.",
-          "schema": {
-            "$ref": "#/definitions/pipeline_ssh_key_pair"
-          }
-        },
-        "404": {
-          "description": "The account, repository or SSH key pair was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    },
-    "put": {
-      "description": "Create or update the repository SSH key pair. The private key will be set as a default SSH identity in your build container.",
-      "operationId": "updateRepositoryPipelineKeyPair",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The created or updated SSH key pair.",
-          "in": "body",
-          "name": "_body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/pipeline_ssh_key_pair"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The SSH key pair was created or updated.",
-          "schema": {
-            "$ref": "#/definitions/pipeline_ssh_key_pair"
-          }
-        },
-        "404": {
-          "description": "The account, repository or SSH key pair was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/": {
-    "get": {
-      "description": "Find repository level known hosts.",
-      "operationId": "getRepositoryPipelineKnownHosts",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The retrieved known hosts.",
-          "schema": {
-            "$ref": "#/definitions/paginated_pipeline_known_hosts"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    },
-    "post": {
-      "description": "Create a repository level known host.",
-      "operationId": "createRepositoryPipelineKnownHost",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The known host to create.",
-          "in": "body",
-          "name": "_body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/pipeline_known_host"
-          }
-        }
-      ],
-      "responses": {
-        "201": {
-          "description": "The known host was created.",
-          "headers": {
-            "Location": {
-              "description": "The URL of the newly created pipeline known host.",
-              "type": "string"
-            }
-          },
-          "schema": {
-            "$ref": "#/definitions/pipeline_known_host"
-          }
-        },
-        "404": {
-          "description": "The account or repository does not exist.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        },
-        "409": {
-          "description": "A known host with the provided hostname already exists.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}": {
-    "delete": {
-      "description": "Delete a repository level known host.",
-      "operationId": "deleteRepositoryPipelineKnownHost",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The UUID of the known host to delete.",
-          "in": "path",
-          "name": "known_host_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "204": {
-          "description": "The known host was deleted."
-        },
-        "404": {
-          "description": "The account, repository or known host with given UUID was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    },
-    "get": {
-      "description": "Retrieve a repository level known host.",
-      "operationId": "getRepositoryPipelineKnownHost",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The UUID of the known host to retrieve.",
-          "in": "path",
-          "name": "known_host_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The known host.",
-          "schema": {
-            "$ref": "#/definitions/pipeline_known_host"
-          }
-        },
-        "404": {
-          "description": "The account, repository or known host with the specified UUID was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    },
-    "put": {
-      "description": "Update a repository level known host.",
-      "operationId": "updateRepositoryPipelineKnownHost",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The UUID of the known host to update.",
-          "in": "path",
-          "name": "known_host_uuid",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The updated known host.",
-          "in": "body",
-          "name": "_body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/pipeline_known_host"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The known host was updated.",
-          "schema": {
-            "$ref": "#/definitions/pipeline_known_host"
-          }
-        },
-        "404": {
-          "description": "The account, repository or known host with the given UUID was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines_config/variables/": {
-    "get": {
-      "description": "Find repository level variables.",
-      "operationId": "getRepositoryPipelineVariables",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The retrieved variables.",
-          "schema": {
-            "$ref": "#/definitions/paginated_pipeline_variables"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    },
-    "post": {
-      "description": "Create a repository level variable.",
-      "operationId": "createRepositoryPipelineVariable",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The variable to create.",
-          "in": "body",
-          "name": "_body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/pipeline_variable"
-          }
-        }
-      ],
-      "responses": {
-        "201": {
-          "description": "The variable was created.",
-          "headers": {
-            "Location": {
-              "description": "The URL of the newly created pipeline variable.",
-              "type": "string"
-            }
-          },
-          "schema": {
-            "$ref": "#/definitions/pipeline_variable"
-          }
-        },
-        "404": {
-          "description": "The account or repository does not exist.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        },
-        "409": {
-          "description": "A variable with the provided key already exists.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}": {
-    "delete": {
-      "description": "Delete a repository level variable.",
-      "operationId": "deleteRepositoryPipelineVariable",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The UUID of the variable to delete.",
-          "in": "path",
-          "name": "variable_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "204": {
-          "description": "The variable was deleted."
-        },
-        "404": {
-          "description": "The account, repository or variable with given UUID was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    },
-    "get": {
-      "description": "Retrieve a repository level variable.",
-      "operationId": "getRepositoryPipelineVariable",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The UUID of the variable to retrieve.",
-          "in": "path",
-          "name": "variable_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The variable.",
-          "schema": {
-            "$ref": "#/definitions/pipeline_variable"
-          }
-        },
-        "404": {
-          "description": "The account, repository or variable with the specified UUID was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    },
-    "put": {
-      "description": "Update a repository level variable.",
-      "operationId": "updateRepositoryPipelineVariable",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The UUID of the variable to update.",
-          "in": "path",
-          "name": "variable_uuid",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The updated variable",
-          "in": "body",
-          "name": "_body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/pipeline_variable"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The variable was updated.",
-          "schema": {
-            "$ref": "#/definitions/pipeline_variable"
-          }
-        },
-        "404": {
-          "description": "The account, repository or variable with the given UUID was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines/": {
-    "get": {
-      "description": "Find pipelines",
-      "operationId": "getPipelinesForRepository",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The matching pipelines.",
-          "schema": {
-            "$ref": "#/definitions/paginated_pipelines"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    },
-    "post": {
-      "description": "Endpoint to create and initiate a pipeline. \nThere are a couple of different options to initiate a pipeline, where the payload of the request will determine which type of pipeline will be instantiated.\n# Trigger a Pipeline for a branch\nOne way to trigger pipelines is by specifying the branch for which you want to trigger a pipeline. \nThe specified branch will be used to determine which pipeline definition from the `bitbucket-pipelines.yml` file will be applied to initiate the pipeline. The pipeline will then do a clone of the repository and checkout the latest revision of the specified branch.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n  -d '\n  {\n    \"target\": {\n      \"ref_type\": \"branch\", \n      \"type\": \"pipeline_ref_target\", \n      \"ref_name\": \"master\"\n    }\n  }'\n```\n# Trigger a Pipeline for a commit on a branch or tag\nYou can initiate a pipeline for a specific commit and in the context of a specified reference (e.g. a branch, tag or bookmark).\nThe specified reference will be used to determine which pipeline definition from the bitbucket-pipelines.yml file will be applied to initiate the pipeline. The pipeline will clone the repository and then do a checkout the specified reference. \n\nThe following reference types are supported:\n\n* `branch` \n* `named_branch`\n* `bookmark` \n * `tag`\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n  https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n  -d '\n  {\n    \"target\": {\n      \"commit\": {\n        \"type\": \"commit\", \n        \"hash\": \"ce5b7431602f7cbba007062eeb55225c6e18e956\"\n      }, \n      \"ref_type\": \"branch\", \n      \"type\": \"pipeline_ref_target\", \n      \"ref_name\": \"master\"\n    }\n  }'\n```\n# Trigger a specific pipeline definition for a commit\nYou can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit. \nIn addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition. The resulting pipeline will then clone the repository and checkout the specified revision.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n -d '\n  {\n     \"target\": {\n      \"commit\": {\n         \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",\n         \"type\":\"commit\"\n       },\n        \"selector\": {\n           \"type\":\"custom\",\n              \"pattern\":\"Deploy to production\"\n          },\n        \"type\":\"pipeline_commit_target\"\n   }\n  }'\n```\n# Trigger a specific pipeline definition for a commit on a branch or tag\nYou can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit in the context of a specified reference. \nIn addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition, as well as the reference information. The resulting pipeline will then clone the repository a checkout the specified reference.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n -d '\n  {\n     \"target\": {\n      \"commit\": {\n         \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",\n         \"type\":\"commit\"\n       },\n       \"selector\": {\n          \"type\": \"custom\",\n          \"pattern\": \"Deploy to production\"\n       },\n       \"type\": \"pipeline_ref_target\",\n       \"ref_name\": \"master\",\n       \"ref_type\": \"branch\"\n     }\n  }'\n```\n",
-      "operationId": "createPipelineForRepository",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The pipeline to initiate.",
-          "in": "body",
-          "name": "_body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/pipeline"
-          }
-        }
-      ],
-      "responses": {
-        "201": {
-          "description": "The initiated pipeline.",
-          "headers": {
-            "Location": {
-              "description": "The URL of the newly created pipeline.",
-              "type": "string"
-            }
-          },
-          "schema": {
-            "$ref": "#/definitions/pipeline"
-          }
-        },
-        "400": {
-          "description": "The account or repository is not enabled, the yml file does not exist in the repository for the given revision, or the request body contained invalid properties.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        },
-        "404": {
-          "description": "The account or repository was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}": {
-    "get": {
-      "description": "Retrieve a specified pipeline",
-      "operationId": "getPipelineForRepository",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The pipeline UUID.",
-          "in": "path",
-          "name": "pipeline_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The pipeline.",
-          "schema": {
-            "$ref": "#/definitions/pipeline"
-          }
-        },
-        "404": {
-          "description": "No account, repository or pipeline with the UUID provided exists.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/": {
-    "get": {
-      "description": "Find steps for the given pipeline.",
-      "operationId": "getPipelineStepsForRepository",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The UUID of the pipeline.",
-          "in": "path",
-          "name": "pipeline_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The steps.",
-          "schema": {
-            "$ref": "#/definitions/paginated_pipeline_steps"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}": {
-    "get": {
-      "description": "Retrieve a given step of a pipeline.",
-      "operationId": "getPipelineStepForRepository",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The UUID of the pipeline.",
-          "in": "path",
-          "name": "pipeline_uuid",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The UUID of the step.",
-          "in": "path",
-          "name": "step_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The step.",
-          "schema": {
-            "$ref": "#/definitions/pipeline_step"
-          }
-        },
-        "404": {
-          "description": "No account, repository, pipeline or step with the UUID provided exists for the pipeline with the UUID provided.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log": {
-    "get": {
-      "description": "Retrieve the log file for a given step of a pipeline.\n\nThis endpoint supports (and encourages!) the use of [HTTP Range requests](https://tools.ietf.org/html/rfc7233) to deal with potentially very large log files.",
-      "operationId": "getPipelineStepLogForRepository",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The UUID of the pipeline.",
-          "in": "path",
-          "name": "pipeline_uuid",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The UUID of the step.",
-          "in": "path",
-          "name": "step_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "produces": [
-        "application/octet-stream"
-      ],
-      "responses": {
-        "200": {
-          "description": "The raw log file for this pipeline step."
-        },
-        "304": {
-          "description": "The log has the same etag as the provided If-None-Match header.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        },
-        "404": {
-          "description": "A pipeline with the given UUID does not exist, a step with the given UUID does not exist in the pipeline or a log file does not exist for the given step.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        },
-        "416": {
-          "description": "The requested range does not exist for requests that specified the [HTTP Range header](https://tools.ietf.org/html/rfc7233#section-3.1).",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline": {
-    "post": {
-      "description": "Signal the stop of a pipeline and all of its steps that not have completed yet.",
-      "operationId": "stopPipeline",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The repository.",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The UUID of the pipeline.",
-          "in": "path",
-          "name": "pipeline_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "204": {
-          "description": "The pipeline has been signaled to stop."
-        },
-        "400": {
-          "description": "The specified pipeline has already completed.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        },
-        "404": {
-          "description": "Either the account, repository or pipeline with the given UUID does not exist.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": [
-        "pipelines"
-      ]
-    }
   },
   "/repositories/{username}/{repo_slug}/pullrequests": {
     "get": {
@@ -10250,6 +8589,1667 @@
       },
       "tags": [
         "properties"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/commit/{commit}/pullrequests": {
+    "get": {
+      "operationId": "getPullrequestsForCommit",
+      "parameters": [
+        {
+          "description": "The account; either the UUID in curly braces, or the account_id",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository; either the UUID in curly braces, or the slug",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The SHA1 of the commit",
+          "in": "path",
+          "name": "commit",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "default": 1,
+          "description": "Which page to retrieve",
+          "format": "int32",
+          "in": "query",
+          "name": "page",
+          "required": false,
+          "type": "integer"
+        },
+        {
+          "default": 30,
+          "description": "How many pull requests to retrieve per page",
+          "format": "int32",
+          "in": "query",
+          "name": "pagelen",
+          "required": false,
+          "type": "integer"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "The paginated list of pull requests.",
+          "schema": {
+            "$ref": "#/definitions/paginated_pullrequests"
+          }
+        },
+        "202": {
+          "description": "The repository's pull requests are still being indexed.",
+          "schema": {
+            "$ref": "#/definitions/paginated_pullrequests"
+          }
+        },
+        "404": {
+          "description": "Either the repository does not exist, or pull request commit links have not yet been indexed.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "summary": "Returns a paginated list of all pull requests as part of which this commit was reviewed.",
+      "tags": [
+        "pullrequests"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/deployments/": {
+    "get": {
+      "description": "Find deployments",
+      "operationId": "getDeploymentsForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The matching deployments.",
+          "schema": {
+            "$ref": "#/definitions/paginated_deployments"
+          }
+        }
+      },
+      "tags": [
+        "deployments"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/deployments/{deployment_uuid}": {
+    "get": {
+      "description": "Retrieve a deployment",
+      "operationId": "getDeploymentForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The deployment UUID.",
+          "in": "path",
+          "name": "deployment_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The deployment.",
+          "schema": {
+            "$ref": "#/definitions/deployment"
+          }
+        },
+        "404": {
+          "description": "No account, repository or deployment with the UUID provided exists.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "deployments"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/environments/": {
+    "get": {
+      "description": "Find environments",
+      "operationId": "getEnvironmentsForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The matching environments.",
+          "schema": {
+            "$ref": "#/definitions/paginated_environments"
+          }
+        }
+      },
+      "tags": [
+        "deployments"
+      ]
+    },
+    "post": {
+      "description": "Create an environment.",
+      "operationId": "createEnvironment",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The environment to create.",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/deployment_environment"
+          }
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The environment was created.",
+          "headers": {
+            "Location": {
+              "description": "The URL of the newly created environment.",
+              "type": "string"
+            }
+          },
+          "schema": {
+            "$ref": "#/definitions/deployment_environment"
+          }
+        },
+        "404": {
+          "description": "The account or repository does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "409": {
+          "description": "An environment host with the provided name already exists.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "deployments"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}": {
+    "delete": {},
+    "get": {
+      "description": "Retrieve an environment",
+      "operationId": "getEnvironmentForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The environment UUID.",
+          "in": "path",
+          "name": "environment_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The environment.",
+          "schema": {
+            "$ref": "#/definitions/deployment_environment"
+          }
+        },
+        "404": {
+          "description": "No account, repository or environment with the UUID provided exists.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "deployments"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes/": {
+    "post": {
+      "description": "Update an environment",
+      "operationId": "updateEnvironmentForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The environment UUID.",
+          "in": "path",
+          "name": "environment_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "202": {
+          "description": "The environment update request was accepted."
+        },
+        "404": {
+          "description": "No account, repository or environment with the UUID provided exists.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "deployments"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config": {
+    "get": {
+      "description": "Retrieve the repository pipelines configuration.",
+      "operationId": "getRepositoryPipelineConfig",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The repository pipelines configuration.",
+          "schema": {
+            "$ref": "#/definitions/pipelines_config"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    },
+    "put": {
+      "description": "Update the pipelines configuration for a repository.",
+      "operationId": "updateRepositoryPipelineConfig",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The updated repository pipelines configuration.",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/pipelines_config"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The repository pipelines configuration was updated.",
+          "schema": {
+            "$ref": "#/definitions/pipelines_config"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/build_number": {
+    "put": {
+      "description": "Update the next build number that should be assigned to a pipeline. The next build number that will be configured has to be strictly higher than the current latest build number for this repository.",
+      "operationId": "updateRepositoryBuildNumber",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The build number to update.",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/pipeline_build_number"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The build number has been configured.",
+          "schema": {
+            "$ref": "#/definitions/pipeline_build_number"
+          }
+        },
+        "400": {
+          "description": "The update failed because the next number was invalid (it should be higher than the current number).",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "The account or repository was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/": {
+    "get": {
+      "description": "Retrieve the configured schedules for the given repository.",
+      "operationId": "getRepositoryPipelineSchedules",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The list of schedules.",
+          "schema": {
+            "$ref": "#/definitions/paginated_pipeline_schedules"
+          }
+        },
+        "404": {
+          "description": "The account or repository was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    },
+    "post": {
+      "description": "Create a schedule for the given repository.",
+      "operationId": "createRepositoryPipelineSchedule",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The schedule to create.",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/pipeline_schedule"
+          }
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The created schedule.",
+          "schema": {
+            "$ref": "#/definitions/pipeline_schedule"
+          }
+        },
+        "400": {
+          "description": "There were errors validating the request.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "401": {
+          "description": "The maximum limit of schedules for this repository was reached.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "The account or repository was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}": {
+    "delete": {
+      "description": "Delete a schedule.",
+      "operationId": "deleteRepositoryPipelineSchedule",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The uuid of the schedule.",
+          "in": "path",
+          "name": "schedule_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "The schedule was deleted."
+        },
+        "404": {
+          "description": "The account, repository or schedule was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    },
+    "get": {
+      "description": "Retrieve a schedule by its UUID.",
+      "operationId": "getRepositoryPipelineSchedule",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The uuid of the schedule.",
+          "in": "path",
+          "name": "schedule_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The requested schedule.",
+          "schema": {
+            "$ref": "#/definitions/pipeline_schedule"
+          }
+        },
+        "404": {
+          "description": "The account, repository or schedule was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    },
+    "put": {
+      "description": "Update a schedule.",
+      "operationId": "updateRepositoryPipelineSchedule",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The uuid of the schedule.",
+          "in": "path",
+          "name": "schedule_uuid",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The schedule to update.",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/pipeline_schedule"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The schedule is updated.",
+          "schema": {
+            "$ref": "#/definitions/pipeline_schedule"
+          }
+        },
+        "404": {
+          "description": "The account, repository or schedule was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/": {
+    "get": {
+      "description": "Retrieve the executions of a given schedule.",
+      "operationId": "getRepositoryPipelineScheduleExecutions",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The list of executions of a schedule.",
+          "schema": {
+            "$ref": "#/definitions/paginated_pipeline_schedule_executions"
+          }
+        },
+        "404": {
+          "description": "The account or repository was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair": {
+    "delete": {
+      "description": "Delete the repository SSH key pair.",
+      "operationId": "deleteRepositoryPipelineKeyPair",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "The SSH key pair was deleted."
+        },
+        "404": {
+          "description": "The account, repository or SSH key pair was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    },
+    "get": {
+      "description": "Retrieve the repository SSH key pair excluding the SSH private key. The private key is a write only field and will never be exposed in the logs or the REST API.",
+      "operationId": "getRepositoryPipelineSshKeyPair",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The SSH key pair.",
+          "schema": {
+            "$ref": "#/definitions/pipeline_ssh_key_pair"
+          }
+        },
+        "404": {
+          "description": "The account, repository or SSH key pair was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    },
+    "put": {
+      "description": "Create or update the repository SSH key pair. The private key will be set as a default SSH identity in your build container.",
+      "operationId": "updateRepositoryPipelineKeyPair",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The created or updated SSH key pair.",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/pipeline_ssh_key_pair"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The SSH key pair was created or updated.",
+          "schema": {
+            "$ref": "#/definitions/pipeline_ssh_key_pair"
+          }
+        },
+        "404": {
+          "description": "The account, repository or SSH key pair was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/": {
+    "get": {
+      "description": "Find repository level known hosts.",
+      "operationId": "getRepositoryPipelineKnownHosts",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The retrieved known hosts.",
+          "schema": {
+            "$ref": "#/definitions/paginated_pipeline_known_hosts"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    },
+    "post": {
+      "description": "Create a repository level known host.",
+      "operationId": "createRepositoryPipelineKnownHost",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The known host to create.",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/pipeline_known_host"
+          }
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The known host was created.",
+          "headers": {
+            "Location": {
+              "description": "The URL of the newly created pipeline known host.",
+              "type": "string"
+            }
+          },
+          "schema": {
+            "$ref": "#/definitions/pipeline_known_host"
+          }
+        },
+        "404": {
+          "description": "The account or repository does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "409": {
+          "description": "A known host with the provided hostname already exists.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}": {
+    "delete": {
+      "description": "Delete a repository level known host.",
+      "operationId": "deleteRepositoryPipelineKnownHost",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the known host to delete.",
+          "in": "path",
+          "name": "known_host_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "The known host was deleted."
+        },
+        "404": {
+          "description": "The account, repository or known host with given UUID was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    },
+    "get": {
+      "description": "Retrieve a repository level known host.",
+      "operationId": "getRepositoryPipelineKnownHost",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the known host to retrieve.",
+          "in": "path",
+          "name": "known_host_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The known host.",
+          "schema": {
+            "$ref": "#/definitions/pipeline_known_host"
+          }
+        },
+        "404": {
+          "description": "The account, repository or known host with the specified UUID was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    },
+    "put": {
+      "description": "Update a repository level known host.",
+      "operationId": "updateRepositoryPipelineKnownHost",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the known host to update.",
+          "in": "path",
+          "name": "known_host_uuid",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The updated known host.",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/pipeline_known_host"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The known host was updated.",
+          "schema": {
+            "$ref": "#/definitions/pipeline_known_host"
+          }
+        },
+        "404": {
+          "description": "The account, repository or known host with the given UUID was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/": {
+    "get": {
+      "description": "Find repository level variables.",
+      "operationId": "getRepositoryPipelineVariables",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The retrieved variables.",
+          "schema": {
+            "$ref": "#/definitions/paginated_pipeline_variables"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    },
+    "post": {
+      "description": "Create a repository level variable.",
+      "operationId": "createRepositoryPipelineVariable",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The variable to create.",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/pipeline_variable"
+          }
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The variable was created.",
+          "headers": {
+            "Location": {
+              "description": "The URL of the newly created pipeline variable.",
+              "type": "string"
+            }
+          },
+          "schema": {
+            "$ref": "#/definitions/pipeline_variable"
+          }
+        },
+        "404": {
+          "description": "The account or repository does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "409": {
+          "description": "A variable with the provided key already exists.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid}": {
+    "delete": {
+      "description": "Delete a repository level variable.",
+      "operationId": "deleteRepositoryPipelineVariable",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the variable to delete.",
+          "in": "path",
+          "name": "variable_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "The variable was deleted."
+        },
+        "404": {
+          "description": "The account, repository or variable with given UUID was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    },
+    "get": {
+      "description": "Retrieve a repository level variable.",
+      "operationId": "getRepositoryPipelineVariable",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the variable to retrieve.",
+          "in": "path",
+          "name": "variable_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The variable.",
+          "schema": {
+            "$ref": "#/definitions/pipeline_variable"
+          }
+        },
+        "404": {
+          "description": "The account, repository or variable with the specified UUID was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    },
+    "put": {
+      "description": "Update a repository level variable.",
+      "operationId": "updateRepositoryPipelineVariable",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the variable to update.",
+          "in": "path",
+          "name": "variable_uuid",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The updated variable",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/pipeline_variable"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The variable was updated.",
+          "schema": {
+            "$ref": "#/definitions/pipeline_variable"
+          }
+        },
+        "404": {
+          "description": "The account, repository or variable with the given UUID was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/": {
+    "get": {
+      "description": "Find pipelines",
+      "operationId": "getPipelinesForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The matching pipelines.",
+          "schema": {
+            "$ref": "#/definitions/paginated_pipelines"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    },
+    "post": {
+      "description": "Endpoint to create and initiate a pipeline. \nThere are a couple of different options to initiate a pipeline, where the payload of the request will determine which type of pipeline will be instantiated.\n# Trigger a Pipeline for a branch\nOne way to trigger pipelines is by specifying the branch for which you want to trigger a pipeline. \nThe specified branch will be used to determine which pipeline definition from the `bitbucket-pipelines.yml` file will be applied to initiate the pipeline. The pipeline will then do a clone of the repository and checkout the latest revision of the specified branch.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n  -d '\n  {\n    \"target\": {\n      \"ref_type\": \"branch\", \n      \"type\": \"pipeline_ref_target\", \n      \"ref_name\": \"master\"\n    }\n  }'\n```\n# Trigger a Pipeline for a commit on a branch or tag\nYou can initiate a pipeline for a specific commit and in the context of a specified reference (e.g. a branch, tag or bookmark).\nThe specified reference will be used to determine which pipeline definition from the bitbucket-pipelines.yml file will be applied to initiate the pipeline. The pipeline will clone the repository and then do a checkout the specified reference. \n\nThe following reference types are supported:\n\n* `branch` \n* `named_branch`\n* `bookmark` \n * `tag`\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n  https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n  -d '\n  {\n    \"target\": {\n      \"commit\": {\n        \"type\": \"commit\", \n        \"hash\": \"ce5b7431602f7cbba007062eeb55225c6e18e956\"\n      }, \n      \"ref_type\": \"branch\", \n      \"type\": \"pipeline_ref_target\", \n      \"ref_name\": \"master\"\n    }\n  }'\n```\n# Trigger a specific pipeline definition for a commit\nYou can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit. \nIn addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition. The resulting pipeline will then clone the repository and checkout the specified revision.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n -d '\n  {\n     \"target\": {\n      \"commit\": {\n         \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",\n         \"type\":\"commit\"\n       },\n        \"selector\": {\n           \"type\":\"custom\",\n              \"pattern\":\"Deploy to production\"\n          },\n        \"type\":\"pipeline_commit_target\"\n   }\n  }'\n```\n# Trigger a specific pipeline definition for a commit on a branch or tag\nYou can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit in the context of a specified reference. \nIn addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition, as well as the reference information. The resulting pipeline will then clone the repository a checkout the specified reference.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n -d '\n  {\n     \"target\": {\n      \"commit\": {\n         \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",\n         \"type\":\"commit\"\n       },\n       \"selector\": {\n          \"type\": \"custom\",\n          \"pattern\": \"Deploy to production\"\n       },\n       \"type\": \"pipeline_ref_target\",\n       \"ref_name\": \"master\",\n       \"ref_type\": \"branch\"\n     }\n  }'\n```\n\n\n# Trigger a custom pipeline with variables\nIn addition to triggering a custom pipeline that is defined in your `bitbucket-pipelines.yml` file as shown in the examples above, you can specify variables that will be available for your build. In the request, provide a list of variables, specifying the following for each variable: key, value, and whether it should be secured or not (this field is optional and defaults to not secured).\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\\n -d '\n  {\n    \"target\": {\n      \"type\": \"pipeline_ref_target\",\n      \"ref_type\": \"branch\",\n      \"ref_name\": \"master\",\n      \"selector\": {\n        \"type\": \"custom\",\n        \"pattern\": \"Deploy to production\"\n      }\n    },\n    \"variables\": [\n      {\n        \"key\": \"var1key\",\n        \"value\": \"var1value\",\n        \"secured\": true\n      },\n      {\n        \"key\": \"var2key\",\n        \"value\": \"var2value\"\n      }\n    ]\n  }'\n```\n",
+      "operationId": "createPipelineForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The pipeline to initiate.",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/pipeline"
+          }
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The initiated pipeline.",
+          "headers": {
+            "Location": {
+              "description": "The URL of the newly created pipeline.",
+              "type": "string"
+            }
+          },
+          "schema": {
+            "$ref": "#/definitions/pipeline"
+          }
+        },
+        "400": {
+          "description": "The account or repository is not enabled, the yml file does not exist in the repository for the given revision, or the request body contained invalid properties.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "The account or repository was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}": {
+    "get": {
+      "description": "Retrieve a specified pipeline",
+      "operationId": "getPipelineForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The pipeline UUID.",
+          "in": "path",
+          "name": "pipeline_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The pipeline.",
+          "schema": {
+            "$ref": "#/definitions/pipeline"
+          }
+        },
+        "404": {
+          "description": "No account, repository or pipeline with the UUID provided exists.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/": {
+    "get": {
+      "description": "Find steps for the given pipeline.",
+      "operationId": "getPipelineStepsForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the pipeline.",
+          "in": "path",
+          "name": "pipeline_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The steps.",
+          "schema": {
+            "$ref": "#/definitions/paginated_pipeline_steps"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}": {
+    "get": {
+      "description": "Retrieve a given step of a pipeline.",
+      "operationId": "getPipelineStepForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the pipeline.",
+          "in": "path",
+          "name": "pipeline_uuid",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the step.",
+          "in": "path",
+          "name": "step_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The step.",
+          "schema": {
+            "$ref": "#/definitions/pipeline_step"
+          }
+        },
+        "404": {
+          "description": "No account, repository, pipeline or step with the UUID provided exists for the pipeline with the UUID provided.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log": {
+    "get": {
+      "description": "Retrieve the log file for a given step of a pipeline.\n\nThis endpoint supports (and encourages!) the use of [HTTP Range requests](https://tools.ietf.org/html/rfc7233) to deal with potentially very large log files.",
+      "operationId": "getPipelineStepLogForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the pipeline.",
+          "in": "path",
+          "name": "pipeline_uuid",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the step.",
+          "in": "path",
+          "name": "step_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "produces": [
+        "application/octet-stream"
+      ],
+      "responses": {
+        "200": {
+          "description": "The raw log file for this pipeline step."
+        },
+        "304": {
+          "description": "The log has the same etag as the provided If-None-Match header.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "A pipeline with the given UUID does not exist, a step with the given UUID does not exist in the pipeline or a log file does not exist for the given step.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "416": {
+          "description": "The requested range does not exist for requests that specified the [HTTP Range header](https://tools.ietf.org/html/rfc7233#section-3.1).",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline": {
+    "post": {
+      "description": "Signal the stop of a pipeline and all of its steps that not have completed yet.",
+      "operationId": "stopPipeline",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the pipeline.",
+          "in": "path",
+          "name": "pipeline_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "The pipeline has been signaled to stop."
+        },
+        "400": {
+          "description": "The specified pipeline has already completed.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "Either the account, repository or pipeline with the given UUID does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
       ]
     }
   },
@@ -14610,6 +14610,12 @@
       "responses": {
         "204": {
           "description": "The key has been deleted"
+        },
+        "400": {
+          "description": "If the submitted key or related value is invalid",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
         },
         "403": {
           "description": "If the current user does not have permission to add a key for the specified user"

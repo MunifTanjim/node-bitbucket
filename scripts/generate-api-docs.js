@@ -14,22 +14,43 @@ const URL_ALIASES = {
   '/users/{username}/ssh-keys/{key_id}': '/users/{username}/ssh-keys/'
 }
 
+const usernameRegex = /\/\{username\}\//
+
 const getAPIDescription = ({ method, url }, apiName, namespaceName) => {
   method = method.toLowerCase()
   url = URL_ALIASES[url] || url
-  return PATHS_SPEC[url][method].description || ''
+
+  const spec = _.get(
+    PATHS_SPEC,
+    url,
+    usernameRegex.test(url)
+      ? _.get(PATHS_SPEC, url.replace(usernameRegex, '/{workspace}/'))
+      : null
+  )
+
+  return _.get(
+    spec,
+    [method, 'description'],
+    _.get(spec, [method, 'summary'], '')
+  )
 }
 
 const getAPIParamDefault = (param, paramName, { method, url }) => {
   method = method.toLowerCase()
 
+  const spec = _.get(
+    PATHS_SPEC,
+    url,
+    usernameRegex.test(url)
+      ? _.get(PATHS_SPEC, url.replace(usernameRegex, '/{workspace}/'))
+      : null
+  )
+
   let defaultVal =
-    (_.find(PATHS_SPEC[url][method].parameters, ['name', paramName]) || {})
-      .default || null
+    (_.find(spec[method].parameters, ['name', paramName]) || {}).default || null
 
   if (defaultVal === null) {
-    defaultVal = (_.find(PATHS_SPEC[url].parameters, ['name', paramName]) || {})
-      .default
+    defaultVal = (_.find(spec.parameters, ['name', paramName]) || {}).default
   }
 
   return defaultVal || null
@@ -38,14 +59,20 @@ const getAPIParamDefault = (param, paramName, { method, url }) => {
 const getAPIParamDescription = (param, paramName, { method, url }) => {
   method = method.toLowerCase()
 
-  let description = (
-    _.find(PATHS_SPEC[url][method].parameters, ['name', paramName]) || {}
-  ).description
+  const spec = _.get(
+    PATHS_SPEC,
+    url,
+    usernameRegex.test(url)
+      ? _.get(PATHS_SPEC, url.replace(usernameRegex, '/{workspace}/'))
+      : null
+  )
+
+  let description = (_.find(spec[method].parameters, ['name', paramName]) || {})
+    .description
 
   if (!description) {
-    description = (
-      _.find(PATHS_SPEC[url].parameters, ['name', paramName]) || {}
-    ).description
+    description = (_.find(spec.parameters, ['name', paramName]) || {})
+      .description
   }
 
   return description || ''
@@ -78,10 +105,25 @@ const toAPIParamComment = (param, paramName, api) => {
     .replace(/\[\]/g, '')}  ${paramDescription.split('\n\n')[0]}`
 }
 
-const getLinkToOfficialDocs = ({ method, url }, apiName, namespaceName) =>
-  `<a href="https://developer.atlassian.com/bitbucket/api/2/reference/resource${encodeURI(
-    url
+const getLinkToOfficialDocs = ({ method, url }, apiName, namespaceName) => {
+  url = URL_ALIASES[url] || url
+
+  const specUrl = _.get(PATHS_SPEC, url)
+    ? url
+    : usernameRegex.test(url)
+      ? _.get(PATHS_SPEC, url.replace(usernameRegex, '/{workspace}/'))
+        ? url.replace(usernameRegex, '/{workspace}/')
+        : null
+      : null
+
+  if (!specUrl) {
+    throw new Error(`specUrl missing for url: ${url}`)
+  }
+
+  return `<a href="https://developer.atlassian.com/bitbucket/api/2/reference/resource${encodeURI(
+    specUrl
   )}#${_.lowerCase(method)}">[API Docs]</a>`
+}
 
 const toAPIComment = (api, apiName, namespaceName) => {
   if (api.alias) {

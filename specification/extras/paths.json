@@ -116,11 +116,6 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/hooks/{uid}": {
-    "put": {
-      "parameters": []
-    }
-  },
   "/repositories/{username}/{repo_slug}/issues/{issue_id}": {
     "put": {
       "parameters": [
@@ -238,6 +233,26 @@
           }
         }
       }
+    }
+  },
+  "/teams/{username}/members": {
+    "get": {
+      "deprecated": true
+    }
+  },
+  "/users/{username}/followers": {
+    "get": {
+      "deprecated": true
+    }
+  },
+  "/users/{username}/following": {
+    "get": {
+      "deprecated": true
+    }
+  },
+  "/users/{username}/members": {
+    "get": {
+      "deprecated": true
     }
   }
 }

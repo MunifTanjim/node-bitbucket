@@ -11,6 +11,14 @@ const endpointMethod = (
 ) => {
   let endpointOptions = deepmerge(endpointDefaults, options)
 
+  if (endpointOptions.deprecated) {
+    console.log(
+      `\x1b[43m\x1b[30m %s \x1b[0m\x1b[33m %s \x1b[0m`,
+      `DEPRECATION WARNING:`,
+      endpointOptions.url
+    )
+  }
+
   let promise = Promise.resolve(endpointOptions)
     .then(endpointOptions => validate(endpointParamsSpecs, endpointOptions))
     .then(apiClient.request)

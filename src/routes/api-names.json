@@ -898,6 +898,197 @@
       "repositories": ""
     }
   },
+  "/repositories/{workspace}/{repo_slug}/commit/{commit}/pullrequests": {
+    "get": {
+      "pullrequests": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/deployments/": {
+    "get": {
+      "deployments": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/deployments/{deployment_uuid}": {
+    "get": {
+      "deployments": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/environments/": {
+    "get": {
+      "deployments": "",
+      "repositories": ""
+    },
+    "post": {
+      "deployments": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}": {
+    "delete": {
+      "repositories": ""
+    },
+    "get": {
+      "deployments": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes/": {
+    "post": {
+      "deployments": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config": {
+    "get": {
+      "pipelines": "",
+      "repositories": ""
+    },
+    "put": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/build_number": {
+    "put": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/": {
+    "get": {
+      "pipelines": "",
+      "repositories": ""
+    },
+    "post": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}": {
+    "delete": {
+      "pipelines": "",
+      "repositories": ""
+    },
+    "get": {
+      "pipelines": "",
+      "repositories": ""
+    },
+    "put": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/": {
+    "get": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair": {
+    "delete": {
+      "pipelines": "",
+      "repositories": ""
+    },
+    "get": {
+      "pipelines": "",
+      "repositories": ""
+    },
+    "put": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/": {
+    "get": {
+      "pipelines": "",
+      "repositories": ""
+    },
+    "post": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}": {
+    "delete": {
+      "pipelines": "",
+      "repositories": ""
+    },
+    "get": {
+      "pipelines": "",
+      "repositories": ""
+    },
+    "put": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/": {
+    "get": {
+      "pipelines": "",
+      "repositories": ""
+    },
+    "post": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid}": {
+    "delete": {
+      "pipelines": "",
+      "repositories": ""
+    },
+    "get": {
+      "pipelines": "",
+      "repositories": ""
+    },
+    "put": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/": {
+    "get": {
+      "pipelines": "",
+      "repositories": ""
+    },
+    "post": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}": {
+    "get": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/": {
+    "get": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}": {
+    "get": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log": {
+    "get": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline": {
+    "post": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
   "/repositories/{workspace}/{repo_slug}/properties/{app_key}/{property_name}": {
     "delete": {
       "properties": "",

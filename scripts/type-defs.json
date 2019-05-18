@@ -3393,7 +3393,11 @@
           },
           "type": "object"
         }
-      ]
+      ],
+      "x-bb-default-fields": [
+        "uuid"
+      ],
+      "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
     },
     "PipelineStepError": {
       "allOf": [
@@ -3733,14 +3737,13 @@
         },
         {
           "additionalProperties": true,
-          "type": "object",
-          "x-bb-default-fields": [
-            "uuid",
-            "state",
-            "image"
-          ]
+          "type": "object"
         }
-      ]
+      ],
+      "x-bb-default-fields": [
+        "uuid"
+      ],
+      "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
     },
     "PipelinesStgWestPipelineStep": {
       "allOf": [
@@ -3749,14 +3752,13 @@
         },
         {
           "additionalProperties": true,
-          "type": "object",
-          "x-bb-default-fields": [
-            "uuid",
-            "state",
-            "image"
-          ]
+          "type": "object"
         }
-      ]
+      ],
+      "x-bb-default-fields": [
+        "uuid"
+      ],
+      "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
     },
     "Project": {
       "allOf": [

@@ -5134,6 +5134,7 @@
       "url": "/snippets/{username}"
     },
     "listWatchers": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "encoded_id": {
@@ -5409,6 +5410,7 @@
       "url": "/teams/{username}"
     },
     "getAllMembers": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "username": {
@@ -6066,6 +6068,7 @@
       "url": "/users/{username}/ssh-keys/{key_id}"
     },
     "getTeamMembers": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "username": {
@@ -6098,6 +6101,7 @@
       "alias": "user.listEmails"
     },
     "listFollowers": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "page": {
@@ -6126,6 +6130,7 @@
       "url": "/users/{username}/followers"
     },
     "listFollowing": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "page": {

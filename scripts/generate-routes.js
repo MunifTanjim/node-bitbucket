@@ -61,12 +61,12 @@ const setAlias = (apiObject, namespaceName, resourceName, namesList) => {
   return false
 }
 
-const setConsumes = (apiObject, { consumes = [] }) => {
+const setConsumes = (apiObject, { consumes = [] } = {}) => {
   if (!apiObject.accepts) apiObject.accepts = []
   apiObject.accepts = _.uniq(apiObject.accepts.concat(...consumes))
 }
 
-const setProduces = (apiObject, { produces = [] }) => {
+const setProduces = (apiObject, { produces = [] } = {}) => {
   if (produces.length === 1) {
     _.set(apiObject, 'headers.accept', produces[0])
   }
@@ -76,7 +76,7 @@ const setHTTPMethod = (apiObject, method) => {
   apiObject.method = method.toUpperCase()
 }
 
-const setParameters = (apiObject, { parameters = [] }) => {
+const setParameters = (apiObject, { parameters = [] } = {}) => {
   _.each(
     parameters,
     ({
@@ -117,7 +117,7 @@ const setParameters = (apiObject, { parameters = [] }) => {
   )
 }
 
-const setResponses = (apiObject, { responses = [] }) => {
+const setResponses = (apiObject, { responses = [] } = {}) => {
   _.each(responses, (response, code) => {
     if (Number(code) < 300) {
       if (!response.schema) return
@@ -132,11 +132,29 @@ const setURL = (apiObject, url) => {
   apiObject.url = url
 }
 
+const setDeprecated = (apiObject, { deprecated = false } = {}) => {
+  if (deprecated) apiObject.deprecated = true
+}
+
 const updateRoutes = routesObject => {
+  const usernameRegex = /\/\{username\}\//
+
   _.each(API_NAMES, (methods, url) => {
     // Specification for URL
-    let spec = PATHS_SPEC[url] || {}
-    let specExtras = PATHS_SPEC_EXTRAS[url] || {}
+    const spec = _.get(
+      PATHS_SPEC,
+      url,
+      usernameRegex.test(url)
+        ? _.get(PATHS_SPEC, url.replace(usernameRegex, '/{workspace}/'))
+        : null
+    )
+    const specExtras = _.get(
+      PATHS_SPEC_EXTRAS,
+      url,
+      usernameRegex.test(url)
+        ? _.get(PATHS_SPEC_EXTRAS, url.replace(usernameRegex, '/{workspace}/'))
+        : null
+    )
 
     _.each(methods, (namespaces, method) => {
       _.each(namespaces, (apiName, namespaceName) => {
@@ -158,23 +176,46 @@ const updateRoutes = routesObject => {
         setURL(routesObject[namespaceName][apiName], url)
 
         setParameters(routesObject[namespaceName][apiName], spec)
-        if (spec[method]) {
-          setConsumes(routesObject[namespaceName][apiName], spec[method])
-          setProduces(routesObject[namespaceName][apiName], spec[method])
-          setParameters(routesObject[namespaceName][apiName], spec[method])
-          setResponses(routesObject[namespaceName][apiName], spec[method])
-        }
-
-        if (!specExtras[method]) return
-
-        _.each(specExtras[method], (value, key) => {
-          setConsumes(routesObject[namespaceName][apiName], specExtras[method])
-          setProduces(routesObject[namespaceName][apiName], specExtras[method])
+        if (_.get(spec, method)) {
+          setConsumes(routesObject[namespaceName][apiName], _.get(spec, method))
+          setProduces(routesObject[namespaceName][apiName], _.get(spec, method))
           setParameters(
             routesObject[namespaceName][apiName],
-            specExtras[method]
+            _.get(spec, method)
           )
-          setResponses(routesObject[namespaceName][apiName], specExtras[method])
+          setResponses(
+            routesObject[namespaceName][apiName],
+            _.get(spec, method)
+          )
+          setDeprecated(
+            routesObject[namespaceName][apiName],
+            _.get(spec, method)
+          )
+        }
+
+        if (!_.get(specExtras, method)) return
+
+        _.each(specExtras[method], (value, key) => {
+          setConsumes(
+            routesObject[namespaceName][apiName],
+            _.get(specExtras, method)
+          )
+          setProduces(
+            routesObject[namespaceName][apiName],
+            _.get(specExtras, method)
+          )
+          setParameters(
+            routesObject[namespaceName][apiName],
+            _.get(specExtras, method)
+          )
+          setResponses(
+            routesObject[namespaceName][apiName],
+            _.get(specExtras, method)
+          )
+          setDeprecated(
+            routesObject[namespaceName][apiName],
+            _.get(specExtras, method)
+          )
         })
       })
     })
