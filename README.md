@@ -66,8 +66,6 @@ const clientOptions = {
 const bitbucket = new Bitbucket(clientOptions)
 ```
 
-This enables you to use `bitbucket` with both Bitbucket Cloud and Bitbucket Server.
-
 #### Authentication
 
 ```js
