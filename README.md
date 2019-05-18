@@ -11,7 +11,8 @@ Bitbucket API docs: [https://api.bitbucket.org](https://api.bitbucket.org)
 ---
 
 **BITBUCKET CLOUD API CHANGING NOTICE**: [https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr)  
-**BITBUCKET CLOUD API MIGRATION GUIDE**: [https://developer.atlassian.com/cloud/bitbucket/bbc-gdpr-api-migration-guide](https://developer.atlassian.com/cloud/bitbucket/bbc-gdpr-api-migration-guide)
+**BITBUCKET CLOUD API MIGRATION GUIDE**: [https://developer.atlassian.com/cloud/bitbucket/bbc-gdpr-api-migration-guide](https://developer.atlassian.com/cloud/bitbucket/bbc-gdpr-api-migration-guide)  
+**BITBUCKET CLOUD API REPO URL CHANGE**: [https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-workspaces](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-workspaces)
 
 [**BREAKING CHANGES FOR API NAME**](https://github.com/MunifTanjim/node-bitbucket/blob/master/v1_API_NAME_CHANGES.md): Unfortunately, API Name changes were published on the following minor version updates: `v1.8.0`, `v1.9.0`, `v1.10.0`. This type of changes won't happen again for minor version updates anymore.
 

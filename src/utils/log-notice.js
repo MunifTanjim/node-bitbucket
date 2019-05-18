@@ -9,6 +9,11 @@ const logNotice = () => {
     `BITBUCKET CLOUD API MIGRATION GUIDE:`,
     `https://developer.atlassian.com/cloud/bitbucket/bbc-gdpr-api-migration-guide`
   )
+  console.log(
+    '\x1b[45m\x1b[30m %s \x1b[0m\x1b[35m %s \x1b[0m',
+    `BITBUCKET CLOUD API REPO URL CHANGE:`,
+    `https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-workspaces`
+  )
 }
 
 module.exports = logNotice
