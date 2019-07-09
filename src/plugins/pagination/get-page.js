@@ -1,27 +1,13 @@
-const HTTPError = require('../../request/http-error.js')
+const HTTPError = require('../../error')
 
-const getPage = (apiClient, data, direction, callback) => {
-  let url = data[direction]
+const getPage = (client, direction, responseData) => {
+  const url = responseData[direction]
 
   if (!url) {
-    let urlError = new HTTPError(`No ${direction} URL found`, 404)
-    return callback ? callback(urlError) : Promise.reject(urlError)
+    throw new HTTPError(`not found: ${direction} page`, 404)
   }
 
-  let requestOptions = { url }
-
-  let promise = apiClient.request(requestOptions)
-
-  if (callback) {
-    promise
-      .then(response => {
-        callback(null, response)
-      })
-      .catch(callback)
-    return
-  }
-
-  return promise
+  return client.request({ url })
 }
 
 module.exports = getPage
