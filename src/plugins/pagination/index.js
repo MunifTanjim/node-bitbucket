@@ -1,19 +1,11 @@
 const getPage = require('./get-page.js')
 
-class PaginationPlugin {
-  constructor(apiClient) {
-    this.core = apiClient
-  }
+function paginationPlugin(client) {
+  client.hasNextPage = ({ next }) => Boolean(next)
+  client.getNextPage = getPage.bind(null, client, 'next')
 
-  inject() {
-    this.core.hasNextPage = ({ next }) => Boolean(next)
-    this.core.getNextPage = (data, callback) =>
-      getPage(this.core, data, 'next', callback)
-
-    this.core.hasPreviousPage = ({ previous }) => Boolean(previous)
-    this.core.getPreviousPage = (data, callback) =>
-      getPage(this.core, data, 'previous', callback)
-  }
+  client.hasPreviousPage = ({ previous }) => Boolean(previous)
+  client.getPreviousPage = getPage.bind(null, client, 'previous')
 }
 
-module.exports = PaginationPlugin
+module.exports = paginationPlugin
