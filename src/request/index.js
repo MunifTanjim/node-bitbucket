@@ -1,13 +1,6 @@
-const getRequestOptions = require('./request-options.js')
-const fetch = require('./fetch.js')
+const { endpoint } = require('../endpoint')
+const withDefaults = require('./with-defaults')
 
-/**
- * Gets the Request Options and Performs Request
- * @param {Object} endpointOptions
- */
-const request = endpointOptions => {
-  let requestOptions = getRequestOptions(endpointOptions)
-  return fetch(requestOptions)
-}
+const request = withDefaults(endpoint, {})
 
-module.exports = request
+module.exports.request = request
