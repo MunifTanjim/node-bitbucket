@@ -19,9 +19,6 @@
   ],
   "main": "src/index.js",
   "types": "src/index.d.ts",
-  "browser": {
-    "./src/utils/get-buffer-response.js": "./src/utils/get-buffer-response-browser.js"
-  },
   "repository": "github:MunifTanjim/node-bitbucket",
   "scripts": {
     "build": "npm-run-all -p build:*",
@@ -32,16 +29,15 @@
     "prebuild:docs": "mkdirp docs",
     "build:docs": "npm run generate:api-docs",
     "postbuild:docs": "apidoc -i docs -o docs",
-    "generate:specification": "node scripts/generate-specification.js",
-    "generate:api-names": "node scripts/generate-api-names.js",
-    "generate:routes": "node scripts/generate-routes.js",
-    "generate:api-docs": "node scripts/generate-api-docs.js",
-    "generate:type-defs": "node scripts/generate-type-defs.js",
-    "generate:types": "npm-run-all -p generate:types:*",
-    "generate:types:ts": "node scripts/generate-types-ts.js",
+    "generate:specification": "node scripts/generate-specification",
+    "generate:endpoint-names": "node scripts/generate-endpoint-names",
+    "generate:routes": "node scripts/generate-routes",
+    "generate:api-docs": "node scripts/generate-api-docs",
+    "generate:types-schema": "node scripts/generate-types-schema",
+    "generate:types": "node scripts/generate-types",
     "validate": "npm-run-all -p validate:*",
+    "prevalidate:types": "npm run generate:types",
     "validate:types": "npm-run-all -p validate:types:*",
-    "prevalidate:types:ts": "npm run generate:types:ts",
     "validate:types:ts": "tsc --target es6 src/index.d.ts",
     "prepare": "npm-run-all -s build:browser generate:types",
     "test": "jest"
@@ -49,9 +45,9 @@
   "dependencies": {
     "before-after-hook": "^1.4.0",
     "btoa-lite": "^1.0.0",
-    "debug": "^3.1.0",
-    "is-plain-object": "^2.0.4",
-    "node-fetch": "^2.1.2",
+    "deepmerge": "^3.3.0",
+    "is-plain-object": "^3.0.0",
+    "node-fetch": "^2.6.0",
     "url-template": "^2.0.8"
   },
   "devDependencies": {
