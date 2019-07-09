@@ -29,7 +29,7 @@ fetch(API_SPECIFICATION)
     writeSpecPartialJSON('securityDefinitions', securityDefinitions)
 
     writeFileSync(
-      path.resolve(srcPath, `plugins/oauth/spec.json`),
+      path.resolve(srcPath, `plugins/_oauth/spec.json`),
       `${JSON.stringify(deepsort(securityDefinitions.oauth2), null, 2)}\n`
     )
     return apiSpec
@@ -44,7 +44,7 @@ fetch(API_SPECIFICATION)
     delete apiSpec.info
     delete apiSpec['x-revision']
     writeFileSync(
-      path.resolve(srcPath, `request/spec.json`),
+      path.resolve(srcPath, `endpoint/spec.json`),
       `${JSON.stringify(deepsort(apiSpec), null, 2)}\n`
     )
   })

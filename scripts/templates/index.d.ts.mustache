@@ -1,108 +1,161 @@
-/**
- * This declaration file requires TypeScript 2.1 or above.
- */
+import { Agent } from 'http'
 
 declare namespace Bitbucket {
-  export type Any = any;
-  export type AnyObject = object;
+  export type Any = any
+  export type Object = object
 
-  export type Headers = {
-    [header: string]: any
-  };
+  type AuthBasic = {
+    username: string
+    password: string
+  }
+
+  type AuthToken = {
+    token: string
+  }
+
+  export type AuthenticateOptions =
+    | AuthBasic & { type: "basic" | "apppassword" }
+    | AuthToken & { type: "token" }
 
   export interface Options {
-    baseUrl?: string;
-    headers?: Headers;
-    options?: AnyObject;
-    hideNotice?: boolean;
+    auth?: AuthBasic | AuthToken
+    baseUrl?: string
+    notice?: boolean
+    request?: {
+      agent?: Agent
+      timeout?: number
+      [key: string]: any
+    }
+    [option: string]: any
   }
 
-  interface AuthBasic {
-    type: "basic";
-    username: string;
-    password: string;
-  }
+  export type PaginatedResponseData =
+    | { next: string; [key:string]: any; }
+    | { previous: string; [key:string]: any; }
 
-  interface AuthAppPassword {
-    type: "apppassword";
-    username: string;
-    password: string;
-  }
-
-  interface AuthToken {
-    type: "token";
-    token: string;
-  }
-
-  export type Auth =
-    | AuthBasic
-    | AuthAppPassword
-    | AuthToken;
-
-  export type PaginatedData =
-    | { next: string; }
-    | { previous: string; };
-
-  export interface Callback<T> {
-    (error: Bitbucket.Schema.Error | null, response: T): void;
-  }
+  type Headers = { [header: string]: string }
 
   export interface Response<T> {
-    data: T;
-    headers: Headers;
+    data: T
+    headers: {
+      date: string
+      etag: string,
+      'x-accepted-oauth-scopes': string
+      [header: string]: string
+    }
+    status: number
+    url: string
   }
 
+  export type HTTPError = Error & {
+    error?: Schema.Error
+    headers?: Headers
+    request?: RequestOptions
+    status: number
+  }
+
+  export type RequestMethod = 'DELETE' | 'GET' | 'POST' | 'PUT'
+
+  export interface EndpointOptions {
+    baseUrl?: string
+    method?: RequestMethod
+    url?: string
+    headers?: Headers
+    request?: Options['request']
+    [param: string]: any
+  }
+
+  export interface RequestOptions {
+    method?: RequestMethod
+    url?: string
+    body?: any
+    headers?: Headers
+    request?: Options['request']
+  }
+
+  export interface Endpoint {
+    (endpointRoute: string, endpointOptions?: EndpointOptions): RequestOptions
+    (endpointOptions: EndpointOptions): RequestOptions
+    DEFAULTS: EndpointOptions
+    defaults(endpointOptions: EndpointOptions): Endpoint
+    merge(endpointRoute: string, endpointOptions?: EndpointOptions): RequestOptions
+    merge(endpointOptions: EndpointOptions): RequestOptions
+    parse(endpointOptions: EndpointOptions): RequestOptions
+  }
+
+  export interface Request {
+    (endpointRoute: string, endpointOptions?: EndpointOptions): Promise<Response<Schema.Any>>
+    (endpointOptions: EndpointOptions): Promise<Response<Schema.Any>>
+    defaults(endpointOptions: EndpointOptions): Request
+    endpoint: Bitbucket.Endpoint
+  }
+
+  export type Plugin = (client: APIClient, options: Options) => void
+
   namespace Schema {
-    export type Any = Bitbucket.Any;
+    export type Any = Bitbucket.Any
 
     {{{typesBlob}}}
   }
 
   namespace Params {
-    export type Empty = {}
+    export interface Empty {}
 
     {{#namespaces}}
-    {{#apis}}
+    {{#endpoints}}
     {{^exclude}}
     {{#paramsType}}
-    export type {{paramsType}} =
-      {{#ownParams}}
-      {
+    export type {{paramsType}} = {
       {{#params}}
-        "{{name}}"{{^required}}?{{/required}}: {{#schema}}Bitbucket.Schema.{{/schema}}{{{type}}};
+      "{{name}}"{{^required}}?{{/required}}: {{#schema}}Bitbucket.Schema.{{/schema}}{{{type}}}
       {{/params}}
-      };
-      {{/ownParams}}
-      {{^ownParams}}
-      ;
-      {{/ownParams}}
+    }
     {{/paramsType}}
     {{/exclude}}
-    {{/apis}}
+    {{/endpoints}}
     {{/namespaces}}
   }
 }
 
-declare class Bitbucket {
-  constructor(options?: Bitbucket.Options);
+type AsyncResponse<T> = Promise<Bitbucket.Response<T>>
 
-  authenticate(auth: Bitbucket.Auth): void;
+declare interface APIClient {
+  hook: {
+    before(name: string, callback: (options: Bitbucket.RequestOptions) => void): void
+    after(name: string, callback: (response: Bitbucket.Response<Bitbucket.Schema.Any>, options: Bitbucket.RequestOptions) => void): void
+    error(name: string, callback: (error: Bitbucket.HTTPError, options: Bitbucket.RequestOptions) => void): void
+    wrap(name: string, callback: (request: (options: Bitbucket.RequestOptions) => AsyncResponse<Bitbucket.Schema.Any>, options: Bitbucket.RequestOptions) => void): void
+  }
 
-  hasNextPage(data: Bitbucket.PaginatedData): boolean;
-  getNextPage<T>(data: T, callback?: Bitbucket.Callback<Bitbucket.Response<T>>): Promise<Bitbucket.Response<T>>;
+  request: Bitbucket.Request
 
-  hasPreviousPage(data: Bitbucket.PaginatedData): boolean;
-  getPreviousPage<T>(data: T, callback?: Bitbucket.Callback<Bitbucket.Response<T>>): Promise<Bitbucket.Response<T>>;
+  hasNextPage(data: Bitbucket.PaginatedResponseData): boolean
+  getNextPage<T extends Bitbucket.PaginatedResponseData>(data: T): AsyncResponse<T>
+  hasPreviousPage(data: Bitbucket.PaginatedResponseData): boolean
+  getPreviousPage<T extends Bitbucket.PaginatedResponseData>(data: T): AsyncResponse<T>
+
+  registerEndpoints(routes: {
+    [namespace: string]: {
+      [endpointName: string]: Bitbucket.EndpointOptions
+    }
+  }): void
 
   {{#namespaces}}
   {{namespace}}: {
-    {{#apis}}
-    {{name}}(params: Bitbucket.Params.{{paramsType}}, callback?: Bitbucket.Callback<Bitbucket.Response<Bitbucket.Schema.{{responseType}}>>): Promise<Bitbucket.Response<Bitbucket.Schema.{{responseType}}>>;
-    {{/apis}}
-  };
+    {{#endpoints}}
+    {{name}}(params: Bitbucket.Params.{{paramsType}}): AsyncResponse<Bitbucket.Schema.{{responseType}}>
+    {{/endpoints}}
+  }
   {{/namespaces}}
 }
 
-export = Bitbucket;
+interface APIClientFactory {
+  new (options?: Bitbucket.Options): APIClient
+  (options?: Bitbucket.Options): APIClient
 
-export as namespace Bitbucket;
+  plugins(plugins: Bitbucket.Plugin[]): APIClientFactory
+}
+
+declare const Bitbucket: APIClientFactory
+
+export = Bitbucket
