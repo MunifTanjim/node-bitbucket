@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`plugins:endpoint-methods/get-param-groups returns grouped params 1`] = `
-{
-  body: ['body1'],
-  path: ['path1'],
-  query: ['query1','query2']
-}
-`;

@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`utils:add-query-parameters accepts array for filtering query: \`q\` 1`] = `"/?q=name+%3D+%22doctor%22+and+is+%3D+%22who%22"`;
-
-exports[`utils:add-query-parameters replaces space with \`+\` for filtering query: \`q\` 1`] = `"/?q=do+!%3D+%22blink%22"`;
-
-exports[`utils:add-query-parameters works on fresh url 1`] = `"/?wibbly=wobbly"`;
-
-exports[`utils:add-query-parameters works on url containing query string 1`] = `"/?wibbly=wobbly&timey=wimey"`;
