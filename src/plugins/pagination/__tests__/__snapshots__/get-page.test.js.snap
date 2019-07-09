@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`plugins:pagination/get-page throws error if url does not exist 1`] = `[HTTPError: No prev URL found]`;
-
-exports[`plugins:pagination/get-page throws error if url does not exist 2`] = `[HTTPError: No prev URL found]`;
