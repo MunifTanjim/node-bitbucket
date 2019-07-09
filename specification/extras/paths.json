@@ -214,36 +214,31 @@
         {
           "in": "body",
           "name": "_body",
-          "required": true
+          "required": false
         },
         {
           "in": "body",
           "name": "author",
-          "required": false,
           "type": "string"
         },
         {
           "in": "body",
           "name": "branch",
-          "required": false,
           "type": "string"
         },
         {
           "in": "body",
           "name": "files",
-          "required": false,
           "type": "string"
         },
         {
           "in": "body",
           "name": "message",
-          "required": false,
           "type": "string"
         },
         {
           "in": "body",
           "name": "parents",
-          "required": false,
           "type": "string"
         }
       ]
