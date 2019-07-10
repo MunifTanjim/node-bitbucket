@@ -1,10 +1,11 @@
-const isPlainObject = require('is-plain-object')
-const urlTemplate = require('url-template')
+import urlTemplate from 'url-template'
+import { addQueryParameters } from './utils/add-query-parameters'
+import { extractUrlVariableNames } from './utils/extract-url-variable-names'
 
-const { addQueryParameters } = require('./utils/add-query-parameters')
-const {
-  extractUrlVariableNames
-} = require('./utils/extract-url-variable-names')
+type EndpointDefaults = import('./types').EndpointDefaults
+type EndpointParams = import('./types').EndpointParams
+type RequestMethod = import('./types').RequestMethod
+type RequestOptions = import('./types').RequestOptions
 
 const contentType = {
   formData: 'multipart/form-data',
@@ -12,7 +13,7 @@ const contentType = {
   json: 'application/json; charset=utf-8'
 }
 
-const parse = (endpointOptions = {}) => {
+export function parse(endpointOptions: EndpointDefaults): RequestOptions {
   let {
     accepts = [],
     method,
@@ -36,7 +37,7 @@ const parse = (endpointOptions = {}) => {
       if (!urlVariableNames.includes(key)) bodyParams[key] = params[key]
       return bodyParams
     },
-    {}
+    {} as EndpointParams
   )
 
   let bodyIsFormData = false
@@ -68,12 +69,10 @@ const parse = (endpointOptions = {}) => {
   }
 
   return {
-    method: method.toUpperCase(),
+    method: method.toUpperCase() as RequestMethod,
     url,
     headers,
     body,
     request
   }
 }
-
-module.exports = parse
