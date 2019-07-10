@@ -1,11 +1,15 @@
-const nodeFetch = require('node-fetch')
+import nodeFetch from 'node-fetch'
+import { HTTPError } from '../error'
 
-const HTTPError = require('../error')
+type AnyResponse = import('./types').Response<any>
+type Endpoint = import('./types').Endpoint
+type Headers = import('./types').Headers
+type Response = import('node-fetch').Response
 
-const getData = response => {
+const getData = (response: Response): Promise<any> => {
   const contentType = response.headers.get('content-type')
 
-  if (/application\/json/.test(contentType)) {
+  if (/application\/json/.test(contentType!)) {
     return response.json()
   }
 
@@ -16,19 +20,21 @@ const getData = response => {
   return response.arrayBuffer()
 }
 
-function fetchWrapper(requestOptions) {
+export function fetchWrapper(
+  requestOptions: ReturnType<Endpoint>
+): Promise<AnyResponse> {
   const { method, url, headers, body, request } = requestOptions
 
   const options = Object.assign({ method, body, headers }, request)
 
-  let responseHeaders = {}
-  let responseStatus
-  let responseUrl
+  let responseHeaders: Headers = {}
+  let responseStatus: number
+  let responseUrl: string
 
-  const fetch = request.fetch || nodeFetch
+  const fetch = request!.fetch || nodeFetch
 
   return fetch(url, options)
-    .then(response => {
+    .then((response: Response) => {
       responseUrl = response.url
       responseStatus = response.status
       for (const [field, value] of response.headers) {
@@ -47,13 +53,13 @@ function fetchWrapper(requestOptions) {
 
       return getData(response)
     })
-    .then(data => ({
+    .then((data: any) => ({
       data,
       headers: responseHeaders,
       status: responseStatus,
       url: responseUrl
     }))
-    .catch(error => {
+    .catch((error: Error) => {
       if (error instanceof HTTPError) {
         throw error
       }
@@ -64,5 +70,3 @@ function fetchWrapper(requestOptions) {
       })
     })
 }
-
-module.exports = fetchWrapper
