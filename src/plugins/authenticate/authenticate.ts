@@ -1,6 +1,12 @@
-function authenticate(state, options) {
+type AuthenticatePluginState = import('./types').AuthenticatePluginState
+type AuthenticateOptions = import('./types').AuthenticateOptions
+
+export function authenticate(
+  state: AuthenticatePluginState,
+  options: AuthenticateOptions
+): void {
   if (!options) {
-    state.auth = false
+    delete state.auth
     return
   }
 
@@ -28,5 +34,3 @@ function authenticate(state, options) {
 
   state.auth = options
 }
-
-module.exports = authenticate
