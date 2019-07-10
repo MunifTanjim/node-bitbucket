@@ -1,5 +1,11 @@
-function noticePlugin(_client, clientOptions) {
-  const { notice = true } = clientOptions
+/* eslint-disable no-console */
+
+type APIClient = import('./types').APIClient
+type NoticePluginState = import('./types').NoticePluginState
+type Options = import('./types').Options
+
+function noticePlugin(_client: APIClient, clientOptions: Options): void {
+  const { notice = true }: NoticePluginState = clientOptions
 
   if (!notice) return
 
@@ -22,4 +28,4 @@ function noticePlugin(_client, clientOptions) {
   )
 }
 
-module.exports = noticePlugin
+export default noticePlugin
