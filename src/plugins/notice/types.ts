@@ -1,8 +1,6 @@
-export type APIClient = import('../../client/types').APIClient
+export { APIClient, Options } from '../../client/types'
+export { RequestOptions } from '../../endpoint/types'
 
 export type NoticePluginState = {
   notice?: boolean
 }
-
-export type Options = import('../../client/types').Options
-export type RequestOptions = import('../../endpoint/types').RequestOptions

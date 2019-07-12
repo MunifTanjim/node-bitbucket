@@ -1,6 +1,4 @@
-export type APIClient = import('../../client/types').APIClient
+export { APIClient } from '../../client/types'
+export { PaginatedResponseData, Response } from '../../request/types'
+
 export type Direction = 'next' | 'previous'
-export type PaginatedResponseData<
-  T
-> = import('../../request/types').PaginatedResponseData<T>
-export type Response<T> = import('../../request/types').Response<T>
