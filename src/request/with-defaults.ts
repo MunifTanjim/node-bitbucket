@@ -26,9 +26,9 @@ export function withDefaults(
     }
 
     return endpointOptions.request.hook(
-      endpointOptions,
       (options: EndpointDefaults): ReturnType<Request> =>
-        fetchWrapper(endpoint.parse(options))
+        fetchWrapper(endpoint.parse(options)),
+      endpointOptions
     )
   }
 
