@@ -14,32 +14,34 @@ const contentType = {
 }
 
 export function parse(endpointOptions: EndpointDefaults): RequestOptions {
-  let {
+  const {
     accepts = [],
-    method,
+    method: _method,
     baseUrl,
-    url,
+    url: _url,
     headers,
-    body,
     request,
     ...params
   } = endpointOptions
 
-  const urlVariableNames = extractUrlVariableNames(url)
+  const method = _method.toUpperCase() as RequestMethod
 
-  url = urlTemplate.parse(url).expand(params)
+  const urlVariableNames = extractUrlVariableNames(_url)
+
+  let url = urlTemplate.parse(_url).expand(params)
   if (!/^http/.test(url)) {
     url = `${baseUrl}${url}`
   }
 
   const { _body, ...remainingParams } = Object.keys(params).reduce(
-    (bodyParams, key) => {
+    (bodyParams: EndpointParams, key): EndpointParams => {
       if (!urlVariableNames.includes(key)) bodyParams[key] = params[key]
       return bodyParams
     },
-    {} as EndpointParams
+    {}
   )
 
+  let body: any
   let bodyIsFormData = false
 
   if (['GET', 'DELETE'].includes(method)) {
@@ -50,9 +52,9 @@ export function parse(endpointOptions: EndpointDefaults): RequestOptions {
     bodyIsFormData = /form-?data/i.test(body.constructor.name)
 
     if (bodyIsFormData && accepts.includes(contentType.formData)) {
-      Object.keys(remainingParams).forEach(paramName => {
+      for (const paramName of Object.keys(remainingParams)) {
         body.append(paramName, remainingParams[paramName])
-      })
+      }
     }
   } else if (Object.keys(remainingParams).length) {
     body = remainingParams
@@ -69,10 +71,10 @@ export function parse(endpointOptions: EndpointDefaults): RequestOptions {
   }
 
   return {
-    method: method.toUpperCase() as RequestMethod,
+    method,
     url,
-    headers,
     body,
+    headers,
     request
   }
 }
