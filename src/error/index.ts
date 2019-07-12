@@ -1,6 +1,12 @@
-import { Headers, RequestOptions } from '../endpoint/types'
+type Headers = import('./types').Headers
+type RequestOptions = import('./types').RequestOptions
 
 export class HTTPError extends Error {
+  public error?: any
+  public headers?: Headers
+  public request?: RequestOptions
+  public status: number
+
   public constructor(
     message: string,
     statusCode: number,
@@ -21,9 +27,4 @@ export class HTTPError extends Error {
     this.request = options.request
     this.status = statusCode
   }
-
-  public error?: any
-  public headers?: Headers
-  public request?: RequestOptions
-  public status: number
 }
