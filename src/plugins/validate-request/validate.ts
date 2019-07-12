@@ -1,28 +1,30 @@
-'use strict'
+import { HTTPError } from '../../error'
 
-const HTTPError = require('../../error')
+type APIClient = import('./types').APIClient
+type EndpointParams = import('./types').EndpointParams
 
-function validate(_client, requestOptions) {
-  const { validate: params } = requestOptions.request
+export function validate(
+  _client: APIClient,
+  endpointOptions: EndpointParams
+): void {
+  const { validate: params } = endpointOptions.request!
 
   if (!params) return
 
-  Object.keys(params).forEach(paramName => {
+  for (const paramName of Object.keys(params)) {
     const param = params[paramName]
     const expectedType = param.type
 
-    let value = requestOptions[paramName]
+    let value = endpointOptions[paramName]
 
     const valueIsPresent = typeof value !== 'undefined'
 
     if (!param.required && !valueIsPresent) {
-      return
+      continue
     }
 
     if (param.required && !valueIsPresent) {
-      throw new HTTPError(`parameter required: '${paramName}'`, 400, {
-        request: requestOptions
-      })
+      throw new HTTPError(`parameter required: '${paramName}'`, 400)
     }
 
     if (expectedType === 'integer') {
@@ -33,8 +35,7 @@ function validate(_client, requestOptions) {
           `invalid value for parameter '${paramName}': ${JSON.stringify(
             unparsedValue
           )} is NaN`,
-          400,
-          { request: requestOptions }
+          400
         )
       }
     }
@@ -46,8 +47,7 @@ function validate(_client, requestOptions) {
           `invalid value for parameter '${paramName}': ${JSON.stringify(
             value
           )}`,
-          400,
-          { request: requestOptions }
+          400
         )
       }
     }
@@ -55,13 +55,8 @@ function validate(_client, requestOptions) {
     if (param.enum && !param.enum.includes(value)) {
       throw new HTTPError(
         `invalid value for parameter '${paramName}': ${JSON.stringify(value)}`,
-        400,
-        { request: requestOptions }
+        400
       )
     }
-  })
-
-  return requestOptions
+  }
 }
-
-module.exports = validate
