@@ -3,13 +3,13 @@ import isPlainObject from 'is-plain-object'
 import { lowerCaseHeaderFields } from '../utils/lower-case-header-fields'
 import { pick } from './utils/pick'
 
-type EndpointParams = import('../endpoint/types').EndpointParams
+type EndpointParams = import('./types').EndpointParams
 type Options = import('./types').Options
 type RequestHook = import('./types').RequestHook
 
 export function getEndpointOptions(
   clientOptions: Options,
-  hook: RequestHook
+  requestHook: RequestHook
 ): EndpointParams {
   clientOptions.headers = lowerCaseHeaderFields(clientOptions.headers)
 
@@ -19,7 +19,7 @@ export function getEndpointOptions(
     { isMergeableObject: isPlainObject }
   )
 
-  endpointOptions.request.hook = hook
+  endpointOptions.request.hook = requestHook
 
   return endpointOptions
 }

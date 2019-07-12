@@ -9,8 +9,10 @@ export function registerPlugins(
 ): APIClientFactory {
   const plugins = oldPlugins.slice(0)
 
-  newPlugins.forEach(plugin => {
-    if (!plugins.includes(plugin)) plugins.push(plugin)
+  newPlugins.forEach((plugin): void => {
+    if (!plugins.includes(plugin)) {
+      plugins.push(plugin)
+    }
   })
 
   return factory(plugins)
