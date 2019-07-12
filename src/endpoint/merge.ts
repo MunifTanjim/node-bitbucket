@@ -17,7 +17,7 @@ export function merge(
       endpointOptions
     )
   } else {
-    endpointOptions = endpointRoute || {}
+    endpointOptions = endpointRoute
   }
 
   endpointOptions.headers = lowerCaseHeaderFields(endpointOptions.headers)

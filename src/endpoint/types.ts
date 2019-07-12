@@ -14,7 +14,7 @@ export type EndpointParams = {
 export type EndpointDefaults = EndpointParams & {
   method: RequestMethod
   baseUrl: string
-  headers: Headers & {
+  headers: {
     accept: string
     'user-agent': string
   }
@@ -29,14 +29,12 @@ export type RequestOptions = {
   method: RequestMethod
   url: string
   body?: any
-  headers: Headers & {
-    accept?: string
+  headers: EndpointDefaults['headers'] & {
     authorization?: string
-    'user-agent'?: string
   }
-  request?: {
+  request?: EndpointParams['request'] & {
     agent?: Agent
-    fetch?: Function
+    fetch?: (url: string, init?: any) => Promise<any>
     timeout?: number
   }
 }
