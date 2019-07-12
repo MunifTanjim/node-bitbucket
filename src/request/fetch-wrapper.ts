@@ -1,12 +1,12 @@
 import nodeFetch from 'node-fetch'
 import { HTTPError } from '../error'
 
-type AnyResponse = import('./types').Response<any>
+type FetchResponse = import('node-fetch').Response
 type Endpoint = import('./types').Endpoint
 type Headers = import('./types').Headers
-type Response = import('node-fetch').Response
+type Response<T> = import('./types').Response<T>
 
-const getData = (response: Response): Promise<any> => {
+function getData(response: FetchResponse): Promise<any> {
   const contentType = response.headers.get('content-type')
 
   if (/application\/json/.test(contentType!)) {
@@ -22,27 +22,29 @@ const getData = (response: Response): Promise<any> => {
 
 export function fetchWrapper(
   requestOptions: ReturnType<Endpoint>
-): Promise<AnyResponse> {
+): Promise<Response<any>> {
   const { method, url, headers, body, request } = requestOptions
 
   const options = Object.assign({ method, body, headers }, request)
 
-  let responseHeaders: Headers = {}
   let responseStatus: number
   let responseUrl: string
+
+  const responseHeaders: Headers = {}
 
   const fetch = request!.fetch || nodeFetch
 
   return fetch(url, options)
-    .then((response: Response) => {
-      responseUrl = response.url
+    .then((response: FetchResponse): any => {
       responseStatus = response.status
+      responseUrl = response.url
+
       for (const [field, value] of response.headers) {
         responseHeaders[field] = value
       }
 
       if (response.status >= 400 || [304].includes(response.status)) {
-        return getData(response).then(error => {
+        return getData(response).then((error): void => {
           throw new HTTPError(response.statusText, responseStatus, {
             error,
             headers: responseHeaders,
@@ -53,13 +55,15 @@ export function fetchWrapper(
 
       return getData(response)
     })
-    .then((data: any) => ({
-      data,
-      headers: responseHeaders,
-      status: responseStatus,
-      url: responseUrl
-    }))
-    .catch((error: Error) => {
+    .then(
+      (data): Response<any> => ({
+        data,
+        headers: responseHeaders,
+        status: responseStatus,
+        url: responseUrl
+      })
+    )
+    .catch((error): any => {
       if (error instanceof HTTPError) {
         throw error
       }

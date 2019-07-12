@@ -15,9 +15,9 @@ export type Headers = Headers
 export interface Response<T> {
   data: T
   headers: Headers & {
-    date: string
-    etag: string
-    'x-accepted-oauth-scopes': string
+    date?: string
+    etag?: string
+    'x-accepted-oauth-scopes'?: string
   }
   status: number
   url: string
