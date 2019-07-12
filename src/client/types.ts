@@ -1,6 +1,10 @@
+import { HookSingular } from 'before-after-hook'
+
 import { RequestOptions } from '../endpoint/types'
 import { HTTPError } from '../error'
 import { Request, Response } from '../request/types'
+
+export { EndpointParams } from '../endpoint/types'
 
 export type AuthBasic = {
   username: string
@@ -17,25 +21,11 @@ export interface Options {
   auth?: AuthOptions
   baseUrl?: string
   notice?: boolean
-  request?: {
-    [option: string]: any
-  }
+  request?: RequestOptions['request']
   [option: string]: any
 }
 
-export interface RequestHook {
-  before(callback: (options: RequestOptions) => void): void
-  after(
-    callback: (response: Response<any>, options: RequestOptions) => void
-  ): void
-  error(callback: (error: HTTPError, options: RequestOptions) => void): void
-  wrap(
-    callback: (
-      request: (options: RequestOptions) => Promise<Response<any>>,
-      options: RequestOptions
-    ) => void
-  ): void
-}
+export type RequestHook = HookSingular<RequestOptions, Response<any>, HTTPError>
 
 export interface APIClient {
   request: Request
@@ -51,7 +41,3 @@ export interface APIClientFactory {
 
   plugins(plugins: Plugin[]): APIClientFactory
 }
-
-declare const Bitbucket: APIClientFactory
-
-export default Bitbucket

@@ -11,7 +11,6 @@ export function constructor(
   plugins: Plugin[],
   clientOptions: Options = {}
 ): APIClient {
-  // @ts-ignore
   const requestHook: RequestHook = new Singular()
 
   const client = {
@@ -19,7 +18,9 @@ export function constructor(
     requestHook
   }
 
-  plugins.forEach((plugin): void => plugin(client, clientOptions))
+  plugins.forEach((plugin): void => {
+    plugin(client, clientOptions)
+  })
 
   return client
 }
