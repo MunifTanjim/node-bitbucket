@@ -1,0 +1,66 @@
+import {
+  APIClient as BareAPIClient,
+  Options as BareOptions,
+  Plugin
+} from '../src/client/types'
+import { Routes } from '../src/plugins/register-endpoints/types'
+import { PaginatedResponseData, Response } from '../src/request/types'
+import { AuthOptions } from '../src/plugins/auth/types'
+
+interface Options extends BareOptions {
+  auth?: AuthOptions
+  notice?: boolean
+}
+
+type AsyncResponse<T> = Promise<Response<T>>
+
+export interface APIClient extends BareAPIClient {
+  hasNextPage(data: PaginatedResponseData<any>): boolean
+  getNextPage<T>(data: PaginatedResponseData<T>): Response<T>
+  hasPreviousPage(data: PaginatedResponseData<any>): boolean
+  getPreviousPage<T>(data: PaginatedResponseData<T>): Response<T>
+
+  registerEndpoints(routes: Routes): void
+}
+
+export interface APIClientFactory<APIClient> {
+  new (options?: Options): APIClient
+  (options?: Options): APIClient
+
+  plugins(plugins: Plugin[]): APIClientFactory<APIClient>
+}
+
+export namespace Schema {
+  export type Any = any
+  export type AnyObject = { [key: string]: any }
+
+  {{{typesBlob}}}
+}
+
+export namespace Params {
+  export type Empty = {}
+
+  {{#namespaces}}
+  {{#endpoints}}
+  {{^exclude}}
+  {{#paramsType}}
+  export type {{paramsType}} = {
+    {{#params}}
+    "{{name}}"{{^required}}?{{/required}}: {{#schema}}Schema.{{/schema}}{{{type}}}
+    {{/params}}
+  }
+  {{/paramsType}}
+  {{/exclude}}
+  {{/endpoints}}
+  {{/namespaces}}
+}
+
+export interface APIEndpoints {
+  {{#namespaces}}
+  {{namespace}}: {
+    {{#endpoints}}
+    {{name}}: (params: Params.{{paramsType}}) => AsyncResponse<Schema.{{responseType}}>
+    {{/endpoints}}
+  }
+  {{/namespaces}}
+}

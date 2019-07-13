@@ -14,18 +14,22 @@
   "license": "MIT",
   "author": "MunifTanjim (https://muniftanjim.com)",
   "files": [
-    "src",
-    "dist/*.js"
+    "lib",
+    "src/**/types.ts"
   ],
-  "main": "src/index.js",
-  "types": "src/index.d.ts",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "unpkg": "lib/index.umd.js",
+  "jsdelivr": "lib/index.umd.js",
+  "types": "lib/index.d.ts",
   "repository": "github:MunifTanjim/node-bitbucket",
   "scripts": {
-    "prebuild": "npm run clean",
-    "build:cjs": "bili --format cjs --format cjs-min",
-    "build:esm": "bili --format esm --format esm-min",
-    "build:umd": "bili --format umd --format umd-min",
-    "build": "npm-run-all -p build:*",
+    "build": "npm-run-all -s build:core build:plugins",
+    "prebuild:core": "rimraf lib/*.js lib/*.js.map",
+    "build:core": "bili",
+    "prebuild:plugins": "rimraf lib/plugins/*.js lib/plugins/*.js.map",
+    "build:plugins": "npm-run-all -s build:plugin:*",
+    "build:plugin:authenticate": "PLUGIN=authenticate bili",
     "predocs:build": "mkdirp docs",
     "docs:build": "npm run generate:api-docs",
     "postdocs:build": "apidoc -i docs -o docs",
@@ -35,12 +39,16 @@
     "generate:routes": "node scripts/generate-routes",
     "generate:api-docs": "node scripts/generate-api-docs",
     "generate:types-schema": "node scripts/generate-types-schema",
+    "pregenerate:types": "rimraf lib/*.d.ts lib/plugins/*.d.ts",
     "generate:types": "node scripts/generate-types",
-    "preparex": "npm-run-all -s build",
+    "prepack": "npm-run-all -p build generate:types",
     "validate": "npm-run-all -p validate:*",
     "prevalidate:types": "npm run generate:types",
     "validate:types": "npm-run-all -p validate:types:*",
-    "validate:types:ts": "tsc --target es6 src/index.d.ts",
+    "validate:types:bitbucket": "tsc --target es6 lib/bitbucket.d.ts",
+    "validate:types:index": "tsc --target es6 lib/index.d.ts",
+    "validate:types:minimal": "tsc --target es6 lib/minimal.d.ts",
+    "validate:types:plugin:authenticate": "tsc --target es6 lib/plugins/authenticate.d.ts",
     "test": "jest"
   },
   "dependencies": {
@@ -54,6 +62,7 @@
   "devDependencies": {
     "@types/btoa-lite": "^1.0.0",
     "@types/jest": "^24.0.15",
+    "@types/mustache": "^0.8.32",
     "@types/node": "^12.6.1",
     "@types/node-fetch": "^2.3.7",
     "@types/url-template": "^2.0.28",
@@ -83,8 +92,6 @@
     "rollup-plugin-typescript2": "^0.21.2",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
-    "typescript": "^3.5.3",
-    "webpack": "^4.8.3",
-    "webpack-cli": "^3.2.3"
+    "typescript": "^3.5.3"
   }
 }

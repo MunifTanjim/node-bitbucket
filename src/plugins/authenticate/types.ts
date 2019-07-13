@@ -3,8 +3,8 @@ export { RequestOptions } from '../../endpoint/types'
 
 export type APIClient = import('../../client/types').APIClient
 
-type AuthBasic = import('../../client/types').AuthBasic
-type AuthToken = import('../../client/types').AuthToken
+type AuthBasic = import('../auth/types').AuthBasic
+type AuthToken = import('../auth/types').AuthToken
 
 export type AuthenticateOptions =
   | AuthBasic & { type: 'apppassword' | 'basic' }

@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 const { readFileSync, writeFileSync } = require('fs')
 const camelCase = require('lodash/camelCase')
 const toPairs = require('lodash/toPairs')
@@ -12,11 +14,9 @@ const prettier = require('prettier')
 const { pascalCase } = require('./utils/pascal-case')
 
 const ROUTES = require('../src/plugins/register-api-endpoints/routes.json')
-const typesSchema = require('./templates/types-schema.json')
+const typesSchema = require('../templates/types-schema.json')
 
 async function getTypesBlob(languageName) {
-  console.log(`compiling types schema for ${languageName}...`)
-
   const compileSchema = {
     typescript: require('json-schema-to-typescript').compile
   }[languageName.toLowerCase()]
@@ -43,8 +43,8 @@ const typeMap = {
 }
 
 const bodyTypeMap = {
-  default: 'Bitbucket.Any',
-  'application/x-www-form-urlencoded': 'Bitbucket.Object',
+  default: 'Schema.Any',
+  'application/x-www-form-urlencoded': 'Schema.AnyObject',
   'multipart/form-data': 'FormData'
 }
 
@@ -75,14 +75,8 @@ function parameterize(paramName, param, accepts) {
   }
 }
 
-const templatesPath = resolvePath('scripts/templates')
-const typesPath = resolvePath('src')
-
 async function generateTypes(languageName, templateFile) {
-  const templatePath = joinPath(templatesPath, templateFile)
-  const template = readFileSync(templatePath, 'utf8')
-
-  console.log(`generating ${languageName} types...`)
+  const template = readFileSync(templateFile, 'utf8')
 
   const typesBlob = await getTypesBlob(languageName)
 
@@ -137,29 +131,53 @@ async function generateTypes(languageName, templateFile) {
   })
 
   const prettyTypes = prettier.format(types, {
-    parser: languageName.toLowerCase()
+    parser: languageName.toLowerCase(),
+    semi: false,
+    singleQuote: true
   })
 
   return prettyTypes
 }
 
-function writeTypes(types, outputFile) {
-  const definitionFilePath = joinPath(typesPath, outputFile)
-
-  writeFileSync(definitionFilePath, types, 'utf8')
+function writeTypes(languageName, outputFile, types) {
+  writeFileSync(outputFile, types, 'utf8')
 
   console.log(
     `${languageName} types written to: ${relativePath(
       resolvePath('.'),
-      definitionFilePath
+      outputFile
     )}`
   )
 }
 
-const languageName = 'TypeScript'
-const templateFile = 'index.d.ts.mustache'
-const outputFile = 'index.d.ts'
+const templatesPath = resolvePath('templates')
+const typesPath = resolvePath('lib')
 
-generateTypes(languageName, templateFile, outputFile).then(types =>
-  writeTypes(types, outputFile)
-)
+const typeFiles = [
+  {
+    languageName: 'TypeScript',
+    templateFile: joinPath(templatesPath, 'bitbucket.d.ts.mustache'),
+    outputFile: joinPath(typesPath, 'bitbucket.d.ts')
+  },
+  {
+    languageName: 'TypeScript',
+    templateFile: joinPath(templatesPath, 'index.d.ts.mustache'),
+    outputFile: joinPath(typesPath, 'index.d.ts')
+  },
+  {
+    languageName: 'TypeScript',
+    templateFile: joinPath(templatesPath, 'minimal.d.ts.mustache'),
+    outputFile: joinPath(typesPath, 'minimal.d.ts')
+  },
+  {
+    languageName: 'TypeScript',
+    templateFile: joinPath(templatesPath, 'plugins/authenticate.d.ts.mustache'),
+    outputFile: joinPath(typesPath, 'plugins/authenticate.d.ts')
+  }
+]
+
+typeFiles.forEach(({ languageName, templateFile, outputFile }) => {
+  generateTypes(languageName, templateFile, outputFile).then(
+    writeTypes.bind(null, languageName, outputFile)
+  )
+})

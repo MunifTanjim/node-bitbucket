@@ -1,5 +1,3 @@
-import { Agent } from 'http'
-
 export type Headers = { [header: string]: string }
 
 export type RequestMethod = 'DELETE' | 'GET' | 'POST' | 'PUT'
@@ -33,7 +31,7 @@ export type RequestOptions = {
     authorization?: string
   }
   request?: EndpointParams['request'] & {
-    agent?: Agent
+    agent?: any
     fetch?: (url: string, init?: any) => Promise<any>
     timeout?: number
   }
