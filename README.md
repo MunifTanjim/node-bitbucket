@@ -1,6 +1,6 @@
-[![version:@latest](https://img.shields.io/npm/v/bitbucket.svg?style=for-the-badge)](https://www.npmjs.com/package/bitbucket)
-[![Documentation](https://img.shields.io/badge/docs-bitbucket.js-blue.svg?style=for-the-badge)](https://bitbucketjs.netlify.com)
-[![License](https://img.shields.io/github/license/MunifTanjim/node-bitbucket.svg?style=for-the-badge)](https://github.com/MunifTanjim/node-bitbucket/blob/master/LICENSE)
+[![version:@next](https://img.shields.io/npm/v/bitbucket/next.svg?style=for-the-badge)](https://www.npmjs.com/package/bitbucket/v/next)
+[![Documentation](https://img.shields.io/badge/docs-bitbucket.js-blue.svg?style=for-the-badge)](https://next--bitbucketjs.netlify.com)
+[![License](https://img.shields.io/github/license/MunifTanjim/node-bitbucket.svg?style=for-the-badge)](https://github.com/MunifTanjim/node-bitbucket/blob/next/LICENSE)
 
 # Bitbucket.js
 
@@ -23,13 +23,13 @@ Bitbucket API docs: [https://api.bitbucket.org](https://api.bitbucket.org)
 via **npm**:
 
 ```sh
-$ npm install bitbucket --save
+$ npm install --save bitbucket@next
 ```
 
 via **yarn**:
 
 ```sh
-$ yarn add bitbucket
+$ yarn add bitbucket@next
 ```
 
 ## Usage
@@ -37,7 +37,7 @@ $ yarn add bitbucket
 ### Browser
 
 ```html
-<script src="https://unpkg.com/bitbucket/dist/bitbucket.min.js"></script>
+<script src="https://unpkg.com/bitbucket@next/lib/index.umd.js"></script>
 <script>
   const bitbucket = new Bitbucket()
 </script>
@@ -46,7 +46,7 @@ $ yarn add bitbucket
 ### Node
 
 ```js
-const Bitbucket = require('bitbucket')
+const { Bitbucket } = require('bitbucket')
 
 const bitbucket = new Bitbucket()
 ```
@@ -58,8 +58,7 @@ You can set the APIs' `baseUrl` and modify some behaviors (e.g. request timeout 
 ```js
 const clientOptions = {
   baseUrl: 'https://api.bitbucket.org/2.0',
-  headers: {},
-  options: {
+  request: {
     timeout: 10
   }
 }
@@ -70,11 +69,14 @@ const bitbucket = new Bitbucket(clientOptions)
 #### Authentication
 
 ```js
-bitbucket.authenticate({
-  type: 'basic',
-  username: 'username',
-  password: 'password'
-})
+const clientOptions = {
+  auth: {
+    username: 'username',
+    password: 'password'
+  }
+}
+
+const bitbucket = new Bitbucket(clientOptions)
 ```
 
 #### API Methods
@@ -82,21 +84,18 @@ bitbucket.authenticate({
 **async/await**
 ```js
 try {
-  let { data, headers } = await bitbucket.<namespace>.<api>({ ...params })
-} catch (err) {}
+  const { data, headers, status, url } = await bitbucket.<namespace>.<api>({ ...params })
+} catch (err) {
+  const { message, error, headers, request, status } = err
+}
 ```
 
 **Promise**
 ```js
 bitbucket.<namespace>
   .<api>({ ...params })
-  .then(({ data, headers }) => {})
-  .catch(err => {})
-```
-
-**Callback**
-```js
-bitbucket.<namespace>.<api>({ ...params }, (err, { data, headers }) => {})
+  .then(({ data, headers, status, url }) => {})
+  .catch(({ message, error, headers, request, status }) => {})
 ```
 
 Notes:
@@ -106,7 +105,7 @@ Notes:
 
 #### Namespace Names
 
-`addon`, `hook_events`, `webhooks`, `repositories`, `branchrestrictions`, `commits`, `commitstatuses`, `issue_tracker`, `pullrequests`, `downloads`, `source`, `pipelines`, `refs`, `snippets`, `teams`, `projects`, `users`, `search`, `user`, `ssh`
+`branching_model`, `branchrestrictions`, `commits`, `commitstatuses`, `deploy`, `deployments`, `downloads`, `hook_events`, `issue_tracker`, `pipelines`, `projects`, `pullrequests`, `refs`, `repositories`, `search`, `snippet`, `snippets`, `source`, `ssh`, `teams`, `user`, `users`, `webhooks`
 
 #### API Names
 
@@ -117,7 +116,7 @@ Check API client docs: [https://bitbucketjs.netlify.com](https://bitbucketjs.net
 ```js
 bitbucket.repositories
   .list({ username: 'MunifTanjim' })
-  .then(({ data, headers }) => console.log(data.values))
+  .then(({ data }) => console.log(data.values))
   .catch(err => console.error(err))
 ```
 
