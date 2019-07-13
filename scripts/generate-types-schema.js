@@ -80,6 +80,6 @@ for (const entityName of entityNames) {
     .value()
 }
 
-const typesSchemaPath = resolvePath('scripts/templates/types-schema.json')
+const typesSchemaPath = resolvePath('templates/types-schema.json')
 
 writeFileSync(typesSchemaPath, `${stringifiedSchema}\n`)

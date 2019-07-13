@@ -1,11 +1,10 @@
 /* eslint-disable no-console */
 
 type APIClient = import('./types').APIClient
-type NoticePluginState = import('./types').NoticePluginState
 type Options = import('./types').Options
 
 function noticePlugin(_client: APIClient, clientOptions: Options): void {
-  const { notice = true }: NoticePluginState = clientOptions
+  const { notice = true } = clientOptions
 
   if (!notice) return
 

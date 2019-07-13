@@ -9,7 +9,8 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "sourceMap": true,
     "noEmit": true
   },
-  "include": ["src", "scripts"]
+  "include": ["lib", "src", "types"]
 }

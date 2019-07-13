@@ -1,3 +1,5 @@
 import { factory } from './factory'
 
-export default factory()
+const Client = factory()
+
+export default Client

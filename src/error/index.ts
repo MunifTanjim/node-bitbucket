@@ -21,7 +21,7 @@ export class HTTPError extends Error {
     // Maintains proper stack trace (only available on V8)
     if (Error.captureStackTrace) Error.captureStackTrace(this, this.constructor)
 
-    this.name = this.constructor.name
+    this.name = 'HTTPError'
     this.error = options.error
     this.headers = options.headers
     this.request = options.request

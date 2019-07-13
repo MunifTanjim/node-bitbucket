@@ -1,13 +1,13 @@
-const _ = require('lodash')
-const path = require('path')
+const { find, get, keys, lowerCase, toPairs, upperCase } = require('lodash')
+const { resolve: resolvePath } = require('path')
 const { writeFileSync } = require('fs')
 
 const PATHS_SPEC = require('../specification/paths.json')
 const PATHS_SPEC_EXTRAS = require('../specification/extras/paths.json')
 
-const docsPath = path.resolve('docs')
+const docsPath = resolvePath('docs')
 
-const ROUTES = require('../src/routes/routes.json')
+const ROUTES = require('../src/plugins/register-api-endpoints/routes.json')
 
 // One of many workarounds for Bitbucket's faulty API Specification
 const URL_ALIASES = {
@@ -20,37 +20,35 @@ const getAPIDescription = ({ method, url }, apiName, namespaceName) => {
   method = method.toLowerCase()
   url = URL_ALIASES[url] || url
 
-  const spec = _.get(
+  const spec = get(
     PATHS_SPEC,
     url,
     usernameRegex.test(url)
-      ? _.get(PATHS_SPEC, url.replace(usernameRegex, '/{workspace}/'))
+      ? get(PATHS_SPEC, url.replace(usernameRegex, '/{workspace}/'))
       : null
   )
 
-  return _.get(
-    spec,
-    [method, 'description'],
-    _.get(spec, [method, 'summary'], '')
-  )
+  return get(spec, [method, 'description'], get(spec, [method, 'summary'], ''))
 }
 
 const getAPIParamDefault = (param, paramName, { method, url }) => {
   method = method.toLowerCase()
 
-  const spec = _.get(
+  url = url.replace(/\{\?.+\}$/, '')
+
+  const spec = get(
     PATHS_SPEC,
     url,
     usernameRegex.test(url)
-      ? _.get(PATHS_SPEC, url.replace(usernameRegex, '/{workspace}/'))
+      ? get(PATHS_SPEC, url.replace(usernameRegex, '/{workspace}/'))
       : null
   )
 
   let defaultVal =
-    (_.find(spec[method].parameters, ['name', paramName]) || {}).default || null
+    (find(spec[method].parameters, ['name', paramName]) || {}).default || null
 
   if (defaultVal === null) {
-    defaultVal = (_.find(spec.parameters, ['name', paramName]) || {}).default
+    defaultVal = (find(spec.parameters, ['name', paramName]) || {}).default
   }
 
   return defaultVal || null
@@ -59,20 +57,21 @@ const getAPIParamDefault = (param, paramName, { method, url }) => {
 const getAPIParamDescription = (param, paramName, { method, url }) => {
   method = method.toLowerCase()
 
-  const spec = _.get(
+  url = url.replace(/\{\?.+\}$/, '')
+
+  const spec = get(
     PATHS_SPEC,
     url,
     usernameRegex.test(url)
-      ? _.get(PATHS_SPEC, url.replace(usernameRegex, '/{workspace}/'))
+      ? get(PATHS_SPEC, url.replace(usernameRegex, '/{workspace}/'))
       : null
   )
 
-  let description = (_.find(spec[method].parameters, ['name', paramName]) || {})
+  let description = (find(spec[method].parameters, ['name', paramName]) || {})
     .description
 
   if (!description) {
-    description = (_.find(spec.parameters, ['name', paramName]) || {})
-      .description
+    description = (find(spec.parameters, ['name', paramName]) || {}).description
   }
 
   return description || ''
@@ -108,13 +107,15 @@ const toAPIParamComment = (param, paramName, api) => {
 const getLinkToOfficialDocs = ({ method, url }, apiName, namespaceName) => {
   url = URL_ALIASES[url] || url
 
-  const specUrl = _.get(PATHS_SPEC, url)
+  url = url.replace(/\{\?.+\}$/, '')
+
+  const specUrl = get(PATHS_SPEC, url)
     ? url
     : usernameRegex.test(url)
-      ? _.get(PATHS_SPEC, url.replace(usernameRegex, '/{workspace}/'))
-        ? url.replace(usernameRegex, '/{workspace}/')
-        : null
+    ? get(PATHS_SPEC, url.replace(usernameRegex, '/{workspace}/'))
+      ? url.replace(usernameRegex, '/{workspace}/')
       : null
+    : null
 
   if (!specUrl) {
     throw new Error(`specUrl missing for url: ${url}`)
@@ -122,7 +123,7 @@ const getLinkToOfficialDocs = ({ method, url }, apiName, namespaceName) => {
 
   return `<a href="https://developer.atlassian.com/bitbucket/api/2/reference/resource${encodeURI(
     specUrl
-  )}#${_.lowerCase(method)}">[API Docs]</a>`
+  )}#${lowerCase(method)}">[API Docs]</a>`
 }
 
 const toAPIComment = (api, apiName, namespaceName) => {
@@ -150,18 +151,18 @@ const toAPIComment = (api, apiName, namespaceName) => {
 
   const commentLines = [
     `/**`,
-    ` * @api {${_.upperCase(method)}} ${url} ${apiName}`,
+    ` * @api {${upperCase(method)}} ${url} ${apiName}`,
     ` * @apiName ${namespaceName}.${apiName}`,
     ` * @apiDescription ${descriptionWithLinkToOfficialDocs}`,
     ` * @apiGroup ${namespaceName}`,
     ' *'
   ].concat(
-    _.toPairs(params).map(([paramName, param]) =>
+    toPairs(params).map(([paramName, param]) =>
       toAPIParamComment(param, paramName, api)
     )
   )
 
-  const paramsString = _.keys(params).join(', ')
+  const paramsString = keys(params).join(', ')
 
   return commentLines
     .concat([
@@ -189,15 +190,15 @@ const toSectionComment = namespaceName => `
 const prepareNamespace = (namespace, namespaceName) =>
   [toSectionComment(namespaceName)]
     .concat(
-      _.keys(namespace).map(apiName =>
+      keys(namespace).map(apiName =>
         prepareAPI(namespace[apiName], apiName, namespaceName)
       )
     )
     .join('\n')
 
-const apiDocs = _.keys(ROUTES)
+const apiDocs = keys(ROUTES)
   .map(namespaceName => prepareNamespace(ROUTES[namespaceName], namespaceName))
   .join('\n')
   .trim()
 
-writeFileSync(path.resolve(docsPath, 'apidoc.js'), `${apiDocs}\n`)
+writeFileSync(resolvePath(docsPath, 'apidoc.js'), `${apiDocs}\n`)
