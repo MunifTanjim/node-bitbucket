@@ -1,4 +1,4 @@
-import Client from './client'
+import { Client } from './client'
 import authPlugin from './plugins/auth'
 import noticePlugin from './plugins/notice'
 import paginationPlugin from './plugins/pagination'
@@ -16,5 +16,3 @@ const Plugins = [
 ]
 
 export const Bitbucket = Client.plugins(Plugins)
-
-export default Bitbucket
