@@ -167,11 +167,9 @@ const toAPIComment = (api, apiName, namespaceName) => {
   return commentLines
     .concat([
       ` * @apiExample {js} async/await`,
-      ` *   let { data, headers } = await bitbucket.${namespaceName}.${apiName}({ ${paramsString} })`,
+      ` *   const { data, headers } = await bitbucket.${namespaceName}.${apiName}({ ${paramsString} })`,
       ` * @apiExample {js} Promise`,
       ` *   bitbucket.${namespaceName}.${apiName}({ ${paramsString} }).then(({ data, headers }) => {})`,
-      ` * @apiExample {js} Callback`,
-      ` *   bitbucket.${namespaceName}.${apiName}({ ${paramsString} }, (err, { data, headers }) => {})`,
       ` */`
     ])
     .join('\n')
