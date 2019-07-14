@@ -3,7 +3,6 @@
     "target": "esnext",
     "module": "esnext",
     "baseUrl": "./src",
-    "allowJs": true,
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -12,5 +11,5 @@
     "sourceMap": true,
     "noEmit": true
   },
-  "include": ["lib", "src", "types"]
+  "include": ["src"]
 }
