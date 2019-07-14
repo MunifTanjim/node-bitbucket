@@ -17,8 +17,8 @@
     "lib",
     "src/**/types.ts"
   ],
-  "main": "lib/index.js",
-  "module": "lib/index.esm.js",
+  "main": "lib/index.umd.js",
+  "module": "lib/index.js",
   "unpkg": "lib/index.umd.js",
   "jsdelivr": "lib/index.umd.js",
   "types": "lib/index.d.ts",
