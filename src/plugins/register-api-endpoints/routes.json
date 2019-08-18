@@ -2984,6 +2984,37 @@
       "returns": "PaginatedRepositories",
       "url": "/repositories/{username}/{repo_slug}/forks"
     },
+    "listGlobal": {
+      "method": "GET",
+      "params": {
+        "after": {
+          "type": "string"
+        },
+        "page": {
+          "type": "string"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "q": {
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "admin",
+            "contributor",
+            "member",
+            "owner"
+          ],
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedRepositories",
+      "url": "/repositories"
+    },
     "listIssueAttachments": {
       "method": "GET",
       "params": {
@@ -3299,37 +3330,6 @@
       },
       "returns": "PaginatedPipelineVariables",
       "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
-    },
-    "listPublic": {
-      "method": "GET",
-      "params": {
-        "after": {
-          "type": "string"
-        },
-        "page": {
-          "type": "string"
-        },
-        "pagelen": {
-          "type": "integer"
-        },
-        "q": {
-          "type": "string"
-        },
-        "role": {
-          "enum": [
-            "admin",
-            "contributor",
-            "member",
-            "owner"
-          ],
-          "type": "string"
-        },
-        "sort": {
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedRepositories",
-      "url": "/repositories"
     },
     "listPullRequestActivities": {
       "method": "GET",

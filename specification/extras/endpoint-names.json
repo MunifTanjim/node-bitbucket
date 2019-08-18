@@ -63,7 +63,7 @@
   },
   "/repositories": {
     "get": {
-      "repositories": "listPublic"
+      "repositories": "listGlobal"
     }
   },
   "/repositories/{username}": {
