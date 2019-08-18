@@ -1086,6 +1086,11 @@
       "repositories": ""
     }
   },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/remote-triggers/{trigger_key}": {
+    "put": {
+      "repositories": ""
+    }
+  },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/": {
     "get": {
       "pipelines": "",
