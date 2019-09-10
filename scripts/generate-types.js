@@ -11,6 +11,7 @@ const {
 } = require('path')
 const prettier = require('prettier')
 
+const { isPaginatedEndpoint } = require('./utils/is-paginated-endpoint')
 const { pascalCase } = require('./utils/pascal-case')
 
 const ROUTES = require('../src/plugins/register-api-endpoints/routes.json')
@@ -92,6 +93,17 @@ async function generateTypes(languageName, templateFile) {
             '.'
           )
           endpointObject = ROUTES[namespaceAlias][endpointAlias]
+        }
+
+        const isPaginated = isPaginatedEndpoint(endpointName, endpointObject)
+
+        if (isPaginated) {
+          endpointObject.params = Object.assign({}, endpointObject.params, {
+            page: { require: false, type: 'string' },
+            pagelen: { required: false, type: 'integer' },
+            q: { required: false, type: 'string' },
+            sort: { required: false, type: 'string' }
+          })
         }
 
         const params = toPairs(endpointObject.params).reduce(
