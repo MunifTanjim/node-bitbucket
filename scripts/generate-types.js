@@ -106,6 +106,12 @@ async function generateTypes(languageName, templateFile) {
           })
         }
 
+        if (endpointObject.method === 'GET') {
+          endpointObject.params = Object.assign({}, endpointObject.params, {
+            fields: { require: false, type: 'string' }
+          })
+        }
+
         const params = toPairs(endpointObject.params).reduce(
           (params, [paramName, param]) =>
             params.concat(
