@@ -30,7 +30,7 @@
     "prebuild:plugins": "rimraf lib/plugins/*.js lib/plugins/*.js.map",
     "build:plugins": "npm-run-all -s build:plugin:*",
     "build:plugin:authenticate": "PLUGIN=authenticate bili",
-    "predocs:build": "mkdirp docs",
+    "predocs:build": "mkdirp docs && rimraf docs/*",
     "docs:build": "npm run generate:api-docs",
     "postdocs:build": "apidoc -i docs -o docs",
     "clean": "rimraf lib/*",

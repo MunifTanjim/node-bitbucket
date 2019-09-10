@@ -2,6 +2,8 @@ const { find, get, keys, lowerCase, toPairs, upperCase } = require('lodash')
 const { resolve: resolvePath } = require('path')
 const { writeFileSync } = require('fs')
 
+const { isPaginatedEndpoint } = require('./utils/is-paginated-endpoint')
+
 const PATHS_SPEC = require('../specification/paths.json')
 const PATHS_SPEC_EXTRAS = require('../specification/extras/paths.json')
 
@@ -33,6 +35,7 @@ const getAPIDescription = ({ method, url }, apiName, namespaceName) => {
 
 const getAPIParamDefault = (param, paramName, { method, url }) => {
   method = method.toLowerCase()
+  url = URL_ALIASES[url] || url
 
   url = url.replace(/\{\?.+\}$/, '')
 
@@ -56,6 +59,7 @@ const getAPIParamDefault = (param, paramName, { method, url }) => {
 
 const getAPIParamDescription = (param, paramName, { method, url }) => {
   method = method.toLowerCase()
+  url = URL_ALIASES[url] || url
 
   url = url.replace(/\{\?.+\}$/, '')
 
@@ -140,6 +144,23 @@ const toAPIComment = (api, apiName, namespaceName) => {
     throw new Error(
       `HTTP method missing for ${namespaceName}.${apiName} in routes.json`
     )
+  }
+
+  const isPaginated = isPaginatedEndpoint(apiName, api)
+
+  if (isPaginated) {
+    params = Object.assign({}, params, {
+      page: { require: false, type: 'string' },
+      pagelen: { required: false, type: 'integer' },
+      q: { required: false, type: 'string' },
+      sort: { required: false, type: 'string' }
+    })
+  }
+
+  if (method === 'GET') {
+    params = Object.assign({}, params, {
+      fields: { require: false, type: 'string' }
+    })
   }
 
   let descriptionWithLinkToOfficialDocs = [
