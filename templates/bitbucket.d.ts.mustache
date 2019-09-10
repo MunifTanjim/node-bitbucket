@@ -46,7 +46,7 @@ export namespace Params {
   {{#paramsType}}
   export type {{paramsType}} = {
     {{#params}}
-    "{{name}}"{{^required}}?{{/required}}: {{#schema}}Schema.{{/schema}}{{{type}}}
+    {{name}}{{^required}}?{{/required}}: {{#schema}}Schema.{{/schema}}{{{type}}}
     {{/params}}
   }
   {{/paramsType}}

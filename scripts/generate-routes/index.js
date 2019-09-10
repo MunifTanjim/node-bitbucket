@@ -12,6 +12,7 @@ const {
 } = require('../utils/extract-namespace-from-url')
 const { extractNamespaceNames } = require('../utils/extract-namespace-names')
 const { getDuplicates } = require('../utils/get-duplicates')
+const { isPaginatedEndpoint } = require('../utils/is-paginated-endpoint')
 
 const PATHS_SPEC = require('../../specification/paths.json')
 const PATHS_SPEC_EXTRAS = require('../../specification/extras/paths.json')
@@ -145,17 +146,16 @@ function populateRoutes(routesObject) {
   }
 }
 
-function addFilterAndSortParams(routesObject) {
+function formatUrls(routesObject) {
   for (const [, endpoints] of Object.entries(routesObject)) {
     for (const [endpointName, endpointObject] of Object.entries(endpoints)) {
       // ignore alias endpoint
       if (endpointObject.alias) continue
 
-      const isPaginatedList = /^list/i.test(endpointName)
-      const returnsPaginated =
-        endpointObject.returns && /^paginated/i.test(endpointObject.returns)
+      // ignore endpoint with method GET/DELETE
+      if (['GET', 'DELETE'].includes(endpointObject.method)) continue
 
-      if (isPaginatedList || returnsPaginated) {
+      if (isPaginatedEndpoint(endpointName, endpointObject)) {
         processParameters(endpointObject, {
           parameters: [
             { in: 'query', name: 'page', require: false, type: 'string' },
@@ -165,25 +165,31 @@ function addFilterAndSortParams(routesObject) {
           ]
         })
       }
+
+      const queryParams = Object.keys(endpointObject.params).filter(
+        paramName => endpointObject.params[paramName].in === 'query'
+      )
+
+      if (queryParams.length) {
+        const queryTemplate = `{?${queryParams.join(',')}}`
+        endpointObject.url = `${endpointObject.url}${queryTemplate}`
+      }
     }
   }
 }
 
-function formatUrls(routesObject) {
+function cleanupParams(routesObject) {
+  const unnecessaryParamNames = ['page', 'pagelen', 'q', 'sort', 'fields']
+
   for (const [, endpoints] of Object.entries(routesObject)) {
     for (const [, endpointObject] of Object.entries(endpoints)) {
       // ignore alias endpoint
       if (endpointObject.alias) continue
 
-      // ignore endpoint with method GET/DELETE
-      if (!['GET', 'DELETE'].includes(endpointObject.method)) {
-        const queryParams = Object.keys(endpointObject.params).filter(
-          paramName => endpointObject.params[paramName].in === 'query'
-        )
-
-        if (queryParams.length) {
-          const queryTemplate = `{?${queryParams.join(',')}}`
-          endpointObject.url = `${endpointObject.url}${queryTemplate}`
+      // delete unnecessary params
+      for (const paramName of Object.keys(endpointObject.params)) {
+        if (unnecessaryParamNames.includes(paramName)) {
+          delete endpointObject.params[paramName]
         }
       }
 
@@ -200,8 +206,8 @@ function generateRoutes() {
 
   initializeRoutes(routesObject)
   populateRoutes(routesObject)
-  addFilterAndSortParams(routesObject)
   formatUrls(routesObject)
+  cleanupParams(routesObject)
 
   return routesObject
 }
