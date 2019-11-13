@@ -81,6 +81,26 @@
       ]
     }
   },
+  "/repositories/{username}/{repo_slug}/deploy-keys": {
+    "post": {
+      "parameters": [
+        {
+          "description": "A label for deploy key",
+          "in": "path",
+          "name": "label",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key to be used as a deploy key, accepts valid ssh public keys",
+          "in": "path",
+          "name": "key",
+          "required": "true",
+          "type": "string"
+        }
+      ]
+    }
+  },
   "/repositories/{username}/{repo_slug}/downloads": {
     "post": {
       "consumes": ["multipart/form-data"],
