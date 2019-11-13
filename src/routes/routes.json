@@ -681,6 +681,16 @@
           "in": "path",
           "required": true,
           "type": "string"
+        },
+        "label":{
+          "in":"body",
+          "required":true,
+          "type":"string"
+        },
+        "key":{
+          "in":"body",
+          "required":true,
+          "type":"string"
         }
       },
       "returns": "DeployKey",

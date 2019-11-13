@@ -2,17 +2,25 @@
   "name": "bitbucket",
   "version": "1.15.1",
   "description": "Bitbucket API client for Browser and Node.js",
-  "keywords": ["bitbucket", "bitbucket-api", "api-client", "api", "rest"],
+  "keywords": [
+    "bitbucket",
+    "bitbucket-api",
+    "api-client",
+    "api",
+    "rest"
+  ],
   "homepage": "https://github.com/MunifTanjim/node-bitbucket#readme",
   "bugs": "https://github.com/MunifTanjim/node-bitbucket/issues",
   "license": "MIT",
   "author": "MunifTanjim (https://muniftanjim.com)",
-  "files": ["src", "dist/*.js"],
+  "files": [
+    "src",
+    "dist/*.js"
+  ],
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "browser": {
-    "./src/utils/get-buffer-response.js":
-      "./src/utils/get-buffer-response-browser.js"
+    "./src/utils/get-buffer-response.js": "./src/utils/get-buffer-response-browser.js"
   },
   "repository": "github:MunifTanjim/node-bitbucket",
   "scripts": {
@@ -20,8 +28,7 @@
     "prebuild:browser": "mkdirp dist",
     "build:browser": "npm-run-all -p build:browser:*",
     "build:browser:development": "webpack --mode development",
-    "build:browser:production":
-      "webpack --mode production --output-filename=bitbucket.min.js",
+    "build:browser:production": "webpack --mode production --output-filename=bitbucket.min.js",
     "prebuild:docs": "mkdirp docs",
     "build:docs": "npm run generate:api-docs",
     "postbuild:docs": "apidoc -i docs -o docs",
