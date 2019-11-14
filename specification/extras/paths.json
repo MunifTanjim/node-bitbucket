@@ -81,6 +81,24 @@
       ]
     }
   },
+  "/repositories/{username}/{repo_slug}/deploy-keys": {
+    "post": {
+      "parameters": [
+        {
+          "in": "body",
+          "name": "key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "body",
+          "name": "label",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
   "/repositories/{username}/{repo_slug}/downloads": {
     "post": {
       "consumes": ["multipart/form-data"],

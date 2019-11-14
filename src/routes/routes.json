@@ -672,6 +672,16 @@
     "createDeployKey": {
       "method": "POST",
       "params": {
+        "key": {
+          "in": "body",
+          "required": true,
+          "type": "string"
+        },
+        "label": {
+          "in": "body",
+          "required": true,
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
