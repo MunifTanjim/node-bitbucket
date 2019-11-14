@@ -2703,22 +2703,6 @@
     ],
     "post": {
       "description": "Create a new deploy key in a repository.\n\nExample:\n```\n$ curl -XPOST \\\n-H \"Authorization <auth header>\" \\\n-H \"Content-type: application/json\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys -d \\\n'{\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5 mleu@C02W454JHTD8\",\n    \"label\": \"mydeploykey\"\n}'\n\nOutput:\n{\n    \"id\": 123,\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"label\": \"mydeploykey\",\n    \"type\": \"deploy_key\",\n    \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n    \"repository\": {\n        \"full_name\": \"mleu/test\",\n        \"name\": \"test\",\n        \"type\": \"repository\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n    },\n    \"links\":{\n        \"self\":{\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys/123\"\n        }\n    }\n    \"last_used\": null,\n    \"comment\": \"mleu@C02W454JHTD8\"\n}\n```",
-      "parameters": [
-        {
-          "description": "A label for deploy key",
-          "in": "path",
-          "name": "label",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description":"The key to be used as a deploy key, accepts valid ssh public keys",
-          "in":"path",
-          "name":"key",
-          "required":"true",
-          "type":"string"
-        }
-      ],
       "responses": {
         "200": {
           "description": "The deploy key that was created",
