@@ -230,15 +230,19 @@ const addFilterAndSortParams = routesObject => {
       let isPaginatedList = /^list/i.test(apiName)
       let returnsPaginated =
         apiObject.returns && /^paginated/i.test(apiObject.returns)
+      let isPipelines = /pipelines/i.test(apiObject.url)
 
       if (isPaginatedList || returnsPaginated) {
+        parameters = [
+          { in: 'query', name: 'page', require: false, type: 'string' },
+          { in: 'query', name: 'pagelen', required: false, type: 'integer' },
+          { in: 'query', name: 'sort', required: false, type: 'string' }
+        ]
+        if (!isPipelines) {
+          parameters.push({ in: 'query', name: 'q', required: false, type: 'string' })
+        }
         setParameters(apiObject, {
-          parameters: [
-            { in: 'query', name: 'page', require: false, type: 'string' },
-            { in: 'query', name: 'pagelen', required: false, type: 'integer' },
-            { in: 'query', name: 'q', required: false, type: 'string' },
-            { in: 'query', name: 'sort', required: false, type: 'string' }
-          ]
+          parameters: parameters
         })
       }
     })
