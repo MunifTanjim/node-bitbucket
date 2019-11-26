@@ -4914,13 +4914,16 @@
           },
           "state": {
             "description": "The pull request's current status.",
-            "enum": [
+            "items": {
+              "enum": [
               "MERGED",
               "SUPERSEDED",
               "OPEN",
               "DECLINED"
             ],
             "type": "string"
+          },
+            "type": "array"
           },
           "summary": {
             "additionalProperties": false,

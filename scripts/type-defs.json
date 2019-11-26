@@ -4064,13 +4064,16 @@
               "$ref": "#/definitions/PullrequestEndpoint"
             },
             "state": {
-              "enum": [
-                "MERGED",
-                "SUPERSEDED",
-                "OPEN",
-                "DECLINED"
-              ],
-              "type": "string"
+              "items": {
+                "enum": [
+                  "MERGED",
+                  "SUPERSEDED",
+                  "OPEN",
+                  "DECLINED"
+                ],
+                "type": "string"
+              },
+              "type": "array"
             },
             "summary": {
               "additionalProperties": false,

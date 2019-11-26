@@ -3844,14 +3844,17 @@
           "type": "string"
         },
         "state": {
-          "enum": [
-            "MERGED",
-            "SUPERSEDED",
-            "OPEN",
-            "DECLINED"
-          ],
+          "items": {
+            "enum": [
+              "MERGED",
+              "SUPERSEDED",
+              "OPEN",
+              "DECLINED"
+            ],
+            "type": "string"
+          },
           "in": "query",
-          "type": "string"
+          "type": "array"
         },
         "username": {
           "in": "path",
