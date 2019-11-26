@@ -4,6 +4,8 @@
  * @param {Object} params - Query Parameters
  * @returns {String} URL with added Query Parameters
  */
+const qs = require('qs')
+
 const addQueryParameters = (url, params = {}) => {
   const separator = /\?/.test(url) ? '&' : '?'
   const names = Object.keys(params)
@@ -24,6 +26,11 @@ const addQueryParameters = (url, params = {}) => {
               .join('+')
           )
           .join('+')}`
+      }
+      if (name === 'state') {
+        if (Array.isArray(params.state)) {
+          return `${qs.stringify({ state: params.state }, { arrayFormat: "repeat" })}`
+        }
       }
       return `${name}=${encodeURIComponent(params[name])}`
     })
