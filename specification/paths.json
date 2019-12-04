@@ -375,6 +375,7 @@
         {
           "description": "A resource or subject type.",
           "enum": [
+            "workspace",
             "user",
             "repository",
             "team"
@@ -427,13 +428,6 @@
     "get": {
       "description": "Returns all pull requests authored by the specified user.\n\nBy default only open pull requests are returned. This can be controlled\nusing the `state` query parameter. To retrieve pull requests that are\nin one of multiple states, repeat the `state` parameter for each\nindividual state.\n\nThis endpoint also supports filtering and sorting of the results. See\n[filtering and sorting](../../../../meta/filtering) for more details.",
       "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
         {
           "description": "Only return pull requests that are in this state. This parameter can be repeated.",
           "enum": [
@@ -553,6 +547,12 @@
         },
         "404": {
           "description": "If the specified account does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "410": {
+          "description": "If the specified account marked as spam.",
           "schema": {
             "$ref": "#/definitions/error"
           }
@@ -1401,16 +1401,16 @@
         "type": "string"
       },
       {
-        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+        "description": "The restriction rule's id",
         "in": "path",
-        "name": "repo_slug",
+        "name": "id",
         "required": true,
         "type": "string"
       },
       {
-        "description": "The restriction rule's id",
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
-        "name": "id",
+        "name": "repo_slug",
         "required": true,
         "type": "string"
       }
@@ -1654,7 +1654,7 @@
   },
   "/repositories/{username}/{repo_slug}/commit/{node}": {
     "get": {
-      "description": "Returns the specified commit.",
+      "description": "Returns the specified commit.\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/commit/f7591a1\n{\n    \"rendered\": {\n        \"message\": {\n        \"raw\": \"Add a GEORDI_OUTPUT_DIR setting\",\n        \"markup\": \"markdown\",\n        \"html\": \"<p>Add a GEORDI_OUTPUT_DIR setting</p>\",\n        \"type\": \"rendered\"\n        }\n    },\n    \"hash\": \"f7591a13eda445d9a9167f98eb870319f4b6c2d8\",\n    \"repository\": {\n        \"name\": \"geordi\",\n        \"type\": \"repository\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"links\": {\n            \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi\"\n            },\n            \"html\": {\n                \"href\": \"https://bitbucket.org/bitbucket/geordi\"\n            },\n            \"avatar\": {\n                \"href\": \"https://bytebucket.org/ravatar/%7B85d08b4e-571d-44e9-a507-fa476535aa98%7D?ts=1730260\"\n            }\n        },\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n    },\n    \"links\": {\n        \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/commit/f7591a13eda445d9a9167f98eb870319f4b6c2d8\"\n        },\n        \"comments\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/commit/f7591a13eda445d9a9167f98eb870319f4b6c2d8/comments\"\n        },\n        \"patch\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/patch/f7591a13eda445d9a9167f98eb870319f4b6c2d8\"\n        },\n        \"html\": {\n            \"href\": \"https://bitbucket.org/bitbucket/geordi/commits/f7591a13eda445d9a9167f98eb870319f4b6c2d8\"\n        },\n        \"diff\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/diff/f7591a13eda445d9a9167f98eb870319f4b6c2d8\"\n        },\n        \"approve\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/commit/f7591a13eda445d9a9167f98eb870319f4b6c2d8/approve\"\n        },\n        \"statuses\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/commit/f7591a13eda445d9a9167f98eb870319f4b6c2d8/statuses\"\n        }\n    },\n    \"author\": {\n        \"raw\": \"Brodie Rao <a@b.c>\",\n        \"type\": \"author\",\n        \"user\": {\n            \"display_name\": \"Brodie Rao\",\n            \"uuid\": \"{9484702e-c663-4afd-aefb-c93a8cd31c28}\",\n            \"links\": {\n                \"self\": {\n                    \"href\": \"https://api.bitbucket.org/2.0/users/%7B9484702e-c663-4afd-aefb-c93a8cd31c28%7D\"\n                },\n                \"html\": {\n                    \"href\": \"https://bitbucket.org/%7B9484702e-c663-4afd-aefb-c93a8cd31c28%7D/\"\n                },\n                \"avatar\": {\n                    \"href\": \"https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/557058:3aae1e05-702a-41e5-81c8-f36f29afb6ca/613070db-28b0-421f-8dba-ae8a87e2a5c7/128\"\n                }\n            },\n            \"type\": \"user\",\n            \"nickname\": \"brodie\",\n            \"account_id\": \"557058:3aae1e05-702a-41e5-81c8-f36f29afb6ca\"\n        }\n    },\n    \"summary\": {\n        \"raw\": \"Add a GEORDI_OUTPUT_DIR setting\",\n        \"markup\": \"markdown\",\n        \"html\": \"<p>Add a GEORDI_OUTPUT_DIR setting</p>\",\n        \"type\": \"rendered\"\n    },\n    \"participants\": [],\n    \"parents\": [\n        {\n            \"type\": \"commit\",\n            \"hash\": \"f06941fec4ef6bcb0c2456927a0cf258fa4f899b\",\n            \"links\": {\n                \"self\": {\n                    \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/commit/f06941fec4ef6bcb0c2456927a0cf258fa4f899b\"\n                },\n                \"html\": {\n                    \"href\": \"https://bitbucket.org/bitbucket/geordi/commits/f06941fec4ef6bcb0c2456927a0cf258fa4f899b\"\n                }\n            }\n        }\n    ],\n    \"date\": \"2012-07-16T19:37:54+00:00\",\n    \"message\": \"Add a GEORDI_OUTPUT_DIR setting\",\n    \"type\": \"commit\"\n}\n```",
       "parameters": [],
       "responses": {
         "200": {
@@ -2603,16 +2603,16 @@
         "type": "string"
       },
       {
-        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+        "description": "This can either be the username or the UUID of the default reviewer,\nsurrounded by curly-braces, for example: `{account UUID}`.\n",
         "in": "path",
-        "name": "repo_slug",
+        "name": "target_username",
         "required": true,
         "type": "string"
       },
       {
-        "description": "This can either be the username or the UUID of the default reviewer,\nsurrounded by curly-braces, for example: `{account UUID}`.\n",
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
-        "name": "target_username",
+        "name": "repo_slug",
         "required": true,
         "type": "string"
       }
@@ -2703,6 +2703,7 @@
     ],
     "post": {
       "description": "Create a new deploy key in a repository.\n\nExample:\n```\n$ curl -XPOST \\\n-H \"Authorization <auth header>\" \\\n-H \"Content-type: application/json\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys -d \\\n'{\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5 mleu@C02W454JHTD8\",\n    \"label\": \"mydeploykey\"\n}'\n\nOutput:\n{\n    \"id\": 123,\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"label\": \"mydeploykey\",\n    \"type\": \"deploy_key\",\n    \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n    \"repository\": {\n        \"full_name\": \"mleu/test\",\n        \"name\": \"test\",\n        \"type\": \"repository\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n    },\n    \"links\":{\n        \"self\":{\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-keys/123\"\n        }\n    }\n    \"last_used\": null,\n    \"comment\": \"mleu@C02W454JHTD8\"\n}\n```",
+      "parameters": [],
       "responses": {
         "200": {
           "description": "The deploy key that was created",
@@ -2825,16 +2826,16 @@
         "type": "string"
       },
       {
-        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+        "description": "The key ID matching the deploy key.",
         "in": "path",
-        "name": "repo_slug",
+        "name": "key_id",
         "required": true,
         "type": "string"
       },
       {
-        "description": "The key ID matching the deploy key.",
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
-        "name": "key_id",
+        "name": "repo_slug",
         "required": true,
         "type": "string"
       }
@@ -2947,6 +2948,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -2959,6 +2961,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -2969,36 +2972,7 @@
   "/repositories/{username}/{repo_slug}/diffstat/{spec}": {
     "get": {
       "description": "Returns the diff stat for the specified commit.\n\nDiff stat responses contain a record for every path modified by the\ncommit and lists the number of lines added and removed for each file.\n\n\nExample:\n```\ncurl https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/diffstat/d222fa2..e174964\n{\n    \"pagelen\": 500,\n    \"values\": [\n        {\n            \"type\": \"diffstat\",\n            \"status\": \"modified\",\n            \"lines_removed\": 1,\n            \"lines_added\": 2,\n            \"old\": {\n                \"path\": \"setup.py\",\n                \"type\": \"commit_file\",\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/src/e1749643d655d7c7014001a6c0f58abaf42ad850/setup.py\"\n                    }\n                }\n            },\n            \"new\": {\n                \"path\": \"setup.py\",\n                \"type\": \"commit_file\",\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/src/d222fa235229c55dad20b190b0b571adf737d5a6/setup.py\"\n                    }\n                }\n            }\n        }\n    ],\n    \"page\": 1,\n    \"size\": 1\n}\n```",
-      "parameters": [
-        {
-          "description": "Generate diffs that ignore whitespace",
-          "in": "query",
-          "name": "ignore_whitespace",
-          "required": false,
-          "type": "boolean"
-        },
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "A commit SHA (e.g. `3a8b42`) or a commit range using double dot\nnotation (e.g. `3a8b42..9ff173`).\n",
-          "in": "path",
-          "name": "spec",
-          "required": true,
-          "type": "string"
-        }
-      ],
+      "parameters": [],
       "responses": {
         "200": {
           "description": "The diff stats",
@@ -3024,22 +2998,32 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
         "type": "string"
       },
       {
+        "description": "A commit SHA (e.g. `3a8b42`) or a commit range using double dot\nnotation (e.g. `3a8b42..9ff173`).\n",
         "in": "path",
         "name": "spec",
         "required": true,
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
         "type": "string"
+      },
+      {
+        "description": "Generate diffs that ignore whitespace",
+        "in": "query",
+        "name": "ignore_whitespace",
+        "required": false,
+        "type": "boolean"
       }
     ]
   },
@@ -3074,12 +3058,14 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -3174,6 +3160,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -3186,6 +3173,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -3253,6 +3241,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -3271,6 +3260,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -3326,20 +3316,6 @@
     "post": {
       "description": "Creates a new fork of the specified repository.\n\nBy default, forks are created under the authenticated user's account\nwith the same name and slug of the original repository.\n\n```\n$ curl -X POST -u jdoe https://api.bitbucket.org/2.0/repositories/evzijst/dogslow/forks\n\n{\n  \"scm\": \"git\",\n  \"full_name\": \"jdoe/dogslow\",\n  \"parent\": {\n    \"full_name\": \"evzijst/dogslow\",\n    ...\n  },\n  ...\n}\n```\n\nIf you already have a repo with that name, then a 400 is returned and\nyou'll need to specify a custom name for the new fork:\n\n```\n$ curl -X POST -u jdoe https://api.bitbucket.org/2.0/repositories/evzijst/dogslow/forks \\\n  -H 'Content-Type: application/json' -d '{\n    \"name\": \"dogslow_fork\"\n}'\n```\n\nWhen you specify a value for `name`, it will also affect the `slug`.\nThe `slug` is reflected in the repository URL of the new fork. It is\nderived from `name` by substituting non-ASCII characters, removes\nwhitespace, and changes characters to lower case. For example,\n`My repo` would turn into `my_repo`.\n\n## Forking a repository into a team account\n\nTo create a fork into a team account, specify the new owner's account\nexplicitly as part of the request body. This prevents forked\nrepositories from being owned by the authenticated user submitting the\nrequest:\n\n```\n$ curl -X POST -u jdoe https://api.bitbucket.org/2.0/repositories/atlassian/bbql/forks \\\n  -H 'Content-Type: application/json' -d '{\n    \"name\": \"bbql_fork\",\n    \"owner\": {\n      \"username\": \"atlassian\"\n    }\n}'\n```\n\nTo fork a repository into the same team, also specify a new `name`.\n\nYou need contributor access to create new forks within a team account.\n\n\n## Change the properties of a new fork\n\nBy default the fork inherits most of its properties from the parent.\nHowever, since the optional POST body document follows the normal\n`repository` JSON schema and you can override the new fork's\nproperties.\n\nProperties that can be overridden include:\n\n* description\n* fork_policy\n* language\n* mainbranch\n* is_private (note that a private repo's fork_policy might prohibit\n  the creation of public forks, in which `is_private=False` would fail)\n* has_issues (to initialize or disable the new repo's issue tracker --\n  note that the actual contents of the parent repository's issue\n  tracker are not copied during forking)\n* has_wiki (to initialize or disable the new repo's wiki --\n  note that the actual contents of the parent repository's wiki are not\n  copied during forking)\n* project (only teams have projects and when forking into a private\n  project, the fork's `is_private` must be `true`)\n\nProperties that cannot be modified include:\n\n* scm\n* parent\n* full_name",
       "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
         {
           "description": "A repository object. This can be left blank.",
           "in": "body",
@@ -3514,12 +3490,14 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -3666,6 +3644,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -3678,6 +3657,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -3910,6 +3890,12 @@
           "schema": {
             "$ref": "#/definitions/error"
           }
+        },
+        "410": {
+          "description": "The specified issue is unavailable.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
         }
       },
       "security": [
@@ -4041,6 +4027,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -4053,6 +4040,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -4187,6 +4175,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -4205,6 +4194,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -4467,6 +4457,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -4479,6 +4470,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -4656,6 +4648,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -4674,6 +4667,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -5033,12 +5027,14 @@
   "/repositories/{username}/{repo_slug}/issues/export": {
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -5047,22 +5043,7 @@
     ],
     "post": {
       "description": "A POST request to this endpoint initiates a new background celery task that archives the repo's issues.\n\nFor example, you can run:\n\ncurl -u <username> -X POST http://api.bitbucket.org/2.0/repositories/<owner_username>/<repo_slug>/\nissues/export\n\nWhen the job has been accepted, it will return a 202 (Accepted) along with a unique url to this job in the\n'Location' response header. This url is the endpoint for where the user can obtain their zip files.\"",
-      "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        }
-      ],
+      "parameters": [],
       "responses": {
         "202": {
           "description": "The export job has been accepted"
@@ -5107,20 +5088,6 @@
     "get": {
       "description": "This endpoint is used to poll for the progress of an issue export\njob and return the zip file after the job is complete.\nAs long as the job is running, this will return a 200 response\nwith in the response body a description of the current status.\n\nAfter the job has been scheduled, but before it starts executing, this\nendpoint's response is:\n\n{\n \"type\": \"issue_job_status\",\n \"status\": \"ACCEPTED\",\n \"phase\": \"Initializing\",\n \"total\": 0,\n \"count\": 0,\n \"pct\": 0\n}\n\n\nThen once it starts running, it becomes:\n\n{\n \"type\": \"issue_job_status\",\n \"status\": \"STARTED\",\n \"phase\": \"Attachments\",\n \"total\": 15,\n \"count\": 11,\n \"pct\": 73\n}\n\nOnce the job has successfully completed, it returns a stream of the zip file.",
       "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
         {
           "description": "The name of the repo",
           "in": "path",
@@ -5180,6 +5147,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -5198,6 +5166,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -5208,22 +5177,7 @@
   "/repositories/{username}/{repo_slug}/issues/import": {
     "get": {
       "description": "When using GET, this endpoint reports the status of the current import task. Request example:\n\n```\n$ curl -u <username> -X GET https://api.bitbucket.org/2.0/repositories/<owner_username>/<repo_slug>/issues/import\n```\n\nAfter the job has been scheduled, but before it starts executing, this endpoint's response is:\n\n```\n< HTTP/1.1 202 Accepted\n{\n    \"type\": \"issue_job_status\",\n    \"status\": \"PENDING\",\n    \"phase\": \"Attachments\",\n    \"total\": 15,\n    \"count\": 0,\n    \"percent\": 0\n}\n```\n\nOnce it starts running, it is a 202 response with status STARTED and progress filled.\n\nAfter it is finished, it becomes a 200 response with status SUCCESS or FAILURE.",
-      "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        }
-      ],
+      "parameters": [],
       "responses": {
         "200": {
           "description": "Import job complete with either FAILURE or SUCCESS status",
@@ -5274,12 +5228,14 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -5288,22 +5244,7 @@
     ],
     "post": {
       "description": "A POST request to this endpoint will import the zip file given by the archive parameter into the repository. All\nexisting issues will be deleted and replaced by the contents of the imported zip file.\n\nImports are done through a multipart/form-data POST. There is one valid and required form field, with the name\n\"archive,\" which needs to be a file field:\n\n```\n$ curl -u <username> -X POST -F archive=@/path/to/file.zip https://api.bitbucket.org/2.0/repositories/<owner_username>/<repo_slug>/issues/import\n```\n\nWhen the import job is accepted, here is example output:\n\n```\n< HTTP/1.1 202 Accepted\n\n{\n    \"type\": \"issue_job_status\",\n    \"status\": \"ACCEPTED\",\n    \"phase\": \"Attachments\",\n    \"total\": 15,\n    \"count\": 0,\n    \"percent\": 0\n}\n```",
-      "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        }
-      ],
+      "parameters": [],
       "responses": {
         "202": {
           "description": "Import job accepted",
@@ -5449,18 +5390,18 @@
         "type": "string"
       },
       {
-        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-        "in": "path",
-        "name": "repo_slug",
-        "required": true,
-        "type": "string"
-      },
-      {
         "description": "The milestone's id",
         "in": "path",
         "name": "milestone_id",
         "required": true,
         "type": "integer"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
       }
     ]
   },
@@ -5498,6 +5439,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -5510,6 +5452,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -5521,20 +5464,6 @@
     "get": {
       "description": "Returns all pull requests on the specified repository.\n\nBy default only open pull requests are returned. This can be controlled\nusing the `state` query parameter. To retrieve pull requests that are\nin one of multiple states, repeat the `state` parameter for each\nindividual state.\n\nThis endpoint also supports filtering and sorting of the results. See\n[filtering and sorting](../../../../meta/filtering) for more details.",
       "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
         {
           "description": "Only return pull requests that are in this state. This parameter can be repeated.",
           "enum": [
@@ -5584,12 +5513,14 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -5599,20 +5530,6 @@
     "post": {
       "description": "Creates a new pull request where the destination repository is\nthis repository and the author is the authenticated user.\n\nThe minimum required fields to create a pull request are `title` and\n`source`, specified by a branch name.\n\n```\ncurl https://api.bitbucket.org/2.0/repositories/my-username/my-repository/pullrequests \\\n    -u my-username:my-password \\\n    --request POST \\\n    --header 'Content-Type: application/json' \\\n    --data '{\n        \"title\": \"My Title\",\n        \"source\": {\n            \"branch\": {\n                \"name\": \"staging\"\n            }\n        }\n    }'\n```\n\nIf the pull request's `destination` is not specified, it will default\nto the `repository.mainbranch`. To open a pull request to a\ndifferent branch, say from a feature branch to a staging branch,\nspecify a `destination` (same format as the `source`):\n\n```\n{\n    \"title\": \"My Title\",\n    \"source\": {\n        \"branch\": {\n            \"name\": \"my-feature-branch\"\n        }\n    },\n    \"destination\": {\n        \"branch\": {\n            \"name\": \"staging\"\n        }\n    }\n}\n```\n\nReviewers can be specified by adding an array of user objects as the\n`reviewers` property.\n\n```\n{\n    \"title\": \"My Title\",\n    \"source\": {\n        \"branch\": {\n            \"name\": \"my-feature-branch\"\n        }\n    },\n    \"reviewers\": [\n        {\n            \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n        }\n    ]\n}\n```\n\nOther fields:\n\n* `description` - a string\n* `close_source_branch` - boolean that specifies if the source branch should be closed upon merging",
       "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
         {
           "description": "The new pull request.\n\nThe request URL you POST to becomes the destination repository URL. For this reason, you must specify an explicit source repository in the request object if you want to pull from a different repository (fork).\n\nSince not all elements are required or even mutable, you only need to include the elements you want to initialize, such as the source branch and the title.",
           "in": "body",
@@ -5671,20 +5588,6 @@
     "get": {
       "description": "Returns the specified pull request.",
       "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
         {
           "description": "The id of the pull request.",
           "in": "path",
@@ -5873,6 +5776,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -5885,6 +5789,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -5894,20 +5799,6 @@
     "put": {
       "description": "Mutates the specified pull request.\n\nThis can be used to change the pull request's branches or description.\n\nOnly open pull requests can be mutated.",
       "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
         {
           "description": "The id of the pull request.",
           "in": "path",
@@ -6115,30 +6006,8 @@
   },
   "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/activity": {
     "get": {
-      "description": "Returns a paginated list of the pull request's activity log.\n\nThis includes comments that were made by the reviewers, updates and\napprovals.",
-      "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The id of the pull request.",
-          "in": "path",
-          "name": "pull_request_id",
-          "required": true,
-          "type": "integer"
-        }
-      ],
+      "description": "Returns a paginated list of the pull request's activity log.\n\nThis includes comments that were made by the reviewers, updates and\napprovals.\n\nComments created on a file or a line of code have an inline property.\n\nComment example:\n```\n{\n    \"pagelen\": 20,\n    \"values\": [\n        {\n            \"comment\": {\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/pullrequests/5695/comments/118571088\"\n                    },\n                    \"html\": {\n                        \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/pull-requests/5695/_/diff#comment-118571088\"\n                    }\n                },\n                \"deleted\": false,\n                \"pullrequest\": {\n                    \"type\": \"pullrequest\",\n                    \"id\": 5695,\n                    \"links\": {\n                        \"self\": {\n                            \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/pullrequests/5695\"\n                        },\n                        \"html\": {\n                            \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/pull-requests/5695\"\n                        }\n                    },\n                    \"title\": \"username/NONE: small change from onFocus to onClick to handle tabbing through the page and not expand the editor unless a click event triggers it\"\n                },\n                \"content\": {\n                    \"raw\": \"inline with to a dn from lines\",\n                    \"markup\": \"markdown\",\n                    \"html\": \"<p>inline with to a dn from lines</p>\",\n                    \"type\": \"rendered\"\n                },\n                \"created_on\": \"2019-09-27T00:33:46.039178+00:00\",\n                \"user\": {\n                    \"display_name\": \"Name Lastname\",\n                    \"uuid\": \"{}\",\n                    \"links\": {\n                        \"self\": {\n                            \"href\": \"https://bitbucket.org/!api/2.0/users/%7B%7D\"\n                        },\n                        \"html\": {\n                            \"href\": \"https://bitbucket.org/%7B%7D/\"\n                        },\n                        \"avatar\": {\n                            \"href\": \"https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/:/128\"\n                        }\n                    },\n                    \"type\": \"user\",\n                    \"nickname\": \"Name\",\n                    \"account_id\": \"\"\n                },\n                \"created_on\": \"2019-09-27T00:33:46.039178+00:00\",\n                \"user\": {\n                    \"display_name\": \"Name Lastname\",\n                    \"uuid\": \"{}\",\n                    \"links\": {\n                        \"self\": {\n                            \"href\": \"https://bitbucket.org/!api/2.0/users/%7B%7D\"\n                        },\n                        \"html\": {\n                            \"href\": \"https://bitbucket.org/%7B%7D/\"\n                        },\n                        \"avatar\": {\n                            \"href\": \"https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/:/128\"\n                        }\n                    },\n                    \"type\": \"user\",\n                    \"nickname\": \"Name\",\n                    \"account_id\": \"\"\n                },\n                \"updated_on\": \"2019-09-27T00:33:46.055384+00:00\",\n                \"inline\": {\n                    \"context_lines\": \"\",\n                    \"to\": null,\n                    \"path\": \"\",\n                    \"outdated\": false,\n                    \"from\": 211\n                },\n                \"type\": \"pullrequest_comment\",\n                \"id\": 118571088\n            },\n            \"pull_request\": {\n                \"type\": \"pullrequest\",\n                \"id\": 5695,\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/pullrequests/5695\"\n                    },\n                    \"html\": {\n                        \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/pull-requests/5695\"\n                    }\n                },\n                \"title\": \"username/NONE: small change from onFocus to onClick to handle tabbing through the page and not expand the editor unless a click event triggers it\"\n            }\n        }\n    ]\n}\n```\n\nUpdates include a state property of OPEN, MERGED, or DECLINED.\n\nUpdate example:\n```\n{\n    \"pagelen\": 20,\n    \"values\": [\n        {\n            \"update\": {\n                \"description\": \"\",\n                \"title\": \"username/NONE: small change from onFocus to onClick to handle tabbing through the page and not expand the editor unless a click event triggers it\",\n                \"destination\": {\n                    \"commit\": {\n                        \"type\": \"commit\",\n                        \"hash\": \"6a2c16e4a152\",\n                        \"links\": {\n                            \"self\": {\n                                \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/commit/6a2c16e4a152\"\n                            },\n                            \"html\": {\n                                \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6a2c16e4a152\"\n                            }\n                        }\n                    },\n                    \"branch\": {\n                        \"name\": \"master\"\n                    },\n                    \"repository\": {\n                        \"name\": \"Atlaskit-MK-2\",\n                        \"type\": \"repository\",\n                        \"full_name\": \"atlassian/atlaskit-mk-2\",\n                        \"links\": {\n                            \"self\": {\n                                \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2\"\n                            },\n                            \"html\": {\n                                \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2\"\n                            },\n                            \"avatar\": {\n                                \"href\": \"https://bytebucket.org/ravatar/%7B%7D?ts=js\"\n                            }\n                        },\n                        \"uuid\": \"{}\"\n                    }\n                },\n                \"reason\": \"\",\n                \"source\": {\n                    \"commit\": {\n                        \"type\": \"commit\",\n                        \"hash\": \"728c8bad1813\",\n                        \"links\": {\n                            \"self\": {\n                                \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/commit/728c8bad1813\"\n                            },\n                            \"html\": {\n                                \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/commits/728c8bad1813\"\n                            }\n                        }\n                    },\n                    \"branch\": {\n                        \"name\": \"username/NONE-add-onClick-prop-for-accessibility\"\n                    },\n                    \"repository\": {\n                        \"name\": \"Atlaskit-MK-2\",\n                        \"type\": \"repository\",\n                        \"full_name\": \"atlassian/atlaskit-mk-2\",\n                        \"links\": {\n                            \"self\": {\n                                \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2\"\n                            },\n                            \"html\": {\n                                \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2\"\n                            },\n                            \"avatar\": {\n                                \"href\": \"https://bytebucket.org/ravatar/%7B%7D?ts=js\"\n                            }\n                        },\n                        \"uuid\": \"{}\"\n                    }\n                },\n                \"state\": \"OPEN\",\n                \"author\": {\n                    \"display_name\": \"Name Lastname\",\n                    \"uuid\": \"{}\",\n                    \"links\": {\n                        \"self\": {\n                            \"href\": \"https://bitbucket.org/!api/2.0/users/%7B%7D\"\n                        },\n                        \"html\": {\n                            \"href\": \"https://bitbucket.org/%7B%7D/\"\n                        },\n                        \"avatar\": {\n                            \"href\": \"https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/:/128\"\n                        }\n                    },\n                    \"type\": \"user\",\n                    \"nickname\": \"Name\",\n                    \"account_id\": \"\"\n                },\n                \"date\": \"2019-05-10T06:48:25.305565+00:00\"\n            },\n            \"pull_request\": {\n                \"type\": \"pullrequest\",\n                \"id\": 5695,\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/pullrequests/5695\"\n                    },\n                    \"html\": {\n                        \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/pull-requests/5695\"\n                    }\n                },\n                \"title\": \"username/NONE: small change from onFocus to onClick to handle tabbing through the page and not expand the editor unless a click event triggers it\"\n            }\n        }\n    ]\n}\n```\n\nApproval example:\n```\n{\n    \"pagelen\": 20,\n    \"values\": [\n        {\n            \"approval\": {\n                \"date\": \"2019-09-27T00:37:19.849534+00:00\",\n                \"pullrequest\": {\n                    \"type\": \"pullrequest\",\n                    \"id\": 5695,\n                    \"links\": {\n                        \"self\": {\n                            \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/pullrequests/5695\"\n                        },\n                        \"html\": {\n                            \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/pull-requests/5695\"\n                        }\n                    },\n                    \"title\": \"username/NONE: small change from onFocus to onClick to handle tabbing through the page and not expand the editor unless a click event triggers it\"\n                },\n                \"user\": {\n                    \"display_name\": \"Name Lastname\",\n                    \"uuid\": \"{}\",\n                    \"links\": {\n                        \"self\": {\n                            \"href\": \"https://bitbucket.org/!api/2.0/users/%7B%7D\"\n                        },\n                        \"html\": {\n                            \"href\": \"https://bitbucket.org/%7B%7D/\"\n                        },\n                        \"avatar\": {\n                            \"href\": \"https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/:/128\"\n                        }\n                    },\n                    \"type\": \"user\",\n                    \"nickname\": \"Name\",\n                    \"account_id\": \"\"\n                }\n            },\n            \"pull_request\": {\n                \"type\": \"pullrequest\",\n                \"id\": 5695,\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/pullrequests/5695\"\n                    },\n                    \"html\": {\n                        \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/pull-requests/5695\"\n                    }\n                },\n                \"title\": \"username/NONE: small change from onFocus to onClick to handle tabbing through the page and not expand the editor unless a click event triggers it\"\n            }\n        }\n    ]\n}\n```",
+      "parameters": [],
       "responses": {
         "200": {
           "description": "The pull request activity log"
@@ -6172,18 +6041,21 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
         "type": "string"
       },
       {
+        "description": "The id of the pull request.",
         "in": "path",
         "name": "pull_request_id",
         "required": true,
-        "type": "string"
+        "type": "integer"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -6225,6 +6097,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -6237,6 +6110,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -6282,20 +6156,6 @@
     "get": {
       "description": "Returns a paginated list of the pull request's comments.\n\nThis includes both global, inline comments and replies.\n\nThe default sorting is oldest to newest and can be overridden with\nthe `sort` query parameter.\n\nThis endpoint also supports filtering and sorting of the results. See\n[filtering and sorting](../../../../../../meta/filtering) for more\ndetails.",
       "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
         {
           "description": "The id of the pull request.",
           "in": "path",
@@ -6343,6 +6203,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -6355,6 +6216,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -6364,20 +6226,6 @@
     "post": {
       "description": "Creates a new pull request comment.\n\nReturns the newly created pull request comment.",
       "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
         {
           "description": "The id of the pull request.",
           "in": "path",
@@ -6519,6 +6367,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -6537,6 +6386,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -6625,6 +6475,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -6637,6 +6488,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -6647,6 +6499,7 @@
   "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/decline": {
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -6659,6 +6512,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -6872,6 +6726,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -6884,6 +6739,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -6919,6 +6775,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -6931,6 +6788,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -6941,6 +6799,7 @@
   "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/merge": {
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -6953,6 +6812,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -7178,6 +7038,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -7190,6 +7051,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -7263,30 +7125,8 @@
   },
   "/repositories/{username}/{repo_slug}/pullrequests/activity": {
     "get": {
-      "description": "Returns a paginated list of the pull request's activity log.\n\nThis includes comments that were made by the reviewers, updates and\napprovals.",
-      "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The id of the pull request.",
-          "in": "path",
-          "name": "pull_request_id",
-          "required": true,
-          "type": "integer"
-        }
-      ],
+      "description": "Returns a paginated list of the pull request's activity log.\n\nThis includes comments that were made by the reviewers, updates and\napprovals.\n\nComments created on a file or a line of code have an inline property.\n\nComment example:\n```\n{\n    \"pagelen\": 20,\n    \"values\": [\n        {\n            \"comment\": {\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/pullrequests/5695/comments/118571088\"\n                    },\n                    \"html\": {\n                        \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/pull-requests/5695/_/diff#comment-118571088\"\n                    }\n                },\n                \"deleted\": false,\n                \"pullrequest\": {\n                    \"type\": \"pullrequest\",\n                    \"id\": 5695,\n                    \"links\": {\n                        \"self\": {\n                            \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/pullrequests/5695\"\n                        },\n                        \"html\": {\n                            \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/pull-requests/5695\"\n                        }\n                    },\n                    \"title\": \"username/NONE: small change from onFocus to onClick to handle tabbing through the page and not expand the editor unless a click event triggers it\"\n                },\n                \"content\": {\n                    \"raw\": \"inline with to a dn from lines\",\n                    \"markup\": \"markdown\",\n                    \"html\": \"<p>inline with to a dn from lines</p>\",\n                    \"type\": \"rendered\"\n                },\n                \"created_on\": \"2019-09-27T00:33:46.039178+00:00\",\n                \"user\": {\n                    \"display_name\": \"Name Lastname\",\n                    \"uuid\": \"{}\",\n                    \"links\": {\n                        \"self\": {\n                            \"href\": \"https://bitbucket.org/!api/2.0/users/%7B%7D\"\n                        },\n                        \"html\": {\n                            \"href\": \"https://bitbucket.org/%7B%7D/\"\n                        },\n                        \"avatar\": {\n                            \"href\": \"https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/:/128\"\n                        }\n                    },\n                    \"type\": \"user\",\n                    \"nickname\": \"Name\",\n                    \"account_id\": \"\"\n                },\n                \"created_on\": \"2019-09-27T00:33:46.039178+00:00\",\n                \"user\": {\n                    \"display_name\": \"Name Lastname\",\n                    \"uuid\": \"{}\",\n                    \"links\": {\n                        \"self\": {\n                            \"href\": \"https://bitbucket.org/!api/2.0/users/%7B%7D\"\n                        },\n                        \"html\": {\n                            \"href\": \"https://bitbucket.org/%7B%7D/\"\n                        },\n                        \"avatar\": {\n                            \"href\": \"https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/:/128\"\n                        }\n                    },\n                    \"type\": \"user\",\n                    \"nickname\": \"Name\",\n                    \"account_id\": \"\"\n                },\n                \"updated_on\": \"2019-09-27T00:33:46.055384+00:00\",\n                \"inline\": {\n                    \"context_lines\": \"\",\n                    \"to\": null,\n                    \"path\": \"\",\n                    \"outdated\": false,\n                    \"from\": 211\n                },\n                \"type\": \"pullrequest_comment\",\n                \"id\": 118571088\n            },\n            \"pull_request\": {\n                \"type\": \"pullrequest\",\n                \"id\": 5695,\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/pullrequests/5695\"\n                    },\n                    \"html\": {\n                        \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/pull-requests/5695\"\n                    }\n                },\n                \"title\": \"username/NONE: small change from onFocus to onClick to handle tabbing through the page and not expand the editor unless a click event triggers it\"\n            }\n        }\n    ]\n}\n```\n\nUpdates include a state property of OPEN, MERGED, or DECLINED.\n\nUpdate example:\n```\n{\n    \"pagelen\": 20,\n    \"values\": [\n        {\n            \"update\": {\n                \"description\": \"\",\n                \"title\": \"username/NONE: small change from onFocus to onClick to handle tabbing through the page and not expand the editor unless a click event triggers it\",\n                \"destination\": {\n                    \"commit\": {\n                        \"type\": \"commit\",\n                        \"hash\": \"6a2c16e4a152\",\n                        \"links\": {\n                            \"self\": {\n                                \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/commit/6a2c16e4a152\"\n                            },\n                            \"html\": {\n                                \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6a2c16e4a152\"\n                            }\n                        }\n                    },\n                    \"branch\": {\n                        \"name\": \"master\"\n                    },\n                    \"repository\": {\n                        \"name\": \"Atlaskit-MK-2\",\n                        \"type\": \"repository\",\n                        \"full_name\": \"atlassian/atlaskit-mk-2\",\n                        \"links\": {\n                            \"self\": {\n                                \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2\"\n                            },\n                            \"html\": {\n                                \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2\"\n                            },\n                            \"avatar\": {\n                                \"href\": \"https://bytebucket.org/ravatar/%7B%7D?ts=js\"\n                            }\n                        },\n                        \"uuid\": \"{}\"\n                    }\n                },\n                \"reason\": \"\",\n                \"source\": {\n                    \"commit\": {\n                        \"type\": \"commit\",\n                        \"hash\": \"728c8bad1813\",\n                        \"links\": {\n                            \"self\": {\n                                \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/commit/728c8bad1813\"\n                            },\n                            \"html\": {\n                                \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/commits/728c8bad1813\"\n                            }\n                        }\n                    },\n                    \"branch\": {\n                        \"name\": \"username/NONE-add-onClick-prop-for-accessibility\"\n                    },\n                    \"repository\": {\n                        \"name\": \"Atlaskit-MK-2\",\n                        \"type\": \"repository\",\n                        \"full_name\": \"atlassian/atlaskit-mk-2\",\n                        \"links\": {\n                            \"self\": {\n                                \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2\"\n                            },\n                            \"html\": {\n                                \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2\"\n                            },\n                            \"avatar\": {\n                                \"href\": \"https://bytebucket.org/ravatar/%7B%7D?ts=js\"\n                            }\n                        },\n                        \"uuid\": \"{}\"\n                    }\n                },\n                \"state\": \"OPEN\",\n                \"author\": {\n                    \"display_name\": \"Name Lastname\",\n                    \"uuid\": \"{}\",\n                    \"links\": {\n                        \"self\": {\n                            \"href\": \"https://bitbucket.org/!api/2.0/users/%7B%7D\"\n                        },\n                        \"html\": {\n                            \"href\": \"https://bitbucket.org/%7B%7D/\"\n                        },\n                        \"avatar\": {\n                            \"href\": \"https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/:/128\"\n                        }\n                    },\n                    \"type\": \"user\",\n                    \"nickname\": \"Name\",\n                    \"account_id\": \"\"\n                },\n                \"date\": \"2019-05-10T06:48:25.305565+00:00\"\n            },\n            \"pull_request\": {\n                \"type\": \"pullrequest\",\n                \"id\": 5695,\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/pullrequests/5695\"\n                    },\n                    \"html\": {\n                        \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/pull-requests/5695\"\n                    }\n                },\n                \"title\": \"username/NONE: small change from onFocus to onClick to handle tabbing through the page and not expand the editor unless a click event triggers it\"\n            }\n        }\n    ]\n}\n```\n\nApproval example:\n```\n{\n    \"pagelen\": 20,\n    \"values\": [\n        {\n            \"approval\": {\n                \"date\": \"2019-09-27T00:37:19.849534+00:00\",\n                \"pullrequest\": {\n                    \"type\": \"pullrequest\",\n                    \"id\": 5695,\n                    \"links\": {\n                        \"self\": {\n                            \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/pullrequests/5695\"\n                        },\n                        \"html\": {\n                            \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/pull-requests/5695\"\n                        }\n                    },\n                    \"title\": \"username/NONE: small change from onFocus to onClick to handle tabbing through the page and not expand the editor unless a click event triggers it\"\n                },\n                \"user\": {\n                    \"display_name\": \"Name Lastname\",\n                    \"uuid\": \"{}\",\n                    \"links\": {\n                        \"self\": {\n                            \"href\": \"https://bitbucket.org/!api/2.0/users/%7B%7D\"\n                        },\n                        \"html\": {\n                            \"href\": \"https://bitbucket.org/%7B%7D/\"\n                        },\n                        \"avatar\": {\n                            \"href\": \"https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/:/128\"\n                        }\n                    },\n                    \"type\": \"user\",\n                    \"nickname\": \"Name\",\n                    \"account_id\": \"\"\n                }\n            },\n            \"pull_request\": {\n                \"type\": \"pullrequest\",\n                \"id\": 5695,\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://bitbucket.org/!api/2.0/repositories/atlassian/atlaskit-mk-2/pullrequests/5695\"\n                    },\n                    \"html\": {\n                        \"href\": \"https://bitbucket.org/atlassian/atlaskit-mk-2/pull-requests/5695\"\n                    }\n                },\n                \"title\": \"username/NONE: small change from onFocus to onClick to handle tabbing through the page and not expand the editor unless a click event triggers it\"\n            }\n        }\n    ]\n}\n```",
+      "parameters": [],
       "responses": {
         "200": {
           "description": "The pull request activity log"
@@ -7320,12 +7160,21 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
         "type": "string"
       },
       {
+        "description": "The id of the pull request.",
+        "in": "path",
+        "name": "pull_request_id",
+        "required": true,
+        "type": "integer"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -7352,13 +7201,13 @@
           "type": "string"
         },
         {
-          "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../../../../meta/filtering).",
+          "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../../meta/filtering).",
           "in": "query",
           "name": "q",
           "type": "string"
         },
         {
-          "description": "\nField by which the results should be sorted as per\n[filtering and sorting](../../../../../../meta/filtering). The `name`\nfield is handled specially for refs in that, if specified as the sort field, it\nuses a natural sort order instead of the default lexicographical sort order. For example,\nit will return ['1.1', '1.2', '1.10'] instead of ['1.1', '1.10', '1.2'].",
+          "description": "\nField by which the results should be sorted as per\n[filtering and sorting](../../../../meta/filtering). The `name`\nfield is handled specially for refs in that, if specified as the sort field, it\nuses a natural sort order instead of the default lexicographical sort order. For example,\nit will return ['1.1', '1.2', '1.10'] instead of ['1.1', '1.10', '1.2'].",
           "in": "query",
           "name": "sort",
           "type": "string"
@@ -7437,13 +7286,13 @@
           "type": "string"
         },
         {
-          "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../../../../meta/filtering).",
+          "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../../../meta/filtering).",
           "in": "query",
           "name": "q",
           "type": "string"
         },
         {
-          "description": "\nField by which the results should be sorted as per\n[filtering and sorting](../../../../../../meta/filtering). The `name`\nfield is handled specially for branches in that, if specified as the sort field, it\nuses a natural sort order instead of the default lexicographical sort order. For example,\nit will return ['branch1', 'branch2', 'branch10'] instead of ['branch1', 'branch10', 'branch2'].",
+          "description": "\nField by which the results should be sorted as per\n[filtering and sorting](../../../../../meta/filtering). The `name`\nfield is handled specially for branches in that, if specified as the sort field, it\nuses a natural sort order instead of the default lexicographical sort order. For example,\nit will return ['branch1', 'branch2', 'branch10'] instead of ['branch1', 'branch10', 'branch2'].",
           "in": "query",
           "name": "sort",
           "type": "string"
@@ -7838,13 +7687,13 @@
           "type": "string"
         },
         {
-          "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../../../../meta/filtering).",
+          "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../../../meta/filtering).",
           "in": "query",
           "name": "q",
           "type": "string"
         },
         {
-          "description": "\nField by which the results should be sorted as per\n[filtering and sorting](../../../../../../meta/filtering). The `name`\nfield is handled specially for tags in that, if specified as the sort field, it\nuses a natural sort order instead of the default lexicographical sort order. For example,\nit will return ['1.1', '1.2', '1.10'] instead of ['1.1', '1.10', '1.2'].",
+          "description": "\nField by which the results should be sorted as per\n[filtering and sorting](../../../../../meta/filtering). The `name`\nfield is handled specially for tags in that, if specified as the sort field, it\nuses a natural sort order instead of the default lexicographical sort order. For example,\nit will return ['1.1', '1.2', '1.10'] instead of ['1.1', '1.10', '1.2'].",
           "in": "query",
           "name": "sort",
           "type": "string"
@@ -8098,12 +7947,14 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -8263,6 +8114,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -8281,6 +8133,7 @@
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -8384,18 +8237,18 @@
         "type": "string"
       },
       {
-        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-        "in": "path",
-        "name": "repo_slug",
-        "required": true,
-        "type": "string"
-      },
-      {
         "description": "The version's id",
         "in": "path",
         "name": "version_id",
         "required": true,
         "type": "integer"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
       }
     ]
   },
@@ -8664,6 +8517,228 @@
       ]
     }
   },
+  "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables": {
+    "get": {
+      "description": "Find deployment environment level variables.",
+      "operationId": "getDeploymentVariables",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The environment.",
+          "in": "path",
+          "name": "environment_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The retrieved deployment variables.",
+          "schema": {
+            "$ref": "#/definitions/paginated_deployment_variable"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    },
+    "post": {
+      "description": "Create a deployment environment level variable.",
+      "operationId": "createDeploymentVariable",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The environment.",
+          "in": "path",
+          "name": "environment_uuid",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the variable to update.",
+          "in": "path",
+          "name": "variable_uuid",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The variable to create",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/deployment_variable"
+          }
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The variable was created.",
+          "headers": {
+            "Location": {
+              "description": "The URL of the newly created variable.",
+              "type": "string"
+            }
+          },
+          "schema": {
+            "$ref": "#/definitions/deployment_variable"
+          }
+        },
+        "404": {
+          "description": "The account, repository, environment or variable with the given UUID was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "409": {
+          "description": "A variable with the provided key already exists.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}": {
+    "delete": {
+      "description": "Delete a deployment environment level variable.",
+      "operationId": "deleteDeploymentVariable",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The environment.",
+          "in": "path",
+          "name": "environment_uuid",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the variable to delete.",
+          "in": "path",
+          "name": "variable_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "The variable was deleted."
+        },
+        "404": {
+          "description": "The account, repository, environment or variable with given UUID was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    },
+    "put": {
+      "description": "Update a deployment environment level variable.",
+      "operationId": "updateDeploymentVariable",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The environment.",
+          "in": "path",
+          "name": "environment_uuid",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the variable to update.",
+          "in": "path",
+          "name": "variable_uuid",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The updated deployment variable.",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/deployment_variable"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The deployment variable was updated.",
+          "schema": {
+            "$ref": "#/definitions/deployment_variable"
+          }
+        },
+        "404": {
+          "description": "The account, repository, environment or variable with the given UUID was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "pipelines"
+      ]
+    }
+  },
   "/repositories/{workspace}/{repo_slug}/deployments/": {
     "get": {
       "description": "Find deployments",
@@ -8835,7 +8910,47 @@
     }
   },
   "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}": {
-    "delete": {},
+    "delete": {
+      "description": "Delete an environment",
+      "operationId": "deleteEnvironmentForRepository",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The environment UUID.",
+          "in": "path",
+          "name": "environment_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "The environment was deleted."
+        },
+        "404": {
+          "description": "No account or repository with the UUID provided exists.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "deployments"
+      ]
+    },
     "get": {
       "description": "Retrieve an environment",
       "operationId": "getEnvironmentForRepository",
@@ -10203,6 +10318,18 @@
       ]
     }
   },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/logs/{log_uuid}": {
+    "get": {}
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports": {
+    "get": {}
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports/test_cases": {
+    "get": {}
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports/test_cases/{test_case_uuid}/test_case_reasons": {
+    "get": {}
+  },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline": {
     "post": {
       "description": "Signal the stop of a pipeline and all of its steps that not have completed yet.",
@@ -10686,6 +10813,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -10841,6 +10969,12 @@
           "schema": {
             "$ref": "#/definitions/error"
           }
+        },
+        "410": {
+          "description": "If the snippet marked as spam.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
         }
       },
       "security": [
@@ -10862,6 +10996,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -11065,6 +11200,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -11211,6 +11347,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -11297,6 +11434,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -11371,6 +11509,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -11433,6 +11572,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -11582,6 +11722,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -11681,6 +11822,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -11737,6 +11879,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -11802,6 +11945,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -11914,6 +12058,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -12021,6 +12166,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -12127,6 +12273,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -12177,6 +12324,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -12229,6 +12377,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -12280,6 +12429,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -12426,6 +12576,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -12547,6 +12698,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -12556,15 +12708,8 @@
   },
   "/teams/{username}/permissions": {
     "get": {
-      "description": "Returns an object for each team permission a user on the team has.\n\nPermissions returned are effective permissions — if a user is a member of\nmultiple groups with distinct roles, only the highest level is returned.\n\nPermissions can be:\n\n* `admin`\n* `collaborator`\n\nOnly users with admin permission for the team may access this resource.\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"permission\": \"admin\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"evzijst\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"team\": {\n        \"username\": \"bitbucket\",\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    },\n    {\n      \"permission\": \"collaborator\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"seanaty\",\n        \"nickname\": \"seanaty\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"team\": {\n        \"username\": \"bitbucket\",\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../meta/filtering) by\nteam, user, or permission by adding the following query string\nparameters:\n\n* `q=user.username=\"evzijst\"` or `q=permission=\"admin\"`\n* `sort=team.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
+      "description": "Returns an object for each team permission a user on the team has.\n\nPermissions returned are effective permissions — if a user is a member of\nmultiple groups with distinct roles, only the highest level is returned.\n\nPermissions can be:\n\n* `admin`\n* `collaborator`\n\nOnly users with admin permission for the team may access this resource.\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"permission\": \"admin\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"team\": {\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    },\n    {\n      \"permission\": \"collaborator\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"nickname\": \"seanaty\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"team\": {\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../meta/filtering) by\nteam, user, or permission by adding the following query string\nparameters:\n\n* `q=user.uuid=\"{d301aafa-d676-4ee0-88be-962be7417567}\"` or `q=permission=\"admin\"`\n* `sort=team.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
       "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
         {
           "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../meta/filtering).",
           "in": "query",
@@ -12611,6 +12756,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -12620,15 +12766,8 @@
   },
   "/teams/{username}/permissions/repositories": {
     "get": {
-      "description": "Returns an object for each repository permission for all of a\nteam’s repositories.\n\nIf the username URL parameter refers to a user account instead of\na team account, an object containing the repository permissions\nof all the username's repositories will be returned.\n\nPermissions returned are effective permissions — the highest level of\npermission the user has. This does not include public repositories that\nusers are not granted any specific permission in, and does not\ndistinguish between direct and indirect privileges.\n\nOnly users with admin permission for the team may access this resource.\n\nPermissions can be:\n\n* `admin`\n* `write`\n* `read`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions/repositories\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"admin\"\n    },\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"seanaty\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"write\"\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../../meta/filtering)\nby repository, user, or permission by adding the following query string\nparameters:\n\n* `q=repository.name=\"geordi\"` or `q=permission>\"read\"`\n* `sort=user.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
+      "description": "Returns an object for each repository permission for all of a\nteam’s repositories.\n\nIf the username URL parameter refers to a user account instead of\na team account, an object containing the repository permissions\nof all the username's repositories will be returned.\n\nPermissions returned are effective permissions — the highest level of\npermission the user has. This does not include public repositories that\nusers are not granted any specific permission in, and does not\ndistinguish between direct and indirect privileges.\n\nOnly users with admin permission for the team may access this resource.\n\nPermissions can be:\n\n* `admin`\n* `write`\n* `read`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions/repositories\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"admin\"\n    },\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"write\"\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../../meta/filtering)\nby repository, user, or permission by adding the following query string\nparameters:\n\n* `q=repository.name=\"geordi\"` or `q=permission>\"read\"`\n* `sort=user.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
       "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
         {
           "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../../meta/filtering).",
           "in": "query",
@@ -12675,6 +12814,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -12684,22 +12824,8 @@
   },
   "/teams/{username}/permissions/repositories/{repo_slug}": {
     "get": {
-      "description": "Returns an object for each repository permission of a given repository.\n\nIf the username URL parameter refers to a user account instead of\na team account, an object containing the repository permissions\nof the username's repository will be returned.\n\nPermissions returned are effective permissions — the highest level of\npermission the user has. This does not include public repositories that\nusers are not granted any specific permission in, and does not\ndistinguish between direct and indirect privileges.\n\nOnly users with admin permission for the repository may access this resource.\n\nPermissions can be:\n\n* `admin`\n* `write`\n* `read`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions/repositories/geordi\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"admin\"\n    },\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"seanaty\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"write\"\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../../meta/filtering)\nby user, or permission by adding the following query string parameters:\n\n* `q=permission>\"read\"`\n* `sort=user.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
+      "description": "Returns an object for each repository permission of a given repository.\n\nIf the username URL parameter refers to a user account instead of\na team account, an object containing the repository permissions\nof the username's repository will be returned.\n\nPermissions returned are effective permissions — the highest level of\npermission the user has. This does not include public repositories that\nusers are not granted any specific permission in, and does not\ndistinguish between direct and indirect privileges.\n\nOnly users with admin permission for the repository may access this resource.\n\nPermissions can be:\n\n* `admin`\n* `write`\n* `read`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions/repositories/geordi\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"admin\"\n    },\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"write\"\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../../meta/filtering)\nby user, or permission by adding the following query string parameters:\n\n* `q=permission>\"read\"`\n* `sort=user.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
       "parameters": [
-        {
-          "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
-          "in": "path",
-          "name": "repo_slug",
-          "required": true,
-          "type": "string"
-        },
         {
           "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../../meta/filtering).",
           "in": "query",
@@ -12746,12 +12872,14 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
         "type": "string"
       },
       {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
         "required": true,
@@ -13255,6 +13383,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -13480,7 +13609,7 @@
   },
   "/user/permissions/repositories": {
     "get": {
-      "description": "Returns an object for each repository the caller has explicit access\nto and their effective permission — the highest level of permission the\ncaller has. This does not return public repositories that the user was\nnot granted any specific permission in, and does not distinguish between\ndirect and indirect privileges.\n\nPermissions can be:\n\n* `admin`\n* `write`\n* `read`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/user/permissions/repositories\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"evzijst\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"admin\"\n    }\n  ],\n  \"page\": 1,\n  \"size\": 1\n}\n```\n\nResults may be further [filtered or sorted](../../../meta/filtering) by\nrepository or permission by adding the following query string\nparameters:\n\n* `q=repository.name=\"geordi\"` or `q=permission>\"read\"`\n* `sort=repository.name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
+      "description": "Returns an object for each repository the caller has explicit access\nto and their effective permission — the highest level of permission the\ncaller has. This does not return public repositories that the user was\nnot granted any specific permission in, and does not distinguish between\ndirect and indirect privileges.\n\nPermissions can be:\n\n* `admin`\n* `write`\n* `read`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/user/permissions/repositories\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"admin\"\n    }\n  ],\n  \"page\": 1,\n  \"size\": 1\n}\n```\n\nResults may be further [filtered or sorted](../../../meta/filtering) by\nrepository or permission by adding the following query string\nparameters:\n\n* `q=repository.name=\"geordi\"` or `q=permission>\"read\"`\n* `sort=repository.name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
       "parameters": [
         {
           "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../meta/filtering).",
@@ -13526,7 +13655,7 @@
   },
   "/user/permissions/teams": {
     "get": {
-      "description": "Returns an object for each team the caller is a member of, and their\neffective role — the highest level of privilege the caller has. If a\nuser is a member of multiple groups with distinct roles, only the\nhighest level is returned.\n\nPermissions can be:\n\n* `admin`\n* `collaborator`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/user/permissions/teams\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"permission\": \"admin\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"username\": \"evzijst\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"team\": {\n        \"username\": \"bitbucket\",\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 1\n}\n```\n\nResults may be further [filtered or sorted](../../../meta/filtering) by\nteam or permission by adding the following query string parameters:\n\n* `q=team.username=\"bitbucket\"` or `q=permission=\"admin\"`\n* `sort=team.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
+      "description": "Returns an object for each team the caller is a member of, and their\neffective role — the highest level of privilege the caller has. If a\nuser is a member of multiple groups with distinct roles, only the\nhighest level is returned.\n\nPermissions can be:\n\n* `admin`\n* `collaborator`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/user/permissions/teams\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"permission\": \"admin\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"team\": {\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 1\n}\n```\n\nResults may be further [filtered or sorted](../../../meta/filtering) by\nteam or permission by adding the following query string parameters:\n\n* `q=team.uuid=\"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"` or `q=permission=\"admin\"`\n* `sort=team.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
       "parameters": [
         {
           "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../meta/filtering).",
@@ -13631,6 +13760,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -13681,6 +13811,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -13733,6 +13864,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -13784,6 +13916,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -13930,6 +14063,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -14051,6 +14185,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -14393,6 +14528,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -14520,6 +14656,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,
@@ -14697,6 +14834,7 @@
     },
     "parameters": [
       {
+        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
         "in": "path",
         "name": "username",
         "required": true,

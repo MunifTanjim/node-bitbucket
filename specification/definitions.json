@@ -454,15 +454,16 @@
             "description": "The type of restriction that is being applied.",
             "enum": [
               "require_tasks_to_be_completed",
-              "require_passing_builds_to_merge",
               "force",
+              "restrict_merges",
+              "enforce_merge_checks",
+              "require_approvals_to_merge",
+              "delete",
               "require_all_dependencies_merged",
               "push",
-              "require_approvals_to_merge",
-              "enforce_merge_checks",
-              "restrict_merges",
+              "require_passing_builds_to_merge",
               "reset_pullrequest_approvals_on_change",
-              "delete"
+              "require_default_reviewer_approvals_to_merge"
             ],
             "type": "string"
           },
@@ -497,7 +498,7 @@
             "type": "array"
           },
           "value": {
-            "description": "Value with kind-specific semantics: \"require_approvals_to_merge\" uses it to require a minimum number of approvals on a PR; \"require_passing_builds_to_merge\" uses it to require a minimum number of passing builds.",
+            "description": "Value with kind-specific semantics: \"require_approvals_to_merge\" uses it to require a minimum number of approvals on a PR; \"require_default_reviewer_approvals_to_merge\" uses it to require a minimum number of approvals from default reviewers on a PR; \"require_passing_builds_to_merge\" uses it to require a minimum number of passing builds.",
             "type": "integer"
           }
         },
@@ -941,7 +942,11 @@
         },
         "type": "object"
       }
-    ]
+    ],
+    "x-bb-default-fields": [
+      "uuid"
+    ],
+    "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
   },
   "deployment_release": {
     "allOf": [
@@ -1172,6 +1177,68 @@
         "type": "object"
       }
     ]
+  },
+  "deployment_variable": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Pipelines deployment variable.",
+        "properties": {
+          "key": {
+            "description": "The unique name of the variable.",
+            "type": "string"
+          },
+          "secured": {
+            "description": "If true, this variable will be treated as secured. The value will never be exposed in the logs or the REST API.",
+            "type": "boolean"
+          },
+          "uuid": {
+            "description": "The UUID identifying the variable.",
+            "type": "string"
+          },
+          "value": {
+            "description": "The value of the variable. If the variable is secured, this will be empty.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
+  "deployments_ddev_deployment_environment": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Deployment Environment.",
+        "type": "object"
+      }
+    ],
+    "x-bb-default-fields": [
+      "uuid"
+    ],
+    "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
+  },
+  "deployments_stg_west_deployment_environment": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Deployment Environment.",
+        "type": "object"
+      }
+    ],
+    "x-bb-default-fields": [
+      "uuid"
+    ],
+    "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
   },
   "diffstat": {
     "additionalProperties": true,
@@ -2151,6 +2218,42 @@
         "minItems": 0,
         "type": "array",
         "uniqueItems": true
+      }
+    },
+    "type": "object"
+  },
+  "paginated_deployment_variable": {
+    "description": "A paged list of deployment variables.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/deployment_variable"
+        },
+        "minItems": 0,
+        "type": "array"
       }
     },
     "type": "object"
@@ -4764,6 +4867,19 @@
                 },
                 "type": "object"
               },
+              "diffstat": {
+                "additionalProperties": false,
+                "properties": {
+                  "href": {
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
               "html": {
                 "additionalProperties": false,
                 "properties": {
@@ -5981,6 +6097,7 @@
           "subject_type": {
             "description": "The type of entity, which is `repository` in the case of webhook subscriptions on repositories.",
             "enum": [
+              "workspace",
               "user",
               "repository",
               "team"

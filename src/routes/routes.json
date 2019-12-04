@@ -157,6 +157,7 @@
         },
         "subject_type": {
           "enum": [
+            "workspace",
             "user",
             "repository",
             "team"

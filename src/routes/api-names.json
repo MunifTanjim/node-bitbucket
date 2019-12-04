@@ -904,6 +904,26 @@
       "repositories": ""
     }
   },
+  "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables": {
+    "get": {
+      "pipelines": "",
+      "repositories": ""
+    },
+    "post": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}": {
+    "delete": {
+      "pipelines": "",
+      "repositories": ""
+    },
+    "put": {
+      "pipelines": "",
+      "repositories": ""
+    }
+  },
   "/repositories/{workspace}/{repo_slug}/deployments/": {
     "get": {
       "deployments": "",
@@ -928,6 +948,7 @@
   },
   "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}": {
     "delete": {
+      "deployments": "",
       "repositories": ""
     },
     "get": {
@@ -1080,6 +1101,26 @@
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log": {
     "get": {
       "pipelines": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/logs/{log_uuid}": {
+    "get": {
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports": {
+    "get": {
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports/test_cases": {
+    "get": {
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports/test_cases/{test_case_uuid}/test_case_reasons": {
+    "get": {
       "repositories": ""
     }
   },
