@@ -12,6 +12,20 @@
       ]
     }
   },
+  "/repositories/{username}/{repo_slug}/branching-model/settings": {
+    "put": {
+      "parameters": [
+        {
+          "in": "body",
+          "name": "_body",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/branching_model_settings"
+          }
+        }
+      ]
+    }
+  },
   "/repositories/{username}/{repo_slug}/commits": {
     "get": {
       "parameters": [

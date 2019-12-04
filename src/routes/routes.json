@@ -4277,6 +4277,11 @@
     "updateBranchingModelSettings": {
       "method": "PUT",
       "params": {
+        "_body": {
+          "in": "body",
+          "schema": "BranchingModelSettings",
+          "type": "any"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
