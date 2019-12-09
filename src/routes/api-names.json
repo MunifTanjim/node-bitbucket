@@ -56,7 +56,7 @@
       "webhooks": "list"
     }
   },
-  "/pullrequests/{target_user}": {
+  "/pullrequests/{selected_user}": {
     "get": {
       "pullrequests": ""
     }
@@ -906,21 +906,21 @@
   },
   "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables": {
     "get": {
-      "deployments": "getDeploymentVariable",
+      "pipelines": "getDeploymentVariable",
       "repositories": "getDeploymentVariable"
     },
     "post": {
-      "deployments": "createDeploymentVariable",
+      "pipelines": "createDeploymentVariable",
       "repositories": "createDeploymentVariable"
     }
   },
   "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}": {
     "delete": {
-      "deployments": "deleteDeploymentVariable",
+      "pipelines": "deleteDeploymentVariable",
       "repositories": "deleteDeploymentVariable"
     },
     "put": {
-      "deployments": "updateDeploymentVariable",
+      "pipelines": "updateDeploymentVariable",
       "repositories": "updateDeploymentVariable"
     }
   },
