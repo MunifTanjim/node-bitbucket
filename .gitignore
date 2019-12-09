@@ -68,9 +68,9 @@ dist
 docs
 /bitbucket-test.js
 
-#Mac
+# Mac
 .DS_Store
 
-#VSCode
+# VSCode
 .history
 .VSCode
