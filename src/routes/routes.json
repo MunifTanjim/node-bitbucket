@@ -100,9 +100,6 @@
     }
   },
   "deployments": {
-    "createEnvironment":{
-      "alias": "repositories.createEnvironment"
-    },
     "get": {
       "alias": "repositories.getDeployment"
     },
@@ -115,26 +112,8 @@
     "listEnvironments": {
       "alias": "repositories.listEnvironments"
     },
-    "deleteEnvironment":{
-      "alias": "repositories.deleteEnvironment"
-    },
     "updateEnvironment": {
       "alias": "repositories.updateEnvironment"
-    },
-    "createDeploymentVariable": {
-      "alias": "repositories.createDeploymentVariable"
-    },
-    "getDeploymentVariable": {
-      "alias": "repositories.getDeploymentVariable"
-    },
-    "updateDeploymentVariable": {
-      "alias": "repositories.updateDeploymentVariable"
-    },
-    "deleteDeploymentVariable": {
-      "alias": "repositories.deleteDeploymentVariable"
-    },
-    "listDeploymentVariables": {
-      "alias": "repositories.listDeploymentVariables"
     }
   },
   "downloads": {
@@ -285,6 +264,9 @@
     "create": {
       "alias": "repositories.createPipeline"
     },
+    "createDeploymentVariable": {
+      "alias": "repositories.createDeploymentVariable"
+    },
     "createKnownHost": {
       "alias": "repositories.createPipelineKnownHost"
     },
@@ -299,6 +281,9 @@
     },
     "createVariableForUser": {
       "alias": "users.createPipelineVariable"
+    },
+    "deleteDeploymentVariable": {
+      "alias": "repositories.deleteDeploymentVariable"
     },
     "deleteKnownHost": {
       "alias": "repositories.deletePipelineKnownHost"
@@ -351,6 +336,9 @@
     "list": {
       "alias": "repositories.listPipelines"
     },
+    "listDeploymentVariables": {
+      "alias": "repositories.listDeploymentVariables"
+    },
     "listKnownHosts": {
       "alias": "repositories.listPipelineKnownHosts"
     },
@@ -380,6 +368,9 @@
     },
     "updateConfig": {
       "alias": "repositories.updatePipelineConfig"
+    },
+    "updateDeploymentVariable": {
+      "alias": "repositories.updateDeploymentVariable"
     },
     "updateKnownHost": {
       "alias": "repositories.updatePipelineKnownHost"
@@ -727,6 +718,11 @@
           "schema": "DeploymentVariable",
           "type": "any"
         },
+        "environment_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -737,14 +733,14 @@
           "required": true,
           "type": "string"
         },
-        "environment_uuid": {
+        "variable_uuid": {
           "in": "path",
           "required": true,
           "type": "string"
         }
       },
       "returns": "DeploymentVariable",
-      "url": "/repositories/{username}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables"
+      "url": "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables"
     },
     "createDownload": {
       "accepts": [
@@ -776,7 +772,7 @@
         "_body": {
           "in": "body",
           "required": true,
-          "schema": "Environment",
+          "schema": "DeploymentEnvironment",
           "type": "any"
         },
         "repo_slug": {
@@ -790,7 +786,7 @@
           "type": "string"
         }
       },
-      "returns": "Environment",
+      "returns": "DeploymentEnvironment",
       "url": "/repositories/{username}/{repo_slug}/environments/"
     },
     "createFork": {
@@ -1403,6 +1399,11 @@
     "deleteDeploymentVariable": {
       "method": "DELETE",
       "params": {
+        "environment_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
@@ -1413,18 +1414,13 @@
           "required": true,
           "type": "string"
         },
-        "environment_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
         "variable_uuid": {
           "in": "path",
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}"
     },
     "deleteDownload": {
       "method": "DELETE",
@@ -2077,33 +2073,6 @@
       },
       "returns": "DeploymentEnvironment",
       "url": "/repositories/{username}/{repo_slug}/environments/{environment_uuid}"
-    },
-    "getDeploymentVariable": {
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "environment_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
-        "variable_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "DeploymentVariable",
-      "url": "/repositories/{username}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}"
     },
     "getIssue": {
       "method": "GET",
@@ -3211,24 +3180,40 @@
     "listDeploymentVariables": {
       "method": "GET",
       "params": {
+        "environment_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "page": {
+          "in": "query",
+          "type": "string"
+        },
+        "pagelen": {
+          "in": "query",
+          "type": "integer"
+        },
+        "q": {
+          "in": "query",
+          "type": "string"
+        },
         "repo_slug": {
           "in": "path",
           "required": true,
+          "type": "string"
+        },
+        "sort": {
+          "in": "query",
           "type": "string"
         },
         "username": {
           "in": "path",
           "required": true,
           "type": "string"
-        },
-        "environment_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
         }
       },
-      "returns": "DeploymentVariable",
-      "url": "/repositories/{username}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables"
+      "returns": "PaginatedDeploymentVariable",
+      "url": "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables"
     },
     "listDiffStats": {
       "method": "GET",
@@ -4547,13 +4532,18 @@
       "url": "/repositories/{username}/{repo_slug}/deploy-keys/{key_id}"
     },
     "updateDeploymentVariable": {
-      "method": "POST",
+      "method": "PUT",
       "params": {
         "_body": {
           "in": "body",
           "required": true,
           "schema": "DeploymentVariable",
           "type": "any"
+        },
+        "environment_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
         },
         "repo_slug": {
           "in": "path",
@@ -4565,11 +4555,6 @@
           "required": true,
           "type": "string"
         },
-        "environment_uuid": {
-          "in": "path",
-          "required": true,
-          "type": "string"
-        },
         "variable_uuid": {
           "in": "path",
           "required": true,
@@ -4577,7 +4562,7 @@
         }
       },
       "returns": "DeploymentVariable",
-      "url": "/repositories/{username}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}"
     },
     "updateEnvironment": {
       "method": "POST",
