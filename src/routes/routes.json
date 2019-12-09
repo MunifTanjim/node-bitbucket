@@ -100,6 +100,9 @@
     }
   },
   "deployments": {
+    "createEnvironment":{
+      "alias": "repositories.createEnvironment"
+    },
     "get": {
       "alias": "repositories.getDeployment"
     },
@@ -112,8 +115,26 @@
     "listEnvironments": {
       "alias": "repositories.listEnvironments"
     },
+    "deleteEnvironment":{
+      "alias": "repositories.deleteEnvironment"
+    },
     "updateEnvironment": {
       "alias": "repositories.updateEnvironment"
+    },
+    "createDeploymentVariable": {
+      "alias": "repositories.createDeploymentVariable"
+    },
+    "getDeploymentVariable": {
+      "alias": "repositories.getDeploymentVariable"
+    },
+    "updateDeploymentVariable": {
+      "alias": "repositories.updateDeploymentVariable"
+    },
+    "deleteDeploymentVariable": {
+      "alias": "repositories.deleteDeploymentVariable"
+    },
+    "listDeploymentVariables": {
+      "alias": "repositories.listDeploymentVariables"
     }
   },
   "downloads": {
@@ -697,6 +718,34 @@
       "returns": "DeployKey",
       "url": "/repositories/{username}/{repo_slug}/deploy-keys"
     },
+    "createDeploymentVariable": {
+      "method": "POST",
+      "params": {
+        "_body": {
+          "in": "body",
+          "required": true,
+          "schema": "DeploymentVariable",
+          "type": "any"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "environment_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "DeploymentVariable",
+      "url": "/repositories/{username}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables"
+    },
     "createDownload": {
       "accepts": [
         "multipart/form-data"
@@ -720,6 +769,29 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/downloads"
+    },
+    "createEnvironment": {
+      "method": "POST",
+      "params": {
+        "_body": {
+          "in": "body",
+          "required": true,
+          "schema": "Environment",
+          "type": "any"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "Environment",
+      "url": "/repositories/{username}/{repo_slug}/environments/"
     },
     "createFork": {
       "method": "POST",
@@ -1328,6 +1400,32 @@
       },
       "url": "/repositories/{username}/{repo_slug}/deploy-keys/{key_id}"
     },
+    "deleteDeploymentVariable": {
+      "method": "DELETE",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "environment_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "variable_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}"
+    },
     "deleteDownload": {
       "method": "DELETE",
       "params": {
@@ -1348,6 +1446,27 @@
         }
       },
       "url": "/repositories/{username}/{repo_slug}/downloads/{filename}"
+    },
+    "deleteEnvironment": {
+      "method": "DELETE",
+      "params": {
+        "environment_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{username}/{repo_slug}/environments/{environment_uuid}"
     },
     "deleteIssue": {
       "method": "DELETE",
@@ -1958,6 +2077,33 @@
       },
       "returns": "DeploymentEnvironment",
       "url": "/repositories/{username}/{repo_slug}/environments/{environment_uuid}"
+    },
+    "getDeploymentVariable": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "environment_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "variable_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "DeploymentVariable",
+      "url": "/repositories/{username}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}"
     },
     "getIssue": {
       "method": "GET",
@@ -3061,6 +3207,28 @@
       },
       "returns": "PaginatedDeployments",
       "url": "/repositories/{username}/{repo_slug}/deployments/"
+    },
+    "listDeploymentVariables": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "environment_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "DeploymentVariable",
+      "url": "/repositories/{username}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables"
     },
     "listDiffStats": {
       "method": "GET",
@@ -4377,6 +4545,39 @@
       },
       "returns": "DeployKey",
       "url": "/repositories/{username}/{repo_slug}/deploy-keys/{key_id}"
+    },
+    "updateDeploymentVariable": {
+      "method": "POST",
+      "params": {
+        "_body": {
+          "in": "body",
+          "required": true,
+          "schema": "DeploymentVariable",
+          "type": "any"
+        },
+        "repo_slug": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "environment_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        "variable_uuid": {
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "DeploymentVariable",
+      "url": "/repositories/{username}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}"
     },
     "updateEnvironment": {
       "method": "POST",

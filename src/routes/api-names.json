@@ -322,12 +322,12 @@
     },
     "post": {
       "deployments": "",
-      "repositories": ""
+      "repositories": "createEnvironment"
     }
   },
   "/repositories/{username}/{repo_slug}/environments/{environment_uuid}": {
     "delete": {
-      "repositories": ""
+      "repositories": "deleteEnvironment"
     },
     "get": {
       "deployments": "getEnvironment",
@@ -906,22 +906,22 @@
   },
   "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables": {
     "get": {
-      "pipelines": "",
-      "repositories": ""
+      "deployments": "getDeploymentVariable",
+      "repositories": "getDeploymentVariable"
     },
     "post": {
-      "pipelines": "",
-      "repositories": ""
+      "deployments": "createDeploymentVariable",
+      "repositories": "createDeploymentVariable"
     }
   },
   "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}": {
     "delete": {
-      "pipelines": "",
-      "repositories": ""
+      "deployments": "deleteDeploymentVariable",
+      "repositories": "deleteDeploymentVariable"
     },
     "put": {
-      "pipelines": "",
-      "repositories": ""
+      "deployments": "updateDeploymentVariable",
+      "repositories": "updateDeploymentVariable"
     }
   },
   "/repositories/{workspace}/{repo_slug}/deployments/": {

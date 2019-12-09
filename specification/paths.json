@@ -8912,7 +8912,7 @@
   "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}": {
     "delete": {
       "description": "Delete an environment",
-      "operationId": "deleteEnvironmentForRepository",
+      "operationId": "deleteEnvironment",
       "parameters": [
         {
           "description": "The account.",
