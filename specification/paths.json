@@ -424,10 +424,17 @@
       }
     ]
   },
-  "/pullrequests/{target_user}": {
+  "/pullrequests/{selected_user}": {
     "get": {
       "description": "Returns all pull requests authored by the specified user.\n\nBy default only open pull requests are returned. This can be controlled\nusing the `state` query parameter. To retrieve pull requests that are\nin one of multiple states, repeat the `state` parameter for each\nindividual state.\n\nThis endpoint also supports filtering and sorting of the results. See\n[filtering and sorting](../../../../meta/filtering) for more details.",
       "parameters": [
+        {
+          "description": "This can either be the username of the pull request author, the author's UUID\nsurrounded by curly-braces, for example: `{account UUID}`, or the author's Atlassian ID.\n",
+          "in": "path",
+          "name": "selected_user",
+          "required": true,
+          "type": "string"
+        },
         {
           "description": "Only return pull requests that are in this state. This parameter can be repeated.",
           "enum": [
@@ -475,7 +482,7 @@
     "parameters": [
       {
         "in": "path",
-        "name": "target_user",
+        "name": "selected_user",
         "required": true,
         "type": "string"
       }
@@ -8912,7 +8919,7 @@
   "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}": {
     "delete": {
       "description": "Delete an environment",
-      "operationId": "deleteEnvironment",
+      "operationId": "deleteEnvironmentForRepository",
       "parameters": [
         {
           "description": "The account.",
