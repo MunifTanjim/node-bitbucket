@@ -906,8 +906,8 @@
   },
   "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables": {
     "get": {
-      "pipelines": "getDeploymentVariable",
-      "repositories": "getDeploymentVariable"
+      "pipelines": "listDeploymentVariables",
+      "repositories": "listDeploymentVariables"
     },
     "post": {
       "pipelines": "createDeploymentVariable",
