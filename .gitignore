@@ -67,3 +67,10 @@ typings/
 dist
 docs
 /bitbucket-test.js
+
+# Mac
+.DS_Store
+
+# VSCode
+.history
+.VSCode

@@ -404,15 +404,16 @@
             "kind": {
               "enum": [
                 "require_tasks_to_be_completed",
-                "require_passing_builds_to_merge",
                 "force",
+                "restrict_merges",
+                "enforce_merge_checks",
+                "require_approvals_to_merge",
+                "delete",
                 "require_all_dependencies_merged",
                 "push",
-                "require_approvals_to_merge",
-                "enforce_merge_checks",
-                "restrict_merges",
+                "require_passing_builds_to_merge",
                 "reset_pullrequest_approvals_on_change",
-                "delete"
+                "require_default_reviewer_approvals_to_merge"
               ],
               "type": "string"
             },
@@ -840,7 +841,11 @@
           },
           "type": "object"
         }
-      ]
+      ],
+      "x-bb-default-fields": [
+        "uuid"
+      ],
+      "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
     },
     "DeploymentRelease": {
       "allOf": [
@@ -1034,6 +1039,61 @@
           "type": "object"
         }
       ]
+    },
+    "DeploymentVariable": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "secured": {
+              "type": "boolean"
+            },
+            "uuid": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentsDdevDeploymentEnvironment": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "type": "object"
+        }
+      ],
+      "x-bb-default-fields": [
+        "uuid"
+      ],
+      "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
+    },
+    "DeploymentsStgWestDeploymentEnvironment": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "type": "object"
+        }
+      ],
+      "x-bb-default-fields": [
+        "uuid"
+      ],
+      "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
     },
     "Diffstat": {
       "additionalProperties": true,
@@ -1876,6 +1936,32 @@
         "values": {
           "items": {
             "$ref": "#/definitions/DeployKey"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedDeploymentVariable": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/DeploymentVariable"
           },
           "type": "array"
         }
@@ -3931,6 +4017,18 @@
                   },
                   "type": "object"
                 },
+                "diffstat": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
                 "html": {
                   "additionalProperties": false,
                   "properties": {
@@ -5025,6 +5123,7 @@
             },
             "subject_type": {
               "enum": [
+                "workspace",
                 "user",
                 "repository",
                 "team"
@@ -5077,6 +5176,9 @@
     "DeploymentEnvironment": {
       "$ref": "#/definitions/DeploymentEnvironment"
     },
+    "DeploymentVariable": {
+      "$ref": "#/definitions/DeploymentVariable"
+    },
     "Error": {
       "$ref": "#/definitions/Error"
     },
@@ -5112,6 +5214,9 @@
     },
     "PaginatedDeployKeys": {
       "$ref": "#/definitions/PaginatedDeployKeys"
+    },
+    "PaginatedDeploymentVariable": {
+      "$ref": "#/definitions/PaginatedDeploymentVariable"
     },
     "PaginatedDeployments": {
       "$ref": "#/definitions/PaginatedDeployments"
