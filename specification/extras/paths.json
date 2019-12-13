@@ -125,6 +125,17 @@
       ]
     }
   },
+  "/repositories/{username}/{repo_slug}/environments/{environment_uuid}/changes/": {
+    "post": {
+      "parameters": [
+        {
+          "in": "body",
+          "name": "_body",
+          "required": true
+        }
+      ]
+    }
+  },
   "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}": {
     "get": {
       "parameters": [

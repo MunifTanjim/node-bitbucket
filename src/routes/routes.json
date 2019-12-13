@@ -4567,6 +4567,11 @@
     "updateEnvironment": {
       "method": "POST",
       "params": {
+        "_body": {
+          "in": "body",
+          "required": true,
+          "type": "any"
+        },
         "environment_uuid": {
           "in": "path",
           "required": true,
