@@ -10167,9 +10167,6 @@
       ]
     }
   },
-  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/remote-triggers/{trigger_key}": {
-    "put": {}
-  },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/": {
     "get": {
       "description": "Find steps for the given pipeline.",

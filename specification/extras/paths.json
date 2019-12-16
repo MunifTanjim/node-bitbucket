@@ -244,62 +244,13 @@
       ]
     }
   },
-  "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables": {
-    "get": {
-      "parameters": [
-        {
-          "name": "username",
-          "deleted": true
-        },
-        {
-          "in": "path",
-          "name": "workspace",
-          "required": true,
-          "type": "string"
-        }
-      ]
-    },
+  "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes/": {
     "post": {
       "parameters": [
         {
-          "name": "username",
-          "deleted": true
-        },
-        {
-          "in": "path",
-          "name": "workspace",
-          "required": true,
-          "type": "string"
-        }
-      ]
-    }
-  },
-  "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}": {
-    "delete": {
-      "parameters": [
-        {
-          "name": "username",
-          "deleted": true
-        },
-        {
-          "in": "path",
-          "name": "workspace",
-          "required": true,
-          "type": "string"
-        }
-      ]
-    },
-    "put": {
-      "parameters": [
-        {
-          "name": "username",
-          "deleted": true
-        },
-        {
-          "in": "path",
-          "name": "workspace",
-          "required": true,
-          "type": "string"
+          "in": "body",
+          "name": "_body",
+          "required": true
         }
       ]
     }

@@ -646,12 +646,10 @@
       "method": "POST",
       "params": {
         "key": {
-          "in": "body",
           "required": true,
           "type": "string"
         },
         "label": {
-          "in": "body",
           "required": true,
           "type": "string"
         },
@@ -671,28 +669,23 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body",
           "required": true,
           "schema": "DeploymentVariable",
           "type": "any"
         },
         "environment_uuid": {
-          "in": "path",
           "required": true,
           "type": "string"
         },
         "repo_slug": {
-          "in": "path",
           "required": true,
           "type": "string"
         },
         "variable_uuid": {
-          "in": "path",
           "required": true,
           "type": "string"
         },
         "workspace": {
-          "in": "path",
           "required": true,
           "type": "string"
         }
@@ -725,24 +718,21 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body",
           "required": true,
           "schema": "DeploymentEnvironment",
           "type": "any"
         },
         "repo_slug": {
-          "in": "path",
           "required": true,
           "type": "string"
         },
-        "username": {
-          "in": "path",
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "DeploymentEnvironment",
-      "url": "/repositories/{username}/{repo_slug}/environments/"
+      "url": "/repositories/{workspace}/{repo_slug}/environments/"
     },
     "createFork": {
       "method": "POST",
@@ -934,13 +924,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Pipeline",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines/"
     },
     "createPipelineKnownHost": {
       "method": "POST",
@@ -954,13 +944,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelineKnownHost",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/"
     },
     "createPipelineSchedule": {
       "method": "POST",
@@ -974,13 +964,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelineSchedule",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/"
     },
     "createPipelineVariable": {
       "method": "POST",
@@ -994,13 +984,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelineVariable",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/"
     },
     "createPullRequest": {
       "method": "POST",
@@ -1269,22 +1259,18 @@
       "method": "DELETE",
       "params": {
         "environment_uuid": {
-          "in": "path",
           "required": true,
           "type": "string"
         },
         "repo_slug": {
-          "in": "path",
           "required": true,
           "type": "string"
         },
         "variable_uuid": {
-          "in": "path",
           "required": true,
           "type": "string"
         },
         "workspace": {
-          "in": "path",
           "required": true,
           "type": "string"
         }
@@ -1313,22 +1299,19 @@
       "method": "DELETE",
       "params": {
         "environment_uuid": {
-          "in": "path",
           "required": true,
           "type": "string"
         },
         "repo_slug": {
-          "in": "path",
           "required": true,
           "type": "string"
         },
-        "username": {
-          "in": "path",
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/environments/{environment_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}"
     },
     "deleteIssue": {
       "method": "DELETE",
@@ -1446,12 +1429,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
     },
     "deletePipelineSchedule": {
       "method": "DELETE",
@@ -1464,12 +1447,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
     },
     "deletePipelineSshKeyPair": {
       "method": "DELETE",
@@ -1478,12 +1461,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair"
     },
     "deletePipelineVariable": {
       "method": "DELETE",
@@ -1492,16 +1475,16 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "variable_uuid": {
           "required": true,
           "type": "string"
         },
-        "variable_uuid": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
     },
     "deletePullRequestApproval": {
       "method": "DELETE",
@@ -1778,13 +1761,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Deployment",
-      "url": "/repositories/{username}/{repo_slug}/deployments/{deployment_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/deployments/{deployment_uuid}"
     },
     "getDiff": {
       "method": "GET",
@@ -1845,13 +1828,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "DeploymentEnvironment",
-      "url": "/repositories/{username}/{repo_slug}/environments/{environment_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}"
     },
     "getIssue": {
       "method": "GET",
@@ -2102,13 +2085,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Pipeline",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}"
     },
     "getPipelineConfig": {
       "method": "GET",
@@ -2117,13 +2100,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelinesConfig",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config"
     },
     "getPipelineKnownHost": {
       "method": "GET",
@@ -2136,13 +2119,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelineKnownHost",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
     },
     "getPipelineSchedule": {
       "method": "GET",
@@ -2155,13 +2138,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelineSchedule",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
     },
     "getPipelineSshKeyPair": {
       "method": "GET",
@@ -2170,13 +2153,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelineSshKeyPair",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair"
     },
     "getPipelineStep": {
       "method": "GET",
@@ -2193,13 +2176,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelineStep",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}"
     },
     "getPipelineStepLog": {
       "headers": {
@@ -2219,12 +2202,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log"
     },
     "getPipelineVariable": {
       "method": "GET",
@@ -2233,17 +2216,17 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "variable_uuid": {
           "required": true,
           "type": "string"
         },
-        "variable_uuid": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelineVariable",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
     },
     "getPullRequest": {
       "method": "GET",
@@ -2615,45 +2598,26 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedDeployments",
-      "url": "/repositories/{username}/{repo_slug}/deployments/"
+      "url": "/repositories/{workspace}/{repo_slug}/deployments/"
     },
     "listDeploymentVariables": {
       "method": "GET",
       "params": {
         "environment_uuid": {
-          "in": "path",
           "required": true,
-          "type": "string"
-        },
-        "page": {
-          "in": "query",
-          "type": "string"
-        },
-        "pagelen": {
-          "in": "query",
-          "type": "integer"
-        },
-        "q": {
-          "in": "query",
           "type": "string"
         },
         "repo_slug": {
-          "in": "path",
           "required": true,
           "type": "string"
         },
-        "sort": {
-          "in": "query",
-          "type": "string"
-        },
         "workspace": {
-          "in": "path",
           "required": true,
           "type": "string"
         }
@@ -2704,13 +2668,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedEnvironments",
-      "url": "/repositories/{username}/{repo_slug}/environments/"
+      "url": "/repositories/{workspace}/{repo_slug}/environments/"
     },
     "listFileHistory": {
       "method": "GET",
@@ -2869,13 +2833,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedPipelineKnownHosts",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/"
     },
     "listPipelines": {
       "method": "GET",
@@ -2884,13 +2848,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedPipelines",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines/"
     },
     "listPipelineScheduleExecutions": {
       "method": "GET",
@@ -2899,13 +2863,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedPipelineScheduleExecutions",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/"
     },
     "listPipelineSchedules": {
       "method": "GET",
@@ -2914,13 +2878,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedPipelineSchedules",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/"
     },
     "listPipelineSteps": {
       "method": "GET",
@@ -2933,13 +2897,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedPipelineSteps",
-      "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/"
     },
     "listPipelineVariables": {
       "method": "GET",
@@ -2948,13 +2912,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedPipelineVariables",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/"
     },
     "listPullRequestActivities": {
       "method": "GET",
@@ -3063,13 +3027,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedPullrequests",
-      "url": "/repositories/{username}/{repo_slug}/commit/{commit}/pullrequests"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/pullrequests"
     },
     "listPullRequestStatuses": {
       "method": "GET",
@@ -3252,12 +3216,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline"
     },
     "update": {
       "headers": {
@@ -3284,11 +3248,6 @@
     "updateBranchingModelSettings": {
       "method": "PUT",
       "params": {
-        "_body": {
-          "in": "body",
-          "schema": "BranchingModelSettings",
-          "type": "any"
-        },
         "repo_slug": {
           "required": true,
           "type": "string"
@@ -3375,28 +3334,23 @@
       "method": "PUT",
       "params": {
         "_body": {
-          "in": "body",
           "required": true,
           "schema": "DeploymentVariable",
           "type": "any"
         },
         "environment_uuid": {
-          "in": "path",
           "required": true,
           "type": "string"
         },
         "repo_slug": {
-          "in": "path",
           "required": true,
           "type": "string"
         },
         "variable_uuid": {
-          "in": "path",
           "required": true,
           "type": "string"
         },
         "workspace": {
-          "in": "path",
           "required": true,
           "type": "string"
         }
@@ -3408,7 +3362,6 @@
       "method": "POST",
       "params": {
         "_body": {
-          "in": "body",
           "required": true,
           "type": "any"
         },
@@ -3420,12 +3373,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/environments/{environment_uuid}/changes/"
+      "url": "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes/"
     },
     "updateIssue": {
       "method": "PUT",
@@ -3491,13 +3444,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelineBuildNumber",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/build_number"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/build_number"
     },
     "updatePipelineConfig": {
       "method": "PUT",
@@ -3511,13 +3464,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelinesConfig",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config"
     },
     "updatePipelineKnownHost": {
       "method": "PUT",
@@ -3535,13 +3488,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelineKnownHost",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}"
     },
     "updatePipelineSchedule": {
       "method": "PUT",
@@ -3559,13 +3512,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelineSchedule",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}"
     },
     "updatePipelineSshKeyPair": {
       "method": "PUT",
@@ -3579,13 +3532,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelineSshKeyPair",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair"
     },
     "updatePipelineVariable": {
       "method": "PUT",
@@ -3599,17 +3552,17 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "variable_uuid": {
           "required": true,
           "type": "string"
         },
-        "variable_uuid": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelineVariable",
-      "url": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid}"
     },
     "updatePullRequest": {
       "method": "PUT",
@@ -4600,6 +4553,16 @@
     },
     "deleteSshKey": {
       "method": "DELETE",
+      "params": {
+        "key_id": {
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "required": true,
+          "type": "string"
+        }
+      },
       "url": "/users/{username}/ssh-keys/{key_id}"
     },
     "deleteWebhook": {
@@ -4650,6 +4613,17 @@
     },
     "getSshKey": {
       "method": "GET",
+      "params": {
+        "key_id": {
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "SshAccountKey",
       "url": "/users/{username}/ssh-keys/{key_id}"
     },
     "getTeamMembers": {
@@ -4792,6 +4766,21 @@
     },
     "updateSshKey": {
       "method": "PUT",
+      "params": {
+        "_body": {
+          "schema": "SshAccountKey",
+          "type": "any"
+        },
+        "key_id": {
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "SshAccountKey",
       "url": "/users/{username}/ssh-keys/{key_id}"
     },
     "updateWebhook": {
