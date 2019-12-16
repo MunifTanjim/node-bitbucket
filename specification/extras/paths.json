@@ -249,6 +249,66 @@
       ]
     }
   },
+  "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables": {
+    "get": {
+      "parameters": [
+        {
+          "name": "username",
+          "deleted": true
+        },
+        {
+          "in": "path",
+          "name": "workspace",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "post": {
+      "parameters": [
+        {
+          "name": "username",
+          "deleted": true
+        },
+        {
+          "in": "path",
+          "name": "workspace",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}": {
+    "delete": {
+      "parameters": [
+        {
+          "name": "username",
+          "deleted": true
+        },
+        {
+          "in": "path",
+          "name": "workspace",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "put": {
+      "parameters": [
+        {
+          "name": "username",
+          "deleted": true
+        },
+        {
+          "in": "path",
+          "name": "workspace",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
   "/snippets/{username}/{encoded_id}/watch": {
     "delete": {
       "responses": {

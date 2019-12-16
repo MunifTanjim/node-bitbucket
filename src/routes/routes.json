@@ -728,12 +728,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "variable_uuid": {
           "in": "path",
           "required": true,
           "type": "string"
         },
-        "variable_uuid": {
+        "workspace": {
           "in": "path",
           "required": true,
           "type": "string"
@@ -1409,12 +1409,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "variable_uuid": {
           "in": "path",
           "required": true,
           "type": "string"
         },
-        "variable_uuid": {
+        "workspace": {
           "in": "path",
           "required": true,
           "type": "string"
@@ -3206,7 +3206,7 @@
           "in": "query",
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "in": "path",
           "required": true,
           "type": "string"
@@ -4550,12 +4550,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "variable_uuid": {
           "in": "path",
           "required": true,
           "type": "string"
         },
-        "variable_uuid": {
+        "workspace": {
           "in": "path",
           "required": true,
           "type": "string"
