@@ -52,6 +52,7 @@
     "debug": "^3.1.0",
     "is-plain-object": "^2.0.4",
     "node-fetch": "^2.1.2",
+    "qs": "^6.9.1",
     "url-template": "^2.0.8"
   },
   "devDependencies": {

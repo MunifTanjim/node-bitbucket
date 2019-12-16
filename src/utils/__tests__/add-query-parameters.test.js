@@ -47,4 +47,11 @@ describe('utils:add-query-parameters', () => {
     })
     expect(qs).toMatchSnapshot()
   })
+
+  it('accepts array for state, so it can return all pull requests', () => {
+    let state = addQueryParameters(url, {
+      state: ['MERGED', 'OPEN']
+    })
+    expect(state).toBe('/?state=MERGED&state=OPEN')
+  })
 })
