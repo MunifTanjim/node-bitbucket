@@ -98,7 +98,7 @@ function populateRoutes(routesObject) {
         setMethod(routesObject[namespaceName][endpointName], method)
         setUrl(routesObject[namespaceName][endpointName], url)
 
-        processParameters(routesObject[namespaceName][endpointName], spec)
+        processParameters(routesObject[namespaceName][endpointName], spec, url)
 
         const methodSpec = get(spec, method)
         if (methodSpec) {
@@ -106,7 +106,8 @@ function populateRoutes(routesObject) {
           processProduces(routesObject[namespaceName][endpointName], methodSpec)
           processParameters(
             routesObject[namespaceName][endpointName],
-            methodSpec
+            methodSpec,
+            url
           )
           processResponses(
             routesObject[namespaceName][endpointName],
@@ -130,7 +131,8 @@ function populateRoutes(routesObject) {
           )
           processParameters(
             routesObject[namespaceName][endpointName],
-            methodSpecExtras
+            methodSpecExtras,
+            url
           )
           processResponses(
             routesObject[namespaceName][endpointName],
@@ -156,14 +158,23 @@ function formatUrls(routesObject) {
       if (['GET', 'DELETE'].includes(endpointObject.method)) continue
 
       if (isPaginatedEndpoint(endpointName, endpointObject)) {
-        processParameters(endpointObject, {
-          parameters: [
-            { in: 'query', name: 'page', require: false, type: 'string' },
-            { in: 'query', name: 'pagelen', required: false, type: 'integer' },
-            { in: 'query', name: 'q', required: false, type: 'string' },
-            { in: 'query', name: 'sort', required: false, type: 'string' }
-          ]
-        })
+        processParameters(
+          endpointObject,
+          {
+            parameters: [
+              { in: 'query', name: 'page', require: false, type: 'string' },
+              {
+                in: 'query',
+                name: 'pagelen',
+                required: false,
+                type: 'integer'
+              },
+              { in: 'query', name: 'q', required: false, type: 'string' },
+              { in: 'query', name: 'sort', required: false, type: 'string' }
+            ]
+          },
+          endpointObject.url
+        )
       }
 
       const queryParams = Object.keys(endpointObject.params).filter(

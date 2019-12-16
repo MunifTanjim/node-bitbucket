@@ -2,7 +2,39 @@ const deepmerge = require('deepmerge')
 const { uniq } = require('lodash')
 const { pascalCase } = require('../utils/pascal-case')
 
-const processParameters = (endpointObject, { parameters = [] } = {}) => {
+const usernameRegex = /\/\{username\}/
+const workspaceRegex = /\/\{workspace\}/
+
+const fixUrlParameters = (endpointObject, url) => {
+  const needWorkspaceUrlParam = workspaceRegex.test(url)
+  const needUsernameUrlParam = usernameRegex.test(url)
+
+  if (needWorkspaceUrlParam && !endpointObject.params['workspace']) {
+    endpointObject.params['workspace'] = {
+      in: 'path',
+      required: true,
+      type: 'string'
+    }
+  }
+
+  if (!needWorkspaceUrlParam) {
+    delete endpointObject.params['workspace']
+  }
+
+  if (needUsernameUrlParam && !endpointObject.params['username']) {
+    endpointObject.params['username'] = {
+      in: 'path',
+      required: true,
+      type: 'string'
+    }
+  }
+
+  if (!needUsernameUrlParam) {
+    delete endpointObject.params['username']
+  }
+}
+
+const processParameters = (endpointObject, { parameters = [] } = {}, url) => {
   for (const {
     enum: _enum,
     in: _in,
@@ -40,6 +72,8 @@ const processParameters = (endpointObject, { parameters = [] } = {}) => {
       )
     }
   }
+
+  fixUrlParameters(endpointObject, url)
 }
 
 module.exports.processParameters = processParameters

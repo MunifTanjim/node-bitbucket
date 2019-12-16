@@ -42,6 +42,7 @@ fetch(API_SPECIFICATION)
     writeSpecPartialJSON('others', apiSpec)
 
     delete apiSpec.info
+    delete apiSpec['x-atlassian-narrative']
     delete apiSpec['x-revision']
     writeFileSync(
       path.resolve(srcPath, `endpoint/spec.json`),
