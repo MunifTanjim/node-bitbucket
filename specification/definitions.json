@@ -834,6 +834,22 @@
       }
     ]
   },
+  "ddev_report": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A report for a commit.",
+        "type": "object"
+      }
+    ],
+    "x-bb-default-fields": [
+      "uuid"
+    ],
+    "x-bb-url": "/rest/internal/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+  },
   "deploy_key": {
     "allOf": [
       {
@@ -5237,6 +5253,22 @@
     ],
     "type": "object"
   },
+  "report": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A report for a commit.",
+        "type": "object"
+      }
+    ],
+    "x-bb-default-fields": [
+      "uuid"
+    ],
+    "x-bb-url": "/rest/internal/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+  },
   "repository": {
     "allOf": [
       {
@@ -5827,6 +5859,22 @@
         "type": "object"
       }
     ]
+  },
+  "stg_west_report": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A report for a commit.",
+        "type": "object"
+      }
+    ],
+    "x-bb-default-fields": [
+      "uuid"
+    ],
+    "x-bb-url": "/rest/internal/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
   },
   "subject_types": {
     "additionalProperties": false,

@@ -509,12 +509,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
+      "url": "/repositories/{workspace}/{repo_slug}/default-reviewers/{target_username}"
     },
     "create": {
       "headers": {
@@ -530,13 +530,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Repository",
-      "url": "/repositories/{username}/{repo_slug}"
+      "url": "/repositories/{workspace}/{repo_slug}"
     },
     "createBranch": {
       "method": "POST",
@@ -549,13 +549,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Branch",
-      "url": "/repositories/{username}/{repo_slug}/refs/branches"
+      "url": "/repositories/{workspace}/{repo_slug}/refs/branches"
     },
     "createBranchRestriction": {
       "method": "POST",
@@ -569,13 +569,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Branchrestriction",
-      "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
+      "url": "/repositories/{workspace}/{repo_slug}/branch-restrictions"
     },
     "createCommitApproval": {
       "method": "POST",
@@ -588,13 +588,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Participant",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/approve"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/approve"
     },
     "createCommitBuildStatus": {
       "method": "POST",
@@ -611,13 +611,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Commitstatus",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/statuses/build"
     },
     "createCommitComment": {
       "method": "POST",
@@ -635,12 +635,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/comments"
     },
     "createDeployKey": {
       "method": "POST",
@@ -657,13 +657,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "DeployKey",
-      "url": "/repositories/{username}/{repo_slug}/deploy-keys"
+      "url": "/repositories/{workspace}/{repo_slug}/deploy-keys"
     },
     "createDeploymentVariable": {
       "method": "POST",
@@ -707,12 +707,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/downloads"
+      "url": "/repositories/{workspace}/{repo_slug}/downloads"
     },
     "createEnvironment": {
       "method": "POST",
@@ -745,13 +745,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Repository",
-      "url": "/repositories/{username}/{repo_slug}/forks"
+      "url": "/repositories/{workspace}/{repo_slug}/forks"
     },
     "createIssue": {
       "method": "POST",
@@ -765,13 +765,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Issue",
-      "url": "/repositories/{username}/{repo_slug}/issues"
+      "url": "/repositories/{workspace}/{repo_slug}/issues"
     },
     "createIssueAttachments": {
       "accepts": [
@@ -791,12 +791,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/attachments"
     },
     "createIssueChange": {
       "method": "POST",
@@ -814,13 +814,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "IssueChange",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/changes"
     },
     "createIssueComment": {
       "method": "POST",
@@ -838,12 +838,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/comments"
     },
     "createIssueExportJob": {
       "method": "POST",
@@ -852,12 +852,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/issues/export"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/export"
     },
     "createIssueImportJob": {
       "method": "POST",
@@ -866,13 +866,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "IssueJobStatus",
-      "url": "/repositories/{username}/{repo_slug}/issues/import"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/import"
     },
     "createIssueVote": {
       "method": "PUT",
@@ -885,13 +885,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Error",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/vote"
     },
     "createIssueWatch": {
       "method": "PUT",
@@ -904,13 +904,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Error",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/watch"
     },
     "createPipeline": {
       "method": "POST",
@@ -1003,13 +1003,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Pullrequest",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests"
     },
     "createPullRequestApproval": {
       "method": "POST",
@@ -1022,13 +1022,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Participant",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/approve"
     },
     "createPullRequestComment": {
       "method": "POST",
@@ -1046,13 +1046,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PullrequestComment",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments"
     },
     "createSrcFileCommit": {
       "accepts": [
@@ -1083,12 +1083,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/src"
+      "url": "/repositories/{workspace}/{repo_slug}/src"
     },
     "createTag": {
       "method": "POST",
@@ -1102,13 +1102,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Tag",
-      "url": "/repositories/{username}/{repo_slug}/refs/tags"
+      "url": "/repositories/{workspace}/{repo_slug}/refs/tags"
     },
     "createWebhook": {
       "method": "POST",
@@ -1121,13 +1121,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "WebhookSubscription",
-      "url": "/repositories/{username}/{repo_slug}/hooks"
+      "url": "/repositories/{workspace}/{repo_slug}/hooks"
     },
     "declinePullRequest": {
       "method": "POST",
@@ -1140,13 +1140,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Pullrequest",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/decline"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/decline"
     },
     "delete": {
       "method": "DELETE",
@@ -1158,12 +1158,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}"
+      "url": "/repositories/{workspace}/{repo_slug}"
     },
     "deleteBranch": {
       "method": "DELETE",
@@ -1176,12 +1176,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/refs/branches/{name}"
+      "url": "/repositories/{workspace}/{repo_slug}/refs/branches/{name}"
     },
     "deleteBranchRestriction": {
       "method": "DELETE",
@@ -1194,12 +1194,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
+      "url": "/repositories/{workspace}/{repo_slug}/branch-restrictions/{id}"
     },
     "deleteCommitApproval": {
       "method": "DELETE",
@@ -1212,12 +1212,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/approve"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/approve"
     },
     "deleteDefaultReviewer": {
       "method": "DELETE",
@@ -1230,12 +1230,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
+      "url": "/repositories/{workspace}/{repo_slug}/default-reviewers/{target_username}"
     },
     "deleteDeployKey": {
       "method": "DELETE",
@@ -1248,12 +1248,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/deploy-keys/{key_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/deploy-keys/{key_id}"
     },
     "deleteDeploymentVariable": {
       "method": "DELETE",
@@ -1288,12 +1288,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/downloads/{filename}"
+      "url": "/repositories/{workspace}/{repo_slug}/downloads/{filename}"
     },
     "deleteEnvironment": {
       "method": "DELETE",
@@ -1324,13 +1324,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Issue",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}"
     },
     "deleteIssueAttachment": {
       "method": "DELETE",
@@ -1347,12 +1347,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments/{path}"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/attachments/{path}"
     },
     "deleteIssueComment": {
       "method": "DELETE",
@@ -1374,12 +1374,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
     },
     "deleteIssueVote": {
       "method": "DELETE",
@@ -1392,12 +1392,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/vote"
     },
     "deleteIssueWatch": {
       "method": "DELETE",
@@ -1410,13 +1410,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Error",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/watch"
     },
     "deletePipelineKnownHost": {
       "method": "DELETE",
@@ -1497,12 +1497,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/approve"
     },
     "deletePullRequestComment": {
       "method": "DELETE",
@@ -1519,12 +1519,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}"
     },
     "deleteTag": {
       "method": "DELETE",
@@ -1537,12 +1537,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/refs/tags/{name}"
+      "url": "/repositories/{workspace}/{repo_slug}/refs/tags/{name}"
     },
     "deleteWebhook": {
       "method": "DELETE",
@@ -1555,12 +1555,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
+      "url": "/repositories/{workspace}/{repo_slug}/hooks/{uid}"
     },
     "get": {
       "headers": {
@@ -1572,13 +1572,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Repository",
-      "url": "/repositories/{username}/{repo_slug}"
+      "url": "/repositories/{workspace}/{repo_slug}"
     },
     "getBranch": {
       "method": "GET",
@@ -1591,13 +1591,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Branch",
-      "url": "/repositories/{username}/{repo_slug}/refs/branches/{name}"
+      "url": "/repositories/{workspace}/{repo_slug}/refs/branches/{name}"
     },
     "getBranchingModel": {
       "method": "GET",
@@ -1606,13 +1606,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "BranchingModel",
-      "url": "/repositories/{username}/{repo_slug}/branching-model"
+      "url": "/repositories/{workspace}/{repo_slug}/branching-model"
     },
     "getBranchingModelSettings": {
       "method": "GET",
@@ -1621,13 +1621,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "BranchingModelSettings",
-      "url": "/repositories/{username}/{repo_slug}/branching-model/settings"
+      "url": "/repositories/{workspace}/{repo_slug}/branching-model/settings"
     },
     "getBranchRestriction": {
       "method": "GET",
@@ -1640,13 +1640,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Branchrestriction",
-      "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
+      "url": "/repositories/{workspace}/{repo_slug}/branch-restrictions/{id}"
     },
     "getCommit": {
       "method": "GET",
@@ -1659,13 +1659,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Commit",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}"
     },
     "getCommitBuildStatus": {
       "method": "GET",
@@ -1682,13 +1682,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Commitstatus",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/statuses/build/{key}"
     },
     "getCommitComment": {
       "method": "GET",
@@ -1705,13 +1705,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "CommitComment",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments/{comment_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/comments/{comment_id}"
     },
     "getDefaultReviewer": {
       "method": "GET",
@@ -1724,12 +1724,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}"
+      "url": "/repositories/{workspace}/{repo_slug}/default-reviewers/{target_username}"
     },
     "getDeployKey": {
       "method": "GET",
@@ -1742,13 +1742,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "DeployKey",
-      "url": "/repositories/{username}/{repo_slug}/deploy-keys/{key_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/deploy-keys/{key_id}"
     },
     "getDeployment": {
       "method": "GET",
@@ -1792,12 +1792,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/diff/{spec}"
+      "url": "/repositories/{workspace}/{repo_slug}/diff/{spec}"
     },
     "getDownload": {
       "method": "GET",
@@ -1810,12 +1810,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/downloads/{filename}"
+      "url": "/repositories/{workspace}/{repo_slug}/downloads/{filename}"
     },
     "getEnvironment": {
       "method": "GET",
@@ -1847,13 +1847,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Issue",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}"
     },
     "getIssueAttachment": {
       "method": "GET",
@@ -1870,12 +1870,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments/{path}"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/attachments/{path}"
     },
     "getIssueChange": {
       "method": "GET",
@@ -1892,13 +1892,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "IssueChange",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes/{change_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/changes/{change_id}"
     },
     "getIssueComment": {
       "method": "GET",
@@ -1915,13 +1915,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "IssueComment",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
     },
     "getIssueComponent": {
       "method": "GET",
@@ -1934,13 +1934,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Component",
-      "url": "/repositories/{username}/{repo_slug}/components/{component_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/components/{component_id}"
     },
     "getIssueExportJobStatus": {
       "method": "GET",
@@ -1957,13 +1957,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "IssueJobStatus",
-      "url": "/repositories/{username}/{repo_slug}/issues/export/{repo_name}-issues-{task_id}.zip"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/export/{repo_name}-issues-{task_id}.zip"
     },
     "getIssueImportJobStatus": {
       "method": "GET",
@@ -1972,13 +1972,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "IssueJobStatus",
-      "url": "/repositories/{username}/{repo_slug}/issues/import"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/import"
     },
     "getIssueMilestone": {
       "method": "GET",
@@ -1991,13 +1991,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Milestone",
-      "url": "/repositories/{username}/{repo_slug}/milestones/{milestone_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/milestones/{milestone_id}"
     },
     "getIssueVersion": {
       "method": "GET",
@@ -2006,17 +2006,17 @@
           "required": true,
           "type": "string"
         },
-        "username": {
-          "required": true,
-          "type": "string"
-        },
         "version_id": {
           "required": true,
           "type": "integer"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
         }
       },
       "returns": "Version",
-      "url": "/repositories/{username}/{repo_slug}/versions/{version_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/versions/{version_id}"
     },
     "getIssueVote": {
       "method": "GET",
@@ -2029,13 +2029,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Error",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/vote"
     },
     "getIssueWatch": {
       "method": "GET",
@@ -2048,13 +2048,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Error",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/watch"
     },
     "getPatch": {
       "method": "GET",
@@ -2067,12 +2067,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/patch/{spec}"
+      "url": "/repositories/{workspace}/{repo_slug}/patch/{spec}"
     },
     "getPipeline": {
       "method": "GET",
@@ -2239,13 +2239,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Pullrequest",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}"
     },
     "getPullRequestComment": {
       "method": "GET",
@@ -2262,13 +2262,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PullrequestComment",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}"
     },
     "getPullRequestDiff": {
       "method": "GET",
@@ -2281,12 +2281,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/diff"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/diff"
     },
     "getPullRequestDiffStat": {
       "method": "GET",
@@ -2299,12 +2299,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/diffstat"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/diffstat"
     },
     "getPullRequestPatch": {
       "method": "GET",
@@ -2317,12 +2317,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/patch"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/patch"
     },
     "getTag": {
       "method": "GET",
@@ -2335,13 +2335,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Tag",
-      "url": "/repositories/{username}/{repo_slug}/refs/tags/{name}"
+      "url": "/repositories/{workspace}/{repo_slug}/refs/tags/{name}"
     },
     "getWebhook": {
       "method": "GET",
@@ -2354,13 +2354,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "WebhookSubscription",
-      "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
+      "url": "/repositories/{workspace}/{repo_slug}/hooks/{uid}"
     },
     "list": {
       "method": "GET",
@@ -2374,13 +2374,13 @@
           ],
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedRepositories",
-      "url": "/repositories/{username}"
+      "url": "/repositories/{workspace}"
     },
     "listBranches": {
       "method": "GET",
@@ -2389,13 +2389,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedBranches",
-      "url": "/repositories/{username}/{repo_slug}/refs/branches"
+      "url": "/repositories/{workspace}/{repo_slug}/refs/branches"
     },
     "listBranchRestrictions": {
       "method": "GET",
@@ -2410,13 +2410,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedBranchrestrictions",
-      "url": "/repositories/{username}/{repo_slug}/branch-restrictions"
+      "url": "/repositories/{workspace}/{repo_slug}/branch-restrictions"
     },
     "listCommitComments": {
       "method": "GET",
@@ -2429,13 +2429,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedCommitComments",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/comments"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/comments"
     },
     "listCommits": {
       "method": "GET",
@@ -2450,12 +2450,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/commits"
+      "url": "/repositories/{workspace}/{repo_slug}/commits"
     },
     "listCommitsAlt": {
       "accepts": [
@@ -2473,12 +2473,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/commits{?page,pagelen,q,sort}"
+      "url": "/repositories/{workspace}/{repo_slug}/commits{?page,pagelen,q,sort}"
     },
     "listCommitsAt": {
       "method": "GET",
@@ -2497,12 +2497,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/commits/{revision}"
+      "url": "/repositories/{workspace}/{repo_slug}/commits/{revision}"
     },
     "listCommitsAtAlt": {
       "method": "POST",
@@ -2521,12 +2521,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/commits/{revision}{?page,pagelen,q,sort}"
+      "url": "/repositories/{workspace}/{repo_slug}/commits/{revision}{?page,pagelen,q,sort}"
     },
     "listCommitStatuses": {
       "method": "GET",
@@ -2539,13 +2539,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedCommitstatuses",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/statuses"
     },
     "listComponents": {
       "method": "GET",
@@ -2554,13 +2554,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedComponents",
-      "url": "/repositories/{username}/{repo_slug}/components"
+      "url": "/repositories/{workspace}/{repo_slug}/components"
     },
     "listDefaultReviewers": {
       "method": "GET",
@@ -2569,12 +2569,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/default-reviewers"
+      "url": "/repositories/{workspace}/{repo_slug}/default-reviewers"
     },
     "listDeployKeys": {
       "method": "GET",
@@ -2583,13 +2583,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedDeployKeys",
-      "url": "/repositories/{username}/{repo_slug}/deploy-keys"
+      "url": "/repositories/{workspace}/{repo_slug}/deploy-keys"
     },
     "listDeployments": {
       "method": "GET",
@@ -2639,13 +2639,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedDiffstats",
-      "url": "/repositories/{username}/{repo_slug}/diffstat/{spec}"
+      "url": "/repositories/{workspace}/{repo_slug}/diffstat/{spec}"
     },
     "listDownloads": {
       "method": "GET",
@@ -2654,12 +2654,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/downloads"
+      "url": "/repositories/{workspace}/{repo_slug}/downloads"
     },
     "listEnvironments": {
       "method": "GET",
@@ -2694,13 +2694,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedFiles",
-      "url": "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}"
+      "url": "/repositories/{workspace}/{repo_slug}/filehistory/{node}/{path}"
     },
     "listForks": {
       "method": "GET",
@@ -2709,13 +2709,22 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "role": {
+          "enum": [
+            "admin",
+            "contributor",
+            "member",
+            "owner"
+          ],
+          "type": "string"
+        },
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedRepositories",
-      "url": "/repositories/{username}/{repo_slug}/forks"
+      "url": "/repositories/{workspace}/{repo_slug}/forks"
     },
     "listGlobal": {
       "method": "GET",
@@ -2747,13 +2756,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedIssueAttachments",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/attachments"
     },
     "listIssueChanges": {
       "method": "GET",
@@ -2766,13 +2775,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedLogEntries",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/changes"
     },
     "listIssueComments": {
       "method": "GET",
@@ -2785,13 +2794,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedIssueComments",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/comments"
     },
     "listIssues": {
       "method": "GET",
@@ -2800,13 +2809,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedIssues",
-      "url": "/repositories/{username}/{repo_slug}/issues"
+      "url": "/repositories/{workspace}/{repo_slug}/issues"
     },
     "listMilestones": {
       "method": "GET",
@@ -2815,13 +2824,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedMilestones",
-      "url": "/repositories/{username}/{repo_slug}/milestones"
+      "url": "/repositories/{workspace}/{repo_slug}/milestones"
     },
     "listPermissions": {
       "alias": "user.listPermissionsForRepos"
@@ -2931,12 +2940,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/activity"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/activity"
     },
     "listPullRequestActivitiesForRepo": {
       "method": "GET",
@@ -2945,12 +2954,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/activity"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/activity"
     },
     "listPullRequestComments": {
       "method": "GET",
@@ -2963,13 +2972,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedPullrequestComments",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments"
     },
     "listPullRequestCommits": {
       "method": "GET",
@@ -2982,12 +2991,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/commits"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/commits"
     },
     "listPullRequests": {
       "method": "GET",
@@ -3005,13 +3014,13 @@
           ],
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedPullrequests",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests"
     },
     "listPullrequestsForCommit": {
       "headers": {
@@ -3046,13 +3055,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedCommitstatuses",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
     },
     "listRefs": {
       "method": "GET",
@@ -3061,13 +3070,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedRefs",
-      "url": "/repositories/{username}/{repo_slug}/refs"
+      "url": "/repositories/{workspace}/{repo_slug}/refs"
     },
     "listTags": {
       "method": "GET",
@@ -3076,13 +3085,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedTags",
-      "url": "/repositories/{username}/{repo_slug}/refs/tags"
+      "url": "/repositories/{workspace}/{repo_slug}/refs/tags"
     },
     "listVersions": {
       "method": "GET",
@@ -3091,13 +3100,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedVersions",
-      "url": "/repositories/{username}/{repo_slug}/versions"
+      "url": "/repositories/{workspace}/{repo_slug}/versions"
     },
     "listWatchers": {
       "method": "GET",
@@ -3106,12 +3115,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/repositories/{username}/{repo_slug}/watchers"
+      "url": "/repositories/{workspace}/{repo_slug}/watchers"
     },
     "listWebhooks": {
       "method": "GET",
@@ -3120,13 +3129,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedWebhookSubscriptions",
-      "url": "/repositories/{username}/{repo_slug}/hooks"
+      "url": "/repositories/{workspace}/{repo_slug}/hooks"
     },
     "mergePullRequest": {
       "method": "POST",
@@ -3143,13 +3152,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Pullrequest",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/merge"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/merge"
     },
     "readSrc": {
       "method": "GET",
@@ -3176,13 +3185,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedTreeentries",
-      "url": "/repositories/{username}/{repo_slug}/src/{node}/{path}"
+      "url": "/repositories/{workspace}/{repo_slug}/src/{node}/{path}"
     },
     "readSrcRoot": {
       "method": "GET",
@@ -3197,13 +3206,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedTreeentries",
-      "url": "/repositories/{username}/{repo_slug}/src"
+      "url": "/repositories/{workspace}/{repo_slug}/src"
     },
     "stopPipeline": {
       "method": "POST",
@@ -3237,28 +3246,32 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Repository",
-      "url": "/repositories/{username}/{repo_slug}"
+      "url": "/repositories/{workspace}/{repo_slug}"
     },
     "updateBranchingModelSettings": {
       "method": "PUT",
       "params": {
+        "_body": {
+          "schema": "BranchingModelSettings",
+          "type": "any"
+        },
         "repo_slug": {
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "BranchingModelSettings",
-      "url": "/repositories/{username}/{repo_slug}/branching-model/settings"
+      "url": "/repositories/{workspace}/{repo_slug}/branching-model/settings"
     },
     "updateBranchRestriction": {
       "method": "PUT",
@@ -3276,13 +3289,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Branchrestriction",
-      "url": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}"
+      "url": "/repositories/{workspace}/{repo_slug}/branch-restrictions/{id}"
     },
     "updateCommitBuildStatus": {
       "method": "PUT",
@@ -3303,13 +3316,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Commitstatus",
-      "url": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/statuses/build/{key}"
     },
     "updateDeployKey": {
       "method": "PUT",
@@ -3322,13 +3335,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "DeployKey",
-      "url": "/repositories/{username}/{repo_slug}/deploy-keys/{key_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/deploy-keys/{key_id}"
     },
     "updateDeploymentVariable": {
       "method": "PUT",
@@ -3396,13 +3409,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Issue",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}"
     },
     "updateIssueComment": {
       "method": "PUT",
@@ -3424,13 +3437,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "IssueComment",
-      "url": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/comments/{comment_id}"
     },
     "updatePipelineBuildNumber": {
       "method": "PUT",
@@ -3579,13 +3592,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Pullrequest",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}"
     },
     "updatePullRequestComment": {
       "method": "PUT",
@@ -3607,13 +3620,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PullrequestComment",
-      "url": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}"
     },
     "updateWebhook": {
       "method": "PUT",
@@ -3626,13 +3639,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "WebhookSubscription",
-      "url": "/repositories/{username}/{repo_slug}/hooks/{uid}"
+      "url": "/repositories/{workspace}/{repo_slug}/hooks/{uid}"
     }
   },
   "search": {
@@ -3656,12 +3669,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/snippets/{username}/{encoded_id}/watch"
+      "url": "/snippets/{workspace}/{encoded_id}/watch"
     },
     "create": {
       "method": "POST",
@@ -3687,13 +3700,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Snippet",
-      "url": "/snippets/{username}/{encoded_id}/comments"
+      "url": "/snippets/{workspace}/{encoded_id}/comments"
     },
     "createForUser": {
       "method": "POST",
@@ -3703,13 +3716,13 @@
           "schema": "Snippet",
           "type": "any"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Snippet",
-      "url": "/snippets/{username}"
+      "url": "/snippets/{workspace}"
     },
     "delete": {
       "method": "DELETE",
@@ -3718,12 +3731,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/snippets/{username}/{encoded_id}"
+      "url": "/snippets/{workspace}/{encoded_id}"
     },
     "deleteAt": {
       "method": "DELETE",
@@ -3736,12 +3749,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/snippets/{username}/{encoded_id}/{node_id}"
+      "url": "/snippets/{workspace}/{encoded_id}/{node_id}"
     },
     "deleteComment": {
       "method": "DELETE",
@@ -3754,12 +3767,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/snippets/{username}/{encoded_id}/comments/{comment_id}"
+      "url": "/snippets/{workspace}/{encoded_id}/comments/{comment_id}"
     },
     "get": {
       "method": "GET",
@@ -3768,13 +3781,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Snippet",
-      "url": "/snippets/{username}/{encoded_id}"
+      "url": "/snippets/{workspace}/{encoded_id}"
     },
     "getAt": {
       "method": "GET",
@@ -3787,13 +3800,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Snippet",
-      "url": "/snippets/{username}/{encoded_id}/{node_id}"
+      "url": "/snippets/{workspace}/{encoded_id}/{node_id}"
     },
     "getComment": {
       "method": "GET",
@@ -3806,13 +3819,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "SnippetComment",
-      "url": "/snippets/{username}/{encoded_id}/comments/{comment_id}"
+      "url": "/snippets/{workspace}/{encoded_id}/comments/{comment_id}"
     },
     "getCommit": {
       "method": "GET",
@@ -3825,13 +3838,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "SnippetCommit",
-      "url": "/snippets/{username}/{encoded_id}/commits/{revision}"
+      "url": "/snippets/{workspace}/{encoded_id}/commits/{revision}"
     },
     "getDiff": {
       "method": "GET",
@@ -3847,12 +3860,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/snippets/{username}/{encoded_id}/{revision}/diff"
+      "url": "/snippets/{workspace}/{encoded_id}/{revision}/diff"
     },
     "getFile": {
       "method": "GET",
@@ -3869,12 +3882,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/snippets/{username}/{encoded_id}/{node_id}/files/{path}"
+      "url": "/snippets/{workspace}/{encoded_id}/{node_id}/files/{path}"
     },
     "getPatch": {
       "method": "GET",
@@ -3887,12 +3900,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/snippets/{username}/{encoded_id}/{revision}/patch"
+      "url": "/snippets/{workspace}/{encoded_id}/{revision}/patch"
     },
     "getRawFiles": {
       "method": "GET",
@@ -3905,12 +3918,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/snippets/{username}/{encoded_id}/files/{path}"
+      "url": "/snippets/{workspace}/{encoded_id}/files/{path}"
     },
     "list": {
       "method": "GET",
@@ -3934,13 +3947,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedSnippetComments",
-      "url": "/snippets/{username}/{encoded_id}/comments"
+      "url": "/snippets/{workspace}/{encoded_id}/comments"
     },
     "listCommits": {
       "method": "GET",
@@ -3949,13 +3962,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedSnippetCommit",
-      "url": "/snippets/{username}/{encoded_id}/commits"
+      "url": "/snippets/{workspace}/{encoded_id}/commits"
     },
     "listForUser": {
       "method": "GET",
@@ -3968,13 +3981,13 @@
           ],
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedSnippets",
-      "url": "/snippets/{username}"
+      "url": "/snippets/{workspace}"
     },
     "listWatchers": {
       "deprecated": true,
@@ -3984,13 +3997,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedUsers",
-      "url": "/snippets/{username}/{encoded_id}/watchers"
+      "url": "/snippets/{workspace}/{encoded_id}/watchers"
     },
     "startWatch": {
       "method": "PUT",
@@ -3999,12 +4012,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/snippets/{username}/{encoded_id}/watch"
+      "url": "/snippets/{workspace}/{encoded_id}/watch"
     },
     "stopWatch": {
       "method": "DELETE",
@@ -4013,12 +4026,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/snippets/{username}/{encoded_id}/watch"
+      "url": "/snippets/{workspace}/{encoded_id}/watch"
     },
     "update": {
       "accepts": [
@@ -4032,13 +4045,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Snippet",
-      "url": "/snippets/{username}/{encoded_id}"
+      "url": "/snippets/{workspace}/{encoded_id}"
     },
     "updateAt": {
       "accepts": [
@@ -4056,13 +4069,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "Snippet",
-      "url": "/snippets/{username}/{encoded_id}/{node_id}"
+      "url": "/snippets/{workspace}/{encoded_id}/{node_id}"
     },
     "updateComment": {
       "method": "PUT",
@@ -4075,12 +4088,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/snippets/{username}/{encoded_id}/comments/{comment_id}"
+      "url": "/snippets/{workspace}/{encoded_id}/comments/{comment_id}"
     }
   },
   "source": {

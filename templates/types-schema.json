@@ -747,6 +747,21 @@
         }
       ]
     },
+    "DdevReport": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "type": "object"
+        }
+      ],
+      "x-bb-default-fields": [
+        "uuid"
+      ],
+      "x-bb-url": "/rest/internal/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+    },
     "DeployKey": {
       "allOf": [
         {
@@ -4348,6 +4363,21 @@
       ],
       "type": "object"
     },
+    "Report": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "type": "object"
+        }
+      ],
+      "x-bb-default-fields": [
+        "uuid"
+      ],
+      "x-bb-url": "/rest/internal/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+    },
     "Repository": {
       "allOf": [
         {
@@ -4876,6 +4906,21 @@
           "type": "object"
         }
       ]
+    },
+    "StgWestReport": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "type": "object"
+        }
+      ],
+      "x-bb-default-fields": [
+        "uuid"
+      ],
+      "x-bb-url": "/rest/internal/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
     },
     "SubjectTypes": {
       "additionalProperties": false,

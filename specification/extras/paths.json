@@ -1,18 +1,5 @@
 {
-  "/repositories": {
-    "get": {
-      "parameters": [
-        {
-          "enum": ["admin", "contributor", "member", "owner"],
-          "in": "query",
-          "name": "role",
-          "required": false,
-          "type": "string"
-        }
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/branching-model/settings": {
+  "/repositories/{workspace}/{repo_slug}/branching-model/settings": {
     "put": {
       "parameters": [
         {
@@ -26,7 +13,7 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/commits": {
+  "/repositories/{workspace}/{repo_slug}/commits": {
     "get": {
       "parameters": [
         {
@@ -61,7 +48,7 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/commits/{revision}": {
+  "/repositories/{workspace}/{repo_slug}/commits/{revision}": {
     "get": {
       "parameters": [
         {
@@ -95,7 +82,7 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/deploy-keys": {
+  "/repositories/{workspace}/{repo_slug}/deploy-keys": {
     "post": {
       "parameters": [
         {
@@ -113,7 +100,7 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/downloads": {
+  "/repositories/{workspace}/{repo_slug}/downloads": {
     "post": {
       "consumes": ["multipart/form-data"],
       "parameters": [
@@ -125,18 +112,7 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/environments/{environment_uuid}/changes/": {
-    "post": {
-      "parameters": [
-        {
-          "in": "body",
-          "name": "_body",
-          "required": true
-        }
-      ]
-    }
-  },
-  "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}": {
+  "/repositories/{workspace}/{repo_slug}/filehistory/{node}/{path}": {
     "get": {
       "parameters": [
         {
@@ -148,7 +124,7 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/hooks": {
+  "/repositories/{workspace}/{repo_slug}/hooks": {
     "post": {
       "parameters": [
         {
@@ -159,7 +135,7 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/issues/{issue_id}": {
+  "/repositories/{workspace}/{repo_slug}/issues/{issue_id}": {
     "put": {
       "parameters": [
         {
@@ -173,7 +149,7 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments": {
+  "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/attachments": {
     "post": {
       "consumes": ["multipart/form-data"],
       "parameters": [
@@ -185,7 +161,7 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/pullrequests/activity": {
+  "/repositories/{workspace}/{repo_slug}/pullrequests/activity": {
     "get": {
       "parameters": [
         {
@@ -196,7 +172,7 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/refs/branches": {
+  "/repositories/{workspace}/{repo_slug}/refs/branches": {
     "post": {
       "parameters": [
         {
@@ -207,7 +183,7 @@
       ]
     }
   },
-  "/repositories/{username}/{repo_slug}/src": {
+  "/repositories/{workspace}/{repo_slug}/src": {
     "post": {
       "consumes": ["multipart/form-data", "application/x-www-form-urlencoded"],
       "parameters": [
@@ -255,7 +231,7 @@
       ]
     }
   },
-  "/snippets/{username}/{encoded_id}/watch": {
+  "/snippets/{workspace}/{encoded_id}/watch": {
     "delete": {
       "responses": {
         "204": {
