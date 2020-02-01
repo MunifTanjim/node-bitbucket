@@ -1,6 +1,6 @@
-[![version:@next](https://img.shields.io/npm/v/bitbucket/next.svg?style=for-the-badge)](https://www.npmjs.com/package/bitbucket/v/next)
-[![Documentation](https://img.shields.io/badge/docs-bitbucket.js-blue.svg?style=for-the-badge)](https://next--bitbucketjs.netlify.com)
-[![License](https://img.shields.io/github/license/MunifTanjim/node-bitbucket.svg?style=for-the-badge)](https://github.com/MunifTanjim/node-bitbucket/blob/next/LICENSE)
+[![version:@latest](https://img.shields.io/npm/v/bitbucket.svg?style=for-the-badge)](https://www.npmjs.com/package/bitbucket)
+[![Documentation](https://img.shields.io/badge/docs-bitbucket.js-blue.svg?style=for-the-badge)](https://bitbucketjs.netlify.com)
+[![License](https://img.shields.io/github/license/MunifTanjim/node-bitbucket.svg?style=for-the-badge)](https://github.com/MunifTanjim/node-bitbucket/blob/master/LICENSE)
 
 # Bitbucket.js
 
@@ -23,13 +23,13 @@ Bitbucket API docs: [https://api.bitbucket.org](https://api.bitbucket.org)
 via **npm**:
 
 ```sh
-$ npm install --save bitbucket@next
+$ npm install --save bitbucket
 ```
 
 via **yarn**:
 
 ```sh
-$ yarn add bitbucket@next
+$ yarn add bitbucket
 ```
 
 ## Usage
@@ -37,7 +37,7 @@ $ yarn add bitbucket@next
 ### Browser
 
 ```html
-<script src="https://unpkg.com/bitbucket@next/lib/index.umd.js"></script>
+<script src="https://unpkg.com/bitbucket/lib/index.umd.js"></script>
 <script>
   const bitbucket = new Bitbucket()
 </script>
