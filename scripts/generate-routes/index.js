@@ -59,6 +59,7 @@ function initializeRoutes(routesObject) {
 
 function populateRoutes(routesObject) {
   const usernameRegex = /\/\{username\}\//
+  const workspaceRegex = /\/\{workspace\}\//
 
   for (const [url, methods] of Object.entries(ENDPOINT_NAMES)) {
     //   if spec for  */{username}/* path does not exist
@@ -69,6 +70,8 @@ function populateRoutes(routesObject) {
       url,
       usernameRegex.test(url)
         ? get(PATHS_SPEC, url.replace(usernameRegex, '/{workspace}/'))
+        : workspaceRegex.test(url)
+        ? get(PATHS_SPEC, url.replace(workspaceRegex, '/{username}/'))
         : null
     )
 
@@ -77,6 +80,8 @@ function populateRoutes(routesObject) {
       url,
       usernameRegex.test(url)
         ? get(PATHS_SPEC_EXTRAS, url.replace(usernameRegex, '/{workspace}/'))
+        : workspaceRegex.test(url)
+        ? get(PATHS_SPEC_EXTRAS, url.replace(workspaceRegex, '/{username}/'))
         : null
     )
 
