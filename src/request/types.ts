@@ -1,16 +1,17 @@
 import {
   Endpoint,
-  EndpointDefaults,
   EndpointOptions,
   EndpointParams,
   Headers
 } from '../endpoint/types'
 
-export type Endpoint = Endpoint
-export type EndpointDefaults = EndpointDefaults
-export type EndpointOptions = EndpointOptions
-export type EndpointParams = EndpointParams
-export type Headers = Headers
+export {
+  Endpoint,
+  EndpointDefaults,
+  EndpointOptions,
+  EndpointParams,
+  Headers
+} from '../endpoint/types'
 
 export interface Response<T> {
   data: T

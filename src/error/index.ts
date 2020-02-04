@@ -1,10 +1,12 @@
 type Headers = import('./types').Headers
 type RequestOptions = import('./types').RequestOptions
 
-export class HTTPError extends Error {
-  public error?: any
-  public headers?: Headers
-  public request?: RequestOptions
+type AbstractHTTPError = import('./types').HTTPError
+
+export class HTTPError extends Error implements AbstractHTTPError {
+  public error: any | undefined
+  public headers: Headers | undefined
+  public request: RequestOptions | undefined
   public status: number
 
   public constructor(
