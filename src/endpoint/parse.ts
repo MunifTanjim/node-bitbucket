@@ -70,6 +70,10 @@ export function parse(endpointOptions: EndpointDefaults): RequestOptions {
     }
   }
 
+  if (typeof body === 'undefined') {
+    delete headers['content-type']
+  }
+
   return {
     method,
     url,
