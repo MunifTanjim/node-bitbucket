@@ -1,2 +1,4 @@
-export { APIClient } from '../../client/types'
-export { EndpointParams } from '../../endpoint/types'
+import type { APIClient } from '../../client/types'
+import type { EndpointParams } from '../../endpoint/types'
+
+export type { APIClient, EndpointParams }

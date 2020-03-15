@@ -1,5 +1,10 @@
-export { Options } from '../../client/types'
-export { RequestOptions } from '../../endpoint/types'
+import { Options } from '../../client/types'
+import { RequestOptions } from '../../endpoint/types'
+
+export type {
+  Options,
+  RequestOptions
+}
 
 export type APIClient = import('../../client/types').APIClient
 

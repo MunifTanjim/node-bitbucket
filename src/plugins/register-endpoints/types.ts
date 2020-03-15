@@ -1,5 +1,12 @@
-export { APIClient, Options } from '../../client/types'
-export { EndpointDefaults, RequestOptions } from '../../endpoint/types'
+import type { APIClient, Options } from '../../client/types'
+import type { EndpointDefaults, RequestOptions } from '../../endpoint/types'
+
+export type {
+  APIClient,
+  Options,
+  EndpointDefaults,
+  RequestOptions
+}
 
 export type Headers = import('../../endpoint/types').Headers
 export type RequestMethod = import('../../endpoint/types').RequestMethod
