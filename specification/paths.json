@@ -1946,6 +1946,522 @@
       ]
     }
   },
+  "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports": {
+    "get": {
+      "description": "Returns a paginated list of Reports linked to this commit.",
+      "operationId": "getReportsForCommit",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The commit for which to retrieve reports.",
+          "in": "path",
+          "name": "commit",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/paginated_reports"
+          }
+        }
+      },
+      "tags": [
+        "reports",
+        "commits"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}": {
+    "delete": {
+      "description": "Deletes a single Report matching the provided ID.",
+      "operationId": "deleteReport",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The commit the report belongs to.",
+          "in": "path",
+          "name": "commit",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Either the uuid or external-id of the report.",
+          "in": "path",
+          "name": "reportId",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "204": {
+          "description": "No content"
+        }
+      },
+      "tags": [
+        "reports",
+        "commits"
+      ]
+    },
+    "get": {
+      "description": "Returns a single Report matching the provided ID.",
+      "operationId": "getReport",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The commit the report belongs to.",
+          "in": "path",
+          "name": "commit",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Either the uuid or external-id of the report.",
+          "in": "path",
+          "name": "reportId",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/report"
+          }
+        },
+        "404": {
+          "description": "The report with the given ID was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "reports",
+        "commits"
+      ]
+    },
+    "put": {
+      "description": "Creates or updates a report for the specified commit.",
+      "operationId": "createOrUpdateReport",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The commit the report belongs to.",
+          "in": "path",
+          "name": "commit",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Either the uuid or external-id of the report.",
+          "in": "path",
+          "name": "reportId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The report to create or update",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/report"
+          }
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/report"
+          }
+        },
+        "400": {
+          "description": "The provided Report object is malformed or incomplete.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "reports",
+        "commits"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations": {
+    "get": {
+      "description": "Returns a paginated list of Annotations for a specified report.",
+      "operationId": "getAnnotationsForReport",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The commit for which to retrieve reports.",
+          "in": "path",
+          "name": "commit",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Uuid or external-if of the report for which to get annotations for.",
+          "in": "path",
+          "name": "reportId",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/paginated_annotations"
+          }
+        }
+      },
+      "tags": [
+        "reports",
+        "commits"
+      ]
+    },
+    "post": {
+      "description": "Bulk upload of annotations.",
+      "operationId": "bulkCreateOrUpdateAnnotations",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The commit for which to retrieve reports.",
+          "in": "path",
+          "name": "commit",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Uuid or external-if of the report for which to get annotations for.",
+          "in": "path",
+          "name": "reportId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The annotations to create or update",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "items": {
+              "$ref": "#/definitions/report_annotation"
+            },
+            "maxItems": 100,
+            "minItems": 1,
+            "type": "array"
+          }
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "items": {
+              "$ref": "#/definitions/report_annotation"
+            },
+            "type": "array"
+          }
+        }
+      },
+      "tags": [
+        "reports",
+        "commits"
+      ]
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations/{annotationId}": {
+    "delete": {
+      "description": "Deletes a single Annotation matching the provided ID.",
+      "operationId": "deleteAnnotation",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The commit the annotation belongs to.",
+          "in": "path",
+          "name": "commit",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Either the uuid or external-id of the annotation.",
+          "in": "path",
+          "name": "reportId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Either the uuid or external-id of the annotation.",
+          "in": "path",
+          "name": "annotationId",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "204": {
+          "description": "No content"
+        }
+      },
+      "tags": [
+        "reports",
+        "commits"
+      ]
+    },
+    "get": {
+      "description": "Returns a single Annotation matching the provided ID.",
+      "operationId": "getAnnotation",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The commit the report belongs to.",
+          "in": "path",
+          "name": "commit",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Either the uuid or external-id of the report.",
+          "in": "path",
+          "name": "reportId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Either the uuid or external-id of the annotation.",
+          "in": "path",
+          "name": "annotationId",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/report_annotation"
+          }
+        },
+        "404": {
+          "description": "The annotation with the given ID was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "reports",
+        "commits"
+      ]
+    },
+    "put": {
+      "description": "Creates or updates an annotation for the specified report.",
+      "operationId": "createOrUpdateAnnotation",
+      "parameters": [
+        {
+          "description": "The account.",
+          "in": "path",
+          "name": "username",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The repository.",
+          "in": "path",
+          "name": "repo_slug",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The commit the report belongs to.",
+          "in": "path",
+          "name": "commit",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Either the uuid or external-id of the report.",
+          "in": "path",
+          "name": "reportId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Either the uuid or external-id of the annotation.",
+          "in": "path",
+          "name": "annotationId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The annotation to create or update",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/report_annotation"
+          }
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/report_annotation"
+          }
+        },
+        "400": {
+          "description": "The provided Annotation object is malformed or incomplete.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": [
+        "reports",
+        "commits"
+      ]
+    }
+  },
   "/repositories/{workspace}/{repo_slug}/commit/{node}": {
     "get": {
       "description": "Returns the specified commit.\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/commit/f7591a1\n{\n    \"rendered\": {\n        \"message\": {\n        \"raw\": \"Add a GEORDI_OUTPUT_DIR setting\",\n        \"markup\": \"markdown\",\n        \"html\": \"<p>Add a GEORDI_OUTPUT_DIR setting</p>\",\n        \"type\": \"rendered\"\n        }\n    },\n    \"hash\": \"f7591a13eda445d9a9167f98eb870319f4b6c2d8\",\n    \"repository\": {\n        \"name\": \"geordi\",\n        \"type\": \"repository\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"links\": {\n            \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi\"\n            },\n            \"html\": {\n                \"href\": \"https://bitbucket.org/bitbucket/geordi\"\n            },\n            \"avatar\": {\n                \"href\": \"https://bytebucket.org/ravatar/%7B85d08b4e-571d-44e9-a507-fa476535aa98%7D?ts=1730260\"\n            }\n        },\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n    },\n    \"links\": {\n        \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/commit/f7591a13eda445d9a9167f98eb870319f4b6c2d8\"\n        },\n        \"comments\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/commit/f7591a13eda445d9a9167f98eb870319f4b6c2d8/comments\"\n        },\n        \"patch\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/patch/f7591a13eda445d9a9167f98eb870319f4b6c2d8\"\n        },\n        \"html\": {\n            \"href\": \"https://bitbucket.org/bitbucket/geordi/commits/f7591a13eda445d9a9167f98eb870319f4b6c2d8\"\n        },\n        \"diff\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/diff/f7591a13eda445d9a9167f98eb870319f4b6c2d8\"\n        },\n        \"approve\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/commit/f7591a13eda445d9a9167f98eb870319f4b6c2d8/approve\"\n        },\n        \"statuses\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/commit/f7591a13eda445d9a9167f98eb870319f4b6c2d8/statuses\"\n        }\n    },\n    \"author\": {\n        \"raw\": \"Brodie Rao <a@b.c>\",\n        \"type\": \"author\",\n        \"user\": {\n            \"display_name\": \"Brodie Rao\",\n            \"uuid\": \"{9484702e-c663-4afd-aefb-c93a8cd31c28}\",\n            \"links\": {\n                \"self\": {\n                    \"href\": \"https://api.bitbucket.org/2.0/users/%7B9484702e-c663-4afd-aefb-c93a8cd31c28%7D\"\n                },\n                \"html\": {\n                    \"href\": \"https://bitbucket.org/%7B9484702e-c663-4afd-aefb-c93a8cd31c28%7D/\"\n                },\n                \"avatar\": {\n                    \"href\": \"https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/557058:3aae1e05-702a-41e5-81c8-f36f29afb6ca/613070db-28b0-421f-8dba-ae8a87e2a5c7/128\"\n                }\n            },\n            \"type\": \"user\",\n            \"nickname\": \"brodie\",\n            \"account_id\": \"557058:3aae1e05-702a-41e5-81c8-f36f29afb6ca\"\n        }\n    },\n    \"summary\": {\n        \"raw\": \"Add a GEORDI_OUTPUT_DIR setting\",\n        \"markup\": \"markdown\",\n        \"html\": \"<p>Add a GEORDI_OUTPUT_DIR setting</p>\",\n        \"type\": \"rendered\"\n    },\n    \"participants\": [],\n    \"parents\": [\n        {\n            \"type\": \"commit\",\n            \"hash\": \"f06941fec4ef6bcb0c2456927a0cf258fa4f899b\",\n            \"links\": {\n                \"self\": {\n                    \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/commit/f06941fec4ef6bcb0c2456927a0cf258fa4f899b\"\n                },\n                \"html\": {\n                    \"href\": \"https://bitbucket.org/bitbucket/geordi/commits/f06941fec4ef6bcb0c2456927a0cf258fa4f899b\"\n                }\n            }\n        }\n    ],\n    \"date\": \"2012-07-16T19:37:54+00:00\",\n    \"message\": \"Add a GEORDI_OUTPUT_DIR setting\",\n    \"type\": \"commit\"\n}\n```",
@@ -3596,7 +4112,7 @@
   },
   "/repositories/{workspace}/{repo_slug}/diffstat/{spec}": {
     "get": {
-      "description": "Returns the diff stat for the specified commit.\n\nDiff stat responses contain a record for every path modified by the\ncommit and lists the number of lines added and removed for each file.\n\n\nExample:\n```\ncurl https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/diffstat/d222fa2..e174964\n{\n    \"pagelen\": 500,\n    \"values\": [\n        {\n            \"type\": \"diffstat\",\n            \"status\": \"modified\",\n            \"lines_removed\": 1,\n            \"lines_added\": 2,\n            \"old\": {\n                \"path\": \"setup.py\",\n                \"type\": \"commit_file\",\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/src/e1749643d655d7c7014001a6c0f58abaf42ad850/setup.py\"\n                    }\n                }\n            },\n            \"new\": {\n                \"path\": \"setup.py\",\n                \"type\": \"commit_file\",\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/src/d222fa235229c55dad20b190b0b571adf737d5a6/setup.py\"\n                    }\n                }\n            }\n        }\n    ],\n    \"page\": 1,\n    \"size\": 1\n}\n```",
+      "description": "Returns the diff stat for the specified commit.\n\nDiff stat responses contain a record for every path modified by the\ncommit and lists the number of lines added and removed for each file.\n\n\nExample:\n```\ncurl https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/diffstat/d222fa2..e174964\n{\n    \"pagelen\": 500,\n    \"values\": [\n        {\n            \"type\": \"diffstat\",\n            \"status\": \"modified\",\n            \"lines_removed\": 1,\n            \"lines_added\": 2,\n            \"old\": {\n                \"path\": \"setup.py\",\n                \"escaped_path\": \"setup.py\",\n                \"type\": \"commit_file\",\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/src/e1749643d655d7c7014001a6c0f58abaf42ad850/setup.py\"\n                    }\n                }\n            },\n            \"new\": {\n                \"path\": \"setup.py\",\n                \"escaped_path\": \"setup.py\",\n                \"type\": \"commit_file\",\n                \"links\": {\n                    \"self\": {\n                        \"href\": \"https://api.bitbucket.org/2.0/repositories/bitbucket/geordi/src/d222fa235229c55dad20b190b0b571adf737d5a6/setup.py\"\n                    }\n                }\n            }\n        }\n    ],\n    \"page\": 1,\n    \"size\": 1\n}\n```",
       "parameters": [],
       "responses": {
         "200": {
@@ -7351,7 +7867,7 @@
       ]
     },
     "post": {
-      "description": "Endpoint to create and initiate a pipeline. \nThere are a couple of different options to initiate a pipeline, where the payload of the request will determine which type of pipeline will be instantiated.\n# Trigger a Pipeline for a branch\nOne way to trigger pipelines is by specifying the branch for which you want to trigger a pipeline. \nThe specified branch will be used to determine which pipeline definition from the `bitbucket-pipelines.yml` file will be applied to initiate the pipeline. The pipeline will then do a clone of the repository and checkout the latest revision of the specified branch.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n  -d '\n  {\n    \"target\": {\n      \"ref_type\": \"branch\", \n      \"type\": \"pipeline_ref_target\", \n      \"ref_name\": \"master\"\n    }\n  }'\n```\n# Trigger a Pipeline for a commit on a branch or tag\nYou can initiate a pipeline for a specific commit and in the context of a specified reference (e.g. a branch, tag or bookmark).\nThe specified reference will be used to determine which pipeline definition from the bitbucket-pipelines.yml file will be applied to initiate the pipeline. The pipeline will clone the repository and then do a checkout the specified reference. \n\nThe following reference types are supported:\n\n* `branch` \n* `named_branch`\n* `bookmark` \n * `tag`\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n  https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n  -d '\n  {\n    \"target\": {\n      \"commit\": {\n        \"type\": \"commit\", \n        \"hash\": \"ce5b7431602f7cbba007062eeb55225c6e18e956\"\n      }, \n      \"ref_type\": \"branch\", \n      \"type\": \"pipeline_ref_target\", \n      \"ref_name\": \"master\"\n    }\n  }'\n```\n# Trigger a specific pipeline definition for a commit\nYou can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit. \nIn addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition. The resulting pipeline will then clone the repository and checkout the specified revision.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n -d '\n  {\n     \"target\": {\n      \"commit\": {\n         \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",\n         \"type\":\"commit\"\n       },\n        \"selector\": {\n           \"type\":\"custom\",\n              \"pattern\":\"Deploy to production\"\n          },\n        \"type\":\"pipeline_commit_target\"\n   }\n  }'\n```\n# Trigger a specific pipeline definition for a commit on a branch or tag\nYou can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit in the context of a specified reference. \nIn addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition, as well as the reference information. The resulting pipeline will then clone the repository a checkout the specified reference.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n -d '\n  {\n     \"target\": {\n      \"commit\": {\n         \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",\n         \"type\":\"commit\"\n       },\n       \"selector\": {\n          \"type\": \"custom\",\n          \"pattern\": \"Deploy to production\"\n       },\n       \"type\": \"pipeline_ref_target\",\n       \"ref_name\": \"master\",\n       \"ref_type\": \"branch\"\n     }\n  }'\n```\n\n\n# Trigger a custom pipeline with variables\nIn addition to triggering a custom pipeline that is defined in your `bitbucket-pipelines.yml` file as shown in the examples above, you can specify variables that will be available for your build. In the request, provide a list of variables, specifying the following for each variable: key, value, and whether it should be secured or not (this field is optional and defaults to not secured).\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\\n -d '\n  {\n    \"target\": {\n      \"type\": \"pipeline_ref_target\",\n      \"ref_type\": \"branch\",\n      \"ref_name\": \"master\",\n      \"selector\": {\n        \"type\": \"custom\",\n        \"pattern\": \"Deploy to production\"\n      }\n    },\n    \"variables\": [\n      {\n        \"key\": \"var1key\",\n        \"value\": \"var1value\",\n        \"secured\": true\n      },\n      {\n        \"key\": \"var2key\",\n        \"value\": \"var2value\"\n      }\n    ]\n  }'\n```\n",
+      "description": "Endpoint to create and initiate a pipeline.\nThere are a couple of different options to initiate a pipeline, where the payload of the request will determine which type of pipeline will be instantiated.\n# Trigger a Pipeline for a branch\nOne way to trigger pipelines is by specifying the branch for which you want to trigger a pipeline.\nThe specified branch will be used to determine which pipeline definition from the `bitbucket-pipelines.yml` file will be applied to initiate the pipeline. The pipeline will then do a clone of the repository and checkout the latest revision of the specified branch.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n  -d '\n  {\n    \"target\": {\n      \"ref_type\": \"branch\",\n      \"type\": \"pipeline_ref_target\",\n      \"ref_name\": \"master\"\n    }\n  }'\n```\n# Trigger a Pipeline for a commit on a branch or tag\nYou can initiate a pipeline for a specific commit and in the context of a specified reference (e.g. a branch, tag or bookmark).\nThe specified reference will be used to determine which pipeline definition from the bitbucket-pipelines.yml file will be applied to initiate the pipeline. The pipeline will clone the repository and then do a checkout the specified reference.\n\nThe following reference types are supported:\n\n* `branch`\n* `named_branch`\n* `bookmark`\n * `tag`\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n  https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n  -d '\n  {\n    \"target\": {\n      \"commit\": {\n        \"type\": \"commit\",\n        \"hash\": \"ce5b7431602f7cbba007062eeb55225c6e18e956\"\n      },\n      \"ref_type\": \"branch\",\n      \"type\": \"pipeline_ref_target\",\n      \"ref_name\": \"master\"\n    }\n  }'\n```\n# Trigger a specific pipeline definition for a commit\nYou can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit.\nIn addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition. The resulting pipeline will then clone the repository and checkout the specified revision.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n -d '\n  {\n     \"target\": {\n      \"commit\": {\n         \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",\n         \"type\":\"commit\"\n       },\n        \"selector\": {\n           \"type\":\"custom\",\n              \"pattern\":\"Deploy to production\"\n          },\n        \"type\":\"pipeline_commit_target\"\n   }\n  }'\n```\n# Trigger a specific pipeline definition for a commit on a branch or tag\nYou can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit in the context of a specified reference.\nIn addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition, as well as the reference information. The resulting pipeline will then clone the repository a checkout the specified reference.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n -d '\n  {\n     \"target\": {\n      \"commit\": {\n         \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",\n         \"type\":\"commit\"\n       },\n       \"selector\": {\n          \"type\": \"custom\",\n          \"pattern\": \"Deploy to production\"\n       },\n       \"type\": \"pipeline_ref_target\",\n       \"ref_name\": \"master\",\n       \"ref_type\": \"branch\"\n     }\n  }'\n```\n\n\n# Trigger a custom pipeline with variables\nIn addition to triggering a custom pipeline that is defined in your `bitbucket-pipelines.yml` file as shown in the examples above, you can specify variables that will be available for your build. In the request, provide a list of variables, specifying the following for each variable: key, value, and whether it should be secured or not (this field is optional and defaults to not secured).\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\\n -d '\n  {\n    \"target\": {\n      \"type\": \"pipeline_ref_target\",\n      \"ref_type\": \"branch\",\n      \"ref_name\": \"master\",\n      \"selector\": {\n        \"type\": \"custom\",\n        \"pattern\": \"Deploy to production\"\n      }\n    },\n    \"variables\": [\n      {\n        \"key\": \"var1key\",\n        \"value\": \"var1value\",\n        \"secured\": true\n      },\n      {\n        \"key\": \"var2key\",\n        \"value\": \"var2value\"\n      }\n    ]\n  }'\n```\n\n# Trigger a pull request pipeline\n\nYou can also initiate a pipeline for a specific pull request.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\\n -d '\n  {\n\t\"target\": {\n      \"type\": \"pipeline_pullrequest_target\",\n\t  \"source\": \"pull-request-branch\",\n      \"destination\": \"master\",\n      \"destination_commit\": {\n      \t \"hash\" : \"9f848b7\"\n      },\n      \"commit\": {\n      \t\"hash\" : \"1a372fc\"\n      },\n      \"pullrequest\" : {\n      \t\"id\" : \"3\"\n      },\n\t  \"selector\": {\n        \"type\": \"pull-requests\",\n        \"pattern\": \"**\"\n      }\n    }\n  }'\n```\n",
       "operationId": "createPipelineForRepository",
       "parameters": [
         {
@@ -9324,6 +9840,9 @@
             "$ref": "#/definitions/pullrequest"
           }
         },
+        "202": {
+          "description": "In the Location header, the URL to poll for the pull request merge status"
+        },
         "555": {
           "description": "If the merge took too long and timed out.\nIn this case the caller should retry the request later",
           "schema": {
@@ -9348,6 +9867,59 @@
         "pullrequests"
       ]
     }
+  },
+  "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/merge/task-status/{task_id}": {
+    "get": {
+      "description": "",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The task status and self link, and if merge complete, a pull request"
+        }
+      },
+      "security": [
+        {
+          "oauth2": []
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "pullrequests"
+      ]
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "pull_request_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "in": "path",
+        "name": "task_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ]
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/patch": {
     "get": {
@@ -10499,13 +11071,6 @@
           "type": "string"
         },
         {
-          "description": "\nThe name of the branch that the new commit should be\ncreated on. When omitted, the commit will be created on top\nof the main branch and will become the main branch's new\nHEAD/tip.\n\nWhen a branch name is provided that already exists in the\nrepo, then the commit will be created on top of that\nbranch. In this case, if a parent SHA1 was also provided,\nthen it is asserted that the parent is the branch's\ntip/HEAD at the time the request is made. When this is not\nthe case, a 409 is returned.\n\nThis API cannot be used to create new anonymous heads in\nMercurial repos.\n\nWhen a new branch name is specified (that does not already\nexist in the repo), and no parent SHA1s are provided, then\nthe new commit will inherit from the current main branch's\ntip/HEAD commit, but not advance the main branch. The new\ncommit will be the new branch. When the request also\nspecifies a parent SHA1, then the new commit and branch\nare created directly on top of the parent commit,\nregardless of the state of the main branch.\n\nWhen a branch name is not specified, but a parent SHA1 is\nprovided, then Bitbucket asserts that it represents the\nmain branch's current HEAD/tip, or a 409 is returned.\n\nWhen a branch name is not specified and the repo is empty,\nthe new commit will become the repo's root commit and will\nbe on the main branch.\n\nWhen a branch name is specified and the repo is empty, the\nnew commit will become the repo's root commit and also\ndefine the repo's main branch going forward.\n\nThis API cannot be used to create additional root commits\nin non-empty repos.\n\nThe branch field cannot be repeated.\n\nAs a side effect, this API can be used to create a new\nbranch without modifying any files, by specifying a new\nbranch name in this field, together with parents, but\nomitting the files fields, while not sending any files.\nThis will create a new commit and branch with the same\ncontents as the first parent. The diff of this commit\nagainst its first parent will be empty.\n",
-          "in": "query",
-          "name": "files",
-          "required": false,
-          "type": "string"
-        },
-        {
           "description": "\nThe name of the branch that the new commit should be\ncreated on. When omitted, the commit will be created on top\nof the main branch and will become the main branch's new\nhead.\n\nWhen a branch name is provided that already exists in the\nrepo, then the commit will be created on top of that\nbranch. In this case, *if* a parent SHA1 was also provided,\nthen it is asserted that the parent is the branch's\ntip/HEAD at the time the request is made. When this is not\nthe case, a 409 is returned.\n\nThis API cannot be used to create new anonymous heads in\nMercurial repositories.\n\nWhen a new branch name is specified (that does not already\nexist in the repo), and no parent SHA1s are provided, then\nthe new commit will inherit from the current main branch's\ntip/HEAD commit, but not advance the main branch. The new\ncommit will be the new branch. When the request *also*\nspecifies a parent SHA1, then the new commit and branch\nare created directly on top of the parent commit,\nregardless of the state of the main branch.\n\nWhen a branch name is not specified, but a parent SHA1 is\nprovided, then Bitbucket asserts that it represents the\nmain branch's current HEAD/tip, or a 409 is returned.\n\nWhen a branch name is not specified and the repo is empty,\nthe new commit will become the repo's root commit and will\nbe on the main branch.\n\nWhen a branch name is specified and the repo is empty, the\nnew commit will become the repo's root commit and also\ndefine the repo's main branch going forward.\n\nThis API cannot be used to create additional root commits\nin non-empty repos.\n\nThe branch field cannot be repeated.\n\nAs a side effect, this API can be used to create a new\nbranch without modifying any files, by specifying a new\nbranch name in this field, together with `parents`, but\nomitting the `files` fields, while not sending any files.\nThis will create a new commit and branch with the same\ncontents as the first parent. The diff of this commit\nagainst its first parent will be empty.\n",
           "in": "query",
           "name": "branch",
@@ -10514,7 +11079,7 @@
         }
       ],
       "responses": {
-        "200": {
+        "201": {
           "description": "\n"
         },
         "404": {
@@ -13584,7 +14149,7 @@
           }
         },
         "400": {
-          "description": "If the search request was invalid due to one of the following reasons:\n* the specified type of target account doesn't match the actual account type;\n* malformed pagination properties;\n* missing or malformed search query, in the latter case an error key will be returned in `error.data.key` property.",
+          "description": "If the search request was invalid due to one of the\nfollowing reasons:\n\n* the specified type of target account doesn''t match the actual\naccount type;\n\n* malformed pagination properties;\n\n* missing or malformed search query, in the latter case an error\nkey will be returned in `error.data.key` property.\n",
           "schema": {
             "$ref": "#/definitions/error"
           }
@@ -13602,7 +14167,7 @@
           }
         }
       },
-      "summary": "Search for code in the repositories of the specified team",
+      "summary": "Search for code in the repositories of the specified team.\n\nSearching across all repositories:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code?search_query=foo'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 2,\n      \"content_matches\": [\n        {\n          \"lines\": [\n            {\n              \"line\": 2,\n              \"segments\": []\n            },\n            {\n              \"line\": 3,\n              \"segments\": [\n                {\n                  \"text\": \"def \"\n                },\n                {\n                  \"text\": \"foo\",\n                  \"match\": true\n                },\n                {\n                  \"text\": \"():\"\n                }\n              ]\n            },\n            {\n              \"line\": 4,\n              \"segments\": [\n                {\n                  \"text\": \"    print(\\\"snek\\\")\"\n                }\n              ]\n            },\n            {\n              \"line\": 5,\n              \"segments\": []\n            }\n          ]\n        }\n      ],\n      \"path_matches\": [\n        {\n          \"text\": \"src/\"\n        },\n        {\n          \"text\": \"foo\",\n          \"match\": true\n        },\n        {\n          \"text\": \".py\"\n        }\n      ],\n      \"file\": {\n        \"path\": \"src/foo.py\",\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        }\n      }\n    }\n  ]\n}\n```\n\nNote that searches can match in the file's text (`content_matches`),\nthe path (`path_matches`), or both as in the example above.\n\nYou can use the same syntax for the search query as in the UI, e.g.\nto only search within a specific repository:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code?search_query=foo+repo:demo'\n# results from the \"demo\" repository\n```\n\nSimilar to other APIs, you can request more fields using a\n`fields` query parameter. E.g. to get some more information about\nthe repository of matched files (the `%2B` is a URL-encoded `+`):\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code'\\\n     '?search_query=foo&fields=%2Bvalues.file.commit.repository'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 1,\n      \"content_matches\": [...],\n      \"path_matches\": [...],\n      \"file\": {\n        \"commit\": {\n          \"type\": \"commit\",\n          \"hash\": \"ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/commit/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/my-workspace/demo/commits/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            }\n          },\n          \"repository\": {\n            \"name\": \"demo\",\n            \"type\": \"repository\",\n            \"full_name\": \"my-workspace/demo\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/my-workspace/demo\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bytebucket.org/ravatar/%7B850e1749-781a-4115-9316-df39d0600e7a%7D?ts=default\"\n              }\n            },\n            \"uuid\": \"{850e1749-781a-4115-9316-df39d0600e7a}\"\n          }\n        },\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        },\n        \"path\": \"src/foo.py\"\n      }\n    }\n  ]\n}\n```\n\nTry `fields=%2Bvalues.*.*.*.*` to get an idea what's possible.\n",
       "tags": [
         "search"
       ]
@@ -13839,6 +14404,43 @@
         }
       ],
       "tags": []
+    },
+    "parameters": []
+  },
+  "/user/permissions/workspaces": {
+    "get": {
+      "description": "Returns an object for each workspace the caller is a member of, and\ntheir effective role - the highest level of privilege the caller has.\nIf a user is a member of multiple groups with distinct roles, only the\nhighest level is returned.\n\nPermissions can be:\n\n* `owner`\n* `collaborator`\n* `member`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/user/permissions/workspaces\n\n{\n  \"pagelen\": 10,\n  \"page\": 1,\n  \"size\": 1,\n  \"values\": [\n    {\n      \"type\": \"workspace_membership\",\n      \"permission\": \"owner\",\n      \"last_accessed\": \"2019-03-07T12:35:02.900024+00:00\",\n      \"added_on\": \"2018-10-11T17:42:02.961424+00:00\",\n\n      \"user\": {\n        \"type\": \"user\",\n        \"uuid\": \"{470c176d-3574-44ea-bb41-89e8638bcca4}\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n      },\n\n      \"workspace\": {\n        \"type\": \"workspace\",\n        \"uuid\": \"{a15fb181-db1f-48f7-b41f-e1eff06929d6}\",\n        \"slug\": \"bitbucket\",\n        \"name\": \"Atlassian Bitbucket\",\n      }\n    }\n  ]\n}\n```\n\nResults may be further [filtered or sorted](../../../meta/filtering) by\nworkspace or permission by adding the following query string parameters:\n\n* `q=workspace.slug=\"bitbucket\"` or `q=permission=\"owner\"`\n* `sort=workspace.slug`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "All of the workspace memberships for a user.",
+          "schema": {
+            "$ref": "#/definitions/paginated_workspace_memberships"
+          }
+        },
+        "401": {
+          "description": "The request wasn't authenticated.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "account"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "workspaces"
+      ]
     },
     "parameters": []
   },
@@ -14729,7 +15331,7 @@
           }
         },
         "400": {
-          "description": "If the search request was invalid due to one of the following reasons:\n* the specified type of target account doesn't match the actual account type;\n* malformed pagination properties;\n* missing or malformed search query, in the latter case an error key will be returned in `error.data.key` property.",
+          "description": "If the search request was invalid due to one of the\nfollowing reasons:\n\n* the specified type of target account doesn''t match the actual\naccount type;\n\n* malformed pagination properties;\n\n* missing or malformed search query, in the latter case an error\nkey will be returned in `error.data.key` property.\n",
           "schema": {
             "$ref": "#/definitions/error"
           }
@@ -14747,7 +15349,7 @@
           }
         }
       },
-      "summary": "Search for code in the repositories of the specified user",
+      "summary": "Search for code in the repositories of the specified user.\n\nSearching across all repositories:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code?search_query=foo'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 2,\n      \"content_matches\": [\n        {\n          \"lines\": [\n            {\n              \"line\": 2,\n              \"segments\": []\n            },\n            {\n              \"line\": 3,\n              \"segments\": [\n                {\n                  \"text\": \"def \"\n                },\n                {\n                  \"text\": \"foo\",\n                  \"match\": true\n                },\n                {\n                  \"text\": \"():\"\n                }\n              ]\n            },\n            {\n              \"line\": 4,\n              \"segments\": [\n                {\n                  \"text\": \"    print(\\\"snek\\\")\"\n                }\n              ]\n            },\n            {\n              \"line\": 5,\n              \"segments\": []\n            }\n          ]\n        }\n      ],\n      \"path_matches\": [\n        {\n          \"text\": \"src/\"\n        },\n        {\n          \"text\": \"foo\",\n          \"match\": true\n        },\n        {\n          \"text\": \".py\"\n        }\n      ],\n      \"file\": {\n        \"path\": \"src/foo.py\",\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        }\n      }\n    }\n  ]\n}\n```\n\nNote that searches can match in the file's text (`content_matches`),\nthe path (`path_matches`), or both as in the example above.\n\nYou can use the same syntax for the search query as in the UI, e.g.\nto only search within a specific repository:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code?search_query=foo+repo:demo'\n# results from the \"demo\" repository\n```\n\nSimilar to other APIs, you can request more fields using a\n`fields` query parameter. E.g. to get some more information about\nthe repository of matched files (the `%2B` is a URL-encoded `+`):\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code'\\\n     '?search_query=foo&fields=%2Bvalues.file.commit.repository'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 1,\n      \"content_matches\": [...],\n      \"path_matches\": [...],\n      \"file\": {\n        \"commit\": {\n          \"type\": \"commit\",\n          \"hash\": \"ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/commit/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/my-workspace/demo/commits/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            }\n          },\n          \"repository\": {\n            \"name\": \"demo\",\n            \"type\": \"repository\",\n            \"full_name\": \"my-workspace/demo\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/my-workspace/demo\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bytebucket.org/ravatar/%7B850e1749-781a-4115-9316-df39d0600e7a%7D?ts=default\"\n              }\n            },\n            \"uuid\": \"{850e1749-781a-4115-9316-df39d0600e7a}\"\n          }\n        },\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        },\n        \"path\": \"src/foo.py\"\n      }\n    }\n  ]\n}\n```\n\nTry `fields=%2Bvalues.*.*.*.*` to get an idea what's possible.\n",
       "tags": [
         "search"
       ]
@@ -15051,6 +15653,706 @@
       ],
       "tags": [
         "ssh"
+      ]
+    }
+  },
+  "/workspaces": {
+    "get": {
+      "description": "",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The list of workspaces accessible by the user.",
+          "schema": {
+            "$ref": "#/definitions/paginated_workspaces"
+          }
+        },
+        "401": {
+          "description": "The request wasn't authenticated.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "account"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "workspaces"
+      ]
+    },
+    "parameters": []
+  },
+  "/workspaces/{workspace}": {
+    "get": {
+      "description": "",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The workspace.",
+          "schema": {
+            "$ref": "#/definitions/workspace"
+          }
+        },
+        "404": {
+          "description": "If no workspace exists for the specified name or UUID.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": []
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "workspaces"
+      ]
+    },
+    "parameters": [
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "/workspaces/{workspace}/hooks": {
+    "get": {
+      "description": "Returns a paginated list of webhooks installed on this workspace.",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The paginated list of installed webhooks.",
+          "schema": {
+            "$ref": "#/definitions/paginated_webhook_subscriptions"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user is not an owner on the specified workspace.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the specified workspace does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "webhook"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "workspaces",
+        "webhooks"
+      ]
+    },
+    "parameters": [
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "post": {
+      "description": "Creates a new webhook on the specified workspace.\n\nWorkspace webhooks are fired for events from all repositories contained\nby that workspace.\n\nNote that only owners can install webhooks on workspaces.",
+      "parameters": [],
+      "responses": {
+        "201": {
+          "description": "The newly installed webhook.",
+          "headers": {
+            "Location": {
+              "description": "The URL of new newly created webhook.",
+              "type": "string"
+            }
+          },
+          "schema": {
+            "$ref": "#/definitions/webhook_subscription"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user is not an owner on the specified workspace.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the specified workspace does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "webhook"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "workspaces",
+        "webhooks"
+      ]
+    }
+  },
+  "/workspaces/{workspace}/hooks/{uid}": {
+    "delete": {
+      "description": "Deletes the specified webhook subscription from the given workspace.",
+      "parameters": [
+        {
+          "description": "The installed webhook's id",
+          "in": "path",
+          "name": "uid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "When the webhook was deleted successfully"
+        },
+        "403": {
+          "description": "If the authenticated user does not have permission to delete the webhook.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the webhook or workspace does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "webhook"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "workspaces",
+        "webhooks"
+      ]
+    },
+    "get": {
+      "description": "Returns the webhook with the specified id installed on the given\nworkspace.",
+      "parameters": [
+        {
+          "description": "The installed webhook's id.",
+          "in": "path",
+          "name": "uid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The webhook subscription object.",
+          "schema": {
+            "$ref": "#/definitions/webhook_subscription"
+          }
+        },
+        "404": {
+          "description": "If the webhook or workspace does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "webhook"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "workspaces",
+        "webhooks"
+      ]
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "uid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "put": {
+      "description": "Updates the specified webhook subscription.\n\nThe following properties can be mutated:\n\n* `description`\n* `url`\n* `active`\n* `events`",
+      "parameters": [
+        {
+          "description": "The installed webhook's id",
+          "in": "path",
+          "name": "uid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The webhook subscription object.",
+          "schema": {
+            "$ref": "#/definitions/webhook_subscription"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user does not have permission to update the webhook.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the webhook or workspace does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "webhook"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "workspaces",
+        "webhooks"
+      ]
+    }
+  },
+  "/workspaces/{workspace}/members": {
+    "get": {
+      "description": "",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The list of users that are part of a workspace.",
+          "schema": {
+            "$ref": "#/definitions/paginated_workspace_memberships"
+          }
+        },
+        "401": {
+          "description": "The request wasn't authenticated.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "account"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "workspaces"
+      ]
+    },
+    "parameters": [
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "/workspaces/{workspace}/members/{member}": {
+    "get": {
+      "description": "",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The user that is part of a workspace.",
+          "schema": {
+            "$ref": "#/definitions/workspace_membership"
+          }
+        },
+        "401": {
+          "description": "The request wasn't authenticated.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "account"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "workspaces"
+      ]
+    },
+    "parameters": [
+      {
+        "description": "Member's UUID or Atlassian ID.",
+        "in": "path",
+        "name": "member",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "/workspaces/{workspace}/projects": {
+    "get": {
+      "description": "",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The list of projects in a workspace.",
+          "schema": {
+            "$ref": "#/definitions/paginated_projects"
+          }
+        },
+        "404": {
+          "description": "A workspace doesn't exist at this location.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "project"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "workspaces"
+      ]
+    },
+    "parameters": [
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "post": {
+      "description": "Creates a new project.\n\nNote that the avatar has to be embedded as either a data-url\nor a URL to an external image as shown in the examples below:\n\n```\n$ body=$(cat << EOF\n{\n    \"name\": \"Mars Project\",\n    \"key\": \"MARS\",\n    \"description\": \"Software for colonizing mars.\",\n    \"links\": {\n        \"avatar\": {\n            \"href\": \"data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/...\"\n        }\n    },\n    \"is_private\": false\n}\nEOF\n)\n$ curl -H \"Content-Type: application/json\" \\\n       -X POST \\\n       -d \"$body\" \\\n       https://api.bitbucket.org/2.0/teams/teams-in-space/projects/ | jq .\n{\n  // Serialized project document\n}\n```\n\nor even:\n\n```\n$ body=$(cat << EOF\n{\n    \"name\": \"Mars Project\",\n    \"key\": \"MARS\",\n    \"description\": \"Software for colonizing mars.\",\n    \"links\": {\n        \"avatar\": {\n            \"href\": \"http://i.imgur.com/72tRx4w.gif\"\n        }\n    },\n    \"is_private\": false\n}\nEOF\n)\n$ curl -H \"Content-Type: application/json\" \\\n       -X POST \\\n       -d \"$body\" \\\n       https://api.bitbucket.org/2.0/teams/teams-in-space/projects/ | jq .\n{\n  // Serialized project document\n}\n```",
+      "parameters": [
+        {
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/project"
+          }
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "A new project has been created.",
+          "headers": {
+            "Location": {
+              "description": "The location of the newly created project",
+              "type": "string"
+            }
+          },
+          "schema": {
+            "$ref": "#/definitions/project"
+          }
+        },
+        "403": {
+          "description": "The requesting user isn't authorized to create the project.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "A workspace doesn't exist at this location.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "project:write"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "projects"
+      ]
+    }
+  },
+  "/workspaces/{workspace}/projects/{project_key}": {
+    "delete": {
+      "description": "",
+      "parameters": [],
+      "responses": {
+        "204": {
+          "description": "Successful deletion."
+        },
+        "403": {
+          "description": "The requesting user isn't authorized to delete the project or the project isn't empty.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "A project isn't hosted at this location.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "project:write"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "projects"
+      ]
+    },
+    "get": {
+      "description": "",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The project that is part of a workspace.",
+          "schema": {
+            "$ref": "#/definitions/project"
+          }
+        },
+        "401": {
+          "description": "The request wasn't authenticated.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "The requesting user isn't authorized to access the project.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "A project isn't hosted at this location.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "project"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "projects",
+        "workspaces"
+      ]
+    },
+    "parameters": [
+      {
+        "description": "The project in question. This is the actual `key` assigned\nto the project.\n",
+        "in": "path",
+        "name": "project_key",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "put": {
+      "description": "Since this endpoint can be used to both update and to create a\nproject, the request body depends on the intent.\n\n### Creation\n\nSee the POST documentation for the project collection for an\nexample of the request body.\n\nNote: The `key` should not be specified in the body of request\n(since it is already present in the URL). The `name` is required,\neverything else is optional.\n\n### Update\n\nSee the POST documentation for the project collection for an\nexample of the request body.\n\nNote: The key is not required in the body (since it is already in\nthe URL). The key may be specified in the body, if the intent is\nto change the key itself. In such a scenario, the location of the\nproject is changed and is returned in the `Location` header of the\nresponse.",
+      "parameters": [
+        {
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/project"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The existing project is has been updated.",
+          "headers": {
+            "Location": {
+              "description": "The location of the project. This header is only provided\nwhen the project key is updated.",
+              "type": "string"
+            }
+          },
+          "schema": {
+            "$ref": "#/definitions/project"
+          }
+        },
+        "201": {
+          "description": "A new project has been created.",
+          "headers": {
+            "Location": {
+              "description": "The location of the newly created project",
+              "type": "string"
+            }
+          },
+          "schema": {
+            "$ref": "#/definitions/project"
+          }
+        },
+        "403": {
+          "description": "The requesting user isn't authorized to update or create the project.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "A workspace doesn't exist at the location. Note that the project's absence from this location doesn't raise a 404, since a PUT at a non-existent location can be used to create a new project.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": [
+            "project:write"
+          ]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": [
+        "projects"
       ]
     }
   }

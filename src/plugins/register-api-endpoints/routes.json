@@ -28,17 +28,38 @@
     }
   },
   "commits": {
+    "bulkCreateOrUpdateAnnotations": {
+      "alias": "repositories.bulkCreateOrUpdateAnnotations"
+    },
     "createApproval": {
       "alias": "repositories.createCommitApproval"
     },
     "createComment": {
       "alias": "repositories.createCommitComment"
     },
+    "createOrUpdateAnnotation": {
+      "alias": "repositories.createOrUpdateAnnotation"
+    },
+    "createOrUpdateReport": {
+      "alias": "repositories.createOrUpdateReport"
+    },
+    "deleteAnnotation": {
+      "alias": "repositories.deleteAnnotation"
+    },
     "deleteApproval": {
       "alias": "repositories.deleteCommitApproval"
     },
+    "deleteReport": {
+      "alias": "repositories.deleteReport"
+    },
     "get": {
       "alias": "repositories.getCommit"
+    },
+    "getAnnotation": {
+      "alias": "repositories.getAnnotation"
+    },
+    "getAnnotationsForReport": {
+      "alias": "repositories.getAnnotationsForReport"
     },
     "getComment": {
       "alias": "repositories.getCommitComment"
@@ -48,6 +69,12 @@
     },
     "getPatch": {
       "alias": "repositories.getPatch"
+    },
+    "getReport": {
+      "alias": "repositories.getReport"
+    },
+    "getReportsForCommit": {
+      "alias": "repositories.getReportsForCommit"
     },
     "list": {
       "alias": "repositories.listCommits"
@@ -100,6 +127,12 @@
     }
   },
   "deployments": {
+    "createEnvironment": {
+      "alias": "repositories.createEnvironment"
+    },
+    "deleteEnvironmentForRepository": {
+      "alias": "repositories.deleteEnvironment"
+    },
     "get": {
       "alias": "repositories.getDeployment"
     },
@@ -391,6 +424,44 @@
       "alias": "teams.updateProject"
     }
   },
+  "properties": {
+    "deleteCommitHostedPropertyValue": {
+      "alias": "repositories.deleteCommitHostedPropertyValue"
+    },
+    "deletePullRequestHostedPropertyValue": {
+      "alias": "repositories.deletePullRequestHostedPropertyValue"
+    },
+    "deleteRepositoryHostedPropertyValue": {
+      "alias": "repositories.deleteRepositoryHostedPropertyValue"
+    },
+    "deleteUserHostedPropertyValue": {
+      "alias": "users.deleteUserHostedPropertyValue"
+    },
+    "getCommitHostedPropertyValue": {
+      "alias": "repositories.getCommitHostedPropertyValue"
+    },
+    "getPullRequestHostedPropertyValue": {
+      "alias": "repositories.getPullRequestHostedPropertyValue"
+    },
+    "getRepositoryHostedPropertyValue": {
+      "alias": "repositories.getRepositoryHostedPropertyValue"
+    },
+    "retrieveUserHostedPropertyValue": {
+      "alias": "users.retrieveUserHostedPropertyValue"
+    },
+    "updateCommitHostedPropertyValue": {
+      "alias": "repositories.updateCommitHostedPropertyValue"
+    },
+    "updatePullRequestHostedPropertyValue": {
+      "alias": "repositories.updatePullRequestHostedPropertyValue"
+    },
+    "updateRepositoryHostedPropertyValue": {
+      "alias": "repositories.updateRepositoryHostedPropertyValue"
+    },
+    "updateUserHostedPropertyValue": {
+      "alias": "users.updateUserHostedPropertyValue"
+    }
+  },
   "pullrequests": {
     "addDefaultReviewer": {
       "alias": "repositories.addDefaultReviewer"
@@ -497,6 +568,35 @@
       "alias": "repositories.listTags"
     }
   },
+  "reports": {
+    "bulkCreateOrUpdateAnnotations": {
+      "alias": "repositories.bulkCreateOrUpdateAnnotations"
+    },
+    "createOrUpdateAnnotation": {
+      "alias": "repositories.createOrUpdateAnnotation"
+    },
+    "createOrUpdateReport": {
+      "alias": "repositories.createOrUpdateReport"
+    },
+    "deleteAnnotation": {
+      "alias": "repositories.deleteAnnotation"
+    },
+    "deleteReport": {
+      "alias": "repositories.deleteReport"
+    },
+    "getAnnotation": {
+      "alias": "repositories.getAnnotation"
+    },
+    "getAnnotationsForReport": {
+      "alias": "repositories.getAnnotationsForReport"
+    },
+    "getReport": {
+      "alias": "repositories.getReport"
+    },
+    "getReportsForCommit": {
+      "alias": "repositories.getReportsForCommit"
+    }
+  },
   "repositories": {
     "addDefaultReviewer": {
       "method": "PUT",
@@ -515,6 +615,36 @@
         }
       },
       "url": "/repositories/{workspace}/{repo_slug}/default-reviewers/{target_username}"
+    },
+    "bulkCreateOrUpdateAnnotations": {
+      "headers": {
+        "accept": "application/json"
+      },
+      "method": "POST",
+      "params": {
+        "_body": {
+          "required": true,
+          "type": "any"
+        },
+        "commit": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "reportId": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "ReportAnnotation[]",
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations"
     },
     "create": {
       "headers": {
@@ -912,6 +1042,72 @@
       "returns": "Error",
       "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/watch"
     },
+    "createOrUpdateAnnotation": {
+      "headers": {
+        "accept": "application/json"
+      },
+      "method": "PUT",
+      "params": {
+        "_body": {
+          "required": true,
+          "schema": "ReportAnnotation",
+          "type": "any"
+        },
+        "annotationId": {
+          "required": true,
+          "type": "string"
+        },
+        "commit": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "reportId": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "ReportAnnotation",
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations/{annotationId}"
+    },
+    "createOrUpdateReport": {
+      "headers": {
+        "accept": "application/json"
+      },
+      "method": "PUT",
+      "params": {
+        "_body": {
+          "required": true,
+          "schema": "Report",
+          "type": "any"
+        },
+        "commit": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "reportId": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "Report",
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}"
+    },
     "createPipeline": {
       "method": "POST",
       "params": {
@@ -1165,6 +1361,35 @@
       },
       "url": "/repositories/{workspace}/{repo_slug}"
     },
+    "deleteAnnotation": {
+      "headers": {
+        "accept": "application/json"
+      },
+      "method": "DELETE",
+      "params": {
+        "annotationId": {
+          "required": true,
+          "type": "string"
+        },
+        "commit": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "reportId": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations/{annotationId}"
+    },
     "deleteBranch": {
       "method": "DELETE",
       "params": {
@@ -1218,6 +1443,32 @@
         }
       },
       "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/approve"
+    },
+    "deleteCommitHostedPropertyValue": {
+      "method": "DELETE",
+      "params": {
+        "app_key": {
+          "required": true,
+          "type": "string"
+        },
+        "commit": {
+          "required": true,
+          "type": "string"
+        },
+        "property_name": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name}"
     },
     "deleteDefaultReviewer": {
       "method": "DELETE",
@@ -1526,6 +1777,79 @@
       },
       "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}"
     },
+    "deletePullRequestHostedPropertyValue": {
+      "method": "DELETE",
+      "params": {
+        "app_key": {
+          "required": true,
+          "type": "string"
+        },
+        "property_name": {
+          "required": true,
+          "type": "string"
+        },
+        "pullrequest_id": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pullrequest_id}/properties/{app_key}/{property_name}"
+    },
+    "deleteReport": {
+      "headers": {
+        "accept": "application/json"
+      },
+      "method": "DELETE",
+      "params": {
+        "commit": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "reportId": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}"
+    },
+    "deleteRepositoryHostedPropertyValue": {
+      "method": "DELETE",
+      "params": {
+        "app_key": {
+          "required": true,
+          "type": "string"
+        },
+        "property_name": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/properties/{app_key}/{property_name}"
+    },
     "deleteTag": {
       "method": "DELETE",
       "params": {
@@ -1579,6 +1903,62 @@
       },
       "returns": "Repository",
       "url": "/repositories/{workspace}/{repo_slug}"
+    },
+    "getAnnotation": {
+      "headers": {
+        "accept": "application/json"
+      },
+      "method": "GET",
+      "params": {
+        "annotationId": {
+          "required": true,
+          "type": "string"
+        },
+        "commit": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "reportId": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "ReportAnnotation",
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations/{annotationId}"
+    },
+    "getAnnotationsForReport": {
+      "headers": {
+        "accept": "application/json"
+      },
+      "method": "GET",
+      "params": {
+        "commit": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "reportId": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedAnnotations",
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations"
     },
     "getBranch": {
       "method": "GET",
@@ -1712,6 +2092,32 @@
       },
       "returns": "CommitComment",
       "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/comments/{comment_id}"
+    },
+    "getCommitHostedPropertyValue": {
+      "method": "GET",
+      "params": {
+        "app_key": {
+          "required": true,
+          "type": "string"
+        },
+        "commit": {
+          "required": true,
+          "type": "string"
+        },
+        "property_name": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name}"
     },
     "getDefaultReviewer": {
       "method": "GET",
@@ -2306,6 +2712,32 @@
       },
       "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/diffstat"
     },
+    "getPullRequestHostedPropertyValue": {
+      "method": "GET",
+      "params": {
+        "app_key": {
+          "required": true,
+          "type": "string"
+        },
+        "property_name": {
+          "required": true,
+          "type": "string"
+        },
+        "pullrequest_id": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pullrequest_id}/properties/{app_key}/{property_name}"
+    },
     "getPullRequestPatch": {
       "method": "GET",
       "params": {
@@ -2323,6 +2755,76 @@
         }
       },
       "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/patch"
+    },
+    "getReport": {
+      "headers": {
+        "accept": "application/json"
+      },
+      "method": "GET",
+      "params": {
+        "commit": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "reportId": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "Report",
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}"
+    },
+    "getReportsForCommit": {
+      "headers": {
+        "accept": "application/json"
+      },
+      "method": "GET",
+      "params": {
+        "commit": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedReports",
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports"
+    },
+    "getRepositoryHostedPropertyValue": {
+      "method": "GET",
+      "params": {
+        "app_key": {
+          "required": true,
+          "type": "string"
+        },
+        "property_name": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/properties/{app_key}/{property_name}"
     },
     "getTag": {
       "method": "GET",
@@ -3324,6 +3826,32 @@
       "returns": "Commitstatus",
       "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/statuses/build/{key}"
     },
+    "updateCommitHostedPropertyValue": {
+      "method": "PUT",
+      "params": {
+        "app_key": {
+          "required": true,
+          "type": "string"
+        },
+        "commit": {
+          "required": true,
+          "type": "string"
+        },
+        "property_name": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name}"
+    },
     "updateDeployKey": {
       "method": "PUT",
       "params": {
@@ -3627,6 +4155,54 @@
       },
       "returns": "PullrequestComment",
       "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}"
+    },
+    "updatePullRequestHostedPropertyValue": {
+      "method": "PUT",
+      "params": {
+        "app_key": {
+          "required": true,
+          "type": "string"
+        },
+        "property_name": {
+          "required": true,
+          "type": "string"
+        },
+        "pullrequest_id": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pullrequest_id}/properties/{app_key}/{property_name}"
+    },
+    "updateRepositoryHostedPropertyValue": {
+      "method": "PUT",
+      "params": {
+        "app_key": {
+          "required": true,
+          "type": "string"
+        },
+        "property_name": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/properties/{app_key}/{property_name}"
     },
     "updateWebhook": {
       "method": "PUT",
@@ -4578,6 +5154,24 @@
       },
       "url": "/users/{username}/ssh-keys/{key_id}"
     },
+    "deleteUserHostedPropertyValue": {
+      "method": "DELETE",
+      "params": {
+        "app_key": {
+          "required": true,
+          "type": "string"
+        },
+        "property_name": {
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/users/{username}/properties/{app_key}/{property_name}"
+    },
     "deleteWebhook": {
       "method": "DELETE",
       "params": {
@@ -4739,6 +5333,24 @@
       "returns": "PaginatedWebhookSubscriptions",
       "url": "/users/{username}/hooks"
     },
+    "retrieveUserHostedPropertyValue": {
+      "method": "GET",
+      "params": {
+        "app_key": {
+          "required": true,
+          "type": "string"
+        },
+        "property_name": {
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/users/{username}/properties/{app_key}/{property_name}"
+    },
     "searchCode": {
       "headers": {
         "accept": "application/json"
@@ -4795,6 +5407,24 @@
       },
       "returns": "SshAccountKey",
       "url": "/users/{username}/ssh-keys/{key_id}"
+    },
+    "updateUserHostedPropertyValue": {
+      "method": "PUT",
+      "params": {
+        "app_key": {
+          "required": true,
+          "type": "string"
+        },
+        "property_name": {
+          "required": true,
+          "type": "string"
+        },
+        "username": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/users/{username}/properties/{app_key}/{property_name}"
     },
     "updateWebhook": {
       "method": "PUT",

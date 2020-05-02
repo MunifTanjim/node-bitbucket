@@ -622,6 +622,9 @@
         "commit": {
           "$ref": "#/definitions/Commit"
         },
+        "escaped_path": {
+          "type": "string"
+        },
         "path": {
           "type": "string"
         },
@@ -760,7 +763,7 @@
       "x-bb-default-fields": [
         "uuid"
       ],
-      "x-bb-url": "/rest/internal/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+      "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
     },
     "DeployKey": {
       "allOf": [
@@ -1724,6 +1727,39 @@
       },
       "type": "object"
     },
+    "JiraProject": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "type": "object"
+        }
+      ],
+      "x-bb-default-fields": [
+        "cloudId",
+        "id"
+      ],
+      "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}/projects/{id}?actor={user.uuid}&atlassian_account_id={user.account_id}"
+    },
+    "JiraSite": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "type": "object"
+        }
+      ],
+      "x-bb-default-fields": [
+        "cloudId",
+        "cloudUrl",
+        "cloudName"
+      ],
+      "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}?actor={user.uuid}&atlassian_account_id={user.account_id}"
+    },
     "Milestone": {
       "allOf": [
         {
@@ -1791,6 +1827,32 @@
         },
         "size": {
           "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedAnnotations": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/ReportAnnotation"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -2515,6 +2577,32 @@
       },
       "type": "object"
     },
+    "PaginatedReports": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/Report"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "PaginatedRepositories": {
       "additionalProperties": false,
       "properties": {
@@ -2860,6 +2948,60 @@
         "values": {
           "items": {
             "$ref": "#/definitions/WebhookSubscription"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedWorkspaceMemberships": {
+      "additionalProperties": false,
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/WorkspaceMembership"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedWorkspaces": {
+      "additionalProperties": false,
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/Workspace"
           },
           "type": "array"
         }
@@ -4370,13 +4512,166 @@
         },
         {
           "additionalProperties": true,
+          "properties": {
+            "created_on": {
+              "type": "string"
+            },
+            "data": {
+              "items": {
+                "$ref": "#/definitions/ReportData"
+              },
+              "type": "array"
+            },
+            "details": {
+              "required": true,
+              "type": "string"
+            },
+            "external_id": {
+              "required": true,
+              "type": "string"
+            },
+            "link": {
+              "type": "string"
+            },
+            "logo_url": {
+              "type": "string"
+            },
+            "remote_link_enabled": {
+              "type": "boolean"
+            },
+            "report_type": {
+              "enum": [
+                "SECURITY",
+                "COVERAGE",
+                "TEST",
+                "BUG"
+              ],
+              "type": "string"
+            },
+            "reporter": {
+              "type": "string"
+            },
+            "result": {
+              "enum": [
+                "PASSED",
+                "FAILED",
+                "PENDING"
+              ],
+              "type": "string"
+            },
+            "title": {
+              "required": true,
+              "type": "string"
+            },
+            "updated_on": {
+              "type": "string"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
           "type": "object"
         }
       ],
       "x-bb-default-fields": [
         "uuid"
       ],
-      "x-bb-url": "/rest/internal/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+      "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+    },
+    "ReportAnnotation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "annotation_type": {
+              "enum": [
+                "VULNERABILITY",
+                "CODE_SMELL",
+                "BUG"
+              ],
+              "type": "string"
+            },
+            "created_on": {
+              "type": "string"
+            },
+            "details": {
+              "type": "string"
+            },
+            "external_id": {
+              "required": true,
+              "type": "string"
+            },
+            "line": {
+              "type": "integer"
+            },
+            "link": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "result": {
+              "enum": [
+                "PASSED",
+                "FAILED",
+                "SKIPPED",
+                "IGNORED"
+              ],
+              "type": "string"
+            },
+            "severity": {
+              "enum": [
+                "CRITICAL",
+                "HIGH",
+                "MEDIUM",
+                "LOW"
+              ],
+              "type": "string"
+            },
+            "summary": {
+              "required": true,
+              "type": "string"
+            },
+            "updated_on": {
+              "type": "string"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "x-bb-default-fields": [
+        "uuid"
+      ],
+      "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{reportUuid}/annotations/{uuid}"
+    },
+    "ReportData": {
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "BOOLEAN",
+            "DATE",
+            "DURATION",
+            "LINK",
+            "NUMBER",
+            "PERCENTAGE",
+            "TEXT"
+          ],
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "type": "object"
     },
     "Repository": {
       "allOf": [
@@ -4920,7 +5215,7 @@
       "x-bb-default-fields": [
         "uuid"
       ],
-      "x-bb-url": "/rest/internal/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+      "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
     },
     "SubjectTypes": {
       "additionalProperties": false,
@@ -5185,6 +5480,190 @@
           "type": "object"
         }
       ]
+    },
+    "Workspace": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "created_on": {
+              "type": "string"
+            },
+            "is_private": {
+              "type": "boolean"
+            },
+            "links": {
+              "additionalProperties": false,
+              "properties": {
+                "avatar": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "html": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "members": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "owners": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "projects": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "repositories": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "self": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "snippets": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "type": "string"
+            },
+            "slug": {
+              "type": "string"
+            },
+            "updated_on": {
+              "type": "string"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "WorkspaceMembership": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "added_on": {
+              "type": "string"
+            },
+            "last_accessed": {
+              "type": "string"
+            },
+            "links": {
+              "additionalProperties": false,
+              "properties": {
+                "self": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "permission": {
+              "enum": [
+                "owner",
+                "collaborator",
+                "member"
+              ],
+              "type": "string"
+            },
+            "user": {
+              "$ref": "#/definitions/Account"
+            },
+            "workspace": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "type": "object"
+        }
+      ]
     }
   },
   "properties": {
@@ -5241,6 +5720,9 @@
     },
     "Milestone": {
       "$ref": "#/definitions/Milestone"
+    },
+    "PaginatedAnnotations": {
+      "$ref": "#/definitions/PaginatedAnnotations"
     },
     "PaginatedBranches": {
       "$ref": "#/definitions/PaginatedBranches"
@@ -5323,6 +5805,9 @@
     "PaginatedRefs": {
       "$ref": "#/definitions/PaginatedRefs"
     },
+    "PaginatedReports": {
+      "$ref": "#/definitions/PaginatedReports"
+    },
     "PaginatedRepositories": {
       "$ref": "#/definitions/PaginatedRepositories"
     },
@@ -5361,6 +5846,12 @@
     },
     "PaginatedWebhookSubscriptions": {
       "$ref": "#/definitions/PaginatedWebhookSubscriptions"
+    },
+    "PaginatedWorkspaceMemberships": {
+      "$ref": "#/definitions/PaginatedWorkspaceMemberships"
+    },
+    "PaginatedWorkspaces": {
+      "$ref": "#/definitions/PaginatedWorkspaces"
     },
     "Participant": {
       "$ref": "#/definitions/Participant"
@@ -5401,6 +5892,12 @@
     "PullrequestMergeParameters": {
       "$ref": "#/definitions/PullrequestMergeParameters"
     },
+    "Report": {
+      "$ref": "#/definitions/Report"
+    },
+    "ReportAnnotation": {
+      "$ref": "#/definitions/ReportAnnotation"
+    },
     "Repository": {
       "$ref": "#/definitions/Repository"
     },
@@ -5436,6 +5933,12 @@
     },
     "WebhookSubscription": {
       "$ref": "#/definitions/WebhookSubscription"
+    },
+    "Workspace": {
+      "$ref": "#/definitions/Workspace"
+    },
+    "WorkspaceMembership": {
+      "$ref": "#/definitions/WorkspaceMembership"
     }
   },
   "type": "object"

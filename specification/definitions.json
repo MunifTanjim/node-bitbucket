@@ -694,6 +694,10 @@
       "commit": {
         "$ref": "#/definitions/commit"
       },
+      "escaped_path": {
+        "description": "The escaped version of the path as it appears in a diff. If the path does not require escaping this will be the same as path.",
+        "type": "string"
+      },
       "path": {
         "description": "The path in the repository",
         "type": "string"
@@ -848,7 +852,7 @@
     "x-bb-default-fields": [
       "uuid"
     ],
-    "x-bb-url": "/rest/internal/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+    "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
   },
   "deploy_key": {
     "allOf": [
@@ -1914,6 +1918,41 @@
     },
     "type": "object"
   },
+  "jira_project": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Jira Project.",
+        "type": "object"
+      }
+    ],
+    "x-bb-default-fields": [
+      "cloudId",
+      "id"
+    ],
+    "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}/projects/{id}?actor={user.uuid}&atlassian_account_id={user.account_id}"
+  },
+  "jira_site": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Jira Site.",
+        "type": "object"
+      }
+    ],
+    "x-bb-default-fields": [
+      "cloudId",
+      "cloudUrl",
+      "cloudName"
+    ],
+    "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}?actor={user.uuid}&atlassian_account_id={user.account_id}"
+  },
   "milestone": {
     "allOf": [
       {
@@ -1994,6 +2033,42 @@
         "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
         "minimum": 0,
         "type": "integer"
+      }
+    },
+    "type": "object"
+  },
+  "paginated_annotations": {
+    "description": "A paginated list of annotations.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/report_annotation"
+        },
+        "minItems": 0,
+        "type": "array"
       }
     },
     "type": "object"
@@ -3040,6 +3115,42 @@
     },
     "type": "object"
   },
+  "paginated_reports": {
+    "description": "A paginated list of reports.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/report"
+        },
+        "minItems": 0,
+        "type": "array"
+      }
+    },
+    "type": "object"
+  },
   "paginated_repositories": {
     "additionalProperties": false,
     "description": "A paginated list of repositories.",
@@ -3551,6 +3662,86 @@
       "values": {
         "items": {
           "$ref": "#/definitions/webhook_subscription"
+        },
+        "minItems": 0,
+        "type": "array",
+        "uniqueItems": true
+      }
+    },
+    "type": "object"
+  },
+  "paginated_workspace_memberships": {
+    "additionalProperties": false,
+    "description": "A paginated list of workspace memberships.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "values": {
+        "items": {
+          "$ref": "#/definitions/workspace_membership"
+        },
+        "minItems": 0,
+        "type": "array",
+        "uniqueItems": true
+      }
+    },
+    "type": "object"
+  },
+  "paginated_workspaces": {
+    "additionalProperties": false,
+    "description": "A paginated list of workspaces.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "values": {
+        "items": {
+          "$ref": "#/definitions/workspace"
         },
         "minItems": 0,
         "type": "array",
@@ -5261,13 +5452,204 @@
       {
         "additionalProperties": true,
         "description": "A report for a commit.",
+        "properties": {
+          "created_on": {
+            "description": "The timestamp when the report was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "data": {
+            "description": "An array of data fields to display information on the report. Maximum 10.",
+            "items": {
+              "$ref": "#/definitions/report_data"
+            },
+            "type": "array"
+          },
+          "details": {
+            "description": "A string to describe the purpose of the report. This string may contain escaped newlines and if it does it will display the content accordingly..",
+            "required": true,
+            "type": "string"
+          },
+          "external_id": {
+            "description": "ID of the report provided by the report creator. It can be used to identify the report as an alternative to it's generated uuid. It is not used by Bitbucket, but only by the report creator for updating or deleting this specific report. Needs to be unique.",
+            "required": true,
+            "type": "string"
+          },
+          "link": {
+            "description": "A URL linking to the results of the report in an external tool.",
+            "format": "uri",
+            "type": "string"
+          },
+          "logo_url": {
+            "description": "A URL to the report logo. If none is provided, the default insights logo will be used.",
+            "format": "uri",
+            "type": "string"
+          },
+          "remote_link_enabled": {
+            "description": "If enabled, a remote link is created in Jira for the issue associated with the commit the report belongs to.",
+            "type": "boolean"
+          },
+          "report_type": {
+            "description": "The type of the report.",
+            "enum": [
+              "SECURITY",
+              "COVERAGE",
+              "TEST",
+              "BUG"
+            ],
+            "type": "string"
+          },
+          "reporter": {
+            "description": "A string to describe the tool or company who created the report.",
+            "type": "string"
+          },
+          "result": {
+            "description": "The state of the report. May be set to PENDING and later updated.",
+            "enum": [
+              "PASSED",
+              "FAILED",
+              "PENDING"
+            ],
+            "type": "string"
+          },
+          "title": {
+            "description": "The title of the report.",
+            "required": true,
+            "type": "string"
+          },
+          "updated_on": {
+            "description": "The timestamp when the report was updated.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "The UUID that can be used to identify the report.",
+            "type": "string"
+          }
+        },
         "type": "object"
       }
     ],
     "x-bb-default-fields": [
       "uuid"
     ],
-    "x-bb-url": "/rest/internal/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+    "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+  },
+  "report_annotation": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A report for a commit.",
+        "properties": {
+          "annotation_type": {
+            "description": "The type of the report.",
+            "enum": [
+              "VULNERABILITY",
+              "CODE_SMELL",
+              "BUG"
+            ],
+            "type": "string"
+          },
+          "created_on": {
+            "description": "The timestamp when the report was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "details": {
+            "description": "The details to show to users when clicking on the annotation.",
+            "type": "string"
+          },
+          "external_id": {
+            "description": "ID of the annotation provided by the annotation creator. It can be used to identify the annotation as an alternative to it's generated uuid. It is not used by Bitbucket, but only by the annotation creator for updating or deleting this specific annotation. Needs to be unique.",
+            "required": true,
+            "type": "string"
+          },
+          "line": {
+            "description": "The line number that the annotation should belong to. If no line number is provided, then it will default to 0 and in a pull request it will appear at the top of the file specified by the path field.",
+            "minimum": 1,
+            "type": "integer"
+          },
+          "link": {
+            "description": "A URL linking to the annotation in an external tool.",
+            "format": "uri",
+            "type": "string"
+          },
+          "path": {
+            "description": "The path of the file on which this annotation should be placed. This is the path of the file relative to the git repository. If no path is provided, then it will appear in the overview modal on all pull requests where the tip of the branch is the given commit, regardless of which files were modified.",
+            "type": "string"
+          },
+          "result": {
+            "description": "The state of the report. May be set to PENDING and later updated.",
+            "enum": [
+              "PASSED",
+              "FAILED",
+              "SKIPPED",
+              "IGNORED"
+            ],
+            "type": "string"
+          },
+          "severity": {
+            "description": "The severity of the annotation.",
+            "enum": [
+              "CRITICAL",
+              "HIGH",
+              "MEDIUM",
+              "LOW"
+            ],
+            "type": "string"
+          },
+          "summary": {
+            "description": "The message to display to users.",
+            "required": true,
+            "type": "string"
+          },
+          "updated_on": {
+            "description": "The timestamp when the report was updated.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "The UUID that can be used to identify the annotation.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    ],
+    "x-bb-default-fields": [
+      "uuid"
+    ],
+    "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{reportUuid}/annotations/{uuid}"
+  },
+  "report_data": {
+    "description": "A key-value element that will be displayed along with the report.",
+    "properties": {
+      "title": {
+        "description": "A string describing what this data field represents.",
+        "type": "string"
+      },
+      "type": {
+        "description": "The type of data contained in the value field. If not provided, then the value will be detected as a boolean, number or string.",
+        "enum": [
+          "BOOLEAN",
+          "DATE",
+          "DURATION",
+          "LINK",
+          "NUMBER",
+          "PERCENTAGE",
+          "TEXT"
+        ],
+        "type": "string"
+      },
+      "value": {
+        "description": "The value of the data element.",
+        "type": "object"
+      }
+    },
+    "type": "object"
   },
   "repository": {
     "allOf": [
@@ -5874,7 +6256,7 @@
     "x-bb-default-fields": [
       "uuid"
     ],
-    "x-bb-url": "/rest/internal/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+    "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
   },
   "subject_types": {
     "additionalProperties": false,
@@ -6160,6 +6542,210 @@
           "uuid": {
             "description": "The webhook's id",
             "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
+  "workspace": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket workspace.\n            Workspaces are used to organize repositories.",
+        "properties": {
+          "created_on": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "is_private": {
+            "description": "Indicates whether the workspace is publicly accessible, or whether it is\nprivate to the members and consequently only visible to members.\nNote that private workspaces cannot contain public repositories.",
+            "type": "boolean"
+          },
+          "links": {
+            "additionalProperties": false,
+            "properties": {
+              "avatar": {
+                "additionalProperties": false,
+                "properties": {
+                  "href": {
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "html": {
+                "additionalProperties": false,
+                "properties": {
+                  "href": {
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "members": {
+                "additionalProperties": false,
+                "properties": {
+                  "href": {
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "owners": {
+                "additionalProperties": false,
+                "properties": {
+                  "href": {
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "projects": {
+                "additionalProperties": false,
+                "properties": {
+                  "href": {
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "repositories": {
+                "additionalProperties": false,
+                "properties": {
+                  "href": {
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "self": {
+                "additionalProperties": false,
+                "properties": {
+                  "href": {
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "snippets": {
+                "additionalProperties": false,
+                "properties": {
+                  "href": {
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "name": {
+            "description": "The name of the workspace.",
+            "type": "string"
+          },
+          "slug": {
+            "description": "The short label that identifies this workspace.",
+            "type": "string"
+          },
+          "updated_on": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "The workspace's immutable id.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
+  "workspace_membership": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket workspace membership.\n            Links a user to a workspace.",
+        "properties": {
+          "added_on": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "last_accessed": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "links": {
+            "additionalProperties": false,
+            "properties": {
+              "self": {
+                "additionalProperties": false,
+                "properties": {
+                  "href": {
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "permission": {
+            "description": "Effective permission of user within workspace. Owners can administer\nthe workspace. Collaborators can create repositories. Members can edit\nexisting content.",
+            "enum": [
+              "owner",
+              "collaborator",
+              "member"
+            ],
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/definitions/account"
+          },
+          "workspace": {
+            "$ref": "#/definitions/workspace"
           }
         },
         "type": "object"

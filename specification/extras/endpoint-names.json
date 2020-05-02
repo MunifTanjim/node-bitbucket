@@ -127,22 +127,75 @@
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name}": {
     "delete": {
-      "properties": "",
-      "repositories": ""
+      "properties": "deleteCommitHostedPropertyValue",
+      "repositories": "deleteCommitHostedPropertyValue"
     },
     "get": {
-      "properties": "",
-      "repositories": ""
+      "properties": "getCommitHostedPropertyValue",
+      "repositories": "getCommitHostedPropertyValue"
     },
     "put": {
-      "properties": "",
-      "repositories": ""
+      "properties": "updateCommitHostedPropertyValue",
+      "repositories": "updateCommitHostedPropertyValue"
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/pullrequests": {
     "get": {
       "pullrequests": "listForCommit",
       "repositories": "listPullrequestsForCommit"
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports": {
+    "get": {
+      "commits": "getReportsForCommit",
+      "reports": "getReportsForCommit",
+      "repositories": "getReportsForCommit"
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}": {
+    "delete": {
+      "commits": "deleteReport",
+      "reports": "deleteReport",
+      "repositories": "deleteReport"
+    },
+    "get": {
+      "commits": "getReport",
+      "reports": "getReport",
+      "repositories": "getReport"
+    },
+    "put": {
+      "commits": "createOrUpdateReport",
+      "reports": "createOrUpdateReport",
+      "repositories": "createOrUpdateReport"
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations": {
+    "get": {
+      "commits": "getAnnotationsForReport",
+      "reports": "getAnnotationsForReport",
+      "repositories": "getAnnotationsForReport"
+    },
+    "post": {
+      "commits": "bulkCreateOrUpdateAnnotations",
+      "reports": "bulkCreateOrUpdateAnnotations",
+      "repositories": "bulkCreateOrUpdateAnnotations"
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations/{annotationId}": {
+    "delete": {
+      "commits": "deleteAnnotation",
+      "reports": "deleteAnnotation",
+      "repositories": "deleteAnnotation"
+    },
+    "get": {
+      "commits": "getAnnotation",
+      "reports": "getAnnotation",
+      "repositories": "getAnnotation"
+    },
+    "put": {
+      "commits": "createOrUpdateAnnotation",
+      "reports": "createOrUpdateAnnotation",
+      "repositories": "createOrUpdateAnnotation"
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{node}": {
@@ -344,13 +397,13 @@
       "repositories": "listEnvironments"
     },
     "post": {
-      "deployments": "",
+      "deployments": "createEnvironment",
       "repositories": "createEnvironment"
     }
   },
   "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}": {
     "delete": {
-      "deployments": "",
+      "deployments": "deleteEnvironmentForRepository",
       "repositories": "deleteEnvironment"
     },
     "get": {
@@ -725,16 +778,16 @@
   },
   "/repositories/{workspace}/{repo_slug}/properties/{app_key}/{property_name}": {
     "delete": {
-      "properties": "",
-      "repositories": ""
+      "properties": "deleteRepositoryHostedPropertyValue",
+      "repositories": "deleteRepositoryHostedPropertyValue"
     },
     "get": {
-      "properties": "",
-      "repositories": ""
+      "properties": "getRepositoryHostedPropertyValue",
+      "repositories": "getRepositoryHostedPropertyValue"
     },
     "put": {
-      "properties": "",
-      "repositories": ""
+      "properties": "updateRepositoryHostedPropertyValue",
+      "repositories": "updateRepositoryHostedPropertyValue"
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests": {
@@ -827,6 +880,12 @@
       "repositories": "mergePullRequest"
     }
   },
+  "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/merge/task-status/{task_id}": {
+    "get": {
+      "pullrequests": "",
+      "repositories": ""
+    }
+  },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/patch": {
     "get": {
       "pullrequests": "getPatch",
@@ -842,16 +901,16 @@
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pullrequest_id}/properties/{app_key}/{property_name}": {
     "delete": {
-      "properties": "",
-      "repositories": ""
+      "properties": "deletePullRequestHostedPropertyValue",
+      "repositories": "deletePullRequestHostedPropertyValue"
     },
     "get": {
-      "properties": "",
-      "repositories": ""
+      "properties": "getPullRequestHostedPropertyValue",
+      "repositories": "getPullRequestHostedPropertyValue"
     },
     "put": {
-      "properties": "",
-      "repositories": ""
+      "properties": "updatePullRequestHostedPropertyValue",
+      "repositories": "updatePullRequestHostedPropertyValue"
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/activity": {
@@ -1196,6 +1255,12 @@
       "user": "listPermissionsForTeams"
     }
   },
+  "/user/permissions/workspaces": {
+    "get": {
+      "user": "",
+      "workspaces": ""
+    }
+  },
   "/users/{username}": {
     "get": {
       "users": "get"
@@ -1267,16 +1332,16 @@
   },
   "/users/{username}/properties/{app_key}/{property_name}": {
     "delete": {
-      "properties": "",
-      "users": ""
+      "properties": "deleteUserHostedPropertyValue",
+      "users": "deleteUserHostedPropertyValue"
     },
     "get": {
-      "properties": "",
-      "users": ""
+      "properties": "retrieveUserHostedPropertyValue",
+      "users": "retrieveUserHostedPropertyValue"
     },
     "put": {
-      "properties": "",
-      "users": ""
+      "properties": "updateUserHostedPropertyValue",
+      "users": "updateUserHostedPropertyValue"
     }
   },
   "/users/{username}/repositories": {
@@ -1313,6 +1378,73 @@
     "put": {
       "ssh": "updateKey",
       "users": "updateSshKey"
+    }
+  },
+  "/workspaces": {
+    "get": {
+      "workspaces": ""
+    }
+  },
+  "/workspaces/{workspace}": {
+    "get": {
+      "workspaces": ""
+    }
+  },
+  "/workspaces/{workspace}/hooks": {
+    "get": {
+      "webhooks": "",
+      "workspaces": ""
+    },
+    "post": {
+      "webhooks": "",
+      "workspaces": ""
+    }
+  },
+  "/workspaces/{workspace}/hooks/{uid}": {
+    "delete": {
+      "webhooks": "",
+      "workspaces": ""
+    },
+    "get": {
+      "webhooks": "",
+      "workspaces": ""
+    },
+    "put": {
+      "webhooks": "",
+      "workspaces": ""
+    }
+  },
+  "/workspaces/{workspace}/members": {
+    "get": {
+      "workspaces": ""
+    }
+  },
+  "/workspaces/{workspace}/members/{member}": {
+    "get": {
+      "workspaces": ""
+    }
+  },
+  "/workspaces/{workspace}/projects": {
+    "get": {
+      "workspaces": ""
+    },
+    "post": {
+      "projects": "",
+      "workspaces": ""
+    }
+  },
+  "/workspaces/{workspace}/projects/{project_key}": {
+    "delete": {
+      "projects": "",
+      "workspaces": ""
+    },
+    "get": {
+      "projects": "",
+      "workspaces": ""
+    },
+    "put": {
+      "projects": "",
+      "workspaces": ""
     }
   }
 }
