@@ -46,17 +46,17 @@ for (const url of Object.keys(PATHS_SPEC)) {
       ENDPOINT_NAMES[url][method] = {}
     }
 
+    const endpointName = PATHS_SPEC[url][method].operationId || ''
+
     if (!ENDPOINT_NAMES[url][method][resourceNamespaceName]) {
-      // set placeholder for new endpoint name
-      ENDPOINT_NAMES[url][method][resourceNamespaceName] = ''
+      ENDPOINT_NAMES[url][method][resourceNamespaceName] = endpointName
     }
 
     if (!PATHS_SPEC[url][method].tags) continue
 
     for (const tagNamespaceName of PATHS_SPEC[url][method].tags) {
       if (!ENDPOINT_NAMES[url][method][tagNamespaceName]) {
-        // set placeholder for new endpoint name
-        ENDPOINT_NAMES[url][method][tagNamespaceName] = ''
+        ENDPOINT_NAMES[url][method][tagNamespaceName] = endpointName
       }
     }
   }
