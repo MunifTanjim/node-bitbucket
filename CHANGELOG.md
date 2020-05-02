@@ -4,6 +4,10 @@
 
 - ...
 
+## [2.1.0] - 2020-05-02
+
+- Add endpoints for: `PropertyValue`, `Reports`, `Annotation`
+
 ## [2.0.3] - 2020-02-14
 
 - Resolve: [#51](https://github.com/MunifTanjim/node-bitbucket/issues/51)
@@ -20,7 +24,8 @@
 
 - Version 2 Release
 
-[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.0.3...HEAD
+[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.1.0...HEAD
+[2.1.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.0.3...2.1.0
 [2.0.3]: https://github.com/MunifTanjim/node-bitbucket/compare/2.0.2...2.0.3
 [2.0.2]: https://github.com/MunifTanjim/node-bitbucket/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/MunifTanjim/node-bitbucket/compare/2.0.0...2.0.1
