@@ -4,6 +4,10 @@
 
 - ...
 
+## [2.2.0] - 2020-05-23
+
+- Add better support for TypeScript types, resolves [#61](https://github.com/MunifTanjim/node-bitbucket/issues/61)
+
 ## [2.1.0] - 2020-05-02
 
 - Add endpoints for: `PropertyValue`, `Reports`, `Annotation`
