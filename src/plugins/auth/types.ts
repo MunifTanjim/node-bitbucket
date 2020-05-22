@@ -1,11 +1,6 @@
-import { Options } from '../../client/types'
-import { RequestOptions } from '../../endpoint/types'
-
-export type {
-  Options,
-  RequestOptions
-}
 export type APIClient = import('../../client/types').APIClient
+export type Options = import('../../client/types').Options
+export type RequestOptions = import('../../endpoint/types').RequestOptions
 
 export type AuthBasic = {
   username: string

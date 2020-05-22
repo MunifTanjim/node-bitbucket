@@ -1,12 +1,5 @@
-import type {
-  Headers,
-  RequestOptions
-} from '../endpoint/types'
-
-export type {
-  Headers,
-  RequestOptions
-}
+export type Headers = import('../endpoint/types').Headers
+export type RequestOptions = import('../endpoint/types').RequestOptions
 
 export abstract class HTTPError extends Error {
   public error!: any | undefined

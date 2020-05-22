@@ -1,4 +1,2 @@
-import type { APIClient } from '../../client/types'
-import type { EndpointParams } from '../../endpoint/types'
-
-export type { APIClient, EndpointParams }
+export type APIClient = import('../../client/types').APIClient
+export type EndpointParams = import('../../endpoint/types').EndpointParams
