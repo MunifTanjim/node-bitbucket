@@ -2,8 +2,10 @@
   "extends": [
     "standard",
     "eslint:recommended",
-    "prettier",
-    "plugin:prettier/recommended",
+    // todo: enable prettier once it supports typescript 3.8
+    // refer to https://github.com/prettier/prettier/issues/7778
+    // "prettier",
+    // "plugin:prettier/recommended",
     "plugin:jest/recommended"
   ]
 }

@@ -1,9 +1,9 @@
-import { HookSingular } from 'before-after-hook'
-import { RequestOptions } from '../endpoint/types'
-import { HTTPError } from '../error/types'
-import { Request, Response } from '../request/types'
-
-export { EndpointParams } from '../endpoint/types'
+type HookSingular<O, R, E> = import('before-after-hook').HookSingular<O, R, E>
+type RequestOptions = import('../endpoint/types').RequestOptions
+export type EndpointParams = import('../endpoint/types').EndpointParams
+type HTTPError = import('../error/types').HTTPError
+type Request = import('../request/types').Request
+type Response<T> = import('../request/types').Response<T>
 
 export interface Options {
   [option: string]: any
