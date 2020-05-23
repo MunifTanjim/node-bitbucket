@@ -1,9 +1,0 @@
-{
-  "extends": [
-    "standard",
-    "eslint:recommended",
-    "prettier",
-    "plugin:prettier/recommended",
-    "plugin:jest/recommended"
-  ]
-}
