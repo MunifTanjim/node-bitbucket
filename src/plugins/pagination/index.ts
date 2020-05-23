@@ -9,7 +9,7 @@ function paginationPlugin(client: APIClient): void {
   client.getNextPage = getPage.bind(null, client, 'next')
 
   client.hasPreviousPage = <T>({
-    previous
+    previous,
   }: PaginatedResponseData<T>): boolean => Boolean(previous)
   client.getPreviousPage = getPage.bind(null, client, 'previous')
 }

@@ -59,8 +59,8 @@ You can set the APIs' `baseUrl` and modify some behaviors (e.g. request timeout 
 const clientOptions = {
   baseUrl: 'https://api.bitbucket.org/2.0',
   request: {
-    timeout: 10
-  }
+    timeout: 10,
+  },
 }
 
 const bitbucket = new Bitbucket(clientOptions)
@@ -72,8 +72,8 @@ const bitbucket = new Bitbucket(clientOptions)
 const clientOptions = {
   auth: {
     username: 'username',
-    password: 'password'
-  }
+    password: 'password',
+  },
 }
 
 const bitbucket = new Bitbucket(clientOptions)
@@ -82,6 +82,7 @@ const bitbucket = new Bitbucket(clientOptions)
 #### API Methods
 
 **async/await**
+
 ```js
 try {
   const { data, headers, status, url } = await bitbucket.<namespace>.<api>({ ...params })
@@ -91,6 +92,7 @@ try {
 ```
 
 **Promise**
+
 ```js
 bitbucket.<namespace>
   .<api>({ ...params })
@@ -117,7 +119,7 @@ Check API client docs: [https://bitbucketjs.netlify.com](https://bitbucketjs.net
 bitbucket.repositories
   .list({ username: 'MunifTanjim' })
   .then(({ data }) => console.log(data.values))
-  .catch(err => console.error(err))
+  .catch((err) => console.error(err))
 ```
 
 ## Acknowledgement

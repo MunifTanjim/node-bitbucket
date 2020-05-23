@@ -1,5 +1,5 @@
 const URL_CORRECTION = {
-  '/users/{username}/ssh-keys/': '/users/{username}/ssh-keys/{key_id}'
+  '/users/{username}/ssh-keys/': '/users/{username}/ssh-keys/{key_id}',
 }
 
 const setUrl = (endpointObject, url) => {

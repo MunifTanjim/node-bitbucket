@@ -1,4 +1,4 @@
-const getOAuthRoutes = info => ({
+const getOAuthRoutes = (info) => ({
   getToken: {
     authorizationCodeGrant: {
       grant_type: 'authorization_code',
@@ -7,24 +7,24 @@ const getOAuthRoutes = info => ({
         client_id: {
           in: 'body',
           required: true,
-          type: 'string'
+          type: 'string',
         },
         client_secret: {
           in: 'body',
           required: true,
-          type: 'string'
+          type: 'string',
         },
         code: {
           required: true,
-          type: 'string'
+          type: 'string',
         },
         grant_type: {
           in: 'body',
           required: true,
-          type: 'string'
-        }
+          type: 'string',
+        },
       },
-      url: `${info.tokenUrl}`
+      url: `${info.tokenUrl}`,
     },
     implicitGrant: {
       response_type: 'token',
@@ -33,15 +33,15 @@ const getOAuthRoutes = info => ({
         client_id: {
           in: 'query',
           required: true,
-          type: 'string'
+          type: 'string',
         },
         response_type: {
           in: 'query',
           required: true,
-          type: 'string'
-        }
+          type: 'string',
+        },
       },
-      url: `${info.tokenUrl}`
+      url: `${info.tokenUrl}`,
     },
     resourceOwnerPasswordCredentialsGrant: {
       grant_type: 'password',
@@ -50,30 +50,30 @@ const getOAuthRoutes = info => ({
         client_id: {
           in: 'body',
           required: true,
-          type: 'string'
+          type: 'string',
         },
         client_secret: {
           in: 'body',
           required: true,
-          type: 'string'
+          type: 'string',
         },
         grant_type: {
           in: 'body',
           required: true,
-          type: 'string'
+          type: 'string',
         },
         password: {
           in: 'body',
           required: true,
-          type: 'string'
+          type: 'string',
         },
         username: {
           in: 'body',
           required: true,
-          type: 'string'
-        }
+          type: 'string',
+        },
       },
-      url: `${info.tokenUrl}`
+      url: `${info.tokenUrl}`,
     },
     clientCredentialsGrant: {
       grant_type: 'client_credentials',
@@ -82,20 +82,20 @@ const getOAuthRoutes = info => ({
         client_id: {
           in: 'body',
           required: true,
-          type: 'string'
+          type: 'string',
         },
         client_secret: {
           in: 'body',
           required: true,
-          type: 'string'
+          type: 'string',
         },
         grant_type: {
           in: 'body',
           required: true,
-          type: 'string'
-        }
+          type: 'string',
+        },
       },
-      url: `${info.tokenUrl}`
+      url: `${info.tokenUrl}`,
     },
     bitbucketCloudJWTGrant: {
       grant_type: 'urn:bitbucket:oauth2:jwt',
@@ -104,17 +104,17 @@ const getOAuthRoutes = info => ({
         grant_type: {
           in: 'body',
           required: true,
-          type: 'string'
+          type: 'string',
         },
         jwtToken: {
           in: 'headers.authorization:JWT',
           required: true,
-          type: 'string'
-        }
+          type: 'string',
+        },
       },
-      url: `${info.tokenUrl}`
-    }
-  }
+      url: `${info.tokenUrl}`,
+    },
+  },
 })
 
 module.exports = getOAuthRoutes

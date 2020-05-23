@@ -31,9 +31,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "addon"
-      ]
+      "tags": ["addon"]
     },
     "parameters": [],
     "put": {
@@ -73,9 +71,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "addon"
-      ]
+      "tags": ["addon"]
     }
   },
   "/addon/linkers": {
@@ -101,9 +97,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "addon"
-      ]
+      "tags": ["addon"]
     },
     "parameters": []
   },
@@ -130,9 +124,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "addon"
-      ]
+      "tags": ["addon"]
     },
     "parameters": [
       {
@@ -166,9 +158,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "addon"
-      ]
+      "tags": ["addon"]
     },
     "get": {
       "description": "",
@@ -192,9 +182,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "addon"
-      ]
+      "tags": ["addon"]
     },
     "parameters": [
       {
@@ -226,9 +214,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "addon"
-      ]
+      "tags": ["addon"]
     },
     "put": {
       "description": "",
@@ -252,9 +238,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "addon"
-      ]
+      "tags": ["addon"]
     }
   },
   "/addon/linkers/{linker_key}/values/": {
@@ -280,9 +264,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "addon"
-      ]
+      "tags": ["addon"]
     },
     "get": {
       "description": "",
@@ -306,9 +288,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "addon"
-      ]
+      "tags": ["addon"]
     },
     "parameters": [
       {
@@ -358,9 +338,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "addon"
-      ]
+      "tags": ["addon"]
     }
   },
   "/hook_events": {
@@ -386,9 +364,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "webhooks"
-      ]
+      "tags": ["webhooks"]
     },
     "parameters": []
   },
@@ -398,12 +374,7 @@
       "parameters": [
         {
           "description": "A resource or subject type.",
-          "enum": [
-            "workspace",
-            "user",
-            "repository",
-            "team"
-          ],
+          "enum": ["workspace", "user", "repository", "team"],
           "in": "path",
           "name": "subject_type",
           "required": true,
@@ -435,9 +406,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "webhooks"
-      ]
+      "tags": ["webhooks"]
     },
     "parameters": [
       {
@@ -461,12 +430,7 @@
         },
         {
           "description": "Only return pull requests that are in this state. This parameter can be repeated.",
-          "enum": [
-            "MERGED",
-            "SUPERSEDED",
-            "OPEN",
-            "DECLINED"
-          ],
+          "enum": ["MERGED", "SUPERSEDED", "OPEN", "DECLINED"],
           "in": "query",
           "name": "state",
           "type": "string"
@@ -488,9 +452,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -499,9 +461,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "parameters": [
       {
@@ -525,12 +485,7 @@
         },
         {
           "description": "Filters the result based on the authenticated user's role on each repository.\n\n* **member**: returns repositories to which the user has explicit read access\n* **contributor**: returns repositories to which the user has explicit write access\n* **admin**: returns repositories to which the user has explicit administrator access\n* **owner**: returns all repositories owned by the current user\n",
-          "enum": [
-            "admin",
-            "contributor",
-            "member",
-            "owner"
-          ],
+          "enum": ["admin", "contributor", "member", "owner"],
           "in": "query",
           "name": "role",
           "required": false,
@@ -561,9 +516,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -572,9 +525,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories"
-      ]
+      "tags": ["repositories"]
     },
     "parameters": []
   },
@@ -584,12 +535,7 @@
       "parameters": [
         {
           "description": "\nFilters the result based on the authenticated user's role on each repository.\n\n* **member**: returns repositories to which the user has explicit read access\n* **contributor**: returns repositories to which the user has explicit write access\n* **admin**: returns repositories to which the user has explicit administrator access\n* **owner**: returns all repositories owned by the current user\n",
-          "enum": [
-            "admin",
-            "contributor",
-            "member",
-            "owner"
-          ],
+          "enum": ["admin", "contributor", "member", "owner"],
           "in": "query",
           "name": "role",
           "required": false,
@@ -632,9 +578,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -643,9 +587,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories"
-      ]
+      "tags": ["repositories"]
     },
     "parameters": [
       {
@@ -688,9 +630,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:delete"
-          ]
+          "oauth2": ["repository:delete"]
         },
         {
           "basic": []
@@ -699,16 +639,12 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories"
-      ]
+      "tags": ["repositories"]
     },
     "get": {
       "description": "Returns the object describing this repository.",
       "parameters": [],
-      "produces": [
-        "application/json"
-      ],
+      "produces": ["application/json"],
       "responses": {
         "200": {
           "description": "The repository object.",
@@ -819,9 +755,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -830,9 +764,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories"
-      ]
+      "tags": ["repositories"]
     },
     "parameters": [
       {
@@ -863,9 +795,7 @@
           }
         }
       ],
-      "produces": [
-        "application/json"
-      ],
+      "produces": ["application/json"],
       "responses": {
         "200": {
           "description": "The newly created repository.",
@@ -976,9 +906,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:admin"
-          ]
+          "oauth2": ["repository:admin"]
         },
         {
           "basic": []
@@ -987,9 +915,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories"
-      ]
+      "tags": ["repositories"]
     },
     "put": {
       "description": "Since this endpoint can be used to both update and to create a\nrepository, the request body depends on the intent.\n\n### Creation\n\nSee the POST documentation for the repository endpoint for an example\nof the request body.\n\n### Update\n\nNote: Changing the `name` of the repository will cause the location to\nbe changed. This is because the URL of the repo is derived from the\nname (a process called slugification). In such a scenario, it is\npossible for the request to fail if the newly created slug conflicts\nwith an existing repository's slug. But if there is no conflict,\nthe new location will be returned in the `Location` header of the\nresponse.",
@@ -1004,9 +930,7 @@
           }
         }
       ],
-      "produces": [
-        "application/json"
-      ],
+      "produces": ["application/json"],
       "responses": {
         "200": {
           "description": "The existing repository has been updated",
@@ -1223,9 +1147,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:admin"
-          ]
+          "oauth2": ["repository:admin"]
         },
         {
           "basic": []
@@ -1234,9 +1156,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories"
-      ]
+      "tags": ["repositories"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/branch-restrictions": {
@@ -1286,9 +1206,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:admin"
-          ]
+          "oauth2": ["repository:admin"]
         },
         {
           "basic": []
@@ -1297,9 +1215,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "branchrestrictions"
-      ]
+      "tags": ["branchrestrictions"]
     },
     "parameters": [
       {
@@ -1358,9 +1274,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:admin"
-          ]
+          "oauth2": ["repository:admin"]
         },
         {
           "basic": []
@@ -1369,9 +1283,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "branchrestrictions"
-      ]
+      "tags": ["branchrestrictions"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/branch-restrictions/{id}": {
@@ -1403,9 +1315,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:admin"
-          ]
+          "oauth2": ["repository:admin"]
         },
         {
           "basic": []
@@ -1414,9 +1324,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "branchrestrictions"
-      ]
+      "tags": ["branchrestrictions"]
     },
     "get": {
       "description": "Returns a specific branch restriction rule.",
@@ -1449,9 +1357,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:admin"
-          ]
+          "oauth2": ["repository:admin"]
         },
         {
           "basic": []
@@ -1460,9 +1366,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "branchrestrictions"
-      ]
+      "tags": ["branchrestrictions"]
     },
     "parameters": [
       {
@@ -1528,9 +1432,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:admin"
-          ]
+          "oauth2": ["repository:admin"]
         },
         {
           "basic": []
@@ -1539,9 +1441,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "branchrestrictions"
-      ]
+      "tags": ["branchrestrictions"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/branching-model": {
@@ -1576,9 +1476,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -1587,9 +1485,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "branching_model"
-      ]
+      "tags": ["branching_model"]
     },
     "parameters": [
       {
@@ -1640,9 +1536,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:admin"
-          ]
+          "oauth2": ["repository:admin"]
         },
         {
           "basic": []
@@ -1651,9 +1545,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "branching_model"
-      ]
+      "tags": ["branching_model"]
     },
     "parameters": [
       {
@@ -1708,9 +1600,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:admin"
-          ]
+          "oauth2": ["repository:admin"]
         },
         {
           "basic": []
@@ -1719,9 +1609,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "branching_model"
-      ]
+      "tags": ["branching_model"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name}": {
@@ -1770,9 +1658,7 @@
           "description": "An empty response."
         }
       },
-      "tags": [
-        "properties"
-      ]
+      "tags": ["properties"]
     },
     "get": {
       "description": "Retrieve an application property value stored against a commit.",
@@ -1819,9 +1705,7 @@
           "description": "The value of the property."
         }
       },
-      "tags": [
-        "properties"
-      ]
+      "tags": ["properties"]
     },
     "put": {
       "description": "Update an application property value stored against a commit.",
@@ -1868,9 +1752,7 @@
           "description": "An empty response."
         }
       },
-      "tags": [
-        "properties"
-      ]
+      "tags": ["properties"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/pullrequests": {
@@ -1917,9 +1799,7 @@
           "type": "integer"
         }
       ],
-      "produces": [
-        "application/json"
-      ],
+      "produces": ["application/json"],
       "responses": {
         "200": {
           "description": "The paginated list of pull requests.",
@@ -1941,9 +1821,7 @@
         }
       },
       "summary": "Returns a paginated list of all pull requests as part of which this commit was reviewed. Pull Request Commit Links app must be installed first before using this API; installation automatically occurs when 'Go to pull request' is clicked from the web interface for a commit's details.",
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports": {
@@ -1973,9 +1851,7 @@
           "type": "string"
         }
       ],
-      "produces": [
-        "application/json"
-      ],
+      "produces": ["application/json"],
       "responses": {
         "200": {
           "description": "OK",
@@ -1984,10 +1860,7 @@
           }
         }
       },
-      "tags": [
-        "reports",
-        "commits"
-      ]
+      "tags": ["reports", "commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}": {
@@ -2024,18 +1897,13 @@
           "type": "string"
         }
       ],
-      "produces": [
-        "application/json"
-      ],
+      "produces": ["application/json"],
       "responses": {
         "204": {
           "description": "No content"
         }
       },
-      "tags": [
-        "reports",
-        "commits"
-      ]
+      "tags": ["reports", "commits"]
     },
     "get": {
       "description": "Returns a single Report matching the provided ID.",
@@ -2070,9 +1938,7 @@
           "type": "string"
         }
       ],
-      "produces": [
-        "application/json"
-      ],
+      "produces": ["application/json"],
       "responses": {
         "200": {
           "description": "OK",
@@ -2087,10 +1953,7 @@
           }
         }
       },
-      "tags": [
-        "reports",
-        "commits"
-      ]
+      "tags": ["reports", "commits"]
     },
     "put": {
       "description": "Creates or updates a report for the specified commit.",
@@ -2134,9 +1997,7 @@
           }
         }
       ],
-      "produces": [
-        "application/json"
-      ],
+      "produces": ["application/json"],
       "responses": {
         "200": {
           "description": "OK",
@@ -2151,10 +2012,7 @@
           }
         }
       },
-      "tags": [
-        "reports",
-        "commits"
-      ]
+      "tags": ["reports", "commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations": {
@@ -2191,9 +2049,7 @@
           "type": "string"
         }
       ],
-      "produces": [
-        "application/json"
-      ],
+      "produces": ["application/json"],
       "responses": {
         "200": {
           "description": "OK",
@@ -2202,10 +2058,7 @@
           }
         }
       },
-      "tags": [
-        "reports",
-        "commits"
-      ]
+      "tags": ["reports", "commits"]
     },
     "post": {
       "description": "Bulk upload of annotations.",
@@ -2254,9 +2107,7 @@
           }
         }
       ],
-      "produces": [
-        "application/json"
-      ],
+      "produces": ["application/json"],
       "responses": {
         "200": {
           "description": "OK",
@@ -2268,10 +2119,7 @@
           }
         }
       },
-      "tags": [
-        "reports",
-        "commits"
-      ]
+      "tags": ["reports", "commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations/{annotationId}": {
@@ -2315,18 +2163,13 @@
           "type": "string"
         }
       ],
-      "produces": [
-        "application/json"
-      ],
+      "produces": ["application/json"],
       "responses": {
         "204": {
           "description": "No content"
         }
       },
-      "tags": [
-        "reports",
-        "commits"
-      ]
+      "tags": ["reports", "commits"]
     },
     "get": {
       "description": "Returns a single Annotation matching the provided ID.",
@@ -2368,9 +2211,7 @@
           "type": "string"
         }
       ],
-      "produces": [
-        "application/json"
-      ],
+      "produces": ["application/json"],
       "responses": {
         "200": {
           "description": "OK",
@@ -2385,10 +2226,7 @@
           }
         }
       },
-      "tags": [
-        "reports",
-        "commits"
-      ]
+      "tags": ["reports", "commits"]
     },
     "put": {
       "description": "Creates or updates an annotation for the specified report.",
@@ -2439,9 +2277,7 @@
           }
         }
       ],
-      "produces": [
-        "application/json"
-      ],
+      "produces": ["application/json"],
       "responses": {
         "200": {
           "description": "OK",
@@ -2456,10 +2292,7 @@
           }
         }
       },
-      "tags": [
-        "reports",
-        "commits"
-      ]
+      "tags": ["reports", "commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{node}": {
@@ -2482,9 +2315,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -2493,9 +2324,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "commits"
-      ]
+      "tags": ["commits"]
     },
     "parameters": [
       {
@@ -2538,9 +2367,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:write"
-          ]
+          "oauth2": ["repository:write"]
         },
         {
           "basic": []
@@ -2549,9 +2376,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "commits"
-      ]
+      "tags": ["commits"]
     },
     "parameters": [
       {
@@ -2595,9 +2420,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:write"
-          ]
+          "oauth2": ["repository:write"]
         },
         {
           "basic": []
@@ -2606,9 +2429,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "commits"
-      ]
+      "tags": ["commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{node}/comments": {
@@ -2640,9 +2461,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -2651,9 +2470,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "commits"
-      ]
+      "tags": ["commits"]
     },
     "parameters": [
       {
@@ -2724,9 +2541,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -2735,9 +2550,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "commits"
-      ]
+      "tags": ["commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{node}/comments/{comment_id}": {
@@ -2754,9 +2567,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -2765,9 +2576,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "commits"
-      ]
+      "tags": ["commits"]
     },
     "parameters": [
       {
@@ -2838,9 +2647,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -2849,10 +2656,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories",
-        "commitstatuses"
-      ]
+      "tags": ["repositories", "commitstatuses"]
     },
     "parameters": [
       {
@@ -2934,9 +2738,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -2945,10 +2747,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories",
-        "commitstatuses"
-      ]
+      "tags": ["repositories", "commitstatuses"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{node}/statuses/build/{key}": {
@@ -2974,9 +2773,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -2985,10 +2782,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories",
-        "commitstatuses"
-      ]
+      "tags": ["repositories", "commitstatuses"]
     },
     "parameters": [
       {
@@ -3052,9 +2846,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -3063,10 +2855,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories",
-        "commitstatuses"
-      ]
+      "tags": ["repositories", "commitstatuses"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commits": {
@@ -3083,9 +2872,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -3094,9 +2881,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "commits"
-      ]
+      "tags": ["commits"]
     },
     "parameters": [
       {
@@ -3127,9 +2912,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -3138,9 +2921,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "commits"
-      ]
+      "tags": ["commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commits/{revision}": {
@@ -3157,9 +2938,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -3168,9 +2947,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "commits"
-      ]
+      "tags": ["commits"]
     },
     "parameters": [
       {
@@ -3207,9 +2984,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -3218,9 +2993,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "commits"
-      ]
+      "tags": ["commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/components": {
@@ -3243,9 +3016,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue"
-          ]
+          "oauth2": ["issue"]
         },
         {
           "basic": []
@@ -3254,9 +3025,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -3295,9 +3064,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue"
-          ]
+          "oauth2": ["issue"]
         },
         {
           "basic": []
@@ -3306,9 +3073,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -3345,9 +3110,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -3356,9 +3119,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "parameters": [
       {
@@ -3391,9 +3152,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:admin"
-          ]
+          "oauth2": ["repository:admin"]
         },
         {
           "basic": []
@@ -3402,9 +3161,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "get": {
       "description": "Returns the specified reviewer.\n\nThis can be used to test whether a user is among the repository's\ndefault reviewers list. A 404 indicates that that specified user is not\na default reviewer.",
@@ -3419,9 +3176,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -3430,9 +3185,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "parameters": [
       {
@@ -3470,9 +3223,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:admin"
-          ]
+          "oauth2": ["repository:admin"]
         },
         {
           "basic": []
@@ -3481,9 +3232,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/deploy-keys": {
@@ -3509,10 +3258,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository",
-            "repository:admin"
-          ]
+          "oauth2": ["repository", "repository:admin"]
         },
         {
           "basic": []
@@ -3521,9 +3267,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "deploy"
-      ]
+      "tags": ["deploy"]
     },
     "parameters": [
       {
@@ -3566,10 +3310,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository",
-            "repository:admin"
-          ]
+          "oauth2": ["repository", "repository:admin"]
         },
         {
           "basic": []
@@ -3578,9 +3319,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "deploy"
-      ]
+      "tags": ["deploy"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/deploy-keys/{key_id}": {
@@ -3603,10 +3342,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository",
-            "repository:admin"
-          ]
+          "oauth2": ["repository", "repository:admin"]
         },
         {
           "basic": []
@@ -3615,9 +3351,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "deploy"
-      ]
+      "tags": ["deploy"]
     },
     "get": {
       "description": "Returns the deploy key belonging to a specific key.\n\nExample:\n```\n$ curl -H \"Authorization <auth header>\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-key/1234\n\nOutput:\n{\n    \"comment\": \"mleu@C02W454JHTD8\",\n    \"last_used\": null,\n    \"links\": {\n        \"self\": {\n            \"href\": https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-key/1234\"\n        }\n    },\n    \"repository\": {\n        \"full_name\": \"mleu/test\",\n        \"name\": \"test\",\n        \"type\": \"repository\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n    },\n    \"label\": \"mykey\",\n    \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"id\": 1234,\n    \"type\": \"deploy_key\"\n}\n```",
@@ -3641,10 +3375,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository",
-            "repository:admin"
-          ]
+          "oauth2": ["repository", "repository:admin"]
         },
         {
           "basic": []
@@ -3653,9 +3384,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "deploy"
-      ]
+      "tags": ["deploy"]
     },
     "parameters": [
       {
@@ -3708,10 +3437,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository",
-            "repository:admin"
-          ]
+          "oauth2": ["repository", "repository:admin"]
         },
         {
           "basic": []
@@ -3720,9 +3446,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "deploy"
-      ]
+      "tags": ["deploy"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables": {
@@ -3760,9 +3484,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "post": {
       "description": "Create a deployment environment level variable.",
@@ -3832,9 +3554,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}": {
@@ -3882,9 +3602,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "put": {
       "description": "Update a deployment environment level variable.",
@@ -3942,9 +3660,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/deployments/": {
@@ -3975,9 +3691,7 @@
           }
         }
       },
-      "tags": [
-        "deployments"
-      ]
+      "tags": ["deployments"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/deployments/{deployment_uuid}": {
@@ -4021,9 +3735,7 @@
           }
         }
       },
-      "tags": [
-        "deployments"
-      ]
+      "tags": ["deployments"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/diff/{spec}": {
@@ -4072,9 +3784,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -4083,9 +3793,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "commits"
-      ]
+      "tags": ["commits"]
     },
     "parameters": [
       {
@@ -4124,9 +3832,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -4182,9 +3888,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -4193,9 +3897,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "downloads"
-      ]
+      "tags": ["downloads"]
     },
     "parameters": [
       {
@@ -4226,9 +3928,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:write"
-          ]
+          "oauth2": ["repository:write"]
         },
         {
           "basic": []
@@ -4237,9 +3937,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "downloads"
-      ]
+      "tags": ["downloads"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/downloads/{filename}": {
@@ -4256,9 +3954,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:write"
-          ]
+          "oauth2": ["repository:write"]
         },
         {
           "basic": []
@@ -4267,9 +3963,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "downloads"
-      ]
+      "tags": ["downloads"]
     },
     "get": {
       "description": "Return a redirect to the contents of a download artifact.\n\nThis endpoint returns the actual file contents and not the artifact's\nmetadata.\n\n    $ curl -s -L https://api.bitbucket.org/2.0/repositories/evzijst/git-tests/downloads/hello.txt\n    Hello World",
@@ -4284,9 +3978,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -4295,9 +3987,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "downloads"
-      ]
+      "tags": ["downloads"]
     },
     "parameters": [
       {
@@ -4350,9 +4040,7 @@
           }
         }
       },
-      "tags": [
-        "deployments"
-      ]
+      "tags": ["deployments"]
     },
     "post": {
       "description": "Create an environment.",
@@ -4408,9 +4096,7 @@
           }
         }
       },
-      "tags": [
-        "deployments"
-      ]
+      "tags": ["deployments"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}": {
@@ -4451,9 +4137,7 @@
           }
         }
       },
-      "tags": [
-        "deployments"
-      ]
+      "tags": ["deployments"]
     },
     "get": {
       "description": "Retrieve an environment",
@@ -4495,9 +4179,7 @@
           }
         }
       },
-      "tags": [
-        "deployments"
-      ]
+      "tags": ["deployments"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes/": {
@@ -4538,9 +4220,7 @@
           }
         }
       },
-      "tags": [
-        "deployments"
-      ]
+      "tags": ["deployments"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/filehistory/{node}/{path}": {
@@ -4585,9 +4265,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -4596,10 +4274,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "source",
-        "repositories"
-      ]
+      "tags": ["source", "repositories"]
     },
     "parameters": [
       {
@@ -4636,12 +4311,7 @@
       "parameters": [
         {
           "description": "Filters the result based on the authenticated user's role on each repository.\n\n* **member**: returns repositories to which the user has explicit read access\n* **contributor**: returns repositories to which the user has explicit write access\n* **admin**: returns repositories to which the user has explicit administrator access\n* **owner**: returns all repositories owned by the current user\n",
-          "enum": [
-            "admin",
-            "contributor",
-            "member",
-            "owner"
-          ],
+          "enum": ["admin", "contributor", "member", "owner"],
           "in": "query",
           "name": "role",
           "required": false,
@@ -4672,9 +4342,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -4683,9 +4351,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories"
-      ]
+      "tags": ["repositories"]
     },
     "parameters": [
       {
@@ -4820,9 +4486,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:write"
-          ]
+          "oauth2": ["repository:write"]
         },
         {
           "basic": []
@@ -4831,9 +4495,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories"
-      ]
+      "tags": ["repositories"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/hooks": {
@@ -4862,9 +4524,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -4873,10 +4533,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories",
-        "webhooks"
-      ]
+      "tags": ["repositories", "webhooks"]
     },
     "parameters": [
       {
@@ -4925,9 +4582,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -4936,10 +4591,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories",
-        "webhooks"
-      ]
+      "tags": ["repositories", "webhooks"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/hooks/{uid}": {
@@ -4973,9 +4625,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -4984,10 +4634,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories",
-        "webhooks"
-      ]
+      "tags": ["repositories", "webhooks"]
     },
     "get": {
       "description": "Returns the webhook with the specified id installed on the specified\nrepository.",
@@ -5016,9 +4663,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -5027,10 +4672,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories",
-        "webhooks"
-      ]
+      "tags": ["repositories", "webhooks"]
     },
     "parameters": [
       {
@@ -5087,9 +4729,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -5098,10 +4738,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories",
-        "webhooks"
-      ]
+      "tags": ["repositories", "webhooks"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues": {
@@ -5124,9 +4761,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue"
-          ]
+          "oauth2": ["issue"]
         },
         {
           "basic": []
@@ -5135,9 +4770,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -5202,9 +4835,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue:write"
-          ]
+          "oauth2": ["issue:write"]
         },
         {
           "basic": []
@@ -5213,9 +4844,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}": {
@@ -5244,9 +4873,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue:write"
-          ]
+          "oauth2": ["issue:write"]
         },
         {
           "basic": []
@@ -5255,9 +4882,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "get": {
       "description": "Returns the specified issue.",
@@ -5290,9 +4915,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue"
-          ]
+          "oauth2": ["issue"]
         },
         {
           "basic": []
@@ -5301,9 +4924,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -5353,9 +4974,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue:write"
-          ]
+          "oauth2": ["issue:write"]
         },
         {
           "basic": []
@@ -5364,9 +4983,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/attachments": {
@@ -5400,9 +5017,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue"
-          ]
+          "oauth2": ["issue"]
         },
         {
           "basic": []
@@ -5411,9 +5026,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -5473,9 +5086,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue:write"
-          ]
+          "oauth2": ["issue:write"]
         },
         {
           "basic": []
@@ -5484,9 +5095,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/attachments/{path}": {
@@ -5509,9 +5118,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue:write"
-          ]
+          "oauth2": ["issue:write"]
         },
         {
           "basic": []
@@ -5520,9 +5127,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "get": {
       "description": "Returns the contents of the specified file attachment.\n\nNote that this endpoint does not return a JSON response, but instead\nreturns a redirect pointing to the actual file that in turn will return\nthe raw contents.\n\nThe redirect URL contains a one-time token that has a limited lifetime.\nAs a result, the link should not be persisted, stored, or shared.",
@@ -5548,9 +5153,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue"
-          ]
+          "oauth2": ["issue"]
         },
         {
           "basic": []
@@ -5559,9 +5162,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -5627,9 +5228,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue"
-          ]
+          "oauth2": ["issue"]
         },
         {
           "basic": []
@@ -5638,9 +5237,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -5712,9 +5309,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue:write"
-          ]
+          "oauth2": ["issue:write"]
         },
         {
           "basic": []
@@ -5723,9 +5318,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/changes/{change_id}": {
@@ -5748,9 +5341,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue"
-          ]
+          "oauth2": ["issue"]
         },
         {
           "basic": []
@@ -5759,9 +5350,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -5830,9 +5419,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue"
-          ]
+          "oauth2": ["issue"]
         },
         {
           "basic": []
@@ -5841,9 +5428,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -5913,9 +5498,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue:write"
-          ]
+          "oauth2": ["issue:write"]
         },
         {
           "basic": []
@@ -5924,9 +5507,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/comments/{comment_id}": {
@@ -5971,9 +5552,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue:write"
-          ]
+          "oauth2": ["issue:write"]
         },
         {
           "basic": []
@@ -5982,9 +5561,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "get": {
       "description": "Returns the specified issue comment object.",
@@ -6021,9 +5598,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue"
-          ]
+          "oauth2": ["issue"]
         },
         {
           "basic": []
@@ -6032,9 +5607,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -6114,9 +5687,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue:write"
-          ]
+          "oauth2": ["issue:write"]
         },
         {
           "basic": []
@@ -6125,9 +5696,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/vote": {
@@ -6144,10 +5713,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue:write",
-            "account:write"
-          ]
+          "oauth2": ["issue:write", "account:write"]
         },
         {
           "basic": []
@@ -6156,9 +5722,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "get": {
       "description": "Check whether the authenticated user has voted for this issue.\nA 204 status code indicates that the user has voted, while a 404\nimplies they haven't.",
@@ -6185,10 +5749,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue",
-            "account"
-          ]
+          "oauth2": ["issue", "account"]
         },
         {
           "basic": []
@@ -6197,9 +5758,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -6249,10 +5808,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue",
-            "account:write"
-          ]
+          "oauth2": ["issue", "account:write"]
         },
         {
           "basic": []
@@ -6261,9 +5817,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/watch": {
@@ -6292,10 +5846,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue:write",
-            "account:write"
-          ]
+          "oauth2": ["issue:write", "account:write"]
         },
         {
           "basic": []
@@ -6304,9 +5855,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "get": {
       "description": "Indicated whether or not the authenticated user is watching this\nissue.",
@@ -6333,10 +5882,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue",
-            "account"
-          ]
+          "oauth2": ["issue", "account"]
         },
         {
           "basic": []
@@ -6345,9 +5891,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -6397,10 +5941,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue",
-            "account:write"
-          ]
+          "oauth2": ["issue", "account:write"]
         },
         {
           "basic": []
@@ -6409,9 +5950,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/export": {
@@ -6459,10 +5998,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:admin",
-            "issue"
-          ]
+          "oauth2": ["repository:admin", "issue"]
         },
         {
           "basic": []
@@ -6521,10 +6057,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:admin",
-            "issue"
-          ]
+          "oauth2": ["repository:admin", "issue"]
         },
         {
           "basic": []
@@ -6602,10 +6135,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:admin",
-            "issue:write"
-          ]
+          "oauth2": ["repository:admin", "issue:write"]
         },
         {
           "basic": []
@@ -6669,10 +6199,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:admin",
-            "issue:write"
-          ]
+          "oauth2": ["repository:admin", "issue:write"]
         },
         {
           "basic": []
@@ -6704,9 +6231,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue"
-          ]
+          "oauth2": ["issue"]
         },
         {
           "basic": []
@@ -6715,9 +6240,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -6756,9 +6279,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue"
-          ]
+          "oauth2": ["issue"]
         },
         {
           "basic": []
@@ -6767,9 +6288,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -6812,9 +6331,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -6823,9 +6340,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "commits"
-      ]
+      "tags": ["commits"]
     },
     "parameters": [
       {
@@ -6878,9 +6393,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "put": {
       "description": "Update the pipelines configuration for a repository.",
@@ -6918,9 +6431,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/build_number": {
@@ -6972,9 +6483,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/": {
@@ -7011,9 +6520,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "post": {
       "description": "Create a schedule for the given repository.",
@@ -7069,9 +6576,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}": {
@@ -7112,9 +6617,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "get": {
       "description": "Retrieve a schedule by its UUID.",
@@ -7156,9 +6659,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "put": {
       "description": "Update a schedule.",
@@ -7209,9 +6710,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/": {
@@ -7248,9 +6747,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair": {
@@ -7284,9 +6781,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "get": {
       "description": "Retrieve the repository SSH key pair excluding the SSH private key. The private key is a write only field and will never be exposed in the logs or the REST API.",
@@ -7321,9 +6816,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "put": {
       "description": "Create or update the repository SSH key pair. The private key will be set as a default SSH identity in your build container.",
@@ -7367,9 +6860,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/": {
@@ -7400,9 +6891,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "post": {
       "description": "Create a repository level known host.",
@@ -7458,9 +6947,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}": {
@@ -7501,9 +6988,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "get": {
       "description": "Retrieve a repository level known host.",
@@ -7545,9 +7030,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "put": {
       "description": "Update a repository level known host.",
@@ -7598,9 +7081,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/": {
@@ -7631,9 +7112,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "post": {
       "description": "Create a repository level variable.",
@@ -7689,9 +7168,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid}": {
@@ -7732,9 +7209,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "get": {
       "description": "Retrieve a repository level variable.",
@@ -7776,9 +7251,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "put": {
       "description": "Update a repository level variable.",
@@ -7829,9 +7302,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/": {
@@ -7862,9 +7333,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "post": {
       "description": "Endpoint to create and initiate a pipeline.\nThere are a couple of different options to initiate a pipeline, where the payload of the request will determine which type of pipeline will be instantiated.\n# Trigger a Pipeline for a branch\nOne way to trigger pipelines is by specifying the branch for which you want to trigger a pipeline.\nThe specified branch will be used to determine which pipeline definition from the `bitbucket-pipelines.yml` file will be applied to initiate the pipeline. The pipeline will then do a clone of the repository and checkout the latest revision of the specified branch.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n  -d '\n  {\n    \"target\": {\n      \"ref_type\": \"branch\",\n      \"type\": \"pipeline_ref_target\",\n      \"ref_name\": \"master\"\n    }\n  }'\n```\n# Trigger a Pipeline for a commit on a branch or tag\nYou can initiate a pipeline for a specific commit and in the context of a specified reference (e.g. a branch, tag or bookmark).\nThe specified reference will be used to determine which pipeline definition from the bitbucket-pipelines.yml file will be applied to initiate the pipeline. The pipeline will clone the repository and then do a checkout the specified reference.\n\nThe following reference types are supported:\n\n* `branch`\n* `named_branch`\n* `bookmark`\n * `tag`\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n  https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n  -d '\n  {\n    \"target\": {\n      \"commit\": {\n        \"type\": \"commit\",\n        \"hash\": \"ce5b7431602f7cbba007062eeb55225c6e18e956\"\n      },\n      \"ref_type\": \"branch\",\n      \"type\": \"pipeline_ref_target\",\n      \"ref_name\": \"master\"\n    }\n  }'\n```\n# Trigger a specific pipeline definition for a commit\nYou can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit.\nIn addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition. The resulting pipeline will then clone the repository and checkout the specified revision.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n -d '\n  {\n     \"target\": {\n      \"commit\": {\n         \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",\n         \"type\":\"commit\"\n       },\n        \"selector\": {\n           \"type\":\"custom\",\n              \"pattern\":\"Deploy to production\"\n          },\n        \"type\":\"pipeline_commit_target\"\n   }\n  }'\n```\n# Trigger a specific pipeline definition for a commit on a branch or tag\nYou can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit in the context of a specified reference.\nIn addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition, as well as the reference information. The resulting pipeline will then clone the repository a checkout the specified reference.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n -d '\n  {\n     \"target\": {\n      \"commit\": {\n         \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",\n         \"type\":\"commit\"\n       },\n       \"selector\": {\n          \"type\": \"custom\",\n          \"pattern\": \"Deploy to production\"\n       },\n       \"type\": \"pipeline_ref_target\",\n       \"ref_name\": \"master\",\n       \"ref_type\": \"branch\"\n     }\n  }'\n```\n\n\n# Trigger a custom pipeline with variables\nIn addition to triggering a custom pipeline that is defined in your `bitbucket-pipelines.yml` file as shown in the examples above, you can specify variables that will be available for your build. In the request, provide a list of variables, specifying the following for each variable: key, value, and whether it should be secured or not (this field is optional and defaults to not secured).\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\\n -d '\n  {\n    \"target\": {\n      \"type\": \"pipeline_ref_target\",\n      \"ref_type\": \"branch\",\n      \"ref_name\": \"master\",\n      \"selector\": {\n        \"type\": \"custom\",\n        \"pattern\": \"Deploy to production\"\n      }\n    },\n    \"variables\": [\n      {\n        \"key\": \"var1key\",\n        \"value\": \"var1value\",\n        \"secured\": true\n      },\n      {\n        \"key\": \"var2key\",\n        \"value\": \"var2value\"\n      }\n    ]\n  }'\n```\n\n# Trigger a pull request pipeline\n\nYou can also initiate a pipeline for a specific pull request.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\\n -d '\n  {\n\t\"target\": {\n      \"type\": \"pipeline_pullrequest_target\",\n\t  \"source\": \"pull-request-branch\",\n      \"destination\": \"master\",\n      \"destination_commit\": {\n      \t \"hash\" : \"9f848b7\"\n      },\n      \"commit\": {\n      \t\"hash\" : \"1a372fc\"\n      },\n      \"pullrequest\" : {\n      \t\"id\" : \"3\"\n      },\n\t  \"selector\": {\n        \"type\": \"pull-requests\",\n        \"pattern\": \"**\"\n      }\n    }\n  }'\n```\n",
@@ -7920,9 +7389,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}": {
@@ -7966,9 +7433,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/": {
@@ -8006,9 +7471,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}": {
@@ -8059,9 +7522,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log": {
@@ -8098,9 +7559,7 @@
           "type": "string"
         }
       ],
-      "produces": [
-        "application/octet-stream"
-      ],
+      "produces": ["application/octet-stream"],
       "responses": {
         "200": {
           "description": "The raw log file for this pipeline step."
@@ -8124,9 +7583,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/logs/{log_uuid}": {
@@ -8185,9 +7642,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/properties/{app_key}/{property_name}": {
@@ -8229,9 +7684,7 @@
           "description": "An empty response."
         }
       },
-      "tags": [
-        "properties"
-      ]
+      "tags": ["properties"]
     },
     "get": {
       "description": "Retrieve an application property value stored against a repository.",
@@ -8271,9 +7724,7 @@
           "description": "The value of the property."
         }
       },
-      "tags": [
-        "properties"
-      ]
+      "tags": ["properties"]
     },
     "put": {
       "description": "Update an application property value stored against a repository.",
@@ -8313,9 +7764,7 @@
           "description": "An empty response."
         }
       },
-      "tags": [
-        "properties"
-      ]
+      "tags": ["properties"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests": {
@@ -8324,12 +7773,7 @@
       "parameters": [
         {
           "description": "Only return pull requests that are in this state. This parameter can be repeated.",
-          "enum": [
-            "MERGED",
-            "SUPERSEDED",
-            "OPEN",
-            "DECLINED"
-          ],
+          "enum": ["MERGED", "SUPERSEDED", "OPEN", "DECLINED"],
           "in": "query",
           "name": "state",
           "type": "string"
@@ -8354,9 +7798,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -8365,9 +7807,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "parameters": [
       {
@@ -8426,9 +7866,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest:write"
-          ]
+          "oauth2": ["pullrequest:write"]
         },
         {
           "basic": []
@@ -8437,9 +7875,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}": {
@@ -8617,9 +8053,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -8628,9 +8062,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "parameters": [
       {
@@ -8846,9 +8278,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest:write"
-          ]
+          "oauth2": ["pullrequest:write"]
         },
         {
           "basic": []
@@ -8857,9 +8287,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/activity": {
@@ -8882,9 +8310,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -8893,9 +8319,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "parameters": [
       {
@@ -8938,9 +8362,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest:write"
-          ]
+          "oauth2": ["pullrequest:write"]
         },
         {
           "basic": []
@@ -8949,9 +8371,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "parameters": [
       {
@@ -8994,9 +8414,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest:write"
-          ]
+          "oauth2": ["pullrequest:write"]
         },
         {
           "basic": []
@@ -9005,9 +8423,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments": {
@@ -9044,9 +8460,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -9055,9 +8469,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "parameters": [
       {
@@ -9129,9 +8541,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -9140,9 +8550,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}": {
@@ -9168,9 +8576,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -9179,9 +8585,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "get": {
       "description": "Returns a specific pull request comment.",
@@ -9208,9 +8612,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -9219,9 +8621,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "parameters": [
       {
@@ -9286,9 +8686,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -9297,9 +8695,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/commits": {
@@ -9316,9 +8712,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -9327,9 +8721,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "parameters": [
       {
@@ -9540,9 +8932,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest:write"
-          ]
+          "oauth2": ["pullrequest:write"]
         },
         {
           "basic": []
@@ -9551,9 +8941,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/diff": {
@@ -9567,9 +8955,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -9578,9 +8964,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "parameters": [
       {
@@ -9616,9 +9000,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -9627,9 +9009,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "parameters": [
       {
@@ -9852,9 +9232,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest:write"
-          ]
+          "oauth2": ["pullrequest:write"]
         },
         {
           "basic": []
@@ -9863,9 +9241,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/merge/task-status/{task_id}": {
@@ -9888,9 +9264,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "parameters": [
       {
@@ -9935,9 +9309,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -9946,9 +9318,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "parameters": [
       {
@@ -10011,9 +9381,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -10022,11 +9390,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories",
-        "pullrequests",
-        "commitstatuses"
-      ]
+      "tags": ["repositories", "pullrequests", "commitstatuses"]
     },
     "parameters": [
       {
@@ -10098,9 +9462,7 @@
           "description": "An empty response."
         }
       },
-      "tags": [
-        "properties"
-      ]
+      "tags": ["properties"]
     },
     "get": {
       "description": "Retrieve an application property value stored against a pull request.",
@@ -10147,9 +9509,7 @@
           "description": "The value of the property."
         }
       },
-      "tags": [
-        "properties"
-      ]
+      "tags": ["properties"]
     },
     "put": {
       "description": "Update an application property value stored against a pull request.",
@@ -10196,9 +9556,7 @@
           "description": "An empty response."
         }
       },
-      "tags": [
-        "properties"
-      ]
+      "tags": ["properties"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/activity": {
@@ -10221,9 +9579,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "pullrequest"
-          ]
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -10232,9 +9588,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "pullrequests"
-      ]
+      "tags": ["pullrequests"]
     },
     "parameters": [
       {
@@ -10313,9 +9667,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -10324,9 +9676,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "refs"
-      ]
+      "tags": ["refs"]
     },
     "parameters": [
       {
@@ -10398,9 +9748,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -10409,9 +9757,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "refs"
-      ]
+      "tags": ["refs"]
     },
     "parameters": [
       {
@@ -10541,9 +9887,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:write"
-          ]
+          "oauth2": ["repository:write"]
         },
         {
           "basic": []
@@ -10552,9 +9896,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "refs"
-      ]
+      "tags": ["refs"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/refs/branches/{name}": {
@@ -10580,9 +9922,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:write"
-          ]
+          "oauth2": ["repository:write"]
         },
         {
           "basic": []
@@ -10591,9 +9931,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "refs"
-      ]
+      "tags": ["refs"]
     },
     "get": {
       "description": "Returns a branch object within the specified repository.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default | jq .\n{\n  \"heads\": [\n    {\n      \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n      \"type\": \"commit\",\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n        }\n      }\n    }\n  ],\n  \"type\": \"named_branch\",\n  \"name\": \"default\",\n  \"links\": {\n    \"commits\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/default\"\n    },\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default\"\n    },\n    \"html\": {\n      \"href\": \"https://bitbucket.org/seanfarley/mercurial/branch/default\"\n    }\n  },\n  \"target\": {\n    \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n    \"repository\": {\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial\"\n        },\n        \"avatar\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/avatar/32/\"\n        }\n      },\n      \"type\": \"repository\",\n      \"name\": \"mercurial\",\n      \"full_name\": \"seanfarley/mercurial\",\n      \"uuid\": \"{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}\"\n    },\n    \"links\": {\n      \"self\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"comments\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/comments\"\n      },\n      \"patch\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"html\": {\n        \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"diff\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"approve\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/approve\"\n      },\n      \"statuses\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/statuses\"\n      }\n    },\n    \"author\": {\n      \"raw\": \"Martin von Zweigbergk <martinvonz@google.com>\",\n      \"type\": \"author\",\n      \"user\": {\n        \"username\": \"martinvonz\",\n        \"nickname\": \"martinvonz\",\n        \"display_name\": \"Martin von Zweigbergk\",\n        \"type\": \"user\",\n        \"uuid\": \"{fdb0e657-3ade-4fad-a136-95f1ffe4a5ac}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/martinvonz\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/martinvonz/\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket.org/account/martinvonz/avatar/32/\"\n          }\n        }\n      }\n    },\n    \"parents\": [\n      {\n        \"hash\": \"5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\",\n        \"type\": \"commit\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n          }\n        }\n      }\n    ],\n    \"date\": \"2018-02-01T18:44:49+00:00\",\n    \"message\": \"config: replace a for-else by any()\",\n    \"type\": \"commit\"\n  }\n}\n```\n\nThis call requires authentication. Private repositories require the\ncaller to authenticate with an account that has appropriate\nauthorization.\n\nFor Git, the branch name should not include any prefixes (e.g.\nrefs/heads).\n\nFor Mercurial, the response will include an additional field that lists\nthe open heads.",
@@ -10707,9 +10045,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -10718,9 +10054,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "refs"
-      ]
+      "tags": ["refs"]
     },
     "parameters": [
       {
@@ -10799,9 +10133,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -10810,9 +10142,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "refs"
-      ]
+      "tags": ["refs"]
     },
     "parameters": [
       {
@@ -10858,9 +10188,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:write"
-          ]
+          "oauth2": ["repository:write"]
         },
         {
           "basic": []
@@ -10869,9 +10197,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "refs"
-      ]
+      "tags": ["refs"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/refs/tags/{name}": {
@@ -10897,9 +10223,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:write"
-          ]
+          "oauth2": ["repository:write"]
         },
         {
           "basic": []
@@ -10908,9 +10232,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "refs"
-      ]
+      "tags": ["refs"]
     },
     "get": {
       "description": "Returns the specified tag.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/hg/refs/tags/3.8 -G | jq .\n{\n  \"name\": \"3.8\",\n  \"links\": {\n    \"commits\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commits/3.8\"\n    },\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/refs/tags/3.8\"\n    },\n    \"html\": {\n      \"href\": \"https://bitbucket.org/seanfarley/hg/commits/tag/3.8\"\n    }\n  },\n  \"tagger\": {\n    \"raw\": \"Matt Mackall <mpm@selenic.com>\",\n    \"type\": \"author\",\n    \"user\": {\n      \"username\": \"mpmselenic\",\n      \"nickname\": \"mpmselenic\",\n      \"display_name\": \"Matt Mackall\",\n      \"type\": \"user\",\n      \"uuid\": \"{a4934530-db4c-419c-a478-9ab4964c2ee7}\",\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/users/mpmselenic\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/mpmselenic/\"\n        },\n        \"avatar\": {\n          \"href\": \"https://bitbucket.org/account/mpmselenic/avatar/32/\"\n        }\n      }\n    }\n  },\n  \"date\": \"2016-05-01T18:52:25+00:00\",\n  \"message\": \"Added tag 3.8 for changeset f85de28eae32\",\n  \"type\": \"tag\",\n  \"target\": {\n    \"hash\": \"f85de28eae32e7d3064b1a1321309071bbaaa069\",\n    \"repository\": {\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/hg\"\n        },\n        \"avatar\": {\n          \"href\": \"https://bitbucket.org/seanfarley/hg/avatar/32/\"\n        }\n      },\n      \"type\": \"repository\",\n      \"name\": \"hg\",\n      \"full_name\": \"seanfarley/hg\",\n      \"uuid\": \"{c75687fb-e99d-4579-9087-190dbd406d30}\"\n    },\n    \"links\": {\n      \"self\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"comments\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069/comments\"\n      },\n      \"patch\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/patch/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"html\": {\n        \"href\": \"https://bitbucket.org/seanfarley/hg/commits/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"diff\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/diff/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"approve\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069/approve\"\n      },\n      \"statuses\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069/statuses\"\n      }\n    },\n    \"author\": {\n      \"raw\": \"Sean Farley <sean@farley.io>\",\n      \"type\": \"author\",\n      \"user\": {\n        \"username\": \"seanfarley\",\n        \"nickname\": \"seanfarley\",\n        \"display_name\": \"Sean Farley\",\n        \"type\": \"user\",\n        \"uuid\": \"{a295f8a8-5876-4d43-89b5-3ad8c6c3c51d}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/seanfarley\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket.org/account/seanfarley/avatar/32/\"\n          }\n        }\n      }\n    },\n    \"parents\": [\n      {\n        \"hash\": \"9a98d0e5b07fc60887f9d3d34d9ac7d536f470d2\",\n        \"type\": \"commit\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/9a98d0e5b07fc60887f9d3d34d9ac7d536f470d2\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/hg/commits/9a98d0e5b07fc60887f9d3d34d9ac7d536f470d2\"\n          }\n        }\n      }\n    ],\n    \"date\": \"2016-05-01T04:21:17+00:00\",\n    \"message\": \"debian: alphabetize build deps\",\n    \"type\": \"commit\"\n  }\n}\n```",
@@ -10937,9 +10259,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -10948,9 +10268,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "refs"
-      ]
+      "tags": ["refs"]
     },
     "parameters": [
       {
@@ -10982,9 +10300,7 @@
       "parameters": [
         {
           "description": "Instead of returning the file's contents, return the (json) meta data for it.",
-          "enum": [
-            "meta"
-          ],
+          "enum": ["meta"],
           "in": "query",
           "name": "format",
           "required": false,
@@ -11007,9 +10323,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -11018,10 +10332,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "source",
-        "repositories"
-      ]
+      "tags": ["source", "repositories"]
     },
     "parameters": [
       {
@@ -11091,9 +10402,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository:write"
-          ]
+          "oauth2": ["repository:write"]
         },
         {
           "basic": []
@@ -11102,10 +10411,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "source",
-        "repositories"
-      ]
+      "tags": ["source", "repositories"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/src/{node}/{path}": {
@@ -11114,10 +10420,7 @@
       "parameters": [
         {
           "description": "If 'meta' is provided, returns the (json) meta data for the contents of the file.  If 'rendered' is provided, returns the contents of a non-binary file in HTML-formatted rendered markup. Since Git and Mercurial do not generally track what text encoding scheme is used, this endpoint attempts to detect the most appropriate character encoding. While usually correct, determining the character encoding can be ambiguous which in exceptional cases can lead to misinterpretation of the characters. As such, the raw element in the response object should not be treated as equivalent to the file's actual contents.",
-          "enum": [
-            "meta",
-            "rendered"
-          ],
+          "enum": ["meta", "rendered"],
           "in": "query",
           "name": "format",
           "required": false,
@@ -11167,9 +10470,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -11178,10 +10479,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "source",
-        "repositories"
-      ]
+      "tags": ["source", "repositories"]
     },
     "parameters": [
       {
@@ -11232,9 +10530,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue"
-          ]
+          "oauth2": ["issue"]
         },
         {
           "basic": []
@@ -11243,9 +10539,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -11284,9 +10578,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "issue"
-          ]
+          "oauth2": ["issue"]
         },
         {
           "basic": []
@@ -11295,9 +10587,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "issue_tracker"
-      ]
+      "tags": ["issue_tracker"]
     },
     "parameters": [
       {
@@ -11334,9 +10624,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -11345,9 +10633,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories"
-      ]
+      "tags": ["repositories"]
     },
     "parameters": [
       {
@@ -11372,11 +10658,7 @@
       "parameters": [
         {
           "description": "Filter down the result based on the authenticated user's role (`owner`, `contributor`, or `member`).",
-          "enum": [
-            "owner",
-            "contributor",
-            "member"
-          ],
+          "enum": ["owner", "contributor", "member"],
           "in": "query",
           "name": "role",
           "required": false,
@@ -11399,9 +10681,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -11410,9 +10690,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "parameters": [],
     "post": {
@@ -11450,9 +10728,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet:write"
-          ]
+          "oauth2": ["snippet:write"]
         },
         {
           "basic": []
@@ -11461,9 +10737,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     }
   },
   "/snippets/{workspace}": {
@@ -11472,11 +10746,7 @@
       "parameters": [
         {
           "description": "Filter down the result based on the authenticated user's role (`owner`, `contributor`, or `member`).",
-          "enum": [
-            "owner",
-            "contributor",
-            "member"
-          ],
+          "enum": ["owner", "contributor", "member"],
           "in": "query",
           "name": "role",
           "required": false,
@@ -11506,9 +10776,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -11517,9 +10785,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "parameters": [
       {
@@ -11571,9 +10837,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet:write"
-          ]
+          "oauth2": ["snippet:write"]
         },
         {
           "basic": []
@@ -11582,9 +10846,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     }
   },
   "/snippets/{workspace}/{encoded_id}": {
@@ -11624,9 +10886,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet:write"
-          ]
+          "oauth2": ["snippet:write"]
         },
         {
           "basic": []
@@ -11635,9 +10895,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "get": {
       "description": "Retrieves a single snippet.\n\nSnippets support multiple content types:\n\n* application/json\n* multipart/related\n* multipart/form-data\n\n\napplication/json\n----------------\n\nThe default content type of the response is `application/json`.\nSince JSON is always `utf-8`, it cannot reliably contain file contents\nfor files that are not text. Therefore, JSON snippet documents only\ncontain the filename and links to the file contents.\n\nThis means that in order to retrieve all parts of a snippet, N+1\nrequests need to be made (where N is the number of files in the\nsnippet).\n\n\nmultipart/related\n-----------------\n\nTo retrieve an entire snippet in a single response, use the\n`Accept: multipart/related` HTTP request header.\n\n    $ curl -H \"Accept: multipart/related\" https://api.bitbucket.org/2.0/snippets/evzijst/1\n\nResponse:\n\n    HTTP/1.1 200 OK\n    Content-Length: 2214\n    Content-Type: multipart/related; start=\"snippet\"; boundary=\"===============1438169132528273974==\"\n    MIME-Version: 1.0\n\n    --===============1438169132528273974==\n    Content-Type: application/json; charset=\"utf-8\"\n    MIME-Version: 1.0\n    Content-ID: snippet\n\n    {\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/snippets/evzijst/kypj\"\n        },\n        \"comments\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/comments\"\n        },\n        \"watchers\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/watchers\"\n        },\n        \"commits\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/commits\"\n        }\n      },\n      \"id\": kypj,\n      \"title\": \"My snippet\",\n      \"created_on\": \"2014-12-29T22:22:04.790331+00:00\",\n      \"updated_on\": \"2014-12-29T22:22:04.790331+00:00\",\n      \"is_private\": false,\n      \"files\": {\n        \"foo.txt\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/files/367ab19/foo.txt\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/snippets/evzijst/kypj#file-foo.txt\"\n            }\n          }\n        },\n        \"image.png\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/files/367ab19/image.png\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/snippets/evzijst/kypj#file-image.png\"\n            }\n          }\n        }\n      ],\n      \"owner\": {\n        \"username\": \"evzijst\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/evzijst\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/evzijst\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket-staging-assetroot.s3.amazonaws.com/c/photos/2013/Jul/31/erik-avatar-725122544-0_avatar.png\"\n          }\n        }\n      },\n      \"creator\": {\n        \"username\": \"evzijst\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/evzijst\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/evzijst\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket-staging-assetroot.s3.amazonaws.com/c/photos/2013/Jul/31/erik-avatar-725122544-0_avatar.png\"\n          }\n        }\n      }\n    }\n\n    --===============1438169132528273974==\n    Content-Type: text/plain; charset=\"us-ascii\"\n    MIME-Version: 1.0\n    Content-Transfer-Encoding: 7bit\n    Content-ID: \"foo.txt\"\n    Content-Disposition: attachment; filename=\"foo.txt\"\n\n    foo\n\n    --===============1438169132528273974==\n    Content-Type: image/png\n    MIME-Version: 1.0\n    Content-Transfer-Encoding: base64\n    Content-ID: \"image.png\"\n    Content-Disposition: attachment; filename=\"image.png\"\n\n    iVBORw0KGgoAAAANSUhEUgAAABQAAAAoCAYAAAD+MdrbAAABD0lEQVR4Ae3VMUoDQRTG8ccUaW2m\n    TKONFxArJYJamCvkCnZTaa+VnQdJSBFl2SMsLFrEWNjZBZs0JgiL/+KrhhVmJRbCLPx4O+/DT2TB\n    cbblJxf+UWFVVRNsEGAtgvJxnLm2H+A5RQ93uIl+3632PZyl/skjfOn9Gvdwmlcw5aPUwimG+NT5\n    EnNN036IaZePUuIcK533NVfal7/5yjWeot2z9ta1cAczHEf7I+3J0ws9Cgx0fsOFpmlfwKcWPuBQ\n    73Oc4FHzBaZ8llq4q1mr5B2mOUCt815qYR8eB1hG2VJ7j35q4RofaH7IG+Xrf/PfJhfmwtfFYoIN\n    AqxFUD6OMxcvkO+UfKfkOyXfKdsv/AYCHMLVkHAFWgAAAABJRU5ErkJggg==\n    --===============1438169132528273974==--\n\nmultipart/form-data\n-------------------\n\nAs with creating new snippets, `multipart/form-data` can be used as an\nalternative to `multipart/related`. However, the inherently flat\nstructure of form-data means that only basic, root-level properties\ncan be returned, while nested elements like `links` are omitted:\n\n    $ curl -H \"Accept: multipart/form-data\" https://api.bitbucket.org/2.0/snippets/evzijst/kypj\n\nResponse:\n\n    HTTP/1.1 200 OK\n    Content-Length: 951\n    Content-Type: multipart/form-data; boundary=----------------------------63a4b224c59f\n\n    ------------------------------63a4b224c59f\n    Content-Disposition: form-data; name=\"title\"\n    Content-Type: text/plain; charset=\"utf-8\"\n\n    My snippet\n    ------------------------------63a4b224c59f--\n    Content-Disposition: attachment; name=\"file\"; filename=\"foo.txt\"\n    Content-Type: text/plain\n\n    foo\n\n    ------------------------------63a4b224c59f\n    Content-Disposition: attachment; name=\"file\"; filename=\"image.png\"\n    Content-Transfer-Encoding: base64\n    Content-Type: application/octet-stream\n\n    iVBORw0KGgoAAAANSUhEUgAAABQAAAAoCAYAAAD+MdrbAAABD0lEQVR4Ae3VMUoDQRTG8ccUaW2m\n    TKONFxArJYJamCvkCnZTaa+VnQdJSBFl2SMsLFrEWNjZBZs0JgiL/+KrhhVmJRbCLPx4O+/DT2TB\n    cbblJxf+UWFVVRNsEGAtgvJxnLm2H+A5RQ93uIl+3632PZyl/skjfOn9Gvdwmlcw5aPUwimG+NT5\n    EnNN036IaZePUuIcK533NVfal7/5yjWeot2z9ta1cAczHEf7I+3J0ws9Cgx0fsOFpmlfwKcWPuBQ\n    73Oc4FHzBaZ8llq4q1mr5B2mOUCt815qYR8eB1hG2VJ7j35q4RofaH7IG+Xrf/PfJhfmwtfFYoIN\n    AqxFUD6OMxcvkO+UfKfkOyXfKdsv/AYCHMLVkHAFWgAAAABJRU5ErkJggg==\n    ------------------------------5957323a6b76--",
@@ -11689,9 +10947,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -11700,9 +10956,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "parameters": [
       {
@@ -11768,9 +11022,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet:write"
-          ]
+          "oauth2": ["snippet:write"]
         },
         {
           "basic": []
@@ -11779,9 +11031,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     }
   },
   "/snippets/{workspace}/{encoded_id}/{node_id}": {
@@ -11827,9 +11077,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet:write"
-          ]
+          "oauth2": ["snippet:write"]
         },
         {
           "basic": []
@@ -11838,9 +11086,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "get": {
       "description": "Identical to `GET /snippets/encoded_id`, except that this endpoint\ncan be used to retrieve the contents of the snippet as it was at an\nolder revision, while `/snippets/encoded_id` always returns the\nsnippet's current revision.\n\nNote that only the snippet's file contents are versioned, not its\nmeta data properties like the title.\n\nOther than that, the two endpoints are identical in behavior.",
@@ -11893,9 +11139,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -11904,9 +11148,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "parameters": [
       {
@@ -11991,9 +11233,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet:write"
-          ]
+          "oauth2": ["snippet:write"]
         },
         {
           "basic": []
@@ -12002,9 +11242,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     }
   },
   "/snippets/{workspace}/{encoded_id}/{node_id}/files/{path}": {
@@ -12040,9 +11278,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -12051,9 +11287,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "parameters": [
       {
@@ -12127,9 +11361,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -12138,9 +11370,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "parameters": [
       {
@@ -12202,9 +11432,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -12213,9 +11441,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "parameters": [
       {
@@ -12265,9 +11491,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -12276,9 +11500,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "parameters": [
       {
@@ -12336,9 +11558,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -12347,9 +11567,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     }
   },
   "/snippets/{workspace}/{encoded_id}/comments/{comment_id}": {
@@ -12375,9 +11593,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -12386,9 +11602,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "get": {
       "description": "Returns the specific snippet comment.",
@@ -12415,9 +11629,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -12426,9 +11638,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "parameters": [
       {
@@ -12473,9 +11683,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -12484,9 +11692,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     }
   },
   "/snippets/{workspace}/{encoded_id}/commits": {
@@ -12515,9 +11721,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -12526,9 +11730,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "parameters": [
       {
@@ -12572,9 +11774,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -12583,9 +11783,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "parameters": [
       {
@@ -12638,9 +11836,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -12649,9 +11845,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippet"
-      ]
+      "tags": ["snippet"]
     },
     "parameters": [
       {
@@ -12709,9 +11903,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet:write"
-          ]
+          "oauth2": ["snippet:write"]
         },
         {
           "basic": []
@@ -12720,9 +11912,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "get": {
       "description": "Used to check if the current user is watching a specific snippet.\n\nReturns 204 (No Content) if the user is watching the snippet and 404 if\nnot.\n\nHitting this endpoint anonymously always returns a 404.",
@@ -12751,9 +11941,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -12762,9 +11950,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "parameters": [
       {
@@ -12814,9 +12000,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet:write"
-          ]
+          "oauth2": ["snippet:write"]
         },
         {
           "basic": []
@@ -12825,9 +12009,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     }
   },
   "/snippets/{workspace}/{encoded_id}/watchers": {
@@ -12859,9 +12041,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "snippet"
-          ]
+          "oauth2": ["snippet"]
         },
         {
           "basic": []
@@ -12870,9 +12050,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "snippets"
-      ]
+      "tags": ["snippets"]
     },
     "parameters": [
       {
@@ -12896,11 +12074,7 @@
       "parameters": [
         {
           "description": "\nFilters the teams based on the authenticated user's role on each team.\n\n* **member**: returns a list of all the teams which the caller is a member of\n  at least one team group or repository owned by the team\n* **contributor**: returns a list of teams which the caller has write access\n  to at least one repository owned by the team\n* **admin**: returns a list teams which the caller has team administrator access\n",
-          "enum": [
-            "admin",
-            "contributor",
-            "member"
-          ],
+          "enum": ["admin", "contributor", "member"],
           "in": "query",
           "name": "role",
           "required": false,
@@ -12923,9 +12097,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "team"
-          ]
+          "oauth2": ["team"]
         },
         {
           "basic": []
@@ -12934,9 +12106,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "teams"
-      ]
+      "tags": ["teams"]
     },
     "parameters": []
   },
@@ -12977,9 +12147,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "teams"
-      ]
+      "tags": ["teams"]
     },
     "parameters": [
       {
@@ -13028,9 +12196,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "teams"
-      ]
+      "tags": ["teams"]
     },
     "parameters": [
       {
@@ -13070,9 +12236,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account"
-          ]
+          "oauth2": ["account"]
         },
         {
           "basic": []
@@ -13081,9 +12245,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "teams"
-      ]
+      "tags": ["teams"]
     },
     "parameters": [
       {
@@ -13121,9 +12283,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -13132,10 +12292,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "teams",
-        "webhooks"
-      ]
+      "tags": ["teams", "webhooks"]
     },
     "parameters": [
       {
@@ -13177,9 +12334,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -13188,10 +12343,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "teams",
-        "webhooks"
-      ]
+      "tags": ["teams", "webhooks"]
     }
   },
   "/teams/{username}/hooks/{uid}": {
@@ -13225,9 +12377,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -13236,10 +12386,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "teams",
-        "webhooks"
-      ]
+      "tags": ["teams", "webhooks"]
     },
     "get": {
       "description": "Returns the webhook with the specified id installed on the given\nteam account.",
@@ -13268,9 +12415,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -13279,10 +12424,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "teams",
-        "webhooks"
-      ]
+      "tags": ["teams", "webhooks"]
     },
     "parameters": [
       {
@@ -13332,9 +12474,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -13343,10 +12483,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "teams",
-        "webhooks"
-      ]
+      "tags": ["teams", "webhooks"]
     }
   },
   "/teams/{username}/members": {
@@ -13391,9 +12528,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account"
-          ]
+          "oauth2": ["account"]
         },
         {
           "basic": []
@@ -13402,9 +12537,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "teams"
-      ]
+      "tags": ["teams"]
     },
     "parameters": [
       {
@@ -13451,9 +12584,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "team"
-          ]
+          "oauth2": ["team"]
         },
         {
           "basic": []
@@ -13509,9 +12640,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "team"
-          ]
+          "oauth2": ["team"]
         },
         {
           "basic": []
@@ -13567,9 +12696,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -13618,9 +12745,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "post": {
       "description": "Create an account level variable.",
@@ -13669,9 +12794,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/teams/{username}/pipelines_config/variables/{variable_uuid}": {
@@ -13705,9 +12828,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "get": {
       "description": "Retrieve a team level variable.",
@@ -13742,9 +12863,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "put": {
       "description": "Update a team level variable.",
@@ -13788,9 +12907,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/teams/{username}/projects/": {
@@ -13819,9 +12936,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "project"
-          ]
+          "oauth2": ["project"]
         },
         {
           "basic": []
@@ -13830,9 +12945,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "projects"
-      ]
+      "tags": ["projects"]
     },
     "parameters": [
       {
@@ -13883,9 +12996,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "project:write"
-          ]
+          "oauth2": ["project:write"]
         },
         {
           "basic": []
@@ -13894,9 +13005,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "projects"
-      ]
+      "tags": ["projects"]
     }
   },
   "/teams/{username}/projects/{project_key}": {
@@ -13922,9 +13031,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "project:write"
-          ]
+          "oauth2": ["project:write"]
         },
         {
           "basic": []
@@ -13933,9 +13040,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "projects"
-      ]
+      "tags": ["projects"]
     },
     "get": {
       "description": "",
@@ -13962,9 +13067,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "project"
-          ]
+          "oauth2": ["project"]
         },
         {
           "basic": []
@@ -13973,9 +13076,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "projects"
-      ]
+      "tags": ["projects"]
     },
     "parameters": [
       {
@@ -14045,9 +13146,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "project:write"
-          ]
+          "oauth2": ["project:write"]
         },
         {
           "basic": []
@@ -14056,9 +13155,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "projects"
-      ]
+      "tags": ["projects"]
     }
   },
   "/teams/{username}/repositories": {
@@ -14075,9 +13172,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -14086,10 +13181,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "users",
-        "teams"
-      ]
+      "tags": ["users", "teams"]
     },
     "parameters": [
       {
@@ -14138,9 +13230,7 @@
           "type": "integer"
         }
       ],
-      "produces": [
-        "application/json"
-      ],
+      "produces": ["application/json"],
       "responses": {
         "200": {
           "description": "Successful search",
@@ -14168,9 +13258,7 @@
         }
       },
       "summary": "Search for code in the repositories of the specified team.\n\nSearching across all repositories:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code?search_query=foo'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 2,\n      \"content_matches\": [\n        {\n          \"lines\": [\n            {\n              \"line\": 2,\n              \"segments\": []\n            },\n            {\n              \"line\": 3,\n              \"segments\": [\n                {\n                  \"text\": \"def \"\n                },\n                {\n                  \"text\": \"foo\",\n                  \"match\": true\n                },\n                {\n                  \"text\": \"():\"\n                }\n              ]\n            },\n            {\n              \"line\": 4,\n              \"segments\": [\n                {\n                  \"text\": \"    print(\\\"snek\\\")\"\n                }\n              ]\n            },\n            {\n              \"line\": 5,\n              \"segments\": []\n            }\n          ]\n        }\n      ],\n      \"path_matches\": [\n        {\n          \"text\": \"src/\"\n        },\n        {\n          \"text\": \"foo\",\n          \"match\": true\n        },\n        {\n          \"text\": \".py\"\n        }\n      ],\n      \"file\": {\n        \"path\": \"src/foo.py\",\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        }\n      }\n    }\n  ]\n}\n```\n\nNote that searches can match in the file's text (`content_matches`),\nthe path (`path_matches`), or both as in the example above.\n\nYou can use the same syntax for the search query as in the UI, e.g.\nto only search within a specific repository:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code?search_query=foo+repo:demo'\n# results from the \"demo\" repository\n```\n\nSimilar to other APIs, you can request more fields using a\n`fields` query parameter. E.g. to get some more information about\nthe repository of matched files (the `%2B` is a URL-encoded `+`):\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code'\\\n     '?search_query=foo&fields=%2Bvalues.file.commit.repository'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 1,\n      \"content_matches\": [...],\n      \"path_matches\": [...],\n      \"file\": {\n        \"commit\": {\n          \"type\": \"commit\",\n          \"hash\": \"ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/commit/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/my-workspace/demo/commits/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            }\n          },\n          \"repository\": {\n            \"name\": \"demo\",\n            \"type\": \"repository\",\n            \"full_name\": \"my-workspace/demo\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/my-workspace/demo\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bytebucket.org/ravatar/%7B850e1749-781a-4115-9316-df39d0600e7a%7D?ts=default\"\n              }\n            },\n            \"uuid\": \"{850e1749-781a-4115-9316-df39d0600e7a}\"\n          }\n        },\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        },\n        \"path\": \"src/foo.py\"\n      }\n    }\n  ]\n}\n```\n\nTry `fields=%2Bvalues.*.*.*.*` to get an idea what's possible.\n",
-      "tags": [
-        "search"
-      ]
+      "tags": ["search"]
     }
   },
   "/user": {
@@ -14231,9 +13319,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account"
-          ]
+          "oauth2": ["account"]
         },
         {
           "basic": []
@@ -14242,9 +13328,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "users"
-      ]
+      "tags": ["users"]
     },
     "parameters": []
   },
@@ -14262,9 +13346,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "email"
-          ]
+          "oauth2": ["email"]
         },
         {
           "basic": []
@@ -14273,9 +13355,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "users"
-      ]
+      "tags": ["users"]
     },
     "parameters": []
   },
@@ -14293,9 +13373,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "email"
-          ]
+          "oauth2": ["email"]
         },
         {
           "basic": []
@@ -14304,9 +13382,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "users"
-      ]
+      "tags": ["users"]
     },
     "parameters": [
       {
@@ -14346,9 +13422,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account"
-          ]
+          "oauth2": ["account"]
         },
         {
           "basic": []
@@ -14357,9 +13431,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "repositories"
-      ]
+      "tags": ["repositories"]
     },
     "parameters": []
   },
@@ -14392,9 +13464,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account"
-          ]
+          "oauth2": ["account"]
         },
         {
           "basic": []
@@ -14427,9 +13497,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account"
-          ]
+          "oauth2": ["account"]
         },
         {
           "basic": []
@@ -14438,9 +13506,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "workspaces"
-      ]
+      "tags": ["workspaces"]
     },
     "parameters": []
   },
@@ -14501,9 +13567,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "users"
-      ]
+      "tags": ["users"]
     },
     "parameters": [
       {
@@ -14552,9 +13616,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "users"
-      ]
+      "tags": ["users"]
     },
     "parameters": [
       {
@@ -14594,9 +13656,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account"
-          ]
+          "oauth2": ["account"]
         },
         {
           "basic": []
@@ -14605,9 +13665,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "users"
-      ]
+      "tags": ["users"]
     },
     "parameters": [
       {
@@ -14645,9 +13703,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -14656,10 +13712,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "users",
-        "webhooks"
-      ]
+      "tags": ["users", "webhooks"]
     },
     "parameters": [
       {
@@ -14701,9 +13754,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -14712,10 +13763,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "users",
-        "webhooks"
-      ]
+      "tags": ["users", "webhooks"]
     }
   },
   "/users/{username}/hooks/{uid}": {
@@ -14749,9 +13797,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -14760,10 +13806,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "users",
-        "webhooks"
-      ]
+      "tags": ["users", "webhooks"]
     },
     "get": {
       "description": "Returns the webhook with the specified id installed on the given\nuser account.\n\nNote that the username path parameter has been deprecated due to\n[privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).\nUse the account's UUID or account_id instead.",
@@ -14792,9 +13835,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -14803,10 +13844,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "users",
-        "webhooks"
-      ]
+      "tags": ["users", "webhooks"]
     },
     "parameters": [
       {
@@ -14856,9 +13894,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -14867,10 +13903,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "users",
-        "webhooks"
-      ]
+      "tags": ["users", "webhooks"]
     }
   },
   "/users/{username}/members": {
@@ -14915,9 +13948,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account"
-          ]
+          "oauth2": ["account"]
         },
         {
           "basic": []
@@ -14926,9 +13957,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "teams"
-      ]
+      "tags": ["teams"]
     },
     "parameters": [
       {
@@ -14961,9 +13990,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "post": {
       "description": "Create a user level variable.",
@@ -15012,9 +14039,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/users/{username}/pipelines_config/variables/{variable_uuid}": {
@@ -15048,9 +14073,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "get": {
       "description": "Retrieve a user level variable.",
@@ -15085,9 +14108,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     },
     "put": {
       "description": "Update a user level variable.",
@@ -15131,9 +14152,7 @@
           }
         }
       },
-      "tags": [
-        "pipelines"
-      ]
+      "tags": ["pipelines"]
     }
   },
   "/users/{username}/properties/{app_key}/{property_name}": {
@@ -15168,9 +14187,7 @@
           "description": "An empty response."
         }
       },
-      "tags": [
-        "properties"
-      ]
+      "tags": ["properties"]
     },
     "get": {
       "description": "Retrieve an application property value stored against a user.",
@@ -15203,9 +14220,7 @@
           "description": "The value of the property."
         }
       },
-      "tags": [
-        "properties"
-      ]
+      "tags": ["properties"]
     },
     "put": {
       "description": "Update an application property value stored against a user.",
@@ -15238,9 +14253,7 @@
           "description": "An empty response."
         }
       },
-      "tags": [
-        "properties"
-      ]
+      "tags": ["properties"]
     }
   },
   "/users/{username}/repositories": {
@@ -15257,9 +14270,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "repository"
-          ]
+          "oauth2": ["repository"]
         },
         {
           "basic": []
@@ -15268,10 +14279,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "users",
-        "teams"
-      ]
+      "tags": ["users", "teams"]
     },
     "parameters": [
       {
@@ -15320,9 +14328,7 @@
           "type": "integer"
         }
       ],
-      "produces": [
-        "application/json"
-      ],
+      "produces": ["application/json"],
       "responses": {
         "200": {
           "description": "Successful search",
@@ -15350,9 +14356,7 @@
         }
       },
       "summary": "Search for code in the repositories of the specified user.\n\nSearching across all repositories:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code?search_query=foo'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 2,\n      \"content_matches\": [\n        {\n          \"lines\": [\n            {\n              \"line\": 2,\n              \"segments\": []\n            },\n            {\n              \"line\": 3,\n              \"segments\": [\n                {\n                  \"text\": \"def \"\n                },\n                {\n                  \"text\": \"foo\",\n                  \"match\": true\n                },\n                {\n                  \"text\": \"():\"\n                }\n              ]\n            },\n            {\n              \"line\": 4,\n              \"segments\": [\n                {\n                  \"text\": \"    print(\\\"snek\\\")\"\n                }\n              ]\n            },\n            {\n              \"line\": 5,\n              \"segments\": []\n            }\n          ]\n        }\n      ],\n      \"path_matches\": [\n        {\n          \"text\": \"src/\"\n        },\n        {\n          \"text\": \"foo\",\n          \"match\": true\n        },\n        {\n          \"text\": \".py\"\n        }\n      ],\n      \"file\": {\n        \"path\": \"src/foo.py\",\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        }\n      }\n    }\n  ]\n}\n```\n\nNote that searches can match in the file's text (`content_matches`),\nthe path (`path_matches`), or both as in the example above.\n\nYou can use the same syntax for the search query as in the UI, e.g.\nto only search within a specific repository:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code?search_query=foo+repo:demo'\n# results from the \"demo\" repository\n```\n\nSimilar to other APIs, you can request more fields using a\n`fields` query parameter. E.g. to get some more information about\nthe repository of matched files (the `%2B` is a URL-encoded `+`):\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code'\\\n     '?search_query=foo&fields=%2Bvalues.file.commit.repository'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 1,\n      \"content_matches\": [...],\n      \"path_matches\": [...],\n      \"file\": {\n        \"commit\": {\n          \"type\": \"commit\",\n          \"hash\": \"ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/commit/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/my-workspace/demo/commits/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            }\n          },\n          \"repository\": {\n            \"name\": \"demo\",\n            \"type\": \"repository\",\n            \"full_name\": \"my-workspace/demo\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/my-workspace/demo\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bytebucket.org/ravatar/%7B850e1749-781a-4115-9316-df39d0600e7a%7D?ts=default\"\n              }\n            },\n            \"uuid\": \"{850e1749-781a-4115-9316-df39d0600e7a}\"\n          }\n        },\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        },\n        \"path\": \"src/foo.py\"\n      }\n    }\n  ]\n}\n```\n\nTry `fields=%2Bvalues.*.*.*.*` to get an idea what's possible.\n",
-      "tags": [
-        "search"
-      ]
+      "tags": ["search"]
     }
   },
   "/users/{username}/ssh-keys": {
@@ -15386,9 +14390,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account"
-          ]
+          "oauth2": ["account"]
         },
         {
           "basic": []
@@ -15397,9 +14399,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "ssh"
-      ]
+      "tags": ["ssh"]
     },
     "parameters": [
       {
@@ -15455,9 +14455,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account:write"
-          ]
+          "oauth2": ["account:write"]
         },
         {
           "basic": []
@@ -15466,9 +14464,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "ssh"
-      ]
+      "tags": ["ssh"]
     }
   },
   "/users/{username}/ssh-keys/": {
@@ -15512,9 +14508,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account:write"
-          ]
+          "oauth2": ["account:write"]
         },
         {
           "basic": []
@@ -15523,9 +14517,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "ssh"
-      ]
+      "tags": ["ssh"]
     },
     "get": {
       "description": "Returns a specific SSH public key belonging to a user.\n\nExample:\n```\n$ curl https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/{fbe4bbab-f6f7-4dde-956b-5c58323c54b3}\n\n{\n    \"comment\": \"user@myhost\",\n    \"created_on\": \"2018-03-14T13:17:05.196003+00:00\",\n    \"key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY\",\n    \"label\": \"\",\n    \"last_used\": \"2018-03-20T13:18:05.196003+00:00\",\n    \"links\": {\n        \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl/ssh-keys/b15b6026-9c02-4626-b4ad-b905f99f763a\"\n        }\n    },\n    \"owner\": {\n        \"display_name\": \"Mark Adams\",\n        \"links\": {\n            \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/markadams-atl/avatar/32/\"\n            },\n            \"html\": {\n                \"href\": \"https://bitbucket.org/markadams-atl/\"\n            },\n            \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/markadams-atl\"\n            }\n        },\n        \"type\": \"user\",\n        \"username\": \"markadams-atl\",\n        \"nickname\": \"markadams-atl\",\n        \"uuid\": \"{d7dd0e2d-3994-4a50-a9ee-d260b6cefdab}\"\n    },\n    \"type\": \"ssh_key\",\n    \"uuid\": \"{b15b6026-9c02-4626-b4ad-b905f99f763a}\"\n}\n```",
@@ -15564,9 +14556,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account"
-          ]
+          "oauth2": ["account"]
         },
         {
           "basic": []
@@ -15575,9 +14565,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "ssh"
-      ]
+      "tags": ["ssh"]
     },
     "parameters": [
       {
@@ -15640,9 +14628,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account:write"
-          ]
+          "oauth2": ["account:write"]
         },
         {
           "basic": []
@@ -15651,9 +14637,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "ssh"
-      ]
+      "tags": ["ssh"]
     }
   },
   "/workspaces": {
@@ -15676,9 +14660,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account"
-          ]
+          "oauth2": ["account"]
         },
         {
           "basic": []
@@ -15687,9 +14669,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "workspaces"
-      ]
+      "tags": ["workspaces"]
     },
     "parameters": []
   },
@@ -15722,9 +14702,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "workspaces"
-      ]
+      "tags": ["workspaces"]
     },
     "parameters": [
       {
@@ -15762,9 +14740,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -15773,10 +14749,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "workspaces",
-        "webhooks"
-      ]
+      "tags": ["workspaces", "webhooks"]
     },
     "parameters": [
       {
@@ -15818,9 +14791,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -15829,10 +14800,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "workspaces",
-        "webhooks"
-      ]
+      "tags": ["workspaces", "webhooks"]
     }
   },
   "/workspaces/{workspace}/hooks/{uid}": {
@@ -15866,9 +14834,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -15877,10 +14843,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "workspaces",
-        "webhooks"
-      ]
+      "tags": ["workspaces", "webhooks"]
     },
     "get": {
       "description": "Returns the webhook with the specified id installed on the given\nworkspace.",
@@ -15909,9 +14872,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -15920,10 +14881,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "workspaces",
-        "webhooks"
-      ]
+      "tags": ["workspaces", "webhooks"]
     },
     "parameters": [
       {
@@ -15973,9 +14931,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "webhook"
-          ]
+          "oauth2": ["webhook"]
         },
         {
           "basic": []
@@ -15984,10 +14940,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "workspaces",
-        "webhooks"
-      ]
+      "tags": ["workspaces", "webhooks"]
     }
   },
   "/workspaces/{workspace}/members": {
@@ -16010,9 +14963,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account"
-          ]
+          "oauth2": ["account"]
         },
         {
           "basic": []
@@ -16021,9 +14972,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "workspaces"
-      ]
+      "tags": ["workspaces"]
     },
     "parameters": [
       {
@@ -16055,9 +15004,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "account"
-          ]
+          "oauth2": ["account"]
         },
         {
           "basic": []
@@ -16066,9 +15013,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "workspaces"
-      ]
+      "tags": ["workspaces"]
     },
     "parameters": [
       {
@@ -16107,9 +15052,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "project"
-          ]
+          "oauth2": ["project"]
         },
         {
           "basic": []
@@ -16118,9 +15061,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "workspaces"
-      ]
+      "tags": ["workspaces"]
     },
     "parameters": [
       {
@@ -16171,9 +15112,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "project:write"
-          ]
+          "oauth2": ["project:write"]
         },
         {
           "basic": []
@@ -16182,9 +15121,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "projects"
-      ]
+      "tags": ["projects"]
     }
   },
   "/workspaces/{workspace}/projects/{project_key}": {
@@ -16210,9 +15147,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "project:write"
-          ]
+          "oauth2": ["project:write"]
         },
         {
           "basic": []
@@ -16221,9 +15156,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "projects"
-      ]
+      "tags": ["projects"]
     },
     "get": {
       "description": "",
@@ -16256,9 +15189,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "project"
-          ]
+          "oauth2": ["project"]
         },
         {
           "basic": []
@@ -16267,10 +15198,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "projects",
-        "workspaces"
-      ]
+      "tags": ["projects", "workspaces"]
     },
     "parameters": [
       {
@@ -16340,9 +15268,7 @@
       },
       "security": [
         {
-          "oauth2": [
-            "project:write"
-          ]
+          "oauth2": ["project:write"]
         },
         {
           "basic": []
@@ -16351,9 +15277,7 @@
           "api_key": []
         }
       ],
-      "tags": [
-        "projects"
-      ]
+      "tags": ["projects"]
     }
   }
 }

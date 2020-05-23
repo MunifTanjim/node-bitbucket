@@ -1,8 +1,6 @@
 {
   "basePath": "/2.0",
-  "consumes": [
-    "application/json"
-  ],
+  "consumes": ["application/json"],
   "host": "api.bitbucket.org",
   "info": {
     "contact": {
@@ -15,12 +13,8 @@
     "title": "Bitbucket API",
     "version": "2.0"
   },
-  "produces": [
-    "application/json"
-  ],
-  "schemes": [
-    "https"
-  ],
+  "produces": ["application/json"],
+  "schemes": ["https"],
   "swagger": "2.0",
   "x-atlassian-narrative": {
     "documents": [

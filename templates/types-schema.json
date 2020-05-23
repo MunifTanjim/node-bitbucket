@@ -167,11 +167,7 @@
                   "type": "string"
                 },
                 "markup": {
-                  "enum": [
-                    "markdown",
-                    "creole",
-                    "plaintext"
-                  ],
+                  "enum": ["markdown", "creole", "plaintext"],
                   "type": "string"
                 },
                 "raw": {
@@ -210,22 +206,14 @@
                 "additionalProperties": false,
                 "properties": {
                   "kind": {
-                    "enum": [
-                      "feature",
-                      "bugfix",
-                      "release",
-                      "hotfix"
-                    ],
+                    "enum": ["feature", "bugfix", "release", "hotfix"],
                     "type": "string"
                   },
                   "prefix": {
                     "type": "string"
                   }
                 },
-                "required": [
-                  "kind",
-                  "prefix"
-                ],
+                "required": ["kind", "prefix"],
                 "type": "object"
               },
               "maxItems": 4,
@@ -244,10 +232,7 @@
                   "type": "boolean"
                 }
               },
-              "required": [
-                "name",
-                "use_mainbranch"
-              ],
+              "required": ["name", "use_mainbranch"],
               "type": "object"
             },
             "production": {
@@ -263,10 +248,7 @@
                   "type": "boolean"
                 }
               },
-              "required": [
-                "name",
-                "use_mainbranch"
-              ],
+              "required": ["name", "use_mainbranch"],
               "type": "object"
             }
           },
@@ -290,21 +272,14 @@
                     "type": "boolean"
                   },
                   "kind": {
-                    "enum": [
-                      "feature",
-                      "bugfix",
-                      "release",
-                      "hotfix"
-                    ],
+                    "enum": ["feature", "bugfix", "release", "hotfix"],
                     "type": "string"
                   },
                   "prefix": {
                     "type": "string"
                   }
                 },
-                "required": [
-                  "kind"
-                ],
+                "required": ["kind"],
                 "type": "object"
               },
               "maxItems": 4,
@@ -375,10 +350,7 @@
           "additionalProperties": true,
           "properties": {
             "branch_match_kind": {
-              "enum": [
-                "branching_model",
-                "glob"
-              ],
+              "enum": ["branching_model", "glob"],
               "type": "string"
             },
             "branch_type": {
@@ -448,11 +420,7 @@
               "type": "integer"
             }
           },
-          "required": [
-            "kind",
-            "branch_match_kind",
-            "pattern"
-          ],
+          "required": ["kind", "branch_match_kind", "pattern"],
           "type": "object"
         }
       ]
@@ -472,11 +440,7 @@
                   "type": "string"
                 },
                 "markup": {
-                  "enum": [
-                    "markdown",
-                    "creole",
-                    "plaintext"
-                  ],
+                  "enum": ["markdown", "creole", "plaintext"],
                   "type": "string"
                 },
                 "raw": {
@@ -507,9 +471,7 @@
                   "type": "integer"
                 }
               },
-              "required": [
-                "path"
-              ],
+              "required": ["path"],
               "type": "object"
             },
             "links": {
@@ -610,13 +572,7 @@
       "additionalProperties": true,
       "properties": {
         "attributes": {
-          "enum": [
-            "link",
-            "executable",
-            "subrepository",
-            "binary",
-            "lfs"
-          ],
+          "enum": ["link", "executable", "subrepository", "binary", "lfs"],
           "type": "string"
         },
         "commit": {
@@ -632,9 +588,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object"
     },
     "Commitstatus": {
@@ -691,12 +645,7 @@
               "type": "string"
             },
             "state": {
-              "enum": [
-                "SUCCESSFUL",
-                "FAILED",
-                "INPROGRESS",
-                "STOPPED"
-              ],
+              "enum": ["SUCCESSFUL", "FAILED", "INPROGRESS", "STOPPED"],
               "type": "string"
             },
             "updated_on": {
@@ -760,9 +709,7 @@
           "type": "object"
         }
       ],
-      "x-bb-default-fields": [
-        "uuid"
-      ],
+      "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
     },
     "DeployKey": {
@@ -860,9 +807,7 @@
           "type": "object"
         }
       ],
-      "x-bb-default-fields": [
-        "uuid"
-      ],
+      "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
     },
     "DeploymentRelease": {
@@ -920,9 +865,7 @@
               "$ref": "#/definitions/Account"
             },
             "name": {
-              "enum": [
-                "COMPLETED"
-              ],
+              "enum": ["COMPLETED"],
               "type": "string"
             },
             "start_date": {
@@ -960,9 +903,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "FAILED"
-              ],
+              "enum": ["FAILED"],
               "type": "string"
             }
           },
@@ -979,9 +920,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "STOPPED"
-              ],
+              "enum": ["STOPPED"],
               "type": "string"
             }
           },
@@ -998,9 +937,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "SUCCESSFUL"
-              ],
+              "enum": ["SUCCESSFUL"],
               "type": "string"
             }
           },
@@ -1020,9 +957,7 @@
               "$ref": "#/definitions/Account"
             },
             "name": {
-              "enum": [
-                "IN_PROGRESS"
-              ],
+              "enum": ["IN_PROGRESS"],
               "type": "string"
             },
             "start_date": {
@@ -1045,9 +980,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "UNDEPLOYED"
-              ],
+              "enum": ["UNDEPLOYED"],
               "type": "string"
             },
             "trigger_url": {
@@ -1093,9 +1026,7 @@
           "type": "object"
         }
       ],
-      "x-bb-default-fields": [
-        "uuid"
-      ],
+      "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
     },
     "DeploymentsStgWestDeploymentEnvironment": {
@@ -1108,9 +1039,7 @@
           "type": "object"
         }
       ],
-      "x-bb-default-fields": [
-        "uuid"
-      ],
+      "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
     },
     "Diffstat": {
@@ -1129,21 +1058,14 @@
           "$ref": "#/definitions/CommitFile"
         },
         "status": {
-          "enum": [
-            "added",
-            "removed",
-            "modified",
-            "renamed"
-          ],
+          "enum": ["added", "removed", "modified", "renamed"],
           "type": "string"
         },
         "type": {
           "type": "string"
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object"
     },
     "Error": {
@@ -1164,18 +1086,14 @@
               "type": "string"
             }
           },
-          "required": [
-            "message"
-          ],
+          "required": ["message"],
           "type": "object"
         },
         "type": {
           "type": "string"
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object"
     },
     "Group": {
@@ -1300,11 +1218,7 @@
                   "type": "string"
                 },
                 "markup": {
-                  "enum": [
-                    "markdown",
-                    "creole",
-                    "plaintext"
-                  ],
+                  "enum": ["markdown", "creole", "plaintext"],
                   "type": "string"
                 },
                 "raw": {
@@ -1323,12 +1237,7 @@
               "type": "integer"
             },
             "kind": {
-              "enum": [
-                "bug",
-                "enhancement",
-                "proposal",
-                "task"
-              ],
+              "enum": ["bug", "enhancement", "proposal", "task"],
               "type": "string"
             },
             "links": {
@@ -1413,13 +1322,7 @@
               "$ref": "#/definitions/Milestone"
             },
             "priority": {
-              "enum": [
-                "trivial",
-                "minor",
-                "major",
-                "critical",
-                "blocker"
-              ],
+              "enum": ["trivial", "minor", "major", "critical", "blocker"],
               "type": "string"
             },
             "reporter": {
@@ -1652,11 +1555,7 @@
               "type": "string"
             },
             "markup": {
-              "enum": [
-                "markdown",
-                "creole",
-                "plaintext"
-              ],
+              "enum": ["markdown", "creole", "plaintext"],
               "type": "string"
             },
             "raw": {
@@ -1675,9 +1574,7 @@
           "$ref": "#/definitions/User"
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object"
     },
     "IssueComment": {
@@ -1710,12 +1607,7 @@
           "type": "string"
         },
         "status": {
-          "enum": [
-            "ACCEPTED",
-            "STARTED",
-            "RUNNING",
-            "FAILURE"
-          ],
+          "enum": ["ACCEPTED", "STARTED", "RUNNING", "FAILURE"],
           "type": "string"
         },
         "total": {
@@ -1737,10 +1629,7 @@
           "type": "object"
         }
       ],
-      "x-bb-default-fields": [
-        "cloudId",
-        "id"
-      ],
+      "x-bb-default-fields": ["cloudId", "id"],
       "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}/projects/{id}?actor={user.uuid}&atlassian_account_id={user.account_id}"
     },
     "JiraSite": {
@@ -1753,11 +1642,7 @@
           "type": "object"
         }
       ],
-      "x-bb-default-fields": [
-        "cloudId",
-        "cloudUrl",
-        "cloudName"
-      ],
+      "x-bb-default-fields": ["cloudId", "cloudUrl", "cloudName"],
       "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}?actor={user.uuid}&atlassian_account_id={user.account_id}"
     },
     "Milestone": {
@@ -1805,9 +1690,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object"
     },
     "Page": {
@@ -3023,10 +2906,7 @@
               "type": "string"
             },
             "role": {
-              "enum": [
-                "PARTICIPANT",
-                "REVIEWER"
-              ],
+              "enum": ["PARTICIPANT", "REVIEWER"],
               "type": "string"
             },
             "user": {
@@ -3199,12 +3079,7 @@
               "type": "string"
             },
             "ref_type": {
-              "enum": [
-                "branch",
-                "tag",
-                "named_branch",
-                "bookmark"
-              ],
+              "enum": ["branch", "tag", "named_branch", "bookmark"],
               "type": "string"
             },
             "selector": {
@@ -3305,13 +3180,7 @@
               "type": "string"
             },
             "type": {
-              "enum": [
-                "branches",
-                "tags",
-                "bookmarks",
-                "default",
-                "custom"
-              ],
+              "enum": ["branches", "tags", "bookmarks", "default", "custom"],
               "type": "string"
             }
           },
@@ -3384,9 +3253,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "COMPLETED"
-              ],
+              "enum": ["COMPLETED"],
               "type": "string"
             },
             "result": {
@@ -3409,9 +3276,7 @@
               "$ref": "#/definitions/PipelineError"
             },
             "name": {
-              "enum": [
-                "ERROR"
-              ],
+              "enum": ["ERROR"],
               "type": "string"
             }
           },
@@ -3428,9 +3293,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "EXPIRED"
-              ],
+              "enum": ["EXPIRED"],
               "type": "string"
             }
           },
@@ -3447,9 +3310,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "FAILED"
-              ],
+              "enum": ["FAILED"],
               "type": "string"
             }
           },
@@ -3478,9 +3339,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "STOPPED"
-              ],
+              "enum": ["STOPPED"],
               "type": "string"
             }
           },
@@ -3497,9 +3356,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "SUCCESSFUL"
-              ],
+              "enum": ["SUCCESSFUL"],
               "type": "string"
             }
           },
@@ -3516,9 +3373,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "IN_PROGRESS"
-              ],
+              "enum": ["IN_PROGRESS"],
               "type": "string"
             },
             "stage": {
@@ -3538,9 +3393,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "PAUSED"
-              ],
+              "enum": ["PAUSED"],
               "type": "string"
             }
           },
@@ -3557,9 +3410,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "RUNNING"
-              ],
+              "enum": ["RUNNING"],
               "type": "string"
             }
           },
@@ -3588,9 +3439,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "PENDING"
-              ],
+              "enum": ["PENDING"],
               "type": "string"
             }
           },
@@ -3637,9 +3486,7 @@
           "type": "object"
         }
       ],
-      "x-bb-default-fields": [
-        "uuid"
-      ],
+      "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
     },
     "PipelineStepError": {
@@ -3682,9 +3529,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "COMPLETED"
-              ],
+              "enum": ["COMPLETED"],
               "type": "string"
             },
             "result": {
@@ -3707,9 +3552,7 @@
               "$ref": "#/definitions/PipelineStepError"
             },
             "name": {
-              "enum": [
-                "ERROR"
-              ],
+              "enum": ["ERROR"],
               "type": "string"
             }
           },
@@ -3726,9 +3569,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "EXPIRED"
-              ],
+              "enum": ["EXPIRED"],
               "type": "string"
             }
           },
@@ -3745,9 +3586,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "FAILED"
-              ],
+              "enum": ["FAILED"],
               "type": "string"
             }
           },
@@ -3764,9 +3603,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "NOT_RUN"
-              ],
+              "enum": ["NOT_RUN"],
               "type": "string"
             }
           },
@@ -3795,9 +3632,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "STOPPED"
-              ],
+              "enum": ["STOPPED"],
               "type": "string"
             }
           },
@@ -3814,9 +3649,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "SUCCESSFUL"
-              ],
+              "enum": ["SUCCESSFUL"],
               "type": "string"
             }
           },
@@ -3833,9 +3666,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "IN_PROGRESS"
-              ],
+              "enum": ["IN_PROGRESS"],
               "type": "string"
             }
           },
@@ -3852,9 +3683,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "PENDING"
-              ],
+              "enum": ["PENDING"],
               "type": "string"
             }
           },
@@ -3871,9 +3700,7 @@
           "additionalProperties": true,
           "properties": {
             "name": {
-              "enum": [
-                "READY"
-              ],
+              "enum": ["READY"],
               "type": "string"
             }
           },
@@ -3983,9 +3810,7 @@
           "type": "object"
         }
       ],
-      "x-bb-default-fields": [
-        "uuid"
-      ],
+      "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
     },
     "PipelinesStgWestPipelineStep": {
@@ -3998,9 +3823,7 @@
           "type": "object"
         }
       ],
-      "x-bb-default-fields": [
-        "uuid"
-      ],
+      "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
     },
     "Project": {
@@ -4253,11 +4076,7 @@
                       "type": "string"
                     },
                     "markup": {
-                      "enum": [
-                        "markdown",
-                        "creole",
-                        "plaintext"
-                      ],
+                      "enum": ["markdown", "creole", "plaintext"],
                       "type": "string"
                     },
                     "raw": {
@@ -4273,11 +4092,7 @@
                       "type": "string"
                     },
                     "markup": {
-                      "enum": [
-                        "markdown",
-                        "creole",
-                        "plaintext"
-                      ],
+                      "enum": ["markdown", "creole", "plaintext"],
                       "type": "string"
                     },
                     "raw": {
@@ -4293,11 +4108,7 @@
                       "type": "string"
                     },
                     "markup": {
-                      "enum": [
-                        "markdown",
-                        "creole",
-                        "plaintext"
-                      ],
+                      "enum": ["markdown", "creole", "plaintext"],
                       "type": "string"
                     },
                     "raw": {
@@ -4319,12 +4130,7 @@
               "$ref": "#/definitions/PullrequestEndpoint"
             },
             "state": {
-              "enum": [
-                "MERGED",
-                "SUPERSEDED",
-                "OPEN",
-                "DECLINED"
-              ],
+              "enum": ["MERGED", "SUPERSEDED", "OPEN", "DECLINED"],
               "type": "string"
             },
             "summary": {
@@ -4334,11 +4140,7 @@
                   "type": "string"
                 },
                 "markup": {
-                  "enum": [
-                    "markdown",
-                    "creole",
-                    "plaintext"
-                  ],
+                  "enum": ["markdown", "creole", "plaintext"],
                   "type": "string"
                 },
                 "raw": {
@@ -4388,11 +4190,7 @@
             },
             "merge_strategies": {
               "items": {
-                "enum": [
-                  "merge_commit",
-                  "squash",
-                  "fast_forward"
-                ],
+                "enum": ["merge_commit", "squash", "fast_forward"],
                 "type": "string"
               },
               "type": "array"
@@ -4426,11 +4224,7 @@
         },
         "merge_strategy": {
           "default": "merge_commit",
-          "enum": [
-            "merge_commit",
-            "squash",
-            "fast_forward"
-          ],
+          "enum": ["merge_commit", "squash", "fast_forward"],
           "type": "string"
         },
         "message": {
@@ -4440,9 +4234,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object"
     },
     "Ref": {
@@ -4500,9 +4292,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object"
     },
     "Report": {
@@ -4540,23 +4330,14 @@
               "type": "boolean"
             },
             "report_type": {
-              "enum": [
-                "SECURITY",
-                "COVERAGE",
-                "TEST",
-                "BUG"
-              ],
+              "enum": ["SECURITY", "COVERAGE", "TEST", "BUG"],
               "type": "string"
             },
             "reporter": {
               "type": "string"
             },
             "result": {
-              "enum": [
-                "PASSED",
-                "FAILED",
-                "PENDING"
-              ],
+              "enum": ["PASSED", "FAILED", "PENDING"],
               "type": "string"
             },
             "title": {
@@ -4573,9 +4354,7 @@
           "type": "object"
         }
       ],
-      "x-bb-default-fields": [
-        "uuid"
-      ],
+      "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
     },
     "ReportAnnotation": {
@@ -4587,11 +4366,7 @@
           "additionalProperties": true,
           "properties": {
             "annotation_type": {
-              "enum": [
-                "VULNERABILITY",
-                "CODE_SMELL",
-                "BUG"
-              ],
+              "enum": ["VULNERABILITY", "CODE_SMELL", "BUG"],
               "type": "string"
             },
             "created_on": {
@@ -4614,21 +4389,11 @@
               "type": "string"
             },
             "result": {
-              "enum": [
-                "PASSED",
-                "FAILED",
-                "SKIPPED",
-                "IGNORED"
-              ],
+              "enum": ["PASSED", "FAILED", "SKIPPED", "IGNORED"],
               "type": "string"
             },
             "severity": {
-              "enum": [
-                "CRITICAL",
-                "HIGH",
-                "MEDIUM",
-                "LOW"
-              ],
+              "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"],
               "type": "string"
             },
             "summary": {
@@ -4645,9 +4410,7 @@
           "type": "object"
         }
       ],
-      "x-bb-default-fields": [
-        "uuid"
-      ],
+      "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{reportUuid}/annotations/{uuid}"
     },
     "ReportData": {
@@ -4688,11 +4451,7 @@
               "type": "string"
             },
             "fork_policy": {
-              "enum": [
-                "allow_forks",
-                "no_public_forks",
-                "no_forks"
-              ],
+              "enum": ["allow_forks", "no_public_forks", "no_forks"],
               "type": "string"
             },
             "full_name": {
@@ -4855,10 +4614,7 @@
               "$ref": "#/definitions/Project"
             },
             "scm": {
-              "enum": [
-                "hg",
-                "git"
-              ],
+              "enum": ["hg", "git"],
               "type": "string"
             },
             "size": {
@@ -4879,11 +4635,7 @@
       "additionalProperties": true,
       "properties": {
         "permission": {
-          "enum": [
-            "admin",
-            "write",
-            "read"
-          ],
+          "enum": ["admin", "write", "read"],
           "type": "string"
         },
         "repository": {
@@ -4896,9 +4648,7 @@
           "$ref": "#/definitions/User"
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object"
     },
     "SearchCodeSearchResult": {
@@ -5016,10 +4766,7 @@
               "$ref": "#/definitions/Account"
             },
             "scm": {
-              "enum": [
-                "hg",
-                "git"
-              ],
+              "enum": ["hg", "git"],
               "type": "string"
             },
             "title": {
@@ -5212,9 +4959,7 @@
           "type": "object"
         }
       ],
-      "x-bb-default-fields": [
-        "uuid"
-      ],
+      "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
     },
     "SubjectTypes": {
@@ -5315,10 +5060,7 @@
       "additionalProperties": true,
       "properties": {
         "permission": {
-          "enum": [
-            "admin",
-            "collaborator"
-          ],
+          "enum": ["admin", "collaborator"],
           "type": "string"
         },
         "team": {
@@ -5331,9 +5073,7 @@
           "$ref": "#/definitions/User"
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object"
     },
     "Treeentry": {
@@ -5349,9 +5089,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object"
     },
     "User": {
@@ -5462,12 +5200,7 @@
               "$ref": "#/definitions/Object"
             },
             "subject_type": {
-              "enum": [
-                "workspace",
-                "user",
-                "repository",
-                "team"
-              ],
+              "enum": ["workspace", "user", "repository", "team"],
               "type": "string"
             },
             "url": {
@@ -5647,11 +5380,7 @@
               "type": "object"
             },
             "permission": {
-              "enum": [
-                "owner",
-                "collaborator",
-                "member"
-              ],
+              "enum": ["owner", "collaborator", "member"],
               "type": "string"
             },
             "user": {

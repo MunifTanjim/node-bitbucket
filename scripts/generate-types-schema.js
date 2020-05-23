@@ -16,11 +16,11 @@ const noiseKeys = [
   'minItems',
   'pattern',
   'readOnly',
-  'uniqueItems'
+  'uniqueItems',
 ]
 
 function deleteNoises(object) {
-  noiseKeys.forEach(noiseKey => {
+  noiseKeys.forEach((noiseKey) => {
     delete object[noiseKey]
   })
 }
@@ -37,16 +37,12 @@ function deleteNoisesDeep(object) {
   }
 }
 
-const entityNames = chain(DEFINITIONS_SPEC)
-  .keys()
-  .uniq()
-  .sort()
-  .value()
+const entityNames = chain(DEFINITIONS_SPEC).keys().uniq().sort().value()
 
 const schema = {
   type: 'object',
   definitions: {},
-  properties: {}
+  properties: {},
 }
 
 for (const [entityName, entity] of Object.entries(DEFINITIONS_SPEC)) {
@@ -60,7 +56,7 @@ const stringifiedPathsSpec = JSON.stringify(PATHS_SPEC)
 for (const entityName of entityNames) {
   if (RegExp(`"#/definitions/${entityName}"`).test(stringifiedPathsSpec)) {
     schema.properties[entityName] = {
-      $ref: `#/definitions/${entityName}`
+      $ref: `#/definitions/${entityName}`,
     }
   }
 }

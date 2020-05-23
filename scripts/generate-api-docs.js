@@ -5,7 +5,7 @@ const { writeFileSync } = require('fs')
 const { isPaginatedEndpoint } = require('./utils/is-paginated-endpoint')
 
 const PATHS_SPEC = require('../specification/paths.json')
-const PATHS_SPEC_EXTRAS = require('../specification/extras/paths.json')
+// const PATHS_SPEC_EXTRAS = require('../specification/extras/paths.json')
 
 const docsPath = resolvePath('docs')
 
@@ -13,7 +13,7 @@ const ROUTES = require('../src/plugins/register-api-endpoints/routes.json')
 
 // One of many workarounds for Bitbucket's faulty API Specification
 const URL_ALIASES = {
-  '/users/{username}/ssh-keys/{key_id}': '/users/{username}/ssh-keys/'
+  '/users/{username}/ssh-keys/{key_id}': '/users/{username}/ssh-keys/',
 }
 
 const usernameRegex = /\/\{username\}\//
@@ -82,21 +82,21 @@ const getAPIParamDescription = (param, paramName, { method, url }) => {
 }
 
 const toAPIParamComment = (param, paramName, api) => {
-  let paramDescription = getAPIParamDescription(param, paramName, api)
-  let paramDefaultVal = getAPIParamDefault(param, paramName, api)
-  let paramType = param.type
+  const paramDescription = getAPIParamDescription(param, paramName, api)
+  const paramDefaultVal = getAPIParamDefault(param, paramName, api)
+  const paramType = param.type
 
   let paramLabel = paramName
   if (paramDefaultVal !== null) {
     paramLabel += `="${paramDefaultVal}"`
   }
 
-  let paramRequired = Boolean(param.required)
+  const paramRequired = Boolean(param.required)
   if (!paramRequired) {
     paramLabel = `[${paramLabel}]`
   }
 
-  let paramGroup = `Parameters`
+  const paramGroup = `Parameters`
 
   let allowedValues = ''
   if (param.enum) {
@@ -132,12 +132,12 @@ const getLinkToOfficialDocs = ({ method, url }, apiName, namespaceName) => {
 
 const toAPIComment = (api, apiName, namespaceName) => {
   if (api.alias) {
-    let [namespaceAlias, apiAlias] = api.alias.split('.')
+    const [namespaceAlias, apiAlias] = api.alias.split('.')
     api = ROUTES[namespaceAlias][apiAlias]
   }
 
-  let method = api.method
-  let url = api.url
+  const method = api.method
+  const url = api.url
   let params = api.params
 
   if (!method) {
@@ -153,19 +153,19 @@ const toAPIComment = (api, apiName, namespaceName) => {
       page: { require: false, type: 'string' },
       pagelen: { required: false, type: 'integer' },
       q: { required: false, type: 'string' },
-      sort: { required: false, type: 'string' }
+      sort: { required: false, type: 'string' },
     })
   }
 
   if (method === 'GET') {
     params = Object.assign({}, params, {
-      fields: { require: false, type: 'string' }
+      fields: { require: false, type: 'string' },
     })
   }
 
-  let descriptionWithLinkToOfficialDocs = [
+  const descriptionWithLinkToOfficialDocs = [
     getAPIDescription(api, apiName, namespaceName).split('\n\n')[0],
-    getLinkToOfficialDocs(api, apiName, namespaceName)
+    getLinkToOfficialDocs(api, apiName, namespaceName),
   ]
     .filter(Boolean)
     .join(' ')
@@ -176,7 +176,7 @@ const toAPIComment = (api, apiName, namespaceName) => {
     ` * @apiName ${namespaceName}.${apiName}`,
     ` * @apiDescription ${descriptionWithLinkToOfficialDocs}`,
     ` * @apiGroup ${namespaceName}`,
-    ' *'
+    ' *',
   ].concat(
     toPairs(params).map(([paramName, param]) =>
       toAPIParamComment(param, paramName, api)
@@ -191,7 +191,7 @@ const toAPIComment = (api, apiName, namespaceName) => {
       ` *   const { data, headers } = await bitbucket.${namespaceName}.${apiName}({ ${paramsString} })`,
       ` * @apiExample {js} Promise`,
       ` *   bitbucket.${namespaceName}.${apiName}({ ${paramsString} }).then(({ data, headers }) => {})`,
-      ` */`
+      ` */`,
     ])
     .join('\n')
 }
@@ -199,7 +199,7 @@ const toAPIComment = (api, apiName, namespaceName) => {
 const prepareAPI = (api, apiName, namespaceName) =>
   toAPIComment(api, apiName, namespaceName)
 
-const toSectionComment = namespaceName => `
+const toSectionComment = (namespaceName) => `
 /**
  * ${namespaceName}
  * @namespace ${namespaceName}
@@ -209,14 +209,16 @@ const toSectionComment = namespaceName => `
 const prepareNamespace = (namespace, namespaceName) =>
   [toSectionComment(namespaceName)]
     .concat(
-      keys(namespace).map(apiName =>
+      keys(namespace).map((apiName) =>
         prepareAPI(namespace[apiName], apiName, namespaceName)
       )
     )
     .join('\n')
 
 const apiDocs = keys(ROUTES)
-  .map(namespaceName => prepareNamespace(ROUTES[namespaceName], namespaceName))
+  .map((namespaceName) =>
+    prepareNamespace(ROUTES[namespaceName], namespaceName)
+  )
   .join('\n')
   .trim()
 

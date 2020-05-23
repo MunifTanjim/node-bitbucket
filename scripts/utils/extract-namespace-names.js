@@ -1,6 +1,6 @@
 const { chain, keys, values } = require('lodash')
 
-const extractNamespaceNames = endpointNames => {
+const extractNamespaceNames = (endpointNames) => {
   return chain(endpointNames)
     .values()
     .flatMap(values)

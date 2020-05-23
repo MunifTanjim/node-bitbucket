@@ -173,12 +173,7 @@
       "method": "GET",
       "params": {
         "subject_type": {
-          "enum": [
-            "workspace",
-            "user",
-            "repository",
-            "team"
-          ],
+          "enum": ["workspace", "user", "repository", "team"],
           "required": true,
           "type": "string"
         }
@@ -824,9 +819,7 @@
       "url": "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables"
     },
     "createDownload": {
-      "accepts": [
-        "multipart/form-data"
-      ],
+      "accepts": ["multipart/form-data"],
       "method": "POST",
       "params": {
         "_body": {
@@ -904,9 +897,7 @@
       "url": "/repositories/{workspace}/{repo_slug}/issues"
     },
     "createIssueAttachments": {
-      "accepts": [
-        "multipart/form-data"
-      ],
+      "accepts": ["multipart/form-data"],
       "method": "POST",
       "params": {
         "_body": {
@@ -1251,10 +1242,7 @@
       "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments"
     },
     "createSrcFileCommit": {
-      "accepts": [
-        "multipart/form-data",
-        "application/x-www-form-urlencoded"
-      ],
+      "accepts": ["multipart/form-data", "application/x-www-form-urlencoded"],
       "method": "POST",
       "params": {
         "_body": {
@@ -2868,12 +2856,7 @@
       "method": "GET",
       "params": {
         "role": {
-          "enum": [
-            "admin",
-            "contributor",
-            "member",
-            "owner"
-          ],
+          "enum": ["admin", "contributor", "member", "owner"],
           "type": "string"
         },
         "workspace": {
@@ -2960,9 +2943,7 @@
       "url": "/repositories/{workspace}/{repo_slug}/commits"
     },
     "listCommitsAlt": {
-      "accepts": [
-        "application/x-www-form-urlencoded"
-      ],
+      "accepts": ["application/x-www-form-urlencoded"],
       "method": "POST",
       "params": {
         "exclude": {
@@ -3212,12 +3193,7 @@
           "type": "string"
         },
         "role": {
-          "enum": [
-            "admin",
-            "contributor",
-            "member",
-            "owner"
-          ],
+          "enum": ["admin", "contributor", "member", "owner"],
           "type": "string"
         },
         "workspace": {
@@ -3235,12 +3211,7 @@
           "type": "string"
         },
         "role": {
-          "enum": [
-            "admin",
-            "contributor",
-            "member",
-            "owner"
-          ],
+          "enum": ["admin", "contributor", "member", "owner"],
           "type": "string"
         }
       },
@@ -3508,12 +3479,7 @@
           "type": "string"
         },
         "state": {
-          "enum": [
-            "MERGED",
-            "SUPERSEDED",
-            "OPEN",
-            "DECLINED"
-          ],
+          "enum": ["MERGED", "SUPERSEDED", "OPEN", "DECLINED"],
           "type": "string"
         },
         "workspace": {
@@ -3666,10 +3632,7 @@
       "method": "GET",
       "params": {
         "format": {
-          "enum": [
-            "meta",
-            "rendered"
-          ],
+          "enum": ["meta", "rendered"],
           "type": "string"
         },
         "max_depth": {
@@ -3699,9 +3662,7 @@
       "method": "GET",
       "params": {
         "format": {
-          "enum": [
-            "meta"
-          ],
+          "enum": ["meta"],
           "type": "string"
         },
         "repo_slug": {
@@ -4505,11 +4466,7 @@
       "method": "GET",
       "params": {
         "role": {
-          "enum": [
-            "owner",
-            "contributor",
-            "member"
-          ],
+          "enum": ["owner", "contributor", "member"],
           "type": "string"
         }
       },
@@ -4550,11 +4507,7 @@
       "method": "GET",
       "params": {
         "role": {
-          "enum": [
-            "owner",
-            "contributor",
-            "member"
-          ],
+          "enum": ["owner", "contributor", "member"],
           "type": "string"
         },
         "workspace": {
@@ -4863,11 +4816,7 @@
       "method": "GET",
       "params": {
         "role": {
-          "enum": [
-            "admin",
-            "contributor",
-            "member"
-          ],
+          "enum": ["admin", "contributor", "member"],
           "type": "string"
         }
       },

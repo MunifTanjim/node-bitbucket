@@ -10,7 +10,7 @@ type RequestOptions = import('./types').RequestOptions
 const contentType = {
   formData: 'multipart/form-data',
   urlEncoded: 'application/x-www-form-urlencoded',
-  json: 'application/json; charset=utf-8'
+  json: 'application/json; charset=utf-8',
 }
 
 export function parse(endpointOptions: EndpointDefaults): RequestOptions {
@@ -79,6 +79,6 @@ export function parse(endpointOptions: EndpointDefaults): RequestOptions {
     url,
     body,
     headers,
-    request
+    request,
   }
 }

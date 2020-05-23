@@ -5,10 +5,10 @@ const get = require('lodash/get')
 const path = require('path')
 
 const {
-  extractEndpointNamesForNamespace
+  extractEndpointNamesForNamespace,
 } = require('../utils/extract-endpoint-names-for-namespace')
 const {
-  extractNamespaceFromURL
+  extractNamespaceFromURL,
 } = require('../utils/extract-namespace-from-url')
 const { extractNamespaceNames } = require('../utils/extract-namespace-names')
 const { getDuplicates } = require('../utils/get-duplicates')
@@ -34,7 +34,7 @@ const { setUrl } = require('./set-url')
 function initializeRoutes(routesObject) {
   const namespaceNames = extractNamespaceNames(ENDPOINT_NAMES)
 
-  namespaceNames.forEach(namespaceName => {
+  namespaceNames.forEach((namespaceName) => {
     routesObject[namespaceName] = {}
 
     const endpointNames = extractEndpointNamesForNamespace(
@@ -49,9 +49,9 @@ function initializeRoutes(routesObject) {
       )
     }
 
-    endpointNames.forEach(methodName => {
+    endpointNames.forEach((methodName) => {
       routesObject[namespaceName][methodName] = {
-        params: {}
+        params: {},
       }
     })
   })
@@ -172,18 +172,18 @@ function formatUrls(routesObject) {
                 in: 'query',
                 name: 'pagelen',
                 required: false,
-                type: 'integer'
+                type: 'integer',
               },
               { in: 'query', name: 'q', required: false, type: 'string' },
-              { in: 'query', name: 'sort', required: false, type: 'string' }
-            ]
+              { in: 'query', name: 'sort', required: false, type: 'string' },
+            ],
           },
           endpointObject.url
         )
       }
 
       const queryParams = Object.keys(endpointObject.params).filter(
-        paramName => endpointObject.params[paramName].in === 'query'
+        (paramName) => endpointObject.params[paramName].in === 'query'
       )
 
       if (queryParams.length) {
