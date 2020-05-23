@@ -9,28 +9,28 @@ const fixUrlParameters = (endpointObject, url) => {
   const needWorkspaceUrlParam = workspaceRegex.test(url)
   const needUsernameUrlParam = usernameRegex.test(url)
 
-  if (needWorkspaceUrlParam && !endpointObject.params['workspace']) {
-    endpointObject.params['workspace'] = {
+  if (needWorkspaceUrlParam && !endpointObject.params.workspace) {
+    endpointObject.params.workspace = {
       in: 'path',
       required: true,
-      type: 'string'
+      type: 'string',
     }
   }
 
   if (!needWorkspaceUrlParam) {
-    delete endpointObject.params['workspace']
+    delete endpointObject.params.workspace
   }
 
-  if (needUsernameUrlParam && !endpointObject.params['username']) {
-    endpointObject.params['username'] = {
+  if (needUsernameUrlParam && !endpointObject.params.username) {
+    endpointObject.params.username = {
       in: 'path',
       required: true,
-      type: 'string'
+      type: 'string',
     }
   }
 
   if (!needUsernameUrlParam) {
-    delete endpointObject.params['username']
+    delete endpointObject.params.username
   }
 }
 
@@ -42,7 +42,7 @@ const processParameters = (endpointObject, { parameters = [] } = {}, url) => {
     required,
     schema = {},
     type = 'any',
-    deleted
+    deleted,
   } of parameters) {
     if (deleted) {
       delete endpointObject.params[name]
@@ -57,7 +57,7 @@ const processParameters = (endpointObject, { parameters = [] } = {}, url) => {
       enum: _enum,
       in: _in,
       required,
-      type
+      type,
     })
 
     endpointObject.params[name].enum = uniq(endpointObject.params[name].enum)

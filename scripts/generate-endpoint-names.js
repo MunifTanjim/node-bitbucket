@@ -4,7 +4,7 @@ const deepsort = require('deep-sort-object')
 const get = require('lodash/get')
 
 const {
-  extractNamespaceFromURL
+  extractNamespaceFromURL,
 } = require('./utils/extract-namespace-from-url')
 
 const PATHS_SPEC = require('../specification/paths.json')

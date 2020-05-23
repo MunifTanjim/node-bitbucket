@@ -14,12 +14,12 @@ export function beforeRequest(
   switch (state.auth.type) {
     case 'apppassword':
     case 'basic':
-      requestOptions.headers['authorization'] = `Basic ${btoa(
+      requestOptions.headers.authorization = `Basic ${btoa(
         `${state.auth.username}:${state.auth.password}`
       )}`
       break
     case 'token':
-      requestOptions.headers['authorization'] = `Bearer ${state.auth.token}`
+      requestOptions.headers.authorization = `Bearer ${state.auth.token}`
       break
   }
 }

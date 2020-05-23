@@ -27,7 +27,7 @@ export function registerEndpoints(client: APIClient, routes: Routes): void {
       ) as EndpointDefaults
 
       endpointDefaults.request = {
-        validate: endpointObject.params
+        validate: endpointObject.params,
       }
 
       const request = client.request.defaults(endpointDefaults)
@@ -40,7 +40,7 @@ export function registerEndpoints(client: APIClient, routes: Routes): void {
           console.log(
             `\x1b[43m\x1b[30m %s \x1b[0m\x1b[33m %s \x1b[0m`,
             `DEPRECATION WARNING:`,
-            `${endpointDefaults.method} ${endpointDefaults.url}`
+            `${endpointDefaults.method} ${endpointDefaults.url as string}`
           )
 
           client[namespaceName][endpointName] = request

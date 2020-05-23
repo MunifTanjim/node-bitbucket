@@ -7,7 +7,7 @@ const { render: renderTemplate } = require('mustache')
 const {
   join: joinPath,
   relative: relativePath,
-  resolve: resolvePath
+  resolve: resolvePath,
 } = require('path')
 const prettier = require('prettier')
 
@@ -19,11 +19,11 @@ const typesSchema = require('../templates/types-schema.json')
 
 async function getTypesBlob(languageName) {
   const compileSchema = {
-    typescript: require('json-schema-to-typescript').compile
+    typescript: require('json-schema-to-typescript').compile,
   }[languageName.toLowerCase()]
 
   const typesBlob = await compileSchema(typesSchema, 'RootInterfaceToDiscard', {
-    bannerComment: false
+    bannerComment: false,
   })
 
   const typesBlobWithoutRootInterface = typesBlob.replace(
@@ -40,13 +40,13 @@ async function getTypesBlob(languageName) {
 }
 
 const typeMap = {
-  integer: 'number'
+  integer: 'number',
 }
 
 const bodyTypeMap = {
   default: 'Schema.Any',
   'application/x-www-form-urlencoded': 'Schema.AnyObject',
-  'multipart/form-data': 'FormData'
+  'multipart/form-data': 'FormData',
 }
 
 function parameterize(paramName, param, accepts) {
@@ -64,7 +64,7 @@ function parameterize(paramName, param, accepts) {
 
   if (accepts && paramName === '_body') {
     type = accepts
-      .map(type => bodyTypeMap[type] || bodyTypeMap.default)
+      .map((type) => bodyTypeMap[type] || bodyTypeMap.default)
       .join(' | ')
   }
 
@@ -72,7 +72,7 @@ function parameterize(paramName, param, accepts) {
     name: paramName,
     required: param.required,
     schema,
-    type: enums || type
+    type: enums || type,
   }
 }
 
@@ -102,13 +102,13 @@ async function generateTypes(languageName, templateFile) {
             page: { require: false, type: 'string' },
             pagelen: { required: false, type: 'integer' },
             q: { required: false, type: 'string' },
-            sort: { required: false, type: 'string' }
+            sort: { required: false, type: 'string' },
           })
         }
 
         if (endpointObject.method === 'GET') {
           endpointObject.params = Object.assign({}, endpointObject.params, {
-            fields: { require: false, type: 'string' }
+            fields: { require: false, type: 'string' },
           })
         }
 
@@ -131,7 +131,7 @@ async function generateTypes(languageName, templateFile) {
           params,
           paramsType,
           responseType,
-          exclude: !hasParams
+          exclude: !hasParams,
         })
       },
       []
@@ -139,19 +139,19 @@ async function generateTypes(languageName, templateFile) {
 
     return namespaces.concat({
       namespace: namespaceName,
-      endpoints
+      endpoints,
     })
   }, [])
 
   const types = renderTemplate(template, {
     namespaces,
-    typesBlob
+    typesBlob,
   })
 
   const prettyTypes = prettier.format(types, {
     parser: languageName.toLowerCase(),
     semi: false,
-    singleQuote: true
+    singleQuote: true,
   })
 
   return prettyTypes
@@ -175,23 +175,23 @@ const typeFiles = [
   {
     languageName: 'TypeScript',
     templateFile: joinPath(templatesPath, 'bitbucket.d.ts.mustache'),
-    outputFile: joinPath(typesPath, 'bitbucket.d.ts')
+    outputFile: joinPath(typesPath, 'bitbucket.d.ts'),
   },
   {
     languageName: 'TypeScript',
     templateFile: joinPath(templatesPath, 'index.d.ts.mustache'),
-    outputFile: joinPath(typesPath, 'index.d.ts')
+    outputFile: joinPath(typesPath, 'index.d.ts'),
   },
   {
     languageName: 'TypeScript',
     templateFile: joinPath(templatesPath, 'minimal.d.ts.mustache'),
-    outputFile: joinPath(typesPath, 'minimal.d.ts')
+    outputFile: joinPath(typesPath, 'minimal.d.ts'),
   },
   {
     languageName: 'TypeScript',
     templateFile: joinPath(templatesPath, 'plugins/authenticate.d.ts.mustache'),
-    outputFile: joinPath(typesPath, 'plugins/authenticate.d.ts')
-  }
+    outputFile: joinPath(typesPath, 'plugins/authenticate.d.ts'),
+  },
 ]
 
 typeFiles.forEach(({ languageName, templateFile, outputFile }) => {

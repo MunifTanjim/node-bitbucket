@@ -12,7 +12,7 @@ const Plugins = [
   paginationPlugin,
   registerEndpointsPlugin,
   registerApiEndpointsPlugin,
-  validateRequestPlugin
+  validateRequestPlugin,
 ]
 
 export const Bitbucket = Client.plugins(Plugins)

@@ -5,8 +5,8 @@ export type Options = import('../../client/types').Options
 export type RequestOptions = import('../../endpoint/types').RequestOptions
 
 export type AuthenticateOptions =
-  | AuthBasic & { type: 'apppassword' | 'basic' }
-  | AuthToken & { type: 'token' }
+  | (AuthBasic & { type: 'apppassword' | 'basic' })
+  | (AuthToken & { type: 'token' })
 
 export type AuthenticatePluginState = {
   client: APIClient

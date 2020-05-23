@@ -12,7 +12,7 @@ function authPlugin(client: APIClient, clientOptions: Options): void {
 
   const state: AuthPluginState = {
     client,
-    auth: clientOptions.auth
+    auth: clientOptions.auth,
   }
 
   client.requestHook.before(beforeRequest.bind(null, state))

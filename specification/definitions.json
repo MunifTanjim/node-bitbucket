@@ -185,11 +185,7 @@
               },
               "markup": {
                 "description": "The type of markup language the raw content is to be interpreted in.",
-                "enum": [
-                  "markdown",
-                  "creole",
-                  "plaintext"
-                ],
+                "enum": ["markdown", "creole", "plaintext"],
                 "type": "string"
               },
               "raw": {
@@ -233,12 +229,7 @@
               "properties": {
                 "kind": {
                   "description": "The kind of branch.",
-                  "enum": [
-                    "feature",
-                    "bugfix",
-                    "release",
-                    "hotfix"
-                  ],
+                  "enum": ["feature", "bugfix", "release", "hotfix"],
                   "type": "string"
                 },
                 "prefix": {
@@ -246,10 +237,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "kind",
-                "prefix"
-              ],
+              "required": ["kind", "prefix"],
               "type": "object"
             },
             "maxItems": 4,
@@ -272,10 +260,7 @@
                 "type": "boolean"
               }
             },
-            "required": [
-              "name",
-              "use_mainbranch"
-            ],
+            "required": ["name", "use_mainbranch"],
             "type": "object"
           },
           "production": {
@@ -293,10 +278,7 @@
                 "type": "boolean"
               }
             },
-            "required": [
-              "name",
-              "use_mainbranch"
-            ],
+            "required": ["name", "use_mainbranch"],
             "type": "object"
           }
         },
@@ -323,12 +305,7 @@
                 },
                 "kind": {
                   "description": "The kind of the branch type.",
-                  "enum": [
-                    "feature",
-                    "bugfix",
-                    "release",
-                    "hotfix"
-                  ],
+                  "enum": ["feature", "bugfix", "release", "hotfix"],
                   "type": "string"
                 },
                 "prefix": {
@@ -336,9 +313,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "kind"
-              ],
+              "required": ["kind"],
               "type": "object"
             },
             "maxItems": 4,
@@ -421,10 +396,7 @@
         "properties": {
           "branch_match_kind": {
             "description": "Indicates how the restriction is matched against a branch. The default is `glob`.",
-            "enum": [
-              "branching_model",
-              "glob"
-            ],
+            "enum": ["branching_model", "glob"],
             "type": "string"
           },
           "branch_type": {
@@ -502,11 +474,7 @@
             "type": "integer"
           }
         },
-        "required": [
-          "kind",
-          "branch_match_kind",
-          "pattern"
-        ],
+        "required": ["kind", "branch_match_kind", "pattern"],
         "type": "object"
       }
     ]
@@ -529,11 +497,7 @@
               },
               "markup": {
                 "description": "The type of markup language the raw content is to be interpreted in.",
-                "enum": [
-                  "markdown",
-                  "creole",
-                  "plaintext"
-                ],
+                "enum": ["markdown", "creole", "plaintext"],
                 "type": "string"
               },
               "raw": {
@@ -571,9 +535,7 @@
                 "type": "integer"
               }
             },
-            "required": [
-              "path"
-            ],
+            "required": ["path"],
             "type": "object"
           },
           "links": {
@@ -682,13 +644,7 @@
     "description": "A file object, representing a file at a commit in a repository",
     "properties": {
       "attributes": {
-        "enum": [
-          "link",
-          "executable",
-          "subrepository",
-          "binary",
-          "lfs"
-        ],
+        "enum": ["link", "executable", "subrepository", "binary", "lfs"],
         "type": "string"
       },
       "commit": {
@@ -706,9 +662,7 @@
         "type": "string"
       }
     },
-    "required": [
-      "type"
-    ],
+    "required": ["type"],
     "type": "object"
   },
   "commitstatus": {
@@ -774,12 +728,7 @@
           },
           "state": {
             "description": "Provides some indication of the status of this commit",
-            "enum": [
-              "SUCCESSFUL",
-              "FAILED",
-              "INPROGRESS",
-              "STOPPED"
-            ],
+            "enum": ["SUCCESSFUL", "FAILED", "INPROGRESS", "STOPPED"],
             "type": "string"
           },
           "updated_on": {
@@ -849,9 +798,7 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": [
-      "uuid"
-    ],
+    "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
   },
   "deploy_key": {
@@ -963,9 +910,7 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": [
-      "uuid"
-    ],
+    "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
   },
   "deployment_release": {
@@ -1037,9 +982,7 @@
           },
           "name": {
             "description": "The name of deployment state (COMPLETED).",
-            "enum": [
-              "COMPLETED"
-            ],
+            "enum": ["COMPLETED"],
             "type": "string"
           },
           "start_date": {
@@ -1085,9 +1028,7 @@
         "properties": {
           "name": {
             "description": "The name of the completed deployment status (FAILED).",
-            "enum": [
-              "FAILED"
-            ],
+            "enum": ["FAILED"],
             "type": "string"
           }
         },
@@ -1106,9 +1047,7 @@
         "properties": {
           "name": {
             "description": "The name of the completed deployment status (STOPPED).",
-            "enum": [
-              "STOPPED"
-            ],
+            "enum": ["STOPPED"],
             "type": "string"
           }
         },
@@ -1127,9 +1066,7 @@
         "properties": {
           "name": {
             "description": "The name of the completed deployment status (SUCCESSFUL).",
-            "enum": [
-              "SUCCESSFUL"
-            ],
+            "enum": ["SUCCESSFUL"],
             "type": "string"
           }
         },
@@ -1152,9 +1089,7 @@
           },
           "name": {
             "description": "The name of deployment state (IN_PROGRESS).",
-            "enum": [
-              "IN_PROGRESS"
-            ],
+            "enum": ["IN_PROGRESS"],
             "type": "string"
           },
           "start_date": {
@@ -1183,9 +1118,7 @@
         "properties": {
           "name": {
             "description": "The name of deployment state (UNDEPLOYED).",
-            "enum": [
-              "UNDEPLOYED"
-            ],
+            "enum": ["UNDEPLOYED"],
             "type": "string"
           },
           "trigger_url": {
@@ -1239,9 +1172,7 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": [
-      "uuid"
-    ],
+    "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
   },
   "deployments_stg_west_deployment_environment": {
@@ -1255,9 +1186,7 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": [
-      "uuid"
-    ],
+    "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
   },
   "diffstat": {
@@ -1277,21 +1206,14 @@
         "$ref": "#/definitions/commit_file"
       },
       "status": {
-        "enum": [
-          "added",
-          "removed",
-          "modified",
-          "renamed"
-        ],
+        "enum": ["added", "removed", "modified", "renamed"],
         "type": "string"
       },
       "type": {
         "type": "string"
       }
     },
-    "required": [
-      "type"
-    ],
+    "required": ["type"],
     "type": "object"
   },
   "error": {
@@ -1314,18 +1236,14 @@
             "type": "string"
           }
         },
-        "required": [
-          "message"
-        ],
+        "required": ["message"],
         "type": "object"
       },
       "type": {
         "type": "string"
       }
     },
-    "required": [
-      "type"
-    ],
+    "required": ["type"],
     "type": "object"
   },
   "group": {
@@ -1464,11 +1382,7 @@
               },
               "markup": {
                 "description": "The type of markup language the raw content is to be interpreted in.",
-                "enum": [
-                  "markdown",
-                  "creole",
-                  "plaintext"
-                ],
+                "enum": ["markdown", "creole", "plaintext"],
                 "type": "string"
               },
               "raw": {
@@ -1490,12 +1404,7 @@
             "type": "integer"
           },
           "kind": {
-            "enum": [
-              "bug",
-              "enhancement",
-              "proposal",
-              "task"
-            ],
+            "enum": ["bug", "enhancement", "proposal", "task"],
             "type": "string"
           },
           "links": {
@@ -1586,13 +1495,7 @@
             "$ref": "#/definitions/milestone"
           },
           "priority": {
-            "enum": [
-              "trivial",
-              "minor",
-              "major",
-              "critical",
-              "blocker"
-            ],
+            "enum": ["trivial", "minor", "major", "critical", "blocker"],
             "type": "string"
           },
           "reporter": {
@@ -1834,11 +1737,7 @@
           },
           "markup": {
             "description": "The type of markup language the raw content is to be interpreted in.",
-            "enum": [
-              "markdown",
-              "creole",
-              "plaintext"
-            ],
+            "enum": ["markdown", "creole", "plaintext"],
             "type": "string"
           },
           "raw": {
@@ -1858,9 +1757,7 @@
         "$ref": "#/definitions/user"
       }
     },
-    "required": [
-      "type"
-    ],
+    "required": ["type"],
     "type": "object"
   },
   "issue_comment": {
@@ -1900,12 +1797,7 @@
       },
       "status": {
         "description": "The status of the import/export job",
-        "enum": [
-          "ACCEPTED",
-          "STARTED",
-          "RUNNING",
-          "FAILURE"
-        ],
+        "enum": ["ACCEPTED", "STARTED", "RUNNING", "FAILURE"],
         "type": "string"
       },
       "total": {
@@ -1929,10 +1821,7 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": [
-      "cloudId",
-      "id"
-    ],
+    "x-bb-default-fields": ["cloudId", "id"],
     "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}/projects/{id}?actor={user.uuid}&atlassian_account_id={user.account_id}"
   },
   "jira_site": {
@@ -1946,11 +1835,7 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": [
-      "cloudId",
-      "cloudUrl",
-      "cloudName"
-    ],
+    "x-bb-default-fields": ["cloudId", "cloudUrl", "cloudName"],
     "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}?actor={user.uuid}&atlassian_account_id={user.account_id}"
   },
   "milestone": {
@@ -2001,9 +1886,7 @@
         "type": "string"
       }
     },
-    "required": [
-      "type"
-    ],
+    "required": ["type"],
     "type": "object"
   },
   "page": {
@@ -3768,10 +3651,7 @@
             "type": "string"
           },
           "role": {
-            "enum": [
-              "PARTICIPANT",
-              "REVIEWER"
-            ],
+            "enum": ["PARTICIPANT", "REVIEWER"],
             "type": "string"
           },
           "user": {
@@ -3976,12 +3856,7 @@
           },
           "ref_type": {
             "description": "The type of reference (branch/tag).",
-            "enum": [
-              "branch",
-              "tag",
-              "named_branch",
-              "bookmark"
-            ],
+            "enum": ["branch", "tag", "named_branch", "bookmark"],
             "type": "string"
           },
           "selector": {
@@ -4099,13 +3974,7 @@
           },
           "type": {
             "description": "The type of selector.",
-            "enum": [
-              "branches",
-              "tags",
-              "bookmarks",
-              "default",
-              "custom"
-            ],
+            "enum": ["branches", "tags", "bookmarks", "default", "custom"],
             "type": "string"
           }
         },
@@ -4189,9 +4058,7 @@
         "properties": {
           "name": {
             "description": "The name of pipeline state (COMPLETED).",
-            "enum": [
-              "COMPLETED"
-            ],
+            "enum": ["COMPLETED"],
             "type": "string"
           },
           "result": {
@@ -4218,9 +4085,7 @@
           },
           "name": {
             "description": "The name of the result (ERROR)",
-            "enum": [
-              "ERROR"
-            ],
+            "enum": ["ERROR"],
             "type": "string"
           }
         },
@@ -4239,9 +4104,7 @@
         "properties": {
           "name": {
             "description": "The name of the stopped result (EXPIRED).",
-            "enum": [
-              "EXPIRED"
-            ],
+            "enum": ["EXPIRED"],
             "type": "string"
           }
         },
@@ -4260,9 +4123,7 @@
         "properties": {
           "name": {
             "description": "The name of the failed result (FAILED).",
-            "enum": [
-              "FAILED"
-            ],
+            "enum": ["FAILED"],
             "type": "string"
           }
         },
@@ -4294,9 +4155,7 @@
         "properties": {
           "name": {
             "description": "The name of the stopped result (STOPPED).",
-            "enum": [
-              "STOPPED"
-            ],
+            "enum": ["STOPPED"],
             "type": "string"
           }
         },
@@ -4315,9 +4174,7 @@
         "properties": {
           "name": {
             "description": "The name of the successful result (SUCCESSFUL).",
-            "enum": [
-              "SUCCESSFUL"
-            ],
+            "enum": ["SUCCESSFUL"],
             "type": "string"
           }
         },
@@ -4336,9 +4193,7 @@
         "properties": {
           "name": {
             "description": "The name of pipeline state (IN_PROGRESS).",
-            "enum": [
-              "IN_PROGRESS"
-            ],
+            "enum": ["IN_PROGRESS"],
             "type": "string"
           },
           "stage": {
@@ -4361,9 +4216,7 @@
         "properties": {
           "name": {
             "description": "The name of the stage (PAUSED)",
-            "enum": [
-              "PAUSED"
-            ],
+            "enum": ["PAUSED"],
             "type": "string"
           }
         },
@@ -4382,9 +4235,7 @@
         "properties": {
           "name": {
             "description": "The name of the stage (RUNNING)",
-            "enum": [
-              "RUNNING"
-            ],
+            "enum": ["RUNNING"],
             "type": "string"
           }
         },
@@ -4416,9 +4267,7 @@
         "properties": {
           "name": {
             "description": "The name of pipeline state (PENDING).",
-            "enum": [
-              "PENDING"
-            ],
+            "enum": ["PENDING"],
             "type": "string"
           }
         },
@@ -4475,9 +4324,7 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": [
-      "uuid"
-    ],
+    "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
   },
   "pipeline_step_error": {
@@ -4526,9 +4373,7 @@
         "properties": {
           "name": {
             "description": "The name of pipeline step state (COMPLETED).",
-            "enum": [
-              "COMPLETED"
-            ],
+            "enum": ["COMPLETED"],
             "type": "string"
           },
           "result": {
@@ -4555,9 +4400,7 @@
           },
           "name": {
             "description": "The name of the result (ERROR)",
-            "enum": [
-              "ERROR"
-            ],
+            "enum": ["ERROR"],
             "type": "string"
           }
         },
@@ -4576,9 +4419,7 @@
         "properties": {
           "name": {
             "description": "The name of the result (EXPIRED)",
-            "enum": [
-              "EXPIRED"
-            ],
+            "enum": ["EXPIRED"],
             "type": "string"
           }
         },
@@ -4597,9 +4438,7 @@
         "properties": {
           "name": {
             "description": "The name of the result (FAILED)",
-            "enum": [
-              "FAILED"
-            ],
+            "enum": ["FAILED"],
             "type": "string"
           }
         },
@@ -4618,9 +4457,7 @@
         "properties": {
           "name": {
             "description": "The name of the result (NOT_RUN)",
-            "enum": [
-              "NOT_RUN"
-            ],
+            "enum": ["NOT_RUN"],
             "type": "string"
           }
         },
@@ -4652,9 +4489,7 @@
         "properties": {
           "name": {
             "description": "The name of the result (STOPPED)",
-            "enum": [
-              "STOPPED"
-            ],
+            "enum": ["STOPPED"],
             "type": "string"
           }
         },
@@ -4673,9 +4508,7 @@
         "properties": {
           "name": {
             "description": "The name of the result (SUCCESSFUL)",
-            "enum": [
-              "SUCCESSFUL"
-            ],
+            "enum": ["SUCCESSFUL"],
             "type": "string"
           }
         },
@@ -4694,9 +4527,7 @@
         "properties": {
           "name": {
             "description": "The name of pipeline step state (IN_PROGRESS).",
-            "enum": [
-              "IN_PROGRESS"
-            ],
+            "enum": ["IN_PROGRESS"],
             "type": "string"
           }
         },
@@ -4715,9 +4546,7 @@
         "properties": {
           "name": {
             "description": "The name of pipeline step state (PENDING).",
-            "enum": [
-              "PENDING"
-            ],
+            "enum": ["PENDING"],
             "type": "string"
           }
         },
@@ -4736,9 +4565,7 @@
         "properties": {
           "name": {
             "description": "The name of pipeline step state (READY).",
-            "enum": [
-              "READY"
-            ],
+            "enum": ["READY"],
             "type": "string"
           }
         },
@@ -4860,9 +4687,7 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": [
-      "uuid"
-    ],
+    "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
   },
   "pipelines_stg_west_pipeline_step": {
@@ -4876,9 +4701,7 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": [
-      "uuid"
-    ],
+    "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
   },
   "project": {
@@ -5162,11 +4985,7 @@
                   },
                   "markup": {
                     "description": "The type of markup language the raw content is to be interpreted in.",
-                    "enum": [
-                      "markdown",
-                      "creole",
-                      "plaintext"
-                    ],
+                    "enum": ["markdown", "creole", "plaintext"],
                     "type": "string"
                   },
                   "raw": {
@@ -5185,11 +5004,7 @@
                   },
                   "markup": {
                     "description": "The type of markup language the raw content is to be interpreted in.",
-                    "enum": [
-                      "markdown",
-                      "creole",
-                      "plaintext"
-                    ],
+                    "enum": ["markdown", "creole", "plaintext"],
                     "type": "string"
                   },
                   "raw": {
@@ -5208,11 +5023,7 @@
                   },
                   "markup": {
                     "description": "The type of markup language the raw content is to be interpreted in.",
-                    "enum": [
-                      "markdown",
-                      "creole",
-                      "plaintext"
-                    ],
+                    "enum": ["markdown", "creole", "plaintext"],
                     "type": "string"
                   },
                   "raw": {
@@ -5237,12 +5048,7 @@
           },
           "state": {
             "description": "The pull request's current status.",
-            "enum": [
-              "MERGED",
-              "SUPERSEDED",
-              "OPEN",
-              "DECLINED"
-            ],
+            "enum": ["MERGED", "SUPERSEDED", "OPEN", "DECLINED"],
             "type": "string"
           },
           "summary": {
@@ -5254,11 +5060,7 @@
               },
               "markup": {
                 "description": "The type of markup language the raw content is to be interpreted in.",
-                "enum": [
-                  "markdown",
-                  "creole",
-                  "plaintext"
-                ],
+                "enum": ["markdown", "creole", "plaintext"],
                 "type": "string"
               },
               "raw": {
@@ -5317,11 +5119,7 @@
           "merge_strategies": {
             "description": "Available merge strategies, when this endpoint is the destination of the pull request.",
             "items": {
-              "enum": [
-                "merge_commit",
-                "squash",
-                "fast_forward"
-              ],
+              "enum": ["merge_commit", "squash", "fast_forward"],
               "type": "string"
             },
             "type": "array"
@@ -5359,11 +5157,7 @@
       "merge_strategy": {
         "default": "merge_commit",
         "description": "The merge strategy that will be used to merge the pull request.",
-        "enum": [
-          "merge_commit",
-          "squash",
-          "fast_forward"
-        ],
+        "enum": ["merge_commit", "squash", "fast_forward"],
         "type": "string"
       },
       "message": {
@@ -5374,9 +5168,7 @@
         "type": "string"
       }
     },
-    "required": [
-      "type"
-    ],
+    "required": ["type"],
     "type": "object"
   },
   "ref": {
@@ -5439,9 +5231,7 @@
         "type": "string"
       }
     },
-    "required": [
-      "type"
-    ],
+    "required": ["type"],
     "type": "object"
   },
   "report": {
@@ -5491,12 +5281,7 @@
           },
           "report_type": {
             "description": "The type of the report.",
-            "enum": [
-              "SECURITY",
-              "COVERAGE",
-              "TEST",
-              "BUG"
-            ],
+            "enum": ["SECURITY", "COVERAGE", "TEST", "BUG"],
             "type": "string"
           },
           "reporter": {
@@ -5505,11 +5290,7 @@
           },
           "result": {
             "description": "The state of the report. May be set to PENDING and later updated.",
-            "enum": [
-              "PASSED",
-              "FAILED",
-              "PENDING"
-            ],
+            "enum": ["PASSED", "FAILED", "PENDING"],
             "type": "string"
           },
           "title": {
@@ -5530,9 +5311,7 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": [
-      "uuid"
-    ],
+    "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
   },
   "report_annotation": {
@@ -5546,11 +5325,7 @@
         "properties": {
           "annotation_type": {
             "description": "The type of the report.",
-            "enum": [
-              "VULNERABILITY",
-              "CODE_SMELL",
-              "BUG"
-            ],
+            "enum": ["VULNERABILITY", "CODE_SMELL", "BUG"],
             "type": "string"
           },
           "created_on": {
@@ -5583,22 +5358,12 @@
           },
           "result": {
             "description": "The state of the report. May be set to PENDING and later updated.",
-            "enum": [
-              "PASSED",
-              "FAILED",
-              "SKIPPED",
-              "IGNORED"
-            ],
+            "enum": ["PASSED", "FAILED", "SKIPPED", "IGNORED"],
             "type": "string"
           },
           "severity": {
             "description": "The severity of the annotation.",
-            "enum": [
-              "CRITICAL",
-              "HIGH",
-              "MEDIUM",
-              "LOW"
-            ],
+            "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"],
             "type": "string"
           },
           "summary": {
@@ -5619,9 +5384,7 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": [
-      "uuid"
-    ],
+    "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{reportUuid}/annotations/{uuid}"
   },
   "report_data": {
@@ -5669,11 +5432,7 @@
           },
           "fork_policy": {
             "description": "\nControls the rules for forking this repository.\n\n* **allow_forks**: unrestricted forking\n* **no_public_forks**: restrict forking to private forks (forks cannot\n  be made public later)\n* **no_forks**: deny all forking\n",
-            "enum": [
-              "allow_forks",
-              "no_public_forks",
-              "no_forks"
-            ],
+            "enum": ["allow_forks", "no_public_forks", "no_forks"],
             "type": "string"
           },
           "full_name": {
@@ -5847,10 +5606,7 @@
             "$ref": "#/definitions/project"
           },
           "scm": {
-            "enum": [
-              "hg",
-              "git"
-            ],
+            "enum": ["hg", "git"],
             "type": "string"
           },
           "size": {
@@ -5874,11 +5630,7 @@
     "description": "A user's permission for a given repository.",
     "properties": {
       "permission": {
-        "enum": [
-          "admin",
-          "write",
-          "read"
-        ],
+        "enum": ["admin", "write", "read"],
         "type": "string"
       },
       "repository": {
@@ -5891,9 +5643,7 @@
         "$ref": "#/definitions/user"
       }
     },
-    "required": [
-      "type"
-    ],
+    "required": ["type"],
     "type": "object"
   },
   "search_code_search_result": {
@@ -6039,10 +5789,7 @@
           },
           "scm": {
             "description": "The DVCS used to store the snippet.",
-            "enum": [
-              "hg",
-              "git"
-            ],
+            "enum": ["hg", "git"],
             "type": "string"
           },
           "title": {
@@ -6253,9 +6000,7 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": [
-      "uuid"
-    ],
+    "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
   },
   "subject_types": {
@@ -6366,10 +6111,7 @@
     "description": "A user's permission for a given team.",
     "properties": {
       "permission": {
-        "enum": [
-          "admin",
-          "collaborator"
-        ],
+        "enum": ["admin", "collaborator"],
         "type": "string"
       },
       "team": {
@@ -6382,9 +6124,7 @@
         "$ref": "#/definitions/user"
       }
     },
-    "required": [
-      "type"
-    ],
+    "required": ["type"],
     "type": "object"
   },
   "treeentry": {
@@ -6402,9 +6142,7 @@
         "type": "string"
       }
     },
-    "required": [
-      "type"
-    ],
+    "required": ["type"],
     "type": "object"
   },
   "user": {
@@ -6526,12 +6264,7 @@
           },
           "subject_type": {
             "description": "The type of entity, which is `repository` in the case of webhook subscriptions on repositories.",
-            "enum": [
-              "workspace",
-              "user",
-              "repository",
-              "team"
-            ],
+            "enum": ["workspace", "user", "repository", "team"],
             "type": "string"
           },
           "url": {
@@ -6734,11 +6467,7 @@
           },
           "permission": {
             "description": "Effective permission of user within workspace. Owners can administer\nthe workspace. Collaborators can create repositories. Members can edit\nexisting content.",
-            "enum": [
-              "owner",
-              "collaborator",
-              "member"
-            ],
+            "enum": ["owner", "collaborator", "member"],
             "type": "string"
           },
           "user": {

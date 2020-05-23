@@ -12,11 +12,11 @@ const config: Config = {
     format: ['es', 'umd'],
     minify: true,
     moduleName: 'Bitbucket',
-    sourceMapExcludeSources: true
+    sourceMapExcludeSources: true,
   },
   globals: {
-    'node-fetch': 'fetch'
-  }
+    'node-fetch': 'fetch',
+  },
 }
 
 const PLUGIN = process.env.PLUGIN

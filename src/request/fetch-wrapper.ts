@@ -9,7 +9,7 @@ type Response<T> = import('./types').Response<T>
 function getData(response: FetchResponse): Promise<any> {
   const contentType = response.headers.get('content-type')
 
-  if (/application\/json/.test(contentType!)) {
+  if (contentType!.includes('application/json')) {
     return response.json()
   }
 
@@ -32,7 +32,7 @@ export function fetchWrapper(
 
   const responseHeaders: Headers = {}
 
-  const fetch = request!.fetch || nodeFetch
+  const fetch = request!.fetch ?? nodeFetch
 
   return fetch(url, options)
     .then((response: FetchResponse): any => {
@@ -48,7 +48,7 @@ export function fetchWrapper(
           throw new HTTPError(response.statusText, responseStatus, {
             error,
             headers: responseHeaders,
-            request: requestOptions
+            request: requestOptions,
           })
         })
       }
@@ -60,7 +60,7 @@ export function fetchWrapper(
         data,
         headers: responseHeaders,
         status: responseStatus,
-        url: responseUrl
+        url: responseUrl,
       })
     )
     .catch((error): any => {
@@ -70,7 +70,7 @@ export function fetchWrapper(
 
       throw new HTTPError(error.message, 500, {
         headers: responseHeaders,
-        request: requestOptions
+        request: requestOptions,
       })
     })
 }

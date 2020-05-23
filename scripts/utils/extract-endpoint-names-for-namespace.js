@@ -4,7 +4,7 @@ const extractEndpointNamesForNamespace = (endpointNames, namespaceName) => {
   return chain(endpointNames)
     .values()
     .flatMap(values)
-    .flatMap(object => pick(object, namespaceName))
+    .flatMap((object) => pick(object, namespaceName))
     .reject(isEmpty)
     .flatMap(values)
     .compact()

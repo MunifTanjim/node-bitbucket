@@ -15,7 +15,7 @@ export function constructor(
 
   const client = {
     request: request.defaults(getEndpointOptions(clientOptions, requestHook)),
-    requestHook
+    requestHook,
   }
 
   plugins.forEach((plugin): void => {

@@ -1,8 +1,8 @@
 export function addQueryParameters(
   url: string,
-  params: { [param: string]: any } = {}
+  params: { [param: string]: any; q?: string } = {}
 ): string {
-  const separator = /\?/.test(url) ? '&' : '?'
+  const separator = url.includes('?') ? '&' : '?'
   const names = Object.keys(params)
 
   if (names.length === 0) {
@@ -12,10 +12,7 @@ export function addQueryParameters(
   return `${url}${separator}${names
     .map((name): string => {
       if (name === 'q') {
-        return `q=${params.q
-          .split(' ')
-          .map(encodeURIComponent)
-          .join('+')}`
+        return `q=${params.q!.split(' ').map(encodeURIComponent).join('+')}`
       }
       return `${name}=${encodeURIComponent(params[name])}`
     })

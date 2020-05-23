@@ -10,7 +10,7 @@ function authenticatePlugin(client: APIClient, clientOptions: Options): void {
 
   const state: AuthenticatePluginState = {
     client,
-    auth: undefined
+    auth: undefined,
   }
 
   client.authenticate = authenticate.bind(null, state)

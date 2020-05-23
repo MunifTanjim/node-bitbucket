@@ -16,7 +16,7 @@ const writeSpecPartialJSON = (filename, content) => {
 const API_SPECIFICATION = 'https://api.bitbucket.org/swagger.json'
 
 fetch(API_SPECIFICATION)
-  .then(response => response.json())
+  .then((response) => response.json())
   .then(({ definitions, ...apiSpec }) => {
     writeSpecPartialJSON('definitions', definitions)
     return apiSpec
@@ -49,6 +49,6 @@ fetch(API_SPECIFICATION)
       `${JSON.stringify(deepsort(apiSpec), null, 2)}\n`
     )
   })
-  .catch(err => {
+  .catch((err) => {
     console.error(err)
   })
