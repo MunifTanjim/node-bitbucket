@@ -79,6 +79,18 @@ const clientOptions = {
 const bitbucket = new Bitbucket(clientOptions)
 ```
 
+#### Authorization ( Bearer token )
+
+```js
+const clientOptions = {
+  auth: {
+    token: 'AbCdEf123456',
+  },
+}
+
+const bitbucket = new Bitbucket(clientOptions)
+```
+
 #### API Methods
 
 **async/await**
