@@ -4,6 +4,10 @@
 
 - ...
 
+## [2.3.0] - 2020-06-29
+
+- Generate from latest API Specification
+
 ## [2.2.0] - 2020-05-23
 
 - Add better support for TypeScript types, resolves [#61](https://github.com/MunifTanjim/node-bitbucket/issues/61)
@@ -28,7 +32,9 @@
 
 - Version 2 Release
 
-[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.1.0...HEAD
+[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.3.0...HEAD
+[2.3.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.2.0...2.3.0
+[2.2.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.1.0...2.2.0
 [2.1.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.0.3...2.1.0
 [2.0.3]: https://github.com/MunifTanjim/node-bitbucket/compare/2.0.2...2.0.3
 [2.0.2]: https://github.com/MunifTanjim/node-bitbucket/compare/2.0.1...2.0.2
