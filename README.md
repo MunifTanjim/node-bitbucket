@@ -68,6 +68,8 @@ const bitbucket = new Bitbucket(clientOptions)
 
 #### Authentication
 
+**Using `username` and `password`**:
+
 ```js
 const clientOptions = {
   auth: {
@@ -79,12 +81,12 @@ const clientOptions = {
 const bitbucket = new Bitbucket(clientOptions)
 ```
 
-#### Authorization ( Bearer token )
+**Using `token`**:
 
 ```js
 const clientOptions = {
   auth: {
-    token: 'AbCdEf123456',
+    token: 'abcdef123456',
   },
 }
 
