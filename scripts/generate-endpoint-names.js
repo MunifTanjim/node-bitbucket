@@ -62,6 +62,20 @@ for (const url of Object.keys(PATHS_SPEC)) {
   }
 }
 
+const existingEndpointUrls = Object.keys(PATHS_SPEC)
+const nonExistentEndpointUrls = Object.keys(ENDPOINT_NAMES).filter(
+  (url) => !existingEndpointUrls.includes(url)
+)
+
+if (nonExistentEndpointUrls.length !== 0) {
+  throw new Error(
+    [
+      `Non-existent URLs:`,
+      ...nonExistentEndpointUrls.map((url) => `- ${url}`),
+    ].join('\n')
+  )
+}
+
 fs.writeFileSync(
   endpointNamesPath,
   `${JSON.stringify(deepsort(ENDPOINT_NAMES), null, 2)}\n`
