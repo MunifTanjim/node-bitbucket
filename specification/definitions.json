@@ -430,6 +430,7 @@
               "restrict_merges",
               "enforce_merge_checks",
               "require_approvals_to_merge",
+              "allow_auto_merge_when_builds_pass",
               "delete",
               "require_all_dependencies_merged",
               "push",
@@ -530,7 +531,7 @@
                 "type": "string"
               },
               "to": {
-                "description": "The comment's anchor line in the new version of the file.",
+                "description": "The comment's anchor line in the new version of the file. If the 'from' line is also provided, this value will be removed.",
                 "minimum": 1,
                 "type": "integer"
               }
@@ -798,8 +799,8 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": ["uuid"],
-    "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+    "x-bb-default-fields": ["uuid", "commitHash"],
+    "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commits/{commitHash}/reports/{uuid}"
   },
   "deploy_key": {
     "allOf": [
@@ -1238,6 +1239,23 @@
         },
         "required": ["message"],
         "type": "object"
+      },
+      "type": {
+        "type": "string"
+      }
+    },
+    "required": ["type"],
+    "type": "object"
+  },
+  "export_options": {
+    "additionalProperties": true,
+    "description": "Options for issue export.",
+    "properties": {
+      "project_key": {
+        "type": "string"
+      },
+      "project_name": {
+        "type": "string"
       },
       "type": {
         "type": "string"
@@ -5256,7 +5274,7 @@
             "type": "array"
           },
           "details": {
-            "description": "A string to describe the purpose of the report. This string may contain escaped newlines and if it does it will display the content accordingly..",
+            "description": "A string to describe the purpose of the report.",
             "required": true,
             "type": "string"
           },
@@ -5311,8 +5329,8 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": ["uuid"],
-    "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+    "x-bb-default-fields": ["uuid", "commitHash"],
+    "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commits/{commitHash}/reports/{uuid}"
   },
   "report_annotation": {
     "allOf": [
@@ -5385,7 +5403,7 @@
       }
     ],
     "x-bb-default-fields": ["uuid"],
-    "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{reportUuid}/annotations/{uuid}"
+    "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commits/{commit.hash}/reports/{reportUuid}/annotations/{uuid}"
   },
   "report_data": {
     "description": "A key-value element that will be displayed along with the report.",
@@ -6000,8 +6018,8 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": ["uuid"],
-    "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+    "x-bb-default-fields": ["uuid", "commitHash"],
+    "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commits/{commitHash}/reports/{uuid}"
   },
   "subject_types": {
     "additionalProperties": false,
@@ -6438,14 +6456,6 @@
         "additionalProperties": true,
         "description": "A Bitbucket workspace membership.\n            Links a user to a workspace.",
         "properties": {
-          "added_on": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "last_accessed": {
-            "format": "date-time",
-            "type": "string"
-          },
           "links": {
             "additionalProperties": false,
             "properties": {
@@ -6464,11 +6474,6 @@
               }
             },
             "type": "object"
-          },
-          "permission": {
-            "description": "Effective permission of user within workspace. Owners can administer\nthe workspace. Collaborators can create repositories. Members can edit\nexisting content.",
-            "enum": ["owner", "collaborator", "member"],
-            "type": "string"
           },
           "user": {
             "$ref": "#/definitions/account"

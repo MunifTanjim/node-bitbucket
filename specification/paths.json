@@ -1618,9 +1618,9 @@
       "operationId": "deleteCommitHostedPropertyValue",
       "parameters": [
         {
-          "description": "The account.",
+          "description": "The repository container; either the workspace slug or the UUID in curly braces.",
           "in": "path",
-          "name": "username",
+          "name": "workspace",
           "required": true,
           "type": "string"
         },
@@ -1665,9 +1665,9 @@
       "operationId": "getCommitHostedPropertyValue",
       "parameters": [
         {
-          "description": "The account.",
+          "description": "The repository container; either the workspace slug or the UUID in curly braces.",
           "in": "path",
-          "name": "username",
+          "name": "workspace",
           "required": true,
           "type": "string"
         },
@@ -1712,9 +1712,9 @@
       "operationId": "updateCommitHostedPropertyValue",
       "parameters": [
         {
-          "description": "The account.",
+          "description": "The repository container; either the workspace slug or the UUID in curly braces.",
           "in": "path",
-          "name": "username",
+          "name": "workspace",
           "required": true,
           "type": "string"
         },
@@ -1956,7 +1956,7 @@
       "tags": ["reports", "commits"]
     },
     "put": {
-      "description": "Creates or updates a report for the specified commit.",
+      "description": "Creates or updates a report for the specified commit.\nTo upload a report, make sure to generate an ID that is unique across all reports for that commit. If you want to use an existing id from your own system, we recommend prefixing it with your system's name to avoid collisions, for example, mySystem-001.\n\n### Sample cURL request:\n```\ncurl --request PUT 'https://api.bitbucket.org/2.0/repositories/<username>/<reposity-name>/commit/<commit-hash>/reports/mysystem-001' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n\t\"title\": \"Security scan report\",\n\t\"details\": \"This pull request introduces 10 new dependency vulnerabilities.\",\n\t\"report_type\": \"SECURITY\",\n\t\"reporter\": \"mySystem\",\n\t\"link\": \"http://www.mysystem.com/reports/001\",\n\t\"result\": \"FAILED\",\n\t\"data\": [\n\t\t{\n\t\t\t\"title\": \"Duration (seconds)\",\n\t\t\t\"type\": \"DURATION\",\n\t\t\t\"value\": 14\n\t\t},\n\t\t{\n\t\t\t\"title\": \"Safe to merge?\",\n\t\t\t\"type\": \"BOOLEAN\",\n\t\t\t\"value\": false\n\t\t}\n\t]\n}'\n```\n\n### Possible field values:\nreport_type: SECURITY, COVERAGE, TEST, BUG\nresult: PASSED, FAILED, PENDING\ndata.type: BOOLEAN, DATE, DURATION, LINK, NUMBER, PERCENTAGE, TEXT\n\nPlease refer to the [Code Insights documentation](https://confluence.atlassian.com/bitbucket/code-insights-994316785.html) for more information.\n",
       "operationId": "createOrUpdateReport",
       "parameters": [
         {
@@ -2061,7 +2061,7 @@
       "tags": ["reports", "commits"]
     },
     "post": {
-      "description": "Bulk upload of annotations.",
+      "description": "Bulk upload of annotations.\nAnnotations are individual findings that have been identified as part of a report, for example, a line of code that represents a vulnerability. These annotations can be attached to a specific file and even a specific line in that file, however, that is optional. Annotations are not mandatory and a report can contain up to 1000 annotations.\n\nAdd the annotations you want to upload as objects in a JSON array and make sure each annotation has the external_id field set to a unique value. If you want to use an existing id from your own system, we recommend prefixing it with your system's name to avoid collisions, for example, mySystem-annotation001. The external id can later be used to identify the report as an alternative to the generated [UUID](https://developer.atlassian.com/bitbucket/api/2/reference/meta/uri-uuid#uuid). You can upload up to 100 annotations per POST request.\n\n### Sample cURL request:\n```\ncurl --location 'https://api.bitbucket.org/2.0/repositories/<username>/<reposity-name>/commit/<commit-hash>/reports/mysystem-001/annotations' \\\n--header 'Content-Type: application/json' \\\n--data-raw '[\n  {\n\t    \"external_id\": \"mysystem-annotation001\",\n\t    \"title\": \"Security scan report\",\n\t    \"annotation_type\": \"VULNERABILITY\",\n\t    \"summary\": \"This line represents a security threat.\",\n\t    \"severity\": \"HIGH\",\n      \"path\": \"my-service/src/main/java/com/myCompany/mysystem/logic/Main.java\",\n\t    \"line\": 42\n  },\n  {\n\t    \"external_id\": \"mySystem-annotation002\",\n\t    \"title\": \"Bug report\",\n\t    \"annotation_type\": \"BUG\",\n\t    \"result\": \"FAILED\",\n\t    \"summary\": \"This line might introduce a bug.\",\n\t    \"severity\": \"MEDIUM\",\n      \"path\": \"my-service/src/main/java/com/myCompany/mysystem/logic/Helper.java\",\n\t    \"line\": 13\n  }\n]'\n```\n\n### Possible field values:\nannotation_type: VULNERABILITY, CODE_SMELL, BUG\nresult: PASSED, FAILED, IGNORED, SKIPPED\nseverity: HIGH, MEDIUM, LOW, CRITICAL\n\nPlease refer to the [Code Insights documentation](https://confluence.atlassian.com/bitbucket/code-insights-994316785.html) for more information.\n",
       "operationId": "bulkCreateOrUpdateAnnotations",
       "parameters": [
         {
@@ -2229,7 +2229,7 @@
       "tags": ["reports", "commits"]
     },
     "put": {
-      "description": "Creates or updates an annotation for the specified report.",
+      "description": "Creates or updates an individual annotation for the specified report.\nAnnotations are individual findings that have been identified as part of a report, for example, a line of code that represents a vulnerability. These annotations can be attached to a specific file and even a specific line in that file, however, that is optional. Annotations are not mandatory and a report can contain up to 1000 annotations.\n\nJust as reports, annotation needs to be uploaded with a unique ID that can later be used to identify the report as an alternative to the generated [UUID](https://developer.atlassian.com/bitbucket/api/2/reference/meta/uri-uuid#uuid). If you want to use an existing id from your own system, we recommend prefixing it with your system's name to avoid collisions, for example, mySystem-annotation001.\n\n### Sample cURL request:\n```\ncurl --request PUT 'https://api.bitbucket.org/2.0/repositories/<username>/<reposity-name>/commit/<commit-hash>/reports/mySystem-001/annotations/mysystem-annotation001' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n\t\"title\": \"Security scan report\",\n\t\"annotation_type\": \"VULNERABILITY\",\n\t\"summary\": \"This line represents a security thread.\",\n\t\"severity\": \"HIGH\",\n\t\"path\": \"my-service/src/main/java/com/myCompany/mysystem/logic/Main.java\",\n\t\"line\": 42\n}'\n```\n\n### Possible field values:\nannotation_type: VULNERABILITY, CODE_SMELL, BUG\nresult: PASSED, FAILED, IGNORED, SKIPPED\nseverity: HIGH, MEDIUM, LOW, CRITICAL\n\nPlease refer to the [Code Insights documentation](https://confluence.atlassian.com/bitbucket/code-insights-994316785.html) for more information.\n",
       "operationId": "createOrUpdateAnnotation",
       "parameters": [
         {
@@ -3797,6 +3797,7 @@
     },
     "parameters": [
       {
+        "description": "A commit SHA (e.g. `3a8b42`) or a commit range using double dot\nnotation (e.g. `3a8b42..9ff173`).\n",
         "in": "path",
         "name": "spec",
         "required": true,
@@ -4500,7 +4501,7 @@
   },
   "/repositories/{workspace}/{repo_slug}/hooks": {
     "get": {
-      "description": "Returns a paginated list of webhooks installed on this repository.",
+      "description": "Returns a paginated list of webhooks installed on this repository.\n\nThe teams endpoint for projects has been deprecated, and you should\nensure you are using the workspaces endpoint.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).",
       "parameters": [],
       "responses": {
         "200": {
@@ -4552,7 +4553,7 @@
       }
     ],
     "post": {
-      "description": "Creates a new webhook on the specified repository.\n\nExample:\n\n```\n$ curl -X POST -u credentials -H 'Content-Type: application/json'           https://api.bitbucket.org/2.0/repositories/username/slug/hooks           -d '\n    {\n      \"description\": \"Webhook Description\",\n      \"url\": \"https://example.com/\",\n      \"active\": true,\n      \"events\": [\n        \"repo:push\",\n        \"issue:created\",\n        \"issue:updated\"\n      ]\n    }'\n```\n\nNote that this call requires the webhook scope, as well as any scope\nthat applies to the events that the webhook subscribes to. In the\nexample above that means: `webhook`, `repository` and `issue`.\n\nAlso note that the `url` must properly resolve and cannot be an\ninternal, non-routed address.",
+      "description": "Creates a new webhook on the specified repository.\n\nThe teams endpoint for projects has been deprecated, and you should\nensure you are using the workspaces endpoint.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).\n\nExample:\n\n```\n$ curl -X POST -u credentials -H 'Content-Type: application/json'           https://api.bitbucket.org/2.0/repositories/username/slug/hooks           -d '\n    {\n      \"description\": \"Webhook Description\",\n      \"url\": \"https://example.com/\",\n      \"active\": true,\n      \"events\": [\n        \"repo:push\",\n        \"issue:created\",\n        \"issue:updated\"\n      ]\n    }'\n```\n\nNote that this call requires the webhook scope, as well as any scope\nthat applies to the events that the webhook subscribes to. In the\nexample above that means: `webhook`, `repository` and `issue`.\n\nAlso note that the `url` must properly resolve and cannot be an\ninternal, non-routed address.",
       "parameters": [],
       "responses": {
         "201": {
@@ -5972,7 +5973,17 @@
     ],
     "post": {
       "description": "A POST request to this endpoint initiates a new background celery task that archives the repo's issues.\n\nFor example, you can run:\n\ncurl -u <username> -X POST http://api.bitbucket.org/2.0/repositories/<owner_username>/<repo_slug>/\nissues/export\n\nWhen the job has been accepted, it will return a 202 (Accepted) along with a unique url to this job in the\n'Location' response header. This url is the endpoint for where the user can obtain their zip files.\"",
-      "parameters": [],
+      "parameters": [
+        {
+          "description": "The options to apply to the export. Available options include `project_key` and `project_name` which, if specified, are used as the project key and name in the exported Jira json format.",
+          "in": "body",
+          "name": "_body",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/export_options"
+          }
+        }
+      ],
       "responses": {
         "202": {
           "description": "The export job has been accepted"
@@ -6211,6 +6222,73 @@
       "tags": []
     }
   },
+  "/repositories/{workspace}/{repo_slug}/merge-base/{revspec}": {
+    "get": {
+      "description": "Returns the best common ancestor between two commits, specified in a revspec\nof 2 commits (e.g. 3a8b42..9ff173).\n\nIf more than one best common ancestor exists, only one will be returned. It is\nunspecified which will be returned.",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The merge base of the provided spec.",
+          "schema": {
+            "$ref": "#/definitions/commit"
+          }
+        },
+        "401": {
+          "description": "If the request was not authenticated.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user does not have access to any of the repositories specified.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the repository or ref in the spec does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["repository"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": ["commits"]
+    },
+    "parameters": [
+      {
+        "description": "A commit range using double dot notation (e.g. `3a8b42..9ff173`).\n",
+        "in": "path",
+        "name": "revspec",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
   "/repositories/{workspace}/{repo_slug}/milestones": {
     "get": {
       "description": "Returns the milestones that have been defined in the issue tracker.\n\nThis resource is only available on repositories that have the issue\ntracker enabled.",
@@ -6344,6 +6422,7 @@
     },
     "parameters": [
       {
+        "description": "A commit SHA (e.g. `3a8b42`) or a commit range using double dot\nnotation (e.g. `3a8b42..9ff173`).\n",
         "in": "path",
         "name": "spec",
         "required": true,
@@ -6373,7 +6452,7 @@
         {
           "description": "The account.",
           "in": "path",
-          "name": "username",
+          "name": "workspace",
           "required": true,
           "type": "string"
         },
@@ -7651,9 +7730,9 @@
       "operationId": "deleteRepositoryHostedPropertyValue",
       "parameters": [
         {
-          "description": "The account.",
+          "description": "The repository container; either the workspace slug or the UUID in curly braces.",
           "in": "path",
-          "name": "username",
+          "name": "workspace",
           "required": true,
           "type": "string"
         },
@@ -7691,9 +7770,9 @@
       "operationId": "getRepositoryHostedPropertyValue",
       "parameters": [
         {
-          "description": "The account.",
+          "description": "The repository container; either the workspace slug or the UUID in curly braces.",
           "in": "path",
-          "name": "username",
+          "name": "workspace",
           "required": true,
           "type": "string"
         },
@@ -7731,9 +7810,9 @@
       "operationId": "updateRepositoryHostedPropertyValue",
       "parameters": [
         {
-          "description": "The account.",
+          "description": "The repository container; either the workspace slug or the UUID in curly braces.",
           "in": "path",
-          "name": "username",
+          "name": "workspace",
           "required": true,
           "type": "string"
         },
@@ -9255,7 +9334,7 @@
       },
       "security": [
         {
-          "oauth2": []
+          "oauth2": ["pullrequest"]
         },
         {
           "basic": []
@@ -9422,9 +9501,9 @@
       "operationId": "deletePullRequestHostedPropertyValue",
       "parameters": [
         {
-          "description": "The account.",
+          "description": "The repository container; either the workspace slug or the UUID in curly braces.",
           "in": "path",
-          "name": "username",
+          "name": "workspace",
           "required": true,
           "type": "string"
         },
@@ -9469,9 +9548,9 @@
       "operationId": "getPullRequestHostedPropertyValue",
       "parameters": [
         {
-          "description": "The account.",
+          "description": "The repository container; either the workspace slug or the UUID in curly braces.",
           "in": "path",
-          "name": "username",
+          "name": "workspace",
           "required": true,
           "type": "string"
         },
@@ -9516,9 +9595,9 @@
       "operationId": "updatePullRequestHostedPropertyValue",
       "parameters": [
         {
-          "description": "The account.",
+          "description": "The repository container; either the workspace slug or the UUID in curly braces.",
           "in": "path",
-          "name": "username",
+          "name": "workspace",
           "required": true,
           "type": "string"
         },
@@ -11451,6 +11530,13 @@
         "type": "string"
       },
       {
+        "description": "A commit SHA (e.g. `3a8b42`) or a commit range using double dot\nnotation (e.g. `3a8b42..9ff173`).\n",
+        "in": "path",
+        "name": "spec",
+        "required": true,
+        "type": "string"
+      },
+      {
         "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
         "in": "path",
         "name": "workspace",
@@ -12070,7 +12156,8 @@
   },
   "/teams": {
     "get": {
-      "description": "Returns all the teams that the authenticated user is associated\nwith.",
+      "deprecated": true,
+      "description": "Returns all the teams that the authenticated user is associated\nwith.\n\nThis endpoint has been deprecated, and you should use the new workspaces endpoint.\nFor more information, see [this post](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).",
       "parameters": [
         {
           "description": "\nFilters the teams based on the authenticated user's role on each team.\n\n* **member**: returns a list of all the teams which the caller is a member of\n  at least one team group or repository owned by the team\n* **contributor**: returns a list of teams which the caller has write access\n  to at least one repository owned by the team\n* **admin**: returns a list teams which the caller has team administrator access\n",
@@ -12210,7 +12297,8 @@
   },
   "/teams/{username}/following": {
     "get": {
-      "description": "Returns the list of accounts this team is following.",
+      "deprecated": true,
+      "description": "Returns the list of accounts this team is following.\n\nThis endpoint has been deprecated, and you should use the new workspaces endpoint.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).",
       "parameters": [
         {
           "description": "The team's username",
@@ -12488,7 +12576,8 @@
   },
   "/teams/{username}/members": {
     "get": {
-      "description": "Returns all members of the specified team. Any member of any of the\nteam's groups is considered a member of the team. This includes users\nin groups that may not actually have access to any of the team's\nrepositories.\n\nThis operation has been deprecated due to privacy changes.\nSee the [announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/)\nfor details.",
+      "deprecated": true,
+      "description": "Returns all members of the specified team. Any member of any of the\nteam's groups is considered a member of the team. This includes users\nin groups that may not actually have access to any of the team's\nrepositories.\n\nThis operation has been deprecated due to privacy changes.\nSee the [announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/)\nfor details.\n\nUse this [workspaces](https://developer.atlassian.com/bitbucket/api/2/reference/resource/workspaces/%7Bworkspace%7D/members)\nendpoint as a replacement.",
       "parameters": [],
       "responses": {
         "200": {
@@ -12551,7 +12640,8 @@
   },
   "/teams/{username}/permissions": {
     "get": {
-      "description": "Returns an object for each team permission a user on the team has.\n\nPermissions returned are effective permissions — if a user is a member of\nmultiple groups with distinct roles, only the highest level is returned.\n\nPermissions can be:\n\n* `admin`\n* `collaborator`\n\nOnly users with admin permission for the team may access this resource.\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"permission\": \"admin\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"team\": {\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    },\n    {\n      \"permission\": \"collaborator\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"nickname\": \"seanaty\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"team\": {\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../meta/filtering) by\nteam, user, or permission by adding the following query string\nparameters:\n\n* `q=user.uuid=\"{d301aafa-d676-4ee0-88be-962be7417567}\"` or `q=permission=\"admin\"`\n* `sort=team.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
+      "deprecated": true,
+      "description": "Returns an object for each team permission a user on the team has.\n\nThis endpoint has been deprecated, and you should use the new workspaces endpoint.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).\"\n\nPermissions returned are effective permissions — if a user is a member of\nmultiple groups with distinct roles, only the highest level is returned.\n\nPermissions can be:\n\n* `admin`\n* `collaborator`\n\nOnly users with admin permission for the team may access this resource.\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"permission\": \"admin\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"team\": {\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    },\n    {\n      \"permission\": \"collaborator\",\n      \"type\": \"team_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"nickname\": \"seanaty\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"team\": {\n        \"display_name\": \"Atlassian Bitbucket\",\n        \"uuid\": \"{4cc6108a-a241-4db0-96a5-64347ac04f87}\"\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../meta/filtering) by\nteam, user, or permission by adding the following query string\nparameters:\n\n* `q=user.uuid=\"{d301aafa-d676-4ee0-88be-962be7417567}\"` or `q=permission=\"admin\"`\n* `sort=team.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
       "parameters": [
         {
           "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../meta/filtering).",
@@ -12607,7 +12697,8 @@
   },
   "/teams/{username}/permissions/repositories": {
     "get": {
-      "description": "Returns an object for each repository permission for all of a\nteam’s repositories.\n\nIf the username URL parameter refers to a user account instead of\na team account, an object containing the repository permissions\nof all the username's repositories will be returned.\n\nPermissions returned are effective permissions — the highest level of\npermission the user has. This does not include public repositories that\nusers are not granted any specific permission in, and does not\ndistinguish between direct and indirect privileges.\n\nOnly users with admin permission for the team may access this resource.\n\nPermissions can be:\n\n* `admin`\n* `write`\n* `read`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions/repositories\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"admin\"\n    },\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"write\"\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../../meta/filtering)\nby repository, user, or permission by adding the following query string\nparameters:\n\n* `q=repository.name=\"geordi\"` or `q=permission>\"read\"`\n* `sort=user.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
+      "deprecated": true,
+      "description": "Returns an object for each repository permission for all of a\nteam’s repositories.\n\nThis endpoint has been deprecated, and you should use the new workspaces endpoint.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).\"\n\nIf the username URL parameter refers to a user account instead of\na team account, an object containing the repository permissions\nof all the username's repositories will be returned.\n\nPermissions returned are effective permissions — the highest level of\npermission the user has. This does not include public repositories that\nusers are not granted any specific permission in, and does not\ndistinguish between direct and indirect privileges.\n\nOnly users with admin permission for the team may access this resource.\n\nPermissions can be:\n\n* `admin`\n* `write`\n* `read`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions/repositories\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"admin\"\n    },\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"write\"\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../../meta/filtering)\nby repository, user, or permission by adding the following query string\nparameters:\n\n* `q=repository.name=\"geordi\"` or `q=permission>\"read\"`\n* `sort=user.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
       "parameters": [
         {
           "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../../meta/filtering).",
@@ -12663,7 +12754,8 @@
   },
   "/teams/{username}/permissions/repositories/{repo_slug}": {
     "get": {
-      "description": "Returns an object for each repository permission of a given repository.\n\nIf the username URL parameter refers to a user account instead of\na team account, an object containing the repository permissions\nof the username's repository will be returned.\n\nPermissions returned are effective permissions — the highest level of\npermission the user has. This does not include public repositories that\nusers are not granted any specific permission in, and does not\ndistinguish between direct and indirect privileges.\n\nOnly users with admin permission for the repository may access this resource.\n\nPermissions can be:\n\n* `admin`\n* `write`\n* `read`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions/repositories/geordi\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"admin\"\n    },\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"write\"\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../../meta/filtering)\nby user, or permission by adding the following query string parameters:\n\n* `q=permission>\"read\"`\n* `sort=user.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
+      "deprecated": true,
+      "description": "Returns an object for each repository permission of a given repository.\n\nThis endpoint has been deprecated, and you should use the new workspaces endpoint.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).\"\n\nIf the username URL parameter refers to a user account instead of\na team account, an object containing the repository permissions\nof the username's repository will be returned.\n\nPermissions returned are effective permissions — the highest level of\npermission the user has. This does not include public repositories that\nusers are not granted any specific permission in, and does not\ndistinguish between direct and indirect privileges.\n\nOnly users with admin permission for the repository may access this resource.\n\nPermissions can be:\n\n* `admin`\n* `write`\n* `read`\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/teams/atlassian_tutorial/permissions/repositories/geordi\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"admin\"\n    },\n    {\n      \"type\": \"repository_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\"\n      },\n      \"repository\": {\n        \"type\": \"repository\",\n        \"name\": \"geordi\",\n        \"full_name\": \"bitbucket/geordi\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n      },\n      \"permission\": \"write\"\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nResults may be further [filtered or sorted](../../../../meta/filtering)\nby user, or permission by adding the following query string parameters:\n\n* `q=permission>\"read\"`\n* `sort=user.display_name`\n\nNote that the query parameter values need to be URL escaped so that `=`\nwould become `%3D`.",
       "parameters": [
         {
           "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../../meta/filtering).",
@@ -12912,7 +13004,7 @@
   },
   "/teams/{username}/projects/": {
     "get": {
-      "description": "",
+      "description": "The teams endpoint for projects has been deprecated, and you should\nensure you are using the workspaces endpoint.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).",
       "parameters": [],
       "responses": {
         "200": {
@@ -12957,7 +13049,7 @@
       }
     ],
     "post": {
-      "description": "Creates a new project.\n\nNote that the avatar has to be embedded as either a data-url\nor a URL to an external image as shown in the examples below:\n\n```\n$ body=$(cat << EOF\n{\n    \"name\": \"Mars Project\",\n    \"key\": \"MARS\",\n    \"description\": \"Software for colonizing mars.\",\n    \"links\": {\n        \"avatar\": {\n            \"href\": \"data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/...\"\n        }\n    },\n    \"is_private\": false\n}\nEOF\n)\n$ curl -H \"Content-Type: application/json\" \\\n       -X POST \\\n       -d \"$body\" \\\n       https://api.bitbucket.org/2.0/teams/teams-in-space/projects/ | jq .\n{\n  // Serialized project document\n}\n```\n\nor even:\n\n```\n$ body=$(cat << EOF\n{\n    \"name\": \"Mars Project\",\n    \"key\": \"MARS\",\n    \"description\": \"Software for colonizing mars.\",\n    \"links\": {\n        \"avatar\": {\n            \"href\": \"http://i.imgur.com/72tRx4w.gif\"\n        }\n    },\n    \"is_private\": false\n}\nEOF\n)\n$ curl -H \"Content-Type: application/json\" \\\n       -X POST \\\n       -d \"$body\" \\\n       https://api.bitbucket.org/2.0/teams/teams-in-space/projects/ | jq .\n{\n  // Serialized project document\n}\n```",
+      "description": "Creates a new project.\n\nThe teams endpoint for projects has been deprecated, and you should\nensure you are using the workspaces endpoint.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).\n\nNote that the avatar has to be embedded as either a data-url\nor a URL to an external image as shown in the examples below:\n\n```\n$ body=$(cat << EOF\n{\n    \"name\": \"Mars Project\",\n    \"key\": \"MARS\",\n    \"description\": \"Software for colonizing mars.\",\n    \"links\": {\n        \"avatar\": {\n            \"href\": \"data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/...\"\n        }\n    },\n    \"is_private\": false\n}\nEOF\n)\n$ curl -H \"Content-Type: application/json\" \\\n       -X POST \\\n       -d \"$body\" \\\n       https://api.bitbucket.org/2.0/teams/teams-in-space/projects/ | jq .\n{\n  // Serialized project document\n}\n```\n\nor even:\n\n```\n$ body=$(cat << EOF\n{\n    \"name\": \"Mars Project\",\n    \"key\": \"MARS\",\n    \"description\": \"Software for colonizing mars.\",\n    \"links\": {\n        \"avatar\": {\n            \"href\": \"http://i.imgur.com/72tRx4w.gif\"\n        }\n    },\n    \"is_private\": false\n}\nEOF\n)\n$ curl -H \"Content-Type: application/json\" \\\n       -X POST \\\n       -d \"$body\" \\\n       https://api.bitbucket.org/2.0/teams/teams-in-space/projects/ | jq .\n{\n  // Serialized project document\n}\n```",
       "parameters": [
         {
           "in": "body",
@@ -13010,7 +13102,7 @@
   },
   "/teams/{username}/projects/{project_key}": {
     "delete": {
-      "description": "",
+      "description": "The teams endpoint for projects has been deprecated, and you should\nensure you are using the workspaces endpoint.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).",
       "parameters": [],
       "responses": {
         "204": {
@@ -13043,7 +13135,7 @@
       "tags": ["projects"]
     },
     "get": {
-      "description": "",
+      "description": "The teams endpoint for projects has been deprecated, and you should\nensure you are using the workspaces endpoint.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).",
       "parameters": [],
       "responses": {
         "200": {
@@ -13095,7 +13187,7 @@
       }
     ],
     "put": {
-      "description": "Since this endpoint can be used to both update and to create a\nproject, the request body depends on the intent.\n\n### Creation\n\nSee the POST documentation for the project collection for an\nexample of the request body.\n\nNote: The `key` should not be specified in the body of request\n(since it is already present in the URL). The `name` is required,\neverything else is optional.\n\n### Update\n\nSee the POST documentation for the project collection for an\nexample of the request body.\n\nNote: The key is not required in the body (since it is already in\nthe URL). The key may be specified in the body, if the intent is\nto change the key itself. In such a scenario, the location of the\nproject is changed and is returned in the `Location` header of the\nresponse.",
+      "description": "Since this endpoint can be used to both update and to create a\nproject, the request body depends on the intent.\n\nThe teams endpoint for projects has been deprecated, and you should\nensure you are using the workspaces endpoint.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).\n\n### Creation\n\nSee the POST documentation for the project collection for an\nexample of the request body.\n\nNote: The `key` should not be specified in the body of request\n(since it is already present in the URL). The `name` is required,\neverything else is optional.\n\n### Update\n\nSee the POST documentation for the project collection for an\nexample of the request body.\n\nNote: The key is not required in the body (since it is already in\nthe URL). The key may be specified in the body, if the intent is\nto change the key itself. In such a scenario, the location of the\nproject is changed and is returned in the `Location` header of the\nresponse.",
       "parameters": [
         {
           "in": "body",
@@ -13160,7 +13252,7 @@
   },
   "/teams/{username}/repositories": {
     "get": {
-      "description": "All repositories owned by a user/team. This includes private\nrepositories, but filtered down to the ones that the calling user has\naccess to.",
+      "description": "All repositories owned by a user/team. This includes private\nrepositories, but filtered down to the ones that the calling user has\naccess to.\n\nThe teams and users endpoint have been deprecated, and you should ensure you are using the new workspaces endpoint.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).",
       "parameters": [],
       "responses": {
         "default": {
@@ -13257,7 +13349,7 @@
           }
         }
       },
-      "summary": "Search for code in the repositories of the specified team.\n\nSearching across all repositories:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code?search_query=foo'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 2,\n      \"content_matches\": [\n        {\n          \"lines\": [\n            {\n              \"line\": 2,\n              \"segments\": []\n            },\n            {\n              \"line\": 3,\n              \"segments\": [\n                {\n                  \"text\": \"def \"\n                },\n                {\n                  \"text\": \"foo\",\n                  \"match\": true\n                },\n                {\n                  \"text\": \"():\"\n                }\n              ]\n            },\n            {\n              \"line\": 4,\n              \"segments\": [\n                {\n                  \"text\": \"    print(\\\"snek\\\")\"\n                }\n              ]\n            },\n            {\n              \"line\": 5,\n              \"segments\": []\n            }\n          ]\n        }\n      ],\n      \"path_matches\": [\n        {\n          \"text\": \"src/\"\n        },\n        {\n          \"text\": \"foo\",\n          \"match\": true\n        },\n        {\n          \"text\": \".py\"\n        }\n      ],\n      \"file\": {\n        \"path\": \"src/foo.py\",\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        }\n      }\n    }\n  ]\n}\n```\n\nNote that searches can match in the file's text (`content_matches`),\nthe path (`path_matches`), or both as in the example above.\n\nYou can use the same syntax for the search query as in the UI, e.g.\nto only search within a specific repository:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code?search_query=foo+repo:demo'\n# results from the \"demo\" repository\n```\n\nSimilar to other APIs, you can request more fields using a\n`fields` query parameter. E.g. to get some more information about\nthe repository of matched files (the `%2B` is a URL-encoded `+`):\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code'\\\n     '?search_query=foo&fields=%2Bvalues.file.commit.repository'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 1,\n      \"content_matches\": [...],\n      \"path_matches\": [...],\n      \"file\": {\n        \"commit\": {\n          \"type\": \"commit\",\n          \"hash\": \"ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/commit/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/my-workspace/demo/commits/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            }\n          },\n          \"repository\": {\n            \"name\": \"demo\",\n            \"type\": \"repository\",\n            \"full_name\": \"my-workspace/demo\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/my-workspace/demo\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bytebucket.org/ravatar/%7B850e1749-781a-4115-9316-df39d0600e7a%7D?ts=default\"\n              }\n            },\n            \"uuid\": \"{850e1749-781a-4115-9316-df39d0600e7a}\"\n          }\n        },\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        },\n        \"path\": \"src/foo.py\"\n      }\n    }\n  ]\n}\n```\n\nTry `fields=%2Bvalues.*.*.*.*` to get an idea what's possible.\n",
+      "summary": "Search for code in the repositories of the specified team.\n\nSearching across all repositories:\n\n```\ncurl 'https://api.bitbucket.org/2.0/teams/team_name/search/code?search_query=foo'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 2,\n      \"content_matches\": [\n        {\n          \"lines\": [\n            {\n              \"line\": 2,\n              \"segments\": []\n            },\n            {\n              \"line\": 3,\n              \"segments\": [\n                {\n                  \"text\": \"def \"\n                },\n                {\n                  \"text\": \"foo\",\n                  \"match\": true\n                },\n                {\n                  \"text\": \"():\"\n                }\n              ]\n            },\n            {\n              \"line\": 4,\n              \"segments\": [\n                {\n                  \"text\": \"    print(\\\"snek\\\")\"\n                }\n              ]\n            },\n            {\n              \"line\": 5,\n              \"segments\": []\n            }\n          ]\n        }\n      ],\n      \"path_matches\": [\n        {\n          \"text\": \"src/\"\n        },\n        {\n          \"text\": \"foo\",\n          \"match\": true\n        },\n        {\n          \"text\": \".py\"\n        }\n      ],\n      \"file\": {\n        \"path\": \"src/foo.py\",\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        }\n      }\n    }\n  ]\n}\n```\n\nNote that searches can match in the file's text (`content_matches`),\nthe path (`path_matches`), or both as in the example above.\n\nYou can use the same syntax for the search query as in the UI, e.g.\nto only search within a specific repository:\n\n```\ncurl 'https://api.bitbucket.org/2.0/teams/team_name/search/code?search_query=foo+repo:demo'\n# results from the \"demo\" repository\n```\n\nSimilar to other APIs, you can request more fields using a\n`fields` query parameter. E.g. to get some more information about\nthe repository of matched files (the `%2B` is a URL-encoded `+`):\n\n```\ncurl 'https://api.bitbucket.org/2.0/teams/team_name/search/code'\\\n     '?search_query=foo&fields=%2Bvalues.file.commit.repository'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 1,\n      \"content_matches\": [...],\n      \"path_matches\": [...],\n      \"file\": {\n        \"commit\": {\n          \"type\": \"commit\",\n          \"hash\": \"ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/commit/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/my-workspace/demo/commits/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            }\n          },\n          \"repository\": {\n            \"name\": \"demo\",\n            \"type\": \"repository\",\n            \"full_name\": \"my-workspace/demo\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/my-workspace/demo\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bytebucket.org/ravatar/%7B850e1749-781a-4115-9316-df39d0600e7a%7D?ts=default\"\n              }\n            },\n            \"uuid\": \"{850e1749-781a-4115-9316-df39d0600e7a}\"\n          }\n        },\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        },\n        \"path\": \"src/foo.py\"\n      }\n    }\n  ]\n}\n```\n\nTry `fields=%2Bvalues.*.*.*.*` to get an idea what's possible.\n",
       "tags": ["search"]
     }
   },
@@ -13510,9 +13602,365 @@
     },
     "parameters": []
   },
+  "/users/{selected_user}/pipelines_config/variables/": {
+    "get": {
+      "description": "Find user level variables.",
+      "operationId": "getPipelineVariablesForUser",
+      "parameters": [
+        {
+          "description": "Either the UUID of the account surrounded by curly-braces, for example `{account UUID}`, OR an Atlassian Account ID.",
+          "in": "path",
+          "name": "selected_user",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The found user level variables.",
+          "schema": {
+            "$ref": "#/definitions/paginated_pipeline_variables"
+          }
+        }
+      },
+      "tags": ["pipelines"]
+    },
+    "post": {
+      "description": "Create a user level variable.",
+      "operationId": "createPipelineVariableForUser",
+      "parameters": [
+        {
+          "description": "Either the UUID of the account surrounded by curly-braces, for example `{account UUID}`, OR an Atlassian Account ID.",
+          "in": "path",
+          "name": "selected_user",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The variable to create.",
+          "in": "body",
+          "name": "_body",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/pipeline_variable"
+          }
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The created variable.",
+          "headers": {
+            "Location": {
+              "description": "The URL of the newly created pipeline variable.",
+              "type": "string"
+            }
+          },
+          "schema": {
+            "$ref": "#/definitions/pipeline_variable"
+          }
+        },
+        "404": {
+          "description": "The account does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "409": {
+          "description": "A variable with the provided key already exists.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": ["pipelines"]
+    }
+  },
+  "/users/{selected_user}/pipelines_config/variables/{variable_uuid}": {
+    "delete": {
+      "description": "Delete an account level variable.",
+      "operationId": "deletePipelineVariableForUser",
+      "parameters": [
+        {
+          "description": "Either the UUID of the account surrounded by curly-braces, for example `{account UUID}`, OR an Atlassian Account ID.",
+          "in": "path",
+          "name": "selected_user",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the variable to delete.",
+          "in": "path",
+          "name": "variable_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "The variable was deleted"
+        },
+        "404": {
+          "description": "The account or the variable with the provided UUID does not exist.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": ["pipelines"]
+    },
+    "get": {
+      "description": "Retrieve a user level variable.",
+      "operationId": "getPipelineVariableForUser",
+      "parameters": [
+        {
+          "description": "Either the UUID of the account surrounded by curly-braces, for example `{account UUID}`, OR an Atlassian Account ID.",
+          "in": "path",
+          "name": "selected_user",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the variable to retrieve.",
+          "in": "path",
+          "name": "variable_uuid",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The variable.",
+          "schema": {
+            "$ref": "#/definitions/pipeline_variable"
+          }
+        },
+        "404": {
+          "description": "The account or variable with the given UUID was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": ["pipelines"]
+    },
+    "put": {
+      "description": "Update a user level variable.",
+      "operationId": "updatePipelineVariableForUser",
+      "parameters": [
+        {
+          "description": "Either the UUID of the account surrounded by curly-braces, for example `{account UUID}`, OR an Atlassian Account ID.",
+          "in": "path",
+          "name": "selected_user",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The UUID of the variable.",
+          "in": "path",
+          "name": "variable_uuid",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The updated variable.",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/pipeline_variable"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The variable was updated.",
+          "schema": {
+            "$ref": "#/definitions/pipeline_variable"
+          }
+        },
+        "404": {
+          "description": "The account or the variable was not found.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "tags": ["pipelines"]
+    }
+  },
+  "/users/{selected_user}/properties/{app_key}/{property_name}": {
+    "delete": {
+      "description": "Delete an application property value stored against a user.",
+      "operationId": "deleteUserHostedPropertyValue",
+      "parameters": [
+        {
+          "description": "Either the UUID of the account surrounded by curly-braces, for example `{account UUID}`, OR an Atlassian Account ID.",
+          "in": "path",
+          "name": "selected_user",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key of the Connect app.",
+          "in": "path",
+          "name": "app_key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the property.",
+          "in": "path",
+          "name": "property_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "An empty response."
+        }
+      },
+      "tags": ["properties"]
+    },
+    "get": {
+      "description": "Retrieve an application property value stored against a user.",
+      "operationId": "retrieveUserHostedPropertyValue",
+      "parameters": [
+        {
+          "description": "Either the UUID of the account surrounded by curly-braces, for example `{account UUID}`, OR an Atlassian Account ID.",
+          "in": "path",
+          "name": "selected_user",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key of the Connect app.",
+          "in": "path",
+          "name": "app_key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the property.",
+          "in": "path",
+          "name": "property_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The value of the property."
+        }
+      },
+      "tags": ["properties"]
+    },
+    "put": {
+      "description": "Update an application property value stored against a user.",
+      "operationId": "updateUserHostedPropertyValue",
+      "parameters": [
+        {
+          "description": "Either the UUID of the account surrounded by curly-braces, for example `{account UUID}`, OR an Atlassian Account ID.",
+          "in": "path",
+          "name": "selected_user",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The key of the Connect app.",
+          "in": "path",
+          "name": "app_key",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The name of the property.",
+          "in": "path",
+          "name": "property_name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "An empty response."
+        }
+      },
+      "tags": ["properties"]
+    }
+  },
+  "/users/{selected_user}/search/code": {
+    "get": {
+      "operationId": "searchAccount",
+      "parameters": [
+        {
+          "description": "Either the UUID of the account surrounded by curly-braces, for example `{account UUID}`, OR an Atlassian Account ID.",
+          "in": "path",
+          "name": "selected_user",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The search query",
+          "in": "query",
+          "name": "search_query",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "default": 1,
+          "description": "Which page of the search results to retrieve",
+          "format": "int32",
+          "in": "query",
+          "name": "page",
+          "required": false,
+          "type": "integer"
+        },
+        {
+          "default": 10,
+          "description": "How many search results to retrieve per page",
+          "format": "int32",
+          "in": "query",
+          "name": "pagelen",
+          "required": false,
+          "type": "integer"
+        }
+      ],
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "Successful search",
+          "schema": {
+            "$ref": "#/definitions/search_result_page"
+          }
+        },
+        "400": {
+          "description": "If the search request was invalid due to one of the\nfollowing reasons:\n\n* the specified type of target account doesn''t match the actual\naccount type;\n\n* malformed pagination properties;\n\n* missing or malformed search query, in the latter case an error\nkey will be returned in `error.data.key` property.\n",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "Search is not enabled for the requested user, navigate to [https://bitbucket.org/search](https://bitbucket.org/search) to turn it on",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "429": {
+          "description": "Too many requests, try again later",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "summary": "Search for code in the repositories of the specified user.\n\nSearching across all repositories:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/{ed08f5e1-605b-4f4a-aee4-6c97628a673e}/search/code?search_query=foo'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 2,\n      \"content_matches\": [\n        {\n          \"lines\": [\n            {\n              \"line\": 2,\n              \"segments\": []\n            },\n            {\n              \"line\": 3,\n              \"segments\": [\n                {\n                  \"text\": \"def \"\n                },\n                {\n                  \"text\": \"foo\",\n                  \"match\": true\n                },\n                {\n                  \"text\": \"():\"\n                }\n              ]\n            },\n            {\n              \"line\": 4,\n              \"segments\": [\n                {\n                  \"text\": \"    print(\\\"snek\\\")\"\n                }\n              ]\n            },\n            {\n              \"line\": 5,\n              \"segments\": []\n            }\n          ]\n        }\n      ],\n      \"path_matches\": [\n        {\n          \"text\": \"src/\"\n        },\n        {\n          \"text\": \"foo\",\n          \"match\": true\n        },\n        {\n          \"text\": \".py\"\n        }\n      ],\n      \"file\": {\n        \"path\": \"src/foo.py\",\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        }\n      }\n    }\n  ]\n}\n```\n\nNote that searches can match in the file's text (`content_matches`),\nthe path (`path_matches`), or both as in the example above.\n\nYou can use the same syntax for the search query as in the UI, e.g.\nto only search within a specific repository:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/{ed08f5e1-605b-4f4a-aee4-6c97628a673e}/search/code?search_query=foo+repo:demo'\n# results from the \"demo\" repository\n```\n\nSimilar to other APIs, you can request more fields using a\n`fields` query parameter. E.g. to get some more information about\nthe repository of matched files (the `%2B` is a URL-encoded `+`):\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/{ed08f5e1-605b-4f4a-aee4-6c97628a673e}/search/code'\\\n     '?search_query=foo&fields=%2Bvalues.file.commit.repository'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 1,\n      \"content_matches\": [...],\n      \"path_matches\": [...],\n      \"file\": {\n        \"commit\": {\n          \"type\": \"commit\",\n          \"hash\": \"ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/commit/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/my-workspace/demo/commits/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            }\n          },\n          \"repository\": {\n            \"name\": \"demo\",\n            \"type\": \"repository\",\n            \"full_name\": \"my-workspace/demo\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/my-workspace/demo\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bytebucket.org/ravatar/%7B850e1749-781a-4115-9316-df39d0600e7a%7D?ts=default\"\n              }\n            },\n            \"uuid\": \"{850e1749-781a-4115-9316-df39d0600e7a}\"\n          }\n        },\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        },\n        \"path\": \"src/foo.py\"\n      }\n    }\n  ]\n}\n```\n\nTry `fields=%2Bvalues.*.*.*.*` to get an idea what's possible.\n",
+      "tags": ["search"]
+    }
+  },
   "/users/{username}": {
     "get": {
-      "description": "Gets the public information associated with a user account.\n\nIf the user's profile is private, `location`, `website` and\n`created_on` elements are omitted.\n\nNote that the user object returned by this operation is changing significantly, due to privacy changes.\nSee the [announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#changes-to-bitbucket-user-objects) for details.",
+      "deprecated": true,
+      "description": "Gets the public information associated with a user account.\n\nThis endpoint has been deprecated, and you should use the new workspaces endpoint.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).\n\nIf the user's profile is private, `location`, `website` and\n`created_on` elements are omitted.\n\nNote that the user object returned by this operation is changing significantly, due to privacy changes.\nSee the [announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#changes-to-bitbucket-user-objects) for details.",
       "parameters": [
         {
           "description": "The account's UUID, account_id, or username. Note that username has been deprecated due to [privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).",
@@ -13579,107 +14027,10 @@
       }
     ]
   },
-  "/users/{username}/followers": {
-    "get": {
-      "description": "Returns the list of accounts that are following this user.\n\nThis operation has been deprecated due to privacy changes.\nSee the [announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/) for details.",
-      "parameters": [
-        {
-          "description": "The account's username",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "A paginated list of user objects.",
-          "schema": {
-            "$ref": "#/definitions/paginated_users"
-          }
-        },
-        "404": {
-          "description": "If no account exists for the specified name, or if the specified account is a team account, not a personal account.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "security": [
-        {
-          "oauth2": []
-        },
-        {
-          "basic": []
-        },
-        {
-          "api_key": []
-        }
-      ],
-      "tags": ["users"]
-    },
-    "parameters": [
-      {
-        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-        "in": "path",
-        "name": "username",
-        "required": true,
-        "type": "string"
-      }
-    ]
-  },
-  "/users/{username}/following": {
-    "get": {
-      "description": "Returns the list of accounts this user is following.\n\nThis operation has been deprecated due to privacy changes.\nSee the [announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/) for details.",
-      "parameters": [
-        {
-          "description": "The user's username",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "A paginated list of user objects.",
-          "schema": {
-            "$ref": "#/definitions/paginated_users"
-          }
-        },
-        "404": {
-          "description": "If no user exists for the specified name, or if the specified account is a team account, not a personal account.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "security": [
-        {
-          "oauth2": ["account"]
-        },
-        {
-          "basic": []
-        },
-        {
-          "api_key": []
-        }
-      ],
-      "tags": ["users"]
-    },
-    "parameters": [
-      {
-        "description": "This can either be the username or the UUID of the account,\nsurrounded by curly-braces, for example: `{account UUID}`. An account\nis either a team or user.\n",
-        "in": "path",
-        "name": "username",
-        "required": true,
-        "type": "string"
-      }
-    ]
-  },
   "/users/{username}/hooks": {
     "get": {
-      "description": "Returns a paginated list of webhooks installed on this user account.\n\nNote that the username path parameter has been deprecated due to\n[privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).\nUse the account's UUID or account_id instead.",
+      "deprecated": true,
+      "description": "Returns a paginated list of webhooks installed on this user account.\n\nNote that the username path parameter has been deprecated due to\n[privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).\nUse the account's UUID or account_id instead.\n\nAlso note that the users endpoint has been deprecated, and the workspaces\nendpoint should be used instead.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).",
       "parameters": [],
       "responses": {
         "200": {
@@ -13724,7 +14075,7 @@
       }
     ],
     "post": {
-      "description": "Creates a new webhook on the specified user account.\n\nAccount-level webhooks are fired for events from all repositories\nbelonging to that account.\n\nNote that one can only register webhooks on one's own account, not that\nof others.\n\nAlso, note that the username path parameter has been deprecated due to\n[privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).\nUse the account's UUID or account_id instead.",
+      "description": "Creates a new webhook on the specified user account.\n\nAccount-level webhooks are fired for events from all repositories\nbelonging to that account.\n\nNote that one can only register webhooks on one's own account, not that\nof others.\n\nAlso, note that the username path parameter has been deprecated due to\n[privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).\nUse the account's UUID or account_id instead.\n\nThe users endpoints have been deprecated, and the workspaces\nendpoint should be used instead.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).",
       "parameters": [],
       "responses": {
         "201": {
@@ -13908,33 +14259,11 @@
   },
   "/users/{username}/members": {
     "get": {
-      "description": "Returns all members of the specified team. Any member of any of the\nteam's groups is considered a member of the team. This includes users\nin groups that may not actually have access to any of the team's\nrepositories.\n\nThis operation has been deprecated due to privacy changes.\nSee the [announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/)\nfor details.",
+      "description": "",
       "parameters": [],
       "responses": {
         "200": {
           "description": "All members",
-          "examples": {
-            "application/json": {
-              "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
-              "account_status": "active",
-              "display_name": "Example Username",
-              "links": {
-                "avatar": {
-                  "href": "https://bitbucket.org/account/example-username/avatar/"
-                },
-                "html": {
-                  "href": "https://bitbucket.org/example-username/"
-                },
-                "self": {
-                  "href": "https://api.bitbucket.org/2.0/users/example-username"
-                }
-              },
-              "nickname": "example-username",
-              "type": "user",
-              "username": "example-username",
-              "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
-            }
-          },
           "schema": {
             "$ref": "#/definitions/user"
           }
@@ -13957,7 +14286,7 @@
           "api_key": []
         }
       ],
-      "tags": ["teams"]
+      "tags": ["users"]
     },
     "parameters": [
       {
@@ -13969,296 +14298,9 @@
       }
     ]
   },
-  "/users/{username}/pipelines_config/variables/": {
-    "get": {
-      "description": "Find user level variables.",
-      "operationId": "getPipelineVariablesForUser",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The found user level variables.",
-          "schema": {
-            "$ref": "#/definitions/paginated_pipeline_variables"
-          }
-        }
-      },
-      "tags": ["pipelines"]
-    },
-    "post": {
-      "description": "Create a user level variable.",
-      "operationId": "createPipelineVariableForUser",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The variable to create.",
-          "in": "body",
-          "name": "_body",
-          "required": false,
-          "schema": {
-            "$ref": "#/definitions/pipeline_variable"
-          }
-        }
-      ],
-      "responses": {
-        "201": {
-          "description": "The created variable.",
-          "headers": {
-            "Location": {
-              "description": "The URL of the newly created pipeline variable.",
-              "type": "string"
-            }
-          },
-          "schema": {
-            "$ref": "#/definitions/pipeline_variable"
-          }
-        },
-        "404": {
-          "description": "The account does not exist.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        },
-        "409": {
-          "description": "A variable with the provided key already exists.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": ["pipelines"]
-    }
-  },
-  "/users/{username}/pipelines_config/variables/{variable_uuid}": {
-    "delete": {
-      "description": "Delete an account level variable.",
-      "operationId": "deletePipelineVariableForUser",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The UUID of the variable to delete.",
-          "in": "path",
-          "name": "variable_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "204": {
-          "description": "The variable was deleted"
-        },
-        "404": {
-          "description": "The account or the variable with the provided UUID does not exist.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": ["pipelines"]
-    },
-    "get": {
-      "description": "Retrieve a user level variable.",
-      "operationId": "getPipelineVariableForUser",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The UUID of the variable to retrieve.",
-          "in": "path",
-          "name": "variable_uuid",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The variable.",
-          "schema": {
-            "$ref": "#/definitions/pipeline_variable"
-          }
-        },
-        "404": {
-          "description": "The account or variable with the given UUID was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": ["pipelines"]
-    },
-    "put": {
-      "description": "Update a user level variable.",
-      "operationId": "updatePipelineVariableForUser",
-      "parameters": [
-        {
-          "description": "The account.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The UUID of the variable.",
-          "in": "path",
-          "name": "variable_uuid",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The updated variable.",
-          "in": "body",
-          "name": "_body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/pipeline_variable"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The variable was updated.",
-          "schema": {
-            "$ref": "#/definitions/pipeline_variable"
-          }
-        },
-        "404": {
-          "description": "The account or the variable was not found.",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "tags": ["pipelines"]
-    }
-  },
-  "/users/{username}/properties/{app_key}/{property_name}": {
-    "delete": {
-      "description": "Delete an application property value stored against a user.",
-      "operationId": "deleteUserHostedPropertyValue",
-      "parameters": [
-        {
-          "description": "The user.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The key of the Connect app.",
-          "in": "path",
-          "name": "app_key",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The name of the property.",
-          "in": "path",
-          "name": "property_name",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "204": {
-          "description": "An empty response."
-        }
-      },
-      "tags": ["properties"]
-    },
-    "get": {
-      "description": "Retrieve an application property value stored against a user.",
-      "operationId": "retrieveUserHostedPropertyValue",
-      "parameters": [
-        {
-          "description": "The user.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The key of the Connect app.",
-          "in": "path",
-          "name": "app_key",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The name of the property.",
-          "in": "path",
-          "name": "property_name",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The value of the property."
-        }
-      },
-      "tags": ["properties"]
-    },
-    "put": {
-      "description": "Update an application property value stored against a user.",
-      "operationId": "updateUserHostedPropertyValue",
-      "parameters": [
-        {
-          "description": "The user.",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The key of the Connect app.",
-          "in": "path",
-          "name": "app_key",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The name of the property.",
-          "in": "path",
-          "name": "property_name",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "204": {
-          "description": "An empty response."
-        }
-      },
-      "tags": ["properties"]
-    }
-  },
   "/users/{username}/repositories": {
     "get": {
-      "description": "All repositories owned by a user/team. This includes private\nrepositories, but filtered down to the ones that the calling user has\naccess to.",
+      "description": "All repositories owned by a user/team. This includes private\nrepositories, but filtered down to the ones that the calling user has\naccess to.\n\nThe teams and users endpoint have been deprecated, and you should ensure you are using the new workspaces endpoint.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).",
       "parameters": [],
       "responses": {
         "default": {
@@ -14290,74 +14332,6 @@
         "type": "string"
       }
     ]
-  },
-  "/users/{username}/search/code": {
-    "get": {
-      "operationId": "searchAccount",
-      "parameters": [
-        {
-          "description": "The account to search in; either the username or the UUID in curly braces",
-          "in": "path",
-          "name": "username",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "description": "The search query",
-          "in": "query",
-          "name": "search_query",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "default": 1,
-          "description": "Which page of the search results to retrieve",
-          "format": "int32",
-          "in": "query",
-          "name": "page",
-          "required": false,
-          "type": "integer"
-        },
-        {
-          "default": 10,
-          "description": "How many search results to retrieve per page",
-          "format": "int32",
-          "in": "query",
-          "name": "pagelen",
-          "required": false,
-          "type": "integer"
-        }
-      ],
-      "produces": ["application/json"],
-      "responses": {
-        "200": {
-          "description": "Successful search",
-          "schema": {
-            "$ref": "#/definitions/search_result_page"
-          }
-        },
-        "400": {
-          "description": "If the search request was invalid due to one of the\nfollowing reasons:\n\n* the specified type of target account doesn''t match the actual\naccount type;\n\n* malformed pagination properties;\n\n* missing or malformed search query, in the latter case an error\nkey will be returned in `error.data.key` property.\n",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        },
-        "404": {
-          "description": "Search is not enabled for the requested user, navigate to [https://bitbucket.org/search](https://bitbucket.org/search) to turn it on",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        },
-        "429": {
-          "description": "Too many requests, try again later",
-          "schema": {
-            "$ref": "#/definitions/error"
-          }
-        }
-      },
-      "summary": "Search for code in the repositories of the specified user.\n\nSearching across all repositories:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code?search_query=foo'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 2,\n      \"content_matches\": [\n        {\n          \"lines\": [\n            {\n              \"line\": 2,\n              \"segments\": []\n            },\n            {\n              \"line\": 3,\n              \"segments\": [\n                {\n                  \"text\": \"def \"\n                },\n                {\n                  \"text\": \"foo\",\n                  \"match\": true\n                },\n                {\n                  \"text\": \"():\"\n                }\n              ]\n            },\n            {\n              \"line\": 4,\n              \"segments\": [\n                {\n                  \"text\": \"    print(\\\"snek\\\")\"\n                }\n              ]\n            },\n            {\n              \"line\": 5,\n              \"segments\": []\n            }\n          ]\n        }\n      ],\n      \"path_matches\": [\n        {\n          \"text\": \"src/\"\n        },\n        {\n          \"text\": \"foo\",\n          \"match\": true\n        },\n        {\n          \"text\": \".py\"\n        }\n      ],\n      \"file\": {\n        \"path\": \"src/foo.py\",\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        }\n      }\n    }\n  ]\n}\n```\n\nNote that searches can match in the file's text (`content_matches`),\nthe path (`path_matches`), or both as in the example above.\n\nYou can use the same syntax for the search query as in the UI, e.g.\nto only search within a specific repository:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code?search_query=foo+repo:demo'\n# results from the \"demo\" repository\n```\n\nSimilar to other APIs, you can request more fields using a\n`fields` query parameter. E.g. to get some more information about\nthe repository of matched files (the `%2B` is a URL-encoded `+`):\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/my-workspace/search/code'\\\n     '?search_query=foo&fields=%2Bvalues.file.commit.repository'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 1,\n      \"content_matches\": [...],\n      \"path_matches\": [...],\n      \"file\": {\n        \"commit\": {\n          \"type\": \"commit\",\n          \"hash\": \"ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/commit/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/my-workspace/demo/commits/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            }\n          },\n          \"repository\": {\n            \"name\": \"demo\",\n            \"type\": \"repository\",\n            \"full_name\": \"my-workspace/demo\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/my-workspace/demo\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bytebucket.org/ravatar/%7B850e1749-781a-4115-9316-df39d0600e7a%7D?ts=default\"\n              }\n            },\n            \"uuid\": \"{850e1749-781a-4115-9316-df39d0600e7a}\"\n          }\n        },\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        },\n        \"path\": \"src/foo.py\"\n      }\n    }\n  ]\n}\n```\n\nTry `fields=%2Bvalues.*.*.*.*` to get an idea what's possible.\n",
-      "tags": ["search"]
-    }
   },
   "/users/{username}/ssh-keys": {
     "get": {
@@ -15000,6 +14974,12 @@
           "schema": {
             "$ref": "#/definitions/error"
           }
+        },
+        "404": {
+          "description": "A workspace cannot be found, or a user cannot be found, or the user is not a a member of the workspace.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
         }
       },
       "security": [
@@ -15023,6 +15003,47 @@
         "required": true,
         "type": "string"
       },
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "/workspaces/{workspace}/permissions": {
+    "get": {
+      "description": "",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The list of users that are part of a workspace, along with their permission.",
+          "schema": {
+            "$ref": "#/definitions/paginated_workspace_memberships"
+          }
+        },
+        "401": {
+          "description": "The request wasn't authenticated.",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["account"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "tags": ["workspaces"]
+    },
+    "parameters": [
       {
         "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
         "in": "path",
@@ -15217,7 +15238,7 @@
       }
     ],
     "put": {
-      "description": "Since this endpoint can be used to both update and to create a\nproject, the request body depends on the intent.\n\n### Creation\n\nSee the POST documentation for the project collection for an\nexample of the request body.\n\nNote: The `key` should not be specified in the body of request\n(since it is already present in the URL). The `name` is required,\neverything else is optional.\n\n### Update\n\nSee the POST documentation for the project collection for an\nexample of the request body.\n\nNote: The key is not required in the body (since it is already in\nthe URL). The key may be specified in the body, if the intent is\nto change the key itself. In such a scenario, the location of the\nproject is changed and is returned in the `Location` header of the\nresponse.",
+      "description": "Since this endpoint can be used to both update and to create a\nproject, the request body depends on the intent.\n\nThe teams endpoint for projects has been deprecated, and you should\nensure you are using the workspaces endpoint.\nFor more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).\n\n### Creation\n\nSee the POST documentation for the project collection for an\nexample of the request body.\n\nNote: The `key` should not be specified in the body of request\n(since it is already present in the URL). The `name` is required,\neverything else is optional.\n\n### Update\n\nSee the POST documentation for the project collection for an\nexample of the request body.\n\nNote: The key is not required in the body (since it is already in\nthe URL). The key may be specified in the body, if the intent is\nto change the key itself. In such a scenario, the location of the\nproject is changed and is returned in the `Location` header of the\nresponse.",
       "parameters": [
         {
           "in": "body",
@@ -15278,6 +15299,74 @@
         }
       ],
       "tags": ["projects"]
+    }
+  },
+  "/workspaces/{workspace}/search/code": {
+    "get": {
+      "operationId": "searchAccount",
+      "parameters": [
+        {
+          "description": "The workspace to search in; either the slug or the UUID in curly braces",
+          "in": "path",
+          "name": "workspace",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The search query",
+          "in": "query",
+          "name": "search_query",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "default": 1,
+          "description": "Which page of the search results to retrieve",
+          "format": "int32",
+          "in": "query",
+          "name": "page",
+          "required": false,
+          "type": "integer"
+        },
+        {
+          "default": 10,
+          "description": "How many search results to retrieve per page",
+          "format": "int32",
+          "in": "query",
+          "name": "pagelen",
+          "required": false,
+          "type": "integer"
+        }
+      ],
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "Successful search",
+          "schema": {
+            "$ref": "#/definitions/search_result_page"
+          }
+        },
+        "400": {
+          "description": "If the search request was invalid due to one of the\nfollowing reasons:\n\n* the specified type of target account doesn''t match the actual\naccount type;\n\n* malformed pagination properties;\n\n* missing or malformed search query, in the latter case an error\nkey will be returned in `error.data.key` property.\n",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "Search is not enabled for the requested workspace, navigate to [https://bitbucket.org/search](https://bitbucket.org/search) to turn it on",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "429": {
+          "description": "Too many requests, try again later",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "summary": "Search for code in the repositories of the specified workspace.\n\nSearching across all repositories:\n\n```\ncurl 'https://api.bitbucket.org/2.0/workspaces/workspace_slug_or_uuid/search/code?search_query=foo'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 2,\n      \"content_matches\": [\n        {\n          \"lines\": [\n            {\n              \"line\": 2,\n              \"segments\": []\n            },\n            {\n              \"line\": 3,\n              \"segments\": [\n                {\n                  \"text\": \"def \"\n                },\n                {\n                  \"text\": \"foo\",\n                  \"match\": true\n                },\n                {\n                  \"text\": \"():\"\n                }\n              ]\n            },\n            {\n              \"line\": 4,\n              \"segments\": [\n                {\n                  \"text\": \"    print(\\\"snek\\\")\"\n                }\n              ]\n            },\n            {\n              \"line\": 5,\n              \"segments\": []\n            }\n          ]\n        }\n      ],\n      \"path_matches\": [\n        {\n          \"text\": \"src/\"\n        },\n        {\n          \"text\": \"foo\",\n          \"match\": true\n        },\n        {\n          \"text\": \".py\"\n        }\n      ],\n      \"file\": {\n        \"path\": \"src/foo.py\",\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        }\n      }\n    }\n  ]\n}\n```\n\nNote that searches can match in the file's text (`content_matches`),\nthe path (`path_matches`), or both as in the example above.\n\nYou can use the same syntax for the search query as in the UI, e.g.\nto only search within a specific repository:\n\n```\ncurl 'https://api.bitbucket.org/2.0/workspaces/my-workspace/search/code?search_query=foo+repo:demo'\n# results from the \"demo\" repository\n```\n\nSimilar to other APIs, you can request more fields using a\n`fields` query parameter. E.g. to get some more information about\nthe repository of matched files (the `%2B` is a URL-encoded `+`):\n\n```\ncurl 'https://api.bitbucket.org/2.0/workspaces/my-workspace/search/code'\\\n     '?search_query=foo&fields=%2Bvalues.file.commit.repository'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 1,\n      \"content_matches\": [...],\n      \"path_matches\": [...],\n      \"file\": {\n        \"commit\": {\n          \"type\": \"commit\",\n          \"hash\": \"ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/commit/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/my-workspace/demo/commits/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            }\n          },\n          \"repository\": {\n            \"name\": \"demo\",\n            \"type\": \"repository\",\n            \"full_name\": \"my-workspace/demo\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/my-workspace/demo\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bytebucket.org/ravatar/%7B850e1749-781a-4115-9316-df39d0600e7a%7D?ts=default\"\n              }\n            },\n            \"uuid\": \"{850e1749-781a-4115-9316-df39d0600e7a}\"\n          }\n        },\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        },\n        \"path\": \"src/foo.py\"\n      }\n    }\n  ]\n}\n```\n\nTry `fields=%2Bvalues.*.*.*.*` to get an idea what's possible.\n",
+      "tags": ["search"]
     }
   }
 }

@@ -969,6 +969,10 @@
     "createIssueExportJob": {
       "method": "POST",
       "params": {
+        "_body": {
+          "schema": "ExportOptions",
+          "type": "any"
+        },
         "repo_slug": {
           "required": true,
           "type": "string"
@@ -4191,6 +4195,9 @@
     },
     "codeOfUser": {
       "alias": "users.searchCode"
+    },
+    "searchAccount": {
+      "alias": "workspaces.searchAccount"
     }
   },
   "snippet": {
@@ -4434,6 +4441,10 @@
           "type": "string"
         },
         "revision": {
+          "required": true,
+          "type": "string"
+        },
+        "spec": {
           "required": true,
           "type": "string"
         },
@@ -4813,6 +4824,7 @@
       "url": "/teams/{username}/hooks/{uid}"
     },
     "list": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "role": {
@@ -4835,6 +4847,7 @@
       "url": "/teams/{username}/followers"
     },
     "listFollowing": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "username": {
@@ -4846,6 +4859,7 @@
       "url": "/teams/{username}/following"
     },
     "listPermissions": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "username": {
@@ -4857,6 +4871,7 @@
       "url": "/teams/{username}/permissions"
     },
     "listPermissionsForRepo": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "repo_slug": {
@@ -4872,6 +4887,7 @@
       "url": "/teams/{username}/permissions/repositories/{repo_slug}"
     },
     "listPermissionsForRepos": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "username": {
@@ -5041,13 +5057,13 @@
           "schema": "PipelineVariable",
           "type": "any"
         },
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PipelineVariable",
-      "url": "/users/{username}/pipelines_config/variables/"
+      "url": "/users/{selected_user}/pipelines_config/variables/"
     },
     "createSshKey": {
       "method": "POST",
@@ -5078,7 +5094,7 @@
     "deletePipelineVariable": {
       "method": "DELETE",
       "params": {
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         },
@@ -5087,7 +5103,7 @@
           "type": "string"
         }
       },
-      "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
+      "url": "/users/{selected_user}/pipelines_config/variables/{variable_uuid}"
     },
     "deleteSshKey": {
       "method": "DELETE",
@@ -5114,12 +5130,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/users/{username}/properties/{app_key}/{property_name}"
+      "url": "/users/{selected_user}/properties/{app_key}/{property_name}"
     },
     "deleteWebhook": {
       "method": "DELETE",
@@ -5136,6 +5152,7 @@
       "url": "/users/{username}/hooks/{uid}"
     },
     "get": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "username": {
@@ -5155,7 +5172,7 @@
     "getPipelineVariable": {
       "method": "GET",
       "params": {
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         },
@@ -5165,7 +5182,7 @@
         }
       },
       "returns": "PipelineVariable",
-      "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
+      "url": "/users/{selected_user}/pipelines_config/variables/{variable_uuid}"
     },
     "getSshKey": {
       "method": "GET",
@@ -5212,40 +5229,16 @@
     "listEmailsForAuthedUser": {
       "alias": "user.listEmails"
     },
-    "listFollowers": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedUsers",
-      "url": "/users/{username}/followers"
-    },
-    "listFollowing": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedUsers",
-      "url": "/users/{username}/following"
-    },
     "listPipelineVariables": {
       "method": "GET",
       "params": {
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedPipelineVariables",
-      "url": "/users/{username}/pipelines_config/variables/"
+      "url": "/users/{selected_user}/pipelines_config/variables/"
     },
     "listRepositories": {
       "method": "GET",
@@ -5272,6 +5265,7 @@
       "url": "/users/{username}/ssh-keys"
     },
     "listWebhooks": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "username": {
@@ -5293,12 +5287,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/users/{username}/properties/{app_key}/{property_name}"
+      "url": "/users/{selected_user}/properties/{app_key}/{property_name}"
     },
     "searchCode": {
       "headers": {
@@ -5310,13 +5304,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "SearchResultPage",
-      "url": "/users/{username}/search/code"
+      "url": "/users/{selected_user}/search/code"
     },
     "updatePipelineVariable": {
       "method": "PUT",
@@ -5326,7 +5320,7 @@
           "schema": "PipelineVariable",
           "type": "any"
         },
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         },
@@ -5336,7 +5330,7 @@
         }
       },
       "returns": "PipelineVariable",
-      "url": "/users/{username}/pipelines_config/variables/{variable_uuid}"
+      "url": "/users/{selected_user}/pipelines_config/variables/{variable_uuid}"
     },
     "updateSshKey": {
       "method": "PUT",
@@ -5368,12 +5362,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/users/{username}/properties/{app_key}/{property_name}"
+      "url": "/users/{selected_user}/properties/{app_key}/{property_name}"
     },
     "updateWebhook": {
       "method": "PUT",
@@ -5442,6 +5436,26 @@
     },
     "updateForUser": {
       "alias": "users.updateWebhook"
+    }
+  },
+  "workspaces": {
+    "searchAccount": {
+      "headers": {
+        "accept": "application/json"
+      },
+      "method": "GET",
+      "params": {
+        "search_query": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "SearchResultPage",
+      "url": "/workspaces/{workspace}/search/code"
     }
   }
 }

@@ -380,6 +380,7 @@
                 "restrict_merges",
                 "enforce_merge_checks",
                 "require_approvals_to_merge",
+                "allow_auto_merge_when_builds_pass",
                 "delete",
                 "require_all_dependencies_merged",
                 "push",
@@ -709,8 +710,8 @@
           "type": "object"
         }
       ],
-      "x-bb-default-fields": ["uuid"],
-      "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+      "x-bb-default-fields": ["uuid", "commitHash"],
+      "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commits/{commitHash}/reports/{uuid}"
     },
     "DeployKey": {
       "allOf": [
@@ -1088,6 +1089,22 @@
           },
           "required": ["message"],
           "type": "object"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": ["type"],
+      "type": "object"
+    },
+    "ExportOptions": {
+      "additionalProperties": true,
+      "properties": {
+        "project_key": {
+          "type": "string"
+        },
+        "project_name": {
+          "type": "string"
         },
         "type": {
           "type": "string"
@@ -4354,8 +4371,8 @@
           "type": "object"
         }
       ],
-      "x-bb-default-fields": ["uuid"],
-      "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+      "x-bb-default-fields": ["uuid", "commitHash"],
+      "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commits/{commitHash}/reports/{uuid}"
     },
     "ReportAnnotation": {
       "allOf": [
@@ -4411,7 +4428,7 @@
         }
       ],
       "x-bb-default-fields": ["uuid"],
-      "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{reportUuid}/annotations/{uuid}"
+      "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commits/{commit.hash}/reports/{reportUuid}/annotations/{uuid}"
     },
     "ReportData": {
       "properties": {
@@ -4959,8 +4976,8 @@
           "type": "object"
         }
       ],
-      "x-bb-default-fields": ["uuid"],
-      "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commit/{commit.hash}/reports/{uuid}"
+      "x-bb-default-fields": ["uuid", "commitHash"],
+      "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commits/{commitHash}/reports/{uuid}"
     },
     "SubjectTypes": {
       "additionalProperties": false,
@@ -5355,12 +5372,6 @@
         {
           "additionalProperties": true,
           "properties": {
-            "added_on": {
-              "type": "string"
-            },
-            "last_accessed": {
-              "type": "string"
-            },
             "links": {
               "additionalProperties": false,
               "properties": {
@@ -5378,10 +5389,6 @@
                 }
               },
               "type": "object"
-            },
-            "permission": {
-              "enum": ["owner", "collaborator", "member"],
-              "type": "string"
             },
             "user": {
               "$ref": "#/definitions/Account"
@@ -5434,6 +5441,9 @@
     },
     "Error": {
       "$ref": "#/definitions/Error"
+    },
+    "ExportOptions": {
+      "$ref": "#/definitions/ExportOptions"
     },
     "Issue": {
       "$ref": "#/definitions/Issue"

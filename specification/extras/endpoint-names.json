@@ -585,6 +585,12 @@
       "repositories": "createIssueImportJob"
     }
   },
+  "/repositories/{workspace}/{repo_slug}/merge-base/{revspec}": {
+    "get": {
+      "commits": "",
+      "repositories": ""
+    }
+  },
   "/repositories/{workspace}/{repo_slug}/milestones": {
     "get": {
       "issue_tracker": "listMilestones",
@@ -725,11 +731,6 @@
     "get": {
       "pipelines": "get",
       "repositories": "getPipeline"
-    }
-  },
-  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/remote-triggers/{trigger_key}": {
-    "put": {
-      "repositories": ""
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/": {
@@ -1261,19 +1262,53 @@
       "workspaces": ""
     }
   },
+  "/users/{selected_user}/pipelines_config/variables/": {
+    "get": {
+      "pipelines": "listVariablesForUser",
+      "users": "listPipelineVariables"
+    },
+    "post": {
+      "pipelines": "createVariableForUser",
+      "users": "createPipelineVariable"
+    }
+  },
+  "/users/{selected_user}/pipelines_config/variables/{variable_uuid}": {
+    "delete": {
+      "pipelines": "deleteVariableForUser",
+      "users": "deletePipelineVariable"
+    },
+    "get": {
+      "pipelines": "getVariableForUser",
+      "users": "getPipelineVariable"
+    },
+    "put": {
+      "pipelines": "updateVariableForUser",
+      "users": "updatePipelineVariable"
+    }
+  },
+  "/users/{selected_user}/properties/{app_key}/{property_name}": {
+    "delete": {
+      "properties": "deleteUserHostedPropertyValue",
+      "users": "deleteUserHostedPropertyValue"
+    },
+    "get": {
+      "properties": "retrieveUserHostedPropertyValue",
+      "users": "retrieveUserHostedPropertyValue"
+    },
+    "put": {
+      "properties": "updateUserHostedPropertyValue",
+      "users": "updateUserHostedPropertyValue"
+    }
+  },
+  "/users/{selected_user}/search/code": {
+    "get": {
+      "search": "codeOfUser",
+      "users": "searchCode"
+    }
+  },
   "/users/{username}": {
     "get": {
       "users": "get"
-    }
-  },
-  "/users/{username}/followers": {
-    "get": {
-      "users": "listFollowers"
-    }
-  },
-  "/users/{username}/following": {
-    "get": {
-      "users": "listFollowing"
     }
   },
   "/users/{username}/hooks": {
@@ -1306,54 +1341,10 @@
       "users": "getTeamMembers"
     }
   },
-  "/users/{username}/pipelines_config/variables/": {
-    "get": {
-      "pipelines": "listVariablesForUser",
-      "users": "listPipelineVariables"
-    },
-    "post": {
-      "pipelines": "createVariableForUser",
-      "users": "createPipelineVariable"
-    }
-  },
-  "/users/{username}/pipelines_config/variables/{variable_uuid}": {
-    "delete": {
-      "pipelines": "deleteVariableForUser",
-      "users": "deletePipelineVariable"
-    },
-    "get": {
-      "pipelines": "getVariableForUser",
-      "users": "getPipelineVariable"
-    },
-    "put": {
-      "pipelines": "updateVariableForUser",
-      "users": "updatePipelineVariable"
-    }
-  },
-  "/users/{username}/properties/{app_key}/{property_name}": {
-    "delete": {
-      "properties": "deleteUserHostedPropertyValue",
-      "users": "deleteUserHostedPropertyValue"
-    },
-    "get": {
-      "properties": "retrieveUserHostedPropertyValue",
-      "users": "retrieveUserHostedPropertyValue"
-    },
-    "put": {
-      "properties": "updateUserHostedPropertyValue",
-      "users": "updateUserHostedPropertyValue"
-    }
-  },
   "/users/{username}/repositories": {
     "get": {
       "teams": "listRepositoriesForUser",
       "users": "listRepositories"
-    }
-  },
-  "/users/{username}/search/code": {
-    "get": {
-      "search": "codeOfUser",
-      "users": "searchCode"
     }
   },
   "/users/{username}/ssh-keys": {
@@ -1424,6 +1415,11 @@
       "workspaces": ""
     }
   },
+  "/workspaces/{workspace}/permissions": {
+    "get": {
+      "workspaces": ""
+    }
+  },
   "/workspaces/{workspace}/projects": {
     "get": {
       "workspaces": ""
@@ -1445,6 +1441,12 @@
     "put": {
       "projects": "",
       "workspaces": ""
+    }
+  },
+  "/workspaces/{workspace}/search/code": {
+    "get": {
+      "search": "searchAccount",
+      "workspaces": "searchAccount"
     }
   }
 }
