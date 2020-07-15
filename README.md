@@ -1,5 +1,5 @@
 [![version:@latest](https://img.shields.io/npm/v/bitbucket.svg?style=for-the-badge)](https://www.npmjs.com/package/bitbucket)
-[![Documentation](https://img.shields.io/badge/docs-bitbucket.js-blue.svg?style=for-the-badge)](https://bitbucketjs.netlify.com)
+[![Documentation](https://img.shields.io/badge/docs-bitbucket.js-blue.svg?style=for-the-badge)](https://bitbucketjs.netlify.app)
 [![License](https://img.shields.io/github/license/MunifTanjim/node-bitbucket.svg?style=for-the-badge)](https://github.com/MunifTanjim/node-bitbucket/blob/master/LICENSE)
 
 # Bitbucket.js
@@ -10,11 +10,7 @@ Bitbucket API docs: [https://api.bitbucket.org](https://api.bitbucket.org)
 
 ---
 
-**BITBUCKET CLOUD API CHANGING NOTICE**: [https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr)  
-**BITBUCKET CLOUD API MIGRATION GUIDE**: [https://developer.atlassian.com/cloud/bitbucket/bbc-gdpr-api-migration-guide](https://developer.atlassian.com/cloud/bitbucket/bbc-gdpr-api-migration-guide)  
-**BITBUCKET CLOUD API REPO URL CHANGE**: [https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-workspaces](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-workspaces)
-
-[**BREAKING CHANGES FOR API NAME**](https://github.com/MunifTanjim/node-bitbucket/blob/master/v1_API_NAME_CHANGES.md): Unfortunately, API Name changes were published on the following minor version updates: `v1.8.0`, `v1.9.0`, `v1.10.0`. This type of changes won't happen again for minor version updates anymore.
+**BITBUCKET CLOUD API LATEST UPDATES**: [https://developer.atlassian.com/cloud/bitbucket](https://developer.atlassian.com/cloud/bitbucket)
 
 ---
 
@@ -131,7 +127,7 @@ Check API client docs: [https://bitbucketjs.netlify.com](https://bitbucketjs.net
 
 ```js
 bitbucket.repositories
-  .list({ username: 'MunifTanjim' })
+  .listGlobal()
   .then(({ data }) => console.log(data.values))
   .catch((err) => console.error(err))
 ```
