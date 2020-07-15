@@ -406,11 +406,23 @@
     "createForTeam": {
       "alias": "teams.createProject"
     },
+    "createOrUpdateProject": {
+      "alias": "workspaces.createOrUpdateProject"
+    },
+    "createProject": {
+      "alias": "workspaces.createProject"
+    },
     "deleteForTeam": {
       "alias": "teams.deleteProject"
     },
+    "deleteProject": {
+      "alias": "workspaces.deleteProject"
+    },
     "getForTeam": {
       "alias": "teams.getProject"
+    },
+    "getProject": {
+      "alias": "workspaces.getProject"
     },
     "listForTeam": {
       "alias": "teams.listProjects"
@@ -5410,6 +5422,9 @@
     "createForUser": {
       "alias": "users.createWebhook"
     },
+    "createWebhookForWorkspace": {
+      "alias": "workspaces.createWebhookForWorkspace"
+    },
     "delete": {
       "alias": "repositories.deleteWebhook"
     },
@@ -5418,6 +5433,9 @@
     },
     "deleteForUser": {
       "alias": "users.deleteWebhook"
+    },
+    "deleteWebhookForWorkspace": {
+      "alias": "workspaces.deleteWebhookForWorkspace"
     },
     "get": {
       "alias": "repositories.getWebhook"
@@ -5430,6 +5448,12 @@
     },
     "getForUser": {
       "alias": "users.getWebhook"
+    },
+    "getWebhookForWorkspace": {
+      "alias": "workspaces.getWebhookForWorkspace"
+    },
+    "getWebhooksForWorkspace": {
+      "alias": "workspaces.getWebhooksForWorkspace"
     },
     "list": {
       "alias": "hook_events.list"
@@ -5451,9 +5475,181 @@
     },
     "updateForUser": {
       "alias": "users.updateWebhook"
+    },
+    "updateWebhookForWorkspace": {
+      "alias": "workspaces.updateWebhookForWorkspace"
     }
   },
   "workspaces": {
+    "createOrUpdateProject": {
+      "method": "PUT",
+      "params": {
+        "_body": {
+          "required": true,
+          "schema": "Project",
+          "type": "any"
+        },
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "Project",
+      "url": "/workspaces/{workspace}/projects/{project_key}"
+    },
+    "createProject": {
+      "method": "POST",
+      "params": {
+        "_body": {
+          "required": true,
+          "schema": "Project",
+          "type": "any"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "Project",
+      "url": "/workspaces/{workspace}/projects"
+    },
+    "createWebhookForWorkspace": {
+      "method": "POST",
+      "params": {
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "WebhookSubscription",
+      "url": "/workspaces/{workspace}/hooks"
+    },
+    "deleteProject": {
+      "method": "DELETE",
+      "params": {
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/workspaces/{workspace}/projects/{project_key}"
+    },
+    "deleteWebhookForWorkspace": {
+      "method": "DELETE",
+      "params": {
+        "uid": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/workspaces/{workspace}/hooks/{uid}"
+    },
+    "getMemberForWorkspace": {
+      "method": "GET",
+      "params": {
+        "member": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "WorkspaceMembership",
+      "url": "/workspaces/{workspace}/members/{member}"
+    },
+    "getMembersForWorkspace": {
+      "method": "GET",
+      "params": {
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedWorkspaceMemberships",
+      "url": "/workspaces/{workspace}/members"
+    },
+    "getProject": {
+      "method": "GET",
+      "params": {
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "Project",
+      "url": "/workspaces/{workspace}/projects/{project_key}"
+    },
+    "getProjects": {
+      "method": "GET",
+      "params": {
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedProjects",
+      "url": "/workspaces/{workspace}/projects"
+    },
+    "getWebhookForWorkspace": {
+      "method": "GET",
+      "params": {
+        "uid": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "WebhookSubscription",
+      "url": "/workspaces/{workspace}/hooks/{uid}"
+    },
+    "getWebhooksForWorkspace": {
+      "method": "GET",
+      "params": {
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedWebhookSubscriptions",
+      "url": "/workspaces/{workspace}/hooks"
+    },
+    "getWorkspace": {
+      "method": "GET",
+      "params": {
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "Workspace",
+      "url": "/workspaces/{workspace}"
+    },
+    "getWorkspaces": {
+      "method": "GET",
+      "returns": "PaginatedWorkspaces",
+      "url": "/workspaces"
+    },
     "searchAccount": {
       "headers": {
         "accept": "application/json"
@@ -5471,6 +5667,21 @@
       },
       "returns": "SearchResultPage",
       "url": "/workspaces/{workspace}/search/code"
+    },
+    "updateWebhookForWorkspace": {
+      "method": "PUT",
+      "params": {
+        "uid": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "WebhookSubscription",
+      "url": "/workspaces/{workspace}/hooks/{uid}"
     }
   }
 }

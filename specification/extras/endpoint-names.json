@@ -1373,46 +1373,46 @@
   },
   "/workspaces": {
     "get": {
-      "workspaces": ""
+      "workspaces": "getWorkspaces"
     }
   },
   "/workspaces/{workspace}": {
     "get": {
-      "workspaces": ""
+      "workspaces": "getWorkspace"
     }
   },
   "/workspaces/{workspace}/hooks": {
     "get": {
-      "webhooks": "",
-      "workspaces": ""
+      "webhooks": "getWebhooksForWorkspace",
+      "workspaces": "getWebhooksForWorkspace"
     },
     "post": {
-      "webhooks": "",
-      "workspaces": ""
+      "webhooks": "createWebhookForWorkspace",
+      "workspaces": "createWebhookForWorkspace"
     }
   },
   "/workspaces/{workspace}/hooks/{uid}": {
     "delete": {
-      "webhooks": "",
-      "workspaces": ""
+      "webhooks": "deleteWebhookForWorkspace",
+      "workspaces": "deleteWebhookForWorkspace"
     },
     "get": {
-      "webhooks": "",
-      "workspaces": ""
+      "webhooks": "getWebhookForWorkspace",
+      "workspaces": "getWebhookForWorkspace"
     },
     "put": {
-      "webhooks": "",
-      "workspaces": ""
+      "webhooks": "updateWebhookForWorkspace",
+      "workspaces": "updateWebhookForWorkspace"
     }
   },
   "/workspaces/{workspace}/members": {
     "get": {
-      "workspaces": ""
+      "workspaces": "getMembersForWorkspace"
     }
   },
   "/workspaces/{workspace}/members/{member}": {
     "get": {
-      "workspaces": ""
+      "workspaces": "getMemberForWorkspace"
     }
   },
   "/workspaces/{workspace}/permissions": {
@@ -1422,25 +1422,25 @@
   },
   "/workspaces/{workspace}/projects": {
     "get": {
-      "workspaces": ""
+      "workspaces": "getProjects"
     },
     "post": {
-      "projects": "",
-      "workspaces": ""
+      "projects": "createProject",
+      "workspaces": "createProject"
     }
   },
   "/workspaces/{workspace}/projects/{project_key}": {
     "delete": {
-      "projects": "",
-      "workspaces": ""
+      "projects": "deleteProject",
+      "workspaces": "deleteProject"
     },
     "get": {
-      "projects": "",
-      "workspaces": ""
+      "projects": "getProject",
+      "workspaces": "getProject"
     },
     "put": {
-      "projects": "",
-      "workspaces": ""
+      "projects": "createOrUpdateProject",
+      "workspaces": "createOrUpdateProject"
     }
   },
   "/workspaces/{workspace}/search/code": {
