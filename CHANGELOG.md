@@ -4,6 +4,11 @@
 
 - ...
 
+## [2.4.0] - 2020-07-15
+
+- Add endpoints for: `Workspace`
+- Update notice plugin
+
 ## [2.3.0] - 2020-06-29
 
 - Generate from latest API Specification
@@ -32,7 +37,8 @@
 
 - Version 2 Release
 
-[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.3.0...HEAD
+[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.4.0...HEAD
+[2.4.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.3.0...2.4.0
 [2.3.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.1.0...2.2.0
 [2.1.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.0.3...2.1.0
