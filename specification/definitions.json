@@ -1257,6 +1257,9 @@
       "project_name": {
         "type": "string"
       },
+      "send_email": {
+        "type": "boolean"
+      },
       "type": {
         "type": "string"
       }
@@ -1308,10 +1311,6 @@
               }
             },
             "type": "object"
-          },
-          "members": {
-            "description": "The number of members in this group",
-            "type": "integer"
           },
           "name": {
             "type": "string"
@@ -1839,7 +1838,8 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": ["cloudId", "id"],
+    "x-bb-default-fields": ["type", "cloudId", "id"],
+    "x-bb-detail-fields": ["key", "name", "url", "avatarUrls.*", "site"],
     "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}/projects/{id}?actor={user.uuid}&atlassian_account_id={user.account_id}"
   },
   "jira_site": {
@@ -1853,7 +1853,8 @@
         "type": "object"
       }
     ],
-    "x-bb-default-fields": ["cloudId", "cloudUrl", "cloudName"],
+    "x-bb-default-fields": ["type", "cloudId", "cloudUrl", "cloudName"],
+    "x-bb-detail-fields": ["connected"],
     "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}?actor={user.uuid}&atlassian_account_id={user.account_id}"
   },
   "milestone": {

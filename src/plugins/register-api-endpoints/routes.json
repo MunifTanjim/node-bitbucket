@@ -2179,8 +2179,14 @@
         "ignore_whitespace": {
           "type": "boolean"
         },
+        "merge": {
+          "type": "boolean"
+        },
         "path": {
           "type": "string"
+        },
+        "renames": {
+          "type": "boolean"
         },
         "repo_slug": {
           "required": true,
@@ -3116,6 +3122,15 @@
       "method": "GET",
       "params": {
         "ignore_whitespace": {
+          "type": "boolean"
+        },
+        "merge": {
+          "type": "boolean"
+        },
+        "path": {
+          "type": "string"
+        },
+        "renames": {
           "type": "boolean"
         },
         "repo_slug": {
