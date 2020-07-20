@@ -4,6 +4,10 @@
 
 - ...
 
+## [2.4.1] - 2020-07-21
+
+- Fix `endpoint/utils/add-query-parameters`
+
 ## [2.4.0] - 2020-07-15
 
 - Add endpoints for: `Workspace`
@@ -37,7 +41,8 @@
 
 - Version 2 Release
 
-[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.4.0...HEAD
+[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.4.1...HEAD
+[2.4.1]: https://github.com/MunifTanjim/node-bitbucket/compare/2.4.0...2.4.1
 [2.4.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.3.0...2.4.0
 [2.3.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.1.0...2.2.0
