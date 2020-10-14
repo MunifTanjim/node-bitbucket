@@ -16,6 +16,13 @@ export function addQueryParameters(
       if (name === 'q') {
         return `q=${params.q!.split(' ').map(encodeURIComponent).join('+')}`
       }
+
+      if (Array.isArray(params[name])) {
+        return params[name]
+          .map((value: string) => `${name}=${encodeURIComponent(value)}`)
+          .join('&')
+      }
+
       return `${name}=${encodeURIComponent(params[name])}`
     })
     .join('&')}`
