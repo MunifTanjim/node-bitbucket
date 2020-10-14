@@ -4,6 +4,10 @@
 
 - ...
 
+## [2.4.2] - 2020-10-14
+
+- Fix `endpoint/utils/add-query-parameters`
+
 ## [2.4.1] - 2020-07-21
 
 - Fix `endpoint/utils/add-query-parameters`
@@ -41,7 +45,8 @@
 
 - Version 2 Release
 
-[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.4.1...HEAD
+[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.4.2...HEAD
+[2.4.2]: https://github.com/MunifTanjim/node-bitbucket/compare/2.4.1...2.4.2
 [2.4.1]: https://github.com/MunifTanjim/node-bitbucket/compare/2.4.0...2.4.1
 [2.4.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.3.0...2.4.0
 [2.3.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.2.0...2.3.0
