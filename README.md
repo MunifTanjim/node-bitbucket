@@ -127,7 +127,7 @@ Check API client docs: [https://bitbucketjs.netlify.com](https://bitbucketjs.net
 
 ```js
 bitbucket.repositories
-  .listGlobal()
+  .listGlobal({})
   .then(({ data }) => console.log(data.values))
   .catch((err) => console.error(err))
 ```
