@@ -1,9 +1,9 @@
 type AuthenticatePluginState = import('./types').AuthenticatePluginState
-type AuthenticateOptions = import('./types').AuthenticateOptions
+type AuthOptions = import('./types').AuthOptions
 
 export function authenticate(
   state: AuthenticatePluginState,
-  options: AuthenticateOptions
+  options: AuthOptions
 ): void {
   if (!options) {
     delete state.auth
@@ -16,6 +16,14 @@ export function authenticate(
       if (!options.username || !options.password) {
         throw new Error(
           'Basic authentication requires both a username and password to be set'
+        )
+      }
+      break
+
+    case 'client_grant':
+      if (!options.client_id || !options.client_secret) {
+        throw new Error(
+          'Client Grant authentication requires a client id and secret to be set'
         )
       }
       break
