@@ -10,7 +10,9 @@
     "rest"
   ],
   "homepage": "https://github.com/MunifTanjim/node-bitbucket#readme",
-  "bugs": "https://github.com/MunifTanjim/node-bitbucket/issues",
+  "bugs": {
+    "url": "https://github.com/MunifTanjim/node-bitbucket/issues"
+  },
   "license": "MIT",
   "author": "MunifTanjim (https://muniftanjim.com)",
   "files": [
@@ -22,9 +24,12 @@
   "unpkg": "lib/index.umd.js",
   "jsdelivr": "lib/index.umd.js",
   "types": "lib/index.d.ts",
-  "repository": "github:MunifTanjim/node-bitbucket",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MunifTanjim/node-bitbucket.git"
+  },
   "scripts": {
-    "build": "npm-run-all -s build:core build:plugins",
+    "build": "npm-run-all -s build:core",
     "prebuild:core": "rimraf lib/*.js lib/*.js.map",
     "build:core": "bili",
     "prebuild:plugins": "rimraf lib/plugins/*.js lib/plugins/*.js.map",
@@ -97,5 +102,8 @@
     "ts-jest": "^26.0.0",
     "ts-node": "^8.10.1",
     "typescript": "^3.8.3"
+  },
+  "directories": {
+    "test": "test"
   }
 }

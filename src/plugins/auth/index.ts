@@ -1,21 +1,25 @@
-import { beforeRequest } from './before-request.js'
-import { validateOptions } from './validate-options'
+import basicAuth from './basicAuth'
+import OAuth from './OAuth'
+import oAuth2Spec from './OAuth/spec.json'
+import getOAuthRoutes from './OAuth/routes'
 
 type APIClient = import('./types').APIClient
-type AuthPluginState = import('./types').AuthPluginState
 type Options = import('./types').Options
 
-function authPlugin(client: APIClient, clientOptions: Options): void {
+const routes = getOAuthRoutes(oAuth2Spec)
+function authenticatePlugin(client: APIClient, clientOptions: Options): void {
+  client.registerEndpoints({ oauth: routes.getToken })
+
   if (!clientOptions.auth) return
+  switch (clientOptions.authStrategy) {
+    case 'OAuth':
+      OAuth(client, clientOptions)
+      break
 
-  validateOptions(clientOptions.auth)
-
-  const state: AuthPluginState = {
-    client,
-    auth: clientOptions.auth,
+    default:
+      basicAuth(client, clientOptions)
+      break
   }
-
-  client.requestHook.before(beforeRequest.bind(null, state))
 }
 
-export default authPlugin
+export default authenticatePlugin

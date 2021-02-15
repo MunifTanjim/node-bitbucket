@@ -7,10 +7,10 @@ import validateRequestPlugin from './plugins/validate-request'
 
 const Plugins = [
   noticePlugin,
-  authPlugin,
   paginationPlugin,
   registerEndpointsPlugin,
   validateRequestPlugin,
+  authPlugin,
 ]
 
 export const Bitbucket = Client.plugins(Plugins)

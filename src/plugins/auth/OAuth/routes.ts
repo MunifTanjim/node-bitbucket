@@ -1,16 +1,19 @@
-const getOAuthRoutes = (info) => ({
+import { SpecType } from './types'
+
+const getOAuthRoutes = (info: SpecType): any => ({
   getToken: {
     authorizationCodeGrant: {
+      accepts: ['application/x-www-form-urlencoded'],
       grant_type: 'authorization_code',
       method: 'POST',
       params: {
         client_id: {
-          in: 'body',
+          in: '_body',
           required: true,
           type: 'string',
         },
         client_secret: {
-          in: 'body',
+          in: '_body',
           required: true,
           type: 'string',
         },
@@ -19,24 +22,7 @@ const getOAuthRoutes = (info) => ({
           type: 'string',
         },
         grant_type: {
-          in: 'body',
-          required: true,
-          type: 'string',
-        },
-      },
-      url: `${info.tokenUrl}`,
-    },
-    implicitGrant: {
-      response_type: 'token',
-      method: 'GET',
-      params: {
-        client_id: {
-          in: 'query',
-          required: true,
-          type: 'string',
-        },
-        response_type: {
-          in: 'query',
+          in: '_body',
           required: true,
           type: 'string',
         },
@@ -44,31 +30,32 @@ const getOAuthRoutes = (info) => ({
       url: `${info.tokenUrl}`,
     },
     resourceOwnerPasswordCredentialsGrant: {
+      accepts: ['application/x-www-form-urlencoded'],
       grant_type: 'password',
       method: 'POST',
       params: {
         client_id: {
-          in: 'body',
+          in: '_body',
           required: true,
           type: 'string',
         },
         client_secret: {
-          in: 'body',
+          in: '_body',
           required: true,
           type: 'string',
         },
         grant_type: {
-          in: 'body',
+          in: '_body',
           required: true,
           type: 'string',
         },
         password: {
-          in: 'body',
+          in: '_body',
           required: true,
           type: 'string',
         },
         username: {
-          in: 'body',
+          in: '_body',
           required: true,
           type: 'string',
         },
@@ -76,21 +63,22 @@ const getOAuthRoutes = (info) => ({
       url: `${info.tokenUrl}`,
     },
     clientCredentialsGrant: {
+      accepts: ['application/x-www-form-urlencoded'],
       grant_type: 'client_credentials',
       method: 'POST',
       params: {
         client_id: {
-          in: 'body',
+          in: '_body',
           required: true,
           type: 'string',
         },
         client_secret: {
-          in: 'body',
+          in: '_body',
           required: true,
           type: 'string',
         },
         grant_type: {
-          in: 'body',
+          in: '_body',
           required: true,
           type: 'string',
         },
@@ -98,11 +86,12 @@ const getOAuthRoutes = (info) => ({
       url: `${info.tokenUrl}`,
     },
     bitbucketCloudJWTGrant: {
+      accepts: ['application/x-www-form-urlencoded'],
       grant_type: 'urn:bitbucket:oauth2:jwt',
       method: 'POST',
       params: {
         grant_type: {
-          in: 'body',
+          in: '_body',
           required: true,
           type: 'string',
         },
@@ -114,7 +103,25 @@ const getOAuthRoutes = (info) => ({
       },
       url: `${info.tokenUrl}`,
     },
+    refreshToken: {
+      accepts: ['application/x-www-form-urlencoded'],
+      grant_type: 'refresh_token',
+      method: 'POST',
+      params: {
+        grant_type: {
+          in: '_body',
+          required: true,
+          type: 'string',
+        },
+        refresh_token: {
+          in: '_body',
+          required: true,
+          type: 'string',
+        },
+      },
+      url: `${info.tokenUrl}`,
+    },
   },
 })
 
-module.exports = getOAuthRoutes
+export default getOAuthRoutes
