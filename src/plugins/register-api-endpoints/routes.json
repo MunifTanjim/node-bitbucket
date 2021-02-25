@@ -281,6 +281,9 @@
     "createKnownHost": {
       "alias": "repositories.createPipelineKnownHost"
     },
+    "createPipelineVariableForWorkspace": {
+      "alias": "workspaces.createPipelineVariableForWorkspace"
+    },
     "createSchedule": {
       "alias": "repositories.createPipelineSchedule"
     },
@@ -298,6 +301,12 @@
     },
     "deleteKnownHost": {
       "alias": "repositories.deletePipelineKnownHost"
+    },
+    "deletePipelineVariableForWorkspace": {
+      "alias": "workspaces.deletePipelineVariableForWorkspace"
+    },
+    "deleteRepositoryPipelineCache": {
+      "alias": "repositories.deleteRepositoryPipelineCache"
     },
     "deleteSchedule": {
       "alias": "repositories.deletePipelineSchedule"
@@ -322,6 +331,18 @@
     },
     "getKnownHost": {
       "alias": "repositories.getPipelineKnownHost"
+    },
+    "getPipelineVariableForWorkspace": {
+      "alias": "workspaces.getPipelineVariableForWorkspace"
+    },
+    "getPipelineVariablesForWorkspace": {
+      "alias": "workspaces.getPipelineVariablesForWorkspace"
+    },
+    "getRepositoryPipelineCacheContentURI": {
+      "alias": "repositories.getRepositoryPipelineCacheContentURI"
+    },
+    "getRepositoryPipelineCaches": {
+      "alias": "repositories.getRepositoryPipelineCaches"
     },
     "getSchedule": {
       "alias": "repositories.getPipelineSchedule"
@@ -385,6 +406,9 @@
     },
     "updateKnownHost": {
       "alias": "repositories.updatePipelineKnownHost"
+    },
+    "updatePipelineVariableForWorkspace": {
+      "alias": "workspaces.updatePipelineVariableForWorkspace"
     },
     "updateSchedule": {
       "alias": "repositories.updatePipelineSchedule"
@@ -717,7 +741,7 @@
     "createCommitApproval": {
       "method": "POST",
       "params": {
-        "node": {
+        "commit": {
           "required": true,
           "type": "string"
         },
@@ -731,7 +755,7 @@
         }
       },
       "returns": "Participant",
-      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/approve"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/approve"
     },
     "createCommitBuildStatus": {
       "method": "POST",
@@ -740,7 +764,7 @@
           "schema": "Commitstatus",
           "type": "any"
         },
-        "node": {
+        "commit": {
           "required": true,
           "type": "string"
         },
@@ -754,7 +778,7 @@
         }
       },
       "returns": "Commitstatus",
-      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/statuses/build"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/statuses/build"
     },
     "createCommitComment": {
       "method": "POST",
@@ -764,7 +788,7 @@
           "schema": "CommitComment",
           "type": "any"
         },
-        "node": {
+        "commit": {
           "required": true,
           "type": "string"
         },
@@ -777,7 +801,7 @@
           "type": "string"
         }
       },
-      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/comments"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/comments"
     },
     "createDeployKey": {
       "method": "POST",
@@ -918,7 +942,7 @@
         },
         "issue_id": {
           "required": true,
-          "type": "integer"
+          "type": "string"
         },
         "repo_slug": {
           "required": true,
@@ -1219,7 +1243,7 @@
       "params": {
         "pull_request_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "repo_slug": {
           "required": true,
@@ -1334,7 +1358,7 @@
       "params": {
         "pull_request_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "repo_slug": {
           "required": true,
@@ -1433,7 +1457,7 @@
     "deleteCommitApproval": {
       "method": "DELETE",
       "params": {
-        "node": {
+        "commit": {
           "required": true,
           "type": "string"
         },
@@ -1446,7 +1470,7 @@
           "type": "string"
         }
       },
-      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/approve"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/approve"
     },
     "deleteCommitHostedPropertyValue": {
       "method": "DELETE",
@@ -1619,7 +1643,7 @@
         },
         "comment_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "issue_id": {
           "required": true,
@@ -1746,7 +1770,7 @@
       "params": {
         "pull_request_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "repo_slug": {
           "required": true,
@@ -1764,11 +1788,11 @@
       "params": {
         "comment_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "pull_request_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "repo_slug": {
           "required": true,
@@ -1853,6 +1877,24 @@
         }
       },
       "url": "/repositories/{workspace}/{repo_slug}/properties/{app_key}/{property_name}"
+    },
+    "deleteRepositoryPipelineCache": {
+      "method": "DELETE",
+      "params": {
+        "cache_uuid": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid}"
     },
     "deleteTag": {
       "method": "DELETE",
@@ -2035,7 +2077,7 @@
     "getCommit": {
       "method": "GET",
       "params": {
-        "node": {
+        "commit": {
           "required": true,
           "type": "string"
         },
@@ -2049,16 +2091,16 @@
         }
       },
       "returns": "Commit",
-      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}"
     },
     "getCommitBuildStatus": {
       "method": "GET",
       "params": {
-        "key": {
+        "commit": {
           "required": true,
           "type": "string"
         },
-        "node": {
+        "key": {
           "required": true,
           "type": "string"
         },
@@ -2072,7 +2114,7 @@
         }
       },
       "returns": "Commitstatus",
-      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/statuses/build/{key}"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/statuses/build/{key}"
     },
     "getCommitComment": {
       "method": "GET",
@@ -2081,7 +2123,7 @@
           "required": true,
           "type": "integer"
         },
-        "node": {
+        "commit": {
           "required": true,
           "type": "string"
         },
@@ -2095,7 +2137,7 @@
         }
       },
       "returns": "CommitComment",
-      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/comments/{comment_id}"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/comments/{comment_id}"
     },
     "getCommitHostedPropertyValue": {
       "method": "GET",
@@ -2321,7 +2363,7 @@
       "params": {
         "comment_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "issue_id": {
           "required": true,
@@ -2668,11 +2710,11 @@
       "params": {
         "comment_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "pull_request_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "repo_slug": {
           "required": true,
@@ -2691,7 +2733,7 @@
       "params": {
         "pull_request_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "repo_slug": {
           "required": true,
@@ -2709,7 +2751,7 @@
       "params": {
         "pull_request_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "repo_slug": {
           "required": true,
@@ -2753,7 +2795,7 @@
       "params": {
         "pull_request_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "repo_slug": {
           "required": true,
@@ -2835,6 +2877,40 @@
         }
       },
       "url": "/repositories/{workspace}/{repo_slug}/properties/{app_key}/{property_name}"
+    },
+    "getRepositoryPipelineCacheContentURI": {
+      "method": "GET",
+      "params": {
+        "cache_uuid": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PipelineCacheContentUri",
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid}/content-uri"
+    },
+    "getRepositoryPipelineCaches": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineCaches",
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/"
     },
     "getTag": {
       "method": "GET",
@@ -2928,7 +3004,7 @@
     "listCommitComments": {
       "method": "GET",
       "params": {
-        "node": {
+        "commit": {
           "required": true,
           "type": "string"
         },
@@ -2942,7 +3018,7 @@
         }
       },
       "returns": "PaginatedCommitComments",
-      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/comments"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/comments"
     },
     "listCommits": {
       "method": "GET",
@@ -2957,11 +3033,16 @@
           "required": true,
           "type": "string"
         },
+        "revision": {
+          "required": true,
+          "type": "string"
+        },
         "workspace": {
           "required": true,
           "type": "string"
         }
       },
+      "returns": "PaginatedChangeset",
       "url": "/repositories/{workspace}/{repo_slug}/commits"
     },
     "listCommitsAlt": {
@@ -2978,11 +3059,16 @@
           "required": true,
           "type": "string"
         },
+        "revision": {
+          "required": true,
+          "type": "string"
+        },
         "workspace": {
           "required": true,
           "type": "string"
         }
       },
+      "returns": "PaginatedChangeset",
       "url": "/repositories/{workspace}/{repo_slug}/commits{?page,pagelen,q,sort}"
     },
     "listCommitsAt": {
@@ -3007,6 +3093,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedChangeset",
       "url": "/repositories/{workspace}/{repo_slug}/commits/{revision}"
     },
     "listCommitsAtAlt": {
@@ -3031,12 +3118,13 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedChangeset",
       "url": "/repositories/{workspace}/{repo_slug}/commits/{revision}{?page,pagelen,q,sort}"
     },
     "listCommitStatuses": {
       "method": "GET",
       "params": {
-        "node": {
+        "commit": {
           "required": true,
           "type": "string"
         },
@@ -3050,7 +3138,7 @@
         }
       },
       "returns": "PaginatedCommitstatuses",
-      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/statuses"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/statuses"
     },
     "listComponents": {
       "method": "GET",
@@ -3193,7 +3281,7 @@
     "listFileHistory": {
       "method": "GET",
       "params": {
-        "node": {
+        "commit": {
           "required": true,
           "type": "string"
         },
@@ -3214,7 +3302,7 @@
         }
       },
       "returns": "PaginatedFiles",
-      "url": "/repositories/{workspace}/{repo_slug}/filehistory/{node}/{path}"
+      "url": "/repositories/{workspace}/{repo_slug}/filehistory/{commit}/{path}"
     },
     "listForks": {
       "method": "GET",
@@ -3254,7 +3342,7 @@
       "params": {
         "issue_id": {
           "required": true,
-          "type": "integer"
+          "type": "string"
         },
         "repo_slug": {
           "required": true,
@@ -3489,7 +3577,7 @@
       "params": {
         "pull_request_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "repo_slug": {
           "required": true,
@@ -3645,7 +3733,7 @@
         },
         "pull_request_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "repo_slug": {
           "required": true,
@@ -3662,16 +3750,16 @@
     "readSrc": {
       "method": "GET",
       "params": {
+        "commit": {
+          "required": true,
+          "type": "string"
+        },
         "format": {
           "enum": ["meta", "rendered"],
           "type": "string"
         },
         "max_depth": {
           "type": "integer"
-        },
-        "node": {
-          "required": true,
-          "type": "string"
         },
         "path": {
           "required": true,
@@ -3687,7 +3775,7 @@
         }
       },
       "returns": "PaginatedTreeentries",
-      "url": "/repositories/{workspace}/{repo_slug}/src/{node}/{path}"
+      "url": "/repositories/{workspace}/{repo_slug}/src/{commit}/{path}"
     },
     "readSrcRoot": {
       "method": "GET",
@@ -3798,11 +3886,11 @@
           "schema": "Commitstatus",
           "type": "any"
         },
-        "key": {
+        "commit": {
           "required": true,
           "type": "string"
         },
-        "node": {
+        "key": {
           "required": true,
           "type": "string"
         },
@@ -3816,7 +3904,7 @@
         }
       },
       "returns": "Commitstatus",
-      "url": "/repositories/{workspace}/{repo_slug}/commit/{node}/statuses/build/{key}"
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/statuses/build/{key}"
     },
     "updateCommitHostedPropertyValue": {
       "method": "PUT",
@@ -3947,7 +4035,7 @@
         },
         "comment_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "issue_id": {
           "required": true,
@@ -4130,11 +4218,11 @@
         },
         "comment_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "pull_request_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "repo_slug": {
           "required": true,
@@ -4332,7 +4420,7 @@
       "params": {
         "comment_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "encoded_id": {
           "required": true,
@@ -4384,7 +4472,7 @@
       "params": {
         "comment_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "encoded_id": {
           "required": true,
@@ -4468,10 +4556,6 @@
           "type": "string"
         },
         "revision": {
-          "required": true,
-          "type": "string"
-        },
-        "spec": {
           "required": true,
           "type": "string"
         },
@@ -4649,7 +4733,7 @@
       "params": {
         "comment_id": {
           "required": true,
-          "type": "string"
+          "type": "integer"
         },
         "encoded_id": {
           "required": true,
@@ -4696,6 +4780,7 @@
   },
   "teams": {
     "createPipelineVariable": {
+      "deprecated": true,
       "method": "POST",
       "params": {
         "_body": {
@@ -4711,6 +4796,7 @@
       "url": "/teams/{username}/pipelines_config/variables/"
     },
     "createProject": {
+      "deprecated": true,
       "method": "POST",
       "params": {
         "_body": {
@@ -4727,6 +4813,7 @@
       "url": "/teams/{username}/projects/"
     },
     "createWebhook": {
+      "deprecated": true,
       "method": "POST",
       "params": {
         "username": {
@@ -4738,6 +4825,7 @@
       "url": "/teams/{username}/hooks"
     },
     "deletePipelineVariable": {
+      "deprecated": true,
       "method": "DELETE",
       "params": {
         "username": {
@@ -4752,6 +4840,7 @@
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
     },
     "deleteProject": {
+      "deprecated": true,
       "method": "DELETE",
       "params": {
         "project_key": {
@@ -4766,6 +4855,7 @@
       "url": "/teams/{username}/projects/{project_key}"
     },
     "deleteWebhook": {
+      "deprecated": true,
       "method": "DELETE",
       "params": {
         "uid": {
@@ -4780,6 +4870,7 @@
       "url": "/teams/{username}/hooks/{uid}"
     },
     "get": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "username": {
@@ -4806,6 +4897,7 @@
       "alias": "users.getTeamMembers"
     },
     "getPipelineVariable": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "username": {
@@ -4821,6 +4913,7 @@
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
     },
     "getProject": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "project_key": {
@@ -4836,6 +4929,7 @@
       "url": "/teams/{username}/projects/{project_key}"
     },
     "getWebhook": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "uid": {
@@ -4863,6 +4957,7 @@
       "url": "/teams"
     },
     "listFollowers": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "username": {
@@ -4926,6 +5021,7 @@
       "url": "/teams/{username}/permissions/repositories"
     },
     "listPipelineVariables": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "username": {
@@ -4937,6 +5033,7 @@
       "url": "/teams/{username}/pipelines_config/variables/"
     },
     "listProjects": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "username": {
@@ -4948,19 +5045,21 @@
       "url": "/teams/{username}/projects/"
     },
     "listRepositories": {
+      "deprecated": true,
       "method": "GET",
       "params": {
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/teams/{username}/repositories"
+      "url": "/teams/{workspace}/repositories"
     },
     "listRepositoriesForUser": {
       "alias": "users.listRepositories"
     },
     "listWebhooks": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "username": {
@@ -4990,6 +5089,7 @@
       "url": "/teams/{username}/search/code"
     },
     "updatePipelineVariable": {
+      "deprecated": true,
       "method": "PUT",
       "params": {
         "_body": {
@@ -5010,6 +5110,7 @@
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
     },
     "updateProject": {
+      "deprecated": true,
       "method": "PUT",
       "params": {
         "_body": {
@@ -5030,6 +5131,7 @@
       "url": "/teams/{username}/projects/{project_key}"
     },
     "updateWebhook": {
+      "deprecated": true,
       "method": "PUT",
       "params": {
         "uid": {
@@ -5071,6 +5173,7 @@
       "url": "/user/permissions/repositories"
     },
     "listPermissionsForTeams": {
+      "deprecated": true,
       "method": "GET",
       "returns": "PaginatedTeamPermissions",
       "url": "/user/permissions/teams"
@@ -5078,6 +5181,7 @@
   },
   "users": {
     "createPipelineVariable": {
+      "deprecated": true,
       "method": "POST",
       "params": {
         "_body": {
@@ -5099,26 +5203,28 @@
           "schema": "SshAccountKey",
           "type": "any"
         },
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "SshAccountKey",
-      "url": "/users/{username}/ssh-keys"
+      "url": "/users/{selected_user}/ssh-keys"
     },
     "createWebhook": {
+      "deprecated": true,
       "method": "POST",
       "params": {
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "WebhookSubscription",
-      "url": "/users/{username}/hooks"
+      "url": "/users/{selected_user}/hooks"
     },
     "deletePipelineVariable": {
+      "deprecated": true,
       "method": "DELETE",
       "params": {
         "selected_user": {
@@ -5139,12 +5245,12 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/users/{username}/ssh-keys/{key_id}"
+      "url": "/users/{selected_user}/ssh-keys/{key_id}"
     },
     "deleteUserHostedPropertyValue": {
       "method": "DELETE",
@@ -5165,30 +5271,30 @@
       "url": "/users/{selected_user}/properties/{app_key}/{property_name}"
     },
     "deleteWebhook": {
+      "deprecated": true,
       "method": "DELETE",
       "params": {
-        "uid": {
+        "selected_user": {
           "required": true,
           "type": "string"
         },
-        "username": {
+        "uid": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/users/{username}/hooks/{uid}"
+      "url": "/users/{selected_user}/hooks/{uid}"
     },
     "get": {
-      "deprecated": true,
       "method": "GET",
       "params": {
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "User",
-      "url": "/users/{username}"
+      "url": "/users/{selected_user}"
     },
     "getAuthedUser": {
       "alias": "user.get"
@@ -5197,6 +5303,7 @@
       "alias": "user.getEmail"
     },
     "getPipelineVariable": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "selected_user": {
@@ -5218,13 +5325,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "SshAccountKey",
-      "url": "/users/{username}/ssh-keys/{key_id}"
+      "url": "/users/{selected_user}/ssh-keys/{key_id}"
     },
     "getTeamMembers": {
       "deprecated": true,
@@ -5239,24 +5346,26 @@
       "url": "/users/{username}/members"
     },
     "getWebhook": {
+      "deprecated": true,
       "method": "GET",
       "params": {
-        "uid": {
+        "selected_user": {
           "required": true,
           "type": "string"
         },
-        "username": {
+        "uid": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "WebhookSubscription",
-      "url": "/users/{username}/hooks/{uid}"
+      "url": "/users/{selected_user}/hooks/{uid}"
     },
     "listEmailsForAuthedUser": {
       "alias": "user.listEmails"
     },
     "listPipelineVariables": {
+      "deprecated": true,
       "method": "GET",
       "params": {
         "selected_user": {
@@ -5268,14 +5377,15 @@
       "url": "/users/{selected_user}/pipelines_config/variables/"
     },
     "listRepositories": {
+      "deprecated": true,
       "method": "GET",
       "params": {
-        "username": {
+        "workspace": {
           "required": true,
           "type": "string"
         }
       },
-      "url": "/users/{username}/repositories"
+      "url": "/users/{workspace}/repositories"
     },
     "listRepositoriesForTeam": {
       "alias": "teams.listRepositories"
@@ -5283,25 +5393,25 @@
     "listSshKeys": {
       "method": "GET",
       "params": {
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedSshUserKeys",
-      "url": "/users/{username}/ssh-keys"
+      "url": "/users/{selected_user}/ssh-keys"
     },
     "listWebhooks": {
       "deprecated": true,
       "method": "GET",
       "params": {
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "PaginatedWebhookSubscriptions",
-      "url": "/users/{username}/hooks"
+      "url": "/users/{selected_user}/hooks"
     },
     "retrieveUserHostedPropertyValue": {
       "method": "GET",
@@ -5340,6 +5450,7 @@
       "url": "/users/{selected_user}/search/code"
     },
     "updatePipelineVariable": {
+      "deprecated": true,
       "method": "PUT",
       "params": {
         "_body": {
@@ -5370,13 +5481,13 @@
           "required": true,
           "type": "string"
         },
-        "username": {
+        "selected_user": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "SshAccountKey",
-      "url": "/users/{username}/ssh-keys/{key_id}"
+      "url": "/users/{selected_user}/ssh-keys/{key_id}"
     },
     "updateUserHostedPropertyValue": {
       "method": "PUT",
@@ -5397,19 +5508,20 @@
       "url": "/users/{selected_user}/properties/{app_key}/{property_name}"
     },
     "updateWebhook": {
+      "deprecated": true,
       "method": "PUT",
       "params": {
-        "uid": {
+        "selected_user": {
           "required": true,
           "type": "string"
         },
-        "username": {
+        "uid": {
           "required": true,
           "type": "string"
         }
       },
       "returns": "WebhookSubscription",
-      "url": "/users/{username}/hooks/{uid}"
+      "url": "/users/{selected_user}/hooks/{uid}"
     }
   },
   "webhooks": {
@@ -5501,6 +5613,21 @@
       "returns": "Project",
       "url": "/workspaces/{workspace}/projects/{project_key}"
     },
+    "createPipelineVariableForWorkspace": {
+      "method": "POST",
+      "params": {
+        "_body": {
+          "schema": "PipelineVariable",
+          "type": "any"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PipelineVariable",
+      "url": "/workspaces/{workspace}/pipelines-config/variables"
+    },
     "createProject": {
       "method": "POST",
       "params": {
@@ -5527,6 +5654,20 @@
       },
       "returns": "WebhookSubscription",
       "url": "/workspaces/{workspace}/hooks"
+    },
+    "deletePipelineVariableForWorkspace": {
+      "method": "DELETE",
+      "params": {
+        "variable_uuid": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/workspaces/{workspace}/pipelines-config/variables/{variable_uuid}"
     },
     "deleteProject": {
       "method": "DELETE",
@@ -5581,6 +5722,32 @@
       },
       "returns": "PaginatedWorkspaceMemberships",
       "url": "/workspaces/{workspace}/members"
+    },
+    "getPipelineVariableForWorkspace": {
+      "method": "GET",
+      "params": {
+        "variable_uuid": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PipelineVariable",
+      "url": "/workspaces/{workspace}/pipelines-config/variables/{variable_uuid}"
+    },
+    "getPipelineVariablesForWorkspace": {
+      "method": "GET",
+      "params": {
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPipelineVariables",
+      "url": "/workspaces/{workspace}/pipelines-config/variables"
     },
     "getProject": {
       "method": "GET",
@@ -5647,6 +5814,12 @@
     },
     "getWorkspaces": {
       "method": "GET",
+      "params": {
+        "role": {
+          "enum": ["owner", "collaborator", "member"],
+          "type": "string"
+        }
+      },
       "returns": "PaginatedWorkspaces",
       "url": "/workspaces"
     },
@@ -5667,6 +5840,26 @@
       },
       "returns": "SearchResultPage",
       "url": "/workspaces/{workspace}/search/code"
+    },
+    "updatePipelineVariableForWorkspace": {
+      "method": "PUT",
+      "params": {
+        "_body": {
+          "required": true,
+          "schema": "PipelineVariable",
+          "type": "any"
+        },
+        "variable_uuid": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PipelineVariable",
+      "url": "/workspaces/{workspace}/pipelines-config/variables/{variable_uuid}"
     },
     "updateWebhookForWorkspace": {
       "method": "PUT",

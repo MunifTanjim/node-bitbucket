@@ -429,10 +429,12 @@
               "force",
               "restrict_merges",
               "enforce_merge_checks",
+              "reset_pullrequest_changes_requested_on_change",
               "require_approvals_to_merge",
               "allow_auto_merge_when_builds_pass",
               "delete",
               "require_all_dependencies_merged",
+              "require_no_changes_requested",
               "push",
               "require_passing_builds_to_merge",
               "reset_pullrequest_approvals_on_change",
@@ -1251,6 +1253,9 @@
     "additionalProperties": true,
     "description": "Options for issue export.",
     "properties": {
+      "include_attachments": {
+        "type": "boolean"
+      },
       "project_key": {
         "type": "string"
       },
@@ -1277,7 +1282,7 @@
         "description": "A group object",
         "properties": {
           "full_slug": {
-            "description": "The concatenation of the owner's username and the group's slug,\nseparated with a colon (e.g. `acme:developers`)\n",
+            "description": "The concatenation of the workspace's slug and the group's slug,\nseparated with a colon (e.g. `acme:developers`)\n",
             "type": "string"
           },
           "links": {
@@ -1321,6 +1326,9 @@
           "slug": {
             "description": "The \"sluggified\" version of the group's name. This contains only ASCII\ncharacters and can therefore be slightly different than the name",
             "type": "string"
+          },
+          "workspace": {
+            "$ref": "#/definitions/workspace"
           }
         },
         "type": "object"
@@ -1344,13 +1352,15 @@
         "enum": [
           "pullrequest:unapproved",
           "issue:comment_created",
-          "pullrequest:approved",
-          "repo:created",
-          "repo:deleted",
           "repo:imported",
+          "repo:created",
+          "repo:commit_comment_created",
+          "pullrequest:approved",
           "pullrequest:comment_updated",
           "issue:updated",
           "project:updated",
+          "repo:deleted",
+          "pullrequest:changes_request_created",
           "pullrequest:comment_created",
           "repo:commit_status_updated",
           "pullrequest:updated",
@@ -1361,10 +1371,10 @@
           "repo:updated",
           "pullrequest:rejected",
           "pullrequest:fulfilled",
-          "repo:push",
           "pullrequest:created",
+          "pullrequest:changes_request_removed",
           "repo:transfer",
-          "repo:commit_comment_created"
+          "repo:push"
         ],
         "type": "string"
       },
@@ -1840,7 +1850,7 @@
     ],
     "x-bb-default-fields": ["type", "cloudId", "id"],
     "x-bb-detail-fields": ["key", "name", "url", "avatarUrls.*", "site"],
-    "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}/projects/{id}?actor={user.uuid}&atlassian_account_id={user.account_id}"
+    "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}/projects/{id}?atlassian_account_id={user.account_id}"
   },
   "jira_site": {
     "allOf": [
@@ -1855,7 +1865,7 @@
     ],
     "x-bb-default-fields": ["type", "cloudId", "cloudUrl", "cloudName"],
     "x-bb-detail-fields": ["connected"],
-    "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}?actor={user.uuid}&atlassian_account_id={user.account_id}"
+    "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}?atlassian_account_id={user.account_id}"
   },
   "milestone": {
     "allOf": [
@@ -2047,6 +2057,46 @@
       "values": {
         "items": {
           "$ref": "#/definitions/branchrestriction"
+        },
+        "minItems": 0,
+        "type": "array",
+        "uniqueItems": true
+      }
+    },
+    "type": "object"
+  },
+  "paginated_changeset": {
+    "additionalProperties": false,
+    "description": "A paginated list of commits.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "values": {
+        "items": {
+          "$ref": "#/definitions/base_commit"
         },
         "minItems": 0,
         "type": "array",
@@ -2637,6 +2687,42 @@
         "minItems": 0,
         "type": "array",
         "uniqueItems": true
+      }
+    },
+    "type": "object"
+  },
+  "paginated_pipeline_caches": {
+    "description": "A paged list of pipeline caches",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/pipeline_cache"
+        },
+        "minItems": 0,
+        "type": "array"
       }
     },
     "type": "object"
@@ -3673,6 +3759,10 @@
             "enum": ["PARTICIPANT", "REVIEWER"],
             "type": "string"
           },
+          "state": {
+            "enum": ["approved", "changes_requested", null],
+            "type": "string"
+          },
           "user": {
             "$ref": "#/definitions/user"
           }
@@ -3752,6 +3842,60 @@
         "type": "object"
       }
     ]
+  },
+  "pipeline_cache": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A representation of metadata for a pipeline cache for given repository.",
+        "properties": {
+          "created_on": {
+            "description": "The timestamp when the cache was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "file_size_bytes": {
+            "description": "The size of the file containing the archive of the cache.",
+            "type": "integer"
+          },
+          "name": {
+            "description": "The name of the cache.",
+            "type": "string"
+          },
+          "path": {
+            "description": "The path where the cache contents were retrieved from.",
+            "type": "string"
+          },
+          "pipeline_uuid": {
+            "description": "The UUID of the pipeline that created the cache.",
+            "type": "string"
+          },
+          "step_uuid": {
+            "description": "The uuid of the step that created the cache.",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "The UUID identifying the pipeline cache.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    ]
+  },
+  "pipeline_cache_content_uri": {
+    "description": "A representation of the location of pipeline cache content.",
+    "properties": {
+      "uri": {
+        "description": "The uri for pipeline cache content.",
+        "format": "uri",
+        "type": "string"
+      }
+    },
+    "type": "object"
   },
   "pipeline_command": {
     "description": "An executable pipeline command.",
@@ -6130,7 +6274,7 @@
     "description": "A user's permission for a given team.",
     "properties": {
       "permission": {
-        "enum": ["admin", "collaborator"],
+        "enum": ["admin", "collaborator", "member"],
         "type": "string"
       },
       "team": {
@@ -6250,13 +6394,15 @@
               "enum": [
                 "pullrequest:unapproved",
                 "issue:comment_created",
-                "pullrequest:approved",
-                "repo:created",
-                "repo:deleted",
                 "repo:imported",
+                "repo:created",
+                "repo:commit_comment_created",
+                "pullrequest:approved",
                 "pullrequest:comment_updated",
                 "issue:updated",
                 "project:updated",
+                "repo:deleted",
+                "pullrequest:changes_request_created",
                 "pullrequest:comment_created",
                 "repo:commit_status_updated",
                 "pullrequest:updated",
@@ -6267,10 +6413,10 @@
                 "repo:updated",
                 "pullrequest:rejected",
                 "pullrequest:fulfilled",
-                "repo:push",
                 "pullrequest:created",
+                "pullrequest:changes_request_removed",
                 "repo:transfer",
-                "repo:commit_comment_created"
+                "repo:push"
               ],
               "type": "string"
             },
