@@ -12,9 +12,7 @@ const docsPath = resolvePath('docs')
 const ROUTES = require('../src/plugins/register-api-endpoints/routes.json')
 
 // One of many workarounds for Bitbucket's faulty API Specification
-const URL_ALIASES = {
-  '/users/{username}/ssh-keys/{key_id}': '/users/{username}/ssh-keys/',
-}
+const URL_ALIASES = {}
 
 const usernameRegex = /\/\{username\}\//
 
