@@ -112,7 +112,7 @@
       ]
     }
   },
-  "/repositories/{workspace}/{repo_slug}/filehistory/{node}/{path}": {
+  "/repositories/{workspace}/{repo_slug}/filehistory/{commit}/{path}": {
     "get": {
       "parameters": [
         {
@@ -157,17 +157,6 @@
           "in": "body",
           "name": "_body",
           "required": true
-        }
-      ]
-    }
-  },
-  "/repositories/{workspace}/{repo_slug}/pullrequests/activity": {
-    "get": {
-      "parameters": [
-        {
-          "name": "pull_request_id",
-          "type": "integer",
-          "deleted": true
         }
       ]
     }
@@ -258,26 +247,6 @@
           }
         }
       }
-    }
-  },
-  "/teams/{username}/members": {
-    "get": {
-      "deprecated": true
-    }
-  },
-  "/users/{username}/followers": {
-    "get": {
-      "deprecated": true
-    }
-  },
-  "/users/{username}/following": {
-    "get": {
-      "deprecated": true
-    }
-  },
-  "/users/{username}/members": {
-    "get": {
-      "deprecated": true
     }
   }
 }

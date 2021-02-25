@@ -379,10 +379,12 @@
                 "force",
                 "restrict_merges",
                 "enforce_merge_checks",
+                "reset_pullrequest_changes_requested_on_change",
                 "require_approvals_to_merge",
                 "allow_auto_merge_when_builds_pass",
                 "delete",
                 "require_all_dependencies_merged",
+                "require_no_changes_requested",
                 "push",
                 "require_passing_builds_to_merge",
                 "reset_pullrequest_approvals_on_change",
@@ -1100,6 +1102,9 @@
     "ExportOptions": {
       "additionalProperties": true,
       "properties": {
+        "include_attachments": {
+          "type": "boolean"
+        },
         "project_key": {
           "type": "string"
         },
@@ -1165,6 +1170,9 @@
             },
             "slug": {
               "type": "string"
+            },
+            "workspace": {
+              "$ref": "#/definitions/Workspace"
             }
           },
           "type": "object"
@@ -1184,13 +1192,15 @@
           "enum": [
             "pullrequest:unapproved",
             "issue:comment_created",
-            "pullrequest:approved",
-            "repo:created",
-            "repo:deleted",
             "repo:imported",
+            "repo:created",
+            "repo:commit_comment_created",
+            "pullrequest:approved",
             "pullrequest:comment_updated",
             "issue:updated",
             "project:updated",
+            "repo:deleted",
+            "pullrequest:changes_request_created",
             "pullrequest:comment_created",
             "repo:commit_status_updated",
             "pullrequest:updated",
@@ -1201,10 +1211,10 @@
             "repo:updated",
             "pullrequest:rejected",
             "pullrequest:fulfilled",
-            "repo:push",
             "pullrequest:created",
+            "pullrequest:changes_request_removed",
             "repo:transfer",
-            "repo:commit_comment_created"
+            "repo:push"
           ],
           "type": "string"
         },
@@ -1648,7 +1658,7 @@
       ],
       "x-bb-default-fields": ["type", "cloudId", "id"],
       "x-bb-detail-fields": ["key", "name", "url", "avatarUrls.*", "site"],
-      "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}/projects/{id}?actor={user.uuid}&atlassian_account_id={user.account_id}"
+      "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}/projects/{id}?atlassian_account_id={user.account_id}"
     },
     "JiraSite": {
       "allOf": [
@@ -1662,7 +1672,7 @@
       ],
       "x-bb-default-fields": ["type", "cloudId", "cloudUrl", "cloudName"],
       "x-bb-detail-fields": ["connected"],
-      "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}?actor={user.uuid}&atlassian_account_id={user.account_id}"
+      "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}?atlassian_account_id={user.account_id}"
     },
     "Milestone": {
       "allOf": [
@@ -1807,6 +1817,33 @@
         "values": {
           "items": {
             "$ref": "#/definitions/Branchrestriction"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedChangeset": {
+      "additionalProperties": false,
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/BaseCommit"
           },
           "type": "array"
         }
@@ -2209,6 +2246,32 @@
         "values": {
           "items": {
             "$ref": "#/definitions/Milestone"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedPipelineCaches": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/PipelineCache"
           },
           "type": "array"
         }
@@ -2928,6 +2991,10 @@
               "enum": ["PARTICIPANT", "REVIEWER"],
               "type": "string"
             },
+            "state": {
+              "enum": ["approved", "changes_requested", null],
+              "type": "string"
+            },
             "user": {
               "$ref": "#/definitions/User"
             }
@@ -2994,6 +3061,48 @@
           "type": "object"
         }
       ]
+    },
+    "PipelineCache": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "created_on": {
+              "type": "string"
+            },
+            "file_size_bytes": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "pipeline_uuid": {
+              "type": "string"
+            },
+            "step_uuid": {
+              "type": "string"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "PipelineCacheContentUri": {
+      "properties": {
+        "uri": {
+          "type": "string"
+        }
+      },
+      "type": "object"
     },
     "PipelineCommand": {
       "properties": {
@@ -5079,7 +5188,7 @@
       "additionalProperties": true,
       "properties": {
         "permission": {
-          "enum": ["admin", "collaborator"],
+          "enum": ["admin", "collaborator", "member"],
           "type": "string"
         },
         "team": {
@@ -5189,13 +5298,15 @@
                 "enum": [
                   "pullrequest:unapproved",
                   "issue:comment_created",
-                  "pullrequest:approved",
-                  "repo:created",
-                  "repo:deleted",
                   "repo:imported",
+                  "repo:created",
+                  "repo:commit_comment_created",
+                  "pullrequest:approved",
                   "pullrequest:comment_updated",
                   "issue:updated",
                   "project:updated",
+                  "repo:deleted",
+                  "pullrequest:changes_request_created",
                   "pullrequest:comment_created",
                   "repo:commit_status_updated",
                   "pullrequest:updated",
@@ -5206,10 +5317,10 @@
                   "repo:updated",
                   "pullrequest:rejected",
                   "pullrequest:fulfilled",
-                  "repo:push",
                   "pullrequest:created",
+                  "pullrequest:changes_request_removed",
                   "repo:transfer",
-                  "repo:commit_comment_created"
+                  "repo:push"
                 ],
                 "type": "string"
               },
@@ -5471,6 +5582,9 @@
     "PaginatedBranchrestrictions": {
       "$ref": "#/definitions/PaginatedBranchrestrictions"
     },
+    "PaginatedChangeset": {
+      "$ref": "#/definitions/PaginatedChangeset"
+    },
     "PaginatedCommitComments": {
       "$ref": "#/definitions/PaginatedCommitComments"
     },
@@ -5515,6 +5629,9 @@
     },
     "PaginatedMilestones": {
       "$ref": "#/definitions/PaginatedMilestones"
+    },
+    "PaginatedPipelineCaches": {
+      "$ref": "#/definitions/PaginatedPipelineCaches"
     },
     "PaginatedPipelineKnownHosts": {
       "$ref": "#/definitions/PaginatedPipelineKnownHosts"
@@ -5602,6 +5719,9 @@
     },
     "PipelineBuildNumber": {
       "$ref": "#/definitions/PipelineBuildNumber"
+    },
+    "PipelineCacheContentUri": {
+      "$ref": "#/definitions/PipelineCacheContentUri"
     },
     "PipelineKnownHost": {
       "$ref": "#/definitions/PipelineKnownHost"
