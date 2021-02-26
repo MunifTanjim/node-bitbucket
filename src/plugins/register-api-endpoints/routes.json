@@ -557,6 +557,21 @@
     "listForCommit": {
       "alias": "repositories.listPullrequestsForCommit"
     },
+    "listPullrequestsForUser": {
+      "method": "GET",
+      "params": {
+        "selected_user": {
+          "required": true,
+          "type": "string"
+        },
+        "state": {
+          "enum": ["MERGED", "SUPERSEDED", "OPEN", "DECLINED"],
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedPullrequests",
+      "url": "/pullrequests/{selected_user}"
+    },
     "listStatuses": {
       "alias": "repositories.listPullRequestStatuses"
     },
