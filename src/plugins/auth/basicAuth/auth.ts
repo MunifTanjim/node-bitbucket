@@ -3,7 +3,6 @@ import btoa from 'btoa-lite'
 type AuthOptions = import('./types').AuthOptions
 type Authentication = import('./types').Authentication
 
-// eslint-disable-next-line @typescript-eslint/require-await
 export function auth(authState: AuthOptions): Authentication {
   if (authState.type === 'token') {
     return {

@@ -28,6 +28,24 @@ via **yarn**:
 $ yarn add bitbucket
 ```
 
+## Authentication
+
+Bitbucket supports different authentication strategies:
+
+- OAuth 2
+- App passwords
+- Basic auth
+
+### Basic auth
+
+```javascript
+const { Bitbucket } = require('bitbucket')
+
+const bitbucket = new Bitbucket({
+  auth: '',
+})
+```
+
 ## Usage
 
 ### Browser

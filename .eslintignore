@@ -4,4 +4,3 @@ lib
 
 # Dependency directories
 node_modules
-src/authentication/**/*
