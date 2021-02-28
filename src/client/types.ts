@@ -5,8 +5,7 @@ type HTTPError = import('../error/types').HTTPError
 type Request = import('../request/types').Request
 type Response<T> = import('../request/types').Response<T>
 
-export interface BitbucketOptions {
-  type?: any
+export interface Options {
   auth?: any
   authStrategy?: string
   baseUrl?: string
@@ -23,11 +22,11 @@ export interface APIClient {
   [key: string]: any
 }
 
-export type Plugin = (client: APIClient, options: BitbucketOptions) => void
+export type Plugin = (client: APIClient, options: Options) => void
 
 export interface APIClientFactory {
-  new (options?: BitbucketOptions): APIClient
-  (options?: BitbucketOptions): APIClient
+  new (options?: Options): APIClient
+  (options?: Options): APIClient
 
   plugins(plugins: Plugin[]): APIClientFactory
 }

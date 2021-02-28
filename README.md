@@ -149,7 +149,7 @@ const bitbucket = new Bitbucket(clientOptions)
 const clientOptions = {
   authStrategy: 'OAuth',
   auth: {
-    grant_type: 'urn:bitbucket:oauth2:jwt',
+    grant_type: 'bitbucketCloudJWTGrant',
     jwt_token: 'jwt_token',
   },
 }

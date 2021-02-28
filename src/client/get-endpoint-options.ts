@@ -4,7 +4,7 @@ import { lowerCaseHeaderFields } from '../utils/lower-case-header-fields'
 import { pick } from './utils/pick'
 
 type EndpointParams = import('./types').EndpointParams
-type Options = import('./types').BitbucketOptions
+type Options = import('./types').Options
 type RequestHook = import('./types').RequestHook
 
 export function getEndpointOptions(

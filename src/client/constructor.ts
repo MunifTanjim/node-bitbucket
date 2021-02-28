@@ -3,13 +3,13 @@ import { request } from '../request'
 import { getEndpointOptions } from './get-endpoint-options'
 
 type APIClient = import('./types').APIClient
-type BitbucketOptions = import('./types').BitbucketOptions
+type Options = import('./types').Options
 type Plugin = import('./types').Plugin
 type RequestHook = import('./types').RequestHook
 
 export function constructor(
   plugins: Plugin[],
-  clientOptions: BitbucketOptions = {}
+  clientOptions: Options = {}
 ): APIClient {
   const requestHook: RequestHook = new Singular()
   const requestDefaults = getEndpointOptions(clientOptions, requestHook)
