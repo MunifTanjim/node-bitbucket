@@ -1,5 +1,5 @@
 import { Client } from './client'
-import authenticatePlugin from './plugins/auth'
+import authPlugin from './plugins/auth'
 import noticePlugin from './plugins/notice'
 import paginationPlugin from './plugins/pagination'
 import registerApiEndpointsPlugin from './plugins/register-api-endpoints'
@@ -12,7 +12,7 @@ const Plugins = [
   registerEndpointsPlugin,
   registerApiEndpointsPlugin,
   validateRequestPlugin,
-  authenticatePlugin,
+  authPlugin,
 ]
 
 export const Bitbucket = Client.plugins(Plugins)
