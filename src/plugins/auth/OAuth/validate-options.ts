@@ -7,4 +7,8 @@ export function validateOptions(auth: AuthOptions): void {
   ) {
     throw new Error(`Specify client id and client secret for authentication`)
   }
+
+  if (!auth.grant_type) {
+    throw new Error(`Specify grant type`)
+  }
 }
