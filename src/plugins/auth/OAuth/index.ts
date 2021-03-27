@@ -16,10 +16,9 @@ const OAuth = (client: APIClient, clientOptions: Options): void => {
     auth: clientOptions.auth,
   }
 
-  // eslint-disable-next-line @typescript-eslint/require-await
-  client.auth = auth.bind(null, client, state)
+  client.auth = auth.bind(null, state)
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  client.requestHook.before(beforeHook.bind(null, client, state))
+  client.requestHook.before(beforeHook.bind(null, state))
 }
 
 export default OAuth
