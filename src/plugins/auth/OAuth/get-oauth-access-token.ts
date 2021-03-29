@@ -4,38 +4,38 @@ import getOAuthRoutes from './routes'
 import { request as Request } from '../../../request'
 
 type AuthState = import('./types').AuthPluginState
+type EndpointOptions = import('./types').EndpointOptions
 
 const routes = getOAuthRoutes(oAuth2Spec).getToken
 export const getOAuthAccessToken = async (state: AuthState): Promise<any> => {
   const { auth: authState } = state
-  const grantType = authState.grant_type
+  const { grant_type: grantType } = authState
+  const { accepts, url, method, grant_type } = routes[grantType]
 
-  let headers
-  if (authState.grant_type === 'bitbucketCloudJWTGrant') {
-    headers = {
-      authorization: `JWT ${btoa(`${authState.jwt_token}`)}`,
-    }
-  } else {
-    headers = {
-      authorization: `Basic ${btoa(
-        `${authState.client_id}:${authState.client_secret}`
-      )}`,
-    }
+  const endpointOptions: EndpointOptions = {
+    accepts,
+    url,
+    method,
+    headers: {},
+    request: {},
+    grant_type,
   }
 
-  const requestOptions = Object.assign(routes[grantType], {
-    headers,
-    request: {},
-  })
+  endpointOptions.headers!.authorization =
+    authState.grant_type === 'bitbucketCloudJWTGrant'
+      ? `JWT ${btoa(`${authState.jwt_token}`)}`
+      : `Basic ${btoa(`${authState.client_id}:${authState.client_secret}`)}`
 
-  const request = Request.defaults(requestOptions)
-  const response = await request(
-    requestOptions,
-    Object.assign(authState, {
-      grant_type: routes[grantType].grant_type,
-    })
-  )
+  if (authState.grant_type === 'authorizationCodeGrant') {
+    endpointOptions.code = authState.code
+  }
 
+  if (authState.grant_type === 'resourceOwnerPasswordCredentialsGrant') {
+    endpointOptions.username = authState.username
+    endpointOptions.password = authState.password
+  }
+
+  const response = await Request(endpointOptions)
   const { data } = response
 
   const newToken = {

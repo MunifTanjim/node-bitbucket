@@ -7,21 +7,12 @@ const getOAuthRoutes = (info: SpecType): any => ({
       grant_type: 'authorization_code',
       method: 'POST',
       params: {
-        client_id: {
-          in: '_body',
-          required: true,
-          type: 'string',
-        },
-        client_secret: {
+        grant_type: {
           in: '_body',
           required: true,
           type: 'string',
         },
         code: {
-          required: true,
-          type: 'string',
-        },
-        grant_type: {
           in: '_body',
           required: true,
           type: 'string',
@@ -34,16 +25,6 @@ const getOAuthRoutes = (info: SpecType): any => ({
       grant_type: 'password',
       method: 'POST',
       params: {
-        client_id: {
-          in: '_body',
-          required: true,
-          type: 'string',
-        },
-        client_secret: {
-          in: '_body',
-          required: true,
-          type: 'string',
-        },
         grant_type: {
           in: '_body',
           required: true,
@@ -67,16 +48,6 @@ const getOAuthRoutes = (info: SpecType): any => ({
       grant_type: 'client_credentials',
       method: 'POST',
       params: {
-        client_id: {
-          in: '_body',
-          required: true,
-          type: 'string',
-        },
-        client_secret: {
-          in: '_body',
-          required: true,
-          type: 'string',
-        },
         grant_type: {
           in: '_body',
           required: true,
@@ -92,11 +63,6 @@ const getOAuthRoutes = (info: SpecType): any => ({
       params: {
         grant_type: {
           in: '_body',
-          required: true,
-          type: 'string',
-        },
-        jwtToken: {
-          in: 'headers.authorization:JWT',
           required: true,
           type: 'string',
         },
