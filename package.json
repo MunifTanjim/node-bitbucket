@@ -52,15 +52,14 @@
     "test": "jest"
   },
   "dependencies": {
+    "@node-fetch/btoa-lite": "node-fetch/btoa-lite",
     "before-after-hook": "^2.1.0",
-    "btoa-lite": "^1.0.0",
     "deepmerge": "^4.2.2",
     "is-plain-object": "^3.0.0",
     "node-fetch": "^2.6.0",
     "url-template": "^2.0.8"
   },
   "devDependencies": {
-    "@types/btoa-lite": "^1.0.0",
     "@types/jest": "^25.2.3",
     "@types/mustache": "^4.0.1",
     "@types/node": "^14.0.5",
