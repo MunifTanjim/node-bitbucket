@@ -24,9 +24,12 @@
   "types": "lib/index.d.ts",
   "repository": "github:MunifTanjim/node-bitbucket",
   "scripts": {
-    "build": "npm-run-all -s build:core",
+    "build": "npm-run-all -s build:core build:plugins",
     "prebuild:core": "rimraf lib/*.js lib/*.js.map",
     "build:core": "bili",
+    "prebuild:plugins": "rimraf lib/plugins/*.js lib/plugins/*.js.map",
+    "build:plugins": "npm-run-all -s build:plugin:*",
+    "build:plugin:authenticate": "cross-env PLUGIN=authenticate bili",
     "predocs:build": "mkdirp docs && rimraf docs/*",
     "docs:build": "npm run generate:api-docs",
     "postdocs:build": "apidoc -i docs -o docs",
@@ -45,6 +48,7 @@
     "validate:types:bitbucket": "tsc --noEmit lib/bitbucket.d.ts",
     "validate:types:index": "tsc --noEmit lib/index.d.ts",
     "validate:types:minimal": "tsc --noEmit lib/minimal.d.ts",
+    "validate:types:plugin:authenticate": "tsc --noEmit lib/plugins/authenticate.d.ts",
     "test": "jest"
   },
   "dependencies": {
