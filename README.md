@@ -62,7 +62,13 @@ const clientOptions = {
 const bitbucket = new Bitbucket(clientOptions)
 ```
 
-#### Authentication
+### Authentication
+
+Bitbucket supports different authentication strategies:
+
+- OAuth 2
+- App passwords
+- Basic auth
 
 **Using `username` and `password`**:
 
@@ -83,6 +89,68 @@ const bitbucket = new Bitbucket(clientOptions)
 const clientOptions = {
   auth: {
     token: 'abcdef123456',
+  },
+}
+
+const bitbucket = new Bitbucket(clientOptions)
+```
+
+**Using `Client Credentials Grant`**:
+
+```js
+const clientOptions = {
+  authStrategy: 'OAuth',
+  auth: {
+    grant_type: 'clientCredentialsGrant',
+    client_id: 'client_id',
+    client_secret: 'client_secret',
+  },
+}
+
+const bitbucket = new Bitbucket(clientOptions)
+```
+
+**Using `Authorization Code Grant`**:
+
+```js
+const clientOptions = {
+  authStrategy: 'OAuth',
+  auth: {
+    grant_type: 'authorizationCodeGrant',
+    client_id: 'client_id',
+    client_secret: 'client_secret',
+    code: 'code',
+  },
+}
+
+const bitbucket = new Bitbucket(clientOptions)
+```
+
+**Using `Resource Owner Password Credentials Grant`**:
+
+```js
+const clientOptions = {
+  authStrategy: 'OAuth',
+  auth: {
+    grant_type: 'resourceOwnerPasswordCredentialsGrant',
+    client_id: 'client_id',
+    client_secret: 'client_secret',
+    username: 'username',
+    password: 'password',
+  },
+}
+
+const bitbucket = new Bitbucket(clientOptions)
+```
+
+**Using `Bitbucket Cloud JWT Grant`**:
+
+```js
+const clientOptions = {
+  authStrategy: 'OAuth',
+  auth: {
+    grant_type: 'bitbucketCloudJWTGrant',
+    jwt_token: 'jwt_token',
   },
 }
 

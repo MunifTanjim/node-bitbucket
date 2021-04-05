@@ -12,9 +12,14 @@ export function constructor(
   clientOptions: Options = {}
 ): APIClient {
   const requestHook: RequestHook = new Singular()
+  const requestDefaults = getEndpointOptions(clientOptions, requestHook)
 
-  const client = {
-    request: request.defaults(getEndpointOptions(clientOptions, requestHook)),
+  const client: APIClient = {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    auth: async () => ({
+      type: 'unauthenticated',
+    }),
+    request: request.defaults(requestDefaults),
     requestHook,
   }
 
