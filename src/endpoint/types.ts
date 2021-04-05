@@ -43,7 +43,7 @@ export interface Endpoint {
   DEFAULTS: EndpointDefaults
   defaults(endpointOptions: EndpointParams): Endpoint
   merge(
-    endpointRoute: string | EndpointOptions,
+    endpointRoute: string,
     endpointOptions?: EndpointParams
   ): EndpointDefaults
   merge(endpointOptions: EndpointParams): EndpointDefaults

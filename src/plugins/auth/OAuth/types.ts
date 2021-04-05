@@ -1,6 +1,7 @@
 export type APIClient = import('../../../client/types').APIClient
 export type Options = import('../../../client/types').Options
 export type AuthOptions = import('../types').OAuthOptions
+export type RequestOptions = import('../../../endpoint/types').RequestOptions
 export type EndpointOptions = import('../../../endpoint/types').EndpointOptions
 
 export type AuthPluginState = {
