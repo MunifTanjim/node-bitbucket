@@ -1,4 +1,4 @@
-import btoa from 'btoa-lite'
+import btoa from '@node-fetch/btoa-lite'
 
 type AuthPluginState = import('./types').AuthPluginState
 type RequestOptions = import('./types').RequestOptions
