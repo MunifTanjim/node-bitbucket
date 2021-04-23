@@ -16,6 +16,7 @@ const noiseKeys = [
   'minItems',
   'pattern',
   'readOnly',
+  'title',
   'uniqueItems',
 ]
 

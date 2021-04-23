@@ -19,8 +19,21 @@ const ENDPOINT_NAMES = require(endpointNamesPath)
 
 const workspaceRegex = /\/\{workspace\}/
 
+// trying to dodge the ever moving breaking changes
+const namespaceNameMap = {
+  branch_restrictions: 'branchrestrictions',
+  commit_statuses: 'commitstatuses',
+}
+
+const formatNamespaceName = (namespaceName) => {
+  const name = namespaceName.toLowerCase().replace(/ /g, '_')
+  return namespaceNameMap[name] || name
+}
+
 for (const url of Object.keys(PATHS_SPEC)) {
-  const resourceNamespaceName = extractNamespaceFromURL(url)
+  const resourceNamespaceName = formatNamespaceName(
+    extractNamespaceFromURL(url)
+  )
 
   if (!ENDPOINT_NAMES[url]) {
     // new endpoint url
@@ -54,7 +67,9 @@ for (const url of Object.keys(PATHS_SPEC)) {
 
     if (!PATHS_SPEC[url][method].tags) continue
 
-    for (const tagNamespaceName of PATHS_SPEC[url][method].tags) {
+    for (const tagNamespaceName of PATHS_SPEC[url][method].tags.map(
+      formatNamespaceName
+    )) {
       if (!ENDPOINT_NAMES[url][method][tagNamespaceName]) {
         ENDPOINT_NAMES[url][method][tagNamespaceName] = endpointName
       }
