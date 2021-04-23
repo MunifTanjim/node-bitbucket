@@ -1,4 +1,4 @@
-import btoa from '@node-fetch/btoa-lite'
+import btoaLite from 'utils/btoa-lite'
 
 type AuthenticatePluginState = import('./types').AuthenticatePluginState
 type RequestOptions = import('./types').RequestOptions
@@ -14,7 +14,7 @@ export function beforeRequest(
   switch (state.auth.type) {
     case 'apppassword':
     case 'basic':
-      requestOptions.headers.authorization = `Basic ${btoa(
+      requestOptions.headers.authorization = `Basic ${btoaLite(
         `${state.auth.username}:${state.auth.password}`
       )}`
       break

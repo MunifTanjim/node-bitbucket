@@ -1236,10 +1236,6 @@
   resolved "https://registry.yarnpkg.com/@jsdevtools/ono/-/ono-7.1.2.tgz#373995bb40a6686589a7fcfec06b0e6e304ef6c6"
   integrity sha512-qS/a24RA5FEoiJS9wiv6Pwg2c/kiUo3IVUQcfeM9JvsR6pM8Yx+yl/6xWYLckZCT5jpLNhslgjiA8p/XcGyMRQ==
 
-"@node-fetch/btoa-lite@node-fetch/btoa-lite":
-  version "0.0.0"
-  resolved "https://codeload.github.com/node-fetch/btoa-lite/tar.gz/1b038dc61d790ca68495a754f5b656dea01f7d63"
-
 "@rollup/plugin-replace@^2.3.2":
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-replace/-/plugin-replace-2.3.2.tgz#da4e0939047f793c2eb5eedfd6c271232d0a033f"
