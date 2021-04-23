@@ -4,6 +4,10 @@
 
 - ...
 
+## [2.6.1] - 2021-04-24
+
+- Remove dependency `@node-fetch/btoa-lite`
+
 ## [2.6.0] - 2021-04-23
 
 - Generate from latest API Specification
@@ -57,7 +61,8 @@
 
 - Version 2 Release
 
-[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.6.0...HEAD
+[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.6.1...HEAD
+[2.6.1]: https://github.com/MunifTanjim/node-bitbucket/compare/2.6.0...2.6.1
 [2.6.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.5.1...2.6.0
 [2.5.1]: https://github.com/MunifTanjim/node-bitbucket/compare/2.5.0...2.5.1
 [2.5.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.4.2...2.5.0
