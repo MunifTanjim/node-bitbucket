@@ -4,6 +4,10 @@
 
 - ...
 
+## [2.6.0] - 2021-04-23
+
+- Generate from latest API Specification
+
 ## [2.5.1] - 2021-02-26
 
 - Generate routes for missing item [80](https://github.com/MunifTanjim/node-bitbucket/issues/80)
@@ -53,7 +57,8 @@
 
 - Version 2 Release
 
-[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.5.1...HEAD
+[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.6.0...HEAD
+[2.6.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.5.1...2.6.0
 [2.5.1]: https://github.com/MunifTanjim/node-bitbucket/compare/2.5.0...2.5.1
 [2.5.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.4.2...2.5.0
 [2.4.2]: https://github.com/MunifTanjim/node-bitbucket/compare/2.4.1...2.4.2
