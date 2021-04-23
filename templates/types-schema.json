@@ -188,7 +188,18 @@
         },
         {
           "additionalProperties": true,
-          "properties": {},
+          "properties": {
+            "default_merge_strategy": {
+              "type": "string"
+            },
+            "merge_strategies": {
+              "items": {
+                "enum": ["merge_commit", "squash", "fast_forward"],
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
           "type": "object"
         }
       ]
@@ -4894,7 +4905,7 @@
               "$ref": "#/definitions/Account"
             },
             "scm": {
-              "enum": ["hg", "git"],
+              "enum": ["git"],
               "type": "string"
             },
             "title": {

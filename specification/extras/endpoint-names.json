@@ -302,24 +302,29 @@
   "/repositories/{workspace}/{repo_slug}/deploy-keys": {
     "get": {
       "deploy": "listKeys",
+      "deployments": "",
       "repositories": "listDeployKeys"
     },
     "post": {
       "deploy": "createKey",
+      "deployments": "",
       "repositories": "createDeployKey"
     }
   },
   "/repositories/{workspace}/{repo_slug}/deploy-keys/{key_id}": {
     "delete": {
       "deploy": "deleteKey",
+      "deployments": "",
       "repositories": "deleteDeployKey"
     },
     "get": {
       "deploy": "getKey",
+      "deployments": "",
       "repositories": "getDeployKey"
     },
     "put": {
       "deploy": "updateKey",
+      "deployments": "",
       "repositories": "updateDeployKey"
     }
   },
@@ -363,6 +368,7 @@
   },
   "/repositories/{workspace}/{repo_slug}/diffstat/{spec}": {
     "get": {
+      "commits": "",
       "repositories": "listDiffStats"
     }
   },
@@ -564,19 +570,23 @@
   },
   "/repositories/{workspace}/{repo_slug}/issues/export": {
     "post": {
+      "issue_tracker": "",
       "repositories": "createIssueExportJob"
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/export/{repo_name}-issues-{task_id}.zip": {
     "get": {
+      "issue_tracker": "",
       "repositories": "getIssueExportJobStatus"
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/import": {
     "get": {
+      "issue_tracker": "",
       "repositories": "getIssueImportJobStatus"
     },
     "post": {
+      "issue_tracker": "",
       "repositories": "createIssueImportJob"
     }
   },
@@ -1276,6 +1286,7 @@
   },
   "/user/permissions/teams": {
     "get": {
+      "teams": "",
       "user": "listPermissionsForTeams"
     }
   },

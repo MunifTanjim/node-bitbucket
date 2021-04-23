@@ -31,7 +31,7 @@
           "api_key": []
         }
       ],
-      "tags": ["addon"]
+      "tags": ["Addon"]
     },
     "parameters": [],
     "put": {
@@ -71,7 +71,7 @@
           "api_key": []
         }
       ],
-      "tags": ["addon"]
+      "tags": ["Addon"]
     }
   },
   "/addon/linkers": {
@@ -100,7 +100,7 @@
           "api_key": []
         }
       ],
-      "tags": ["addon"]
+      "tags": ["Addon"]
     },
     "parameters": []
   },
@@ -136,7 +136,7 @@
           "api_key": []
         }
       ],
-      "tags": ["addon"]
+      "tags": ["Addon"]
     },
     "parameters": [
       {
@@ -180,7 +180,7 @@
           "api_key": []
         }
       ],
-      "tags": ["addon"]
+      "tags": ["Addon"]
     },
     "get": {
       "description": "Gets a list of all [linker](/cloud/bitbucket/modules/linker/) values for the\nspecified linker of the authenticated application.\n\nA linker value lets applications supply values to modify its regular expression.\n\nThe base regular expression must use a Bitbucket-specific match group `(?K)`\nwhich will be translated to `([\\w\\-]+)`. A value must match this pattern.\n\n[Read more about linker values](/cloud/bitbucket/modules/linker/#usingthebitbucketapitosupplyvalues)",
@@ -213,7 +213,7 @@
           "api_key": []
         }
       ],
-      "tags": ["addon"]
+      "tags": ["Addon"]
     },
     "parameters": [
       {
@@ -261,7 +261,7 @@
           "api_key": []
         }
       ],
-      "tags": ["addon"]
+      "tags": ["Addon"]
     },
     "put": {
       "description": "Bulk update [linker](/cloud/bitbucket/modules/linker/) values for the specified\nlinker of the authenticated application.\n\nA linker value lets applications supply values to modify its regular expression.\n\nThe base regular expression must use a Bitbucket-specific match group `(?K)`\nwhich will be translated to `([\\w\\-]+)`. A value must match this pattern.\n\n[Read more about linker values](/cloud/bitbucket/modules/linker/#usingthebitbucketapitosupplyvalues)",
@@ -300,7 +300,7 @@
           "api_key": []
         }
       ],
-      "tags": ["addon"]
+      "tags": ["Addon"]
     }
   },
   "/addon/linkers/{linker_key}/values/{value_id}": {
@@ -335,7 +335,7 @@
           "api_key": []
         }
       ],
-      "tags": ["addon"]
+      "tags": ["Addon"]
     },
     "get": {
       "description": "Get a single [linker](/cloud/bitbucket/modules/linker/) value\nof the authenticated application.",
@@ -368,7 +368,7 @@
           "api_key": []
         }
       ],
-      "tags": ["addon"]
+      "tags": ["Addon"]
     },
     "parameters": [
       {
@@ -410,7 +410,7 @@
           "api_key": []
         }
       ],
-      "tags": ["webhooks"]
+      "tags": ["Webhooks"]
     },
     "parameters": []
   },
@@ -443,7 +443,7 @@
           "api_key": []
         }
       ],
-      "tags": ["webhooks"]
+      "tags": ["Webhooks"]
     },
     "parameters": [
       {
@@ -493,7 +493,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -558,7 +558,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories"]
+      "tags": ["Repositories"]
     },
     "parameters": []
   },
@@ -620,7 +620,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories"]
+      "tags": ["Repositories"]
     },
     "parameters": [
       {
@@ -672,7 +672,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories"]
+      "tags": ["Repositories"]
     },
     "get": {
       "description": "Returns the object describing this repository.",
@@ -797,7 +797,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories"]
+      "tags": ["Repositories"]
     },
     "parameters": [
       {
@@ -948,7 +948,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories"]
+      "tags": ["Repositories"]
     },
     "put": {
       "description": "Since this endpoint can be used to both update and to create a\nrepository, the request body depends on the intent.\n\n### Creation\n\nSee the POST documentation for the repository endpoint for an example\nof the request body.\n\n### Update\n\nNote: Changing the `name` of the repository will cause the location to\nbe changed. This is because the URL of the repo is derived from the\nname (a process called slugification). In such a scenario, it is\npossible for the request to fail if the newly created slug conflicts\nwith an existing repository's slug. But if there is no conflict,\nthe new location will be returned in the `Location` header of the\nresponse.",
@@ -1189,7 +1189,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories"]
+      "tags": ["Repositories"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/branch-restrictions": {
@@ -1248,7 +1248,7 @@
           "api_key": []
         }
       ],
-      "tags": ["branchrestrictions"]
+      "tags": ["Branch restrictions"]
     },
     "parameters": [
       {
@@ -1316,7 +1316,7 @@
           "api_key": []
         }
       ],
-      "tags": ["branchrestrictions"]
+      "tags": ["Branch restrictions"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/branch-restrictions/{id}": {
@@ -1357,7 +1357,7 @@
           "api_key": []
         }
       ],
-      "tags": ["branchrestrictions"]
+      "tags": ["Branch restrictions"]
     },
     "get": {
       "description": "Returns a specific branch restriction rule.",
@@ -1399,7 +1399,7 @@
           "api_key": []
         }
       ],
-      "tags": ["branchrestrictions"]
+      "tags": ["Branch restrictions"]
     },
     "parameters": [
       {
@@ -1474,7 +1474,7 @@
           "api_key": []
         }
       ],
-      "tags": ["branchrestrictions"]
+      "tags": ["Branch restrictions"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/branching-model": {
@@ -1518,7 +1518,7 @@
           "api_key": []
         }
       ],
-      "tags": ["branching_model"]
+      "tags": ["Branching model"]
     },
     "parameters": [
       {
@@ -1578,7 +1578,7 @@
           "api_key": []
         }
       ],
-      "tags": ["branching_model"]
+      "tags": ["Branching model"]
     },
     "parameters": [
       {
@@ -1642,7 +1642,7 @@
           "api_key": []
         }
       ],
-      "tags": ["branching_model"]
+      "tags": ["Branching model"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}": {
@@ -1674,7 +1674,7 @@
           "api_key": []
         }
       ],
-      "tags": ["commits"]
+      "tags": ["Commits"]
     },
     "parameters": [
       {
@@ -1726,7 +1726,7 @@
           "api_key": []
         }
       ],
-      "tags": ["commits"]
+      "tags": ["Commits"]
     },
     "parameters": [
       {
@@ -1779,7 +1779,7 @@
           "api_key": []
         }
       ],
-      "tags": ["commits"]
+      "tags": ["Commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/comments": {
@@ -1820,7 +1820,7 @@
           "api_key": []
         }
       ],
-      "tags": ["commits"]
+      "tags": ["Commits"]
     },
     "parameters": [
       {
@@ -1886,7 +1886,7 @@
           "api_key": []
         }
       ],
-      "tags": ["commits"]
+      "tags": ["Commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/comments/{comment_id}": {
@@ -1912,7 +1912,7 @@
           "api_key": []
         }
       ],
-      "tags": ["commits"]
+      "tags": ["Commits"]
     },
     "parameters": [
       {
@@ -2154,7 +2154,7 @@
         }
       },
       "summary": "Returns a paginated list of all pull requests as part of which this commit was reviewed. Pull Request Commit Links app must be installed first before using this API; installation automatically occurs when 'Go to pull request' is clicked from the web interface for a commit's details.",
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports": {
@@ -2193,7 +2193,7 @@
           }
         }
       },
-      "tags": ["reports", "commits"]
+      "tags": ["Reports", "Commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}": {
@@ -2236,7 +2236,7 @@
           "description": "No content"
         }
       },
-      "tags": ["reports", "commits"]
+      "tags": ["Reports", "Commits"]
     },
     "get": {
       "description": "Returns a single Report matching the provided ID.",
@@ -2286,10 +2286,10 @@
           }
         }
       },
-      "tags": ["reports", "commits"]
+      "tags": ["Reports", "Commits"]
     },
     "put": {
-      "description": "Creates or updates a report for the specified commit.\nTo upload a report, make sure to generate an ID that is unique across all reports for that commit. If you want to use an existing id from your own system, we recommend prefixing it with your system's name to avoid collisions, for example, mySystem-001.\n\n### Sample cURL request:\n```\ncurl --request PUT 'https://api.bitbucket.org/2.0/repositories/<username>/<reposity-name>/commit/<commit-hash>/reports/mysystem-001' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n    \"title\": \"Security scan report\",\n    \"details\": \"This pull request introduces 10 new dependency vulnerabilities.\",\n    \"report_type\": \"SECURITY\",\n    \"reporter\": \"mySystem\",\n    \"link\": \"http://www.mysystem.com/reports/001\",\n    \"result\": \"FAILED\",\n    \"data\": [\n        {\n            \"title\": \"Duration (seconds)\",\n            \"type\": \"DURATION\",\n            \"value\": 14\n        },\n        {\n            \"title\": \"Safe to merge?\",\n            \"type\": \"BOOLEAN\",\n            \"value\": false\n        }\n    ]\n}'\n```\n\n### Possible field values:\nreport_type: SECURITY, COVERAGE, TEST, BUG\nresult: PASSED, FAILED, PENDING\ndata.type: BOOLEAN, DATE, DURATION, LINK, NUMBER, PERCENTAGE, TEXT\n\nPlease refer to the [Code Insights documentation](https://confluence.atlassian.com/bitbucket/code-insights-994316785.html) for more information.\n",
+      "description": "Creates or updates a report for the specified commit.\nTo upload a report, make sure to generate an ID that is unique across all reports for that commit. If you want to use an existing id from your own system, we recommend prefixing it with your system's name to avoid collisions, for example, mySystem-001.\n\n### Sample cURL request:\n```\ncurl --request PUT 'https://api.bitbucket.org/2.0/repositories/<username>/<reposity-name>/commit/<commit-hash>/reports/mysystem-001' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n    \"title\": \"Security scan report\",\n    \"details\": \"This pull request introduces 10 new dependency vulnerabilities.\",\n    \"report_type\": \"SECURITY\",\n    \"reporter\": \"mySystem\",\n    \"link\": \"http://www.mysystem.com/reports/001\",\n    \"result\": \"FAILED\",\n    \"data\": [\n        {\n            \"title\": \"Duration (seconds)\",\n            \"type\": \"DURATION\",\n            \"value\": 14\n        },\n        {\n            \"title\": \"Safe to merge?\",\n            \"type\": \"BOOLEAN\",\n            \"value\": false\n        }\n    ]\n}'\n```\n\n### Possible field values:\nreport_type: SECURITY, COVERAGE, TEST, BUG\nresult: PASSED, FAILED, PENDING\ndata.type: BOOLEAN, DATE, DURATION, LINK, NUMBER, PERCENTAGE, TEXT\n\n#### Data field formats\n| Type  Field   | Value Field Type  | Value Field Display |\n|:--------------|:------------------|:--------------------|\n| None/ Omitted | Number, String or Boolean (not an array or object) | Plain text |\n| BOOLEAN\t| Boolean | The value will be read as a JSON boolean and displayed as 'Yes' or 'No'. |\n| DATE  | Number | The value will be read as a JSON number in the form of a Unix timestamp (milliseconds) and will be displayed as a relative date if the date is less than one week ago, otherwise  it will be displayed as an absolute date. |\n| DURATION | Number | The value will be read as a JSON number in milliseconds and will be displayed in a human readable duration format. |\n| LINK | Object: `{\"text\": \"Link text here\", \"href\": \"https://link.to.annotation/in/external/tool\"}` | The value will be read as a JSON object containing the fields \"text\" and \"href\" and will be displayed as a clickable link on the report. |\n| NUMBER | Number | The value will be read as a JSON number and large numbers will be  displayed in a human readable format (e.g. 14.3k). |\n| PERCENTAGE | Number (between 0 and 100) | The value will be read as a JSON number between 0 and 100 and will be displayed with a percentage sign. |\n| TEXT | String | The value will be read as a JSON string and will be displayed as-is |\n\nPlease refer to the [Code Insights documentation](https://confluence.atlassian.com/bitbucket/code-insights-994316785.html) for more information.\n",
       "operationId": "createOrUpdateReport",
       "parameters": [
         {
@@ -2345,7 +2345,7 @@
           }
         }
       },
-      "tags": ["reports", "commits"]
+      "tags": ["Reports", "Commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations": {
@@ -2391,7 +2391,7 @@
           }
         }
       },
-      "tags": ["reports", "commits"]
+      "tags": ["Reports", "Commits"]
     },
     "post": {
       "description": "Bulk upload of annotations.\nAnnotations are individual findings that have been identified as part of a report, for example, a line of code that represents a vulnerability. These annotations can be attached to a specific file and even a specific line in that file, however, that is optional. Annotations are not mandatory and a report can contain up to 1000 annotations.\n\nAdd the annotations you want to upload as objects in a JSON array and make sure each annotation has the external_id field set to a unique value. If you want to use an existing id from your own system, we recommend prefixing it with your system's name to avoid collisions, for example, mySystem-annotation001. The external id can later be used to identify the report as an alternative to the generated [UUID](https://developer.atlassian.com/bitbucket/api/2/reference/meta/uri-uuid#uuid). You can upload up to 100 annotations per POST request.\n\n### Sample cURL request:\n```\ncurl --location 'https://api.bitbucket.org/2.0/repositories/<username>/<reposity-name>/commit/<commit-hash>/reports/mysystem-001/annotations' \\\n--header 'Content-Type: application/json' \\\n--data-raw '[\n  {\n        \"external_id\": \"mysystem-annotation001\",\n        \"title\": \"Security scan report\",\n        \"annotation_type\": \"VULNERABILITY\",\n        \"summary\": \"This line represents a security threat.\",\n        \"severity\": \"HIGH\",\n      \"path\": \"my-service/src/main/java/com/myCompany/mysystem/logic/Main.java\",\n        \"line\": 42\n  },\n  {\n        \"external_id\": \"mySystem-annotation002\",\n        \"title\": \"Bug report\",\n        \"annotation_type\": \"BUG\",\n        \"result\": \"FAILED\",\n        \"summary\": \"This line might introduce a bug.\",\n        \"severity\": \"MEDIUM\",\n      \"path\": \"my-service/src/main/java/com/myCompany/mysystem/logic/Helper.java\",\n        \"line\": 13\n  }\n]'\n```\n\n### Possible field values:\nannotation_type: VULNERABILITY, CODE_SMELL, BUG\nresult: PASSED, FAILED, IGNORED, SKIPPED\nseverity: HIGH, MEDIUM, LOW, CRITICAL\n\nPlease refer to the [Code Insights documentation](https://confluence.atlassian.com/bitbucket/code-insights-994316785.html) for more information.\n",
@@ -2452,7 +2452,7 @@
           }
         }
       },
-      "tags": ["reports", "commits"]
+      "tags": ["Reports", "Commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/reports/{reportId}/annotations/{annotationId}": {
@@ -2502,7 +2502,7 @@
           "description": "No content"
         }
       },
-      "tags": ["reports", "commits"]
+      "tags": ["Reports", "Commits"]
     },
     "get": {
       "description": "Returns a single Annotation matching the provided ID.",
@@ -2559,7 +2559,7 @@
           }
         }
       },
-      "tags": ["reports", "commits"]
+      "tags": ["Reports", "Commits"]
     },
     "put": {
       "description": "Creates or updates an individual annotation for the specified report.\nAnnotations are individual findings that have been identified as part of a report, for example, a line of code that represents a vulnerability. These annotations can be attached to a specific file and even a specific line in that file, however, that is optional. Annotations are not mandatory and a report can contain up to 1000 annotations.\n\nJust as reports, annotation needs to be uploaded with a unique ID that can later be used to identify the report as an alternative to the generated [UUID](https://developer.atlassian.com/bitbucket/api/2/reference/meta/uri-uuid#uuid). If you want to use an existing id from your own system, we recommend prefixing it with your system's name to avoid collisions, for example, mySystem-annotation001.\n\n### Sample cURL request:\n```\ncurl --request PUT 'https://api.bitbucket.org/2.0/repositories/<username>/<reposity-name>/commit/<commit-hash>/reports/mySystem-001/annotations/mysystem-annotation001' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n    \"title\": \"Security scan report\",\n    \"annotation_type\": \"VULNERABILITY\",\n    \"summary\": \"This line represents a security thread.\",\n    \"severity\": \"HIGH\",\n    \"path\": \"my-service/src/main/java/com/myCompany/mysystem/logic/Main.java\",\n    \"line\": 42\n}'\n```\n\n### Possible field values:\nannotation_type: VULNERABILITY, CODE_SMELL, BUG\nresult: PASSED, FAILED, IGNORED, SKIPPED\nseverity: HIGH, MEDIUM, LOW, CRITICAL\n\nPlease refer to the [Code Insights documentation](https://confluence.atlassian.com/bitbucket/code-insights-994316785.html) for more information.\n",
@@ -2625,7 +2625,7 @@
           }
         }
       },
-      "tags": ["reports", "commits"]
+      "tags": ["Reports", "Commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/statuses": {
@@ -2675,7 +2675,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories", "commitstatuses"]
+      "tags": ["Repositories", "Commit statuses"]
     },
     "parameters": [
       {
@@ -2766,7 +2766,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories", "commitstatuses"]
+      "tags": ["Repositories", "Commit statuses"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/statuses/build/{key}": {
@@ -2801,7 +2801,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories", "commitstatuses"]
+      "tags": ["Repositories", "Commit statuses"]
     },
     "parameters": [
       {
@@ -2874,12 +2874,12 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories", "commitstatuses"]
+      "tags": ["Repositories", "Commit statuses"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commits": {
     "get": {
-      "description": "These are the repository's commits. They are paginated and returned\nin reverse chronological order, similar to the output of `git log` and\n`hg log`. Like these tools, the DAG can be filtered.\n\n## GET /repositories/{workspace}/{repo_slug}/commits/\n\nReturns all commits in the repo in topological order (newest commit\nfirst). All branches and tags are included (similar to\n`git log --all` and `hg log`).\n\n## GET /repositories/{workspace}/{repo_slug}/commits/master\n\nReturns all commits on rev `master` (similar to `git log master`,\n`hg log master`).\n\n## GET /repositories/{workspace}/{repo_slug}/commits/dev?exclude=master\n\nReturns all commits on ref `dev`, except those that are reachable on\n`master` (similar to `git log dev ^master`).\n\n## GET /repositories/{workspace}/{repo_slug}/commits/?exclude=master\n\nReturns all commits in the repo that are not on master\n(similar to `git log --all ^master`).\n\n## GET /repositories/{workspace}/{repo_slug}/commits/?include=foo&include=bar&exclude=fu&exclude=fubar\n\nReturns all commits that are on refs `foo` or `bar`, but not on `fu` or\n`fubar` (similar to `git log foo bar ^fu ^fubar`).\n\nAn optional `path` parameter can be specified that will limit the\nresults to commits that affect that path. `path` can either be a file\nor a directory. If a directory is specified, commits are returned that\nhave modified any file in the directory tree rooted by `path`. It is\nimportant to note that if the `path` parameter is specified, the commits\nreturned by this endpoint may no longer be a DAG, parent commits that\ndo not modify the path will be omitted from the response.\n\n## GET /repositories/{workspace}/{repo_slug}/commits/?path=README.md&include=foo&include=bar&exclude=master\n\nReturns all commits that are on refs `foo` or `bar`, but not on `master`\nthat changed the file README.md.\n\n## GET /repositories/{workspace}/{repo_slug}/commits/?path=src/&include=foo&include=bar&exclude=master\n\nReturns all commits that are on refs `foo` or `bar`, but not on `master`\nthat changed to a file in any file in the directory src or its children.\n\nBecause the response could include a very large number of commits, it\nis paginated. Follow the 'next' link in the response to navigate to the\nnext page of commits. As with other paginated resources, do not\nconstruct your own links.\n\nWhen the include and exclude parameters are more than can fit in a\nquery string, clients can use a `x-www-form-urlencoded` POST instead.",
+      "description": "These are the repository's commits. They are paginated and returned\nin reverse chronological order, similar to the output of `git log`.\nLike these tools, the DAG can be filtered.\n\n## GET /repositories/{workspace}/{repo_slug}/commits/\n\nReturns all commits in the repo in topological order (newest commit\nfirst). All branches and tags are included (similar to\n`git log --all`).\n\n## GET /repositories/{workspace}/{repo_slug}/commits/?exclude=master\n\nReturns all commits in the repo that are not on master\n(similar to `git log --all ^master`).\n\n## GET /repositories/{workspace}/{repo_slug}/commits/?include=foo&include=bar&exclude=fu&exclude=fubar\n\nReturns all commits that are on refs `foo` or `bar`, but not on `fu` or\n`fubar` (similar to `git log foo bar ^fu ^fubar`).\n\nAn optional `path` parameter can be specified that will limit the\nresults to commits that affect that path. `path` can either be a file\nor a directory. If a directory is specified, commits are returned that\nhave modified any file in the directory tree rooted by `path`. It is\nimportant to note that if the `path` parameter is specified, the commits\nreturned by this endpoint may no longer be a DAG, parent commits that\ndo not modify the path will be omitted from the response.\n\n## GET /repositories/{workspace}/{repo_slug}/commits/?path=README.md&include=foo&include=bar&exclude=master\n\nReturns all commits that are on refs `foo` or `bar`, but not on `master`\nthat changed the file README.md.\n\n## GET /repositories/{workspace}/{repo_slug}/commits/?path=src/&include=foo&include=bar&exclude=master\n\nReturns all commits that are on refs `foo` or `bar`, but not on `master`\nthat changed to a file in any file in the directory src or its children.\n\nBecause the response could include a very large number of commits, it\nis paginated. Follow the 'next' link in the response to navigate to the\nnext page of commits. As with other paginated resources, do not\nconstruct your own links.\n\nWhen the include and exclude parameters are more than can fit in a\nquery string, clients can use a `x-www-form-urlencoded` POST instead.",
       "parameters": [],
       "responses": {
         "200": {
@@ -2889,7 +2889,7 @@
           }
         },
         "404": {
-          "description": "If the specified revision or repository does not exist.",
+          "description": "If the specified repository does not exist.",
           "schema": {
             "$ref": "#/definitions/error"
           }
@@ -2906,20 +2906,13 @@
           "api_key": []
         }
       ],
-      "tags": ["commits"]
+      "tags": ["Commits"]
     },
     "parameters": [
       {
         "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
         "name": "repo_slug",
-        "required": true,
-        "type": "string"
-      },
-      {
-        "description": "(optional) The commit's SHA1.",
-        "in": "path",
-        "name": "revision",
         "required": true,
         "type": "string"
       },
@@ -2942,7 +2935,7 @@
           }
         },
         "404": {
-          "description": "If the specified revision or repository does not exist.",
+          "description": "If the specified repository does not exist.",
           "schema": {
             "$ref": "#/definitions/error"
           }
@@ -2959,12 +2952,12 @@
           "api_key": []
         }
       ],
-      "tags": ["commits"]
+      "tags": ["Commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/commits/{revision}": {
     "get": {
-      "description": "These are the repository's commits. They are paginated and returned\nin reverse chronological order, similar to the output of `git log` and\n`hg log`. Like these tools, the DAG can be filtered.\n\n## GET /repositories/{workspace}/{repo_slug}/commits/\n\nReturns all commits in the repo in topological order (newest commit\nfirst). All branches and tags are included (similar to\n`git log --all` and `hg log`).\n\n## GET /repositories/{workspace}/{repo_slug}/commits/master\n\nReturns all commits on rev `master` (similar to `git log master`,\n`hg log master`).\n\n## GET /repositories/{workspace}/{repo_slug}/commits/dev?exclude=master\n\nReturns all commits on ref `dev`, except those that are reachable on\n`master` (similar to `git log dev ^master`).\n\n## GET /repositories/{workspace}/{repo_slug}/commits/?exclude=master\n\nReturns all commits in the repo that are not on master\n(similar to `git log --all ^master`).\n\n## GET /repositories/{workspace}/{repo_slug}/commits/?include=foo&include=bar&exclude=fu&exclude=fubar\n\nReturns all commits that are on refs `foo` or `bar`, but not on `fu` or\n`fubar` (similar to `git log foo bar ^fu ^fubar`).\n\nAn optional `path` parameter can be specified that will limit the\nresults to commits that affect that path. `path` can either be a file\nor a directory. If a directory is specified, commits are returned that\nhave modified any file in the directory tree rooted by `path`. It is\nimportant to note that if the `path` parameter is specified, the commits\nreturned by this endpoint may no longer be a DAG, parent commits that\ndo not modify the path will be omitted from the response.\n\n## GET /repositories/{workspace}/{repo_slug}/commits/?path=README.md&include=foo&include=bar&exclude=master\n\nReturns all commits that are on refs `foo` or `bar`, but not on `master`\nthat changed the file README.md.\n\n## GET /repositories/{workspace}/{repo_slug}/commits/?path=src/&include=foo&include=bar&exclude=master\n\nReturns all commits that are on refs `foo` or `bar`, but not on `master`\nthat changed to a file in any file in the directory src or its children.\n\nBecause the response could include a very large number of commits, it\nis paginated. Follow the 'next' link in the response to navigate to the\nnext page of commits. As with other paginated resources, do not\nconstruct your own links.\n\nWhen the include and exclude parameters are more than can fit in a\nquery string, clients can use a `x-www-form-urlencoded` POST instead.",
+      "description": "These are the repository's commits. They are paginated and returned\nin reverse chronological order, similar to the output of `git log`.\nLike these tools, the DAG can be filtered.\n\n## GET /repositories/{workspace}/{repo_slug}/commits/master\n\nReturns all commits on rev `master` (similar to `git log master`).\n\n## GET /repositories/{workspace}/{repo_slug}/commits/dev?include=foo&exclude=master\n\nReturns all commits on ref `dev` or `foo`, except those that are reachable on\n`master` (similar to `git log dev foo ^master`).\n\nAn optional `path` parameter can be specified that will limit the\nresults to commits that affect that path. `path` can either be a file\nor a directory. If a directory is specified, commits are returned that\nhave modified any file in the directory tree rooted by `path`. It is\nimportant to note that if the `path` parameter is specified, the commits\nreturned by this endpoint may no longer be a DAG, parent commits that\ndo not modify the path will be omitted from the response.\n\n## GET /repositories/{workspace}/{repo_slug}/commits/dev?path=README.md&include=foo&include=bar&exclude=master\n\nReturns all commits that are on refs `dev` or `foo` or `bar`, but not on `master`\nthat changed the file README.md.\n\n## GET /repositories/{workspace}/{repo_slug}/commits/dev?path=src/&include=foo&exclude=master\n\nReturns all commits that are on refs `dev` or `foo`, but not on `master`\nthat changed to a file in any file in the directory src or its children.\n\nBecause the response could include a very large number of commits, it\nis paginated. Follow the 'next' link in the response to navigate to the\nnext page of commits. As with other paginated resources, do not\nconstruct your own links.\n\nWhen the include and exclude parameters are more than can fit in a\nquery string, clients can use a `x-www-form-urlencoded` POST instead.",
       "parameters": [],
       "responses": {
         "200": {
@@ -2974,7 +2967,7 @@
           }
         },
         "404": {
-          "description": "If the specified revision or repository does not exist.",
+          "description": "If the specified revision does not exist.",
           "schema": {
             "$ref": "#/definitions/error"
           }
@@ -2991,7 +2984,7 @@
           "api_key": []
         }
       ],
-      "tags": ["commits"]
+      "tags": ["Commits"]
     },
     "parameters": [
       {
@@ -3002,7 +2995,7 @@
         "type": "string"
       },
       {
-        "description": "(optional) The commit's SHA1.",
+        "description": "The commit's SHA1.",
         "in": "path",
         "name": "revision",
         "required": true,
@@ -3017,7 +3010,7 @@
       }
     ],
     "post": {
-      "description": "Identical to `GET /repositories/{workspace}/{repo_slug}/commits`,\nexcept that POST allows clients to place the include and exclude\nparameters in the request body to avoid URL length issues.\n\n**Note that this resource does NOT support new commit creation.**",
+      "description": "Identical to `GET /repositories/{workspace}/{repo_slug}/commits/{revision}`,\nexcept that POST allows clients to place the include and exclude\nparameters in the request body to avoid URL length issues.\n\n**Note that this resource does NOT support new commit creation.**",
       "parameters": [],
       "responses": {
         "200": {
@@ -3027,7 +3020,7 @@
           }
         },
         "404": {
-          "description": "If the specified revision or repository does not exist.",
+          "description": "If the specified revision does not exist.",
           "schema": {
             "$ref": "#/definitions/error"
           }
@@ -3044,7 +3037,7 @@
           "api_key": []
         }
       ],
-      "tags": ["commits"]
+      "tags": ["Commits"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/components": {
@@ -3076,7 +3069,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -3124,7 +3117,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -3170,7 +3163,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -3212,7 +3205,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "get": {
       "description": "Returns the specified reviewer.\n\nThis can be used to test whether a user is among the repository's\ndefault reviewers list. A 404 indicates that that specified user is not\na default reviewer.",
@@ -3236,7 +3229,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -3283,7 +3276,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/deploy-keys": {
@@ -3318,7 +3311,7 @@
           "api_key": []
         }
       ],
-      "tags": ["deploy"]
+      "tags": ["Deployments"]
     },
     "parameters": [
       {
@@ -3370,7 +3363,7 @@
           "api_key": []
         }
       ],
-      "tags": ["deploy"]
+      "tags": ["Deployments"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/deploy-keys/{key_id}": {
@@ -3402,7 +3395,7 @@
           "api_key": []
         }
       ],
-      "tags": ["deploy"]
+      "tags": ["Deployments"]
     },
     "get": {
       "description": "Returns the deploy key belonging to a specific key.\n\nExample:\n```\n$ curl -H \"Authorization <auth header>\" \\\nhttps://api.bitbucket.org/2.0/repositories/mleu/test/deploy-key/1234\n\nOutput:\n{\n    \"comment\": \"mleu@C02W454JHTD8\",\n    \"last_used\": null,\n    \"links\": {\n        \"self\": {\n            \"href\": https://api.bitbucket.org/2.0/repositories/mleu/test/deploy-key/1234\"\n        }\n    },\n    \"repository\": {\n        \"full_name\": \"mleu/test\",\n        \"name\": \"test\",\n        \"type\": \"repository\",\n        \"uuid\": \"{85d08b4e-571d-44e9-a507-fa476535aa98}\"\n    },\n    \"label\": \"mykey\",\n    \"created_on\": \"2018-08-15T23:50:59.993890+00:00\",\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"id\": 1234,\n    \"type\": \"deploy_key\"\n}\n```",
@@ -3435,7 +3428,7 @@
           "api_key": []
         }
       ],
-      "tags": ["deploy"]
+      "tags": ["Deployments"]
     },
     "parameters": [
       {
@@ -3497,7 +3490,7 @@
           "api_key": []
         }
       ],
-      "tags": ["deploy"]
+      "tags": ["Deployments"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables": {
@@ -3535,7 +3528,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "post": {
       "description": "Create a deployment environment level variable.",
@@ -3605,7 +3598,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables/{variable_uuid}": {
@@ -3653,7 +3646,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "put": {
       "description": "Update a deployment environment level variable.",
@@ -3711,7 +3704,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/deployments/": {
@@ -3742,7 +3735,7 @@
           }
         }
       },
-      "tags": ["deployments"]
+      "tags": ["Deployments"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/deployments/{deployment_uuid}": {
@@ -3786,7 +3779,7 @@
           }
         }
       },
-      "tags": ["deployments"]
+      "tags": ["Deployments"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/diff/{spec}": {
@@ -3858,7 +3851,7 @@
           "api_key": []
         }
       ],
-      "tags": ["commits"]
+      "tags": ["Commits"]
     },
     "parameters": [
       {
@@ -3913,7 +3906,7 @@
           "api_key": []
         }
       ],
-      "tags": []
+      "tags": ["Commits"]
     },
     "parameters": [
       {
@@ -3990,7 +3983,7 @@
           "api_key": []
         }
       ],
-      "tags": ["downloads"]
+      "tags": ["Downloads"]
     },
     "parameters": [
       {
@@ -4030,7 +4023,7 @@
           "api_key": []
         }
       ],
-      "tags": ["downloads"]
+      "tags": ["Downloads"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/downloads/{filename}": {
@@ -4056,7 +4049,7 @@
           "api_key": []
         }
       ],
-      "tags": ["downloads"]
+      "tags": ["Downloads"]
     },
     "get": {
       "description": "Return a redirect to the contents of a download artifact.\n\nThis endpoint returns the actual file contents and not the artifact's\nmetadata.\n\n    $ curl -s -L https://api.bitbucket.org/2.0/repositories/evzijst/git-tests/downloads/hello.txt\n    Hello World",
@@ -4080,7 +4073,7 @@
           "api_key": []
         }
       ],
-      "tags": ["downloads"]
+      "tags": ["Downloads"]
     },
     "parameters": [
       {
@@ -4134,7 +4127,7 @@
           }
         }
       },
-      "tags": ["deployments"]
+      "tags": ["Deployments"]
     },
     "post": {
       "description": "Create an environment.",
@@ -4190,7 +4183,7 @@
           }
         }
       },
-      "tags": ["deployments"]
+      "tags": ["Deployments"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}": {
@@ -4231,7 +4224,7 @@
           }
         }
       },
-      "tags": ["deployments"]
+      "tags": ["Deployments"]
     },
     "get": {
       "description": "Retrieve an environment",
@@ -4273,7 +4266,7 @@
           }
         }
       },
-      "tags": ["deployments"]
+      "tags": ["Deployments"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes/": {
@@ -4314,7 +4307,7 @@
           }
         }
       },
-      "tags": ["deployments"]
+      "tags": ["Deployments"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/filehistory/{commit}/{path}": {
@@ -4368,7 +4361,7 @@
           "api_key": []
         }
       ],
-      "tags": ["source", "repositories"]
+      "tags": ["Source", "Repositories"]
     },
     "parameters": [
       {
@@ -4447,7 +4440,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories"]
+      "tags": ["Repositories"]
     },
     "parameters": [
       {
@@ -4591,7 +4584,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories"]
+      "tags": ["Repositories"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/hooks": {
@@ -4629,7 +4622,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories", "webhooks"]
+      "tags": ["Repositories", "Webhooks"]
     },
     "parameters": [
       {
@@ -4687,7 +4680,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories", "webhooks"]
+      "tags": ["Repositories", "Webhooks"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/hooks/{uid}": {
@@ -4722,7 +4715,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories", "webhooks"]
+      "tags": ["Repositories", "Webhooks"]
     },
     "get": {
       "description": "Returns the webhook with the specified id installed on the specified\nrepository.",
@@ -4752,7 +4745,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories", "webhooks"]
+      "tags": ["Repositories", "Webhooks"]
     },
     "parameters": [
       {
@@ -4811,7 +4804,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories", "webhooks"]
+      "tags": ["Repositories", "Webhooks"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues": {
@@ -4843,7 +4836,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -4917,7 +4910,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}": {
@@ -4955,7 +4948,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "get": {
       "description": "Returns the specified issue.",
@@ -4997,7 +4990,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -5056,7 +5049,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/attachments": {
@@ -5091,7 +5084,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -5153,7 +5146,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/attachments/{path}": {
@@ -5185,7 +5178,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "get": {
       "description": "Returns the contents of the specified file attachment.\n\nNote that this endpoint does not return a JSON response, but instead\nreturns a redirect pointing to the actual file that in turn will return\nthe raw contents.\n\nThe redirect URL contains a one-time token that has a limited lifetime.\nAs a result, the link should not be persisted, stored, or shared.",
@@ -5220,7 +5213,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -5297,7 +5290,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -5378,7 +5371,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/changes/{change_id}": {
@@ -5410,7 +5403,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -5474,7 +5467,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -5540,7 +5533,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/comments/{comment_id}": {
@@ -5573,7 +5566,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "get": {
       "description": "Returns the specified issue comment object.",
@@ -5597,7 +5590,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -5667,7 +5660,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/vote": {
@@ -5693,7 +5686,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "get": {
       "description": "Check whether the authenticated user has voted for this issue.\nA 204 status code indicates that the user has voted, while a 404\nimplies they haven't.",
@@ -5729,7 +5722,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -5788,7 +5781,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/watch": {
@@ -5826,7 +5819,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "get": {
       "description": "Indicated whether or not the authenticated user is watching this\nissue.",
@@ -5862,7 +5855,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -5921,7 +5914,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/export": {
@@ -5988,7 +5981,7 @@
           "api_key": []
         }
       ],
-      "tags": []
+      "tags": ["Issue tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/issues/export/{repo_name}-issues-{task_id}.zip": {
@@ -6032,7 +6025,7 @@
           "api_key": []
         }
       ],
-      "tags": []
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -6112,7 +6105,7 @@
           "api_key": []
         }
       ],
-      "tags": []
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -6176,7 +6169,7 @@
           "api_key": []
         }
       ],
-      "tags": []
+      "tags": ["Issue tracker"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/merge-base/{revspec}": {
@@ -6220,7 +6213,7 @@
           "api_key": []
         }
       ],
-      "tags": ["commits"]
+      "tags": ["Commits"]
     },
     "parameters": [
       {
@@ -6275,7 +6268,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -6323,7 +6316,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -6375,7 +6368,7 @@
           "api_key": []
         }
       ],
-      "tags": ["commits"]
+      "tags": ["Commits"]
     },
     "parameters": [
       {
@@ -6429,7 +6422,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "put": {
       "description": "Update the pipelines configuration for a repository.",
@@ -6467,7 +6460,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/build_number": {
@@ -6519,7 +6512,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/": {
@@ -6556,7 +6549,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "post": {
       "description": "Create a schedule for the given repository.",
@@ -6612,7 +6605,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}": {
@@ -6653,7 +6646,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "get": {
       "description": "Retrieve a schedule by its UUID.",
@@ -6695,7 +6688,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "put": {
       "description": "Update a schedule.",
@@ -6746,7 +6739,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/": {
@@ -6783,7 +6776,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/key_pair": {
@@ -6817,7 +6810,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "get": {
       "description": "Retrieve the repository SSH key pair excluding the SSH private key. The private key is a write only field and will never be exposed in the logs or the REST API.",
@@ -6852,7 +6845,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "put": {
       "description": "Create or update the repository SSH key pair. The private key will be set as a default SSH identity in your build container.",
@@ -6896,7 +6889,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/": {
@@ -6927,7 +6920,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "post": {
       "description": "Create a repository level known host.",
@@ -6983,7 +6976,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}": {
@@ -7024,7 +7017,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "get": {
       "description": "Retrieve a repository level known host.",
@@ -7066,7 +7059,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "put": {
       "description": "Update a repository level known host.",
@@ -7117,7 +7110,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/": {
@@ -7148,7 +7141,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "post": {
       "description": "Create a repository level variable.",
@@ -7204,7 +7197,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/{variable_uuid}": {
@@ -7245,7 +7238,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "get": {
       "description": "Retrieve a repository level variable.",
@@ -7287,7 +7280,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "put": {
       "description": "Update a repository level variable.",
@@ -7338,7 +7331,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/": {
@@ -7375,7 +7368,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid}": {
@@ -7416,7 +7409,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid}/content-uri": {
@@ -7460,7 +7453,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/": {
@@ -7491,7 +7484,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "post": {
       "description": "Endpoint to create and initiate a pipeline.\nThere are a couple of different options to initiate a pipeline, where the payload of the request will determine which type of pipeline will be instantiated.\n# Trigger a Pipeline for a branch\nOne way to trigger pipelines is by specifying the branch for which you want to trigger a pipeline.\nThe specified branch will be used to determine which pipeline definition from the `bitbucket-pipelines.yml` file will be applied to initiate the pipeline. The pipeline will then do a clone of the repository and checkout the latest revision of the specified branch.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n  -d '\n  {\n    \"target\": {\n      \"ref_type\": \"branch\",\n      \"type\": \"pipeline_ref_target\",\n      \"ref_name\": \"master\"\n    }\n  }'\n```\n# Trigger a Pipeline for a commit on a branch or tag\nYou can initiate a pipeline for a specific commit and in the context of a specified reference (e.g. a branch, tag or bookmark).\nThe specified reference will be used to determine which pipeline definition from the bitbucket-pipelines.yml file will be applied to initiate the pipeline. The pipeline will clone the repository and then do a checkout the specified reference.\n\nThe following reference types are supported:\n\n* `branch`\n* `named_branch`\n* `bookmark`\n * `tag`\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n  https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n  -d '\n  {\n    \"target\": {\n      \"commit\": {\n        \"type\": \"commit\",\n        \"hash\": \"ce5b7431602f7cbba007062eeb55225c6e18e956\"\n      },\n      \"ref_type\": \"branch\",\n      \"type\": \"pipeline_ref_target\",\n      \"ref_name\": \"master\"\n    }\n  }'\n```\n# Trigger a specific pipeline definition for a commit\nYou can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit.\nIn addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition. The resulting pipeline will then clone the repository and checkout the specified revision.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n -d '\n  {\n     \"target\": {\n      \"commit\": {\n         \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",\n         \"type\":\"commit\"\n       },\n        \"selector\": {\n           \"type\":\"custom\",\n              \"pattern\":\"Deploy to production\"\n          },\n        \"type\":\"pipeline_commit_target\"\n   }\n  }'\n```\n# Trigger a specific pipeline definition for a commit on a branch or tag\nYou can trigger a specific pipeline that is defined in your `bitbucket-pipelines.yml` file for a specific commit in the context of a specified reference.\nIn addition to the commit revision, you specify the type and pattern of the selector that identifies the pipeline definition, as well as the reference information. The resulting pipeline will then clone the repository a checkout the specified reference.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/jeroendr/meat-demo2/pipelines/ \\\n -d '\n  {\n     \"target\": {\n      \"commit\": {\n         \"hash\":\"a3c4e02c9a3755eccdc3764e6ea13facdf30f923\",\n         \"type\":\"commit\"\n       },\n       \"selector\": {\n          \"type\": \"custom\",\n          \"pattern\": \"Deploy to production\"\n       },\n       \"type\": \"pipeline_ref_target\",\n       \"ref_name\": \"master\",\n       \"ref_type\": \"branch\"\n     }\n  }'\n```\n\n\n# Trigger a custom pipeline with variables\nIn addition to triggering a custom pipeline that is defined in your `bitbucket-pipelines.yml` file as shown in the examples above, you can specify variables that will be available for your build. In the request, provide a list of variables, specifying the following for each variable: key, value, and whether it should be secured or not (this field is optional and defaults to not secured).\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\\n -d '\n  {\n    \"target\": {\n      \"type\": \"pipeline_ref_target\",\n      \"ref_type\": \"branch\",\n      \"ref_name\": \"master\",\n      \"selector\": {\n        \"type\": \"custom\",\n        \"pattern\": \"Deploy to production\"\n      }\n    },\n    \"variables\": [\n      {\n        \"key\": \"var1key\",\n        \"value\": \"var1value\",\n        \"secured\": true\n      },\n      {\n        \"key\": \"var2key\",\n        \"value\": \"var2value\"\n      }\n    ]\n  }'\n```\n\n# Trigger a pull request pipeline\n\nYou can also initiate a pipeline for a specific pull request.\n\n### Example\n\n```\n$ curl -X POST -is -u username:password \\\n  -H 'Content-Type: application/json' \\\n https://api.bitbucket.org/2.0/repositories/{workspace}/{repo_slug}/pipelines/ \\\n -d '\n  {\n\t\"target\": {\n      \"type\": \"pipeline_pullrequest_target\",\n\t  \"source\": \"pull-request-branch\",\n      \"destination\": \"master\",\n      \"destination_commit\": {\n      \t \"hash\" : \"9f848b7\"\n      },\n      \"commit\": {\n      \t\"hash\" : \"1a372fc\"\n      },\n      \"pullrequest\" : {\n      \t\"id\" : \"3\"\n      },\n\t  \"selector\": {\n        \"type\": \"pull-requests\",\n        \"pattern\": \"**\"\n      }\n    }\n  }'\n```\n",
@@ -7547,7 +7540,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}": {
@@ -7591,7 +7584,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/": {
@@ -7629,7 +7622,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}": {
@@ -7680,7 +7673,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log": {
@@ -7741,7 +7734,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/logs/{log_uuid}": {
@@ -7800,7 +7793,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/properties/{app_key}/{property_name}": {
@@ -7965,7 +7958,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -8033,7 +8026,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}": {
@@ -8212,7 +8205,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -8431,7 +8424,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/activity": {
@@ -8463,7 +8456,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -8521,7 +8514,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -8580,7 +8573,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments": {
@@ -8618,7 +8611,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -8693,7 +8686,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}": {
@@ -8728,7 +8721,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "get": {
       "description": "Returns a specific pull request comment.",
@@ -8764,7 +8757,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -8840,7 +8833,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/commits": {
@@ -8866,7 +8859,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -9088,7 +9081,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/diff": {
@@ -9111,7 +9104,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -9157,7 +9150,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -9217,6 +9210,13 @@
           "schema": {
             "$ref": "#/definitions/pullrequest_merge_parameters"
           }
+        },
+        {
+          "description": "Runs merge asynchronously and immediately returns a 202 with polling link to the task-status API in the Location header. Default value is false.",
+          "in": "query",
+          "name": "async",
+          "required": false,
+          "type": "boolean"
         }
       ],
       "responses": {
@@ -9391,7 +9391,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/merge/task-status/{task_id}": {
@@ -9420,7 +9420,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -9473,7 +9473,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -9531,7 +9531,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -9590,7 +9590,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/statuses": {
@@ -9640,7 +9640,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories", "pullrequests", "commitstatuses"]
+      "tags": ["Repositories", "Pullrequests", "Commit statuses"]
     },
     "parameters": [
       {
@@ -9838,7 +9838,7 @@
           "api_key": []
         }
       ],
-      "tags": ["pullrequests"]
+      "tags": ["Pullrequests"]
     },
     "parameters": [
       {
@@ -9905,7 +9905,7 @@
           "api_key": []
         }
       ],
-      "tags": ["refs"]
+      "tags": ["Refs"]
     },
     "parameters": [
       {
@@ -9926,7 +9926,7 @@
   },
   "/repositories/{workspace}/{repo_slug}/refs/branches": {
     "get": {
-      "description": "Returns a list of all open branches within the specified repository.\nResults will be in the order the source control manager returns them.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches | jq .\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n      \"heads\": [\n        {\n          \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n          \"type\": \"commit\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n            }\n          }\n        }\n      ],\n      \"type\": \"named_branch\",\n      \"name\": \"default\",\n      \"links\": {\n        \"commits\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/default\"\n        },\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/branch/default\"\n        }\n      },\n      \"target\": {\n        \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n        \"repository\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial\"\n            },\n            \"avatar\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/avatar/32/\"\n            }\n          },\n          \"type\": \"repository\",\n          \"name\": \"mercurial\",\n          \"full_name\": \"seanfarley/mercurial\",\n          \"uuid\": \"{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}\"\n        },\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"comments\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/comments\"\n          },\n          \"patch\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"diff\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/f1a0933ce59e809f190602655e22ae6ec107c397\"\n          },\n          \"approve\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/approve\"\n          },\n          \"statuses\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/statuses\"\n          }\n        },\n        \"author\": {\n          \"raw\": \"Martin von Zweigbergk <martinvonz@google.com>\",\n          \"type\": \"author\",\n          \"user\": {\n            \"username\": \"martinvonz\",\n            \"nickname\": \"martinvonz\",\n            \"display_name\": \"Martin von Zweigbergk\",\n            \"type\": \"user\",\n            \"uuid\": \"{fdb0e657-3ade-4fad-a136-95f1ffe4a5ac}\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/martinvonz\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/martinvonz/\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/martinvonz/avatar/32/\"\n              }\n            }\n          }\n        },\n        \"parents\": [\n          {\n            \"hash\": \"5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\",\n            \"type\": \"commit\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n              }\n            }\n          }\n        ],\n        \"date\": \"2018-02-01T18:44:49+00:00\",\n        \"message\": \"config: replace a for-else by any()\",\n        \"type\": \"commit\"\n      }\n    },\n    {\n      \"heads\": [\n        {\n          \"hash\": \"1d60ad093792706e1dc7a52b20942593f2c19655\",\n          \"type\": \"commit\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/1d60ad093792706e1dc7a52b20942593f2c19655\"\n            }\n          }\n        }\n      ],\n      \"type\": \"named_branch\",\n      \"name\": \"stable\",\n      \"links\": {\n        \"commits\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/stable\"\n        },\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/stable\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/branch/stable\"\n        }\n      },\n      \"target\": {\n        \"hash\": \"1d60ad093792706e1dc7a52b20942593f2c19655\",\n        \"repository\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial\"\n            },\n            \"avatar\": {\n              \"href\": \"https://bitbucket.org/seanfarley/mercurial/avatar/32/\"\n            }\n          },\n          \"type\": \"repository\",\n          \"name\": \"mercurial\",\n          \"full_name\": \"seanfarley/mercurial\",\n          \"uuid\": \"{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}\"\n        },\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"comments\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/comments\"\n          },\n          \"patch\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"diff\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/1d60ad093792706e1dc7a52b20942593f2c19655\"\n          },\n          \"approve\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/approve\"\n          },\n          \"statuses\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/1d60ad093792706e1dc7a52b20942593f2c19655/statuses\"\n          }\n        },\n        \"author\": {\n          \"raw\": \"Augie Fackler <raf@durin42.com>\",\n          \"type\": \"author\",\n          \"user\": {\n            \"username\": \"durin42\",\n            \"nickname\": \"durin42\",\n            \"display_name\": \"Augie Fackler\",\n            \"type\": \"user\",\n            \"uuid\": \"{e07dc61f-bb05-4218-b43a-d991f26be65a}\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/durin42\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/durin42/\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/durin42/avatar/32/\"\n              }\n            }\n          }\n        },\n        \"parents\": [\n          {\n            \"hash\": \"56a0da11bde519d79168e890df4bcf0da62f0a7b\",\n            \"type\": \"commit\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/56a0da11bde519d79168e890df4bcf0da62f0a7b\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/56a0da11bde519d79168e890df4bcf0da62f0a7b\"\n              }\n            }\n          }\n        ],\n        \"date\": \"2018-02-01T19:13:41+00:00\",\n        \"message\": \"Added signature for changeset d334afc585e2\",\n        \"type\": \"commit\"\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```\n\nBranches support [filtering and sorting](../../../../../meta/filtering)\nthat can be used to search for specific branches. For instance, to find\nall branches that have \"stab\" in their name:\n\n```\ncurl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches -G --data-urlencode 'q=name ~ \"stab\"'\n```\n\nBy default, results will be in the order the underlying source control system returns them and identical to\nthe ordering one sees when running \"$ hg branches\" or \"$ git branch --list\". Note that this follows simple\nlexical ordering of the ref names.\n\nThis can be undesirable as it does apply any natural sorting semantics, meaning for instance that tags are\nsorted [\"v10\", \"v11\", \"v9\"] instead of [\"v9\", \"v10\", \"v11\"].\n\nSorting can be changed using the ?q= query parameter. When using ?q=name to explicitly sort on ref name,\nBitbucket will apply natural sorting and interpret numerical values as numbers instead of strings.",
+      "description": "Returns a list of all open branches within the specified repository.\n        Results will be in the order the source control manager returns them.\n\n        ```\n        $ curl -s https://api.bitbucket.org/2.0/repositories/atlassian/aui/refs/branches?pagelen=1 | jq .\n        {\n          \"pagelen\": 1,\n          \"size\": 187,\n          \"values\": [\n            {\n              \"name\": \"issue-9.3/AUI-5343-assistive-class\",\n              \"links\": {\n                \"commits\": {\n                  \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/commits/issue-9.3/AUI-5343-assistive-class\"\n                },\n                \"self\": {\n                  \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/refs/branches/issue-9.3/AUI-5343-assistive-class\"\n                },\n                \"html\": {\n                  \"href\": \"https://bitbucket.org/atlassian/aui/branch/issue-9.3/AUI-5343-assistive-class\"\n                }\n              },\n              \"default_merge_strategy\": \"squash\",\n              \"merge_strategies\": [\n                \"merge_commit\",\n                \"squash\",\n                \"fast_forward\"\n              ],\n              \"type\": \"branch\",\n              \"target\": {\n                \"hash\": \"e5d1cde9069fcb9f0af90403a4de2150c125a148\",\n                \"repository\": {\n                  \"links\": {\n                    \"self\": {\n                      \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui\"\n                    },\n                    \"html\": {\n                      \"href\": \"https://bitbucket.org/atlassian/aui\"\n                    },\n                    \"avatar\": {\n                      \"href\": \"https://bytebucket.org/ravatar/%7B585074de-7b60-4fd1-81ed-e0bc7fafbda5%7D?ts=86317\"\n                    }\n                  },\n                  \"type\": \"repository\",\n                  \"name\": \"aui\",\n                  \"full_name\": \"atlassian/aui\",\n                  \"uuid\": \"{585074de-7b60-4fd1-81ed-e0bc7fafbda5}\"\n                },\n                \"links\": {\n                  \"self\": {\n                    \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e5d1cde9069fcb9f0af90403a4de2150c125a148\"\n                  },\n                  \"comments\": {\n                    \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e5d1cde9069fcb9f0af90403a4de2150c125a148/comments\"\n                  },\n                  \"patch\": {\n                    \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/patch/e5d1cde9069fcb9f0af90403a4de2150c125a148\"\n                  },\n                  \"html\": {\n                    \"href\": \"https://bitbucket.org/atlassian/aui/commits/e5d1cde9069fcb9f0af90403a4de2150c125a148\"\n                  },\n                  \"diff\": {\n                    \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/diff/e5d1cde9069fcb9f0af90403a4de2150c125a148\"\n                  },\n                  \"approve\": {\n                    \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e5d1cde9069fcb9f0af90403a4de2150c125a148/approve\"\n                  },\n                  \"statuses\": {\n                    \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e5d1cde9069fcb9f0af90403a4de2150c125a148/statuses\"\n                  }\n                },\n                \"author\": {\n                  \"raw\": \"Marcin Konopka <mkonopka@atlassian.com>\",\n                  \"type\": \"author\",\n                  \"user\": {\n                    \"display_name\": \"Marcin Konopka\",\n                    \"uuid\": \"{47cc24f4-2a05-4420-88fe-0417535a110a}\",\n                    \"links\": {\n                      \"self\": {\n                        \"href\": \"https://api.bitbucket.org/2.0/users/%7B47cc24f4-2a05-4420-88fe-0417535a110a%7D\"\n                      },\n                      \"html\": {\n                        \"href\": \"https://bitbucket.org/%7B47cc24f4-2a05-4420-88fe-0417535a110a%7D/\"\n                      },\n                      \"avatar\": {\n                        \"href\": \"https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/MK-1.png\"\n                      }\n                    },\n                    \"nickname\": \"Marcin Konopka\",\n                    \"type\": \"user\",\n                    \"account_id\": \"60113d2b47a9540069f4de03\"\n                  }\n                },\n                \"parents\": [\n                  {\n                    \"hash\": \"87f7fc92b00464ae47b13ef65c91884e4ac9be51\",\n                    \"type\": \"commit\",\n                    \"links\": {\n                      \"self\": {\n                        \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/87f7fc92b00464ae47b13ef65c91884e4ac9be51\"\n                      },\n                      \"html\": {\n                        \"href\": \"https://bitbucket.org/atlassian/aui/commits/87f7fc92b00464ae47b13ef65c91884e4ac9be51\"\n                      }\n                    }\n                  }\n                ],\n                \"date\": \"2021-04-13T13:44:49+00:00\",\n                \"message\": \"wip\n\",\n                \"type\": \"commit\"\n              }\n            }\n          ],\n          \"page\": 1,\n          \"next\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/refs/branches?pagelen=1&page=2\"\n        }\n        ```\n\n        Branches support [filtering and sorting](../../../../../meta/filtering)\n        that can be used to search for specific branches. For instance, to find\n        all branches that have \"stab\" in their name:\n\n        ```\n        curl -s https://api.bitbucket.org/2.0/repositories/atlassian/aui/refs/branches -G --data-urlencode 'q=name ~ \"stab\"'\n        ```\n\n        By default, results will be in the order the underlying source control system returns them and identical to\n        the ordering one sees when running \"$ hg branches\" or \"$ git branch --list\". Note that this follows simple\n        lexical ordering of the ref names.\n\n        This can be undesirable as it does apply any natural sorting semantics, meaning for instance that tags are\n        sorted [\"v10\", \"v11\", \"v9\"] instead of [\"v9\", \"v10\", \"v11\"].\n\n        Sorting can be changed using the ?q= query parameter. When using ?q=name to explicitly sort on ref name,\n        Bitbucket will apply natural sorting and interpret numerical values as numbers instead of strings.",
       "parameters": [
         {
           "description": "\nQuery string to narrow down the response as per\n[filtering and sorting](../../../../../meta/filtering).",
@@ -9972,7 +9972,7 @@
           "api_key": []
         }
       ],
-      "tags": ["refs"]
+      "tags": ["Refs"]
     },
     "parameters": [
       {
@@ -9991,7 +9991,7 @@
       }
     ],
     "post": {
-      "description": "Creates a new branch in the specified repository.\n\nThe payload of the POST should consist of a JSON document that\ncontains the name of the tag and the target hash.\n\n```\ncurl https://api.bitbucket.org/2.0/repositories/seanfarley/hg/refs/branches \\\n-s -u seanfarley -X POST -H \"Content-Type: application/json\" \\\n-d '{\n    \"name\" : \"smf/create-feature\",\n    \"target\" : {\n        \"hash\" : \"default\",\n    }\n}'\n```\n\nThis call requires authentication. Private repositories require the\ncaller to authenticate with an account that has appropriate\nauthorization.\n\nFor Git, the branch name should not include any prefixes (e.g.\nrefs/heads). This endpoint does support using short hash prefixes for\nthe commit hash, but it may return a 400 response if the provided\nprefix is ambiguous. Using a full commit hash is the preferred\napproach.\n\nFor Mercurial, the authenticated user making this call is the author of\nthe new branch commit and the date is current datetime of the call.",
+      "description": "Creates a new branch in the specified repository.\n\nThe payload of the POST should consist of a JSON document that\ncontains the name of the tag and the target hash.\n\n```\ncurl https://api.bitbucket.org/2.0/repositories/seanfarley/hg/refs/branches \\\n-s -u seanfarley -X POST -H \"Content-Type: application/json\" \\\n-d '{\n    \"name\" : \"smf/create-feature\",\n    \"target\" : {\n        \"hash\" : \"default\",\n    }\n}'\n```\n\nThis call requires authentication. Private repositories require the\ncaller to authenticate with an account that has appropriate\nauthorization.\n\nThe branch name should not include any prefixes (e.g.\nrefs/heads). This endpoint does support using short hash prefixes for\nthe commit hash, but it may return a 400 response if the provided\nprefix is ambiguous. Using a full commit hash is the preferred\napproach.",
       "parameters": [],
       "responses": {
         "201": {
@@ -10111,12 +10111,12 @@
           "api_key": []
         }
       ],
-      "tags": ["refs"]
+      "tags": ["Refs"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/refs/branches/{name}": {
     "delete": {
-      "description": "Delete a branch in the specified repository.\n\nThe main branch is not allowed to be deleted and will return a 400\nresponse.\n\nFor Git, the branch name should not include any prefixes (e.g.\nrefs/heads). For Mercurial, this closes all open heads on the branch,\nsets the author of the commit to the authenticated caller, and changes\nthe date to the datetime of the call.",
+      "description": "Delete a branch in the specified repository.\n\nThe main branch is not allowed to be deleted and will return a 400\nresponse.\n\nThe branch name should not include any prefixes (e.g.\nrefs/heads).",
       "parameters": [],
       "responses": {
         "204": {
@@ -10146,10 +10146,10 @@
           "api_key": []
         }
       ],
-      "tags": ["refs"]
+      "tags": ["Refs"]
     },
     "get": {
-      "description": "Returns a branch object within the specified repository.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default | jq .\n{\n  \"heads\": [\n    {\n      \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n      \"type\": \"commit\",\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n        }\n      }\n    }\n  ],\n  \"type\": \"named_branch\",\n  \"name\": \"default\",\n  \"links\": {\n    \"commits\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commits/default\"\n    },\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/refs/branches/default\"\n    },\n    \"html\": {\n      \"href\": \"https://bitbucket.org/seanfarley/mercurial/branch/default\"\n    }\n  },\n  \"target\": {\n    \"hash\": \"f1a0933ce59e809f190602655e22ae6ec107c397\",\n    \"repository\": {\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial\"\n        },\n        \"avatar\": {\n          \"href\": \"https://bitbucket.org/seanfarley/mercurial/avatar/32/\"\n        }\n      },\n      \"type\": \"repository\",\n      \"name\": \"mercurial\",\n      \"full_name\": \"seanfarley/mercurial\",\n      \"uuid\": \"{73dcbd61-e506-4fc1-9ecd-31be2b6d6031}\"\n    },\n    \"links\": {\n      \"self\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"comments\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/comments\"\n      },\n      \"patch\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/patch/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"html\": {\n        \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"diff\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/diff/f1a0933ce59e809f190602655e22ae6ec107c397\"\n      },\n      \"approve\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/approve\"\n      },\n      \"statuses\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/f1a0933ce59e809f190602655e22ae6ec107c397/statuses\"\n      }\n    },\n    \"author\": {\n      \"raw\": \"Martin von Zweigbergk <martinvonz@google.com>\",\n      \"type\": \"author\",\n      \"user\": {\n        \"username\": \"martinvonz\",\n        \"nickname\": \"martinvonz\",\n        \"display_name\": \"Martin von Zweigbergk\",\n        \"type\": \"user\",\n        \"uuid\": \"{fdb0e657-3ade-4fad-a136-95f1ffe4a5ac}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/martinvonz\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/martinvonz/\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket.org/account/martinvonz/avatar/32/\"\n          }\n        }\n      }\n    },\n    \"parents\": [\n      {\n        \"hash\": \"5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\",\n        \"type\": \"commit\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/mercurial/commit/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/mercurial/commits/5523aabb85c30ebc2b8e29aadcaf5e13fa92b375\"\n          }\n        }\n      }\n    ],\n    \"date\": \"2018-02-01T18:44:49+00:00\",\n    \"message\": \"config: replace a for-else by any()\",\n    \"type\": \"commit\"\n  }\n}\n```\n\nThis call requires authentication. Private repositories require the\ncaller to authenticate with an account that has appropriate\nauthorization.\n\nFor Git, the branch name should not include any prefixes (e.g.\nrefs/heads).\n\nFor Mercurial, the response will include an additional field that lists\nthe open heads.",
+      "description": "Returns a branch object within the specified repository.\n\n        ```\n        $ curl -s https://api.bitbucket.org/2.0/repositories/atlassian/aui/refs/branches/master | jq .\n        {\n          \"name\": \"master\",\n          \"links\": {\n            \"commits\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/commits/master\"\n            },\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/refs/branches/master\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/atlassian/aui/branch/master\"\n            }\n          },\n          \"default_merge_strategy\": \"squash\",\n          \"merge_strategies\": [\n            \"merge_commit\",\n            \"squash\",\n            \"fast_forward\"\n          ],\n          \"type\": \"branch\",\n          \"target\": {\n            \"hash\": \"e7d158ff7ed5538c28f94cd97a9ad569680fc94e\",\n            \"repository\": {\n              \"links\": {\n                \"self\": {\n                  \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui\"\n                },\n                \"html\": {\n                  \"href\": \"https://bitbucket.org/atlassian/aui\"\n                },\n                \"avatar\": {\n                  \"href\": \"https://bytebucket.org/ravatar/%7B585074de-7b60-4fd1-81ed-e0bc7fafbda5%7D?ts=86317\"\n                }\n              },\n              \"type\": \"repository\",\n              \"name\": \"aui\",\n              \"full_name\": \"atlassian/aui\",\n              \"uuid\": \"{585074de-7b60-4fd1-81ed-e0bc7fafbda5}\"\n            },\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e7d158ff7ed5538c28f94cd97a9ad569680fc94e\"\n              },\n              \"comments\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e7d158ff7ed5538c28f94cd97a9ad569680fc94e/comments\"\n              },\n              \"patch\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/patch/e7d158ff7ed5538c28f94cd97a9ad569680fc94e\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/atlassian/aui/commits/e7d158ff7ed5538c28f94cd97a9ad569680fc94e\"\n              },\n              \"diff\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/diff/e7d158ff7ed5538c28f94cd97a9ad569680fc94e\"\n              },\n              \"approve\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e7d158ff7ed5538c28f94cd97a9ad569680fc94e/approve\"\n              },\n              \"statuses\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/e7d158ff7ed5538c28f94cd97a9ad569680fc94e/statuses\"\n              }\n            },\n            \"author\": {\n              \"raw\": \"psre-renovate-bot <psre-renovate-bot@atlassian.com>\",\n              \"type\": \"author\",\n              \"user\": {\n                \"display_name\": \"psre-renovate-bot\",\n                \"uuid\": \"{250a442a-3ab3-4fcb-87c3-3c8f3df65ec7}\",\n                \"links\": {\n                  \"self\": {\n                    \"href\": \"https://api.bitbucket.org/2.0/users/%7B250a442a-3ab3-4fcb-87c3-3c8f3df65ec7%7D\"\n                  },\n                  \"html\": {\n                    \"href\": \"https://bitbucket.org/%7B250a442a-3ab3-4fcb-87c3-3c8f3df65ec7%7D/\"\n                  },\n                  \"avatar\": {\n                    \"href\": \"https://secure.gravatar.com/avatar/6972ee037c9f36360170a86f544071a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FP-3.png\"\n                  }\n                },\n                \"nickname\": \"Renovate Bot\",\n                \"type\": \"user\",\n                \"account_id\": \"5d5355e8c6b9320d9ea5b28d\"\n              }\n            },\n            \"parents\": [\n              {\n                \"hash\": \"eab868a309e75733de80969a7bed1ec6d4651e06\",\n                \"type\": \"commit\",\n                \"links\": {\n                  \"self\": {\n                    \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian/aui/commit/eab868a309e75733de80969a7bed1ec6d4651e06\"\n                  },\n                  \"html\": {\n                    \"href\": \"https://bitbucket.org/atlassian/aui/commits/eab868a309e75733de80969a7bed1ec6d4651e06\"\n                  }\n                }\n              }\n            ],\n            \"date\": \"2021-04-12T06:44:38+00:00\",\n            \"message\": \"Merged in issue/NONE-renovate-master-babel-monorepo (pull request #2883)\n\nchore(deps): update babel monorepo to v7.13.15 (master)\n\nApproved-by: Chris \"Daz\" Darroch\n\",\n            \"type\": \"commit\"\n          }\n        }\n        ```\n\n        This call requires authentication. Private repositories require the\n        caller to authenticate with an account that has appropriate\n        authorization.\n\n        For Git, the branch name should not include any prefixes (e.g.\n        refs/heads).",
       "parameters": [],
       "responses": {
         "200": {
@@ -10269,7 +10269,7 @@
           "api_key": []
         }
       ],
-      "tags": ["refs"]
+      "tags": ["Refs"]
     },
     "parameters": [
       {
@@ -10343,7 +10343,7 @@
           "api_key": []
         }
       ],
-      "tags": ["refs"]
+      "tags": ["Refs"]
     },
     "parameters": [
       {
@@ -10398,7 +10398,7 @@
           "api_key": []
         }
       ],
-      "tags": ["refs"]
+      "tags": ["Refs"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/refs/tags/{name}": {
@@ -10433,7 +10433,7 @@
           "api_key": []
         }
       ],
-      "tags": ["refs"]
+      "tags": ["Refs"]
     },
     "get": {
       "description": "Returns the specified tag.\n\n```\n$ curl -s https://api.bitbucket.org/2.0/repositories/seanfarley/hg/refs/tags/3.8 -G | jq .\n{\n  \"name\": \"3.8\",\n  \"links\": {\n    \"commits\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commits/3.8\"\n    },\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/refs/tags/3.8\"\n    },\n    \"html\": {\n      \"href\": \"https://bitbucket.org/seanfarley/hg/commits/tag/3.8\"\n    }\n  },\n  \"tagger\": {\n    \"raw\": \"Matt Mackall <mpm@selenic.com>\",\n    \"type\": \"author\",\n    \"user\": {\n      \"username\": \"mpmselenic\",\n      \"nickname\": \"mpmselenic\",\n      \"display_name\": \"Matt Mackall\",\n      \"type\": \"user\",\n      \"uuid\": \"{a4934530-db4c-419c-a478-9ab4964c2ee7}\",\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/users/mpmselenic\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/mpmselenic/\"\n        },\n        \"avatar\": {\n          \"href\": \"https://bitbucket.org/account/mpmselenic/avatar/32/\"\n        }\n      }\n    }\n  },\n  \"date\": \"2016-05-01T18:52:25+00:00\",\n  \"message\": \"Added tag 3.8 for changeset f85de28eae32\",\n  \"type\": \"tag\",\n  \"target\": {\n    \"hash\": \"f85de28eae32e7d3064b1a1321309071bbaaa069\",\n    \"repository\": {\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/seanfarley/hg\"\n        },\n        \"avatar\": {\n          \"href\": \"https://bitbucket.org/seanfarley/hg/avatar/32/\"\n        }\n      },\n      \"type\": \"repository\",\n      \"name\": \"hg\",\n      \"full_name\": \"seanfarley/hg\",\n      \"uuid\": \"{c75687fb-e99d-4579-9087-190dbd406d30}\"\n    },\n    \"links\": {\n      \"self\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"comments\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069/comments\"\n      },\n      \"patch\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/patch/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"html\": {\n        \"href\": \"https://bitbucket.org/seanfarley/hg/commits/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"diff\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/diff/f85de28eae32e7d3064b1a1321309071bbaaa069\"\n      },\n      \"approve\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069/approve\"\n      },\n      \"statuses\": {\n        \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/f85de28eae32e7d3064b1a1321309071bbaaa069/statuses\"\n      }\n    },\n    \"author\": {\n      \"raw\": \"Sean Farley <sean@farley.io>\",\n      \"type\": \"author\",\n      \"user\": {\n        \"username\": \"seanfarley\",\n        \"nickname\": \"seanfarley\",\n        \"display_name\": \"Sean Farley\",\n        \"type\": \"user\",\n        \"uuid\": \"{a295f8a8-5876-4d43-89b5-3ad8c6c3c51d}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/seanfarley\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket.org/account/seanfarley/avatar/32/\"\n          }\n        }\n      }\n    },\n    \"parents\": [\n      {\n        \"hash\": \"9a98d0e5b07fc60887f9d3d34d9ac7d536f470d2\",\n        \"type\": \"commit\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/seanfarley/hg/commit/9a98d0e5b07fc60887f9d3d34d9ac7d536f470d2\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/seanfarley/hg/commits/9a98d0e5b07fc60887f9d3d34d9ac7d536f470d2\"\n          }\n        }\n      }\n    ],\n    \"date\": \"2016-05-01T04:21:17+00:00\",\n    \"message\": \"debian: alphabetize build deps\",\n    \"type\": \"commit\"\n  }\n}\n```",
@@ -10469,7 +10469,7 @@
           "api_key": []
         }
       ],
-      "tags": ["refs"]
+      "tags": ["Refs"]
     },
     "parameters": [
       {
@@ -10533,7 +10533,7 @@
           "api_key": []
         }
       ],
-      "tags": ["source", "repositories"]
+      "tags": ["Source", "Repositories"]
     },
     "parameters": [
       {
@@ -10618,7 +10618,7 @@
           "api_key": []
         }
       ],
-      "tags": ["source", "repositories"]
+      "tags": ["Source", "Repositories"]
     }
   },
   "/repositories/{workspace}/{repo_slug}/src/{commit}/{path}": {
@@ -10686,7 +10686,7 @@
           "api_key": []
         }
       ],
-      "tags": ["source", "repositories"]
+      "tags": ["Source", "Repositories"]
     },
     "parameters": [
       {
@@ -10748,7 +10748,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -10796,7 +10796,7 @@
           "api_key": []
         }
       ],
-      "tags": ["issue_tracker"]
+      "tags": ["Issue tracker"]
     },
     "parameters": [
       {
@@ -10842,7 +10842,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories"]
+      "tags": ["Repositories"]
     },
     "parameters": [
       {
@@ -10899,7 +10899,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "parameters": [],
     "post": {
@@ -10946,7 +10946,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     }
   },
   "/snippets/{workspace}": {
@@ -10987,7 +10987,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "parameters": [
       {
@@ -11048,7 +11048,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     }
   },
   "/snippets/{workspace}/{encoded_id}": {
@@ -11089,7 +11089,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "get": {
       "description": "Retrieves a single snippet.\n\nSnippets support multiple content types:\n\n* application/json\n* multipart/related\n* multipart/form-data\n\n\napplication/json\n----------------\n\nThe default content type of the response is `application/json`.\nSince JSON is always `utf-8`, it cannot reliably contain file contents\nfor files that are not text. Therefore, JSON snippet documents only\ncontain the filename and links to the file contents.\n\nThis means that in order to retrieve all parts of a snippet, N+1\nrequests need to be made (where N is the number of files in the\nsnippet).\n\n\nmultipart/related\n-----------------\n\nTo retrieve an entire snippet in a single response, use the\n`Accept: multipart/related` HTTP request header.\n\n    $ curl -H \"Accept: multipart/related\" https://api.bitbucket.org/2.0/snippets/evzijst/1\n\nResponse:\n\n    HTTP/1.1 200 OK\n    Content-Length: 2214\n    Content-Type: multipart/related; start=\"snippet\"; boundary=\"===============1438169132528273974==\"\n    MIME-Version: 1.0\n\n    --===============1438169132528273974==\n    Content-Type: application/json; charset=\"utf-8\"\n    MIME-Version: 1.0\n    Content-ID: snippet\n\n    {\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj\"\n        },\n        \"html\": {\n          \"href\": \"https://bitbucket.org/snippets/evzijst/kypj\"\n        },\n        \"comments\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/comments\"\n        },\n        \"watchers\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/watchers\"\n        },\n        \"commits\": {\n          \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/commits\"\n        }\n      },\n      \"id\": kypj,\n      \"title\": \"My snippet\",\n      \"created_on\": \"2014-12-29T22:22:04.790331+00:00\",\n      \"updated_on\": \"2014-12-29T22:22:04.790331+00:00\",\n      \"is_private\": false,\n      \"files\": {\n        \"foo.txt\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/files/367ab19/foo.txt\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/snippets/evzijst/kypj#file-foo.txt\"\n            }\n          }\n        },\n        \"image.png\": {\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/snippets/evzijst/kypj/files/367ab19/image.png\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/snippets/evzijst/kypj#file-image.png\"\n            }\n          }\n        }\n      ],\n      \"owner\": {\n        \"username\": \"evzijst\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/evzijst\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/evzijst\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket-staging-assetroot.s3.amazonaws.com/c/photos/2013/Jul/31/erik-avatar-725122544-0_avatar.png\"\n          }\n        }\n      },\n      \"creator\": {\n        \"username\": \"evzijst\",\n        \"nickname\": \"evzijst\",\n        \"display_name\": \"Erik van Zijst\",\n        \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/evzijst\"\n          },\n          \"html\": {\n            \"href\": \"https://bitbucket.org/evzijst\"\n          },\n          \"avatar\": {\n            \"href\": \"https://bitbucket-staging-assetroot.s3.amazonaws.com/c/photos/2013/Jul/31/erik-avatar-725122544-0_avatar.png\"\n          }\n        }\n      }\n    }\n\n    --===============1438169132528273974==\n    Content-Type: text/plain; charset=\"us-ascii\"\n    MIME-Version: 1.0\n    Content-Transfer-Encoding: 7bit\n    Content-ID: \"foo.txt\"\n    Content-Disposition: attachment; filename=\"foo.txt\"\n\n    foo\n\n    --===============1438169132528273974==\n    Content-Type: image/png\n    MIME-Version: 1.0\n    Content-Transfer-Encoding: base64\n    Content-ID: \"image.png\"\n    Content-Disposition: attachment; filename=\"image.png\"\n\n    iVBORw0KGgoAAAANSUhEUgAAABQAAAAoCAYAAAD+MdrbAAABD0lEQVR4Ae3VMUoDQRTG8ccUaW2m\n    TKONFxArJYJamCvkCnZTaa+VnQdJSBFl2SMsLFrEWNjZBZs0JgiL/+KrhhVmJRbCLPx4O+/DT2TB\n    cbblJxf+UWFVVRNsEGAtgvJxnLm2H+A5RQ93uIl+3632PZyl/skjfOn9Gvdwmlcw5aPUwimG+NT5\n    EnNN036IaZePUuIcK533NVfal7/5yjWeot2z9ta1cAczHEf7I+3J0ws9Cgx0fsOFpmlfwKcWPuBQ\n    73Oc4FHzBaZ8llq4q1mr5B2mOUCt815qYR8eB1hG2VJ7j35q4RofaH7IG+Xrf/PfJhfmwtfFYoIN\n    AqxFUD6OMxcvkO+UfKfkOyXfKdsv/AYCHMLVkHAFWgAAAABJRU5ErkJggg==\n    --===============1438169132528273974==--\n\nmultipart/form-data\n-------------------\n\nAs with creating new snippets, `multipart/form-data` can be used as an\nalternative to `multipart/related`. However, the inherently flat\nstructure of form-data means that only basic, root-level properties\ncan be returned, while nested elements like `links` are omitted:\n\n    $ curl -H \"Accept: multipart/form-data\" https://api.bitbucket.org/2.0/snippets/evzijst/kypj\n\nResponse:\n\n    HTTP/1.1 200 OK\n    Content-Length: 951\n    Content-Type: multipart/form-data; boundary=----------------------------63a4b224c59f\n\n    ------------------------------63a4b224c59f\n    Content-Disposition: form-data; name=\"title\"\n    Content-Type: text/plain; charset=\"utf-8\"\n\n    My snippet\n    ------------------------------63a4b224c59f--\n    Content-Disposition: attachment; name=\"file\"; filename=\"foo.txt\"\n    Content-Type: text/plain\n\n    foo\n\n    ------------------------------63a4b224c59f\n    Content-Disposition: attachment; name=\"file\"; filename=\"image.png\"\n    Content-Transfer-Encoding: base64\n    Content-Type: application/octet-stream\n\n    iVBORw0KGgoAAAANSUhEUgAAABQAAAAoCAYAAAD+MdrbAAABD0lEQVR4Ae3VMUoDQRTG8ccUaW2m\n    TKONFxArJYJamCvkCnZTaa+VnQdJSBFl2SMsLFrEWNjZBZs0JgiL/+KrhhVmJRbCLPx4O+/DT2TB\n    cbblJxf+UWFVVRNsEGAtgvJxnLm2H+A5RQ93uIl+3632PZyl/skjfOn9Gvdwmlcw5aPUwimG+NT5\n    EnNN036IaZePUuIcK533NVfal7/5yjWeot2z9ta1cAczHEf7I+3J0ws9Cgx0fsOFpmlfwKcWPuBQ\n    73Oc4FHzBaZ8llq4q1mr5B2mOUCt815qYR8eB1hG2VJ7j35q4RofaH7IG+Xrf/PfJhfmwtfFYoIN\n    AqxFUD6OMxcvkO+UfKfkOyXfKdsv/AYCHMLVkHAFWgAAAABJRU5ErkJggg==\n    ------------------------------5957323a6b76--",
@@ -11142,7 +11142,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "parameters": [
       {
@@ -11210,7 +11210,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     }
   },
   "/snippets/{workspace}/{encoded_id}/{node_id}": {
@@ -11257,7 +11257,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "get": {
       "description": "Identical to `GET /snippets/encoded_id`, except that this endpoint\ncan be used to retrieve the contents of the snippet as it was at an\nolder revision, while `/snippets/encoded_id` always returns the\nsnippet's current revision.\n\nNote that only the snippet's file contents are versioned, not its\nmeta data properties like the title.\n\nOther than that, the two endpoints are identical in behavior.",
@@ -11304,7 +11304,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "parameters": [
       {
@@ -11385,7 +11385,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     }
   },
   "/snippets/{workspace}/{encoded_id}/{node_id}/files/{path}": {
@@ -11430,7 +11430,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "parameters": [
       {
@@ -11502,7 +11502,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "parameters": [
       {
@@ -11560,7 +11560,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "parameters": [
       {
@@ -11621,7 +11621,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "parameters": [
       {
@@ -11689,7 +11689,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     }
   },
   "/snippets/{workspace}/{encoded_id}/comments/{comment_id}": {
@@ -11724,7 +11724,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "get": {
       "description": "Returns the specific snippet comment.",
@@ -11760,7 +11760,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "parameters": [
       {
@@ -11816,7 +11816,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     }
   },
   "/snippets/{workspace}/{encoded_id}/commits": {
@@ -11854,7 +11854,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "parameters": [
       {
@@ -11908,7 +11908,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "parameters": [
       {
@@ -11972,7 +11972,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippet"]
+      "tags": ["Snippets"]
     },
     "parameters": [
       {
@@ -12033,7 +12033,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "get": {
       "description": "Used to check if the current user is watching a specific snippet.\n\nReturns 204 (No Content) if the user is watching the snippet and 404 if\nnot.\n\nHitting this endpoint anonymously always returns a 404.",
@@ -12063,7 +12063,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "parameters": [
       {
@@ -12115,7 +12115,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     }
   },
   "/snippets/{workspace}/{encoded_id}/watchers": {
@@ -12148,7 +12148,7 @@
           "api_key": []
         }
       ],
-      "tags": ["snippets"]
+      "tags": ["Snippets"]
     },
     "parameters": [
       {
@@ -12206,7 +12206,7 @@
           "api_key": []
         }
       ],
-      "tags": ["teams"]
+      "tags": ["Teams"]
     },
     "parameters": []
   },
@@ -12240,7 +12240,7 @@
           "api_key": []
         }
       ],
-      "tags": ["teams"]
+      "tags": ["Teams"]
     },
     "parameters": [
       {
@@ -12282,7 +12282,7 @@
           "api_key": []
         }
       ],
-      "tags": ["teams"]
+      "tags": ["Teams"]
     },
     "parameters": [
       {
@@ -12324,7 +12324,7 @@
           "api_key": []
         }
       ],
-      "tags": ["teams"]
+      "tags": ["Teams"]
     },
     "parameters": [
       {
@@ -12372,7 +12372,7 @@
           "api_key": []
         }
       ],
-      "tags": ["teams", "webhooks"]
+      "tags": ["Teams", "Webhooks"]
     },
     "parameters": [
       {
@@ -12424,7 +12424,7 @@
           "api_key": []
         }
       ],
-      "tags": ["teams", "webhooks"]
+      "tags": ["Teams", "Webhooks"]
     }
   },
   "/teams/{username}/hooks/{uid}": {
@@ -12460,7 +12460,7 @@
           "api_key": []
         }
       ],
-      "tags": ["teams", "webhooks"]
+      "tags": ["Teams", "Webhooks"]
     },
     "get": {
       "deprecated": true,
@@ -12491,7 +12491,7 @@
           "api_key": []
         }
       ],
-      "tags": ["teams", "webhooks"]
+      "tags": ["Teams", "Webhooks"]
     },
     "parameters": [
       {
@@ -12544,7 +12544,7 @@
           "api_key": []
         }
       ],
-      "tags": ["teams", "webhooks"]
+      "tags": ["Teams", "Webhooks"]
     }
   },
   "/teams/{username}/members": {
@@ -12599,7 +12599,7 @@
           "api_key": []
         }
       ],
-      "tags": ["teams"]
+      "tags": ["Teams"]
     },
     "parameters": [
       {
@@ -12656,7 +12656,7 @@
           "api_key": []
         }
       ],
-      "tags": []
+      "tags": ["Teams"]
     },
     "parameters": [
       {
@@ -12704,7 +12704,7 @@
       },
       "security": [
         {
-          "oauth2": ["team"]
+          "oauth2": ["repository", "team"]
         },
         {
           "basic": []
@@ -12713,7 +12713,7 @@
           "api_key": []
         }
       ],
-      "tags": []
+      "tags": ["Teams"]
     },
     "parameters": [
       {
@@ -12770,7 +12770,7 @@
           "api_key": []
         }
       ],
-      "tags": []
+      "tags": ["Teams"]
     },
     "parameters": [
       {
@@ -12811,7 +12811,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "post": {
       "deprecated": true,
@@ -12861,7 +12861,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/teams/{username}/pipelines_config/variables/{variable_uuid}": {
@@ -12896,7 +12896,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "get": {
       "deprecated": true,
@@ -12932,7 +12932,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "put": {
       "deprecated": true,
@@ -12977,7 +12977,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/teams/{username}/projects/": {
@@ -13016,7 +13016,7 @@
           "api_key": []
         }
       ],
-      "tags": ["projects"]
+      "tags": ["Projects"]
     },
     "parameters": [
       {
@@ -13077,7 +13077,7 @@
           "api_key": []
         }
       ],
-      "tags": ["projects"]
+      "tags": ["Projects"]
     }
   },
   "/teams/{username}/projects/{project_key}": {
@@ -13113,7 +13113,7 @@
           "api_key": []
         }
       ],
-      "tags": ["projects"]
+      "tags": ["Projects"]
     },
     "get": {
       "deprecated": true,
@@ -13150,7 +13150,7 @@
           "api_key": []
         }
       ],
-      "tags": ["projects"]
+      "tags": ["Projects"]
     },
     "parameters": [
       {
@@ -13230,7 +13230,7 @@
           "api_key": []
         }
       ],
-      "tags": ["projects"]
+      "tags": ["Projects"]
     }
   },
   "/teams/{username}/search/code": {
@@ -13298,7 +13298,7 @@
         }
       },
       "summary": "Search for code in the repositories of the specified team.\n\nSearching across all repositories:\n\n```\ncurl 'https://api.bitbucket.org/2.0/teams/team_name/search/code?search_query=foo'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 2,\n      \"content_matches\": [\n        {\n          \"lines\": [\n            {\n              \"line\": 2,\n              \"segments\": []\n            },\n            {\n              \"line\": 3,\n              \"segments\": [\n                {\n                  \"text\": \"def \"\n                },\n                {\n                  \"text\": \"foo\",\n                  \"match\": true\n                },\n                {\n                  \"text\": \"():\"\n                }\n              ]\n            },\n            {\n              \"line\": 4,\n              \"segments\": [\n                {\n                  \"text\": \"    print(\\\"snek\\\")\"\n                }\n              ]\n            },\n            {\n              \"line\": 5,\n              \"segments\": []\n            }\n          ]\n        }\n      ],\n      \"path_matches\": [\n        {\n          \"text\": \"src/\"\n        },\n        {\n          \"text\": \"foo\",\n          \"match\": true\n        },\n        {\n          \"text\": \".py\"\n        }\n      ],\n      \"file\": {\n        \"path\": \"src/foo.py\",\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        }\n      }\n    }\n  ]\n}\n```\n\nNote that searches can match in the file's text (`content_matches`),\nthe path (`path_matches`), or both as in the example above.\n\nYou can use the same syntax for the search query as in the UI, e.g.\nto only search within a specific repository:\n\n```\ncurl 'https://api.bitbucket.org/2.0/teams/team_name/search/code?search_query=foo+repo:demo'\n# results from the \"demo\" repository\n```\n\nSimilar to other APIs, you can request more fields using a\n`fields` query parameter. E.g. to get some more information about\nthe repository of matched files (the `%2B` is a URL-encoded `+`):\n\n```\ncurl 'https://api.bitbucket.org/2.0/teams/team_name/search/code'\\\n     '?search_query=foo&fields=%2Bvalues.file.commit.repository'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 1,\n      \"content_matches\": [...],\n      \"path_matches\": [...],\n      \"file\": {\n        \"commit\": {\n          \"type\": \"commit\",\n          \"hash\": \"ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/commit/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/my-workspace/demo/commits/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            }\n          },\n          \"repository\": {\n            \"name\": \"demo\",\n            \"type\": \"repository\",\n            \"full_name\": \"my-workspace/demo\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/my-workspace/demo\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bytebucket.org/ravatar/%7B850e1749-781a-4115-9316-df39d0600e7a%7D?ts=default\"\n              }\n            },\n            \"uuid\": \"{850e1749-781a-4115-9316-df39d0600e7a}\"\n          }\n        },\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        },\n        \"path\": \"src/foo.py\"\n      }\n    }\n  ]\n}\n```\n\nTry `fields=%2Bvalues.*.*.*.*` to get an idea what's possible.\n",
-      "tags": ["search"]
+      "tags": ["Search"]
     }
   },
   "/teams/{workspace}/repositories": {
@@ -13325,7 +13325,7 @@
           "api_key": []
         }
       ],
-      "tags": ["users", "teams"]
+      "tags": ["Users", "Teams"]
     },
     "parameters": [
       {
@@ -13404,7 +13404,7 @@
           "api_key": []
         }
       ],
-      "tags": ["users"]
+      "tags": ["Users"]
     },
     "parameters": []
   },
@@ -13431,7 +13431,7 @@
           "api_key": []
         }
       ],
-      "tags": ["users"]
+      "tags": ["Users"]
     },
     "parameters": []
   },
@@ -13458,7 +13458,7 @@
           "api_key": []
         }
       ],
-      "tags": ["users"]
+      "tags": ["Users"]
     },
     "parameters": [
       {
@@ -13499,7 +13499,7 @@
       },
       "security": [
         {
-          "oauth2": ["account"]
+          "oauth2": ["account", "repository"]
         },
         {
           "basic": []
@@ -13508,7 +13508,7 @@
           "api_key": []
         }
       ],
-      "tags": ["repositories"]
+      "tags": ["Repositories"]
     },
     "parameters": []
   },
@@ -13551,7 +13551,7 @@
           "api_key": []
         }
       ],
-      "tags": []
+      "tags": ["Teams"]
     },
     "parameters": []
   },
@@ -13599,7 +13599,7 @@
           "api_key": []
         }
       ],
-      "tags": ["workspaces"]
+      "tags": ["Workspaces"]
     },
     "parameters": []
   },
@@ -13652,7 +13652,7 @@
           "api_key": []
         }
       ],
-      "tags": ["users"]
+      "tags": ["Users"]
     },
     "parameters": [
       {
@@ -13700,7 +13700,7 @@
           "api_key": []
         }
       ],
-      "tags": ["users", "webhooks"]
+      "tags": ["Users", "Webhooks"]
     },
     "parameters": [
       {
@@ -13752,7 +13752,7 @@
           "api_key": []
         }
       ],
-      "tags": ["users", "webhooks"]
+      "tags": ["Users", "Webhooks"]
     }
   },
   "/users/{selected_user}/hooks/{uid}": {
@@ -13788,7 +13788,7 @@
           "api_key": []
         }
       ],
-      "tags": ["users", "webhooks"]
+      "tags": ["Users", "Webhooks"]
     },
     "get": {
       "deprecated": true,
@@ -13819,7 +13819,7 @@
           "api_key": []
         }
       ],
-      "tags": ["users", "webhooks"]
+      "tags": ["Users", "Webhooks"]
     },
     "parameters": [
       {
@@ -13872,7 +13872,7 @@
           "api_key": []
         }
       ],
-      "tags": ["users", "webhooks"]
+      "tags": ["Users", "Webhooks"]
     }
   },
   "/users/{selected_user}/pipelines_config/variables/": {
@@ -13897,7 +13897,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "post": {
       "deprecated": true,
@@ -13947,7 +13947,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/users/{selected_user}/pipelines_config/variables/{variable_uuid}": {
@@ -13982,7 +13982,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "get": {
       "deprecated": true,
@@ -14018,7 +14018,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "put": {
       "deprecated": true,
@@ -14063,7 +14063,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/users/{selected_user}/properties/{app_key}/{property_name}": {
@@ -14232,7 +14232,7 @@
         }
       },
       "summary": "Search for code in the repositories of the specified user.\n\nSearching across all repositories:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/{ed08f5e1-605b-4f4a-aee4-6c97628a673e}/search/code?search_query=foo'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 2,\n      \"content_matches\": [\n        {\n          \"lines\": [\n            {\n              \"line\": 2,\n              \"segments\": []\n            },\n            {\n              \"line\": 3,\n              \"segments\": [\n                {\n                  \"text\": \"def \"\n                },\n                {\n                  \"text\": \"foo\",\n                  \"match\": true\n                },\n                {\n                  \"text\": \"():\"\n                }\n              ]\n            },\n            {\n              \"line\": 4,\n              \"segments\": [\n                {\n                  \"text\": \"    print(\\\"snek\\\")\"\n                }\n              ]\n            },\n            {\n              \"line\": 5,\n              \"segments\": []\n            }\n          ]\n        }\n      ],\n      \"path_matches\": [\n        {\n          \"text\": \"src/\"\n        },\n        {\n          \"text\": \"foo\",\n          \"match\": true\n        },\n        {\n          \"text\": \".py\"\n        }\n      ],\n      \"file\": {\n        \"path\": \"src/foo.py\",\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        }\n      }\n    }\n  ]\n}\n```\n\nNote that searches can match in the file's text (`content_matches`),\nthe path (`path_matches`), or both as in the example above.\n\nYou can use the same syntax for the search query as in the UI, e.g.\nto only search within a specific repository:\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/{ed08f5e1-605b-4f4a-aee4-6c97628a673e}/search/code?search_query=foo+repo:demo'\n# results from the \"demo\" repository\n```\n\nSimilar to other APIs, you can request more fields using a\n`fields` query parameter. E.g. to get some more information about\nthe repository of matched files (the `%2B` is a URL-encoded `+`):\n\n```\ncurl 'https://api.bitbucket.org/2.0/users/{ed08f5e1-605b-4f4a-aee4-6c97628a673e}/search/code'\\\n     '?search_query=foo&fields=%2Bvalues.file.commit.repository'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 1,\n      \"content_matches\": [...],\n      \"path_matches\": [...],\n      \"file\": {\n        \"commit\": {\n          \"type\": \"commit\",\n          \"hash\": \"ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/commit/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/my-workspace/demo/commits/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            }\n          },\n          \"repository\": {\n            \"name\": \"demo\",\n            \"type\": \"repository\",\n            \"full_name\": \"my-workspace/demo\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/my-workspace/demo\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bytebucket.org/ravatar/%7B850e1749-781a-4115-9316-df39d0600e7a%7D?ts=default\"\n              }\n            },\n            \"uuid\": \"{850e1749-781a-4115-9316-df39d0600e7a}\"\n          }\n        },\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        },\n        \"path\": \"src/foo.py\"\n      }\n    }\n  ]\n}\n```\n\nTry `fields=%2Bvalues.*.*.*.*` to get an idea what's possible.\n",
-      "tags": ["search"]
+      "tags": ["Search"]
     }
   },
   "/users/{selected_user}/ssh-keys": {
@@ -14267,7 +14267,7 @@
           "api_key": []
         }
       ],
-      "tags": ["ssh"]
+      "tags": ["Ssh"]
     },
     "parameters": [
       {
@@ -14325,7 +14325,7 @@
           "api_key": []
         }
       ],
-      "tags": ["ssh"]
+      "tags": ["Ssh"]
     }
   },
   "/users/{selected_user}/ssh-keys/{key_id}": {
@@ -14363,7 +14363,7 @@
           "api_key": []
         }
       ],
-      "tags": ["ssh"]
+      "tags": ["Ssh"]
     },
     "get": {
       "description": "Returns a specific SSH public key belonging to a user.\n\nExample:\n```\n$ curl https://api.bitbucket.org/2.0/users/{ed08f5e1-605b-4f4a-aee4-6c97628a673e}/ssh-keys/{fbe4bbab-f6f7-4dde-956b-5c58323c54b3}\n\n{\n    \"comment\": \"user@myhost\",\n    \"created_on\": \"2018-03-14T13:17:05.196003+00:00\",\n    \"key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqP3Cr632C2dNhhgKVcon4ldUSAeKiku2yP9O9/bDtY\",\n    \"label\": \"\",\n    \"last_used\": \"2018-03-20T13:18:05.196003+00:00\",\n    \"links\": {\n        \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/users/{ed08f5e1-605b-4f4a-aee4-6c97628a673e}/ssh-keys/b15b6026-9c02-4626-b4ad-b905f99f763a\"\n        }\n    },\n    \"owner\": {\n        \"display_name\": \"Mark Adams\",\n        \"links\": {\n            \"avatar\": {\n                \"href\": \"https://bitbucket.org/account/markadams-atl/avatar/32/\"\n            },\n            \"html\": {\n                \"href\": \"https://bitbucket.org/markadams-atl/\"\n            },\n            \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/users/{ed08f5e1-605b-4f4a-aee4-6c97628a673e}\"\n            }\n        },\n        \"type\": \"user\",\n        \"username\": \"markadams-atl\",\n        \"nickname\": \"markadams-atl\",\n        \"uuid\": \"{d7dd0e2d-3994-4a50-a9ee-d260b6cefdab}\"\n    },\n    \"type\": \"ssh_key\",\n    \"uuid\": \"{b15b6026-9c02-4626-b4ad-b905f99f763a}\"\n}\n```",
@@ -14396,7 +14396,7 @@
           "api_key": []
         }
       ],
-      "tags": ["ssh"]
+      "tags": ["Ssh"]
     },
     "parameters": [
       {
@@ -14461,7 +14461,7 @@
           "api_key": []
         }
       ],
-      "tags": ["ssh"]
+      "tags": ["Ssh"]
     }
   },
   "/users/{username}/members": {
@@ -14494,7 +14494,7 @@
           "api_key": []
         }
       ],
-      "tags": ["users"]
+      "tags": ["Users"]
     },
     "parameters": [
       {
@@ -14530,7 +14530,7 @@
           "api_key": []
         }
       ],
-      "tags": ["users", "teams"]
+      "tags": ["Users", "Teams"]
     },
     "parameters": [
       {
@@ -14594,7 +14594,7 @@
           "api_key": []
         }
       ],
-      "tags": ["workspaces"]
+      "tags": ["Workspaces"]
     },
     "parameters": []
   },
@@ -14627,7 +14627,7 @@
           "api_key": []
         }
       ],
-      "tags": ["workspaces"]
+      "tags": ["Workspaces"]
     },
     "parameters": [
       {
@@ -14674,7 +14674,7 @@
           "api_key": []
         }
       ],
-      "tags": ["workspaces", "webhooks"]
+      "tags": ["Workspaces", "Webhooks"]
     },
     "parameters": [
       {
@@ -14725,7 +14725,7 @@
           "api_key": []
         }
       ],
-      "tags": ["workspaces", "webhooks"]
+      "tags": ["Workspaces", "Webhooks"]
     }
   },
   "/workspaces/{workspace}/hooks/{uid}": {
@@ -14760,7 +14760,7 @@
           "api_key": []
         }
       ],
-      "tags": ["workspaces", "webhooks"]
+      "tags": ["Workspaces", "Webhooks"]
     },
     "get": {
       "description": "Returns the webhook with the specified id installed on the given\nworkspace.",
@@ -14790,7 +14790,7 @@
           "api_key": []
         }
       ],
-      "tags": ["workspaces", "webhooks"]
+      "tags": ["Workspaces", "Webhooks"]
     },
     "parameters": [
       {
@@ -14842,7 +14842,7 @@
           "api_key": []
         }
       ],
-      "tags": ["workspaces", "webhooks"]
+      "tags": ["Workspaces", "Webhooks"]
     }
   },
   "/workspaces/{workspace}/members": {
@@ -14874,7 +14874,7 @@
           "api_key": []
         }
       ],
-      "tags": ["workspaces"]
+      "tags": ["Workspaces"]
     },
     "parameters": [
       {
@@ -14921,7 +14921,7 @@
           "api_key": []
         }
       ],
-      "tags": ["workspaces"]
+      "tags": ["Workspaces"]
     },
     "parameters": [
       {
@@ -14977,7 +14977,7 @@
           "api_key": []
         }
       ],
-      "tags": ["workspaces"]
+      "tags": ["Workspaces"]
     },
     "parameters": [
       {
@@ -15033,7 +15033,7 @@
           "api_key": []
         }
       ],
-      "tags": []
+      "tags": ["Workspaces"]
     },
     "parameters": [
       {
@@ -15089,7 +15089,7 @@
           "api_key": []
         }
       ],
-      "tags": []
+      "tags": ["Workspaces"]
     },
     "parameters": [
       {
@@ -15135,7 +15135,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "post": {
       "description": "Create a workspace level variable.",
@@ -15184,7 +15184,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/workspaces/{workspace}/pipelines-config/variables/{variable_uuid}": {
@@ -15218,7 +15218,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "get": {
       "description": "Retrieve a workspace level variable.",
@@ -15253,7 +15253,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     },
     "put": {
       "description": "Update a workspace level variable.",
@@ -15297,7 +15297,7 @@
           }
         }
       },
-      "tags": ["pipelines"]
+      "tags": ["Pipelines"]
     }
   },
   "/workspaces/{workspace}/projects": {
@@ -15329,7 +15329,7 @@
           "api_key": []
         }
       ],
-      "tags": ["workspaces"]
+      "tags": ["Workspaces"]
     },
     "parameters": [
       {
@@ -15389,7 +15389,7 @@
           "api_key": []
         }
       ],
-      "tags": ["projects"]
+      "tags": ["Projects"]
     }
   },
   "/workspaces/{workspace}/projects/{project_key}": {
@@ -15424,7 +15424,7 @@
           "api_key": []
         }
       ],
-      "tags": ["projects"]
+      "tags": ["Projects"]
     },
     "get": {
       "description": "Returns the requested project.",
@@ -15466,7 +15466,7 @@
           "api_key": []
         }
       ],
-      "tags": ["projects", "workspaces"]
+      "tags": ["Projects", "Workspaces"]
     },
     "parameters": [
       {
@@ -15545,7 +15545,7 @@
           "api_key": []
         }
       ],
-      "tags": ["projects"]
+      "tags": ["Projects"]
     }
   },
   "/workspaces/{workspace}/search/code": {
@@ -15613,7 +15613,7 @@
         }
       },
       "summary": "Search for code in the repositories of the specified workspace.\n\nSearching across all repositories:\n\n```\ncurl 'https://api.bitbucket.org/2.0/workspaces/workspace_slug_or_uuid/search/code?search_query=foo'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 2,\n      \"content_matches\": [\n        {\n          \"lines\": [\n            {\n              \"line\": 2,\n              \"segments\": []\n            },\n            {\n              \"line\": 3,\n              \"segments\": [\n                {\n                  \"text\": \"def \"\n                },\n                {\n                  \"text\": \"foo\",\n                  \"match\": true\n                },\n                {\n                  \"text\": \"():\"\n                }\n              ]\n            },\n            {\n              \"line\": 4,\n              \"segments\": [\n                {\n                  \"text\": \"    print(\\\"snek\\\")\"\n                }\n              ]\n            },\n            {\n              \"line\": 5,\n              \"segments\": []\n            }\n          ]\n        }\n      ],\n      \"path_matches\": [\n        {\n          \"text\": \"src/\"\n        },\n        {\n          \"text\": \"foo\",\n          \"match\": true\n        },\n        {\n          \"text\": \".py\"\n        }\n      ],\n      \"file\": {\n        \"path\": \"src/foo.py\",\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        }\n      }\n    }\n  ]\n}\n```\n\nNote that searches can match in the file's text (`content_matches`),\nthe path (`path_matches`), or both as in the example above.\n\nYou can use the same syntax for the search query as in the UI, e.g.\nto only search within a specific repository:\n\n```\ncurl 'https://api.bitbucket.org/2.0/workspaces/my-workspace/search/code?search_query=foo+repo:demo'\n# results from the \"demo\" repository\n```\n\nSimilar to other APIs, you can request more fields using a\n`fields` query parameter. E.g. to get some more information about\nthe repository of matched files (the `%2B` is a URL-encoded `+`):\n\n```\ncurl 'https://api.bitbucket.org/2.0/workspaces/my-workspace/search/code'\\\n     '?search_query=foo&fields=%2Bvalues.file.commit.repository'\n{\n  \"size\": 1,\n  \"page\": 1,\n  \"pagelen\": 10,\n  \"query_substituted\": false,\n  \"values\": [\n    {\n      \"type\": \"code_search_result\",\n      \"content_match_count\": 1,\n      \"content_matches\": [...],\n      \"path_matches\": [...],\n      \"file\": {\n        \"commit\": {\n          \"type\": \"commit\",\n          \"hash\": \"ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\",\n          \"links\": {\n            \"self\": {\n              \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/commit/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            },\n            \"html\": {\n              \"href\": \"https://bitbucket.org/my-workspace/demo/commits/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b\"\n            }\n          },\n          \"repository\": {\n            \"name\": \"demo\",\n            \"type\": \"repository\",\n            \"full_name\": \"my-workspace/demo\",\n            \"links\": {\n              \"self\": {\n                \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo\"\n              },\n              \"html\": {\n                \"href\": \"https://bitbucket.org/my-workspace/demo\"\n              },\n              \"avatar\": {\n                \"href\": \"https://bytebucket.org/ravatar/%7B850e1749-781a-4115-9316-df39d0600e7a%7D?ts=default\"\n              }\n            },\n            \"uuid\": \"{850e1749-781a-4115-9316-df39d0600e7a}\"\n          }\n        },\n        \"type\": \"commit_file\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/my-workspace/demo/src/ad6964b5fe2880dbd9ddcad1c89000f1dbcbc24b/src/foo.py\"\n          }\n        },\n        \"path\": \"src/foo.py\"\n      }\n    }\n  ]\n}\n```\n\nTry `fields=%2Bvalues.*.*.*.*` to get an idea what's possible.\n",
-      "tags": ["search"]
+      "tags": ["Search"]
     }
   }
 }

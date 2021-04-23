@@ -3048,10 +3048,6 @@
           "required": true,
           "type": "string"
         },
-        "revision": {
-          "required": true,
-          "type": "string"
-        },
         "workspace": {
           "required": true,
           "type": "string"
@@ -3071,10 +3067,6 @@
           "type": "string"
         },
         "repo_slug": {
-          "required": true,
-          "type": "string"
-        },
-        "revision": {
           "required": true,
           "type": "string"
         },
@@ -3746,6 +3738,9 @@
           "schema": "PullrequestMergeParameters",
           "type": "any"
         },
+        "async": {
+          "type": "boolean"
+        },
         "pull_request_id": {
           "required": true,
           "type": "integer"
@@ -3760,7 +3755,7 @@
         }
       },
       "returns": "Pullrequest",
-      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/merge"
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/merge{?async}"
     },
     "readSrc": {
       "method": "GET",

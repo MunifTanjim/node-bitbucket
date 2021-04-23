@@ -1,70 +1,90 @@
 [
   {
-    "description": "",
-    "name": "users"
+    "description": "The addon resource is intended to use used by Bitbucket Cloud Connect\nApps, and only supports JWT authentication.\n",
+    "name": "Addon"
   },
   {
-    "description": "",
-    "name": "teams"
+    "description": "Repository owners and administrators can set branch management\nrules on a repository that control what can be pushed by whom.\nThrough these rules, you can enforce a project or team\nworkflow. For example, owners or administrators can:\n\n* Limit push powers\n* Prevent branch deletion\n* Prevent history re-writes (Git only)\n",
+    "name": "Branch restrictions"
   },
   {
-    "description": "",
-    "name": "repositories"
-  },
-  {
-    "description": "Browse the source code in the repository and\n                              create new commits by uploading.",
-    "name": "source"
-  },
-  {
-    "description": "",
-    "name": "refs"
-  },
-  {
-    "description": "",
-    "name": "commits"
-  },
-  {
-    "description": "",
-    "name": "pullrequests"
-  },
-  {
-    "description": "The issue resources provide functionality for getting information on\nissues in an issue tracker, creating new issues, updating them and deleting\nthem.\n\nYou can access public issues without authentication, but you can't gain access\nto private repositories' issues. By authenticating, you will get the ability\nto create issues, as well as access to updating data or deleting issues you\nhave access to.",
-    "name": "issue_tracker"
-  },
-  {
-    "description": "",
-    "name": "wiki"
-  },
-  {
-    "description": "",
-    "name": "downloads"
-  },
-  {
-    "description": "",
-    "name": "snippets"
-  },
-  {
-    "description": "Webhooks provide a way to configure Bitbucket Cloud to make requests to\nyour server (or another external service) whenever certain events occur in\nBitbucket Cloud.\n\nA webhook consists of:\n\n* A subject -- The resource that generates the events. Currently, this resource\n  is the repository, user account, or team where you create the webhook.\n* One or more event -- The default event is a repository push, but you can\n  select multiple events that can trigger the webhook.\n* A URL -- The endpoint where you want Bitbucket to send the event payloads\n  when a matching event happens.\n\nThere are two parts to getting a webhook to work: creating the webhook and\ntriggering the webhook. After you create a webhook for an event, every time\nthat event occurs, Bitbucket sends a payload request that describes the event\nto the specified URL. Thus, you can think of webhooks as a kind of\nnotification system.\n\nUse webhooks to integrate applications with Bitbucket Cloud. The following\nuse cases provides examples of when you would want to use webhooks:\n\n* Every time a user pushes commits in a repository, you may want to notify\n  your CI server to start a build.\n* Every time a user pushes commits or creates a pull request, you may want to\n  display a notification in your application.\n",
-    "name": "webhooks"
+    "description": "The branching model resource is used to modify the branching model\nfor a repository.\n\nYou can use the branching model to define a branch based workflow\nfor your repositories. When you map your workflow to branch types,\nyou can ensure that branches are named consistently by configuring\nwhich branch types to make available.\n",
+    "name": "Branching model"
   },
   {
     "description": "Commit statuses provide a way to tag commits with meta data,\nlike automated build results.\n",
-    "name": "commitstatuses"
+    "name": "Commit statuses"
   },
   {
-    "description": "Repository owners and administrators can set branch management\nrules on a repository that control what can be pushed by whom.\nThrough these rules, you can enforce a project or team\nworkflow. For example, owners or administrators can:\n\n* Limit push powers\n* Prevent branch (bookmark) deletion\n* Prevent history re-writes (Git only)\n",
-    "name": "branchrestrictions"
-  },
-  {
-    "description": "Bitbucket Cloud projects make it easier for teams to focus on\na goal, product, or process by organizing their repositories.\n",
-    "name": "projects"
-  },
-  {
-    "description": "Bitbucket Pipelines brings continuous delivery to Bitbucket\nCloud, empowering teams with full branching to deployment\nvisibility and faster feedback loops.\n",
-    "name": "pipelines"
+    "description": "These are the repository's commits. They are paginated and returned in\nreverse chronological order, similar to the output of git log.\n",
+    "name": "Commits"
   },
   {
     "description": "Teams are deploying code faster than ever, thanks to continuous\ndelivery practices and tools like Bitbucket Pipelines. Bitbucket\nDeployments gives teams visibility into their deployment\nenvironments and helps teams to track how far changes have\nprogressed in their deployment pipeline.\n",
-    "name": "deployments"
+    "name": "Deployments"
+  },
+  {
+    "description": "Access the list of download links associated with the repository.",
+    "name": "Downloads"
+  },
+  {
+    "description": "The issue resources provide functionality for getting information on\nissues in an issue tracker, creating new issues, updating them and deleting\nthem.\n\nYou can access public issues without authentication, but you can't gain access\nto private repositories' issues. By authenticating, you will get the ability\nto create issues, as well as access to updating data or deleting issues you\nhave access to.\n",
+    "name": "Issue tracker"
+  },
+  {
+    "description": "Bitbucket Pipelines brings continuous delivery to Bitbucket\nCloud, empowering teams with full branching to deployment\nvisibility and faster feedback loops.\n",
+    "name": "Pipelines"
+  },
+  {
+    "description": "Bitbucket Cloud projects make it easier for teams to focus on\na goal, product, or process by organizing their repositories.\n",
+    "name": "Projects"
+  },
+  {
+    "description": "Pull requests are a feature that makes it easier for developers\nto collaborate using Bitbucket. They provide a user-friendly web\ninterface for discussing proposed changes before integrating them\ninto the official project.\n",
+    "name": "Pullrequests"
+  },
+  {
+    "description": "The refs resource allows you access branches and tags in a repository.\nBy default, results will be in the order the underlying source control\nsystem returns them and identical to the ordering one sees when running\n\"$ git show-ref\". Note that this follows simple lexical ordering of the\n ref names.\n",
+    "name": "Refs"
+  },
+  {
+    "description": "Code insights provides reports, annotations, and metrics to help you\nand your team improve code quality in pull requests throughout the code\nreview process. Some of the available code insights are static analysis\nreports, security scan results, artifact links, unit tests, and build\nstatus.\n",
+    "name": "Reports"
+  },
+  {
+    "description": "A Git repository is a virtual storage of your project. It\nallows you to save versions of your code, which you can access\nwhen needed. The repo resource allows you to access public repos,\nor repos that belong to a specific workspace.\n",
+    "name": "Repositories"
+  },
+  {
+    "description": "Snippets allow you share code segments or files with yourself, members of\nyour workspace, or the world.\n\nLike pull requests, repositories and workspaces, the full set of snippets\nis defined by what the current user has access to. This includes all\nsnippets owned by any of the workspaces the user is a member of, or\nsnippets by other users that the current user is either watching or has\n collaborated on (for instance by commenting on it).\n",
+    "name": "Snippets"
+  },
+  {
+    "description": "Browse the source code in the repository and\n                              create new commits by uploading.",
+    "name": "Source"
+  },
+  {
+    "description": "The SSH resource allows you to manage SSH keys.\n",
+    "name": "Ssh"
+  },
+  {
+    "description": "The teams resource has been deprecated, and the workspaces\nendpoint should be used instead.\n\nThe teams resource returns all the teams that the authenticated\nuser is associated with.\n",
+    "name": "Teams"
+  },
+  {
+    "description": "The users resource allows you to access public information\nassociated with a user account. Most resources in the users\nendpoint have been deprecated in favor of workspaces.\n",
+    "name": "Users"
+  },
+  {
+    "description": "Webhooks provide a way to configure Bitbucket Cloud to make requests to\nyour server (or another external service) whenever certain events occur in\nBitbucket Cloud.\n\nA webhook consists of:\n\n* A subject -- The resource that generates the events. Currently, this resource\nis the repository, user account, or team where you create the webhook.\n* One or more event -- The default event is a repository push, but you can\nselect multiple events that can trigger the webhook.\n* A URL -- The endpoint where you want Bitbucket to send the event payloads\nwhen a matching event happens.\n\nThere are two parts to getting a webhook to work: creating the webhook and\ntriggering the webhook. After you create a webhook for an event, every time\nthat event occurs, Bitbucket sends a payload request that describes the event\nto the specified URL. Thus, you can think of webhooks as a kind of\nnotification system.\n\nUse webhooks to integrate applications with Bitbucket Cloud. The following\nuse cases provides examples of when you would want to use webhooks:\n\n* Every time a user pushes commits in a repository, you may want to notify\nyour CI server to start a build.\n* Every time a user pushes commits or creates a pull request, you may want to\ndisplay a notification in your application.\n",
+    "name": "Webhooks"
+  },
+  {
+    "description": "The wiki is a simple place to keep documents. Some people use it\nas their project home page. The wiki is a Git repository, so you\ncan clone it and edit it like any other source files.\n",
+    "name": "Wiki"
+  },
+  {
+    "description": "A workspace is where you create repositories, collaborate on\nyour code, and organize different streams of work in your Bitbucket\nCloud account. Workspaces replace the use of teams and users in API\ncalls.\n",
+    "name": "Workspaces"
   }
 ]

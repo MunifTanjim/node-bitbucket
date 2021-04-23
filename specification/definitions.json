@@ -27,6 +27,7 @@
             "properties": {
               "avatar": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -36,10 +37,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "followers": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -49,10 +52,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "following": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -62,10 +67,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "html": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -75,10 +82,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "repositories": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -88,10 +97,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -101,6 +112,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -121,6 +133,7 @@
             "type": "string"
           }
         },
+        "title": "Account",
         "type": "object"
       }
     ]
@@ -142,6 +155,7 @@
             "$ref": "#/definitions/account"
           }
         },
+        "title": "Author",
         "type": "object"
       }
     ]
@@ -196,6 +210,7 @@
             "type": "object"
           }
         },
+        "title": "Base Commit",
         "type": "object"
       }
     ]
@@ -208,7 +223,21 @@
       {
         "additionalProperties": true,
         "description": "A branch object, representing a branch in a repository.",
-        "properties": {},
+        "properties": {
+          "default_merge_strategy": {
+            "description": "The default merge strategy for pull requests targeting this branch.",
+            "type": "string"
+          },
+          "merge_strategies": {
+            "description": "Available merge strategies for pull requests targeting this branch.",
+            "items": {
+              "enum": ["merge_commit", "squash", "fast_forward"],
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "title": "Branch",
         "type": "object"
       }
     ]
@@ -282,6 +311,7 @@
             "type": "object"
           }
         },
+        "title": "Branching Model",
         "type": "object"
       }
     ]
@@ -344,6 +374,7 @@
             "properties": {
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -353,6 +384,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -381,6 +413,7 @@
             "type": "object"
           }
         },
+        "title": "Branching Model Settings",
         "type": "object"
       }
     ]
@@ -447,6 +480,7 @@
             "properties": {
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -456,6 +490,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -478,6 +513,7 @@
           }
         },
         "required": ["kind", "branch_match_kind", "pattern"],
+        "title": "Branch Restriction",
         "type": "object"
       }
     ]
@@ -546,6 +582,7 @@
             "properties": {
               "code": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -555,10 +592,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "html": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -568,10 +607,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -581,6 +622,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -597,6 +639,7 @@
             "$ref": "#/definitions/user"
           }
         },
+        "title": "Comment",
         "type": "object"
       }
     ]
@@ -621,6 +664,7 @@
             "$ref": "#/definitions/repository"
           }
         },
+        "title": "Commit",
         "type": "object"
       }
     ]
@@ -638,6 +682,7 @@
             "$ref": "#/definitions/commit"
           }
         },
+        "title": "Commit Comment",
         "type": "object"
       }
     ]
@@ -666,6 +711,7 @@
       }
     },
     "required": ["type"],
+    "title": "Commit File",
     "type": "object"
   },
   "commitstatus": {
@@ -694,6 +740,7 @@
             "properties": {
               "commit": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -703,10 +750,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -716,6 +765,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -747,6 +797,7 @@
             "type": "string"
           }
         },
+        "title": "Commit Status",
         "type": "object"
       }
     ]
@@ -768,6 +819,7 @@
             "properties": {
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -777,6 +829,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -786,6 +839,7 @@
             "type": "string"
           }
         },
+        "title": "Component",
         "type": "object"
       }
     ]
@@ -838,6 +892,7 @@
             "properties": {
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -847,6 +902,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -859,6 +915,7 @@
             "$ref": "#/definitions/repository"
           }
         },
+        "title": "Deploy Key",
         "type": "object"
       }
     ]
@@ -888,6 +945,7 @@
             "type": "string"
           }
         },
+        "title": "Deployment",
         "type": "object"
       }
     ]
@@ -910,6 +968,7 @@
             "type": "string"
           }
         },
+        "title": "Deployment Environment",
         "type": "object"
       }
     ],
@@ -948,6 +1007,7 @@
             "type": "string"
           }
         },
+        "title": "Deployment Release",
         "type": "object"
       }
     ]
@@ -961,6 +1021,7 @@
         "additionalProperties": true,
         "description": "The representation of the progress state of a deployment.",
         "properties": {},
+        "title": "Deployment State",
         "type": "object"
       }
     ]
@@ -1016,6 +1077,7 @@
         "additionalProperties": true,
         "description": "The status of a completed deployment.",
         "properties": {},
+        "title": "Completed Deployment",
         "type": "object"
       }
     ]
@@ -1160,6 +1222,7 @@
             "type": "string"
           }
         },
+        "title": "Deployment Variable",
         "type": "object"
       }
     ]
@@ -1217,6 +1280,7 @@
       }
     },
     "required": ["type"],
+    "title": "Diff Stat",
     "type": "object"
   },
   "error": {
@@ -1247,6 +1311,7 @@
       }
     },
     "required": ["type"],
+    "title": "Error",
     "type": "object"
   },
   "export_options": {
@@ -1270,6 +1335,7 @@
       }
     },
     "required": ["type"],
+    "title": "Export Options",
     "type": "object"
   },
   "group": {
@@ -1290,6 +1356,7 @@
             "properties": {
               "html": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -1299,10 +1366,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -1312,6 +1381,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -1331,6 +1401,7 @@
             "$ref": "#/definitions/workspace"
           }
         },
+        "title": "Group",
         "type": "object"
       }
     ]
@@ -1383,6 +1454,7 @@
         "type": "string"
       }
     },
+    "title": "Hook Event",
     "type": "object"
   },
   "issue": {
@@ -1439,6 +1511,7 @@
             "properties": {
               "attachments": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -1448,10 +1521,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "comments": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -1461,10 +1536,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "html": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -1474,10 +1551,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -1487,10 +1566,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "vote": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -1500,10 +1581,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "watch": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -1513,6 +1596,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -1558,6 +1642,7 @@
             "type": "integer"
           }
         },
+        "title": "Issue",
         "type": "object"
       }
     ]
@@ -1576,6 +1661,7 @@
             "properties": {
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -1585,6 +1671,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -1594,6 +1681,7 @@
             "type": "string"
           }
         },
+        "title": "Issue Attachment",
         "type": "object"
       }
     ]
@@ -1728,6 +1816,7 @@
         "properties": {
           "issue": {
             "additionalProperties": false,
+            "description": "A link to a resource related to this object.",
             "properties": {
               "href": {
                 "format": "uri",
@@ -1737,10 +1826,12 @@
                 "type": "string"
               }
             },
+            "title": "Link",
             "type": "object"
           },
           "self": {
             "additionalProperties": false,
+            "description": "A link to a resource related to this object.",
             "properties": {
               "href": {
                 "format": "uri",
@@ -1750,6 +1841,7 @@
                 "type": "string"
               }
             },
+            "title": "Link",
             "type": "object"
           }
         },
@@ -1785,6 +1877,7 @@
       }
     },
     "required": ["type"],
+    "title": "Issue Change",
     "type": "object"
   },
   "issue_comment": {
@@ -1800,6 +1893,7 @@
             "$ref": "#/definitions/issue"
           }
         },
+        "title": "Issue Comment",
         "type": "object"
       }
     ]
@@ -1835,6 +1929,7 @@
         "type": "string"
       }
     },
+    "title": "Issue Job Status",
     "type": "object"
   },
   "jira_project": {
@@ -1884,6 +1979,7 @@
             "properties": {
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -1893,6 +1989,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -1902,6 +1999,7 @@
             "type": "string"
           }
         },
+        "title": "Milestone",
         "type": "object"
       }
     ]
@@ -1947,6 +2045,7 @@
         "type": "integer"
       }
     },
+    "title": "Page",
     "type": "object"
   },
   "paginated_annotations": {
@@ -1983,6 +2082,7 @@
         "type": "array"
       }
     },
+    "title": "Paginated Annotations",
     "type": "object"
   },
   "paginated_branches": {
@@ -2023,6 +2123,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Branches",
     "type": "object"
   },
   "paginated_branchrestrictions": {
@@ -2063,6 +2164,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Branch Restrictions",
     "type": "object"
   },
   "paginated_changeset": {
@@ -2103,6 +2205,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Page",
     "type": "object"
   },
   "paginated_commit_comments": {
@@ -2143,6 +2246,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Commit Comments",
     "type": "object"
   },
   "paginated_commitstatuses": {
@@ -2183,6 +2287,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Commit Statuses",
     "type": "object"
   },
   "paginated_components": {
@@ -2223,6 +2328,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Components",
     "type": "object"
   },
   "paginated_deploy_keys": {
@@ -2263,6 +2369,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Deploy Keys",
     "type": "object"
   },
   "paginated_deployment_variable": {
@@ -2299,6 +2406,7 @@
         "type": "array"
       }
     },
+    "title": "Paginated Deployment Variables",
     "type": "object"
   },
   "paginated_deployments": {
@@ -2335,6 +2443,7 @@
         "type": "array"
       }
     },
+    "title": "Paginated Deployments",
     "type": "object"
   },
   "paginated_diffstats": {
@@ -2375,6 +2484,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Diff Stat",
     "type": "object"
   },
   "paginated_environments": {
@@ -2411,6 +2521,7 @@
         "type": "array"
       }
     },
+    "title": "Paginated Deployment Environments",
     "type": "object"
   },
   "paginated_files": {
@@ -2451,6 +2562,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Files",
     "type": "object"
   },
   "paginated_hook_events": {
@@ -2491,6 +2603,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Hook Events",
     "type": "object"
   },
   "paginated_issue_attachments": {
@@ -2530,6 +2643,7 @@
         "type": "array"
       }
     },
+    "title": "Paginated Issue Attachment",
     "type": "object"
   },
   "paginated_issue_comments": {
@@ -2570,6 +2684,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Issue Comments",
     "type": "object"
   },
   "paginated_issues": {
@@ -2610,6 +2725,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Issues",
     "type": "object"
   },
   "paginated_log_entries": {
@@ -2649,6 +2765,7 @@
         "type": "array"
       }
     },
+    "title": "Paginated Log Entries",
     "type": "object"
   },
   "paginated_milestones": {
@@ -2689,6 +2806,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Milestones",
     "type": "object"
   },
   "paginated_pipeline_caches": {
@@ -2725,6 +2843,7 @@
         "type": "array"
       }
     },
+    "title": "Paginated Pipeline Cache",
     "type": "object"
   },
   "paginated_pipeline_known_hosts": {
@@ -2761,6 +2880,7 @@
         "type": "array"
       }
     },
+    "title": "Paginated Pipeline Known Hosts",
     "type": "object"
   },
   "paginated_pipeline_schedule_executions": {
@@ -2797,6 +2917,7 @@
         "type": "array"
       }
     },
+    "title": "Paginated Pipeline Schedule Executions",
     "type": "object"
   },
   "paginated_pipeline_schedules": {
@@ -2833,6 +2954,7 @@
         "type": "array"
       }
     },
+    "title": "Paginated Pipeline Schedule",
     "type": "object"
   },
   "paginated_pipeline_steps": {
@@ -2869,6 +2991,7 @@
         "type": "array"
       }
     },
+    "title": "Paginated Pipeline Steps",
     "type": "object"
   },
   "paginated_pipeline_variables": {
@@ -2905,6 +3028,7 @@
         "type": "array"
       }
     },
+    "title": "Paginated Pipeline Variables",
     "type": "object"
   },
   "paginated_pipelines": {
@@ -2941,6 +3065,7 @@
         "type": "array"
       }
     },
+    "title": "Paginated Pipelines",
     "type": "object"
   },
   "paginated_projects": {
@@ -2981,6 +3106,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Projects",
     "type": "object"
   },
   "paginated_pullrequest_comments": {
@@ -3021,6 +3147,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Pull Request Comments",
     "type": "object"
   },
   "paginated_pullrequests": {
@@ -3061,6 +3188,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Pull Requests",
     "type": "object"
   },
   "paginated_refs": {
@@ -3101,6 +3229,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Refs",
     "type": "object"
   },
   "paginated_reports": {
@@ -3137,6 +3266,7 @@
         "type": "array"
       }
     },
+    "title": "Paginated Reports",
     "type": "object"
   },
   "paginated_repositories": {
@@ -3177,6 +3307,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Repositories",
     "type": "object"
   },
   "paginated_repository_permissions": {
@@ -3217,6 +3348,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Repository Permissions",
     "type": "object"
   },
   "paginated_snippet_comments": {
@@ -3257,6 +3389,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Snippet Comments",
     "type": "object"
   },
   "paginated_snippet_commit": {
@@ -3296,6 +3429,7 @@
         "type": "array"
       }
     },
+    "title": "Paginated Snippet Commits",
     "type": "object"
   },
   "paginated_snippets": {
@@ -3336,6 +3470,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Snippets",
     "type": "object"
   },
   "paginated_ssh_user_keys": {
@@ -3376,6 +3511,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated SSH User Keys",
     "type": "object"
   },
   "paginated_tags": {
@@ -3416,6 +3552,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Tags",
     "type": "object"
   },
   "paginated_team_permissions": {
@@ -3456,6 +3593,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Team Permissions",
     "type": "object"
   },
   "paginated_teams": {
@@ -3496,6 +3634,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Teams",
     "type": "object"
   },
   "paginated_treeentries": {
@@ -3536,6 +3675,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Tree Entry",
     "type": "object"
   },
   "paginated_users": {
@@ -3576,6 +3716,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Users",
     "type": "object"
   },
   "paginated_versions": {
@@ -3616,6 +3757,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Versions",
     "type": "object"
   },
   "paginated_webhook_subscriptions": {
@@ -3656,6 +3798,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Webhook Subscriptions",
     "type": "object"
   },
   "paginated_workspace_memberships": {
@@ -3696,6 +3839,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Workspace Memberships",
     "type": "object"
   },
   "paginated_workspaces": {
@@ -3736,6 +3880,7 @@
         "uniqueItems": true
       }
     },
+    "title": "Paginated Workspaces",
     "type": "object"
   },
   "participant": {
@@ -3767,6 +3912,7 @@
             "$ref": "#/definitions/user"
           }
         },
+        "title": "Participant",
         "type": "object"
       }
     ]
@@ -3821,6 +3967,7 @@
             "type": "string"
           }
         },
+        "title": "Pipeline",
         "type": "object"
       }
     ]
@@ -3839,6 +3986,7 @@
             "type": "integer"
           }
         },
+        "title": "Pipeline Build Number",
         "type": "object"
       }
     ]
@@ -3882,6 +4030,7 @@
             "type": "string"
           }
         },
+        "title": "Pipeline Cache",
         "type": "object"
       }
     ]
@@ -3895,6 +4044,7 @@
         "type": "string"
       }
     },
+    "title": "Pipeline Cache Content URI",
     "type": "object"
   },
   "pipeline_command": {
@@ -3909,6 +4059,7 @@
         "type": "string"
       }
     },
+    "title": "Pipeline Command",
     "type": "object"
   },
   "pipeline_commit_target": {
@@ -3927,6 +4078,7 @@
             "$ref": "#/definitions/pipeline_selector"
           }
         },
+        "title": "Pipeline Commit Target",
         "type": "object"
       }
     ]
@@ -3949,6 +4101,7 @@
             "type": "string"
           }
         },
+        "title": "Pipeline Error",
         "type": "object"
       }
     ]
@@ -3973,6 +4126,7 @@
         "type": "string"
       }
     },
+    "title": "Pipeline Image",
     "type": "object"
   },
   "pipeline_known_host": {
@@ -3997,6 +4151,7 @@
             "type": "string"
           }
         },
+        "title": "Pipeline Known Host",
         "type": "object"
       }
     ]
@@ -4026,6 +4181,7 @@
             "$ref": "#/definitions/pipeline_selector"
           }
         },
+        "title": "Pipeline Ref Target",
         "type": "object"
       }
     ]
@@ -4069,6 +4225,7 @@
             "type": "string"
           }
         },
+        "title": "Pipeline Schedule",
         "type": "object"
       }
     ]
@@ -4082,6 +4239,7 @@
         "additionalProperties": true,
         "description": "A Pipelines schedule execution.",
         "properties": {},
+        "title": "Pipeline Schedule Execution",
         "type": "object"
       }
     ]
@@ -4141,6 +4299,7 @@
             "type": "string"
           }
         },
+        "title": "Pipeline Selector",
         "type": "object"
       }
     ]
@@ -4163,6 +4322,7 @@
             "type": "string"
           }
         },
+        "title": "Pipeline SSH Key Pair",
         "type": "object"
       }
     ]
@@ -4193,6 +4353,7 @@
             "type": "string"
           }
         },
+        "title": "Pipeline SSH Public Key",
         "type": "object"
       }
     ]
@@ -4206,6 +4367,7 @@
         "additionalProperties": true,
         "description": "The representation of the progress state of a pipeline.",
         "properties": {},
+        "title": "Pipeline State",
         "type": "object"
       }
     ]
@@ -4229,6 +4391,7 @@
             "description": "A result of a completed state of a pipeline."
           }
         },
+        "title": "Pipeline Completed State",
         "type": "object"
       }
     ]
@@ -4252,6 +4415,7 @@
             "type": "string"
           }
         },
+        "title": "Pipeline Completed Error",
         "type": "object"
       }
     ]
@@ -4303,6 +4467,7 @@
         "additionalProperties": true,
         "description": "A result of a completed pipeline state.",
         "properties": {},
+        "title": "Pipeline Completed Result",
         "type": "object"
       }
     ]
@@ -4364,6 +4529,7 @@
             "description": "A stage of an in progress state of a pipeline."
           }
         },
+        "title": "Pipeline In-Progress State",
         "type": "object"
       }
     ]
@@ -4415,6 +4581,7 @@
         "additionalProperties": true,
         "description": "A result of an in progress pipeline state.",
         "properties": {},
+        "title": "Pipeline In-Progress Stage",
         "type": "object"
       }
     ]
@@ -4434,6 +4601,7 @@
             "type": "string"
           }
         },
+        "title": "Pipeline Pending State",
         "type": "object"
       }
     ]
@@ -4484,6 +4652,7 @@
             "type": "string"
           }
         },
+        "title": "Pipeline Step",
         "type": "object"
       }
     ],
@@ -4508,6 +4677,7 @@
             "type": "string"
           }
         },
+        "title": "Pipeline Step Error",
         "type": "object"
       }
     ]
@@ -4521,6 +4691,7 @@
         "additionalProperties": true,
         "description": "The representation of the progress state of a pipeline step.",
         "properties": {},
+        "title": "Pipeline Step State",
         "type": "object"
       }
     ]
@@ -4637,6 +4808,7 @@
         "additionalProperties": true,
         "description": "A result of a completed pipeline step state.",
         "properties": {},
+        "title": "Pipeline Completed Step Result",
         "type": "object"
       }
     ]
@@ -4745,6 +4917,7 @@
         "additionalProperties": true,
         "description": "A representation of the target that a pipeline executes on.",
         "properties": {},
+        "title": "Pipeline Target",
         "type": "object"
       }
     ]
@@ -4758,6 +4931,7 @@
         "additionalProperties": true,
         "description": "A representation of the trigger used for a pipeline.",
         "properties": {},
+        "title": "Pipeline Trigger",
         "type": "object"
       }
     ]
@@ -4771,6 +4945,7 @@
         "additionalProperties": true,
         "description": "A Bitbucket Pipelines MANUAL trigger.",
         "properties": {},
+        "title": "Pipeline Manual Trigger",
         "type": "object"
       }
     ]
@@ -4784,6 +4959,7 @@
         "additionalProperties": true,
         "description": "A Bitbucket Pipelines PUSH trigger.",
         "properties": {},
+        "title": "Pipeline Push Trigger",
         "type": "object"
       }
     ]
@@ -4814,6 +4990,7 @@
             "type": "string"
           }
         },
+        "title": "Pipeline Variable",
         "type": "object"
       }
     ]
@@ -4835,6 +5012,7 @@
             "$ref": "#/definitions/repository"
           }
         },
+        "title": "Pipelines Configuration",
         "type": "object"
       }
     ]
@@ -4896,6 +5074,7 @@
             "properties": {
               "avatar": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -4905,10 +5084,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "html": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -4918,6 +5099,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -4939,6 +5121,7 @@
             "type": "string"
           }
         },
+        "title": "Project",
         "type": "object"
       }
     ]
@@ -4984,6 +5167,7 @@
             "properties": {
               "activity": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -4993,10 +5177,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "approve": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5006,10 +5192,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "comments": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5019,10 +5207,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "commits": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5032,10 +5222,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "decline": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5045,10 +5237,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "diff": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5058,10 +5252,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "diffstat": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5071,10 +5267,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "html": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5084,10 +5282,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "merge": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5097,10 +5297,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5110,6 +5312,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -5123,6 +5326,7 @@
                 "type": "string"
               }
             },
+            "title": "Pull Request Commit",
             "type": "object"
           },
           "participants": {
@@ -5138,6 +5342,7 @@
           },
           "rendered": {
             "additionalProperties": false,
+            "description": "User provided pull request text, interpreted in a markup language and rendered in HTML",
             "properties": {
               "description": {
                 "additionalProperties": false,
@@ -5197,6 +5402,7 @@
                 "type": "object"
               }
             },
+            "title": "Rendered Pull Request Markup",
             "type": "object"
           },
           "reviewers": {
@@ -5248,6 +5454,7 @@
             "type": "string"
           }
         },
+        "title": "Pull Request",
         "type": "object"
       }
     ]
@@ -5265,6 +5472,7 @@
             "$ref": "#/definitions/pullrequest"
           }
         },
+        "title": "Pull Request Comment",
         "type": "object"
       }
     ]
@@ -5291,6 +5499,7 @@
             "type": "string"
           }
         },
+        "title": "Pull Request Branch",
         "type": "object"
       },
       "commit": {
@@ -5301,12 +5510,14 @@
             "type": "string"
           }
         },
+        "title": "Pull Request Commit",
         "type": "object"
       },
       "repository": {
         "$ref": "#/definitions/repository"
       }
     },
+    "title": "Pull Request Endpoint",
     "type": "object"
   },
   "pullrequest_merge_parameters": {
@@ -5332,6 +5543,7 @@
       }
     },
     "required": ["type"],
+    "title": "Pull Request Merge Parameters",
     "type": "object"
   },
   "ref": {
@@ -5343,6 +5555,7 @@
         "properties": {
           "commits": {
             "additionalProperties": false,
+            "description": "A link to a resource related to this object.",
             "properties": {
               "href": {
                 "format": "uri",
@@ -5352,10 +5565,12 @@
                 "type": "string"
               }
             },
+            "title": "Link",
             "type": "object"
           },
           "html": {
             "additionalProperties": false,
+            "description": "A link to a resource related to this object.",
             "properties": {
               "href": {
                 "format": "uri",
@@ -5365,10 +5580,12 @@
                 "type": "string"
               }
             },
+            "title": "Link",
             "type": "object"
           },
           "self": {
             "additionalProperties": false,
+            "description": "A link to a resource related to this object.",
             "properties": {
               "href": {
                 "format": "uri",
@@ -5378,6 +5595,7 @@
                 "type": "string"
               }
             },
+            "title": "Link",
             "type": "object"
           }
         },
@@ -5395,6 +5613,7 @@
       }
     },
     "required": ["type"],
+    "title": "Ref",
     "type": "object"
   },
   "report": {
@@ -5471,6 +5690,7 @@
             "type": "string"
           }
         },
+        "title": "Commit Report",
         "type": "object"
       }
     ],
@@ -5544,6 +5764,7 @@
             "type": "string"
           }
         },
+        "title": "Report Annotation",
         "type": "object"
       }
     ],
@@ -5575,6 +5796,7 @@
         "type": "object"
       }
     },
+    "title": "Report Data",
     "type": "object"
   },
   "repository": {
@@ -5619,6 +5841,7 @@
             "properties": {
               "avatar": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5628,11 +5851,13 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "clone": {
                 "items": {
                   "additionalProperties": false,
+                  "description": "A link to a resource related to this object.",
                   "properties": {
                     "href": {
                       "format": "uri",
@@ -5642,12 +5867,14 @@
                       "type": "string"
                     }
                   },
+                  "title": "Link",
                   "type": "object"
                 },
                 "type": "array"
               },
               "commits": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5657,10 +5884,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "downloads": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5670,10 +5899,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "forks": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5683,10 +5914,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "hooks": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5696,10 +5929,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "html": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5709,10 +5944,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "pullrequests": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5722,10 +5959,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5735,10 +5974,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "watchers": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5748,6 +5989,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -5784,6 +6026,7 @@
             "type": "string"
           }
         },
+        "title": "Repository",
         "type": "object"
       }
     ]
@@ -5807,6 +6050,7 @@
       }
     },
     "required": ["type"],
+    "title": "Repository Permission",
     "type": "object"
   },
   "search_code_search_result": {
@@ -5952,7 +6196,7 @@
           },
           "scm": {
             "description": "The DVCS used to store the snippet.",
-            "enum": ["hg", "git"],
+            "enum": ["git"],
             "type": "string"
           },
           "title": {
@@ -5963,6 +6207,7 @@
             "type": "string"
           }
         },
+        "title": "Snippet",
         "type": "object"
       }
     ]
@@ -5981,6 +6226,7 @@
             "properties": {
               "html": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -5990,10 +6236,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -6003,6 +6251,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -6012,6 +6261,7 @@
             "$ref": "#/definitions/snippet"
           }
         },
+        "title": "Snippet Comment",
         "type": "object"
       }
     ]
@@ -6030,6 +6280,7 @@
             "properties": {
               "diff": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -6039,10 +6290,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "html": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -6052,10 +6305,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -6065,6 +6320,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -6074,6 +6330,7 @@
             "$ref": "#/definitions/snippet"
           }
         },
+        "title": "Snippet Commit",
         "type": "object"
       }
     ]
@@ -6091,6 +6348,7 @@
             "$ref": "#/definitions/account"
           }
         },
+        "title": "SSH Account Key",
         "type": "object"
       }
     ]
@@ -6129,6 +6387,7 @@
             "properties": {
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -6138,6 +6397,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -6148,6 +6408,7 @@
             "type": "string"
           }
         },
+        "title": "SSH Key",
         "type": "object"
       }
     ]
@@ -6175,6 +6436,7 @@
         "properties": {
           "events": {
             "additionalProperties": false,
+            "description": "A link to a resource related to this object.",
             "properties": {
               "href": {
                 "format": "uri",
@@ -6184,6 +6446,7 @@
                 "type": "string"
               }
             },
+            "title": "Link",
             "type": "object"
           }
         },
@@ -6194,6 +6457,7 @@
         "properties": {
           "events": {
             "additionalProperties": false,
+            "description": "A link to a resource related to this object.",
             "properties": {
               "href": {
                 "format": "uri",
@@ -6203,6 +6467,7 @@
                 "type": "string"
               }
             },
+            "title": "Link",
             "type": "object"
           }
         },
@@ -6213,6 +6478,7 @@
         "properties": {
           "events": {
             "additionalProperties": false,
+            "description": "A link to a resource related to this object.",
             "properties": {
               "href": {
                 "format": "uri",
@@ -6222,12 +6488,14 @@
                 "type": "string"
               }
             },
+            "title": "Link",
             "type": "object"
           }
         },
         "type": "object"
       }
     },
+    "title": "Subject Types",
     "type": "object"
   },
   "tag": {
@@ -6252,6 +6520,7 @@
             "$ref": "#/definitions/author"
           }
         },
+        "title": "Tag",
         "type": "object"
       }
     ]
@@ -6265,6 +6534,7 @@
         "additionalProperties": true,
         "description": "A team object.",
         "properties": {},
+        "title": "Team",
         "type": "object"
       }
     ]
@@ -6288,6 +6558,7 @@
       }
     },
     "required": ["type"],
+    "title": "Team Permission",
     "type": "object"
   },
   "treeentry": {
@@ -6306,6 +6577,7 @@
       }
     },
     "required": ["type"],
+    "title": "Tree Entry",
     "type": "object"
   },
   "user": {
@@ -6325,6 +6597,7 @@
             "type": "boolean"
           }
         },
+        "title": "User",
         "type": "object"
       }
     ]
@@ -6346,6 +6619,7 @@
             "properties": {
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -6355,6 +6629,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -6364,6 +6639,7 @@
             "type": "string"
           }
         },
+        "title": "Version",
         "type": "object"
       }
     ]
@@ -6442,6 +6718,7 @@
             "type": "string"
           }
         },
+        "title": "Webhook Subscription",
         "type": "object"
       }
     ]
@@ -6468,6 +6745,7 @@
             "properties": {
               "avatar": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -6477,10 +6755,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "html": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -6490,10 +6770,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "members": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -6503,10 +6785,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "owners": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -6516,10 +6800,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "projects": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -6529,10 +6815,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "repositories": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -6542,10 +6830,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -6555,10 +6845,12 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               },
               "snippets": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -6568,6 +6860,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -6590,6 +6883,7 @@
             "type": "string"
           }
         },
+        "title": "Workspace",
         "type": "object"
       }
     ]
@@ -6608,6 +6902,7 @@
             "properties": {
               "self": {
                 "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
                 "properties": {
                   "href": {
                     "format": "uri",
@@ -6617,6 +6912,7 @@
                     "type": "string"
                   }
                 },
+                "title": "Link",
                 "type": "object"
               }
             },
@@ -6629,6 +6925,7 @@
             "$ref": "#/definitions/workspace"
           }
         },
+        "title": "Workspace Membership",
         "type": "object"
       }
     ]
