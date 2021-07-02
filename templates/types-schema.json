@@ -387,19 +387,21 @@
             "kind": {
               "enum": [
                 "require_tasks_to_be_completed",
+                "allow_auto_merge_when_builds_pass",
+                "require_passing_builds_to_merge",
                 "force",
+                "require_all_dependencies_merged",
+                "require_commits_behind",
                 "restrict_merges",
                 "enforce_merge_checks",
                 "reset_pullrequest_changes_requested_on_change",
-                "require_approvals_to_merge",
-                "allow_auto_merge_when_builds_pass",
-                "delete",
-                "require_all_dependencies_merged",
                 "require_no_changes_requested",
+                "smart_reset_pullrequest_approvals",
                 "push",
-                "require_passing_builds_to_merge",
+                "require_approvals_to_merge",
+                "require_default_reviewer_approvals_to_merge",
                 "reset_pullrequest_approvals_on_change",
-                "require_default_reviewer_approvals_to_merge"
+                "delete"
               ],
               "type": "string"
             },
@@ -4753,7 +4755,7 @@
               "$ref": "#/definitions/Project"
             },
             "scm": {
-              "enum": ["hg", "git"],
+              "enum": ["git"],
               "type": "string"
             },
             "size": {

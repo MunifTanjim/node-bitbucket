@@ -459,19 +459,21 @@
             "description": "The type of restriction that is being applied.",
             "enum": [
               "require_tasks_to_be_completed",
+              "allow_auto_merge_when_builds_pass",
+              "require_passing_builds_to_merge",
               "force",
+              "require_all_dependencies_merged",
+              "require_commits_behind",
               "restrict_merges",
               "enforce_merge_checks",
               "reset_pullrequest_changes_requested_on_change",
-              "require_approvals_to_merge",
-              "allow_auto_merge_when_builds_pass",
-              "delete",
-              "require_all_dependencies_merged",
               "require_no_changes_requested",
+              "smart_reset_pullrequest_approvals",
               "push",
-              "require_passing_builds_to_merge",
+              "require_approvals_to_merge",
+              "require_default_reviewer_approvals_to_merge",
               "reset_pullrequest_approvals_on_change",
-              "require_default_reviewer_approvals_to_merge"
+              "delete"
             ],
             "type": "string"
           },
@@ -508,7 +510,7 @@
             "type": "array"
           },
           "value": {
-            "description": "Value with kind-specific semantics: \"require_approvals_to_merge\" uses it to require a minimum number of approvals on a PR; \"require_default_reviewer_approvals_to_merge\" uses it to require a minimum number of approvals from default reviewers on a PR; \"require_passing_builds_to_merge\" uses it to require a minimum number of passing builds.",
+            "description": "<staticmethod object at 0x7f097fa05890>",
             "type": "integer"
           }
         },
@@ -2461,7 +2463,7 @@
         "type": "integer"
       },
       "pagelen": {
-        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "description": "Current number of objects on the existing page. The default value is 500 with 5000 being the maximum allowed value.",
         "minimum": 1,
         "type": "integer"
       },
@@ -6011,7 +6013,7 @@
             "$ref": "#/definitions/project"
           },
           "scm": {
-            "enum": ["hg", "git"],
+            "enum": ["git"],
             "type": "string"
           },
           "size": {
