@@ -6,7 +6,7 @@
     "type": "apiKey"
   },
   "basic": {
-    "description": "Basic HTTP Authentication as per [RFC-2617](https://tools.ietf.org/html/rfc2617) (Digest not supported). Note that Basic Auth with username and password as credentials is only available on accounts that have 2-factor-auth / 2-step-verification disabled. If you use 2fa, you should authenticate using OAuth2 instead.",
+    "description": "Basic HTTP Authentication as per [RFC-2617](https://tools.ietf.org/html/rfc2617) (Digest not supported). Note that Basic Auth is available only with username and app password as credentials.",
     "type": "basic"
   },
   "oauth2": {
@@ -30,6 +30,8 @@
       "repository:admin": "Administer your repositories",
       "repository:delete": "Delete your repositories",
       "repository:write": "Read and modify your repositories",
+      "runner": "Access your workspaces/repositories' runners",
+      "runner:write": "Access and edit your workspaces/repositories' runners",
       "snippet": "Read your snippets",
       "snippet:write": "Read and modify your snippets",
       "team": "Read your team membership information",

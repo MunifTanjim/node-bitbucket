@@ -1039,11 +1039,45 @@
         },
         {
           "additionalProperties": true,
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
           "type": "object"
         }
       ],
       "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
+    },
+    "DeploymentsDdevPaginatedEnvironments": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/DeploymentsDdevDeploymentEnvironment"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
     },
     "DeploymentsStgWestDeploymentEnvironment": {
       "allOf": [
@@ -1052,11 +1086,45 @@
         },
         {
           "additionalProperties": true,
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
           "type": "object"
         }
       ],
       "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
+    },
+    "DeploymentsStgWestPaginatedEnvironments": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/DeploymentsStgWestDeploymentEnvironment"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
     },
     "Diffstat": {
       "additionalProperties": true,
@@ -3980,6 +4048,9 @@
             },
             "description": {
               "type": "string"
+            },
+            "has_publicly_visible_repos": {
+              "type": "boolean"
             },
             "is_private": {
               "type": "boolean"

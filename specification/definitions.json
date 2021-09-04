@@ -510,7 +510,7 @@
             "type": "array"
           },
           "value": {
-            "description": "<staticmethod object at 0x7f097fa05890>",
+            "description": "<staticmethod object at 0x7fd2c079ed90>",
             "type": "integer"
           }
         },
@@ -1237,11 +1237,59 @@
       {
         "additionalProperties": true,
         "description": "A Bitbucket Deployment Environment.",
+        "properties": {
+          "name": {
+            "description": "The name of the environment.",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "The UUID identifying the environment.",
+            "type": "string"
+          }
+        },
+        "title": "Deployment Environment",
         "type": "object"
       }
     ],
     "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
+  },
+  "deployments_ddev_paginated_environments": {
+    "description": "A paged list of environments",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/deployments_ddev_deployment_environment"
+        },
+        "minItems": 0,
+        "type": "array"
+      }
+    },
+    "title": "Paginated Deployment Environments",
+    "type": "object"
   },
   "deployments_stg_west_deployment_environment": {
     "allOf": [
@@ -1251,11 +1299,59 @@
       {
         "additionalProperties": true,
         "description": "A Bitbucket Deployment Environment.",
+        "properties": {
+          "name": {
+            "description": "The name of the environment.",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "The UUID identifying the environment.",
+            "type": "string"
+          }
+        },
+        "title": "Deployment Environment",
         "type": "object"
       }
     ],
     "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
+  },
+  "deployments_stg_west_paginated_environments": {
+    "description": "A paged list of environments",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/deployments_stg_west_deployment_environment"
+        },
+        "minItems": 0,
+        "type": "array"
+      }
+    },
+    "title": "Paginated Deployment Environments",
+    "type": "object"
   },
   "diffstat": {
     "additionalProperties": true,
@@ -5062,6 +5158,10 @@
           },
           "description": {
             "type": "string"
+          },
+          "has_publicly_visible_repos": {
+            "description": "\nIndicates whether the project contains publicly visible repositories.\nNote that private projects cannot contain public repositories.",
+            "type": "boolean"
           },
           "is_private": {
             "description": "\nIndicates whether the project is publicly accessible, or whether it is\nprivate to the team and consequently only visible to team members.\nNote that private projects cannot contain public repositories.",

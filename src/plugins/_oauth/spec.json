@@ -19,6 +19,8 @@
     "repository:admin": "Administer your repositories",
     "repository:delete": "Delete your repositories",
     "repository:write": "Read and modify your repositories",
+    "runner": "Access your workspaces/repositories' runners",
+    "runner:write": "Access and edit your workspaces/repositories' runners",
     "snippet": "Read your snippets",
     "snippet:write": "Read and modify your snippets",
     "team": "Read your team membership information",
