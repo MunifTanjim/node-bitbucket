@@ -4,6 +4,10 @@
 
 - ...
 
+## [2.6.3] - 2021-09-04
+
+- Generate from latest API Specification
+
 ## [2.6.2] - 2021-07-02
 
 - Generate from latest API Specification
@@ -65,7 +69,8 @@
 
 - Version 2 Release
 
-[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.6.2...HEAD
+[unreleased]: https://github.com/MunifTanjim/node-bitbucket/compare/2.6.3...HEAD
+[2.6.3]: https://github.com/MunifTanjim/node-bitbucket/compare/2.6.2...2.6.3
 [2.6.2]: https://github.com/MunifTanjim/node-bitbucket/compare/2.6.1...2.6.2
 [2.6.1]: https://github.com/MunifTanjim/node-bitbucket/compare/2.6.0...2.6.1
 [2.6.0]: https://github.com/MunifTanjim/node-bitbucket/compare/2.5.1...2.6.0
