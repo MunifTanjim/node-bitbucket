@@ -1,6 +1,5 @@
 const deepclean = require('clean-deep')
 const deepsort = require('deep-sort-object')
-const { writeFileSync } = require('fs')
 const get = require('lodash/get')
 const path = require('path')
 
@@ -13,6 +12,7 @@ const {
 const { extractNamespaceNames } = require('../utils/extract-namespace-names')
 const { getDuplicates } = require('../utils/get-duplicates')
 const { isPaginatedEndpoint } = require('../utils/is-paginated-endpoint')
+const { writeToFile } = require('../utils/write-to-file')
 
 const PATHS_SPEC = require('../../specification/paths.json')
 const PATHS_SPEC_EXTRAS = require('../../specification/extras/paths.json')
@@ -228,7 +228,10 @@ function generateRoutes() {
   return routesObject
 }
 
-writeFileSync(
+writeToFile(
   routesPath,
-  `${JSON.stringify(deepsort(deepclean(generateRoutes())), null, 2)}\n`
-)
+  JSON.stringify(deepsort(deepclean(generateRoutes())), null, 2)
+).catch((err) => {
+  console.error(err)
+  process.exit(1)
+})

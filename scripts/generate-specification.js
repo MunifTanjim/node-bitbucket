@@ -1,15 +1,16 @@
 const path = require('path')
 const fetch = require('node-fetch')
-const { writeFileSync } = require('fs')
 const deepsort = require('deep-sort-object')
+
+const { writeToFile } = require('./utils/write-to-file')
 
 const specPath = path.resolve('specification')
 const srcPath = path.resolve('src')
 
-const writeSpecPartialJSON = (filename, content) => {
-  writeFileSync(
+const writeSpecPartialJSON = async (filename, content) => {
+  await writeToFile(
     path.resolve(specPath, `${filename}.json`),
-    `${JSON.stringify(deepsort(content), null, 2)}\n`
+    JSON.stringify(deepsort(content), null, 2)
   )
 }
 
@@ -17,38 +18,39 @@ const API_SPECIFICATION = 'https://api.bitbucket.org/swagger.json'
 
 fetch(API_SPECIFICATION)
   .then((response) => response.json())
-  .then(({ definitions, ...apiSpec }) => {
-    writeSpecPartialJSON('definitions', definitions)
+  .then(async ({ definitions, ...apiSpec }) => {
+    await writeSpecPartialJSON('definitions', definitions)
     return apiSpec
   })
-  .then(({ paths, ...apiSpec }) => {
-    writeSpecPartialJSON('paths', paths)
+  .then(async ({ paths, ...apiSpec }) => {
+    await writeSpecPartialJSON('paths', paths)
     return apiSpec
   })
-  .then(({ securityDefinitions, ...apiSpec }) => {
-    writeSpecPartialJSON('securityDefinitions', securityDefinitions)
+  .then(async ({ securityDefinitions, ...apiSpec }) => {
+    await writeSpecPartialJSON('securityDefinitions', securityDefinitions)
 
-    writeFileSync(
+    await writeToFile(
       path.resolve(srcPath, `plugins/_oauth/spec.json`),
-      `${JSON.stringify(deepsort(securityDefinitions.oauth2), null, 2)}\n`
+      JSON.stringify(deepsort(securityDefinitions.oauth2), null, 2)
     )
     return apiSpec
   })
-  .then(({ tags, ...apiSpec }) => {
-    writeSpecPartialJSON('tags', tags)
+  .then(async ({ tags, ...apiSpec }) => {
+    await writeSpecPartialJSON('tags', tags)
     return apiSpec
   })
-  .then(({ 'x-radar-pages': xRadarPages, ...apiSpec }) => {
+  .then(async ({ 'x-radar-pages': xRadarPages, ...apiSpec }) => {
     writeSpecPartialJSON('others', apiSpec)
 
     delete apiSpec.info
     delete apiSpec['x-atlassian-narrative']
     delete apiSpec['x-revision']
-    writeFileSync(
+    await writeToFile(
       path.resolve(srcPath, `endpoint/spec.json`),
-      `${JSON.stringify(deepsort(apiSpec), null, 2)}\n`
+      JSON.stringify(deepsort(apiSpec), null, 2)
     )
   })
   .catch((err) => {
     console.error(err)
+    process.exit(1)
   })

@@ -1,10 +1,10 @@
 const deepsort = require('deep-sort-object')
 const deepmerge = require('deepmerge')
-const { writeFileSync } = require('fs')
 const { chain } = require('lodash')
 const { resolve: resolvePath } = require('path')
 
 const { pascalCase } = require('./utils/pascal-case')
+const { writeToFile } = require('./utils/write-to-file')
 
 const DEFINITIONS_SPEC = require('../specification/definitions.json')
 const PATHS_SPEC = require('../specification/paths.json')
@@ -79,4 +79,7 @@ for (const entityName of entityNames) {
 
 const typesSchemaPath = resolvePath('templates/types-schema.json')
 
-writeFileSync(typesSchemaPath, `${stringifiedSchema}\n`)
+writeToFile(typesSchemaPath, stringifiedSchema).catch((err) => {
+  console.error(err)
+  process.exit(1)
+})

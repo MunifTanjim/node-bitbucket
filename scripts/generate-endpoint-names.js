@@ -1,4 +1,3 @@
-const fs = require('fs')
 const path = require('path')
 const deepsort = require('deep-sort-object')
 const get = require('lodash/get')
@@ -6,6 +5,7 @@ const get = require('lodash/get')
 const {
   extractNamespaceFromURL,
 } = require('./utils/extract-namespace-from-url')
+const { writeToFile } = require('./utils/write-to-file')
 
 const PATHS_SPEC = require('../specification/paths.json')
 const NON_METHOD_KEYS = ['parameters']
@@ -91,7 +91,10 @@ if (nonExistentEndpointUrls.length !== 0) {
   )
 }
 
-fs.writeFileSync(
+writeToFile(
   endpointNamesPath,
-  `${JSON.stringify(deepsort(ENDPOINT_NAMES), null, 2)}\n`
-)
+  JSON.stringify(deepsort(ENDPOINT_NAMES), null, 2)
+).catch((err) => {
+  console.error(err)
+  process.exit(1)
+})
