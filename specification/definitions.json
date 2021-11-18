@@ -280,6 +280,10 @@
               "branch": {
                 "$ref": "#/definitions/branch"
               },
+              "branch_does_not_exist": {
+                "description": "Indicates if the indicated branch exists on the repository (`false`)or not (`true`). This is useful for determining a fallback to the mainbranch when a repository is inheriting its project's branching model.",
+                "type": "boolean"
+              },
               "name": {
                 "description": "Name of the target branch. Will be listed here even when the target branch does not exist. Will be `null` if targeting the main branch and the repository is empty.",
                 "type": "string"
@@ -297,6 +301,10 @@
             "properties": {
               "branch": {
                 "$ref": "#/definitions/branch"
+              },
+              "branch_does_not_exist": {
+                "description": "Indicates if the indicated branch exists on the repository (`false`)or not (`true`). This is useful for determining a fallback to the mainbranch when a repository is inheriting its project's branching model.",
+                "type": "boolean"
               },
               "name": {
                 "description": "Name of the target branch. Will be listed here even when the target branch does not exist. Will be `null` if targeting the main branch and the repository is empty.",
@@ -510,7 +518,7 @@
             "type": "array"
           },
           "value": {
-            "description": "<staticmethod object at 0x7fd2c079ed90>",
+            "description": "<staticmethod object at 0x7f7a2188e610>",
             "type": "integer"
           }
         },
@@ -5741,12 +5749,10 @@
           },
           "details": {
             "description": "A string to describe the purpose of the report.",
-            "required": true,
             "type": "string"
           },
           "external_id": {
             "description": "ID of the report provided by the report creator. It can be used to identify the report as an alternative to it's generated uuid. It is not used by Bitbucket, but only by the report creator for updating or deleting this specific report. Needs to be unique.",
-            "required": true,
             "type": "string"
           },
           "link": {
@@ -5779,7 +5785,6 @@
           },
           "title": {
             "description": "The title of the report.",
-            "required": true,
             "type": "string"
           },
           "updated_on": {
@@ -5824,7 +5829,6 @@
           },
           "external_id": {
             "description": "ID of the annotation provided by the annotation creator. It can be used to identify the annotation as an alternative to it's generated uuid. It is not used by Bitbucket, but only by the annotation creator for updating or deleting this specific annotation. Needs to be unique.",
-            "required": true,
             "type": "string"
           },
           "line": {
@@ -5853,7 +5857,6 @@
           },
           "summary": {
             "description": "The message to display to users.",
-            "required": true,
             "type": "string"
           },
           "updated_on": {

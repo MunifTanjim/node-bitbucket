@@ -332,6 +332,24 @@
     "getKnownHost": {
       "alias": "repositories.getPipelineKnownHost"
     },
+    "getOIDCConfiguration": {
+      "alias": "workspaces.getOIDCConfiguration"
+    },
+    "getOIDCKeys": {
+      "alias": "workspaces.getOIDCKeys"
+    },
+    "getPipelineContainerLog": {
+      "alias": "repositories.getPipelineContainerLog"
+    },
+    "getPipelineTestReports": {
+      "alias": "repositories.getPipelineTestReports"
+    },
+    "getPipelineTestReportTestCaseReasons": {
+      "alias": "repositories.getPipelineTestReportTestCaseReasons"
+    },
+    "getPipelineTestReportTestCases": {
+      "alias": "repositories.getPipelineTestReportTestCases"
+    },
     "getPipelineVariableForWorkspace": {
       "alias": "workspaces.getPipelineVariableForWorkspace"
     },
@@ -854,10 +872,6 @@
           "type": "string"
         },
         "repo_slug": {
-          "required": true,
-          "type": "string"
-        },
-        "variable_uuid": {
           "required": true,
           "type": "string"
         },
@@ -2581,6 +2595,35 @@
       "returns": "PipelinesConfig",
       "url": "/repositories/{workspace}/{repo_slug}/pipelines_config"
     },
+    "getPipelineContainerLog": {
+      "headers": {
+        "accept": "application/octet-stream"
+      },
+      "method": "GET",
+      "params": {
+        "log_uuid": {
+          "required": true,
+          "type": "string"
+        },
+        "pipeline_uuid": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "step_uuid": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/logs/{log_uuid}"
+    },
     "getPipelineKnownHost": {
       "method": "GET",
       "params": {
@@ -2681,6 +2724,85 @@
         }
       },
       "url": "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log"
+    },
+    "getPipelineTestReports": {
+      "headers": {
+        "accept": "application/json"
+      },
+      "method": "GET",
+      "params": {
+        "pipeline_uuid": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "step_uuid": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports"
+    },
+    "getPipelineTestReportTestCaseReasons": {
+      "headers": {
+        "accept": "application/json"
+      },
+      "method": "GET",
+      "params": {
+        "pipeline_uuid": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "step_uuid": {
+          "required": true,
+          "type": "string"
+        },
+        "test_case_uuid": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports/test_cases/{test_case_uuid}/test_case_reasons"
+    },
+    "getPipelineTestReportTestCases": {
+      "headers": {
+        "accept": "application/json"
+      },
+      "method": "GET",
+      "params": {
+        "pipeline_uuid": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "step_uuid": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports/test_cases"
     },
     "getPipelineVariable": {
       "method": "GET",
@@ -3468,6 +3590,10 @@
       "method": "GET",
       "params": {
         "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "schedule_uuid": {
           "required": true,
           "type": "string"
         },
@@ -4822,18 +4948,6 @@
       "returns": "Project",
       "url": "/teams/{username}/projects/"
     },
-    "createWebhook": {
-      "deprecated": true,
-      "method": "POST",
-      "params": {
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "WebhookSubscription",
-      "url": "/teams/{username}/hooks"
-    },
     "deletePipelineVariable": {
       "deprecated": true,
       "method": "DELETE",
@@ -4863,21 +4977,6 @@
         }
       },
       "url": "/teams/{username}/projects/{project_key}"
-    },
-    "deleteWebhook": {
-      "deprecated": true,
-      "method": "DELETE",
-      "params": {
-        "uid": {
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/teams/{username}/hooks/{uid}"
     },
     "get": {
       "deprecated": true,
@@ -4937,22 +5036,6 @@
       },
       "returns": "Project",
       "url": "/teams/{username}/projects/{project_key}"
-    },
-    "getWebhook": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "uid": {
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "WebhookSubscription",
-      "url": "/teams/{username}/hooks/{uid}"
     },
     "list": {
       "deprecated": true,
@@ -5068,18 +5151,6 @@
     "listRepositoriesForUser": {
       "alias": "users.listRepositories"
     },
-    "listWebhooks": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedWebhookSubscriptions",
-      "url": "/teams/{username}/hooks"
-    },
     "searchCode": {
       "headers": {
         "accept": "application/json"
@@ -5139,22 +5210,6 @@
       },
       "returns": "Project",
       "url": "/teams/{username}/projects/{project_key}"
-    },
-    "updateWebhook": {
-      "deprecated": true,
-      "method": "PUT",
-      "params": {
-        "uid": {
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "WebhookSubscription",
-      "url": "/teams/{username}/hooks/{uid}"
     }
   },
   "user": {
@@ -5221,18 +5276,6 @@
       "returns": "SshAccountKey",
       "url": "/users/{selected_user}/ssh-keys"
     },
-    "createWebhook": {
-      "deprecated": true,
-      "method": "POST",
-      "params": {
-        "selected_user": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "WebhookSubscription",
-      "url": "/users/{selected_user}/hooks"
-    },
     "deletePipelineVariable": {
       "deprecated": true,
       "method": "DELETE",
@@ -5279,21 +5322,6 @@
         }
       },
       "url": "/users/{selected_user}/properties/{app_key}/{property_name}"
-    },
-    "deleteWebhook": {
-      "deprecated": true,
-      "method": "DELETE",
-      "params": {
-        "selected_user": {
-          "required": true,
-          "type": "string"
-        },
-        "uid": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/users/{selected_user}/hooks/{uid}"
     },
     "get": {
       "method": "GET",
@@ -5355,22 +5383,6 @@
       "returns": "User",
       "url": "/users/{username}/members"
     },
-    "getWebhook": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "selected_user": {
-          "required": true,
-          "type": "string"
-        },
-        "uid": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "WebhookSubscription",
-      "url": "/users/{selected_user}/hooks/{uid}"
-    },
     "listEmailsForAuthedUser": {
       "alias": "user.listEmails"
     },
@@ -5410,18 +5422,6 @@
       },
       "returns": "PaginatedSshUserKeys",
       "url": "/users/{selected_user}/ssh-keys"
-    },
-    "listWebhooks": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "selected_user": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedWebhookSubscriptions",
-      "url": "/users/{selected_user}/hooks"
     },
     "retrieveUserHostedPropertyValue": {
       "method": "GET",
@@ -5516,45 +5516,17 @@
         }
       },
       "url": "/users/{selected_user}/properties/{app_key}/{property_name}"
-    },
-    "updateWebhook": {
-      "deprecated": true,
-      "method": "PUT",
-      "params": {
-        "selected_user": {
-          "required": true,
-          "type": "string"
-        },
-        "uid": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "WebhookSubscription",
-      "url": "/users/{selected_user}/hooks/{uid}"
     }
   },
   "webhooks": {
     "create": {
       "alias": "repositories.createWebhook"
     },
-    "createForTeam": {
-      "alias": "teams.createWebhook"
-    },
-    "createForUser": {
-      "alias": "users.createWebhook"
-    },
     "createWebhookForWorkspace": {
       "alias": "workspaces.createWebhookForWorkspace"
     },
     "delete": {
       "alias": "repositories.deleteWebhook"
-    },
-    "deleteForTeam": {
-      "alias": "teams.deleteWebhook"
-    },
-    "deleteForUser": {
-      "alias": "users.deleteWebhook"
     },
     "deleteWebhookForWorkspace": {
       "alias": "workspaces.deleteWebhookForWorkspace"
@@ -5564,12 +5536,6 @@
     },
     "getAllSubjectTypes": {
       "alias": "hook_events.getAllSubjectTypes"
-    },
-    "getForTeam": {
-      "alias": "teams.getWebhook"
-    },
-    "getForUser": {
-      "alias": "users.getWebhook"
     },
     "getWebhookForWorkspace": {
       "alias": "workspaces.getWebhookForWorkspace"
@@ -5583,20 +5549,8 @@
     "listForRepo": {
       "alias": "repositories.listWebhooks"
     },
-    "listForTeam": {
-      "alias": "teams.listWebhooks"
-    },
-    "listForUser": {
-      "alias": "users.listWebhooks"
-    },
     "update": {
       "alias": "repositories.updateWebhook"
-    },
-    "updateForTeam": {
-      "alias": "teams.updateWebhook"
-    },
-    "updateForUser": {
-      "alias": "users.updateWebhook"
     },
     "updateWebhookForWorkspace": {
       "alias": "workspaces.updateWebhookForWorkspace"
@@ -5732,6 +5686,32 @@
       },
       "returns": "PaginatedWorkspaceMemberships",
       "url": "/workspaces/{workspace}/members"
+    },
+    "getOIDCConfiguration": {
+      "headers": {
+        "accept": "application/json"
+      },
+      "method": "GET",
+      "params": {
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/workspaces/{workspace}/pipelines-config/identity/oidc/.well-known/openid-configuration"
+    },
+    "getOIDCKeys": {
+      "headers": {
+        "accept": "application/json"
+      },
+      "method": "GET",
+      "params": {
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/workspaces/{workspace}/pipelines-config/identity/oidc/keys.json"
     },
     "getPipelineVariableForWorkspace": {
       "method": "GET",

@@ -776,22 +776,26 @@
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/logs/{log_uuid}": {
     "get": {
-      "repositories": ""
+      "pipelines": "getPipelineContainerLog",
+      "repositories": "getPipelineContainerLog"
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports": {
     "get": {
-      "repositories": ""
+      "pipelines": "getPipelineTestReports",
+      "repositories": "getPipelineTestReports"
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports/test_cases": {
     "get": {
-      "repositories": ""
+      "pipelines": "getPipelineTestReportTestCases",
+      "repositories": "getPipelineTestReportTestCases"
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/test_reports/test_cases/{test_case_uuid}/test_case_reasons": {
     "get": {
-      "repositories": ""
+      "pipelines": "getPipelineTestReportTestCaseReasons",
+      "repositories": "getPipelineTestReportTestCaseReasons"
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline": {
@@ -1156,30 +1160,6 @@
       "teams": "listFollowing"
     }
   },
-  "/teams/{username}/hooks": {
-    "get": {
-      "teams": "listWebhooks",
-      "webhooks": "listForTeam"
-    },
-    "post": {
-      "teams": "createWebhook",
-      "webhooks": "createForTeam"
-    }
-  },
-  "/teams/{username}/hooks/{uid}": {
-    "delete": {
-      "teams": "deleteWebhook",
-      "webhooks": "deleteForTeam"
-    },
-    "get": {
-      "teams": "getWebhook",
-      "webhooks": "getForTeam"
-    },
-    "put": {
-      "teams": "updateWebhook",
-      "webhooks": "updateForTeam"
-    }
-  },
   "/teams/{username}/members": {
     "get": {
       "teams": "getAllMembers"
@@ -1299,30 +1279,6 @@
   "/users/{selected_user}": {
     "get": {
       "users": "get"
-    }
-  },
-  "/users/{selected_user}/hooks": {
-    "get": {
-      "users": "listWebhooks",
-      "webhooks": "listForUser"
-    },
-    "post": {
-      "users": "createWebhook",
-      "webhooks": "createForUser"
-    }
-  },
-  "/users/{selected_user}/hooks/{uid}": {
-    "delete": {
-      "users": "deleteWebhook",
-      "webhooks": "deleteForUser"
-    },
-    "get": {
-      "users": "getWebhook",
-      "webhooks": "getForUser"
-    },
-    "put": {
-      "users": "updateWebhook",
-      "webhooks": "updateForUser"
     }
   },
   "/users/{selected_user}/pipelines_config/variables/": {
@@ -1466,12 +1422,14 @@
   },
   "/workspaces/{workspace}/pipelines-config/identity/oidc/.well-known/openid-configuration": {
     "get": {
-      "workspaces": ""
+      "pipelines": "getOIDCConfiguration",
+      "workspaces": "getOIDCConfiguration"
     }
   },
   "/workspaces/{workspace}/pipelines-config/identity/oidc/keys.json": {
     "get": {
-      "workspaces": ""
+      "pipelines": "getOIDCKeys",
+      "workspaces": "getOIDCKeys"
     }
   },
   "/workspaces/{workspace}/pipelines-config/variables": {
