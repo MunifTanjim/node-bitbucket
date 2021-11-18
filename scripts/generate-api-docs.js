@@ -76,7 +76,14 @@ const getAPIParamDescription = (param, paramName, { method, url }) => {
     description = (find(spec.parameters, ['name', paramName]) || {}).description
   }
 
-  return description || ''
+  description = description || ''
+
+  description = description.replace(
+    /\[filtering and sorting\]\(.+\)/,
+    '[filtering and sorting](https://developer.atlassian.com/bitbucket/api/2/reference/meta/filtering)'
+  )
+
+  return description
 }
 
 const toAPIParamComment = (param, paramName, api) => {
