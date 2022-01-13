@@ -52,6 +52,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "atlassian-jwt": "^2.0.2",
     "before-after-hook": "^2.1.0",
     "deepmerge": "^4.2.2",
     "is-plain-object": "^3.0.0",

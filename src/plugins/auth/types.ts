@@ -11,7 +11,13 @@ export type AuthToken = {
   token: string
 }
 
-export type AuthOptions = AuthBasic | AuthToken
+export type AuthJwt = {
+  appKey: string
+  appClientKey: string
+  appSharedSecret: string
+}
+
+export type AuthOptions = AuthBasic | AuthToken | AuthJwt
 
 export type AuthPluginState = {
   client: APIClient
