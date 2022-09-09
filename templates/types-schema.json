@@ -8,112 +8,69 @@
         {
           "additionalProperties": true,
           "properties": {
-            "account_status": {
-              "type": "string"
-            },
             "created_on": {
               "type": "string"
             },
             "display_name": {
               "type": "string"
             },
-            "has_2fa_enabled": {
-              "type": "boolean"
-            },
             "links": {
-              "additionalProperties": false,
-              "properties": {
-                "avatar": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "followers": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "following": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "html": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "repositories": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "self": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              },
-              "type": "object"
-            },
-            "nickname": {
-              "type": "string"
+              "$ref": "#/definitions/AccountLinks"
             },
             "username": {
               "type": "string"
             },
             "uuid": {
               "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "AccountLinks": {
+      "additionalProperties": true,
+      "properties": {
+        "avatar": {
+          "$ref": "#/definitions/Link"
+        }
+      },
+      "type": "object"
+    },
+    "AppUser": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Account"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "account_id": {
+              "type": "string"
             },
-            "website": {
+            "account_status": {
+              "type": "string"
+            },
+            "kind": {
               "type": "string"
             }
           },
           "type": "object"
         }
       ]
+    },
+    "ApplicationProperty": {
+      "additionalProperties": true,
+      "properties": {
+        "_attributes": {
+          "items": {
+            "enum": ["public", "read_only"],
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
     },
     "Author": {
       "allOf": [
@@ -236,9 +193,6 @@
                 "branch": {
                   "$ref": "#/definitions/Branch"
                 },
-                "branch_does_not_exist": {
-                  "type": "boolean"
-                },
                 "name": {
                   "type": "string"
                 },
@@ -254,9 +208,6 @@
               "properties": {
                 "branch": {
                   "$ref": "#/definitions/Branch"
-                },
-                "branch_does_not_exist": {
-                  "type": "boolean"
                 },
                 "name": {
                   "type": "string"
@@ -366,83 +317,19 @@
         {
           "additionalProperties": true,
           "properties": {
-            "branch_match_kind": {
-              "enum": ["branching_model", "glob"],
-              "type": "string"
-            },
-            "branch_type": {
-              "enum": [
-                "feature",
-                "bugfix",
-                "release",
-                "hotfix",
-                "development",
-                "production"
-              ],
-              "type": "string"
-            },
             "groups": {
               "items": {
                 "$ref": "#/definitions/Group"
               },
               "type": "array"
             },
-            "id": {
-              "type": "integer"
-            },
-            "kind": {
-              "enum": [
-                "require_tasks_to_be_completed",
-                "allow_auto_merge_when_builds_pass",
-                "require_passing_builds_to_merge",
-                "force",
-                "require_all_dependencies_merged",
-                "require_commits_behind",
-                "restrict_merges",
-                "enforce_merge_checks",
-                "reset_pullrequest_changes_requested_on_change",
-                "require_no_changes_requested",
-                "smart_reset_pullrequest_approvals",
-                "push",
-                "require_approvals_to_merge",
-                "require_default_reviewer_approvals_to_merge",
-                "reset_pullrequest_approvals_on_change",
-                "delete"
-              ],
-              "type": "string"
-            },
-            "links": {
-              "additionalProperties": false,
-              "properties": {
-                "self": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "href": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              },
-              "type": "object"
-            },
-            "pattern": {
-              "type": "string"
-            },
             "users": {
               "items": {
                 "$ref": "#/definitions/Account"
               },
               "type": "array"
-            },
-            "value": {
-              "type": "integer"
             }
           },
-          "required": ["kind", "branch_match_kind", "pattern"],
           "type": "object"
         }
       ]
@@ -545,7 +432,7 @@
               "type": "string"
             },
             "user": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/Account"
             }
           },
           "type": "object"
@@ -667,7 +554,7 @@
               "type": "string"
             },
             "state": {
-              "enum": ["SUCCESSFUL", "FAILED", "INPROGRESS", "STOPPED"],
+              "enum": ["INPROGRESS", "FAILED", "SUCCESSFUL", "STOPPED"],
               "type": "string"
             },
             "updated_on": {
@@ -829,8 +716,29 @@
           "type": "object"
         }
       ],
+      "x-bb-batch-max-size": 100,
+      "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments_batch",
       "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
+    },
+    "DeploymentEnvironmentLock": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "environmentUuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "x-bb-batch-max-size": 100,
+      "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/locks_batch",
+      "x-bb-default-fields": ["*", "lock_opener.*", "owner.*"]
     },
     "DeploymentRelease": {
       "allOf": [
@@ -1056,8 +964,29 @@
           "type": "object"
         }
       ],
+      "x-bb-batch-max-size": 100,
+      "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments_batch",
       "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
+    },
+    "DeploymentsDdevDeploymentEnvironmentLock": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "environmentUuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "x-bb-batch-max-size": 100,
+      "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/locks_batch",
+      "x-bb-default-fields": ["*", "lock_opener.*", "owner.*"]
     },
     "DeploymentsDdevPaginatedEnvironments": {
       "properties": {
@@ -1103,8 +1032,29 @@
           "type": "object"
         }
       ],
+      "x-bb-batch-max-size": 100,
+      "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments_batch",
       "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
+    },
+    "DeploymentsStgWestDeploymentEnvironmentLock": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "environmentUuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "x-bb-batch-max-size": 100,
+      "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/locks_batch",
+      "x-bb-default-fields": ["*", "lock_opener.*", "owner.*"]
     },
     "DeploymentsStgWestPaginatedEnvironments": {
       "properties": {
@@ -1277,31 +1227,31 @@
         },
         "event": {
           "enum": [
-            "pullrequest:unapproved",
-            "issue:comment_created",
-            "repo:imported",
-            "repo:created",
-            "repo:commit_comment_created",
-            "pullrequest:approved",
-            "pullrequest:comment_updated",
-            "issue:updated",
-            "project:updated",
-            "repo:deleted",
-            "pullrequest:changes_request_created",
-            "pullrequest:comment_created",
-            "repo:commit_status_updated",
-            "pullrequest:updated",
+            "pullrequest:fulfilled",
             "issue:created",
-            "repo:fork",
+            "pullrequest:created",
+            "repo:transfer",
+            "pullrequest:updated",
+            "pullrequest:rejected",
             "pullrequest:comment_deleted",
             "repo:commit_status_created",
+            "repo:fork",
+            "pullrequest:comment_created",
+            "pullrequest:changes_request_created",
+            "pullrequest:approved",
+            "repo:created",
+            "issue:updated",
+            "project:updated",
+            "repo:imported",
+            "repo:commit_comment_created",
+            "issue:comment_created",
+            "repo:commit_status_updated",
             "repo:updated",
-            "pullrequest:rejected",
-            "pullrequest:fulfilled",
-            "pullrequest:created",
-            "pullrequest:changes_request_removed",
-            "repo:transfer",
-            "repo:push"
+            "repo:deleted",
+            "pullrequest:unapproved",
+            "repo:push",
+            "pullrequest:comment_updated",
+            "pullrequest:changes_request_removed"
           ],
           "type": "string"
         },
@@ -1320,7 +1270,7 @@
           "additionalProperties": true,
           "properties": {
             "assignee": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/Account"
             },
             "component": {
               "$ref": "#/definitions/Component"
@@ -1440,7 +1390,7 @@
               "type": "string"
             },
             "reporter": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/Account"
             },
             "repository": {
               "$ref": "#/definitions/Repository"
@@ -1685,7 +1635,7 @@
           "type": "string"
         },
         "user": {
-          "$ref": "#/definitions/User"
+          "$ref": "#/definitions/Account"
         }
       },
       "required": ["type"],
@@ -1761,6 +1711,18 @@
       "x-bb-detail-fields": ["connected"],
       "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}?atlassian_account_id={user.account_id}"
     },
+    "Link": {
+      "additionalProperties": false,
+      "properties": {
+        "href": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Milestone": {
       "allOf": [
         {
@@ -1826,6 +1788,33 @@
         },
         "size": {
           "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedAccounts": {
+      "additionalProperties": false,
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/Account"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -2682,6 +2671,33 @@
       },
       "type": "object"
     },
+    "PaginatedRepositoryGroupPermissions": {
+      "additionalProperties": false,
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/RepositoryGroupPermission"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "PaginatedRepositoryPermissions": {
       "additionalProperties": false,
       "properties": {
@@ -2703,6 +2719,33 @@
         "values": {
           "items": {
             "$ref": "#/definitions/RepositoryPermission"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedRepositoryUserPermissions": {
+      "additionalProperties": false,
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/RepositoryUserPermission"
           },
           "type": "array"
         }
@@ -2844,60 +2887,6 @@
       },
       "type": "object"
     },
-    "PaginatedTeamPermissions": {
-      "additionalProperties": false,
-      "properties": {
-        "next": {
-          "type": "string"
-        },
-        "page": {
-          "type": "integer"
-        },
-        "pagelen": {
-          "type": "integer"
-        },
-        "previous": {
-          "type": "string"
-        },
-        "size": {
-          "type": "integer"
-        },
-        "values": {
-          "items": {
-            "$ref": "#/definitions/TeamPermission"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "PaginatedTeams": {
-      "additionalProperties": false,
-      "properties": {
-        "next": {
-          "type": "string"
-        },
-        "page": {
-          "type": "integer"
-        },
-        "pagelen": {
-          "type": "integer"
-        },
-        "previous": {
-          "type": "string"
-        },
-        "size": {
-          "type": "integer"
-        },
-        "values": {
-          "items": {
-            "$ref": "#/definitions/Team"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
     "PaginatedTreeentries": {
       "additionalProperties": false,
       "properties": {
@@ -2919,33 +2908,6 @@
         "values": {
           "items": {
             "$ref": "#/definitions/Treeentry"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "PaginatedUsers": {
-      "additionalProperties": false,
-      "properties": {
-        "next": {
-          "type": "string"
-        },
-        "page": {
-          "type": "integer"
-        },
-        "pagelen": {
-          "type": "integer"
-        },
-        "previous": {
-          "type": "string"
-        },
-        "size": {
-          "type": "integer"
-        },
-        "values": {
-          "items": {
-            "$ref": "#/definitions/User"
           },
           "type": "array"
         }
@@ -3083,7 +3045,7 @@
               "type": "string"
             },
             "user": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/Account"
             }
           },
           "type": "object"
@@ -3701,6 +3663,8 @@
           "type": "object"
         }
       ],
+      "x-bb-batch-max-size": 100,
+      "x-bb-batch-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/steps_batch",
       "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
     },
@@ -4025,6 +3989,8 @@
           "type": "object"
         }
       ],
+      "x-bb-batch-max-size": 100,
+      "x-bb-batch-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/steps_batch",
       "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
     },
@@ -4038,6 +4004,8 @@
           "type": "object"
         }
       ],
+      "x-bb-batch-max-size": 100,
+      "x-bb-batch-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/steps_batch",
       "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
     },
@@ -4348,7 +4316,7 @@
               "$ref": "#/definitions/PullrequestEndpoint"
             },
             "state": {
-              "enum": ["MERGED", "SUPERSEDED", "OPEN", "DECLINED"],
+              "enum": ["OPEN", "MERGED", "DECLINED", "SUPERSEDED"],
               "type": "string"
             },
             "summary": {
@@ -4844,11 +4812,87 @@
         }
       ]
     },
+    "RepositoryGroupPermission": {
+      "additionalProperties": true,
+      "properties": {
+        "group": {
+          "$ref": "#/definitions/Group"
+        },
+        "links": {
+          "additionalProperties": false,
+          "properties": {
+            "self": {
+              "additionalProperties": false,
+              "properties": {
+                "href": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "permission": {
+          "enum": ["admin", "write", "read", "none"],
+          "type": "string"
+        },
+        "repository": {
+          "$ref": "#/definitions/Repository"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": ["type"],
+      "type": "object"
+    },
     "RepositoryPermission": {
       "additionalProperties": true,
       "properties": {
         "permission": {
-          "enum": ["admin", "write", "read"],
+          "enum": ["admin", "write", "read", "none"],
+          "type": "string"
+        },
+        "repository": {
+          "$ref": "#/definitions/Repository"
+        },
+        "type": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        }
+      },
+      "required": ["type"],
+      "type": "object"
+    },
+    "RepositoryUserPermission": {
+      "additionalProperties": true,
+      "properties": {
+        "links": {
+          "additionalProperties": false,
+          "properties": {
+            "self": {
+              "additionalProperties": false,
+              "properties": {
+                "href": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "permission": {
+          "enum": ["admin", "write", "read", "none"],
           "type": "string"
         },
         "repository": {
@@ -5196,25 +5240,7 @@
           },
           "type": "object"
         },
-        "team": {
-          "additionalProperties": false,
-          "properties": {
-            "events": {
-              "additionalProperties": false,
-              "properties": {
-                "href": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
-          },
-          "type": "object"
-        },
-        "user": {
+        "workspace": {
           "additionalProperties": false,
           "properties": {
             "events": {
@@ -5264,30 +5290,42 @@
         },
         {
           "additionalProperties": true,
-          "properties": {},
+          "properties": {
+            "links": {
+              "$ref": "#/definitions/TeamLinks"
+            }
+          },
           "type": "object"
         }
       ]
     },
-    "TeamPermission": {
-      "additionalProperties": true,
-      "properties": {
-        "permission": {
-          "enum": ["admin", "collaborator", "member"],
-          "type": "string"
+    "TeamLinks": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AccountLinks"
         },
-        "team": {
-          "$ref": "#/definitions/Team"
-        },
-        "type": {
-          "type": "string"
-        },
-        "user": {
-          "$ref": "#/definitions/User"
+        {
+          "additionalProperties": true,
+          "properties": {
+            "html": {
+              "$ref": "#/definitions/Link"
+            },
+            "members": {
+              "$ref": "#/definitions/Link"
+            },
+            "projects": {
+              "$ref": "#/definitions/Link"
+            },
+            "repositories": {
+              "$ref": "#/definitions/Link"
+            },
+            "self": {
+              "$ref": "#/definitions/Link"
+            }
+          },
+          "type": "object"
         }
-      },
-      "required": ["type"],
-      "type": "object"
+      ]
     },
     "Treeentry": {
       "additionalProperties": true,
@@ -5316,8 +5354,45 @@
             "account_id": {
               "type": "string"
             },
+            "account_status": {
+              "type": "string"
+            },
+            "has_2fa_enabled": {
+              "type": "boolean"
+            },
             "is_staff": {
               "type": "boolean"
+            },
+            "links": {
+              "$ref": "#/definitions/UserLinks"
+            },
+            "nickname": {
+              "type": "string"
+            },
+            "website": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "UserLinks": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AccountLinks"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "html": {
+              "$ref": "#/definitions/Link"
+            },
+            "repositories": {
+              "$ref": "#/definitions/Link"
+            },
+            "self": {
+              "$ref": "#/definitions/Link"
             }
           },
           "type": "object"
@@ -5381,31 +5456,31 @@
             "events": {
               "items": {
                 "enum": [
-                  "pullrequest:unapproved",
-                  "issue:comment_created",
-                  "repo:imported",
-                  "repo:created",
-                  "repo:commit_comment_created",
-                  "pullrequest:approved",
-                  "pullrequest:comment_updated",
-                  "issue:updated",
-                  "project:updated",
-                  "repo:deleted",
-                  "pullrequest:changes_request_created",
-                  "pullrequest:comment_created",
-                  "repo:commit_status_updated",
-                  "pullrequest:updated",
+                  "pullrequest:fulfilled",
                   "issue:created",
-                  "repo:fork",
+                  "pullrequest:created",
+                  "repo:transfer",
+                  "pullrequest:updated",
+                  "pullrequest:rejected",
                   "pullrequest:comment_deleted",
                   "repo:commit_status_created",
+                  "repo:fork",
+                  "pullrequest:comment_created",
+                  "pullrequest:changes_request_created",
+                  "pullrequest:approved",
+                  "repo:created",
+                  "issue:updated",
+                  "project:updated",
+                  "repo:imported",
+                  "repo:commit_comment_created",
+                  "issue:comment_created",
+                  "repo:commit_status_updated",
                   "repo:updated",
-                  "pullrequest:rejected",
-                  "pullrequest:fulfilled",
-                  "pullrequest:created",
-                  "pullrequest:changes_request_removed",
-                  "repo:transfer",
-                  "repo:push"
+                  "repo:deleted",
+                  "pullrequest:unapproved",
+                  "repo:push",
+                  "pullrequest:comment_updated",
+                  "pullrequest:changes_request_removed"
                 ],
                 "type": "string"
               },
@@ -5415,7 +5490,7 @@
               "$ref": "#/definitions/Object"
             },
             "subject_type": {
-              "enum": ["workspace", "user", "repository", "team"],
+              "enum": ["repository", "workspace"],
               "type": "string"
             },
             "url": {
@@ -5601,6 +5676,12 @@
     }
   },
   "properties": {
+    "Account": {
+      "$ref": "#/definitions/Account"
+    },
+    "ApplicationProperty": {
+      "$ref": "#/definitions/ApplicationProperty"
+    },
     "Branch": {
       "$ref": "#/definitions/Branch"
     },
@@ -5657,6 +5738,9 @@
     },
     "Milestone": {
       "$ref": "#/definitions/Milestone"
+    },
+    "PaginatedAccounts": {
+      "$ref": "#/definitions/PaginatedAccounts"
     },
     "PaginatedAnnotations": {
       "$ref": "#/definitions/PaginatedAnnotations"
@@ -5754,8 +5838,14 @@
     "PaginatedRepositories": {
       "$ref": "#/definitions/PaginatedRepositories"
     },
+    "PaginatedRepositoryGroupPermissions": {
+      "$ref": "#/definitions/PaginatedRepositoryGroupPermissions"
+    },
     "PaginatedRepositoryPermissions": {
       "$ref": "#/definitions/PaginatedRepositoryPermissions"
+    },
+    "PaginatedRepositoryUserPermissions": {
+      "$ref": "#/definitions/PaginatedRepositoryUserPermissions"
     },
     "PaginatedSnippetComments": {
       "$ref": "#/definitions/PaginatedSnippetComments"
@@ -5772,17 +5862,8 @@
     "PaginatedTags": {
       "$ref": "#/definitions/PaginatedTags"
     },
-    "PaginatedTeamPermissions": {
-      "$ref": "#/definitions/PaginatedTeamPermissions"
-    },
-    "PaginatedTeams": {
-      "$ref": "#/definitions/PaginatedTeams"
-    },
     "PaginatedTreeentries": {
       "$ref": "#/definitions/PaginatedTreeentries"
-    },
-    "PaginatedUsers": {
-      "$ref": "#/definitions/PaginatedUsers"
     },
     "PaginatedVersions": {
       "$ref": "#/definitions/PaginatedVersions"
@@ -5847,6 +5928,12 @@
     "Repository": {
       "$ref": "#/definitions/Repository"
     },
+    "RepositoryGroupPermission": {
+      "$ref": "#/definitions/RepositoryGroupPermission"
+    },
+    "RepositoryUserPermission": {
+      "$ref": "#/definitions/RepositoryUserPermission"
+    },
     "SearchResultPage": {
       "$ref": "#/definitions/SearchResultPage"
     },
@@ -5867,12 +5954,6 @@
     },
     "Tag": {
       "$ref": "#/definitions/Tag"
-    },
-    "Team": {
-      "$ref": "#/definitions/Team"
-    },
-    "User": {
-      "$ref": "#/definitions/User"
     },
     "Version": {
       "$ref": "#/definitions/Version"

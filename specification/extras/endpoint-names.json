@@ -614,6 +614,38 @@
       "repositories": "getPatch"
     }
   },
+  "/repositories/{workspace}/{repo_slug}/permissions-config/groups": {
+    "get": {
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug}": {
+    "delete": {
+      "repositories": ""
+    },
+    "get": {
+      "repositories": ""
+    },
+    "put": {
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/permissions-config/users": {
+    "get": {
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/permissions-config/users/{selected_user_id}": {
+    "delete": {
+      "repositories": ""
+    },
+    "get": {
+      "repositories": ""
+    },
+    "put": {
+      "repositories": ""
+    }
+  },
   "/repositories/{workspace}/{repo_slug}/pipelines_config": {
     "get": {
       "pipelines": "getConfig",
@@ -1140,46 +1172,6 @@
       "snippets": "listWatchers"
     }
   },
-  "/teams": {
-    "get": {
-      "teams": "list"
-    }
-  },
-  "/teams/{username}": {
-    "get": {
-      "teams": "get"
-    }
-  },
-  "/teams/{username}/followers": {
-    "get": {
-      "teams": "listFollowers"
-    }
-  },
-  "/teams/{username}/following": {
-    "get": {
-      "teams": "listFollowing"
-    }
-  },
-  "/teams/{username}/members": {
-    "get": {
-      "teams": "getAllMembers"
-    }
-  },
-  "/teams/{username}/permissions": {
-    "get": {
-      "teams": "listPermissions"
-    }
-  },
-  "/teams/{username}/permissions/repositories": {
-    "get": {
-      "teams": "listPermissionsForRepos"
-    }
-  },
-  "/teams/{username}/permissions/repositories/{repo_slug}": {
-    "get": {
-      "teams": "listPermissionsForRepo"
-    }
-  },
   "/teams/{username}/pipelines_config/variables/": {
     "get": {
       "pipelines": "listVariablesForTeam",
@@ -1204,40 +1196,10 @@
       "teams": "updatePipelineVariable"
     }
   },
-  "/teams/{username}/projects/": {
-    "get": {
-      "projects": "listForTeam",
-      "teams": "listProjects"
-    },
-    "post": {
-      "projects": "createForTeam",
-      "teams": "createProject"
-    }
-  },
-  "/teams/{username}/projects/{project_key}": {
-    "delete": {
-      "projects": "deleteForTeam",
-      "teams": "deleteProject"
-    },
-    "get": {
-      "projects": "getForTeam",
-      "teams": "getProject"
-    },
-    "put": {
-      "projects": "updateForTeam",
-      "teams": "updateProject"
-    }
-  },
   "/teams/{username}/search/code": {
     "get": {
       "search": "codeOfTeam",
       "teams": "searchCode"
-    }
-  },
-  "/teams/{workspace}/repositories": {
-    "get": {
-      "teams": "listRepositories",
-      "users": "listRepositoriesForTeam"
     }
   },
   "/user": {
@@ -1262,12 +1224,6 @@
     "get": {
       "repositories": "listPermissions",
       "user": "listPermissionsForRepos"
-    }
-  },
-  "/user/permissions/teams": {
-    "get": {
-      "teams": "",
-      "user": "listPermissionsForTeams"
     }
   },
   "/user/permissions/workspaces": {
@@ -1347,18 +1303,6 @@
     "put": {
       "ssh": "updateKey",
       "users": "updateSshKey"
-    }
-  },
-  "/users/{username}/members": {
-    "get": {
-      "teams": "getMembers",
-      "users": "getTeamMembers"
-    }
-  },
-  "/users/{workspace}/repositories": {
-    "get": {
-      "teams": "listRepositoriesForUser",
-      "users": "listRepositories"
     }
   },
   "/workspaces": {

@@ -173,7 +173,7 @@
       "method": "GET",
       "params": {
         "subject_type": {
-          "enum": ["workspace", "user", "repository", "team"],
+          "enum": ["repository", "workspace"],
           "required": true,
           "type": "string"
         }
@@ -445,32 +445,17 @@
     }
   },
   "projects": {
-    "createForTeam": {
-      "alias": "teams.createProject"
-    },
     "createOrUpdateProject": {
       "alias": "workspaces.createOrUpdateProject"
     },
     "createProject": {
       "alias": "workspaces.createProject"
     },
-    "deleteForTeam": {
-      "alias": "teams.deleteProject"
-    },
     "deleteProject": {
       "alias": "workspaces.deleteProject"
     },
-    "getForTeam": {
-      "alias": "teams.getProject"
-    },
     "getProject": {
       "alias": "workspaces.getProject"
-    },
-    "listForTeam": {
-      "alias": "teams.listProjects"
-    },
-    "updateForTeam": {
-      "alias": "teams.updateProject"
     }
   },
   "properties": {
@@ -583,7 +568,7 @@
           "type": "string"
         },
         "state": {
-          "enum": ["MERGED", "SUPERSEDED", "OPEN", "DECLINED"],
+          "enum": ["OPEN", "MERGED", "DECLINED", "SUPERSEDED"],
           "type": "string"
         }
       },
@@ -678,6 +663,7 @@
           "type": "string"
         }
       },
+      "returns": "Account",
       "url": "/repositories/{workspace}/{repo_slug}/default-reviewers/{target_username}"
     },
     "bulkCreateOrUpdateAnnotations": {
@@ -1665,11 +1651,6 @@
     "deleteIssueComment": {
       "method": "DELETE",
       "params": {
-        "_body": {
-          "required": true,
-          "schema": "IssueComment",
-          "type": "any"
-        },
         "comment_id": {
           "required": true,
           "type": "integer"
@@ -2192,6 +2173,7 @@
           "type": "string"
         }
       },
+      "returns": "ApplicationProperty",
       "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name}"
     },
     "getDefaultReviewer": {
@@ -2210,6 +2192,7 @@
           "type": "string"
         }
       },
+      "returns": "Account",
       "url": "/repositories/{workspace}/{repo_slug}/default-reviewers/{target_username}"
     },
     "getDeployKey": {
@@ -2278,6 +2261,9 @@
         "spec": {
           "required": true,
           "type": "string"
+        },
+        "topic": {
+          "type": "boolean"
         },
         "workspace": {
           "required": true,
@@ -2925,6 +2911,7 @@
           "type": "string"
         }
       },
+      "returns": "ApplicationProperty",
       "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pullrequest_id}/properties/{app_key}/{property_name}"
     },
     "getPullRequestPatch": {
@@ -3013,6 +3000,7 @@
           "type": "string"
         }
       },
+      "returns": "ApplicationProperty",
       "url": "/repositories/{workspace}/{repo_slug}/properties/{app_key}/{property_name}"
     },
     "getRepositoryPipelineCacheContentURI": {
@@ -3296,6 +3284,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedAccounts",
       "url": "/repositories/{workspace}/{repo_slug}/default-reviewers"
     },
     "listDeployKeys": {
@@ -3369,6 +3358,9 @@
         "spec": {
           "required": true,
           "type": "string"
+        },
+        "topic": {
+          "type": "boolean"
         },
         "workspace": {
           "required": true,
@@ -3731,7 +3723,7 @@
           "type": "string"
         },
         "state": {
-          "enum": ["MERGED", "SUPERSEDED", "OPEN", "DECLINED"],
+          "enum": ["OPEN", "MERGED", "DECLINED", "SUPERSEDED"],
           "type": "string"
         },
         "workspace": {
@@ -3840,6 +3832,7 @@
           "type": "string"
         }
       },
+      "returns": "PaginatedAccounts",
       "url": "/repositories/{workspace}/{repo_slug}/watchers"
     },
     "listWebhooks": {
@@ -4045,6 +4038,11 @@
     "updateCommitHostedPropertyValue": {
       "method": "PUT",
       "params": {
+        "_body": {
+          "required": true,
+          "schema": "ApplicationProperty",
+          "type": "any"
+        },
         "app_key": {
           "required": true,
           "type": "string"
@@ -4375,6 +4373,11 @@
     "updatePullRequestHostedPropertyValue": {
       "method": "PUT",
       "params": {
+        "_body": {
+          "required": true,
+          "schema": "ApplicationProperty",
+          "type": "any"
+        },
         "app_key": {
           "required": true,
           "type": "string"
@@ -4401,6 +4404,11 @@
     "updateRepositoryHostedPropertyValue": {
       "method": "PUT",
       "params": {
+        "_body": {
+          "required": true,
+          "schema": "ApplicationProperty",
+          "type": "any"
+        },
         "app_key": {
           "required": true,
           "type": "string"
@@ -4488,7 +4496,7 @@
       "params": {
         "_body": {
           "required": true,
-          "schema": "Snippet",
+          "schema": "SnippetComment",
           "type": "any"
         },
         "encoded_id": {
@@ -4500,7 +4508,7 @@
           "type": "string"
         }
       },
-      "returns": "Snippet",
+      "returns": "SnippetComment",
       "url": "/snippets/{workspace}/{encoded_id}/comments"
     },
     "createForUser": {
@@ -4789,7 +4797,7 @@
           "type": "string"
         }
       },
-      "returns": "PaginatedUsers",
+      "returns": "PaginatedAccounts",
       "url": "/snippets/{workspace}/{encoded_id}/watchers"
     },
     "startWatch": {
@@ -4867,6 +4875,11 @@
     "updateComment": {
       "method": "PUT",
       "params": {
+        "_body": {
+          "required": true,
+          "schema": "SnippetComment",
+          "type": "any"
+        },
         "comment_id": {
           "required": true,
           "type": "integer"
@@ -4880,6 +4893,7 @@
           "type": "string"
         }
       },
+      "returns": "SnippetComment",
       "url": "/snippets/{workspace}/{encoded_id}/comments/{comment_id}"
     }
   },
@@ -4931,23 +4945,6 @@
       "returns": "PipelineVariable",
       "url": "/teams/{username}/pipelines_config/variables/"
     },
-    "createProject": {
-      "deprecated": true,
-      "method": "POST",
-      "params": {
-        "_body": {
-          "required": true,
-          "schema": "Project",
-          "type": "any"
-        },
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Project",
-      "url": "/teams/{username}/projects/"
-    },
     "deletePipelineVariable": {
       "deprecated": true,
       "method": "DELETE",
@@ -4962,48 +4959,6 @@
         }
       },
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
-    },
-    "deleteProject": {
-      "deprecated": true,
-      "method": "DELETE",
-      "params": {
-        "project_key": {
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/teams/{username}/projects/{project_key}"
-    },
-    "get": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Team",
-      "url": "/teams/{username}"
-    },
-    "getAllMembers": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "User",
-      "url": "/teams/{username}/members"
-    },
-    "getMembers": {
-      "alias": "users.getTeamMembers"
     },
     "getPipelineVariable": {
       "deprecated": true,
@@ -5021,98 +4976,6 @@
       "returns": "PipelineVariable",
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
     },
-    "getProject": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "project_key": {
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Project",
-      "url": "/teams/{username}/projects/{project_key}"
-    },
-    "list": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "role": {
-          "enum": ["admin", "contributor", "member"],
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTeams",
-      "url": "/teams"
-    },
-    "listFollowers": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedUsers",
-      "url": "/teams/{username}/followers"
-    },
-    "listFollowing": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedUsers",
-      "url": "/teams/{username}/following"
-    },
-    "listPermissions": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedTeamPermissions",
-      "url": "/teams/{username}/permissions"
-    },
-    "listPermissionsForRepo": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "repo_slug": {
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedRepositoryPermissions",
-      "url": "/teams/{username}/permissions/repositories/{repo_slug}"
-    },
-    "listPermissionsForRepos": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedRepositoryPermissions",
-      "url": "/teams/{username}/permissions/repositories"
-    },
     "listPipelineVariables": {
       "deprecated": true,
       "method": "GET",
@@ -5124,32 +4987,6 @@
       },
       "returns": "PaginatedPipelineVariables",
       "url": "/teams/{username}/pipelines_config/variables/"
-    },
-    "listProjects": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "PaginatedProjects",
-      "url": "/teams/{username}/projects/"
-    },
-    "listRepositories": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "workspace": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/teams/{workspace}/repositories"
-    },
-    "listRepositoriesForUser": {
-      "alias": "users.listRepositories"
     },
     "searchCode": {
       "headers": {
@@ -5189,33 +5026,12 @@
       },
       "returns": "PipelineVariable",
       "url": "/teams/{username}/pipelines_config/variables/{variable_uuid}"
-    },
-    "updateProject": {
-      "deprecated": true,
-      "method": "PUT",
-      "params": {
-        "_body": {
-          "required": true,
-          "schema": "Project",
-          "type": "any"
-        },
-        "project_key": {
-          "required": true,
-          "type": "string"
-        },
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "Project",
-      "url": "/teams/{username}/projects/{project_key}"
     }
   },
   "user": {
     "get": {
       "method": "GET",
-      "returns": "User",
+      "returns": "Account",
       "url": "/user"
     },
     "getEmail": {
@@ -5236,12 +5052,6 @@
       "method": "GET",
       "returns": "PaginatedRepositoryPermissions",
       "url": "/user/permissions/repositories"
-    },
-    "listPermissionsForTeams": {
-      "deprecated": true,
-      "method": "GET",
-      "returns": "PaginatedTeamPermissions",
-      "url": "/user/permissions/teams"
     }
   },
   "users": {
@@ -5331,7 +5141,7 @@
           "type": "string"
         }
       },
-      "returns": "User",
+      "returns": "Account",
       "url": "/users/{selected_user}"
     },
     "getAuthedUser": {
@@ -5371,18 +5181,6 @@
       "returns": "SshAccountKey",
       "url": "/users/{selected_user}/ssh-keys/{key_id}"
     },
-    "getTeamMembers": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "username": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "returns": "User",
-      "url": "/users/{username}/members"
-    },
     "listEmailsForAuthedUser": {
       "alias": "user.listEmails"
     },
@@ -5397,20 +5195,6 @@
       },
       "returns": "PaginatedPipelineVariables",
       "url": "/users/{selected_user}/pipelines_config/variables/"
-    },
-    "listRepositories": {
-      "deprecated": true,
-      "method": "GET",
-      "params": {
-        "workspace": {
-          "required": true,
-          "type": "string"
-        }
-      },
-      "url": "/users/{workspace}/repositories"
-    },
-    "listRepositoriesForTeam": {
-      "alias": "teams.listRepositories"
     },
     "listSshKeys": {
       "method": "GET",
@@ -5439,6 +5223,7 @@
           "type": "string"
         }
       },
+      "returns": "ApplicationProperty",
       "url": "/users/{selected_user}/properties/{app_key}/{property_name}"
     },
     "searchCode": {
@@ -5502,6 +5287,11 @@
     "updateUserHostedPropertyValue": {
       "method": "PUT",
       "params": {
+        "_body": {
+          "required": true,
+          "schema": "ApplicationProperty",
+          "type": "any"
+        },
         "app_key": {
           "required": true,
           "type": "string"

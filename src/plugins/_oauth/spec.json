@@ -12,7 +12,7 @@
     "pipeline:variable": "Access your repositories' build pipelines and configure their variables",
     "pipeline:write": "Access and rerun your repositories' build pipelines",
     "project": "Read your workspace's project settings and read repositories contained within your workspace's projects",
-    "project:write": "Read and modify your workspace's project settings, and read and transfer repositories within your workspace's projects",
+    "project:admin": "Read and modify settings for projects in your workspace",
     "pullrequest": "Read your repositories and their pull requests",
     "pullrequest:write": "Read and modify your repositories and their pull requests",
     "repository": "Read your repositories",

@@ -8,10 +8,6 @@
         "additionalProperties": true,
         "description": "An account object.",
         "properties": {
-          "account_status": {
-            "description": "The status of the account. Currently the only possible value is \"active\", but more values may be added in the future.",
-            "type": "string"
-          },
           "created_on": {
             "format": "date-time",
             "type": "string"
@@ -19,108 +15,8 @@
           "display_name": {
             "type": "string"
           },
-          "has_2fa_enabled": {
-            "type": "boolean"
-          },
           "links": {
-            "additionalProperties": false,
-            "properties": {
-              "avatar": {
-                "additionalProperties": false,
-                "description": "A link to a resource related to this object.",
-                "properties": {
-                  "href": {
-                    "format": "uri",
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "title": "Link",
-                "type": "object"
-              },
-              "followers": {
-                "additionalProperties": false,
-                "description": "A link to a resource related to this object.",
-                "properties": {
-                  "href": {
-                    "format": "uri",
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "title": "Link",
-                "type": "object"
-              },
-              "following": {
-                "additionalProperties": false,
-                "description": "A link to a resource related to this object.",
-                "properties": {
-                  "href": {
-                    "format": "uri",
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "title": "Link",
-                "type": "object"
-              },
-              "html": {
-                "additionalProperties": false,
-                "description": "A link to a resource related to this object.",
-                "properties": {
-                  "href": {
-                    "format": "uri",
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "title": "Link",
-                "type": "object"
-              },
-              "repositories": {
-                "additionalProperties": false,
-                "description": "A link to a resource related to this object.",
-                "properties": {
-                  "href": {
-                    "format": "uri",
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "title": "Link",
-                "type": "object"
-              },
-              "self": {
-                "additionalProperties": false,
-                "description": "A link to a resource related to this object.",
-                "properties": {
-                  "href": {
-                    "format": "uri",
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "title": "Link",
-                "type": "object"
-              }
-            },
-            "type": "object"
-          },
-          "nickname": {
-            "description": "Account name defined by the owner. Should be used instead of the \"username\" field. Note that \"nickname\" cannot be used in place of \"username\" in URLs and queries, as \"nickname\" is not guaranteed to be unique.",
-            "type": "string"
+            "$ref": "#/definitions/account_links"
           },
           "username": {
             "pattern": "^[a-zA-Z0-9_\\-]+$",
@@ -128,15 +24,65 @@
           },
           "uuid": {
             "type": "string"
-          },
-          "website": {
-            "type": "string"
           }
         },
         "title": "Account",
         "type": "object"
       }
     ]
+  },
+  "account_links": {
+    "additionalProperties": true,
+    "description": "Links related to an Account.",
+    "properties": {
+      "avatar": {
+        "$ref": "#/definitions/link"
+      }
+    },
+    "title": "Account Links",
+    "type": "object"
+  },
+  "app_user": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/account"
+      },
+      {
+        "additionalProperties": true,
+        "description": "An app user object.",
+        "properties": {
+          "account_id": {
+            "description": "The user's Atlassian account ID.",
+            "type": "string"
+          },
+          "account_status": {
+            "description": "The status of the account. Currently the only possible value is \"active\", but more values may be added in the future.",
+            "type": "string"
+          },
+          "kind": {
+            "description": "The kind of App User.",
+            "type": "string"
+          }
+        },
+        "title": "App User",
+        "type": "object"
+      }
+    ]
+  },
+  "application_property": {
+    "additionalProperties": true,
+    "description": "An application property. It is a caller defined JSON object that Bitbucket will store and return. \nThe `_attributes` field at its top level can be used to control who is allowed to read and update the property. \nThe keys of the JSON object must match an allowed pattern. For details, \nsee [Application properties](/cloud/bitbucket/application-properties/).\n",
+    "properties": {
+      "_attributes": {
+        "items": {
+          "enum": ["public", "read_only"],
+          "type": "string"
+        },
+        "type": "array"
+      }
+    },
+    "title": "Application Property",
+    "type": "object"
   },
   "author": {
     "allOf": [
@@ -280,10 +226,6 @@
               "branch": {
                 "$ref": "#/definitions/branch"
               },
-              "branch_does_not_exist": {
-                "description": "Indicates if the indicated branch exists on the repository (`false`)or not (`true`). This is useful for determining a fallback to the mainbranch when a repository is inheriting its project's branching model.",
-                "type": "boolean"
-              },
               "name": {
                 "description": "Name of the target branch. Will be listed here even when the target branch does not exist. Will be `null` if targeting the main branch and the repository is empty.",
                 "type": "string"
@@ -301,10 +243,6 @@
             "properties": {
               "branch": {
                 "$ref": "#/definitions/branch"
-              },
-              "branch_does_not_exist": {
-                "description": "Indicates if the indicated branch exists on the repository (`false`)or not (`true`). This is useful for determining a fallback to the mainbranch when a repository is inheriting its project's branching model.",
-                "type": "boolean"
               },
               "name": {
                 "description": "Name of the target branch. Will be listed here even when the target branch does not exist. Will be `null` if targeting the main branch and the repository is empty.",
@@ -435,23 +373,6 @@
         "additionalProperties": true,
         "description": "A branch restriction rule.",
         "properties": {
-          "branch_match_kind": {
-            "description": "Indicates how the restriction is matched against a branch. The default is `glob`.",
-            "enum": ["branching_model", "glob"],
-            "type": "string"
-          },
-          "branch_type": {
-            "description": "Apply the restriction to branches of this type. Active when `branch_match_kind` is `branching_model`. The branch type will be calculated using the branching model configured for the repository.",
-            "enum": [
-              "feature",
-              "bugfix",
-              "release",
-              "hotfix",
-              "development",
-              "production"
-            ],
-            "type": "string"
-          },
           "groups": {
             "items": {
               "$ref": "#/definitions/group"
@@ -459,70 +380,14 @@
             "minItems": 0,
             "type": "array"
           },
-          "id": {
-            "description": "The branch restriction status' id.",
-            "type": "integer"
-          },
-          "kind": {
-            "description": "The type of restriction that is being applied.",
-            "enum": [
-              "require_tasks_to_be_completed",
-              "allow_auto_merge_when_builds_pass",
-              "require_passing_builds_to_merge",
-              "force",
-              "require_all_dependencies_merged",
-              "require_commits_behind",
-              "restrict_merges",
-              "enforce_merge_checks",
-              "reset_pullrequest_changes_requested_on_change",
-              "require_no_changes_requested",
-              "smart_reset_pullrequest_approvals",
-              "push",
-              "require_approvals_to_merge",
-              "require_default_reviewer_approvals_to_merge",
-              "reset_pullrequest_approvals_on_change",
-              "delete"
-            ],
-            "type": "string"
-          },
-          "links": {
-            "additionalProperties": false,
-            "properties": {
-              "self": {
-                "additionalProperties": false,
-                "description": "A link to a resource related to this object.",
-                "properties": {
-                  "href": {
-                    "format": "uri",
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "title": "Link",
-                "type": "object"
-              }
-            },
-            "type": "object"
-          },
-          "pattern": {
-            "description": "Apply the restriction to branches that match this pattern. Active when `branch_match_kind` is `glob`. Will be empty when `branch_match_kind` is `branching_model`.",
-            "type": "string"
-          },
           "users": {
             "items": {
               "$ref": "#/definitions/account"
             },
             "minItems": 0,
             "type": "array"
-          },
-          "value": {
-            "description": "<staticmethod object at 0x7f7a2188e610>",
-            "type": "integer"
           }
         },
-        "required": ["kind", "branch_match_kind", "pattern"],
         "title": "Branch Restriction",
         "type": "object"
       }
@@ -646,7 +511,7 @@
             "type": "string"
           },
           "user": {
-            "$ref": "#/definitions/user"
+            "$ref": "#/definitions/account"
           }
         },
         "title": "Comment",
@@ -791,7 +656,7 @@
           },
           "state": {
             "description": "Provides some indication of the status of this commit",
-            "enum": ["SUCCESSFUL", "FAILED", "INPROGRESS", "STOPPED"],
+            "enum": ["INPROGRESS", "FAILED", "SUCCESSFUL", "STOPPED"],
             "type": "string"
           },
           "updated_on": {
@@ -982,8 +847,32 @@
         "type": "object"
       }
     ],
+    "x-bb-batch-max-size": 100,
+    "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments_batch",
     "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
+  },
+  "deployment_environment_lock": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Deployment Environment Lock.",
+        "properties": {
+          "environmentUuid": {
+            "description": "The UUID identifying the environment.",
+            "type": "string"
+          }
+        },
+        "title": "Deployment Environment Lock",
+        "type": "object"
+      }
+    ],
+    "x-bb-batch-max-size": 100,
+    "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/locks_batch",
+    "x-bb-default-fields": ["*", "lock_opener.*", "owner.*"]
   },
   "deployment_release": {
     "allOf": [
@@ -1259,8 +1148,32 @@
         "type": "object"
       }
     ],
+    "x-bb-batch-max-size": 100,
+    "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments_batch",
     "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
+  },
+  "deployments_ddev_deployment_environment_lock": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Deployment Environment Lock.",
+        "properties": {
+          "environmentUuid": {
+            "description": "The UUID identifying the environment.",
+            "type": "string"
+          }
+        },
+        "title": "Deployment Environment Lock",
+        "type": "object"
+      }
+    ],
+    "x-bb-batch-max-size": 100,
+    "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/locks_batch",
+    "x-bb-default-fields": ["*", "lock_opener.*", "owner.*"]
   },
   "deployments_ddev_paginated_environments": {
     "description": "A paged list of environments",
@@ -1321,8 +1234,32 @@
         "type": "object"
       }
     ],
+    "x-bb-batch-max-size": 100,
+    "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments_batch",
     "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/{uuid}"
+  },
+  "deployments_stg_west_deployment_environment_lock": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Deployment Environment Lock.",
+        "properties": {
+          "environmentUuid": {
+            "description": "The UUID identifying the environment.",
+            "type": "string"
+          }
+        },
+        "title": "Deployment Environment Lock",
+        "type": "object"
+      }
+    ],
+    "x-bb-batch-max-size": 100,
+    "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/locks_batch",
+    "x-bb-default-fields": ["*", "lock_opener.*", "owner.*"]
   },
   "deployments_stg_west_paginated_environments": {
     "description": "A paged list of environments",
@@ -1527,31 +1464,31 @@
       "event": {
         "description": "The event identifier.",
         "enum": [
-          "pullrequest:unapproved",
-          "issue:comment_created",
-          "repo:imported",
-          "repo:created",
-          "repo:commit_comment_created",
-          "pullrequest:approved",
-          "pullrequest:comment_updated",
-          "issue:updated",
-          "project:updated",
-          "repo:deleted",
-          "pullrequest:changes_request_created",
-          "pullrequest:comment_created",
-          "repo:commit_status_updated",
-          "pullrequest:updated",
+          "pullrequest:fulfilled",
           "issue:created",
-          "repo:fork",
+          "pullrequest:created",
+          "repo:transfer",
+          "pullrequest:updated",
+          "pullrequest:rejected",
           "pullrequest:comment_deleted",
           "repo:commit_status_created",
+          "repo:fork",
+          "pullrequest:comment_created",
+          "pullrequest:changes_request_created",
+          "pullrequest:approved",
+          "repo:created",
+          "issue:updated",
+          "project:updated",
+          "repo:imported",
+          "repo:commit_comment_created",
+          "issue:comment_created",
+          "repo:commit_status_updated",
           "repo:updated",
-          "pullrequest:rejected",
-          "pullrequest:fulfilled",
-          "pullrequest:created",
-          "pullrequest:changes_request_removed",
-          "repo:transfer",
-          "repo:push"
+          "repo:deleted",
+          "pullrequest:unapproved",
+          "repo:push",
+          "pullrequest:comment_updated",
+          "pullrequest:changes_request_removed"
         ],
         "type": "string"
       },
@@ -1573,7 +1510,7 @@
         "description": "An issue.",
         "properties": {
           "assignee": {
-            "$ref": "#/definitions/user"
+            "$ref": "#/definitions/account"
           },
           "component": {
             "$ref": "#/definitions/component"
@@ -1716,7 +1653,7 @@
             "type": "string"
           },
           "reporter": {
-            "$ref": "#/definitions/user"
+            "$ref": "#/definitions/account"
           },
           "repository": {
             "$ref": "#/definitions/repository"
@@ -1979,7 +1916,7 @@
         "type": "string"
       },
       "user": {
-        "$ref": "#/definitions/user"
+        "$ref": "#/definitions/account"
       }
     },
     "required": ["type"],
@@ -2068,6 +2005,21 @@
     "x-bb-detail-fields": ["connected"],
     "x-bb-url": "/api/{target_user.uuid}/jira/sites/{cloudId}?atlassian_account_id={user.account_id}"
   },
+  "link": {
+    "additionalProperties": false,
+    "description": "A link to a resource related to this object.",
+    "properties": {
+      "href": {
+        "format": "uri",
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      }
+    },
+    "title": "Link",
+    "type": "object"
+  },
   "milestone": {
     "allOf": [
       {
@@ -2152,6 +2104,47 @@
       }
     },
     "title": "Page",
+    "type": "object"
+  },
+  "paginated_accounts": {
+    "additionalProperties": false,
+    "description": "A paginated list of accounts.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "values": {
+        "items": {
+          "$ref": "#/definitions/account"
+        },
+        "minItems": 0,
+        "type": "array",
+        "uniqueItems": true
+      }
+    },
+    "title": "Paginated Accounts",
     "type": "object"
   },
   "paginated_annotations": {
@@ -3416,6 +3409,47 @@
     "title": "Paginated Repositories",
     "type": "object"
   },
+  "paginated_repository_group_permissions": {
+    "additionalProperties": false,
+    "description": "A paginated list of repository group permissions.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "values": {
+        "items": {
+          "$ref": "#/definitions/repository_group_permission"
+        },
+        "minItems": 0,
+        "type": "array",
+        "uniqueItems": true
+      }
+    },
+    "title": "Paginated Repository Group Permissions",
+    "type": "object"
+  },
   "paginated_repository_permissions": {
     "additionalProperties": false,
     "description": "A paginated list of repository permissions.",
@@ -3455,6 +3489,47 @@
       }
     },
     "title": "Paginated Repository Permissions",
+    "type": "object"
+  },
+  "paginated_repository_user_permissions": {
+    "additionalProperties": false,
+    "description": "A paginated list of repository user permissions.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "values": {
+        "items": {
+          "$ref": "#/definitions/repository_user_permission"
+        },
+        "minItems": 0,
+        "type": "array",
+        "uniqueItems": true
+      }
+    },
+    "title": "Paginated Repository User Permissions",
     "type": "object"
   },
   "paginated_snippet_comments": {
@@ -3661,88 +3736,6 @@
     "title": "Paginated Tags",
     "type": "object"
   },
-  "paginated_team_permissions": {
-    "additionalProperties": false,
-    "description": "A paginated list of team permissions.",
-    "properties": {
-      "next": {
-        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri",
-        "type": "string"
-      },
-      "page": {
-        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
-        "minimum": 1,
-        "type": "integer"
-      },
-      "pagelen": {
-        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
-        "minimum": 1,
-        "type": "integer"
-      },
-      "previous": {
-        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri",
-        "type": "string"
-      },
-      "size": {
-        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
-        "minimum": 0,
-        "type": "integer"
-      },
-      "values": {
-        "items": {
-          "$ref": "#/definitions/team_permission"
-        },
-        "minItems": 0,
-        "type": "array",
-        "uniqueItems": true
-      }
-    },
-    "title": "Paginated Team Permissions",
-    "type": "object"
-  },
-  "paginated_teams": {
-    "additionalProperties": false,
-    "description": "A paginated list of teams.",
-    "properties": {
-      "next": {
-        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri",
-        "type": "string"
-      },
-      "page": {
-        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
-        "minimum": 1,
-        "type": "integer"
-      },
-      "pagelen": {
-        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
-        "minimum": 1,
-        "type": "integer"
-      },
-      "previous": {
-        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri",
-        "type": "string"
-      },
-      "size": {
-        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
-        "minimum": 0,
-        "type": "integer"
-      },
-      "values": {
-        "items": {
-          "$ref": "#/definitions/team"
-        },
-        "minItems": 0,
-        "type": "array",
-        "uniqueItems": true
-      }
-    },
-    "title": "Paginated Teams",
-    "type": "object"
-  },
   "paginated_treeentries": {
     "additionalProperties": false,
     "description": "A paginated list of commit_file and/or commit_directory objects.",
@@ -3782,47 +3775,6 @@
       }
     },
     "title": "Paginated Tree Entry",
-    "type": "object"
-  },
-  "paginated_users": {
-    "additionalProperties": false,
-    "description": "A paginated list of users.",
-    "properties": {
-      "next": {
-        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri",
-        "type": "string"
-      },
-      "page": {
-        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
-        "minimum": 1,
-        "type": "integer"
-      },
-      "pagelen": {
-        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
-        "minimum": 1,
-        "type": "integer"
-      },
-      "previous": {
-        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
-        "format": "uri",
-        "type": "string"
-      },
-      "size": {
-        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
-        "minimum": 0,
-        "type": "integer"
-      },
-      "values": {
-        "items": {
-          "$ref": "#/definitions/user"
-        },
-        "minItems": 0,
-        "type": "array",
-        "uniqueItems": true
-      }
-    },
-    "title": "Paginated Users",
     "type": "object"
   },
   "paginated_versions": {
@@ -4015,7 +3967,7 @@
             "type": "string"
           },
           "user": {
-            "$ref": "#/definitions/user"
+            "$ref": "#/definitions/account"
           }
         },
         "title": "Participant",
@@ -4762,6 +4714,8 @@
         "type": "object"
       }
     ],
+    "x-bb-batch-max-size": 100,
+    "x-bb-batch-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/steps_batch",
     "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
   },
@@ -5134,6 +5088,8 @@
         "type": "object"
       }
     ],
+    "x-bb-batch-max-size": 100,
+    "x-bb-batch-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/steps_batch",
     "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
   },
@@ -5148,6 +5104,8 @@
         "type": "object"
       }
     ],
+    "x-bb-batch-max-size": 100,
+    "x-bb-batch-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/steps_batch",
     "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
   },
@@ -5527,7 +5485,7 @@
           },
           "state": {
             "description": "The pull request's current status.",
-            "enum": ["MERGED", "SUPERSEDED", "OPEN", "DECLINED"],
+            "enum": ["OPEN", "MERGED", "DECLINED", "SUPERSEDED"],
             "type": "string"
           },
           "summary": {
@@ -6136,12 +6094,55 @@
       }
     ]
   },
+  "repository_group_permission": {
+    "additionalProperties": true,
+    "description": "A group's permission for a given repository.",
+    "properties": {
+      "group": {
+        "$ref": "#/definitions/group"
+      },
+      "links": {
+        "additionalProperties": false,
+        "properties": {
+          "self": {
+            "additionalProperties": false,
+            "description": "A link to a resource related to this object.",
+            "properties": {
+              "href": {
+                "format": "uri",
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "title": "Link",
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "permission": {
+        "enum": ["admin", "write", "read", "none"],
+        "type": "string"
+      },
+      "repository": {
+        "$ref": "#/definitions/repository"
+      },
+      "type": {
+        "type": "string"
+      }
+    },
+    "required": ["type"],
+    "title": "Repository Group Permission",
+    "type": "object"
+  },
   "repository_permission": {
     "additionalProperties": true,
     "description": "A user's permission for a given repository.",
     "properties": {
       "permission": {
-        "enum": ["admin", "write", "read"],
+        "enum": ["admin", "write", "read", "none"],
         "type": "string"
       },
       "repository": {
@@ -6156,6 +6157,49 @@
     },
     "required": ["type"],
     "title": "Repository Permission",
+    "type": "object"
+  },
+  "repository_user_permission": {
+    "additionalProperties": true,
+    "description": "A user's direct permission for a given repository.",
+    "properties": {
+      "links": {
+        "additionalProperties": false,
+        "properties": {
+          "self": {
+            "additionalProperties": false,
+            "description": "A link to a resource related to this object.",
+            "properties": {
+              "href": {
+                "format": "uri",
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "title": "Link",
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "permission": {
+        "enum": ["admin", "write", "read", "none"],
+        "type": "string"
+      },
+      "repository": {
+        "$ref": "#/definitions/repository"
+      },
+      "type": {
+        "type": "string"
+      },
+      "user": {
+        "$ref": "#/definitions/user"
+      }
+    },
+    "required": ["type"],
+    "title": "Repository User Permission",
     "type": "object"
   },
   "search_code_search_result": {
@@ -6557,28 +6601,7 @@
         },
         "type": "object"
       },
-      "team": {
-        "additionalProperties": false,
-        "properties": {
-          "events": {
-            "additionalProperties": false,
-            "description": "A link to a resource related to this object.",
-            "properties": {
-              "href": {
-                "format": "uri",
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              }
-            },
-            "title": "Link",
-            "type": "object"
-          }
-        },
-        "type": "object"
-      },
-      "user": {
+      "workspace": {
         "additionalProperties": false,
         "properties": {
           "events": {
@@ -6638,33 +6661,45 @@
       {
         "additionalProperties": true,
         "description": "A team object.",
-        "properties": {},
+        "properties": {
+          "links": {
+            "$ref": "#/definitions/team_links"
+          }
+        },
         "title": "Team",
         "type": "object"
       }
     ]
   },
-  "team_permission": {
-    "additionalProperties": true,
-    "description": "A user's permission for a given team.",
-    "properties": {
-      "permission": {
-        "enum": ["admin", "collaborator", "member"],
-        "type": "string"
+  "team_links": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/account_links"
       },
-      "team": {
-        "$ref": "#/definitions/team"
-      },
-      "type": {
-        "type": "string"
-      },
-      "user": {
-        "$ref": "#/definitions/user"
+      {
+        "additionalProperties": true,
+        "description": "Links related to a Team.",
+        "properties": {
+          "html": {
+            "$ref": "#/definitions/link"
+          },
+          "members": {
+            "$ref": "#/definitions/link"
+          },
+          "projects": {
+            "$ref": "#/definitions/link"
+          },
+          "repositories": {
+            "$ref": "#/definitions/link"
+          },
+          "self": {
+            "$ref": "#/definitions/link"
+          }
+        },
+        "title": "Team Links",
+        "type": "object"
       }
-    },
-    "required": ["type"],
-    "title": "Team Permission",
-    "type": "object"
+    ]
   },
   "treeentry": {
     "additionalProperties": true,
@@ -6698,11 +6733,52 @@
             "description": "The user's Atlassian account ID.",
             "type": "string"
           },
+          "account_status": {
+            "description": "The status of the account. Currently the only possible value is \"active\", but more values may be added in the future.",
+            "type": "string"
+          },
+          "has_2fa_enabled": {
+            "type": "boolean"
+          },
           "is_staff": {
             "type": "boolean"
+          },
+          "links": {
+            "$ref": "#/definitions/user_links"
+          },
+          "nickname": {
+            "description": "Account name defined by the owner. Should be used instead of the \"username\" field. Note that \"nickname\" cannot be used in place of \"username\" in URLs and queries, as \"nickname\" is not guaranteed to be unique.",
+            "type": "string"
+          },
+          "website": {
+            "type": "string"
           }
         },
         "title": "User",
+        "type": "object"
+      }
+    ]
+  },
+  "user_links": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/account_links"
+      },
+      {
+        "additionalProperties": true,
+        "description": "Links related to a User.",
+        "properties": {
+          "html": {
+            "$ref": "#/definitions/link"
+          },
+          "repositories": {
+            "$ref": "#/definitions/link"
+          },
+          "self": {
+            "$ref": "#/definitions/link"
+          }
+        },
+        "title": "User Links",
         "type": "object"
       }
     ]
@@ -6773,31 +6849,31 @@
             "description": "The events this webhook is subscribed to.",
             "items": {
               "enum": [
-                "pullrequest:unapproved",
-                "issue:comment_created",
-                "repo:imported",
-                "repo:created",
-                "repo:commit_comment_created",
-                "pullrequest:approved",
-                "pullrequest:comment_updated",
-                "issue:updated",
-                "project:updated",
-                "repo:deleted",
-                "pullrequest:changes_request_created",
-                "pullrequest:comment_created",
-                "repo:commit_status_updated",
-                "pullrequest:updated",
+                "pullrequest:fulfilled",
                 "issue:created",
-                "repo:fork",
+                "pullrequest:created",
+                "repo:transfer",
+                "pullrequest:updated",
+                "pullrequest:rejected",
                 "pullrequest:comment_deleted",
                 "repo:commit_status_created",
+                "repo:fork",
+                "pullrequest:comment_created",
+                "pullrequest:changes_request_created",
+                "pullrequest:approved",
+                "repo:created",
+                "issue:updated",
+                "project:updated",
+                "repo:imported",
+                "repo:commit_comment_created",
+                "issue:comment_created",
+                "repo:commit_status_updated",
                 "repo:updated",
-                "pullrequest:rejected",
-                "pullrequest:fulfilled",
-                "pullrequest:created",
-                "pullrequest:changes_request_removed",
-                "repo:transfer",
-                "repo:push"
+                "repo:deleted",
+                "pullrequest:unapproved",
+                "repo:push",
+                "pullrequest:comment_updated",
+                "pullrequest:changes_request_removed"
               ],
               "type": "string"
             },
@@ -6809,8 +6885,8 @@
             "$ref": "#/definitions/object"
           },
           "subject_type": {
-            "description": "The type of entity, which is `repository` in the case of webhook subscriptions on repositories.",
-            "enum": ["workspace", "user", "repository", "team"],
+            "description": "The type of entity. Set to either `repository` or `workspace` based on where the subscription is defined.",
+            "enum": ["repository", "workspace"],
             "type": "string"
           },
           "url": {
@@ -6842,7 +6918,7 @@
             "type": "string"
           },
           "is_private": {
-            "description": "Indicates whether the workspace is publicly accessible, or whether it is\nprivate to the members and consequently only visible to members.\nNote that private workspaces cannot contain public repositories.",
+            "description": "Indicates whether the workspace is publicly accessible, or whether it is\nprivate to the members and consequently only visible to members.",
             "type": "boolean"
           },
           "links": {
