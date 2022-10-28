@@ -656,7 +656,7 @@
           },
           "state": {
             "description": "Provides some indication of the status of this commit",
-            "enum": ["INPROGRESS", "FAILED", "SUCCESSFUL", "STOPPED"],
+            "enum": ["FAILED", "INPROGRESS", "SUCCESSFUL", "STOPPED"],
             "type": "string"
           },
           "updated_on": {
@@ -732,6 +732,24 @@
     ],
     "x-bb-default-fields": ["uuid", "commitHash"],
     "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commits/{commitHash}/reports/{uuid}"
+  },
+  "default_reviewer_and_type": {
+    "additionalProperties": true,
+    "description": "Object containing a user that is a default reviewer and the type of reviewer",
+    "properties": {
+      "reviewer_type": {
+        "type": "string"
+      },
+      "type": {
+        "type": "string"
+      },
+      "user": {
+        "$ref": "#/definitions/user"
+      }
+    },
+    "required": ["type"],
+    "title": "Default Reviewer and Type",
+    "type": "object"
   },
   "deploy_key": {
     "allOf": [
@@ -1326,6 +1344,80 @@
     "title": "Diff Stat",
     "type": "object"
   },
+  "effective_repo_branching_model": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A repository's effective branching model",
+        "properties": {
+          "branch_types": {
+            "description": "The active branch types.",
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "description": "The kind of branch.",
+                  "enum": ["feature", "bugfix", "release", "hotfix"],
+                  "type": "string"
+                },
+                "prefix": {
+                  "description": "The prefix for this branch type. A branch with this prefix will be classified as per `kind`. The prefix must be a valid prefix for a branch and must always exist. It cannot be blank, empty or `null`.",
+                  "type": "string"
+                }
+              },
+              "required": ["kind", "prefix"],
+              "type": "object"
+            },
+            "maxItems": 4,
+            "minItems": 0,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "development": {
+            "additionalProperties": false,
+            "properties": {
+              "branch": {
+                "$ref": "#/definitions/branch"
+              },
+              "name": {
+                "description": "Name of the target branch. Will be listed here even when the target branch does not exist. Will be `null` if targeting the main branch and the repository is empty.",
+                "type": "string"
+              },
+              "use_mainbranch": {
+                "description": "Indicates if the setting points at an explicit branch (`false`) or tracks the main branch (`true`).",
+                "type": "boolean"
+              }
+            },
+            "required": ["name", "use_mainbranch"],
+            "type": "object"
+          },
+          "production": {
+            "additionalProperties": false,
+            "properties": {
+              "branch": {
+                "$ref": "#/definitions/branch"
+              },
+              "name": {
+                "description": "Name of the target branch. Will be listed here even when the target branch does not exist. Will be `null` if targeting the main branch and the repository is empty.",
+                "type": "string"
+              },
+              "use_mainbranch": {
+                "description": "Indicates if the setting points at an explicit branch (`false`) or tracks the main branch (`true`).",
+                "type": "boolean"
+              }
+            },
+            "required": ["name", "use_mainbranch"],
+            "type": "object"
+          }
+        },
+        "title": "Effective Repository Branching Model",
+        "type": "object"
+      }
+    ]
+  },
   "error": {
     "additionalProperties": true,
     "description": "Base type for most resource objects. It defines the common `type` element that identifies an object's type. It also identifies the element as Swagger's `discriminator`.",
@@ -1464,31 +1556,31 @@
       "event": {
         "description": "The event identifier.",
         "enum": [
-          "pullrequest:fulfilled",
-          "issue:created",
-          "pullrequest:created",
-          "repo:transfer",
-          "pullrequest:updated",
-          "pullrequest:rejected",
-          "pullrequest:comment_deleted",
-          "repo:commit_status_created",
-          "repo:fork",
           "pullrequest:comment_created",
-          "pullrequest:changes_request_created",
-          "pullrequest:approved",
-          "repo:created",
-          "issue:updated",
+          "pullrequest:changes_request_removed",
+          "pullrequest:updated",
+          "pullrequest:unapproved",
+          "issue:created",
           "project:updated",
-          "repo:imported",
-          "repo:commit_comment_created",
-          "issue:comment_created",
-          "repo:commit_status_updated",
+          "issue:updated",
+          "repo:transfer",
+          "pullrequest:created",
           "repo:updated",
           "repo:deleted",
-          "pullrequest:unapproved",
-          "repo:push",
+          "issue:comment_created",
+          "repo:commit_comment_created",
           "pullrequest:comment_updated",
-          "pullrequest:changes_request_removed"
+          "pullrequest:comment_deleted",
+          "repo:commit_status_created",
+          "pullrequest:rejected",
+          "repo:commit_status_updated",
+          "repo:fork",
+          "pullrequest:approved",
+          "pullrequest:fulfilled",
+          "pullrequest:changes_request_created",
+          "repo:push",
+          "repo:imported",
+          "repo:created"
         ],
         "type": "string"
       },
@@ -2430,6 +2522,47 @@
     "title": "Paginated Components",
     "type": "object"
   },
+  "paginated_default_reviewer_and_type": {
+    "additionalProperties": false,
+    "description": "A paginated list of default reviewers with reviewer type.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "values": {
+        "items": {
+          "$ref": "#/definitions/default_reviewer_and_type"
+        },
+        "minItems": 0,
+        "type": "array",
+        "uniqueItems": true
+      }
+    },
+    "title": "Paginated Default Reviewer and Type",
+    "type": "object"
+  },
   "paginated_deploy_keys": {
     "additionalProperties": false,
     "description": "A paginated list of deploy keys.",
@@ -3165,6 +3298,47 @@
       }
     },
     "title": "Paginated Pipelines",
+    "type": "object"
+  },
+  "paginated_project_deploy_keys": {
+    "additionalProperties": false,
+    "description": "A paginated list of project deploy keys.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "values": {
+        "items": {
+          "$ref": "#/definitions/project_deploy_key"
+        },
+        "minItems": 0,
+        "type": "array",
+        "uniqueItems": true
+      }
+    },
+    "title": "Paginated Project Deploy Keys",
     "type": "object"
   },
   "paginated_projects": {
@@ -5194,6 +5368,136 @@
       }
     ]
   },
+  "project_branching_model": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A project's branching model",
+        "properties": {
+          "branch_types": {
+            "description": "The active branch types.",
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "description": "The kind of branch.",
+                  "enum": ["feature", "bugfix", "release", "hotfix"],
+                  "type": "string"
+                },
+                "prefix": {
+                  "description": "The prefix for this branch type. A branch with this prefix will be classified as per `kind`. The prefix must be a valid prefix for a branch and must always exist. It cannot be blank, empty or `null`.",
+                  "type": "string"
+                }
+              },
+              "required": ["kind", "prefix"],
+              "type": "object"
+            },
+            "maxItems": 4,
+            "minItems": 0,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "development": {
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "description": "Name of the target branch. If inherited by a repository, it will default to the main branch if the specified branch does not exist.",
+                "type": "string"
+              },
+              "use_mainbranch": {
+                "description": "Indicates if the setting points at an explicit branch (`false`) or tracks the main branch (`true`).",
+                "type": "boolean"
+              }
+            },
+            "required": ["name", "use_mainbranch"],
+            "type": "object"
+          },
+          "production": {
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "description": "Name of the target branch. If inherited by a repository, it will default to the main branch if the specified branch does not exist.",
+                "type": "string"
+              },
+              "use_mainbranch": {
+                "description": "Indicates if the setting points at an explicit branch (`false`) or tracks the main branch (`true`).",
+                "type": "boolean"
+              }
+            },
+            "required": ["name", "use_mainbranch"],
+            "type": "object"
+          }
+        },
+        "title": "Project Branching Model",
+        "type": "object"
+      }
+    ]
+  },
+  "project_deploy_key": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "Represents deploy key for a project.",
+        "properties": {
+          "added_on": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "comment": {
+            "description": "The comment parsed from the deploy key (if present)",
+            "type": "string"
+          },
+          "created_by": {
+            "$ref": "#/definitions/account"
+          },
+          "key": {
+            "description": "The deploy key value.",
+            "type": "string"
+          },
+          "label": {
+            "description": "The user-defined label for the deploy key",
+            "type": "string"
+          },
+          "last_used": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "links": {
+            "additionalProperties": false,
+            "properties": {
+              "self": {
+                "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
+                "properties": {
+                  "href": {
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "title": "Link",
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "project": {
+            "$ref": "#/definitions/project"
+          }
+        },
+        "title": "Project Deploy Key",
+        "type": "object"
+      }
+    ]
+  },
   "pullrequest": {
     "allOf": [
       {
@@ -6123,7 +6427,7 @@
         "type": "object"
       },
       "permission": {
-        "enum": ["admin", "write", "read", "none"],
+        "enum": ["read", "write", "admin", "none"],
         "type": "string"
       },
       "repository": {
@@ -6137,12 +6441,27 @@
     "title": "Repository Group Permission",
     "type": "object"
   },
+  "repository_inheritance_state": {
+    "additionalProperties": true,
+    "description": "A json object representing the repository's inheritance state values",
+    "properties": {
+      "override_settings": {
+        "type": "object"
+      },
+      "type": {
+        "type": "string"
+      }
+    },
+    "required": ["type"],
+    "title": "Repository Inheritance State",
+    "type": "object"
+  },
   "repository_permission": {
     "additionalProperties": true,
     "description": "A user's permission for a given repository.",
     "properties": {
       "permission": {
-        "enum": ["admin", "write", "read", "none"],
+        "enum": ["read", "write", "admin", "none"],
         "type": "string"
       },
       "repository": {
@@ -6185,7 +6504,7 @@
         "type": "object"
       },
       "permission": {
-        "enum": ["admin", "write", "read", "none"],
+        "enum": ["read", "write", "admin", "none"],
         "type": "string"
       },
       "repository": {
@@ -6849,31 +7168,31 @@
             "description": "The events this webhook is subscribed to.",
             "items": {
               "enum": [
-                "pullrequest:fulfilled",
-                "issue:created",
-                "pullrequest:created",
-                "repo:transfer",
-                "pullrequest:updated",
-                "pullrequest:rejected",
-                "pullrequest:comment_deleted",
-                "repo:commit_status_created",
-                "repo:fork",
                 "pullrequest:comment_created",
-                "pullrequest:changes_request_created",
-                "pullrequest:approved",
-                "repo:created",
-                "issue:updated",
+                "pullrequest:changes_request_removed",
+                "pullrequest:updated",
+                "pullrequest:unapproved",
+                "issue:created",
                 "project:updated",
-                "repo:imported",
-                "repo:commit_comment_created",
-                "issue:comment_created",
-                "repo:commit_status_updated",
+                "issue:updated",
+                "repo:transfer",
+                "pullrequest:created",
                 "repo:updated",
                 "repo:deleted",
-                "pullrequest:unapproved",
-                "repo:push",
+                "issue:comment_created",
+                "repo:commit_comment_created",
                 "pullrequest:comment_updated",
-                "pullrequest:changes_request_removed"
+                "pullrequest:comment_deleted",
+                "repo:commit_status_created",
+                "pullrequest:rejected",
+                "repo:commit_status_updated",
+                "repo:fork",
+                "pullrequest:approved",
+                "pullrequest:fulfilled",
+                "pullrequest:changes_request_created",
+                "repo:push",
+                "repo:imported",
+                "repo:created"
               ],
               "type": "string"
             },

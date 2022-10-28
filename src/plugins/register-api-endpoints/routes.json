@@ -5603,6 +5603,43 @@
       "returns": "PaginatedWorkspaces",
       "url": "/workspaces"
     },
+    "listPermissions": {
+      "method": "GET",
+      "params": {
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedWorkspaceMemberships",
+      "url": "/workspaces/{workspace}/permissions"
+    },
+    "listPermissionsForRepositories": {
+      "method": "GET",
+      "params": {
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedRepositoryPermissions",
+      "url": "/workspaces/{workspace}/permissions/repositories"
+    },
+    "listPermissionsForRepository": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedRepositoryPermissions",
+      "url": "/workspaces/{workspace}/permissions/repositories/{repo_slug}"
+    },
     "searchAccount": {
       "headers": {
         "accept": "application/json"

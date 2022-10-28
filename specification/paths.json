@@ -1151,7 +1151,7 @@
   },
   "/repositories/{workspace}/{repo_slug}/branching-model": {
     "get": {
-      "description": "Return the branching model as applied to the repository. This view is\nread-only. The branching model settings can be changed using the\n[settings](branching-model/settings#get) API.\n\nThe returned object:\n\n1. Always has a `development` property. `development.branch` contains\n   the actual repository branch object that is considered to be the\n   `development` branch. `development.branch` will not be present\n   if it does not exist.\n2. Might have a `production` property. `production` will not\n   be present when `production` is disabled.\n   `production.branch` contains the actual branch object that is\n   considered to be the `production` branch. `production.branch` will\n   not be present if it does not exist.\n3. Always has a `branch_types` array which contains all enabled branch\n   types.\n\nExample body:\n\n```\n{\n  \"development\": {\n    \"name\": \"master\",\n    \"branch\": {\n      \"type\": \"branch\",\n      \"name\": \"master\",\n      \"target\": {\n        \"hash\": \"16dffcb0de1b22e249db6799532074cf32efe80f\"\n      }\n    },\n    \"use_mainbranch\": true\n  },\n  \"production\": {\n    \"name\": \"production\",\n    \"branch\": {\n      \"type\": \"branch\",\n      \"name\": \"production\",\n      \"target\": {\n        \"hash\": \"16dffcb0de1b22e249db6799532074cf32efe80f\"\n      }\n    },\n    \"use_mainbranch\": false\n  },\n  \"branch_types\": [\n    {\n      \"kind\": \"release\",\n      \"prefix\": \"release/\"\n    },\n    {\n      \"kind\": \"hotfix\",\n      \"prefix\": \"hotfix/\"\n    },\n    {\n      \"kind\": \"feature\",\n      \"prefix\": \"feature/\"\n    },\n    {\n      \"kind\": \"bugfix\",\n      \"prefix\": \"bugfix/\"\n    }\n  ],\n  \"type\": \"branching_model\",\n  \"links\": {\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/.../branching-model\"\n    }\n  }\n}\n```",
+      "description": "Return the branching model as applied to the repository. This view is\nread-only. The branching model settings can be changed using the\n[settings](#api-repositories-workspace-repo-slug-branching-model-settings-get) API.\n\nThe returned object:\n\n1. Always has a `development` property. `development.branch` contains\n   the actual repository branch object that is considered to be the\n   `development` branch. `development.branch` will not be present\n   if it does not exist.\n2. Might have a `production` property. `production` will not\n   be present when `production` is disabled.\n   `production.branch` contains the actual branch object that is\n   considered to be the `production` branch. `production.branch` will\n   not be present if it does not exist.\n3. Always has a `branch_types` array which contains all enabled branch\n   types.\n\nExample body:\n\n```\n{\n  \"development\": {\n    \"name\": \"master\",\n    \"branch\": {\n      \"type\": \"branch\",\n      \"name\": \"master\",\n      \"target\": {\n        \"hash\": \"16dffcb0de1b22e249db6799532074cf32efe80f\"\n      }\n    },\n    \"use_mainbranch\": true\n  },\n  \"production\": {\n    \"name\": \"production\",\n    \"branch\": {\n      \"type\": \"branch\",\n      \"name\": \"production\",\n      \"target\": {\n        \"hash\": \"16dffcb0de1b22e249db6799532074cf32efe80f\"\n      }\n    },\n    \"use_mainbranch\": false\n  },\n  \"branch_types\": [\n    {\n      \"kind\": \"release\",\n      \"prefix\": \"release/\"\n    },\n    {\n      \"kind\": \"hotfix\",\n      \"prefix\": \"hotfix/\"\n    },\n    {\n      \"kind\": \"feature\",\n      \"prefix\": \"feature/\"\n    },\n    {\n      \"kind\": \"bugfix\",\n      \"prefix\": \"bugfix/\"\n    }\n  ],\n  \"type\": \"branching_model\",\n  \"links\": {\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/.../branching-model\"\n    }\n  }\n}\n```",
       "parameters": [],
       "responses": {
         "200": {
@@ -2861,7 +2861,7 @@
   },
   "/repositories/{workspace}/{repo_slug}/default-reviewers": {
     "get": {
-      "description": "Returns the repository's default reviewers.\n\nThese are the users that are automatically added as reviewers on every\nnew pull request that is created.",
+      "description": "Returns the repository's default reviewers.\n\nThese are the users that are automatically added as reviewers on every\nnew pull request that is created. To obtain the repository's default reviewers\nas well as the default reviewers inherited from the project, use the\n[effective-default-reveiwers](#api-repositories-workspace-repo-slug-effective-default-reviewers-get) endpoint.",
       "parameters": [],
       "responses": {
         "200": {
@@ -3079,7 +3079,7 @@
           "api_key": []
         }
       ],
-      "summary": "List deploy keys",
+      "summary": "List repository deploy keys",
       "tags": ["Deployments"]
     },
     "parameters": [
@@ -3132,7 +3132,7 @@
           "api_key": []
         }
       ],
-      "summary": "Add a deploy key",
+      "summary": "Add a repository deploy key",
       "tags": ["Deployments"]
     }
   },
@@ -3165,7 +3165,7 @@
           "api_key": []
         }
       ],
-      "summary": "Delete a deploy key",
+      "summary": "Delete a repository deploy key",
       "tags": ["Deployments"]
     },
     "get": {
@@ -3199,7 +3199,7 @@
           "api_key": []
         }
       ],
-      "summary": "Get a deploy key",
+      "summary": "Get a repository deploy key",
       "tags": ["Deployments"]
     },
     "parameters": [
@@ -3262,7 +3262,7 @@
           "api_key": []
         }
       ],
-      "summary": "Update a deploy key",
+      "summary": "Update a repository deploy key",
       "tags": ["Deployments"]
     }
   },
@@ -3911,6 +3911,116 @@
         "required": true,
         "type": "string"
       },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "/repositories/{workspace}/{repo_slug}/effective-branching-model": {
+    "get": {
+      "description": "",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The effective branching model object",
+          "schema": {
+            "$ref": "#/definitions/effective_repo_branching_model"
+          }
+        },
+        "401": {
+          "description": "If the request was not authenticated",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user does not have read access to the repository",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the repository does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["repository"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "Get the effective, or currently applied, branching model for a repository",
+      "tags": ["Branching model"]
+    },
+    "parameters": [
+      {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "/repositories/{workspace}/{repo_slug}/effective-default-reviewers": {
+    "get": {
+      "description": "Returns the repository's effective default reviewers. This includes both default\nreviewers defined at the repository level as well as those inherited from its project.\n\nThese are the users that are automatically added as reviewers on every\nnew pull request that is created.\n\n```\n$ curl https://bitbucket.org/!api/2.0/repositories/{workspace_slug}/{repo_slug}/effective-default-reviewers?page=1&pagelen=20\n{\n    \"pagelen\": 20,\n    \"values\": [\n        {\n            \"user\": {\n                \"display_name\": \"Patrick Wolf\",\n                \"uuid\": \"{9565301a-a3cf-4b5d-88f4-dd6af8078d7e}\"\n            },\n            \"reviewer_type\": \"project\",\n            \"type\": \"default_reviewer\",\n        },\n        {\n            \"user\": {\n                \"display_name\": \"Davis Lee\",\n                \"uuid\": \"{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\"\n            },\n            \"reviewer_type\": \"repository\",\n            \"type\": \"default_reviewer\",\n        }\n    ],\n    \"page\": 1,\n    \"size\": 2\n}\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The paginated list of effective default reviewers",
+          "schema": {
+            "$ref": "#/definitions/paginated_default_reviewer_and_type"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user does not have access to view the default reviewers",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["pullrequest"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "List effective default reviewers",
+      "tags": ["Pullrequests"]
+    },
+    "parameters": [
       {
         "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
         "in": "path",
@@ -6115,6 +6225,83 @@
       }
     ]
   },
+  "/repositories/{workspace}/{repo_slug}/override-settings": {
+    "get": {
+      "description": "",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The repository setting inheritance state",
+          "schema": {
+            "$ref": "#/definitions/repository_inheritance_state"
+          }
+        },
+        "404": {
+          "description": "If no repository exists at this location",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["repository:admin"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "Retrieve the inheritance state for repository settings",
+      "tags": ["Repositories"]
+    },
+    "parameters": [
+      {
+        "description": "This can either be the repository slug or the UUID of the repository,\nsurrounded by curly-braces, for example: `{repository UUID}`.\n",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "put": {
+      "description": "",
+      "parameters": [],
+      "responses": {
+        "204": {
+          "description": "The repository setting inheritance state was set and no content returned"
+        },
+        "404": {
+          "description": "If no repository exists at this location",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["repository:admin"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "Set the inheritance state for repository settings\n                ",
+      "tags": ["Repositories"]
+    }
+  },
   "/repositories/{workspace}/{repo_slug}/patch/{spec}": {
     "get": {
       "description": "Produces a raw patch for a single commit (diffed against its first\nparent), or a patch-series for a revspec of 2 commits (e.g.\n`3a8b42..9ff173` where the first commit represents the source and the\nsecond commit the destination).\n\nIn case of the latter (diffing a revspec), a patch series is returned\nfor the commits on the source branch (`3a8b42` and its ancestors in\nour example).\n\nWhile similar to diffs, patches:\n\n* Have a commit header (username, commit message, etc)\n* Do not support the `path=foo/bar.py` query parameter\n\nThe raw patch is returned as-is, in whatever encoding the files in the\nrepository use. It is not decoded into unicode. As such, the\ncontent-type is `text/plain`.",
@@ -6388,7 +6575,7 @@
   },
   "/repositories/{workspace}/{repo_slug}/permissions-config/users": {
     "get": {
-      "description": "Returns a paginated list of explicit user permissions for the given repository.\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/users\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n        \"type\": \"repository_user_permission\",\n        \"user\": {\n            \"type\": \"user\",\n            \"display_name\": \"Colin Cameron\",\n            \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",\n            \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"\n        },\n        \"permission\": \"admin\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/\n                     permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"\n          }\n        }\n    },\n    {\n      \"type\": \"repository_user_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\",\n        \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\"\n      },\n      \"permission\": \"write\",\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0//repositories/atlassian_tutorial/geordi/\n                   permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\"\n        }\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```",
+      "description": "Returns a paginated list of explicit user permissions for the given repository.\nThis endpoint does not support BBQL features.\n\nExample:\n\n```\n$ curl https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/permissions-config/users\n\n{\n  \"pagelen\": 10,\n  \"values\": [\n    {\n        \"type\": \"repository_user_permission\",\n        \"user\": {\n            \"type\": \"user\",\n            \"display_name\": \"Colin Cameron\",\n            \"uuid\": \"{d301aafa-d676-4ee0-88be-962be7417567}\",\n            \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"\n        },\n        \"permission\": \"admin\",\n        \"links\": {\n          \"self\": {\n            \"href\": \"https://api.bitbucket.org/2.0/repositories/atlassian_tutorial/geordi/\n                     permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324a\"\n          }\n        }\n    },\n    {\n      \"type\": \"repository_user_permission\",\n      \"user\": {\n        \"type\": \"user\",\n        \"display_name\": \"Sean Conaty\",\n        \"uuid\": \"{504c3b62-8120-4f0c-a7bc-87800b9d6f70}\",\n        \"account_id\": \"557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\"\n      },\n      \"permission\": \"write\",\n      \"links\": {\n        \"self\": {\n          \"href\": \"https://api.bitbucket.org/2.0//repositories/atlassian_tutorial/geordi/\n                   permissions-config/users/557058:ba8948b2-49da-43a9-9e8b-e7249b8e324c\"\n        }\n      }\n    }\n  ],\n  \"page\": 1,\n  \"size\": 2\n}\n```",
       "parameters": [],
       "responses": {
         "200": {
@@ -6410,7 +6597,7 @@
           }
         },
         "404": {
-          "description": "No repository exists for the given repo slug and workspace.",
+          "description": "No repository exists for the given repository slug and workspace.",
           "schema": {
             "$ref": "#/definitions/error"
           }
@@ -6583,7 +6770,7 @@
           }
         },
         "404": {
-          "description": "One or more of the workspace, repo, and selected user doesn't exist for the given identifiers.",
+          "description": "One or more of the workspace, repository, and selected user doesn't exist for the given identifiers.",
           "schema": {
             "$ref": "#/definitions/error"
           }
@@ -14165,6 +14352,577 @@
       "summary": "Update a project for a workspace",
       "tags": ["Projects"]
     }
+  },
+  "/workspaces/{workspace}/projects/{project_key}/branching-model": {
+    "get": {
+      "description": "Return the branching model set at the project level. This view is\nread-only. The branching model settings can be changed using the\n[settings](#api-workspaces-workspace-projects-project-key-branching-model-settings-get)\nAPI.\n\nThe returned object:\n\n1. Always has a `development` property. `development.name` is\n   the user-specified branch that can be inherited by an individual repository's\n   branching model.\n2. Might have a `production` property. `production` will not\n   be present when `production` is disabled.\n   `production.name` is the user-specified branch that can be\n   inherited by an individual repository's branching model.\n3. Always has a `branch_types` array which contains all enabled branch\n   types.\n\nExample body:\n\n```\n{\n  \"development\": {\n    \"name\": \"master\",\n    \"use_mainbranch\": true\n  },\n  \"production\": {\n    \"name\": \"production\",\n    \"use_mainbranch\": false\n  },\n  \"branch_types\": [\n    {\n      \"kind\": \"release\",\n      \"prefix\": \"release/\"\n    },\n    {\n      \"kind\": \"hotfix\",\n      \"prefix\": \"hotfix/\"\n    },\n    {\n      \"kind\": \"feature\",\n      \"prefix\": \"feature/\"\n    },\n    {\n      \"kind\": \"bugfix\",\n      \"prefix\": \"bugfix/\"\n    }\n  ],\n  \"type\": \"project_branching_model\",\n  \"links\": {\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/.../branching-model\"\n    }\n  }\n}\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The branching model object",
+          "schema": {
+            "$ref": "#/definitions/project_branching_model"
+          }
+        },
+        "401": {
+          "description": "If the request was not authenticated",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user does not have read access to the project",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the project does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["project:admin"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "Get the branching model for a project",
+      "tags": ["Branching model"]
+    },
+    "parameters": [
+      {
+        "description": "The project in question. This is the actual `key` assigned\nto the project.\n",
+        "in": "path",
+        "name": "project_key",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "/workspaces/{workspace}/projects/{project_key}/branching-model/settings": {
+    "get": {
+      "description": "Return the branching model configuration for a project. The returned\nobject:\n\n1. Always has a `development` property for the development branch.\n2. Always a `production` property for the production branch. The\n   production branch can be disabled.\n3. The `branch_types` contains all the branch types.\n\n\nThis is the raw configuration for the branching model. A client\nwishing to see the branching model with its actual current branches may find the\n[active model API](#api-workspaces-workspace-projects-project-key-branching-model-get)\nmore useful.\n\nExample body:\n\n```\n{\n  \"development\": {\n    \"name\": null,\n    \"use_mainbranch\": true\n  },\n  \"production\": {\n    \"name\": \"production\",\n    \"use_mainbranch\": false,\n    \"enabled\": false\n  },\n  \"branch_types\": [\n    {\n      \"kind\": \"release\",\n      \"enabled\": true,\n      \"prefix\": \"release/\"\n    },\n    {\n      \"kind\": \"hotfix\",\n      \"enabled\": true,\n      \"prefix\": \"hotfix/\"\n    },\n    {\n      \"kind\": \"feature\",\n      \"enabled\": true,\n      \"prefix\": \"feature/\"\n    },\n    {\n      \"kind\": \"bugfix\",\n      \"enabled\": false,\n      \"prefix\": \"bugfix/\"\n    }\n  ],\n  \"type\": \"branching_model_settings\",\n  \"links\": {\n    \"self\": {\n      \"href\": \"https://api.bitbucket.org/.../branching-model/settings\"\n    }\n  }\n}\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The branching model configuration",
+          "schema": {
+            "$ref": "#/definitions/branching_model_settings"
+          }
+        },
+        "401": {
+          "description": "If the request was not authenticated",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user does not have admin access to the project",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the project does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["project:admin"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "Get the branching model config for a project",
+      "tags": ["Branching model"]
+    },
+    "parameters": [
+      {
+        "description": "The project in question. This is the actual `key` assigned\nto the project.\n",
+        "in": "path",
+        "name": "project_key",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "put": {
+      "description": "Update the branching model configuration for a project.\n\nThe `development` branch can be configured to a specific branch or to\ntrack the main branch. Any branch name can be supplied, but will only\nsuccessfully be applied to a repository via inheritance if that branch\nexists for that repository. Only the passed properties will be updated. The\nproperties not passed will be left unchanged. A request without a\n`development` property will leave the development branch unchanged.\n\nThe `production` branch can be a specific branch, the main\nbranch or disabled. Any branch name can be supplied, but will only\nsuccessfully be applied to a repository via inheritance if that branch\nexists for that repository. The `enabled` property can be used to enable (`true`)\nor disable (`false`) it. Only the passed properties will be updated. The\nproperties not passed will be left unchanged. A request without a\n`production` property will leave the production branch unchanged.\n\nThe `branch_types` property contains the branch types to be updated.\nOnly the branch types passed will be updated. All updates will be\nrejected if it would leave the branching model in an invalid state.\nFor branch types this means that:\n\n1. The prefixes for all enabled branch types are valid. For example,\n   it is not possible to use '*' inside a Git prefix.\n2. A prefix of an enabled branch type must not be a prefix of another\n   enabled branch type. This is to ensure that a branch can be easily\n   classified by its prefix unambiguously.\n\nIt is possible to store an invalid prefix if that branch type would be\nleft disabled. Only the passed properties will be updated. The\nproperties not passed will be left unchanged. Each branch type must\nhave a `kind` property to identify it.\n\nExample Body:\n\n```\n    {\n      \"development\": {\n        \"use_mainbranch\": true\n      },\n      \"production\": {\n        \"enabled\": true,\n        \"use_mainbranch\": false,\n        \"name\": \"production\"\n      },\n      \"branch_types\": [\n        {\n          \"kind\": \"bugfix\",\n          \"enabled\": true,\n          \"prefix\": \"bugfix/\"\n        },\n        {\n          \"kind\": \"feature\",\n          \"enabled\": true,\n          \"prefix\": \"feature/\"\n        },\n        {\n          \"kind\": \"hotfix\",\n          \"prefix\": \"hotfix/\"\n        },\n        {\n          \"kind\": \"release\",\n          \"enabled\": false,\n        }\n      ]\n    }\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The updated branching model configuration",
+          "schema": {
+            "$ref": "#/definitions/branching_model_settings"
+          }
+        },
+        "400": {
+          "description": "If the request contains an invalid branching model configuration",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "401": {
+          "description": "If the request was not authenticated",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user does not have admin access to the project",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the project does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["project:admin"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "Update the branching model config for a project",
+      "tags": ["Branching model"]
+    }
+  },
+  "/workspaces/{workspace}/projects/{project_key}/default-reviewers": {
+    "get": {
+      "description": "Return a list of all default reviewers for a project. This is a list of users that will be added as default\nreviewers to pull requests for any repository within the project.\n\nExample:\n```\n$ curl https://bitbucket.org/!api/2.0/.../projects/.../default-reviewers | jq .\n{\n    \"pagelen\": 10,\n    \"values\": [\n        {\n            \"user\": {\n                \"display_name\": \"Davis Lee\",\n                \"uuid\": \"{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\"\n            },\n            \"reviewer_type\": \"project\",\n            \"type\": \"default_reviewer\"\n        },\n        {\n            \"user\": {\n                \"display_name\": \"Jorge Rodriguez\",\n                \"uuid\": \"{1aa43376-260d-4a0b-9660-f62672b9655d}\"\n            },\n            \"reviewer_type\": \"project\",\n            \"type\": \"default_reviewer\"\n        }\n    ],\n    \"page\": 1,\n    \"size\": 2\n}\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The list of project default reviewers",
+          "schema": {
+            "$ref": "#/definitions/paginated_default_reviewer_and_type"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user does not have admin access to the project",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the workspace or project does not exist at this location",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["project:admin"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "List the default reviewers in a project",
+      "tags": ["Projects"]
+    },
+    "parameters": [
+      {
+        "description": "The project in question. This is the actual `key` assigned\nto the project.\n",
+        "in": "path",
+        "name": "project_key",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "/workspaces/{workspace}/projects/{project_key}/default-reviewers/{selected_user}": {
+    "delete": {
+      "description": "Removes a default reviewer from the project.\n\nExample:\n```\n$ curl https://bitbucket.org/!api/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D\n\nHTTP/1.1 204\n```",
+      "parameters": [],
+      "responses": {
+        "204": {
+          "description": "The specified user was removed from the list of project default  reviewers"
+        },
+        "400": {
+          "description": "If the specified user is not a default reviewer for the project",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user does not have admin access to the project",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the specified user, project, or workspace does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["project:admin"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "Remove the specific user from the project's default reviewers",
+      "tags": ["Projects"]
+    },
+    "get": {
+      "description": "Returns the specified default reviewer.\n\nExample:\n```\n$ curl https://bitbucket.org/!api/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D\n{\n    \"display_name\": \"Davis Lee\",\n    \"type\": \"user\",\n    \"uuid\": \"{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}\"\n}\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The specified user that is a default reviewer",
+          "schema": {
+            "$ref": "#/definitions/user"
+          }
+        },
+        "400": {
+          "description": "If the specified user is not a default reviewer for the project",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user does not have admin access to the project",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the specified user, project, or workspace does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["project:admin"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "Get a default reviewer",
+      "tags": ["Projects"]
+    },
+    "parameters": [
+      {
+        "description": "The project in question. This can either be the actual `key` assigned\nto the project or the `UUID` (surrounded by curly-braces (`{}`)).\n",
+        "in": "path",
+        "name": "project_key",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the username or the UUID of the default reviewer,\nsurrounded by curly-braces, for example: `{account UUID}`.\n",
+        "in": "path",
+        "name": "selected_user",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "put": {
+      "description": "Adds the specified user to the project's list of default reviewers. The method is\nidempotent. Accepts an optional body containing the `uuid` of the user to be added.\n\nExample:\n```\n$ curl -XPUT https://bitbucket.org/!api/2.0/.../default-reviewers/%7Bf0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6%7D\n-d { 'uuid': '{f0e0e8e9-66c1-4b85-a784-44a9eb9ef1a6}' }\n\nHTTP/1.1 204\n```",
+      "parameters": [],
+      "responses": {
+        "204": {
+          "description": "The specified user was added as a project default reviewer",
+          "schema": {
+            "$ref": "#/definitions/user"
+          }
+        },
+        "400": {
+          "description": "If the specified user cannot be added as a default reviewer for the project",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "If the authenticated user does not have admin access to the project",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the specified user, project, or workspace does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["project:admin"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "Add the specific user as a default reviewer for the project",
+      "tags": ["Projects"]
+    }
+  },
+  "/workspaces/{workspace}/projects/{project_key}/deploy-keys": {
+    "get": {
+      "description": "Returns all deploy keys belonging to a project.\n\nExample:\n```\n$ curl -H \"Authorization <auth header>\" \\\nhttps://api.bitbucket.org/2.0/workspaces/standard/projects/TEST_PROJECT/deploy-keys\n\nOutput:\n{\n    \"pagelen\":10,\n    \"values\":[\n        {\n            \"comment\":\"thakseth@C02W454JHTD8\",\n            \"last_used\":null,\n            \"links\":{\n                \"self\":{\n                    \"href\":\"https://api.bitbucket.org/2.0/workspaces/standard/projects/TEST_PROJECT/deploy-keys/1234\"\n                }\n            },\n            \"label\":\"test\",\n            \"project\":{\n                \"links\":{\n                    \"self\":{\n                        \"href\":\"https://api.bitbucket.org/2.0/workspaces/standard/projects/TEST_PROJECT\"\n                    }\n                },\n                \"type\":\"project\",\n                \"name\":\"cooperative standard\",\n                \"key\":\"TEST_PROJECT\",\n                \"uuid\":\"{3b3e510b-7f2b-414d-a2b7-76c4e405c1c0}\"\n            },\n            \"created_on\":\"2021-07-28T21:20:19.491721+00:00\",\n            \"key\":\"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDX5yfMOEw6HG9jKTYTisbmDTJ4MCUTSVGr5e4OWvY3UuI2A6F8SdzQqa2f5BABA/4g5Sk5awJrYHlNu3EzV1V2I44tR3A4fnZAG71ZKyDPi1wvdO7UYmFgxV/Vd18H9QZFFjICGDM7W0PT2mI0kON/jN3qNWi+GiB/xgaeQKSqynysdysDp8lnnI/8Sh3ikURP9UP83ShRCpAXszOUNaa+UUlcYQYBDLIGowsg51c4PCkC3DNhAMxppkNRKoSOWwyl+oRVXHSDylkiJSBHW3HH4Q6WHieD54kGrjbhWBKdnnxKX7QAAZBDseY+t01N36m6/ljvXSUEcBWtHxBYye0r\",\n            \"type\":\"project_deploy_key\",\n            \"id\":1234\n        }\n    ],\n    \"page\":1,\n    \"size\":1\n}\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "Deploy keys matching the project",
+          "schema": {
+            "$ref": "#/definitions/paginated_project_deploy_keys"
+          }
+        },
+        "403": {
+          "description": "If the specified workspace or project is not accessible to the current user",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the specified workspace or project does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["project", "project:admin"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "List project deploy keys",
+      "tags": ["Deployments"]
+    },
+    "parameters": [
+      {
+        "description": "The project in question. This is the actual `key` assigned\nto the project.\n",
+        "in": "path",
+        "name": "project_key",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "post": {
+      "description": "Create a new deploy key in a project.\n\nExample:\n```\n$ curl -XPOST \\\n-H \"Authorization <auth header>\" \\\n-H \"Content-type: application/json\" \\\nhttps://api.bitbucket.org/!api/2.0/workspaces/jzeng/projects/JZ/deploy-keys/ -d \\\n'{\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5 mleu@C02W454JHTD8\",\n    \"label\": \"mydeploykey\"\n}'\n\nOutput:\n{\n    \"comment\": \"mleu@C02W454JHTD8\",\n    \"last_used\": null,\n    \"links\": {\n        \"self\": {\n            \"href\": \"https://jzeng.devbucket.org/!api/2.0/workspaces/testadfsa/projects/ASDF/deploy-keys/5/\"\n        }\n    },\n    \"label\": \"myprojectkey\",\n    \"project\": {\n        ...\n    },\n    \"created_on\": \"2021-08-10T05:28:00.570859+00:00\",\n    \"key\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAK/b1cHHDr/TEV1JGQl+WjCwStKG6Bhrv0rFpEsYlyTBm1fzN0VOJJYn4ZOPCPJwqse6fGbXntEs+BbXiptR+++HycVgl65TMR0b5ul5AgwrVdZdT7qjCOCgaSV74/9xlHDK8oqgGnfA7ZoBBU+qpVyaloSjBdJfLtPY/xqj4yHnXKYzrtn/uFc4Kp9Tb7PUg9Io3qohSTGJGVHnsVblq/rToJG7L5xIo0OxK0SJSQ5vuId93ZuFZrCNMXj8JDHZeSEtjJzpRCBEXHxpOPhAcbm4MzULgkFHhAVgp4JbkrT99/wpvZ7r9AdkTg7HGqL3rlaDrEcWfL7Lu6TnhBdq5\",\n    \"type\": \"project_deploy_key\",\n    \"id\": 5\n}\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "The project deploy key that was created",
+          "schema": {
+            "$ref": "#/definitions/project_deploy_key"
+          }
+        },
+        "400": {
+          "description": "Invalid deploy key inputs",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "403": {
+          "description": "If the specified workspace or project is not accessible to the current user",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the specified workspace or project does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["project", "project:admin"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "Create a project deploy key",
+      "tags": ["Deployments"]
+    }
+  },
+  "/workspaces/{workspace}/projects/{project_key}/deploy-keys/{key_id}": {
+    "delete": {
+      "description": "This deletes a deploy key from a project.\n\nExample:\n```\n$ curl -XDELETE \\\n-H \"Authorization <auth header>\" \\\nhttps://api.bitbucket.org/2.0/workspaces/jzeng/projects/JZ/deploy-keys/1234\n```",
+      "parameters": [],
+      "responses": {
+        "204": {
+          "description": "The project deploy key has been deleted"
+        },
+        "403": {
+          "description": "If the current user does not have permission to delete a key for the specified project",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the specified workspace, project, or project deploy key does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["project", "project:admin"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "Delete a deploy key from a project",
+      "tags": ["Deployments"]
+    },
+    "get": {
+      "description": "Returns the deploy key belonging to a specific key ID.\n\nExample:\n```\n$ curl -H \"Authorization <auth header>\" \\\nhttps://api.bitbucket.org/2.0/workspaces/standard/projects/TEST_PROJECT/deploy-keys/1234\n\nOutput:\n{\n    \"pagelen\":10,\n    \"values\":[\n        {\n            \"comment\":\"thakseth@C02W454JHTD8\",\n            \"last_used\":null,\n            \"links\":{\n                \"self\":{\n                    \"href\":\"https://api.bitbucket.org/2.0/workspaces/standard/projects/TEST_PROJECT/deploy-keys/1234\"\n                }\n            },\n            \"label\":\"test\",\n            \"project\":{\n                \"links\":{\n                    \"self\":{\n                        \"href\":\"https://api.bitbucket.org/2.0/workspaces/standard/projects/TEST_PROJECT\"\n                    }\n                },\n                \"type\":\"project\",\n                \"name\":\"cooperative standard\",\n                \"key\":\"TEST_PROJECT\",\n                \"uuid\":\"{3b3e510b-7f2b-414d-a2b7-76c4e405c1c0}\"\n            },\n            \"created_on\":\"2021-07-28T21:20:19.491721+00:00\",\n            \"key\":\"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDX5yfMOEw6HG9jKTYTisbmDTJ4MCUTSVGr5e4OWvY3UuI2A6F8SdzQqa2f5BABA/4g5Sk5awJrYHlNu3EzV1V2I44tR3A4fnZAG71ZKyDPi1wvdO7UYmFgxV/Vd18H9QZFFjICGDM7W0PT2mI0kON/jN3qNWi+GiB/xgaeQKSqynysdysDp8lnnI/8Sh3ikURP9UP83ShRCpAXszOUNaa+UUlcYQYBDLIGowsg51c4PCkC3DNhAMxppkNRKoSOWwyl+oRVXHSDylkiJSBHW3HH4Q6WHieD54kGrjbhWBKdnnxKX7QAAZBDseY+t01N36m6/ljvXSUEcBWtHxBYye0r\",\n            \"type\":\"project_deploy_key\",\n            \"id\":1234\n        }\n    ],\n}\n```",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "Project deploy key matching the key ID",
+          "schema": {
+            "$ref": "#/definitions/project_deploy_key"
+          }
+        },
+        "403": {
+          "description": "If the specified workspace or project is not accessible to the current user",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        },
+        "404": {
+          "description": "If the specified workspace or project does not exist",
+          "schema": {
+            "$ref": "#/definitions/error"
+          }
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["project", "project:admin"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "Get a project deploy key",
+      "tags": ["Deployments"]
+    },
+    "parameters": [
+      {
+        "description": "The key ID matching the project deploy key.",
+        "in": "path",
+        "name": "key_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The project in question. This is the actual `key` assigned\nto the project.\n",
+        "in": "path",
+        "name": "project_key",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the workspace ID (slug) or the workspace UUID\nsurrounded by curly-braces, for example: `{workspace UUID}`.\n",
+        "in": "path",
+        "name": "workspace",
+        "required": true,
+        "type": "string"
+      }
+    ]
   },
   "/workspaces/{workspace}/search/code": {
     "get": {

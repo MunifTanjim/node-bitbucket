@@ -554,7 +554,7 @@
               "type": "string"
             },
             "state": {
-              "enum": ["INPROGRESS", "FAILED", "SUCCESSFUL", "STOPPED"],
+              "enum": ["FAILED", "INPROGRESS", "SUCCESSFUL", "STOPPED"],
               "type": "string"
             },
             "updated_on": {
@@ -620,6 +620,22 @@
       ],
       "x-bb-default-fields": ["uuid", "commitHash"],
       "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commits/{commitHash}/reports/{uuid}"
+    },
+    "DefaultReviewerAndType": {
+      "additionalProperties": true,
+      "properties": {
+        "reviewer_type": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        }
+      },
+      "required": ["type"],
+      "type": "object"
     },
     "DeployKey": {
       "allOf": [
@@ -1108,6 +1124,69 @@
       "required": ["type"],
       "type": "object"
     },
+    "EffectiveRepoBranchingModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "branch_types": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "kind": {
+                    "enum": ["feature", "bugfix", "release", "hotfix"],
+                    "type": "string"
+                  },
+                  "prefix": {
+                    "type": "string"
+                  }
+                },
+                "required": ["kind", "prefix"],
+                "type": "object"
+              },
+              "maxItems": 4,
+              "type": "array"
+            },
+            "development": {
+              "additionalProperties": false,
+              "properties": {
+                "branch": {
+                  "$ref": "#/definitions/Branch"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "use_mainbranch": {
+                  "type": "boolean"
+                }
+              },
+              "required": ["name", "use_mainbranch"],
+              "type": "object"
+            },
+            "production": {
+              "additionalProperties": false,
+              "properties": {
+                "branch": {
+                  "$ref": "#/definitions/Branch"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "use_mainbranch": {
+                  "type": "boolean"
+                }
+              },
+              "required": ["name", "use_mainbranch"],
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
     "Error": {
       "additionalProperties": true,
       "properties": {
@@ -1227,31 +1306,31 @@
         },
         "event": {
           "enum": [
-            "pullrequest:fulfilled",
-            "issue:created",
-            "pullrequest:created",
-            "repo:transfer",
-            "pullrequest:updated",
-            "pullrequest:rejected",
-            "pullrequest:comment_deleted",
-            "repo:commit_status_created",
-            "repo:fork",
             "pullrequest:comment_created",
-            "pullrequest:changes_request_created",
-            "pullrequest:approved",
-            "repo:created",
-            "issue:updated",
+            "pullrequest:changes_request_removed",
+            "pullrequest:updated",
+            "pullrequest:unapproved",
+            "issue:created",
             "project:updated",
-            "repo:imported",
-            "repo:commit_comment_created",
-            "issue:comment_created",
-            "repo:commit_status_updated",
+            "issue:updated",
+            "repo:transfer",
+            "pullrequest:created",
             "repo:updated",
             "repo:deleted",
-            "pullrequest:unapproved",
-            "repo:push",
+            "issue:comment_created",
+            "repo:commit_comment_created",
             "pullrequest:comment_updated",
-            "pullrequest:changes_request_removed"
+            "pullrequest:comment_deleted",
+            "repo:commit_status_created",
+            "pullrequest:rejected",
+            "repo:commit_status_updated",
+            "repo:fork",
+            "pullrequest:approved",
+            "pullrequest:fulfilled",
+            "pullrequest:changes_request_created",
+            "repo:push",
+            "repo:imported",
+            "repo:created"
           ],
           "type": "string"
         },
@@ -2007,6 +2086,33 @@
       },
       "type": "object"
     },
+    "PaginatedDefaultReviewerAndType": {
+      "additionalProperties": false,
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/DefaultReviewerAndType"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "PaginatedDeployKeys": {
       "additionalProperties": false,
       "properties": {
@@ -2504,6 +2610,33 @@
         "values": {
           "items": {
             "$ref": "#/definitions/Pipeline"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedProjectDeployKeys": {
+      "additionalProperties": false,
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/ProjectDeployKey"
           },
           "type": "array"
         }
@@ -4079,6 +4212,115 @@
         }
       ]
     },
+    "ProjectBranchingModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "branch_types": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "kind": {
+                    "enum": ["feature", "bugfix", "release", "hotfix"],
+                    "type": "string"
+                  },
+                  "prefix": {
+                    "type": "string"
+                  }
+                },
+                "required": ["kind", "prefix"],
+                "type": "object"
+              },
+              "maxItems": 4,
+              "type": "array"
+            },
+            "development": {
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "use_mainbranch": {
+                  "type": "boolean"
+                }
+              },
+              "required": ["name", "use_mainbranch"],
+              "type": "object"
+            },
+            "production": {
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "use_mainbranch": {
+                  "type": "boolean"
+                }
+              },
+              "required": ["name", "use_mainbranch"],
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "ProjectDeployKey": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "added_on": {
+              "type": "string"
+            },
+            "comment": {
+              "type": "string"
+            },
+            "created_by": {
+              "$ref": "#/definitions/Account"
+            },
+            "key": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "last_used": {
+              "type": "string"
+            },
+            "links": {
+              "additionalProperties": false,
+              "properties": {
+                "self": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "project": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
     "Pullrequest": {
       "allOf": [
         {
@@ -4837,7 +5079,7 @@
           "type": "object"
         },
         "permission": {
-          "enum": ["admin", "write", "read", "none"],
+          "enum": ["read", "write", "admin", "none"],
           "type": "string"
         },
         "repository": {
@@ -4850,11 +5092,24 @@
       "required": ["type"],
       "type": "object"
     },
+    "RepositoryInheritanceState": {
+      "additionalProperties": true,
+      "properties": {
+        "override_settings": {
+          "type": "object"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": ["type"],
+      "type": "object"
+    },
     "RepositoryPermission": {
       "additionalProperties": true,
       "properties": {
         "permission": {
-          "enum": ["admin", "write", "read", "none"],
+          "enum": ["read", "write", "admin", "none"],
           "type": "string"
         },
         "repository": {
@@ -4892,7 +5147,7 @@
           "type": "object"
         },
         "permission": {
-          "enum": ["admin", "write", "read", "none"],
+          "enum": ["read", "write", "admin", "none"],
           "type": "string"
         },
         "repository": {
@@ -5456,31 +5711,31 @@
             "events": {
               "items": {
                 "enum": [
-                  "pullrequest:fulfilled",
-                  "issue:created",
-                  "pullrequest:created",
-                  "repo:transfer",
-                  "pullrequest:updated",
-                  "pullrequest:rejected",
-                  "pullrequest:comment_deleted",
-                  "repo:commit_status_created",
-                  "repo:fork",
                   "pullrequest:comment_created",
-                  "pullrequest:changes_request_created",
-                  "pullrequest:approved",
-                  "repo:created",
-                  "issue:updated",
+                  "pullrequest:changes_request_removed",
+                  "pullrequest:updated",
+                  "pullrequest:unapproved",
+                  "issue:created",
                   "project:updated",
-                  "repo:imported",
-                  "repo:commit_comment_created",
-                  "issue:comment_created",
-                  "repo:commit_status_updated",
+                  "issue:updated",
+                  "repo:transfer",
+                  "pullrequest:created",
                   "repo:updated",
                   "repo:deleted",
-                  "pullrequest:unapproved",
-                  "repo:push",
+                  "issue:comment_created",
+                  "repo:commit_comment_created",
                   "pullrequest:comment_updated",
-                  "pullrequest:changes_request_removed"
+                  "pullrequest:comment_deleted",
+                  "repo:commit_status_created",
+                  "pullrequest:rejected",
+                  "repo:commit_status_updated",
+                  "repo:fork",
+                  "pullrequest:approved",
+                  "pullrequest:fulfilled",
+                  "pullrequest:changes_request_created",
+                  "repo:push",
+                  "repo:imported",
+                  "repo:created"
                 ],
                 "type": "string"
               },
@@ -5718,6 +5973,9 @@
     "DeploymentVariable": {
       "$ref": "#/definitions/DeploymentVariable"
     },
+    "EffectiveRepoBranchingModel": {
+      "$ref": "#/definitions/EffectiveRepoBranchingModel"
+    },
     "Error": {
       "$ref": "#/definitions/Error"
     },
@@ -5762,6 +6020,9 @@
     },
     "PaginatedComponents": {
       "$ref": "#/definitions/PaginatedComponents"
+    },
+    "PaginatedDefaultReviewerAndType": {
+      "$ref": "#/definitions/PaginatedDefaultReviewerAndType"
     },
     "PaginatedDeployKeys": {
       "$ref": "#/definitions/PaginatedDeployKeys"
@@ -5819,6 +6080,9 @@
     },
     "PaginatedPipelines": {
       "$ref": "#/definitions/PaginatedPipelines"
+    },
+    "PaginatedProjectDeployKeys": {
+      "$ref": "#/definitions/PaginatedProjectDeployKeys"
     },
     "PaginatedProjects": {
       "$ref": "#/definitions/PaginatedProjects"
@@ -5910,6 +6174,12 @@
     "Project": {
       "$ref": "#/definitions/Project"
     },
+    "ProjectBranchingModel": {
+      "$ref": "#/definitions/ProjectBranchingModel"
+    },
+    "ProjectDeployKey": {
+      "$ref": "#/definitions/ProjectDeployKey"
+    },
     "Pullrequest": {
       "$ref": "#/definitions/Pullrequest"
     },
@@ -5930,6 +6200,9 @@
     },
     "RepositoryGroupPermission": {
       "$ref": "#/definitions/RepositoryGroupPermission"
+    },
+    "RepositoryInheritanceState": {
+      "$ref": "#/definitions/RepositoryInheritanceState"
     },
     "RepositoryUserPermission": {
       "$ref": "#/definitions/RepositoryUserPermission"
@@ -5954,6 +6227,9 @@
     },
     "Tag": {
       "$ref": "#/definitions/Tag"
+    },
+    "User": {
+      "$ref": "#/definitions/User"
     },
     "Version": {
       "$ref": "#/definitions/Version"

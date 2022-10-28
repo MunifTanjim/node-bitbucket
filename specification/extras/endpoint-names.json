@@ -392,6 +392,18 @@
       "repositories": "getDownload"
     }
   },
+  "/repositories/{workspace}/{repo_slug}/effective-branching-model": {
+    "get": {
+      "branching_model": "",
+      "repositories": ""
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/effective-default-reviewers": {
+    "get": {
+      "pullrequests": "",
+      "repositories": ""
+    }
+  },
   "/repositories/{workspace}/{repo_slug}/environments/": {
     "get": {
       "deployments": "listEnvironments",
@@ -606,6 +618,14 @@
     "get": {
       "issue_tracker": "getMilestone",
       "repositories": "getIssueMilestone"
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/override-settings": {
+    "get": {
+      "repositories": ""
+    },
+    "put": {
+      "repositories": ""
     }
   },
   "/repositories/{workspace}/{repo_slug}/patch/{spec}": {
@@ -1351,17 +1371,17 @@
   },
   "/workspaces/{workspace}/permissions": {
     "get": {
-      "workspaces": ""
+      "workspaces": "listPermissions"
     }
   },
   "/workspaces/{workspace}/permissions/repositories": {
     "get": {
-      "workspaces": ""
+      "workspaces": "listPermissionsForRepositories"
     }
   },
   "/workspaces/{workspace}/permissions/repositories/{repo_slug}": {
     "get": {
-      "workspaces": ""
+      "workspaces": "listPermissionsForRepository"
     }
   },
   "/workspaces/{workspace}/pipelines-config/identity/oidc/.well-known/openid-configuration": {
@@ -1421,6 +1441,62 @@
     "put": {
       "projects": "createOrUpdateProject",
       "workspaces": "createOrUpdateProject"
+    }
+  },
+  "/workspaces/{workspace}/projects/{project_key}/branching-model": {
+    "get": {
+      "branching_model": "",
+      "workspaces": ""
+    }
+  },
+  "/workspaces/{workspace}/projects/{project_key}/branching-model/settings": {
+    "get": {
+      "branching_model": "",
+      "workspaces": ""
+    },
+    "put": {
+      "branching_model": "",
+      "workspaces": ""
+    }
+  },
+  "/workspaces/{workspace}/projects/{project_key}/default-reviewers": {
+    "get": {
+      "projects": "",
+      "workspaces": ""
+    }
+  },
+  "/workspaces/{workspace}/projects/{project_key}/default-reviewers/{selected_user}": {
+    "delete": {
+      "projects": "",
+      "workspaces": ""
+    },
+    "get": {
+      "projects": "",
+      "workspaces": ""
+    },
+    "put": {
+      "projects": "",
+      "workspaces": ""
+    }
+  },
+  "/workspaces/{workspace}/projects/{project_key}/deploy-keys": {
+    "get": {
+      "deployments": "",
+      "workspaces": ""
+    },
+    "post": {
+      "deployments": "",
+      "workspaces": ""
+    }
+  },
+  "/workspaces/{workspace}/projects/{project_key}/deploy-keys/{key_id}": {
+    "delete": {
+      "deployments": "",
+      "workspaces": ""
+    },
+    "get": {
+      "deployments": "",
+      "workspaces": ""
     }
   },
   "/workspaces/{workspace}/search/code": {
