@@ -308,6 +308,9 @@
     "deleteRepositoryPipelineCache": {
       "alias": "repositories.deleteRepositoryPipelineCache"
     },
+    "deleteRepositoryPipelineCaches": {
+      "alias": "repositories.deleteRepositoryPipelineCaches"
+    },
     "deleteSchedule": {
       "alias": "repositories.deletePipelineSchedule"
     },
@@ -1905,6 +1908,24 @@
         }
       },
       "url": "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/{cache_uuid}"
+    },
+    "deleteRepositoryPipelineCaches": {
+      "method": "DELETE",
+      "params": {
+        "name": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines-config/caches"
     },
     "deleteTag": {
       "method": "DELETE",

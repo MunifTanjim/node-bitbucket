@@ -554,7 +554,7 @@
               "type": "string"
             },
             "state": {
-              "enum": ["FAILED", "INPROGRESS", "SUCCESSFUL", "STOPPED"],
+              "enum": ["STOPPED", "SUCCESSFUL", "INPROGRESS", "FAILED"],
               "type": "string"
             },
             "updated_on": {
@@ -1306,31 +1306,31 @@
         },
         "event": {
           "enum": [
-            "pullrequest:comment_created",
-            "pullrequest:changes_request_removed",
-            "pullrequest:updated",
-            "pullrequest:unapproved",
-            "issue:created",
-            "project:updated",
-            "issue:updated",
-            "repo:transfer",
-            "pullrequest:created",
-            "repo:updated",
             "repo:deleted",
-            "issue:comment_created",
-            "repo:commit_comment_created",
-            "pullrequest:comment_updated",
             "pullrequest:comment_deleted",
-            "repo:commit_status_created",
             "pullrequest:rejected",
-            "repo:commit_status_updated",
-            "repo:fork",
-            "pullrequest:approved",
-            "pullrequest:fulfilled",
+            "pullrequest:unapproved",
             "pullrequest:changes_request_created",
-            "repo:push",
+            "repo:commit_status_created",
+            "project:updated",
+            "pullrequest:comment_updated",
+            "issue:comment_created",
+            "issue:updated",
             "repo:imported",
-            "repo:created"
+            "repo:updated",
+            "pullrequest:updated",
+            "pullrequest:approved",
+            "issue:created",
+            "pullrequest:comment_created",
+            "repo:commit_comment_created",
+            "pullrequest:created",
+            "repo:fork",
+            "pullrequest:changes_request_removed",
+            "repo:push",
+            "repo:transfer",
+            "repo:commit_status_updated",
+            "repo:created",
+            "pullrequest:fulfilled"
           ],
           "type": "string"
         },
@@ -3257,6 +3257,9 @@
             },
             "file_size_bytes": {
               "type": "integer"
+            },
+            "key_hash": {
+              "type": "string"
             },
             "name": {
               "type": "string"
@@ -5711,31 +5714,31 @@
             "events": {
               "items": {
                 "enum": [
-                  "pullrequest:comment_created",
-                  "pullrequest:changes_request_removed",
-                  "pullrequest:updated",
-                  "pullrequest:unapproved",
-                  "issue:created",
-                  "project:updated",
-                  "issue:updated",
-                  "repo:transfer",
-                  "pullrequest:created",
-                  "repo:updated",
                   "repo:deleted",
-                  "issue:comment_created",
-                  "repo:commit_comment_created",
-                  "pullrequest:comment_updated",
                   "pullrequest:comment_deleted",
-                  "repo:commit_status_created",
                   "pullrequest:rejected",
-                  "repo:commit_status_updated",
-                  "repo:fork",
-                  "pullrequest:approved",
-                  "pullrequest:fulfilled",
+                  "pullrequest:unapproved",
                   "pullrequest:changes_request_created",
-                  "repo:push",
+                  "repo:commit_status_created",
+                  "project:updated",
+                  "pullrequest:comment_updated",
+                  "issue:comment_created",
+                  "issue:updated",
                   "repo:imported",
-                  "repo:created"
+                  "repo:updated",
+                  "pullrequest:updated",
+                  "pullrequest:approved",
+                  "issue:created",
+                  "pullrequest:comment_created",
+                  "repo:commit_comment_created",
+                  "pullrequest:created",
+                  "repo:fork",
+                  "pullrequest:changes_request_removed",
+                  "repo:push",
+                  "repo:transfer",
+                  "repo:commit_status_updated",
+                  "repo:created",
+                  "pullrequest:fulfilled"
                 ],
                 "type": "string"
               },

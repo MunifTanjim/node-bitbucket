@@ -774,6 +774,12 @@
       "repositories": "updatePipelineVariable"
     }
   },
+  "/repositories/{workspace}/{repo_slug}/pipelines-config/caches": {
+    "delete": {
+      "pipelines": "deleteRepositoryPipelineCaches",
+      "repositories": "deleteRepositoryPipelineCaches"
+    }
+  },
   "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/": {
     "get": {
       "pipelines": "getRepositoryPipelineCaches",
