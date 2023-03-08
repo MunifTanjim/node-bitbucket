@@ -43,6 +43,7 @@
     "generate:types": "node scripts/generate-types",
     "postgenerate:types": "npm run validate:types",
     "prepack": "npm-run-all -p build generate:types",
+    "update": "./scripts/update.sh",
     "validate": "npm-run-all -p validate:*",
     "validate:types": "npm-run-all -p validate:types:*",
     "validate:types:bitbucket": "tsc --noEmit lib/bitbucket.d.ts",
