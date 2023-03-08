@@ -147,9 +147,17 @@
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/comments/{comment_id}": {
+    "delete": {
+      "commits": "deleteComment",
+      "repositories": "deleteCommitComment"
+    },
     "get": {
       "commits": "getComment",
       "repositories": "getCommitComment"
+    },
+    "put": {
+      "commits": "updateComment",
+      "repositories": "updateCommitComment"
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name}": {

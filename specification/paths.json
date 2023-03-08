@@ -1570,6 +1570,31 @@
     }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/comments/{comment_id}": {
+    "delete": {
+      "description": "Deletes the specified commit comment.\n\nNote that deleting comments that have visible replies that point to\nthem will not really delete the resource. This is to retain the integrity\nof the original comment tree. Instead, the `deleted` element is set to\n`true` and the content is blanked out. The comment will continue to be\nreturned by the collections and self endpoints.",
+      "parameters": [],
+      "responses": {
+        "204": {
+          "description": "Indicates the comment was deleted by this action or a previous delete."
+        },
+        "404": {
+          "description": "If the comment doesn't exist"
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["repository"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "Delete a commit comment",
+      "tags": ["Commits"]
+    },
     "get": {
       "description": "Returns the specified commit comment.",
       "parameters": [],
@@ -1624,7 +1649,48 @@
         "required": true,
         "type": "string"
       }
-    ]
+    ],
+    "put": {
+      "description": "Used to update the contents of a comment. Only the content of the comment can be updated.\n\n```\n$ curl https://api.bitbucket.org/2.0/repositories/atlassian/prlinks/commit/7f71b5/comments/5728901 \\\n  -X PUT -u evzijst \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"content\": {\"raw\": \"One more thing!\"}'\n```",
+      "parameters": [
+        {
+          "description": "The updated comment.",
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/commit_comment"
+          }
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The newly updated comment.",
+          "headers": {
+            "Location": {
+              "description": "The location of the newly updated comment.",
+              "type": "string"
+            }
+          }
+        },
+        "400": {
+          "description": "If the comment update was detected as spam"
+        }
+      },
+      "security": [
+        {
+          "oauth2": ["repository"]
+        },
+        {
+          "basic": []
+        },
+        {
+          "api_key": []
+        }
+      ],
+      "summary": "Update a commit comment",
+      "tags": ["Commits"]
+    }
   },
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/properties/{app_key}/{property_name}": {
     "delete": {
@@ -8975,12 +9041,6 @@
           "description": "The `participant` object recording that the authenticated user approved the pull request.",
           "schema": {
             "$ref": "#/definitions/participant"
-          }
-        },
-        "400": {
-          "description": "Pull request cannot be approved because the pull request has already been merged.",
-          "schema": {
-            "$ref": "#/definitions/error"
           }
         },
         "401": {

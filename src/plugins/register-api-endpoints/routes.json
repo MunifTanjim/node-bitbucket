@@ -49,6 +49,9 @@
     "deleteApproval": {
       "alias": "repositories.deleteCommitApproval"
     },
+    "deleteComment": {
+      "alias": "repositories.deleteCommitComment"
+    },
     "deleteReport": {
       "alias": "repositories.deleteReport"
     },
@@ -90,6 +93,9 @@
     },
     "listComments": {
       "alias": "repositories.listCommitComments"
+    },
+    "updateComment": {
+      "alias": "repositories.updateCommitComment"
     }
   },
   "commitstatuses": {
@@ -1489,6 +1495,28 @@
         }
       },
       "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/approve"
+    },
+    "deleteCommitComment": {
+      "method": "DELETE",
+      "params": {
+        "comment_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "commit": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/comments/{comment_id}"
     },
     "deleteCommitHostedPropertyValue": {
       "method": "DELETE",
@@ -4055,6 +4083,33 @@
       },
       "returns": "Commitstatus",
       "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/statuses/build/{key}"
+    },
+    "updateCommitComment": {
+      "method": "PUT",
+      "params": {
+        "_body": {
+          "required": true,
+          "schema": "CommitComment",
+          "type": "any"
+        },
+        "comment_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "commit": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/commit/{commit}/comments/{comment_id}"
     },
     "updateCommitHostedPropertyValue": {
       "method": "PUT",
