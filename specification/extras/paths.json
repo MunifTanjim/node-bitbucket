@@ -248,5 +248,33 @@
         }
       }
     }
+  },
+  "/workspaces/{workspace}/hooks": {
+    "post": {
+      "parameters": [
+        {
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/webhook_subscription"
+          }
+        }
+      ]
+    }
+  },
+  "/workspaces/{workspace}/hooks/{uid}": {
+    "put": {
+      "parameters": [
+        {
+          "in": "body",
+          "name": "_body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/webhook_subscription"
+          }
+        }
+      ]
+    }
   }
 }

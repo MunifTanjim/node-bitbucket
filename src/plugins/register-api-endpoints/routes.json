@@ -5477,6 +5477,11 @@
     "createWebhookForWorkspace": {
       "method": "POST",
       "params": {
+        "_body": {
+          "required": true,
+          "schema": "WebhookSubscription",
+          "type": "any"
+        },
         "workspace": {
           "required": true,
           "type": "string"
@@ -5757,6 +5762,11 @@
     "updateWebhookForWorkspace": {
       "method": "PUT",
       "params": {
+        "_body": {
+          "required": true,
+          "schema": "WebhookSubscription",
+          "type": "any"
+        },
         "uid": {
           "required": true,
           "type": "string"
