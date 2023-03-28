@@ -17,6 +17,8 @@ const config: Config = {
   globals: {
     'node-fetch': 'fetch',
   },
+  // This is an old package that refuses to be packaged as umd.
+  externals: ['atlassian-jwt'],
 }
 
 const PLUGIN = process.env.PLUGIN
