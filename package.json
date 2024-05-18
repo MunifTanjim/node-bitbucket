@@ -1,6 +1,6 @@
 {
   "name": "bitbucket",
-  "version": "2.11.0",
+  "version": "2.12.0",
   "description": "Bitbucket API client for Browser and Node.js",
   "keywords": [
     "bitbucket",
