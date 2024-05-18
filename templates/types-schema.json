@@ -1,5 +1,107 @@
 {
   "definitions": {
+    "APullRequestTask": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Task"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "links": {
+              "additionalProperties": false,
+              "properties": {
+                "html": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "self": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "href": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "APullrequestCommentTask": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/APullRequestTask"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "comment": {
+              "$ref": "#/definitions/Comment"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "APullrequestTaskCreate": {
+      "additionalProperties": false,
+      "properties": {
+        "comment": {
+          "$ref": "#/definitions/Comment"
+        },
+        "content": {
+          "additionalProperties": false,
+          "properties": {
+            "raw": {
+              "type": "string"
+            }
+          },
+          "required": ["raw"],
+          "type": "object"
+        },
+        "pending": {
+          "type": "boolean"
+        }
+      },
+      "required": ["content"],
+      "type": "object"
+    },
+    "APullrequestTaskUpdate": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "additionalProperties": false,
+          "properties": {
+            "raw": {
+              "type": "string"
+            }
+          },
+          "required": ["raw"],
+          "type": "object"
+        },
+        "state": {
+          "enum": ["RESOLVED", "UNRESOLVED"],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Account": {
       "allOf": [
         {
@@ -16,9 +118,6 @@
             },
             "links": {
               "$ref": "#/definitions/AccountLinks"
-            },
-            "username": {
-              "type": "string"
             },
             "uuid": {
               "type": "string"
@@ -137,6 +236,28 @@
           "type": "object"
         }
       ]
+    },
+    "BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "permission": {
+          "enum": ["read", "write", "create-repo", "admin"],
+          "type": "string"
+        }
+      },
+      "required": ["permission"],
+      "type": "object"
+    },
+    "BitbucketAppsPermissionsSerializersRepoPermissionUpdateSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "permission": {
+          "enum": ["read", "write", "admin"],
+          "type": "string"
+        }
+      },
+      "required": ["permission"],
+      "type": "object"
     },
     "Branch": {
       "allOf": [
@@ -439,6 +560,22 @@
         }
       ]
     },
+    "CommentResolution": {
+      "additionalProperties": true,
+      "properties": {
+        "created_on": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/Account"
+        }
+      },
+      "required": ["type"],
+      "type": "object"
+    },
     "Commit": {
       "allOf": [
         {
@@ -554,7 +691,7 @@
               "type": "string"
             },
             "state": {
-              "enum": ["SUCCESSFUL", "INPROGRESS", "STOPPED", "FAILED"],
+              "enum": ["SUCCESSFUL", "STOPPED", "INPROGRESS", "FAILED"],
               "type": "string"
             },
             "updated_on": {
@@ -608,6 +745,58 @@
         }
       ]
     },
+    "DdevPaginatedAnnotations": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/DdevReportAnnotation"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "DdevPaginatedReports": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/DdevReport"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "DdevReport": {
       "allOf": [
         {
@@ -620,6 +809,58 @@
       ],
       "x-bb-default-fields": ["uuid", "commitHash"],
       "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commits/{commitHash}/reports/{uuid}"
+    },
+    "DdevReportAnnotation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "annotation_type": {
+              "enum": ["VULNERABILITY", "CODE_SMELL", "BUG"],
+              "type": "string"
+            },
+            "created_on": {
+              "type": "string"
+            },
+            "details": {
+              "type": "string"
+            },
+            "external_id": {
+              "type": "string"
+            },
+            "line": {
+              "type": "integer"
+            },
+            "link": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "result": {
+              "enum": ["PASSED", "FAILED", "SKIPPED", "IGNORED"],
+              "type": "string"
+            },
+            "severity": {
+              "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"],
+              "type": "string"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "updated_on": {
+              "type": "string"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
     },
     "DefaultReviewerAndType": {
       "additionalProperties": true,
@@ -962,6 +1203,31 @@
         }
       ]
     },
+    "DeploymentsDdevDeployment": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "environment": {
+              "$ref": "#/definitions/DeploymentsDdevDeploymentEnvironment"
+            },
+            "release": {
+              "$ref": "#/definitions/DeploymentsDdevDeploymentRelease"
+            },
+            "state": {
+              "$ref": "#/definitions/DeploymentsDdevDeploymentState"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
     "DeploymentsDdevDeploymentEnvironment": {
       "allOf": [
         {
@@ -1004,6 +1270,123 @@
       "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/locks_batch",
       "x-bb-default-fields": ["*", "lock_opener.*", "owner.*"]
     },
+    "DeploymentsDdevDeploymentRelease": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "commit": {
+              "$ref": "#/definitions/Commit"
+            },
+            "created_on": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentsDdevDeploymentState": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {},
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentsDdevDeploymentVariable": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "secured": {
+              "type": "boolean"
+            },
+            "uuid": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentsDdevPaginatedDeploymentVariable": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/DeploymentsDdevDeploymentVariable"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "DeploymentsDdevPaginatedDeployments": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/DeploymentsDdevDeployment"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "DeploymentsDdevPaginatedEnvironments": {
       "properties": {
         "next": {
@@ -1029,6 +1412,31 @@
         }
       },
       "type": "object"
+    },
+    "DeploymentsStgWestDeployment": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "environment": {
+              "$ref": "#/definitions/DeploymentsStgWestDeploymentEnvironment"
+            },
+            "release": {
+              "$ref": "#/definitions/DeploymentsStgWestDeploymentRelease"
+            },
+            "state": {
+              "$ref": "#/definitions/DeploymentsStgWestDeploymentState"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
     },
     "DeploymentsStgWestDeploymentEnvironment": {
       "allOf": [
@@ -1071,6 +1479,72 @@
       "x-bb-batch-max-size": 100,
       "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/locks_batch",
       "x-bb-default-fields": ["*", "lock_opener.*", "owner.*"]
+    },
+    "DeploymentsStgWestDeploymentRelease": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "commit": {
+              "$ref": "#/definitions/Commit"
+            },
+            "created_on": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentsStgWestDeploymentState": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {},
+          "type": "object"
+        }
+      ]
+    },
+    "DeploymentsStgWestPaginatedDeployments": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/DeploymentsStgWestDeployment"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
     },
     "DeploymentsStgWestPaginatedEnvironments": {
       "properties": {
@@ -1306,31 +1780,33 @@
         },
         "event": {
           "enum": [
-            "repo:commit_status_updated",
-            "repo:commit_comment_created",
-            "repo:transfer",
-            "repo:deleted",
-            "pullrequest:unapproved",
-            "pullrequest:changes_request_created",
-            "pullrequest:fulfilled",
-            "pullrequest:approved",
-            "project:updated",
-            "repo:imported",
-            "repo:created",
-            "pullrequest:comment_updated",
-            "pullrequest:updated",
-            "repo:fork",
-            "pullrequest:rejected",
+            "pullrequest:comment_resolved",
             "issue:created",
-            "issue:updated",
-            "pullrequest:changes_request_removed",
-            "repo:commit_status_created",
             "pullrequest:comment_deleted",
-            "repo:push",
-            "pullrequest:created",
+            "pullrequest:changes_request_created",
+            "issue:comment_created",
+            "pullrequest:updated",
+            "issue:updated",
+            "repo:commit_status_updated",
             "repo:updated",
-            "pullrequest:comment_created",
-            "issue:comment_created"
+            "pullrequest:comment_updated",
+            "repo:commit_status_created",
+            "pullrequest:unapproved",
+            "pullrequest:rejected",
+            "pullrequest:changes_request_removed",
+            "pullrequest:created",
+            "project:updated",
+            "repo:deleted",
+            "pullrequest:comment_reopened",
+            "pullrequest:fulfilled",
+            "repo:imported",
+            "repo:push",
+            "repo:fork",
+            "repo:created",
+            "repo:transfer",
+            "pullrequest:approved",
+            "repo:commit_comment_created",
+            "pullrequest:comment_created"
           ],
           "type": "string"
         },
@@ -1476,6 +1952,7 @@
             },
             "state": {
               "enum": [
+                "submitted",
                 "new",
                 "open",
                 "resolved",
@@ -2643,6 +3120,60 @@
       },
       "type": "object"
     },
+    "PaginatedProjectGroupPermissions": {
+      "additionalProperties": false,
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/ProjectGroupPermission"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PaginatedProjectUserPermissions": {
+      "additionalProperties": false,
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/ProjectUserPermission"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "PaginatedProjects": {
       "additionalProperties": false,
       "properties": {
@@ -3020,6 +3551,33 @@
       },
       "type": "object"
     },
+    "PaginatedTasks": {
+      "additionalProperties": false,
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/APullrequestCommentTask"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "PaginatedTreeentries": {
       "additionalProperties": false,
       "properties": {
@@ -3202,11 +3760,20 @@
             "completed_on": {
               "type": "string"
             },
+            "configuration_sources": {
+              "items": {
+                "$ref": "#/definitions/PipelineConfigurationSource"
+              },
+              "type": "array"
+            },
             "created_on": {
               "type": "string"
             },
             "creator": {
               "$ref": "#/definitions/Account"
+            },
+            "links": {
+              "$ref": "#/definitions/PipelinesPipelineLinks"
             },
             "repository": {
               "$ref": "#/definitions/Repository"
@@ -3222,6 +3789,12 @@
             },
             "uuid": {
               "type": "string"
+            },
+            "variables": {
+              "items": {
+                "$ref": "#/definitions/PipelineVariable"
+              },
+              "type": "array"
             }
           },
           "type": "object"
@@ -3318,6 +3891,18 @@
           "type": "object"
         }
       ]
+    },
+    "PipelineConfigurationSource": {
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        }
+      },
+      "required": ["source", "uri"],
+      "type": "object"
     },
     "PipelineError": {
       "allOf": [
@@ -3420,11 +4005,8 @@
             "enabled": {
               "type": "boolean"
             },
-            "selector": {
-              "$ref": "#/definitions/PipelineSelector"
-            },
             "target": {
-              "$ref": "#/definitions/PipelineTarget"
+              "$ref": "#/definitions/PipelineRefTarget"
             },
             "updated_on": {
               "type": "string"
@@ -3475,6 +4057,58 @@
           "properties": {
             "pipeline": {
               "$ref": "#/definitions/Pipeline"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "PipelineSchedulePostRequestBody": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "cron_pattern": {
+              "type": "string"
+            },
+            "enabled": {
+              "type": "boolean"
+            },
+            "target": {
+              "properties": {
+                "ref_name": {
+                  "type": "string"
+                },
+                "ref_type": {
+                  "enum": ["branch"],
+                  "type": "string"
+                },
+                "selector": {
+                  "$ref": "#/definitions/PipelineSelector"
+                }
+              },
+              "required": ["selector", "ref_name", "ref_type"],
+              "type": "object"
+            }
+          },
+          "required": ["target", "cron_pattern"],
+          "type": "object"
+        }
+      ]
+    },
+    "PipelineSchedulePutRequestBody": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "enabled": {
+              "type": "boolean"
             }
           },
           "type": "object"
@@ -4115,6 +4749,282 @@
         }
       ]
     },
+    "PipelinesDdevLinksSectionHref": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "href": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "PipelinesDdevPaginatedPipelineKnownHosts": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/PipelinesDdevPipelineKnownHost"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PipelinesDdevPaginatedPipelineSteps": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/PipelinesDdevPipelineStep"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PipelinesDdevPaginatedPipelineVariables": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/PipelinesDdevPipelineVariable"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PipelinesDdevPaginatedPipelines": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/PipelinesDdevPipeline"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PipelinesDdevPipeline": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "build_number": {
+              "type": "integer"
+            },
+            "build_seconds_used": {
+              "type": "integer"
+            },
+            "completed_on": {
+              "type": "string"
+            },
+            "created_on": {
+              "type": "string"
+            },
+            "creator": {
+              "$ref": "#/definitions/Account"
+            },
+            "links": {
+              "$ref": "#/definitions/PipelinesDdevPipelineLinks"
+            },
+            "repository": {
+              "$ref": "#/definitions/Repository"
+            },
+            "state": {
+              "$ref": "#/definitions/PipelineState"
+            },
+            "target": {
+              "$ref": "#/definitions/PipelineTarget"
+            },
+            "trigger": {
+              "$ref": "#/definitions/PipelineTrigger"
+            },
+            "uuid": {
+              "type": "string"
+            },
+            "variables": {
+              "items": {
+                "$ref": "#/definitions/PipelineVariable"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "PipelinesDdevPipelineError": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "PipelinesDdevPipelineKnownHost": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "hostname": {
+              "type": "string"
+            },
+            "public_key": {
+              "$ref": "#/definitions/PipelinesDdevPipelineSshPublicKey"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "PipelinesDdevPipelineLinks": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "self": {
+              "$ref": "#/definitions/PipelinesDdevLinksSectionHref"
+            },
+            "steps": {
+              "$ref": "#/definitions/PipelinesDdevLinksSectionHref"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "PipelinesDdevPipelineSshKeyPair": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "private_key": {
+              "type": "string"
+            },
+            "public_key": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "PipelinesDdevPipelineSshPublicKey": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "key_type": {
+              "type": "string"
+            },
+            "md5_fingerprint": {
+              "type": "string"
+            },
+            "sha256_fingerprint": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
     "PipelinesDdevPipelineStep": {
       "allOf": [
         {
@@ -4129,6 +5039,102 @@
       "x-bb-batch-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/steps_batch",
       "x-bb-default-fields": ["uuid"],
       "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
+    },
+    "PipelinesDdevPipelineVariable": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "secured": {
+              "type": "boolean"
+            },
+            "uuid": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "PipelinesDdevSchedulePostRequestBody": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "cron_pattern": {
+              "type": "string"
+            },
+            "enabled": {
+              "type": "boolean"
+            },
+            "target": {
+              "properties": {
+                "ref_name": {
+                  "type": "string"
+                },
+                "ref_type": {
+                  "enum": ["branch"],
+                  "type": "string"
+                },
+                "selector": {
+                  "$ref": "#/definitions/PipelineSelector"
+                }
+              },
+              "required": ["selector", "ref_name", "ref_type"],
+              "type": "object"
+            }
+          },
+          "required": ["target", "cron_pattern"],
+          "type": "object"
+        }
+      ]
+    },
+    "PipelinesLinksSectionHref": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "href": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "PipelinesPipelineLinks": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "self": {
+              "$ref": "#/definitions/PipelinesLinksSectionHref"
+            },
+            "steps": {
+              "$ref": "#/definitions/PipelinesLinksSectionHref"
+            }
+          },
+          "type": "object"
+        }
+      ]
     },
     "PipelinesStgWestPipelineStep": {
       "allOf": [
@@ -4323,6 +5329,82 @@
           "type": "object"
         }
       ]
+    },
+    "ProjectGroupPermission": {
+      "additionalProperties": true,
+      "properties": {
+        "group": {
+          "$ref": "#/definitions/Group"
+        },
+        "links": {
+          "additionalProperties": false,
+          "properties": {
+            "self": {
+              "additionalProperties": false,
+              "properties": {
+                "href": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "permission": {
+          "enum": ["read", "write", "create-repo", "admin", "none"],
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/Project"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": ["type"],
+      "type": "object"
+    },
+    "ProjectUserPermission": {
+      "additionalProperties": true,
+      "properties": {
+        "links": {
+          "additionalProperties": false,
+          "properties": {
+            "self": {
+              "additionalProperties": false,
+              "properties": {
+                "href": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "permission": {
+          "enum": ["read", "write", "create-repo", "admin", "none"],
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/Project"
+        },
+        "type": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        }
+      },
+      "required": ["type"],
+      "type": "object"
     },
     "Pullrequest": {
       "allOf": [
@@ -4602,8 +5684,14 @@
         {
           "additionalProperties": true,
           "properties": {
+            "pending": {
+              "type": "boolean"
+            },
             "pullrequest": {
               "$ref": "#/definitions/Pullrequest"
+            },
+            "resolution": {
+              "$ref": "#/definitions/CommentResolution"
             }
           },
           "type": "object"
@@ -5464,6 +6552,58 @@
         }
       ]
     },
+    "StgWestPaginatedAnnotations": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/StgWestReportAnnotation"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "StgWestPaginatedReports": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pagelen": {
+          "type": "integer"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/StgWestReport"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "StgWestReport": {
       "allOf": [
         {
@@ -5476,6 +6616,58 @@
       ],
       "x-bb-default-fields": ["uuid", "commitHash"],
       "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commits/{commitHash}/reports/{uuid}"
+    },
+    "StgWestReportAnnotation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "properties": {
+            "annotation_type": {
+              "enum": ["VULNERABILITY", "CODE_SMELL", "BUG"],
+              "type": "string"
+            },
+            "created_on": {
+              "type": "string"
+            },
+            "details": {
+              "type": "string"
+            },
+            "external_id": {
+              "type": "string"
+            },
+            "line": {
+              "type": "integer"
+            },
+            "link": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "result": {
+              "enum": ["PASSED", "FAILED", "SKIPPED", "IGNORED"],
+              "type": "string"
+            },
+            "severity": {
+              "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"],
+              "type": "string"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "updated_on": {
+              "type": "string"
+            },
+            "uuid": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ]
     },
     "SubjectTypes": {
       "additionalProperties": false,
@@ -5541,6 +6733,54 @@
         }
       ]
     },
+    "Task": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "additionalProperties": false,
+          "properties": {
+            "html": {
+              "type": "string"
+            },
+            "markup": {
+              "enum": ["markdown", "creole", "plaintext"],
+              "type": "string"
+            },
+            "raw": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "created_on": {
+          "type": "string"
+        },
+        "creator": {
+          "$ref": "#/definitions/Account"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "pending": {
+          "type": "boolean"
+        },
+        "resolved_by": {
+          "$ref": "#/definitions/Account"
+        },
+        "resolved_on": {
+          "type": "string"
+        },
+        "state": {
+          "enum": ["RESOLVED", "UNRESOLVED"],
+          "type": "string"
+        },
+        "updated_on": {
+          "type": "string"
+        }
+      },
+      "required": ["created_on", "updated_on", "state", "content", "creator"],
+      "type": "object"
+    },
     "Team": {
       "allOf": [
         {
@@ -5585,6 +6825,18 @@
         }
       ]
     },
+    "TestReportDdev": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Object"
+        },
+        {
+          "additionalProperties": true,
+          "type": "object"
+        }
+      ],
+      "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline_uuid}/steps/{step_uuid}/testReports?actor={user.uuid}"
+    },
     "Treeentry": {
       "additionalProperties": true,
       "properties": {
@@ -5625,9 +6877,6 @@
               "$ref": "#/definitions/UserLinks"
             },
             "nickname": {
-              "type": "string"
-            },
-            "website": {
               "type": "string"
             }
           },
@@ -5714,35 +6963,45 @@
             "events": {
               "items": {
                 "enum": [
-                  "repo:commit_status_updated",
-                  "repo:commit_comment_created",
-                  "repo:transfer",
-                  "repo:deleted",
-                  "pullrequest:unapproved",
-                  "pullrequest:changes_request_created",
-                  "pullrequest:fulfilled",
-                  "pullrequest:approved",
-                  "project:updated",
-                  "repo:imported",
-                  "repo:created",
-                  "pullrequest:comment_updated",
-                  "pullrequest:updated",
-                  "repo:fork",
-                  "pullrequest:rejected",
+                  "pullrequest:comment_resolved",
                   "issue:created",
-                  "issue:updated",
-                  "pullrequest:changes_request_removed",
-                  "repo:commit_status_created",
                   "pullrequest:comment_deleted",
-                  "repo:push",
-                  "pullrequest:created",
+                  "pullrequest:changes_request_created",
+                  "issue:comment_created",
+                  "pullrequest:updated",
+                  "issue:updated",
+                  "repo:commit_status_updated",
                   "repo:updated",
-                  "pullrequest:comment_created",
-                  "issue:comment_created"
+                  "pullrequest:comment_updated",
+                  "repo:commit_status_created",
+                  "pullrequest:unapproved",
+                  "pullrequest:rejected",
+                  "pullrequest:changes_request_removed",
+                  "pullrequest:created",
+                  "project:updated",
+                  "repo:deleted",
+                  "pullrequest:comment_reopened",
+                  "pullrequest:fulfilled",
+                  "repo:imported",
+                  "repo:push",
+                  "repo:fork",
+                  "repo:created",
+                  "repo:transfer",
+                  "pullrequest:approved",
+                  "repo:commit_comment_created",
+                  "pullrequest:comment_created"
                 ],
                 "type": "string"
               },
               "type": "array"
+            },
+            "secret": {
+              "maxLength": 128,
+              "minLength": 0,
+              "type": "string"
+            },
+            "secret_set": {
+              "type": "boolean"
             },
             "subject": {
               "$ref": "#/definitions/Object"
@@ -5934,11 +7193,26 @@
     }
   },
   "properties": {
+    "APullrequestCommentTask": {
+      "$ref": "#/definitions/APullrequestCommentTask"
+    },
+    "APullrequestTaskCreate": {
+      "$ref": "#/definitions/APullrequestTaskCreate"
+    },
+    "APullrequestTaskUpdate": {
+      "$ref": "#/definitions/APullrequestTaskUpdate"
+    },
     "Account": {
       "$ref": "#/definitions/Account"
     },
     "ApplicationProperty": {
       "$ref": "#/definitions/ApplicationProperty"
+    },
+    "BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema": {
+      "$ref": "#/definitions/BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema"
+    },
+    "BitbucketAppsPermissionsSerializersRepoPermissionUpdateSchema": {
+      "$ref": "#/definitions/BitbucketAppsPermissionsSerializersRepoPermissionUpdateSchema"
     },
     "Branch": {
       "$ref": "#/definitions/Branch"
@@ -5951,6 +7225,9 @@
     },
     "Branchrestriction": {
       "$ref": "#/definitions/Branchrestriction"
+    },
+    "CommentResolution": {
+      "$ref": "#/definitions/CommentResolution"
     },
     "Commit": {
       "$ref": "#/definitions/Commit"
@@ -6087,6 +7364,12 @@
     "PaginatedProjectDeployKeys": {
       "$ref": "#/definitions/PaginatedProjectDeployKeys"
     },
+    "PaginatedProjectGroupPermissions": {
+      "$ref": "#/definitions/PaginatedProjectGroupPermissions"
+    },
+    "PaginatedProjectUserPermissions": {
+      "$ref": "#/definitions/PaginatedProjectUserPermissions"
+    },
     "PaginatedProjects": {
       "$ref": "#/definitions/PaginatedProjects"
     },
@@ -6129,6 +7412,9 @@
     "PaginatedTags": {
       "$ref": "#/definitions/PaginatedTags"
     },
+    "PaginatedTasks": {
+      "$ref": "#/definitions/PaginatedTasks"
+    },
     "PaginatedTreeentries": {
       "$ref": "#/definitions/PaginatedTreeentries"
     },
@@ -6162,6 +7448,12 @@
     "PipelineSchedule": {
       "$ref": "#/definitions/PipelineSchedule"
     },
+    "PipelineSchedulePostRequestBody": {
+      "$ref": "#/definitions/PipelineSchedulePostRequestBody"
+    },
+    "PipelineSchedulePutRequestBody": {
+      "$ref": "#/definitions/PipelineSchedulePutRequestBody"
+    },
     "PipelineSshKeyPair": {
       "$ref": "#/definitions/PipelineSshKeyPair"
     },
@@ -6182,6 +7474,12 @@
     },
     "ProjectDeployKey": {
       "$ref": "#/definitions/ProjectDeployKey"
+    },
+    "ProjectGroupPermission": {
+      "$ref": "#/definitions/ProjectGroupPermission"
+    },
+    "ProjectUserPermission": {
+      "$ref": "#/definitions/ProjectUserPermission"
     },
     "Pullrequest": {
       "$ref": "#/definitions/Pullrequest"

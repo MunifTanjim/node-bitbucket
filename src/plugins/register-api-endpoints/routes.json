@@ -3,11 +3,20 @@
     "get": {
       "alias": "repositories.getBranchingModel"
     },
+    "getForProject": {
+      "alias": "workspaces.getBranchingModelForProject"
+    },
     "getSettings": {
       "alias": "repositories.getBranchingModelSettings"
     },
+    "getSettingsForProject": {
+      "alias": "workspaces.getBranchingModelSettingsForProject"
+    },
     "updateSettings": {
       "alias": "repositories.updateBranchingModelSettings"
+    },
+    "updateSettingsForProject": {
+      "alias": "workspaces.updateBranchingModelSettingsForProject"
     }
   },
   "branchrestrictions": {
@@ -136,8 +145,14 @@
     "createEnvironment": {
       "alias": "repositories.createEnvironment"
     },
+    "createProjectDeployKey": {
+      "alias": "workspaces.createProjectDeployKey"
+    },
     "deleteEnvironmentForRepository": {
       "alias": "repositories.deleteEnvironment"
+    },
+    "deleteProjectDeployKey": {
+      "alias": "workspaces.deleteProjectDeployKey"
     },
     "get": {
       "alias": "repositories.getDeployment"
@@ -145,11 +160,17 @@
     "getEnvironment": {
       "alias": "repositories.getEnvironment"
     },
+    "getProjectDeployKey": {
+      "alias": "workspaces.getProjectDeployKey"
+    },
     "list": {
       "alias": "repositories.listDeployments"
     },
     "listEnvironments": {
       "alias": "repositories.listEnvironments"
+    },
+    "listProjectDeployKeys": {
+      "alias": "workspaces.listProjectDeployKeys"
     },
     "updateEnvironment": {
       "alias": "repositories.updateEnvironment"
@@ -454,17 +475,53 @@
     }
   },
   "projects": {
+    "addDefaultReviewer": {
+      "alias": "workspaces.addDefaultReviewerForProject"
+    },
     "createOrUpdateProject": {
       "alias": "workspaces.createOrUpdateProject"
     },
     "createProject": {
       "alias": "workspaces.createProject"
     },
+    "deleteDefaultReviewer": {
+      "alias": "workspaces.deleteDefaultReviewerForProject"
+    },
+    "deleteGroupPermission": {
+      "alias": "workspaces.deleteProjectGroupPermission"
+    },
     "deleteProject": {
       "alias": "workspaces.deleteProject"
     },
+    "deleteUserPermission": {
+      "alias": "workspaces.deleteProjectUserPermission"
+    },
+    "getDefaultReviewer": {
+      "alias": "workspaces.getDefaultReviewerForProject"
+    },
+    "getGroupPermission": {
+      "alias": "workspaces.getProjectGroupPermission"
+    },
     "getProject": {
       "alias": "workspaces.getProject"
+    },
+    "getUserPermission": {
+      "alias": "workspaces.getProjectUserPermission"
+    },
+    "listDefaultReviewers": {
+      "alias": "workspaces.listDefaultReviewersForProject"
+    },
+    "listGroupPermissions": {
+      "alias": "workspaces.listProjectGroupPermissions"
+    },
+    "listUserPermissions": {
+      "alias": "workspaces.listProjectUserPermissions"
+    },
+    "updateGroupPermission": {
+      "alias": "workspaces.updateProjectGroupPermission"
+    },
+    "updateUserPermission": {
+      "alias": "workspaces.updateProjectUserPermission"
     }
   },
   "properties": {
@@ -506,6 +563,9 @@
     }
   },
   "pullrequests": {
+    "addChangeRequest": {
+      "alias": "repositories.addChangeRequestForPullRequest"
+    },
     "addDefaultReviewer": {
       "alias": "repositories.addDefaultReviewer"
     },
@@ -518,17 +578,26 @@
     "createComment": {
       "alias": "repositories.createPullRequestComment"
     },
+    "createTask": {
+      "alias": "repositories.createPullRequestTask"
+    },
     "decline": {
       "alias": "repositories.declinePullRequest"
     },
     "deleteApproval": {
       "alias": "repositories.deletePullRequestApproval"
     },
+    "deleteChangeRequest": {
+      "alias": "repositories.deleteChangeRequestForPullRequest"
+    },
     "deleteComment": {
       "alias": "repositories.deletePullRequestComment"
     },
     "deleteDefaultReviewer": {
       "alias": "repositories.deleteDefaultReviewer"
+    },
+    "deleteTask": {
+      "alias": "repositories.deletePullRequestTask"
     },
     "get": {
       "alias": "repositories.getPullRequest"
@@ -545,8 +614,14 @@
     "getDiffStat": {
       "alias": "repositories.getPullRequestDiffStat"
     },
+    "getMergeTaskStatus": {
+      "alias": "repositories.getMergeTaskStatusForPullRequest"
+    },
     "getPatch": {
       "alias": "repositories.getPullRequestPatch"
+    },
+    "getTask": {
+      "alias": "repositories.getPullRequestTask"
     },
     "list": {
       "alias": "repositories.listPullRequests"
@@ -587,14 +662,26 @@
     "listStatuses": {
       "alias": "repositories.listPullRequestStatuses"
     },
+    "listTasks": {
+      "alias": "repositories.listPullRequestTasks"
+    },
     "merge": {
       "alias": "repositories.mergePullRequest"
+    },
+    "reopenComment": {
+      "alias": "repositories.reopenPullRequestComment"
+    },
+    "resolveComment": {
+      "alias": "repositories.resolvePullRequestComment"
     },
     "update": {
       "alias": "repositories.updatePullRequest"
     },
     "updateComment": {
       "alias": "repositories.updatePullRequestComment"
+    },
+    "updateTask": {
+      "alias": "repositories.updatePullRequestTask"
     }
   },
   "refs": {
@@ -656,6 +743,25 @@
     }
   },
   "repositories": {
+    "addChangeRequestForPullRequest": {
+      "method": "POST",
+      "params": {
+        "pull_request_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "Participant",
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/request-changes"
+    },
     "addDefaultReviewer": {
       "method": "PUT",
       "params": {
@@ -915,7 +1021,7 @@
         }
       },
       "returns": "DeploymentEnvironment",
-      "url": "/repositories/{workspace}/{repo_slug}/environments/"
+      "url": "/repositories/{workspace}/{repo_slug}/environments"
     },
     "createFork": {
       "method": "POST",
@@ -1181,7 +1287,7 @@
         }
       },
       "returns": "Pipeline",
-      "url": "/repositories/{workspace}/{repo_slug}/pipelines/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines"
     },
     "createPipelineKnownHost": {
       "method": "POST",
@@ -1201,14 +1307,14 @@
         }
       },
       "returns": "PipelineKnownHost",
-      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts"
     },
     "createPipelineSchedule": {
       "method": "POST",
       "params": {
         "_body": {
           "required": true,
-          "schema": "PipelineSchedule",
+          "schema": "PipelineSchedulePostRequestBody",
           "type": "any"
         },
         "repo_slug": {
@@ -1221,7 +1327,7 @@
         }
       },
       "returns": "PipelineSchedule",
-      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules"
     },
     "createPipelineVariable": {
       "method": "POST",
@@ -1241,7 +1347,7 @@
         }
       },
       "returns": "PipelineVariable",
-      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/variables"
     },
     "createPullRequest": {
       "method": "POST",
@@ -1304,6 +1410,30 @@
       },
       "returns": "PullrequestComment",
       "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments"
+    },
+    "createPullRequestTask": {
+      "method": "POST",
+      "params": {
+        "_body": {
+          "required": true,
+          "schema": "APullrequestTaskCreate",
+          "type": "any"
+        },
+        "pull_request_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "APullrequestCommentTask",
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks"
     },
     "createSrcFileCommit": {
       "accepts": ["multipart/form-data", "application/x-www-form-urlencoded"],
@@ -1478,6 +1608,24 @@
       },
       "url": "/repositories/{workspace}/{repo_slug}/branch-restrictions/{id}"
     },
+    "deleteChangeRequestForPullRequest": {
+      "method": "DELETE",
+      "params": {
+        "pull_request_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/request-changes"
+    },
     "deleteCommitApproval": {
       "method": "DELETE",
       "params": {
@@ -1637,6 +1785,24 @@
         }
       },
       "url": "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}"
+    },
+    "deleteGroupPermission": {
+      "method": "DELETE",
+      "params": {
+        "group_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug}"
     },
     "deleteIssue": {
       "method": "DELETE",
@@ -1872,6 +2038,28 @@
       },
       "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pullrequest_id}/properties/{app_key}/{property_name}"
     },
+    "deletePullRequestTask": {
+      "method": "DELETE",
+      "params": {
+        "pull_request_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "task_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks/{task_id}"
+    },
     "deleteReport": {
       "headers": {
         "accept": "application/json"
@@ -1972,6 +2160,24 @@
         }
       },
       "url": "/repositories/{workspace}/{repo_slug}/refs/tags/{name}"
+    },
+    "deleteUserPermission": {
+      "method": "DELETE",
+      "params": {
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "selected_user_id": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/permissions-config/users/{selected_user_id}"
     },
     "deleteWebhook": {
       "method": "DELETE",
@@ -2339,6 +2545,21 @@
       },
       "url": "/repositories/{workspace}/{repo_slug}/downloads/{filename}"
     },
+    "getEffectiveBranchingModel": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "EffectiveRepoBranchingModel",
+      "url": "/repositories/{workspace}/{repo_slug}/effective-branching-model"
+    },
     "getEnvironment": {
       "method": "GET",
       "params": {
@@ -2357,6 +2578,25 @@
       },
       "returns": "DeploymentEnvironment",
       "url": "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}"
+    },
+    "getGroupPermission": {
+      "method": "GET",
+      "params": {
+        "group_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "RepositoryGroupPermission",
+      "url": "/repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug}"
     },
     "getIssue": {
       "method": "GET",
@@ -2577,6 +2817,47 @@
       },
       "returns": "Error",
       "url": "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/watch"
+    },
+    "getMergeBase": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "revspec": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "Commit",
+      "url": "/repositories/{workspace}/{repo_slug}/merge-base/{revspec}"
+    },
+    "getMergeTaskStatusForPullRequest": {
+      "method": "GET",
+      "params": {
+        "pull_request_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "task_id": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/merge/task-status/{task_id}"
     },
     "getPatch": {
       "method": "GET",
@@ -2981,6 +3262,29 @@
       },
       "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/patch"
     },
+    "getPullRequestTask": {
+      "method": "GET",
+      "params": {
+        "pull_request_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "task_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "APullrequestCommentTask",
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks/{task_id}"
+    },
     "getReport": {
       "headers": {
         "accept": "application/json"
@@ -3084,7 +3388,7 @@
         }
       },
       "returns": "PaginatedPipelineCaches",
-      "url": "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines-config/caches"
     },
     "getTag": {
       "method": "GET",
@@ -3104,6 +3408,25 @@
       },
       "returns": "Tag",
       "url": "/repositories/{workspace}/{repo_slug}/refs/tags/{name}"
+    },
+    "getUserPermission": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "selected_user_id": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "RepositoryUserPermission",
+      "url": "/repositories/{workspace}/{repo_slug}/permissions-config/users/{selected_user_id}"
     },
     "getWebhook": {
       "method": "GET",
@@ -3364,7 +3687,7 @@
         }
       },
       "returns": "PaginatedDeployments",
-      "url": "/repositories/{workspace}/{repo_slug}/deployments/"
+      "url": "/repositories/{workspace}/{repo_slug}/deployments"
     },
     "listDeploymentVariables": {
       "method": "GET",
@@ -3433,6 +3756,21 @@
       },
       "url": "/repositories/{workspace}/{repo_slug}/downloads"
     },
+    "listEffectiveDefaultReviewers": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedDefaultReviewerAndType",
+      "url": "/repositories/{workspace}/{repo_slug}/effective-default-reviewers"
+    },
     "listEnvironments": {
       "method": "GET",
       "params": {
@@ -3446,7 +3784,7 @@
         }
       },
       "returns": "PaginatedEnvironments",
-      "url": "/repositories/{workspace}/{repo_slug}/environments/"
+      "url": "/repositories/{workspace}/{repo_slug}/environments"
     },
     "listFileHistory": {
       "method": "GET",
@@ -3506,6 +3844,21 @@
       },
       "returns": "PaginatedRepositories",
       "url": "/repositories"
+    },
+    "listGroupPermissions": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedRepositoryGroupPermissions",
+      "url": "/repositories/{workspace}/{repo_slug}/permissions-config/groups"
     },
     "listIssueAttachments": {
       "method": "GET",
@@ -3610,7 +3963,7 @@
         }
       },
       "returns": "PaginatedPipelineKnownHosts",
-      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts"
     },
     "listPipelines": {
       "method": "GET",
@@ -3625,7 +3978,7 @@
         }
       },
       "returns": "PaginatedPipelines",
-      "url": "/repositories/{workspace}/{repo_slug}/pipelines/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines"
     },
     "listPipelineScheduleExecutions": {
       "method": "GET",
@@ -3644,7 +3997,7 @@
         }
       },
       "returns": "PaginatedPipelineScheduleExecutions",
-      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions"
     },
     "listPipelineSchedules": {
       "method": "GET",
@@ -3659,7 +4012,7 @@
         }
       },
       "returns": "PaginatedPipelineSchedules",
-      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules"
     },
     "listPipelineSteps": {
       "method": "GET",
@@ -3678,7 +4031,7 @@
         }
       },
       "returns": "PaginatedPipelineSteps",
-      "url": "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps"
     },
     "listPipelineVariables": {
       "method": "GET",
@@ -3693,7 +4046,7 @@
         }
       },
       "returns": "PaginatedPipelineVariables",
-      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/"
+      "url": "/repositories/{workspace}/{repo_slug}/pipelines_config/variables"
     },
     "listPullRequestActivities": {
       "method": "GET",
@@ -3824,6 +4177,25 @@
       "returns": "PaginatedCommitstatuses",
       "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/statuses"
     },
+    "listPullRequestTasks": {
+      "method": "GET",
+      "params": {
+        "pull_request_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedTasks",
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks"
+    },
     "listRefs": {
       "method": "GET",
       "params": {
@@ -3853,6 +4225,21 @@
       },
       "returns": "PaginatedTags",
       "url": "/repositories/{workspace}/{repo_slug}/refs/tags"
+    },
+    "listUserPermissions": {
+      "method": "GET",
+      "params": {
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedRepositoryUserPermissions",
+      "url": "/repositories/{workspace}/{repo_slug}/permissions-config/users"
     },
     "listVersions": {
       "method": "GET",
@@ -3973,6 +4360,51 @@
       },
       "returns": "PaginatedTreeentries",
       "url": "/repositories/{workspace}/{repo_slug}/src"
+    },
+    "reopenPullRequestComment": {
+      "method": "DELETE",
+      "params": {
+        "comment_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "pull_request_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}/resolve"
+    },
+    "resolvePullRequestComment": {
+      "method": "POST",
+      "params": {
+        "comment_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "pull_request_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "CommentResolution",
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}/resolve"
     },
     "stopPipeline": {
       "method": "POST",
@@ -4192,10 +4624,6 @@
     "updateEnvironment": {
       "method": "POST",
       "params": {
-        "_body": {
-          "required": true,
-          "type": "any"
-        },
         "environment_uuid": {
           "required": true,
           "type": "string"
@@ -4209,7 +4637,31 @@
           "type": "string"
         }
       },
-      "url": "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes/"
+      "url": "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes"
+    },
+    "updateGroupPermission": {
+      "method": "PUT",
+      "params": {
+        "_body": {
+          "required": true,
+          "schema": "BitbucketAppsPermissionsSerializersRepoPermissionUpdateSchema",
+          "type": "any"
+        },
+        "group_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "RepositoryGroupPermission",
+      "url": "/repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug}"
     },
     "updateIssue": {
       "method": "PUT",
@@ -4332,7 +4784,7 @@
       "params": {
         "_body": {
           "required": true,
-          "schema": "PipelineSchedule",
+          "schema": "PipelineSchedulePutRequestBody",
           "type": "any"
         },
         "repo_slug": {
@@ -4477,6 +4929,34 @@
       },
       "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pullrequest_id}/properties/{app_key}/{property_name}"
     },
+    "updatePullRequestTask": {
+      "method": "PUT",
+      "params": {
+        "_body": {
+          "required": true,
+          "schema": "APullrequestTaskUpdate",
+          "type": "any"
+        },
+        "pull_request_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "task_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "APullrequestCommentTask",
+      "url": "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks/{task_id}"
+    },
     "updateRepositoryHostedPropertyValue": {
       "method": "PUT",
       "params": {
@@ -4503,6 +4983,30 @@
         }
       },
       "url": "/repositories/{workspace}/{repo_slug}/properties/{app_key}/{property_name}"
+    },
+    "updateUserPermission": {
+      "method": "PUT",
+      "params": {
+        "_body": {
+          "required": true,
+          "schema": "BitbucketAppsPermissionsSerializersRepoPermissionUpdateSchema",
+          "type": "any"
+        },
+        "repo_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "selected_user_id": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "RepositoryUserPermission",
+      "url": "/repositories/{workspace}/{repo_slug}/permissions-config/users/{selected_user_id}"
     },
     "updateWebhook": {
       "method": "PUT",
@@ -5019,7 +5523,7 @@
         }
       },
       "returns": "PipelineVariable",
-      "url": "/teams/{username}/pipelines_config/variables/"
+      "url": "/teams/{username}/pipelines_config/variables"
     },
     "deletePipelineVariable": {
       "deprecated": true,
@@ -5062,7 +5566,7 @@
         }
       },
       "returns": "PaginatedPipelineVariables",
-      "url": "/teams/{username}/pipelines_config/variables/"
+      "url": "/teams/{username}/pipelines_config/variables"
     },
     "searchCode": {
       "headers": {
@@ -5128,6 +5632,11 @@
       "method": "GET",
       "returns": "PaginatedRepositoryPermissions",
       "url": "/user/permissions/repositories"
+    },
+    "listPermissionsForWorkspaces": {
+      "method": "GET",
+      "returns": "PaginatedWorkspaceMemberships",
+      "url": "/user/permissions/workspaces"
     }
   },
   "users": {
@@ -5145,7 +5654,7 @@
         }
       },
       "returns": "PipelineVariable",
-      "url": "/users/{selected_user}/pipelines_config/variables/"
+      "url": "/users/{selected_user}/pipelines_config/variables"
     },
     "createSshKey": {
       "method": "POST",
@@ -5270,7 +5779,7 @@
         }
       },
       "returns": "PaginatedPipelineVariables",
-      "url": "/users/{selected_user}/pipelines_config/variables/"
+      "url": "/users/{selected_user}/pipelines_config/variables"
     },
     "listSshKeys": {
       "method": "GET",
@@ -5423,6 +5932,25 @@
     }
   },
   "workspaces": {
+    "addDefaultReviewerForProject": {
+      "method": "PUT",
+      "params": {
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "selected_user": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "User",
+      "url": "/workspaces/{workspace}/projects/{project_key}/default-reviewers/{selected_user}"
+    },
     "createOrUpdateProject": {
       "method": "PUT",
       "params": {
@@ -5474,6 +6002,21 @@
       "returns": "Project",
       "url": "/workspaces/{workspace}/projects"
     },
+    "createProjectDeployKey": {
+      "method": "POST",
+      "params": {
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "ProjectDeployKey",
+      "url": "/workspaces/{workspace}/projects/{project_key}/deploy-keys"
+    },
     "createWebhookForWorkspace": {
       "method": "POST",
       "params": {
@@ -5484,6 +6027,24 @@
       },
       "returns": "WebhookSubscription",
       "url": "/workspaces/{workspace}/hooks"
+    },
+    "deleteDefaultReviewerForProject": {
+      "method": "DELETE",
+      "params": {
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "selected_user": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/workspaces/{workspace}/projects/{project_key}/default-reviewers/{selected_user}"
     },
     "deletePipelineVariableForWorkspace": {
       "method": "DELETE",
@@ -5513,6 +6074,60 @@
       },
       "url": "/workspaces/{workspace}/projects/{project_key}"
     },
+    "deleteProjectDeployKey": {
+      "method": "DELETE",
+      "params": {
+        "key_id": {
+          "required": true,
+          "type": "string"
+        },
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/workspaces/{workspace}/projects/{project_key}/deploy-keys/{key_id}"
+    },
+    "deleteProjectGroupPermission": {
+      "method": "DELETE",
+      "params": {
+        "group_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/workspaces/{workspace}/projects/{project_key}/permissions-config/groups/{group_slug}"
+    },
+    "deleteProjectUserPermission": {
+      "method": "DELETE",
+      "params": {
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "selected_user_id": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "url": "/workspaces/{workspace}/projects/{project_key}/permissions-config/users/{selected_user_id}"
+    },
     "deleteWebhookForWorkspace": {
       "method": "DELETE",
       "params": {
@@ -5526,6 +6141,55 @@
         }
       },
       "url": "/workspaces/{workspace}/hooks/{uid}"
+    },
+    "getBranchingModelForProject": {
+      "method": "GET",
+      "params": {
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "ProjectBranchingModel",
+      "url": "/workspaces/{workspace}/projects/{project_key}/branching-model"
+    },
+    "getBranchingModelSettingsForProject": {
+      "method": "GET",
+      "params": {
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "BranchingModelSettings",
+      "url": "/workspaces/{workspace}/projects/{project_key}/branching-model/settings"
+    },
+    "getDefaultReviewerForProject": {
+      "method": "GET",
+      "params": {
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "selected_user": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "User",
+      "url": "/workspaces/{workspace}/projects/{project_key}/default-reviewers/{selected_user}"
     },
     "getMemberForWorkspace": {
       "method": "GET",
@@ -5620,6 +6284,44 @@
       "returns": "Project",
       "url": "/workspaces/{workspace}/projects/{project_key}"
     },
+    "getProjectDeployKey": {
+      "method": "GET",
+      "params": {
+        "key_id": {
+          "required": true,
+          "type": "string"
+        },
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "ProjectDeployKey",
+      "url": "/workspaces/{workspace}/projects/{project_key}/deploy-keys/{key_id}"
+    },
+    "getProjectGroupPermission": {
+      "method": "GET",
+      "params": {
+        "group_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "ProjectGroupPermission",
+      "url": "/workspaces/{workspace}/projects/{project_key}/permissions-config/groups/{group_slug}"
+    },
     "getProjects": {
       "method": "GET",
       "params": {
@@ -5630,6 +6332,25 @@
       },
       "returns": "PaginatedProjects",
       "url": "/workspaces/{workspace}/projects"
+    },
+    "getProjectUserPermission": {
+      "method": "GET",
+      "params": {
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "selected_user_id": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "ProjectUserPermission",
+      "url": "/workspaces/{workspace}/projects/{project_key}/permissions-config/users/{selected_user_id}"
     },
     "getWebhookForWorkspace": {
       "method": "GET",
@@ -5679,6 +6400,21 @@
       "returns": "PaginatedWorkspaces",
       "url": "/workspaces"
     },
+    "listDefaultReviewersForProject": {
+      "method": "GET",
+      "params": {
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedDefaultReviewerAndType",
+      "url": "/workspaces/{workspace}/projects/{project_key}/default-reviewers"
+    },
     "listPermissions": {
       "method": "GET",
       "params": {
@@ -5716,6 +6452,51 @@
       "returns": "PaginatedRepositoryPermissions",
       "url": "/workspaces/{workspace}/permissions/repositories/{repo_slug}"
     },
+    "listProjectDeployKeys": {
+      "method": "GET",
+      "params": {
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedProjectDeployKeys",
+      "url": "/workspaces/{workspace}/projects/{project_key}/deploy-keys"
+    },
+    "listProjectGroupPermissions": {
+      "method": "GET",
+      "params": {
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedProjectGroupPermissions",
+      "url": "/workspaces/{workspace}/projects/{project_key}/permissions-config/groups"
+    },
+    "listProjectUserPermissions": {
+      "method": "GET",
+      "params": {
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "PaginatedProjectUserPermissions",
+      "url": "/workspaces/{workspace}/projects/{project_key}/permissions-config/users"
+    },
     "searchAccount": {
       "headers": {
         "accept": "application/json"
@@ -5733,6 +6514,21 @@
       },
       "returns": "SearchResultPage",
       "url": "/workspaces/{workspace}/search/code"
+    },
+    "updateBranchingModelSettingsForProject": {
+      "method": "PUT",
+      "params": {
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "BranchingModelSettings",
+      "url": "/workspaces/{workspace}/projects/{project_key}/branching-model/settings"
     },
     "updatePipelineVariableForWorkspace": {
       "method": "PUT",
@@ -5753,6 +6549,54 @@
       },
       "returns": "PipelineVariable",
       "url": "/workspaces/{workspace}/pipelines-config/variables/{variable_uuid}"
+    },
+    "updateProjectGroupPermission": {
+      "method": "PUT",
+      "params": {
+        "_body": {
+          "required": true,
+          "schema": "BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema",
+          "type": "any"
+        },
+        "group_slug": {
+          "required": true,
+          "type": "string"
+        },
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "ProjectGroupPermission",
+      "url": "/workspaces/{workspace}/projects/{project_key}/permissions-config/groups/{group_slug}"
+    },
+    "updateProjectUserPermission": {
+      "method": "PUT",
+      "params": {
+        "_body": {
+          "required": true,
+          "schema": "BitbucketAppsPermissionsSerializersProjectPermissionUpdateSchema",
+          "type": "any"
+        },
+        "project_key": {
+          "required": true,
+          "type": "string"
+        },
+        "selected_user_id": {
+          "required": true,
+          "type": "string"
+        },
+        "workspace": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "returns": "ProjectUserPermission",
+      "url": "/workspaces/{workspace}/projects/{project_key}/permissions-config/users/{selected_user_id}"
     },
     "updateWebhookForWorkspace": {
       "method": "PUT",

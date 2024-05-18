@@ -28,7 +28,7 @@
     "name": "Downloads"
   },
   {
-    "description": "The issue resources provide functionality for getting information on\nissues in an issue tracker, creating new issues, updating them and deleting\nthem.\n\nYou can access public issues without authentication, but you can't gain access\nto private repositories' issues. By authenticating, you will get the ability\nto create issues, as well as access to updating data or deleting issues you\nhave access to.\n",
+    "description": "The issue resources provide functionality for getting information on\nissues in an issue tracker, creating new issues, updating them and deleting\nthem.\n\nYou can access public issues without authentication, but you can't gain access\nto private repositories' issues. By authenticating, you will get the ability\nto create issues, as well as access to updating data or deleting issues you\nhave access to. Issue Tracker features are not supported for repositories in workspaces administered through admin.atlassian.com.\n",
     "name": "Issue tracker"
   },
   {

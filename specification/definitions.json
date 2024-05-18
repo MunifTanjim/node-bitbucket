@@ -1,4 +1,126 @@
 {
+  "A pull request task": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/task"
+      },
+      {
+        "additionalProperties": false,
+        "description": "A pull request task.",
+        "properties": {
+          "links": {
+            "additionalProperties": false,
+            "properties": {
+              "html": {
+                "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
+                "properties": {
+                  "href": {
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "title": "Link",
+                "type": "object"
+              },
+              "self": {
+                "additionalProperties": false,
+                "description": "A link to a resource related to this object.",
+                "properties": {
+                  "href": {
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "title": "Link",
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "title": "Pull Request Task",
+        "type": "object"
+      }
+    ]
+  },
+  "A pullrequest comment task": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/A pull request task"
+      },
+      {
+        "additionalProperties": false,
+        "description": "A pullrequest comment task",
+        "properties": {
+          "comment": {
+            "$ref": "#/definitions/comment"
+          }
+        },
+        "title": "Pull Request Comment Task",
+        "type": "object"
+      }
+    ]
+  },
+  "A pullrequest task create": {
+    "additionalProperties": false,
+    "description": "A pullrequest task create",
+    "properties": {
+      "comment": {
+        "$ref": "#/definitions/comment"
+      },
+      "content": {
+        "additionalProperties": false,
+        "description": "task raw content",
+        "properties": {
+          "raw": {
+            "description": "The task contents",
+            "type": "string"
+          }
+        },
+        "required": ["raw"],
+        "title": "Task Raw Content",
+        "type": "object"
+      },
+      "pending": {
+        "type": "boolean"
+      }
+    },
+    "required": ["content"],
+    "title": "Pull Request Task Create",
+    "type": "object"
+  },
+  "A pullrequest task update": {
+    "additionalProperties": false,
+    "description": "A pullrequest task update",
+    "properties": {
+      "content": {
+        "additionalProperties": false,
+        "description": "task raw content",
+        "properties": {
+          "raw": {
+            "description": "The task contents",
+            "type": "string"
+          }
+        },
+        "required": ["raw"],
+        "title": "Task Raw Content",
+        "type": "object"
+      },
+      "state": {
+        "enum": ["RESOLVED", "UNRESOLVED"],
+        "type": "string"
+      }
+    },
+    "title": "Pull Request Task Update",
+    "type": "object"
+  },
   "account": {
     "allOf": [
       {
@@ -17,10 +139,6 @@
           },
           "links": {
             "$ref": "#/definitions/account_links"
-          },
-          "username": {
-            "pattern": "^[a-zA-Z0-9_\\-]+$",
-            "type": "string"
           },
           "uuid": {
             "type": "string"
@@ -160,6 +278,28 @@
         "type": "object"
       }
     ]
+  },
+  "bitbucket.apps.permissions.serializers.ProjectPermissionUpdateSchema": {
+    "additionalProperties": false,
+    "properties": {
+      "permission": {
+        "enum": ["read", "write", "create-repo", "admin"],
+        "type": "string"
+      }
+    },
+    "required": ["permission"],
+    "type": "object"
+  },
+  "bitbucket.apps.permissions.serializers.RepoPermissionUpdateSchema": {
+    "additionalProperties": false,
+    "properties": {
+      "permission": {
+        "enum": ["read", "write", "admin"],
+        "type": "string"
+      }
+    },
+    "required": ["permission"],
+    "type": "object"
   },
   "branch": {
     "allOf": [
@@ -519,6 +659,26 @@
       }
     ]
   },
+  "comment_resolution": {
+    "additionalProperties": true,
+    "description": "The resolution object for a Comment.",
+    "properties": {
+      "created_on": {
+        "description": "The ISO8601 timestamp the resolution was created.",
+        "format": "date-time",
+        "type": "string"
+      },
+      "type": {
+        "type": "string"
+      },
+      "user": {
+        "$ref": "#/definitions/account"
+      }
+    },
+    "required": ["type"],
+    "title": "Comment Resolution",
+    "type": "object"
+  },
   "commit": {
     "allOf": [
       {
@@ -656,7 +816,7 @@
           },
           "state": {
             "description": "Provides some indication of the status of this commit",
-            "enum": ["SUCCESSFUL", "INPROGRESS", "STOPPED", "FAILED"],
+            "enum": ["SUCCESSFUL", "STOPPED", "INPROGRESS", "FAILED"],
             "type": "string"
           },
           "updated_on": {
@@ -719,6 +879,80 @@
       }
     ]
   },
+  "ddev_paginated_annotations": {
+    "description": "A paginated list of annotations.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/ddev_report_annotation"
+        },
+        "minItems": 0,
+        "type": "array"
+      }
+    },
+    "title": "Paginated Annotations",
+    "type": "object"
+  },
+  "ddev_paginated_reports": {
+    "description": "A paginated list of reports.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/ddev_report"
+        },
+        "minItems": 0,
+        "type": "array"
+      }
+    },
+    "title": "Paginated Reports",
+    "type": "object"
+  },
   "ddev_report": {
     "allOf": [
       {
@@ -732,6 +966,76 @@
     ],
     "x-bb-default-fields": ["uuid", "commitHash"],
     "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commits/{commitHash}/reports/{uuid}"
+  },
+  "ddev_report_annotation": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A report for a commit.",
+        "properties": {
+          "annotation_type": {
+            "description": "The type of the report.",
+            "enum": ["VULNERABILITY", "CODE_SMELL", "BUG"],
+            "type": "string"
+          },
+          "created_on": {
+            "description": "The timestamp when the report was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "details": {
+            "description": "The details to show to users when clicking on the annotation.",
+            "type": "string"
+          },
+          "external_id": {
+            "description": "ID of the annotation provided by the annotation creator. It can be used to identify the annotation as an alternative to it's generated uuid. It is not used by Bitbucket, but only by the annotation creator for updating or deleting this specific annotation. Needs to be unique.",
+            "type": "string"
+          },
+          "line": {
+            "description": "The line number that the annotation should belong to. If no line number is provided, then it will default to 0 and in a pull request it will appear at the top of the file specified by the path field.",
+            "minimum": 1,
+            "type": "integer"
+          },
+          "link": {
+            "description": "A URL linking to the annotation in an external tool.",
+            "format": "uri",
+            "type": "string"
+          },
+          "path": {
+            "description": "The path of the file on which this annotation should be placed. This is the path of the file relative to the git repository. If no path is provided, then it will appear in the overview modal on all pull requests where the tip of the branch is the given commit, regardless of which files were modified.",
+            "type": "string"
+          },
+          "result": {
+            "description": "The state of the report. May be set to PENDING and later updated.",
+            "enum": ["PASSED", "FAILED", "SKIPPED", "IGNORED"],
+            "type": "string"
+          },
+          "severity": {
+            "description": "The severity of the annotation.",
+            "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"],
+            "type": "string"
+          },
+          "summary": {
+            "description": "The message to display to users.",
+            "type": "string"
+          },
+          "updated_on": {
+            "description": "The timestamp when the report was updated.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "The UUID that can be used to identify the annotation.",
+            "type": "string"
+          }
+        },
+        "title": "Report Annotation",
+        "type": "object"
+      }
+    ]
   },
   "default_reviewer_and_type": {
     "additionalProperties": true,
@@ -1144,6 +1448,36 @@
       }
     ]
   },
+  "deployments_ddev_deployment": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Deployment.",
+        "properties": {
+          "environment": {
+            "$ref": "#/definitions/deployments_ddev_deployment_environment",
+            "description": "A deployment environment."
+          },
+          "release": {
+            "$ref": "#/definitions/deployments_ddev_deployment_release",
+            "description": "The release associated with this deployment."
+          },
+          "state": {
+            "$ref": "#/definitions/deployments_ddev_deployment_state"
+          },
+          "uuid": {
+            "description": "The UUID identifying the deployment.",
+            "type": "string"
+          }
+        },
+        "title": "Deployment",
+        "type": "object"
+      }
+    ]
+  },
   "deployments_ddev_deployment_environment": {
     "allOf": [
       {
@@ -1193,6 +1527,162 @@
     "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/locks_batch",
     "x-bb-default-fields": ["*", "lock_opener.*", "owner.*"]
   },
+  "deployments_ddev_deployment_release": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Deployment Release.",
+        "properties": {
+          "commit": {
+            "$ref": "#/definitions/commit",
+            "description": "The commit associated with this release."
+          },
+          "created_on": {
+            "description": "The timestamp when the release was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the release.",
+            "type": "string"
+          },
+          "url": {
+            "description": "Link to the pipeline that produced the release.",
+            "format": "uri",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "The UUID identifying the release.",
+            "type": "string"
+          }
+        },
+        "title": "Deployment Release",
+        "type": "object"
+      }
+    ]
+  },
+  "deployments_ddev_deployment_state": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "The representation of the progress state of a deployment.",
+        "properties": {},
+        "title": "Deployment State",
+        "type": "object"
+      }
+    ]
+  },
+  "deployments_ddev_deployment_variable": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Pipelines deployment variable.",
+        "properties": {
+          "key": {
+            "description": "The unique name of the variable.",
+            "type": "string"
+          },
+          "secured": {
+            "description": "If true, this variable will be treated as secured. The value will never be exposed in the logs or the REST API.",
+            "type": "boolean"
+          },
+          "uuid": {
+            "description": "The UUID identifying the variable.",
+            "type": "string"
+          },
+          "value": {
+            "description": "The value of the variable. If the variable is secured, this will be empty.",
+            "type": "string"
+          }
+        },
+        "title": "Deployment Variable",
+        "type": "object"
+      }
+    ]
+  },
+  "deployments_ddev_paginated_deployment_variable": {
+    "description": "A paged list of deployment variables.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/deployments_ddev_deployment_variable"
+        },
+        "minItems": 0,
+        "type": "array"
+      }
+    },
+    "title": "Paginated Deployment Variables",
+    "type": "object"
+  },
+  "deployments_ddev_paginated_deployments": {
+    "description": "A paged list of deployments",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/deployments_ddev_deployment"
+        },
+        "minItems": 0,
+        "type": "array"
+      }
+    },
+    "title": "Paginated Deployments",
+    "type": "object"
+  },
   "deployments_ddev_paginated_environments": {
     "description": "A paged list of environments",
     "properties": {
@@ -1229,6 +1719,36 @@
     },
     "title": "Paginated Deployment Environments",
     "type": "object"
+  },
+  "deployments_stg_west_deployment": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Deployment.",
+        "properties": {
+          "environment": {
+            "$ref": "#/definitions/deployments_stg_west_deployment_environment",
+            "description": "A deployment environment."
+          },
+          "release": {
+            "$ref": "#/definitions/deployments_stg_west_deployment_release",
+            "description": "The release associated with this deployment."
+          },
+          "state": {
+            "$ref": "#/definitions/deployments_stg_west_deployment_state"
+          },
+          "uuid": {
+            "description": "The UUID identifying the deployment.",
+            "type": "string"
+          }
+        },
+        "title": "Deployment",
+        "type": "object"
+      }
+    ]
   },
   "deployments_stg_west_deployment_environment": {
     "allOf": [
@@ -1278,6 +1798,94 @@
     "x-bb-batch-max-size": 100,
     "x-bb-batch-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/environments/locks_batch",
     "x-bb-default-fields": ["*", "lock_opener.*", "owner.*"]
+  },
+  "deployments_stg_west_deployment_release": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Deployment Release.",
+        "properties": {
+          "commit": {
+            "$ref": "#/definitions/commit",
+            "description": "The commit associated with this release."
+          },
+          "created_on": {
+            "description": "The timestamp when the release was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the release.",
+            "type": "string"
+          },
+          "url": {
+            "description": "Link to the pipeline that produced the release.",
+            "format": "uri",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "The UUID identifying the release.",
+            "type": "string"
+          }
+        },
+        "title": "Deployment Release",
+        "type": "object"
+      }
+    ]
+  },
+  "deployments_stg_west_deployment_state": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "The representation of the progress state of a deployment.",
+        "properties": {},
+        "title": "Deployment State",
+        "type": "object"
+      }
+    ]
+  },
+  "deployments_stg_west_paginated_deployments": {
+    "description": "A paged list of deployments",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/deployments_stg_west_deployment"
+        },
+        "minItems": 0,
+        "type": "array"
+      }
+    },
+    "title": "Paginated Deployments",
+    "type": "object"
   },
   "deployments_stg_west_paginated_environments": {
     "description": "A paged list of environments",
@@ -1556,31 +2164,33 @@
       "event": {
         "description": "The event identifier.",
         "enum": [
-          "repo:commit_status_updated",
-          "repo:commit_comment_created",
-          "repo:transfer",
-          "repo:deleted",
-          "pullrequest:unapproved",
-          "pullrequest:changes_request_created",
-          "pullrequest:fulfilled",
-          "pullrequest:approved",
-          "project:updated",
-          "repo:imported",
-          "repo:created",
-          "pullrequest:comment_updated",
-          "pullrequest:updated",
-          "repo:fork",
-          "pullrequest:rejected",
+          "pullrequest:comment_resolved",
           "issue:created",
-          "issue:updated",
-          "pullrequest:changes_request_removed",
-          "repo:commit_status_created",
           "pullrequest:comment_deleted",
-          "repo:push",
-          "pullrequest:created",
+          "pullrequest:changes_request_created",
+          "issue:comment_created",
+          "pullrequest:updated",
+          "issue:updated",
+          "repo:commit_status_updated",
           "repo:updated",
-          "pullrequest:comment_created",
-          "issue:comment_created"
+          "pullrequest:comment_updated",
+          "repo:commit_status_created",
+          "pullrequest:unapproved",
+          "pullrequest:rejected",
+          "pullrequest:changes_request_removed",
+          "pullrequest:created",
+          "project:updated",
+          "repo:deleted",
+          "pullrequest:comment_reopened",
+          "pullrequest:fulfilled",
+          "repo:imported",
+          "repo:push",
+          "repo:fork",
+          "repo:created",
+          "repo:transfer",
+          "pullrequest:approved",
+          "repo:commit_comment_created",
+          "pullrequest:comment_created"
         ],
         "type": "string"
       },
@@ -1752,6 +2362,7 @@
           },
           "state": {
             "enum": [
+              "submitted",
               "new",
               "open",
               "resolved",
@@ -3341,6 +3952,88 @@
     "title": "Paginated Project Deploy Keys",
     "type": "object"
   },
+  "paginated_project_group_permissions": {
+    "additionalProperties": false,
+    "description": "A paginated list of project group permissions.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "values": {
+        "items": {
+          "$ref": "#/definitions/project_group_permission"
+        },
+        "minItems": 0,
+        "type": "array",
+        "uniqueItems": true
+      }
+    },
+    "title": "Paginated Project Group Permissions",
+    "type": "object"
+  },
+  "paginated_project_user_permissions": {
+    "additionalProperties": false,
+    "description": "A paginated list of project user permissions.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "values": {
+        "items": {
+          "$ref": "#/definitions/project_user_permission"
+        },
+        "minItems": 0,
+        "type": "array",
+        "uniqueItems": true
+      }
+    },
+    "title": "Paginated Project User Permissions",
+    "type": "object"
+  },
   "paginated_projects": {
     "additionalProperties": false,
     "description": "A paginated list of projects",
@@ -3910,6 +4603,47 @@
     "title": "Paginated Tags",
     "type": "object"
   },
+  "paginated_tasks": {
+    "additionalProperties": false,
+    "description": "A paginated list of tasks.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "minimum": 1,
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "values": {
+        "items": {
+          "$ref": "#/definitions/A pullrequest comment task"
+        },
+        "minItems": 0,
+        "type": "array",
+        "uniqueItems": true
+      }
+    },
+    "title": "Paginated Tasks",
+    "type": "object"
+  },
   "paginated_treeentries": {
     "additionalProperties": false,
     "description": "A paginated list of commit_file and/or commit_directory objects.",
@@ -4171,6 +4905,14 @@
             "format": "date-time",
             "type": "string"
           },
+          "configuration_sources": {
+            "description": "An ordered list of sources of the pipeline configuration",
+            "items": {
+              "$ref": "#/definitions/pipeline_configuration_source"
+            },
+            "minItems": 0,
+            "type": "array"
+          },
           "created_on": {
             "description": "The timestamp when the pipeline was created.",
             "format": "date-time",
@@ -4179,6 +4921,9 @@
           "creator": {
             "$ref": "#/definitions/account",
             "description": "The Bitbucket account that was used to create the pipeline."
+          },
+          "links": {
+            "$ref": "#/definitions/pipelines_pipeline_links"
           },
           "repository": {
             "$ref": "#/definitions/repository"
@@ -4197,6 +4942,14 @@
           "uuid": {
             "description": "The UUID identifying the pipeline.",
             "type": "string"
+          },
+          "variables": {
+            "description": "The variables for the pipeline.",
+            "items": {
+              "$ref": "#/definitions/pipeline_variable"
+            },
+            "minItems": 0,
+            "type": "array"
           }
         },
         "title": "Pipeline",
@@ -4319,6 +5072,22 @@
       }
     ]
   },
+  "pipeline_configuration_source": {
+    "description": "Information about the source of the pipeline configuration",
+    "properties": {
+      "source": {
+        "description": "Identifier of the configuration source",
+        "type": "string"
+      },
+      "uri": {
+        "description": "Link to the configuration source view or its immediate content",
+        "format": "uri",
+        "type": "string"
+      }
+    },
+    "required": ["source", "uri"],
+    "type": "object"
+  },
   "pipeline_error": {
     "allOf": [
       {
@@ -4437,18 +5206,15 @@
             "type": "string"
           },
           "cron_pattern": {
-            "description": "The cron expression that the schedule applies.",
+            "description": "The cron expression with second precision (7 fields) that the schedule applies. For example, for expression: 0 0 12 * * ? *, will execute at 12pm UTC every day.",
             "type": "string"
           },
           "enabled": {
             "description": "Whether the schedule is enabled.",
             "type": "boolean"
           },
-          "selector": {
-            "$ref": "#/definitions/pipeline_selector"
-          },
           "target": {
-            "$ref": "#/definitions/pipeline_target",
+            "$ref": "#/definitions/pipeline_ref_target",
             "description": "The target on which the schedule will be executed."
           },
           "updated_on": {
@@ -4512,6 +5278,66 @@
             "description": "The pipeline that was triggered by this execution of a schedule."
           }
         },
+        "type": "object"
+      }
+    ]
+  },
+  "pipeline_schedule_post_request_body": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "properties": {
+          "cron_pattern": {
+            "description": "The cron expression with second precision (7 fields) that the schedule applies. For example, for expression: 0 0 12 * * ? *, will execute at 12pm UTC every day.",
+            "type": "string"
+          },
+          "enabled": {
+            "description": "Whether the schedule is enabled.",
+            "type": "boolean"
+          },
+          "target": {
+            "description": "The target on which the schedule will be executed.",
+            "properties": {
+              "ref_name": {
+                "description": "The name of the reference.",
+                "type": "string"
+              },
+              "ref_type": {
+                "description": "The type of reference (branch only).",
+                "enum": ["branch"],
+                "type": "string"
+              },
+              "selector": {
+                "$ref": "#/definitions/pipeline_selector"
+              }
+            },
+            "required": ["selector", "ref_name", "ref_type"],
+            "type": "object"
+          }
+        },
+        "required": ["target", "cron_pattern"],
+        "title": "Request body for Pipeline Schedule POST request",
+        "type": "object"
+      }
+    ]
+  },
+  "pipeline_schedule_put_request_body": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "properties": {
+          "enabled": {
+            "description": "Whether the schedule is enabled.",
+            "type": "boolean"
+          }
+        },
+        "title": "Request body for Pipeline Schedule PUT request",
         "type": "object"
       }
     ]
@@ -5255,6 +6081,367 @@
       }
     ]
   },
+  "pipelines_ddev_links_section_href": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A links section href",
+        "properties": {
+          "href": {
+            "description": "A link",
+            "format": "uri",
+            "type": "string"
+          }
+        },
+        "title": "Pipeline Links href",
+        "type": "object"
+      }
+    ]
+  },
+  "pipelines_ddev_paginated_pipeline_known_hosts": {
+    "description": "A paged list of known hosts.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/pipelines_ddev_pipeline_known_host"
+        },
+        "minItems": 0,
+        "type": "array"
+      }
+    },
+    "title": "Paginated Pipeline Known Hosts",
+    "type": "object"
+  },
+  "pipelines_ddev_paginated_pipeline_steps": {
+    "description": "A paged list of pipeline steps.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/pipelines_ddev_pipeline_step"
+        },
+        "minItems": 0,
+        "type": "array"
+      }
+    },
+    "title": "Paginated Pipeline Steps",
+    "type": "object"
+  },
+  "pipelines_ddev_paginated_pipeline_variables": {
+    "description": "A paged list of variables.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/pipelines_ddev_pipeline_variable"
+        },
+        "minItems": 0,
+        "type": "array"
+      }
+    },
+    "title": "Paginated Pipeline Variables",
+    "type": "object"
+  },
+  "pipelines_ddev_paginated_pipelines": {
+    "description": "A paged list of pipelines",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/pipelines_ddev_pipeline"
+        },
+        "minItems": 0,
+        "type": "array"
+      }
+    },
+    "title": "Paginated Pipelines",
+    "type": "object"
+  },
+  "pipelines_ddev_pipeline": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Bitbucket Pipeline. This represents an actual pipeline result.",
+        "properties": {
+          "build_number": {
+            "description": "The build number of the pipeline.",
+            "type": "integer"
+          },
+          "build_seconds_used": {
+            "description": "The number of build seconds used by this pipeline.",
+            "type": "integer"
+          },
+          "completed_on": {
+            "description": "The timestamp when the Pipeline was completed. This is not set if the pipeline is still in progress.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "created_on": {
+            "description": "The timestamp when the pipeline was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "creator": {
+            "$ref": "#/definitions/account",
+            "description": "The Bitbucket account that was used to create the pipeline."
+          },
+          "links": {
+            "$ref": "#/definitions/pipelines_ddev_pipeline_links"
+          },
+          "repository": {
+            "$ref": "#/definitions/repository"
+          },
+          "state": {
+            "$ref": "#/definitions/pipeline_state"
+          },
+          "target": {
+            "$ref": "#/definitions/pipeline_target",
+            "description": "The target that the pipeline built."
+          },
+          "trigger": {
+            "$ref": "#/definitions/pipeline_trigger",
+            "description": "The trigger used for the pipeline."
+          },
+          "uuid": {
+            "description": "The UUID identifying the pipeline.",
+            "type": "string"
+          },
+          "variables": {
+            "description": "The variables for the pipeline.",
+            "items": {
+              "$ref": "#/definitions/pipeline_variable"
+            },
+            "minItems": 0,
+            "type": "array"
+          }
+        },
+        "title": "Pipeline",
+        "type": "object"
+      }
+    ]
+  },
+  "pipelines_ddev_pipeline_error": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "An error causing a pipeline failure.",
+        "properties": {
+          "key": {
+            "description": "The error key.",
+            "type": "string"
+          },
+          "message": {
+            "description": "The error message",
+            "type": "string"
+          }
+        },
+        "title": "Pipeline Error",
+        "type": "object"
+      }
+    ]
+  },
+  "pipelines_ddev_pipeline_known_host": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Pipelines known host.",
+        "properties": {
+          "hostname": {
+            "description": "The hostname of the known host.",
+            "type": "string"
+          },
+          "public_key": {
+            "$ref": "#/definitions/pipelines_ddev_pipeline_ssh_public_key",
+            "description": "The public key of the known host."
+          },
+          "uuid": {
+            "description": "The UUID identifying the known host.",
+            "type": "string"
+          }
+        },
+        "title": "Pipeline Known Host",
+        "type": "object"
+      }
+    ]
+  },
+  "pipelines_ddev_pipeline_links": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "Links section for a Pipeline.",
+        "properties": {
+          "self": {
+            "$ref": "#/definitions/pipelines_ddev_links_section_href",
+            "description": "Link to the Pipeline."
+          },
+          "steps": {
+            "$ref": "#/definitions/pipelines_ddev_links_section_href",
+            "description": "Link to the steps of the Pipeline."
+          }
+        },
+        "title": "Pipeline Links",
+        "type": "object"
+      }
+    ]
+  },
+  "pipelines_ddev_pipeline_ssh_key_pair": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Pipelines SSH key pair.",
+        "properties": {
+          "private_key": {
+            "description": "The SSH private key. This value will be empty when retrieving the SSH key pair.",
+            "type": "string"
+          },
+          "public_key": {
+            "description": "The SSH public key.",
+            "type": "string"
+          }
+        },
+        "title": "Pipeline SSH Key Pair",
+        "type": "object"
+      }
+    ]
+  },
+  "pipelines_ddev_pipeline_ssh_public_key": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Pipelines known host public key.",
+        "properties": {
+          "key": {
+            "description": "The base64 encoded public key.",
+            "type": "string"
+          },
+          "key_type": {
+            "description": "The type of the public key.",
+            "type": "string"
+          },
+          "md5_fingerprint": {
+            "description": "The MD5 fingerprint of the public key.",
+            "type": "string"
+          },
+          "sha256_fingerprint": {
+            "description": "The SHA-256 fingerprint of the public key.",
+            "type": "string"
+          }
+        },
+        "title": "Pipeline SSH Public Key",
+        "type": "object"
+      }
+    ]
+  },
   "pipelines_ddev_pipeline_step": {
     "allOf": [
       {
@@ -5270,6 +6457,121 @@
     "x-bb-batch-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/steps_batch",
     "x-bb-default-fields": ["uuid"],
     "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline.uuid}/steps/{uuid}"
+  },
+  "pipelines_ddev_pipeline_variable": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A Pipelines variable.",
+        "properties": {
+          "key": {
+            "description": "The unique name of the variable.",
+            "type": "string"
+          },
+          "secured": {
+            "description": "If true, this variable will be treated as secured. The value will never be exposed in the logs or the REST API.",
+            "type": "boolean"
+          },
+          "uuid": {
+            "description": "The UUID identifying the variable.",
+            "type": "string"
+          },
+          "value": {
+            "description": "The value of the variable. If the variable is secured, this will be empty.",
+            "type": "string"
+          }
+        },
+        "title": "Pipeline Variable",
+        "type": "object"
+      }
+    ]
+  },
+  "pipelines_ddev_schedule_post_request_body": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "properties": {
+          "cron_pattern": {
+            "description": "The cron expression with second precision (7 fields) that the schedule applies. For example, for expression: 0 0 12 * * ? *, will execute at 12pm UTC every day.",
+            "type": "string"
+          },
+          "enabled": {
+            "description": "Whether the schedule is enabled.",
+            "type": "boolean"
+          },
+          "target": {
+            "description": "The target on which the schedule will be executed.",
+            "properties": {
+              "ref_name": {
+                "type": "string"
+              },
+              "ref_type": {
+                "description": "The type of reference (branch only).",
+                "enum": ["branch"],
+                "type": "string"
+              },
+              "selector": {
+                "$ref": "#/definitions/pipeline_selector"
+              }
+            },
+            "required": ["selector", "ref_name", "ref_type"],
+            "type": "object"
+          }
+        },
+        "required": ["target", "cron_pattern"],
+        "title": "Request body for Pipeline Schedule POST request",
+        "type": "object"
+      }
+    ]
+  },
+  "pipelines_links_section_href": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A links section href",
+        "properties": {
+          "href": {
+            "description": "A link",
+            "format": "uri",
+            "type": "string"
+          }
+        },
+        "title": "Pipeline Links href",
+        "type": "object"
+      }
+    ]
+  },
+  "pipelines_pipeline_links": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "Links section for a Pipeline.",
+        "properties": {
+          "self": {
+            "$ref": "#/definitions/pipelines_links_section_href",
+            "description": "Link to the Pipeline."
+          },
+          "steps": {
+            "$ref": "#/definitions/pipelines_links_section_href",
+            "description": "Link to the steps of the Pipeline."
+          }
+        },
+        "title": "Pipeline Links",
+        "type": "object"
+      }
+    ]
   },
   "pipelines_stg_west_pipeline_step": {
     "allOf": [
@@ -5501,6 +6803,92 @@
         "type": "object"
       }
     ]
+  },
+  "project_group_permission": {
+    "additionalProperties": true,
+    "description": "A group's permission for a given project.",
+    "properties": {
+      "group": {
+        "$ref": "#/definitions/group"
+      },
+      "links": {
+        "additionalProperties": false,
+        "properties": {
+          "self": {
+            "additionalProperties": false,
+            "description": "A link to a resource related to this object.",
+            "properties": {
+              "href": {
+                "format": "uri",
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "title": "Link",
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "permission": {
+        "enum": ["read", "write", "create-repo", "admin", "none"],
+        "type": "string"
+      },
+      "project": {
+        "$ref": "#/definitions/project"
+      },
+      "type": {
+        "type": "string"
+      }
+    },
+    "required": ["type"],
+    "title": "Project Group Permission",
+    "type": "object"
+  },
+  "project_user_permission": {
+    "additionalProperties": true,
+    "description": "A user's direct permission for a given project.",
+    "properties": {
+      "links": {
+        "additionalProperties": false,
+        "properties": {
+          "self": {
+            "additionalProperties": false,
+            "description": "A link to a resource related to this object.",
+            "properties": {
+              "href": {
+                "format": "uri",
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "title": "Link",
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "permission": {
+        "enum": ["read", "write", "create-repo", "admin", "none"],
+        "type": "string"
+      },
+      "project": {
+        "$ref": "#/definitions/project"
+      },
+      "type": {
+        "type": "string"
+      },
+      "user": {
+        "$ref": "#/definitions/user"
+      }
+    },
+    "required": ["type"],
+    "title": "Project User Permission",
+    "type": "object"
   },
   "pullrequest": {
     "allOf": [
@@ -5844,8 +7232,14 @@
         "additionalProperties": true,
         "description": "A pullrequest comment.",
         "properties": {
+          "pending": {
+            "type": "boolean"
+          },
           "pullrequest": {
             "$ref": "#/definitions/pullrequest"
+          },
+          "resolution": {
+            "$ref": "#/definitions/comment_resolution"
           }
         },
         "title": "Pull Request Comment",
@@ -5911,7 +7305,7 @@
         "type": "string"
       },
       "message": {
-        "description": "The commit message that will be used on the resulting commit.",
+        "description": "The commit message that will be used on the resulting commit. Note that the size of the message is limited to 128 KiB.",
         "type": "string"
       },
       "type": {
@@ -6196,9 +7590,11 @@
             "type": "string"
           },
           "has_issues": {
+            "description": "\nThe issue tracker for this repository is enabled. Issue Tracker\nfeatures are not supported for repositories in workspaces\nadministered through admin.atlassian.com.\n",
             "type": "boolean"
           },
           "has_wiki": {
+            "description": "\nThe wiki for this repository is enabled. Wiki\nfeatures are not supported for repositories in workspaces\nadministered through admin.atlassian.com.\n",
             "type": "boolean"
           },
           "is_private": {
@@ -6885,6 +8281,80 @@
       }
     ]
   },
+  "stg_west_paginated_annotations": {
+    "description": "A paginated list of annotations.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/stg_west_report_annotation"
+        },
+        "minItems": 0,
+        "type": "array"
+      }
+    },
+    "title": "Paginated Annotations",
+    "type": "object"
+  },
+  "stg_west_paginated_reports": {
+    "description": "A paginated list of reports.",
+    "properties": {
+      "next": {
+        "description": "Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "page": {
+        "description": "Page number of the current results. This is an optional element that is not provided in all responses.",
+        "type": "integer"
+      },
+      "pagelen": {
+        "description": "Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.",
+        "type": "integer"
+      },
+      "previous": {
+        "description": "Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.",
+        "format": "uri",
+        "type": "string"
+      },
+      "size": {
+        "description": "Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.",
+        "type": "integer"
+      },
+      "values": {
+        "description": "The values of the current page.",
+        "items": {
+          "$ref": "#/definitions/stg_west_report"
+        },
+        "minItems": 0,
+        "type": "array"
+      }
+    },
+    "title": "Paginated Reports",
+    "type": "object"
+  },
   "stg_west_report": {
     "allOf": [
       {
@@ -6898,6 +8368,76 @@
     ],
     "x-bb-default-fields": ["uuid", "commitHash"],
     "x-bb-url": "/rest/2.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/commits/{commitHash}/reports/{uuid}"
+  },
+  "stg_west_report_annotation": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "A report for a commit.",
+        "properties": {
+          "annotation_type": {
+            "description": "The type of the report.",
+            "enum": ["VULNERABILITY", "CODE_SMELL", "BUG"],
+            "type": "string"
+          },
+          "created_on": {
+            "description": "The timestamp when the report was created.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "details": {
+            "description": "The details to show to users when clicking on the annotation.",
+            "type": "string"
+          },
+          "external_id": {
+            "description": "ID of the annotation provided by the annotation creator. It can be used to identify the annotation as an alternative to it's generated uuid. It is not used by Bitbucket, but only by the annotation creator for updating or deleting this specific annotation. Needs to be unique.",
+            "type": "string"
+          },
+          "line": {
+            "description": "The line number that the annotation should belong to. If no line number is provided, then it will default to 0 and in a pull request it will appear at the top of the file specified by the path field.",
+            "minimum": 1,
+            "type": "integer"
+          },
+          "link": {
+            "description": "A URL linking to the annotation in an external tool.",
+            "format": "uri",
+            "type": "string"
+          },
+          "path": {
+            "description": "The path of the file on which this annotation should be placed. This is the path of the file relative to the git repository. If no path is provided, then it will appear in the overview modal on all pull requests where the tip of the branch is the given commit, regardless of which files were modified.",
+            "type": "string"
+          },
+          "result": {
+            "description": "The state of the report. May be set to PENDING and later updated.",
+            "enum": ["PASSED", "FAILED", "SKIPPED", "IGNORED"],
+            "type": "string"
+          },
+          "severity": {
+            "description": "The severity of the annotation.",
+            "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"],
+            "type": "string"
+          },
+          "summary": {
+            "description": "The message to display to users.",
+            "type": "string"
+          },
+          "updated_on": {
+            "description": "The timestamp when the report was updated.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "The UUID that can be used to identify the annotation.",
+            "type": "string"
+          }
+        },
+        "title": "Report Annotation",
+        "type": "object"
+      }
+    ]
   },
   "subject_types": {
     "additionalProperties": false,
@@ -6976,6 +8516,63 @@
       }
     ]
   },
+  "task": {
+    "additionalProperties": false,
+    "description": "A task object.",
+    "properties": {
+      "content": {
+        "additionalProperties": false,
+        "properties": {
+          "html": {
+            "description": "The user's content rendered as HTML.",
+            "type": "string"
+          },
+          "markup": {
+            "description": "The type of markup language the raw content is to be interpreted in.",
+            "enum": ["markdown", "creole", "plaintext"],
+            "type": "string"
+          },
+          "raw": {
+            "description": "The text as it was typed by a user.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "created_on": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "creator": {
+        "$ref": "#/definitions/account"
+      },
+      "id": {
+        "type": "integer"
+      },
+      "pending": {
+        "type": "boolean"
+      },
+      "resolved_by": {
+        "$ref": "#/definitions/account"
+      },
+      "resolved_on": {
+        "description": "The ISO8601 timestamp for when the task was resolved.",
+        "format": "date-time",
+        "type": "string"
+      },
+      "state": {
+        "enum": ["RESOLVED", "UNRESOLVED"],
+        "type": "string"
+      },
+      "updated_on": {
+        "format": "date-time",
+        "type": "string"
+      }
+    },
+    "required": ["created_on", "updated_on", "state", "content", "creator"],
+    "title": "Task",
+    "type": "object"
+  },
   "team": {
     "allOf": [
       {
@@ -7024,6 +8621,19 @@
       }
     ]
   },
+  "test_report_ddev": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/object"
+      },
+      {
+        "additionalProperties": true,
+        "description": "Test report for a pipeline step.",
+        "type": "object"
+      }
+    ],
+    "x-bb-url": "/rest/1.0/accounts/{target_user.uuid}/repositories/{repository.uuid}/pipelines/{pipeline_uuid}/steps/{step_uuid}/testReports?actor={user.uuid}"
+  },
   "treeentry": {
     "additionalProperties": true,
     "description": "Base type for most resource objects. It defines the common `type` element that identifies an object's type. It also identifies the element as Swagger's `discriminator`.",
@@ -7071,9 +8681,6 @@
           },
           "nickname": {
             "description": "Account name defined by the owner. Should be used instead of the \"username\" field. Note that \"nickname\" cannot be used in place of \"username\" in URLs and queries, as \"nickname\" is not guaranteed to be unique.",
-            "type": "string"
-          },
-          "website": {
             "type": "string"
           }
         },
@@ -7172,37 +8779,49 @@
             "description": "The events this webhook is subscribed to.",
             "items": {
               "enum": [
-                "repo:commit_status_updated",
-                "repo:commit_comment_created",
-                "repo:transfer",
-                "repo:deleted",
-                "pullrequest:unapproved",
-                "pullrequest:changes_request_created",
-                "pullrequest:fulfilled",
-                "pullrequest:approved",
-                "project:updated",
-                "repo:imported",
-                "repo:created",
-                "pullrequest:comment_updated",
-                "pullrequest:updated",
-                "repo:fork",
-                "pullrequest:rejected",
+                "pullrequest:comment_resolved",
                 "issue:created",
-                "issue:updated",
-                "pullrequest:changes_request_removed",
-                "repo:commit_status_created",
                 "pullrequest:comment_deleted",
-                "repo:push",
-                "pullrequest:created",
+                "pullrequest:changes_request_created",
+                "issue:comment_created",
+                "pullrequest:updated",
+                "issue:updated",
+                "repo:commit_status_updated",
                 "repo:updated",
-                "pullrequest:comment_created",
-                "issue:comment_created"
+                "pullrequest:comment_updated",
+                "repo:commit_status_created",
+                "pullrequest:unapproved",
+                "pullrequest:rejected",
+                "pullrequest:changes_request_removed",
+                "pullrequest:created",
+                "project:updated",
+                "repo:deleted",
+                "pullrequest:comment_reopened",
+                "pullrequest:fulfilled",
+                "repo:imported",
+                "repo:push",
+                "repo:fork",
+                "repo:created",
+                "repo:transfer",
+                "pullrequest:approved",
+                "repo:commit_comment_created",
+                "pullrequest:comment_created"
               ],
               "type": "string"
             },
             "minItems": 1,
             "type": "array",
             "uniqueItems": true
+          },
+          "secret": {
+            "description": "The secret to associate with the hook. The secret is never returned via the API. As such, this field is only used during updates. The secret can be set to `null` or \"\" to remove the secret (or create a hook with no secret). Leaving out the secret field during updates will leave the secret unchanged. Leaving out the secret during creation will create a hook with no secret.",
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string"
+          },
+          "secret_set": {
+            "description": "Indicates whether or not the hook has an associated secret. It is not possible to see the hook's secret. This field is ignored during updates.",
+            "type": "boolean"
           },
           "subject": {
             "$ref": "#/definitions/object"

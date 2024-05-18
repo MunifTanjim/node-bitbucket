@@ -336,6 +336,12 @@
       "repositories": "updateDeployKey"
     }
   },
+  "/repositories/{workspace}/{repo_slug}/deployments": {
+    "get": {
+      "deployments": "list",
+      "repositories": "listDeployments"
+    }
+  },
   "/repositories/{workspace}/{repo_slug}/deployments_config/environments/{environment_uuid}/variables": {
     "get": {
       "pipelines": "listDeploymentVariables",
@@ -354,12 +360,6 @@
     "put": {
       "pipelines": "updateDeploymentVariable",
       "repositories": "updateDeploymentVariable"
-    }
-  },
-  "/repositories/{workspace}/{repo_slug}/deployments/": {
-    "get": {
-      "deployments": "list",
-      "repositories": "listDeployments"
     }
   },
   "/repositories/{workspace}/{repo_slug}/deployments/{deployment_uuid}": {
@@ -403,16 +403,16 @@
   "/repositories/{workspace}/{repo_slug}/effective-branching-model": {
     "get": {
       "branching_model": "",
-      "repositories": ""
+      "repositories": "getEffectiveBranchingModel"
     }
   },
   "/repositories/{workspace}/{repo_slug}/effective-default-reviewers": {
     "get": {
       "pullrequests": "",
-      "repositories": ""
+      "repositories": "listEffectiveDefaultReviewers"
     }
   },
-  "/repositories/{workspace}/{repo_slug}/environments/": {
+  "/repositories/{workspace}/{repo_slug}/environments": {
     "get": {
       "deployments": "listEnvironments",
       "repositories": "listEnvironments"
@@ -432,7 +432,7 @@
       "repositories": "getEnvironment"
     }
   },
-  "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes/": {
+  "/repositories/{workspace}/{repo_slug}/environments/{environment_uuid}/changes": {
     "post": {
       "deployments": "updateEnvironment",
       "repositories": "updateEnvironment"
@@ -613,7 +613,7 @@
   "/repositories/{workspace}/{repo_slug}/merge-base/{revspec}": {
     "get": {
       "commits": "",
-      "repositories": ""
+      "repositories": "getMergeBase"
     }
   },
   "/repositories/{workspace}/{repo_slug}/milestones": {
@@ -644,34 +644,44 @@
   },
   "/repositories/{workspace}/{repo_slug}/permissions-config/groups": {
     "get": {
-      "repositories": ""
+      "repositories": "listGroupPermissions"
     }
   },
   "/repositories/{workspace}/{repo_slug}/permissions-config/groups/{group_slug}": {
     "delete": {
-      "repositories": ""
+      "repositories": "deleteGroupPermission"
     },
     "get": {
-      "repositories": ""
+      "repositories": "getGroupPermission"
     },
     "put": {
-      "repositories": ""
+      "repositories": "updateGroupPermission"
     }
   },
   "/repositories/{workspace}/{repo_slug}/permissions-config/users": {
     "get": {
-      "repositories": ""
+      "repositories": "listUserPermissions"
     }
   },
   "/repositories/{workspace}/{repo_slug}/permissions-config/users/{selected_user_id}": {
     "delete": {
-      "repositories": ""
+      "repositories": "deleteUserPermission"
     },
     "get": {
-      "repositories": ""
+      "repositories": "getUserPermission"
     },
     "put": {
-      "repositories": ""
+      "repositories": "updateUserPermission"
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pipelines": {
+    "get": {
+      "pipelines": "list",
+      "repositories": "listPipelines"
+    },
+    "post": {
+      "pipelines": "create",
+      "repositories": "createPipeline"
     }
   },
   "/repositories/{workspace}/{repo_slug}/pipelines_config": {
@@ -690,7 +700,7 @@
       "repositories": "updatePipelineBuildNumber"
     }
   },
-  "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/": {
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules": {
     "get": {
       "pipelines": "listSchedules",
       "repositories": "listPipelineSchedules"
@@ -714,7 +724,7 @@
       "repositories": "updatePipelineSchedule"
     }
   },
-  "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/": {
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions": {
     "get": {
       "pipelines": "listScheduleExecutions",
       "repositories": "listPipelineScheduleExecutions"
@@ -734,7 +744,7 @@
       "repositories": "updatePipelineSshKeyPair"
     }
   },
-  "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts/": {
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/ssh/known_hosts": {
     "get": {
       "pipelines": "listKnownHosts",
       "repositories": "listPipelineKnownHosts"
@@ -758,7 +768,7 @@
       "repositories": "updatePipelineKnownHost"
     }
   },
-  "/repositories/{workspace}/{repo_slug}/pipelines_config/variables/": {
+  "/repositories/{workspace}/{repo_slug}/pipelines_config/variables": {
     "get": {
       "pipelines": "listVariablesForRepo",
       "repositories": "listPipelineVariables"
@@ -786,9 +796,7 @@
     "delete": {
       "pipelines": "deleteRepositoryPipelineCaches",
       "repositories": "deleteRepositoryPipelineCaches"
-    }
-  },
-  "/repositories/{workspace}/{repo_slug}/pipelines-config/caches/": {
+    },
     "get": {
       "pipelines": "getRepositoryPipelineCaches",
       "repositories": "getRepositoryPipelineCaches"
@@ -806,23 +814,13 @@
       "repositories": "getRepositoryPipelineCacheContentURI"
     }
   },
-  "/repositories/{workspace}/{repo_slug}/pipelines/": {
-    "get": {
-      "pipelines": "list",
-      "repositories": "listPipelines"
-    },
-    "post": {
-      "pipelines": "create",
-      "repositories": "createPipeline"
-    }
-  },
   "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}": {
     "get": {
       "pipelines": "get",
       "repositories": "getPipeline"
     }
   },
-  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps/": {
+  "/repositories/{workspace}/{repo_slug}/pipelines/{pipeline_uuid}/steps": {
     "get": {
       "pipelines": "listSteps",
       "repositories": "listPipelineSteps"
@@ -944,6 +942,16 @@
       "repositories": "updatePullRequestComment"
     }
   },
+  "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}/resolve": {
+    "delete": {
+      "pullrequests": "reopenComment",
+      "repositories": "reopenPullRequestComment"
+    },
+    "post": {
+      "pullrequests": "resolveComment",
+      "repositories": "resolvePullRequestComment"
+    }
+  },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/commits": {
     "get": {
       "pullrequests": "listCommits",
@@ -976,8 +984,8 @@
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/merge/task-status/{task_id}": {
     "get": {
-      "pullrequests": "",
-      "repositories": ""
+      "pullrequests": "getMergeTaskStatus",
+      "repositories": "getMergeTaskStatusForPullRequest"
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/patch": {
@@ -988,12 +996,12 @@
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/request-changes": {
     "delete": {
-      "pullrequests": "",
-      "repositories": ""
+      "pullrequests": "deleteChangeRequest",
+      "repositories": "deleteChangeRequestForPullRequest"
     },
     "post": {
-      "pullrequests": "",
-      "repositories": ""
+      "pullrequests": "addChangeRequest",
+      "repositories": "addChangeRequestForPullRequest"
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/statuses": {
@@ -1001,6 +1009,30 @@
       "commitstatuses": "listPullRequestStatuses",
       "pullrequests": "listStatuses",
       "repositories": "listPullRequestStatuses"
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks": {
+    "get": {
+      "pullrequests": "listTasks",
+      "repositories": "listPullRequestTasks"
+    },
+    "post": {
+      "pullrequests": "createTask",
+      "repositories": "createPullRequestTask"
+    }
+  },
+  "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/tasks/{task_id}": {
+    "delete": {
+      "pullrequests": "deleteTask",
+      "repositories": "deletePullRequestTask"
+    },
+    "get": {
+      "pullrequests": "getTask",
+      "repositories": "getPullRequestTask"
+    },
+    "put": {
+      "pullrequests": "updateTask",
+      "repositories": "updatePullRequestTask"
     }
   },
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pullrequest_id}/properties/{app_key}/{property_name}": {
@@ -1206,7 +1238,7 @@
       "snippets": "listWatchers"
     }
   },
-  "/teams/{username}/pipelines_config/variables/": {
+  "/teams/{username}/pipelines_config/variables": {
     "get": {
       "pipelines": "listVariablesForTeam",
       "teams": "listPipelineVariables"
@@ -1262,7 +1294,7 @@
   },
   "/user/permissions/workspaces": {
     "get": {
-      "user": "",
+      "user": "listPermissionsForWorkspaces",
       "workspaces": ""
     }
   },
@@ -1271,7 +1303,7 @@
       "users": "get"
     }
   },
-  "/users/{selected_user}/pipelines_config/variables/": {
+  "/users/{selected_user}/pipelines_config/variables": {
     "get": {
       "pipelines": "listVariablesForUser",
       "users": "listPipelineVariables"
@@ -1459,58 +1491,98 @@
   },
   "/workspaces/{workspace}/projects/{project_key}/branching-model": {
     "get": {
-      "branching_model": "",
-      "workspaces": ""
+      "branching_model": "getForProject",
+      "workspaces": "getBranchingModelForProject"
     }
   },
   "/workspaces/{workspace}/projects/{project_key}/branching-model/settings": {
     "get": {
-      "branching_model": "",
-      "workspaces": ""
+      "branching_model": "getSettingsForProject",
+      "workspaces": "getBranchingModelSettingsForProject"
     },
     "put": {
-      "branching_model": "",
-      "workspaces": ""
+      "branching_model": "updateSettingsForProject",
+      "workspaces": "updateBranchingModelSettingsForProject"
     }
   },
   "/workspaces/{workspace}/projects/{project_key}/default-reviewers": {
     "get": {
-      "projects": "",
-      "workspaces": ""
+      "projects": "listDefaultReviewers",
+      "workspaces": "listDefaultReviewersForProject"
     }
   },
   "/workspaces/{workspace}/projects/{project_key}/default-reviewers/{selected_user}": {
     "delete": {
-      "projects": "",
-      "workspaces": ""
+      "projects": "deleteDefaultReviewer",
+      "workspaces": "deleteDefaultReviewerForProject"
     },
     "get": {
-      "projects": "",
-      "workspaces": ""
+      "projects": "getDefaultReviewer",
+      "workspaces": "getDefaultReviewerForProject"
     },
     "put": {
-      "projects": "",
-      "workspaces": ""
+      "projects": "addDefaultReviewer",
+      "workspaces": "addDefaultReviewerForProject"
     }
   },
   "/workspaces/{workspace}/projects/{project_key}/deploy-keys": {
     "get": {
-      "deployments": "",
-      "workspaces": ""
+      "deployments": "listProjectDeployKeys",
+      "workspaces": "listProjectDeployKeys"
     },
     "post": {
-      "deployments": "",
-      "workspaces": ""
+      "deployments": "createProjectDeployKey",
+      "workspaces": "createProjectDeployKey"
     }
   },
   "/workspaces/{workspace}/projects/{project_key}/deploy-keys/{key_id}": {
     "delete": {
-      "deployments": "",
-      "workspaces": ""
+      "deployments": "deleteProjectDeployKey",
+      "workspaces": "deleteProjectDeployKey"
     },
     "get": {
-      "deployments": "",
-      "workspaces": ""
+      "deployments": "getProjectDeployKey",
+      "workspaces": "getProjectDeployKey"
+    }
+  },
+  "/workspaces/{workspace}/projects/{project_key}/permissions-config/groups": {
+    "get": {
+      "projects": "listGroupPermissions",
+      "workspaces": "listProjectGroupPermissions"
+    }
+  },
+  "/workspaces/{workspace}/projects/{project_key}/permissions-config/groups/{group_slug}": {
+    "delete": {
+      "projects": "deleteGroupPermission",
+      "workspaces": "deleteProjectGroupPermission"
+    },
+    "get": {
+      "projects": "getGroupPermission",
+      "workspaces": "getProjectGroupPermission"
+    },
+    "put": {
+      "projects": "updateGroupPermission",
+      "workspaces": "updateProjectGroupPermission"
+    }
+  },
+  "/workspaces/{workspace}/projects/{project_key}/permissions-config/users": {
+    "get": {
+      "projects": "listUserPermissions",
+      "workspaces": "listProjectUserPermissions"
+    }
+  },
+  "/workspaces/{workspace}/projects/{project_key}/permissions-config/users/{selected_user_id}": {
+    "delete": {
+      "projects": "deleteUserPermission",
+      "workspaces": "deleteProjectUserPermission"
+    },
+    "get": {
+      "projects": "getUserPermission",
+      "workspaces": "getProjectUserPermission"
+    },
+    "put": {
+      "projects": "updateUserPermission",
+      "workspaces": "updateProjectUserPermission"
     }
   },
   "/workspaces/{workspace}/search/code": {
