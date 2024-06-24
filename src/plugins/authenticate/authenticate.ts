@@ -26,9 +26,21 @@ export function authenticate(
       }
       break
 
+    case 'jwt':
+      if (
+        !options.appKey ||
+        !options.appClientKey ||
+        !options.appSharedSecret
+      ) {
+        throw new Error(
+          'JWT authentication requires an appKey, appClientKey, and appSharedSecret to be set'
+        )
+      }
+      break
+
     default:
       throw new Error(
-        "Invalid authentication type, must be 'apppassword', 'basic' or 'token'"
+        "Invalid authentication type, must be 'apppassword', 'basic', 'token', or 'jwt'"
       )
   }
 
